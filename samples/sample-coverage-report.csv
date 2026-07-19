@@ -1,0 +1,38 @@
+dimension,value,count,percentage,target_exam_weight_percent,notes
+domain,1.0 General Security Concepts,1,10.0,12,Sample count is intentionally close to the published exam weighting.
+domain,"2.0 Threats, Vulnerabilities, and Mitigations",2,20.0,22,Sample count is intentionally close to the published exam weighting.
+domain,3.0 Security Architecture,2,20.0,18,Sample count is intentionally close to the published exam weighting.
+domain,4.0 Security Operations,3,30.0,28,Sample count is intentionally close to the published exam weighting.
+domain,5.0 Security Program Management and Oversight,2,20.0,20,Sample count is intentionally close to the published exam weighting.
+objective,1.4 Explain the importance of using appropriate cryptographic solutions.,1,10.0,,One representative question in this initial sample.
+objective,"2.4 Given a scenario, analyze indicators of malicious activity.",1,10.0,,One representative question in this initial sample.
+objective,2.5 Explain the purpose of mitigation techniques used to secure the enterprise.,1,10.0,,One representative question in this initial sample.
+objective,3.3 Compare and contrast concepts and strategies to protect data.,1,10.0,,One representative question in this initial sample.
+objective,3.4 Explain the importance of resilience and recovery in security architecture.,1,10.0,,One representative question in this initial sample.
+objective,4.3 Explain various activities associated with vulnerability management.,1,10.0,,One representative question in this initial sample.
+objective,"4.6 Given a scenario, implement and maintain identity and access management.",1,10.0,,One representative question in this initial sample.
+objective,4.8 Explain appropriate incident response activities.,1,10.0,,One representative question in this initial sample.
+objective,5.2 Explain elements of the risk management process.,1,10.0,,One representative question in this initial sample.
+objective,5.3 Explain the processes associated with third-party risk assessment and management.,1,10.0,,One representative question in this initial sample.
+topic,Authentication factors,1,10.0,,
+topic,Digital signatures,1,10.0,,
+topic,Incident containment,1,10.0,,
+topic,Network isolation and segmentation,1,10.0,,
+topic,Password attacks,1,10.0,,
+topic,Quantitative risk analysis,1,10.0,,
+topic,Recovery objectives,1,10.0,,
+topic,Remediation validation,1,10.0,,
+topic,Service-level agreements,1,10.0,,
+topic,Tokenization,1,10.0,,
+difficulty,easy,3,30.0,,
+difficulty,hard,2,20.0,,
+difficulty,medium,5,50.0,,
+question_type,single_choice,10,100.0,,
+question_style,calculation,2,20.0,,
+question_style,comparison,1,10.0,,
+question_style,direct,2,20.0,,
+question_style,scenario,5,50.0,,
+stored_correct_answer,A,3,30.0,,
+stored_correct_answer,B,3,30.0,,
+stored_correct_answer,C,2,20.0,,
+stored_correct_answer,D,2,20.0,,
