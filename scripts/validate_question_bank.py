@@ -1,37 +1,18 @@
 #!/usr/bin/env python3
-"""
-Validate the SEC-701 question bank.
-
-Expected repository layout:
-
-repo-root/
-  data/
-    security-plus/
-      sec-701/
-        draft-questions.csv
-        objective-map.csv
-        questions.csv
-        retired-questions.csv
-        source-register.csv
-  docs/
-    blank-question-template.csv
-    question-schema.md
-    validation-report.md
-  samples/
-    sample-coverage-report.csv
-    sample-review.md
-  scripts/
-    validate_question_bank.py
+"""Validate the SEC-701 question bank.
 
 Run from any directory:
-
     python scripts/validate_question_bank.py
+
+Write the tracked Markdown report only when intentionally requested:
+    python scripts/validate_question_bank.py --write-report
 
 The script uses only the Python standard library.
 """
 
 from __future__ import annotations
 
+import argparse
 from collections import Counter, defaultdict
 import csv
 from datetime import datetime
@@ -40,17 +21,11 @@ import re
 import sys
 
 
-# ---------------------------------------------------------------------------
-# Repository paths
-# ---------------------------------------------------------------------------
-
 SCRIPT_PATH = Path(__file__).resolve()
 SCRIPTS_DIR = SCRIPT_PATH.parent
 REPO_ROOT = SCRIPTS_DIR.parent
-
 DATA_DIR = REPO_ROOT / "data" / "security-plus" / "sec-701"
 DOCS_DIR = REPO_ROOT / "docs"
-SAMPLES_DIR = REPO_ROOT / "samples"
 
 DRAFT_FILE = DATA_DIR / "draft-questions.csv"
 ACTIVE_FILE = DATA_DIR / "questions.csv"
@@ -59,11 +34,6 @@ OBJECTIVE_MAP_FILE = DATA_DIR / "objective-map.csv"
 SOURCE_REGISTER_FILE = DATA_DIR / "source-register.csv"
 BLANK_TEMPLATE_FILE = DOCS_DIR / "blank-question-template.csv"
 REPORT_FILE = DOCS_DIR / "validation-report.md"
-
-
-# ---------------------------------------------------------------------------
-# Schema
-# ---------------------------------------------------------------------------
 
 ACTIVE_HEADERS = [
     "question_id",
@@ -111,7 +81,6 @@ RETIREMENT_HEADERS = [
     "retirement_reason",
     "replacement_question_id",
 ]
-
 RETIRED_HEADERS = ACTIVE_HEADERS + RETIREMENT_HEADERS
 
 REQUIRED_ALWAYS = {
@@ -178,7 +147,6 @@ ENUMS = {
 QUESTION_ID_RE = re.compile(r"^SEC701-\d{7}$")
 CONCEPT_KEY_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
-
 POSITION_DEPENDENT_RE = re.compile(
     r"\b("
     r"all of the above|"
@@ -194,19 +162,23 @@ POSITION_DEPENDENT_RE = re.compile(
     r")\b",
     re.IGNORECASE,
 )
-
 UNSUPPORTED_ABSOLUTE_RE = re.compile(
     r"\b(always|never|guarantees?|completely prevents?|impossible)\b",
     re.IGNORECASE,
 )
 
 
-# ---------------------------------------------------------------------------
-# Helpers
-# ---------------------------------------------------------------------------
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--write-report",
+        action="store_true",
+        help="Rewrite docs/validation-report.md with the current results.",
+    )
+    return parser.parse_args()
+
 
 def relative_path(path: Path) -> str:
-    """Return a repository-relative path for readable messages."""
     try:
         return str(path.relative_to(REPO_ROOT))
     except ValueError:
@@ -214,32 +186,26 @@ def relative_path(path: Path) -> str:
 
 
 def read_csv(path: Path) -> tuple[list[str], list[dict[str, str]]]:
-    """Read a UTF-8 CSV and return headers and rows."""
     with path.open("r", newline="", encoding="utf-8-sig") as file:
         reader = csv.DictReader(file)
         return reader.fieldnames or [], [dict(row) for row in reader]
 
 
 def normalized(text: str) -> str:
-    """Normalize text for exact duplicate checks."""
     return re.sub(r"[^a-z0-9]+", " ", (text or "").casefold()).strip()
 
 
 def split_pipe_values(value: str) -> list[str]:
-    """Split a pipe-delimited field and remove blank entries."""
     return [part.strip() for part in (value or "").split("|") if part.strip()]
 
 
 def valid_iso_date(value: str) -> bool:
-    """Validate both the appearance and calendar validity of YYYY-MM-DD."""
     if not DATE_RE.fullmatch(value or ""):
         return False
-
     try:
         datetime.strptime(value, "%Y-%m-%d")
     except ValueError:
         return False
-
     return True
 
 
@@ -249,6 +215,10 @@ def add_error(errors: list[str], location: str, message: str) -> None:
 
 def add_warning(warnings: list[str], location: str, message: str) -> None:
     warnings.append(f"{location}: {message}")
+
+
+def add_info(infos: list[str], location: str, message: str) -> None:
+    infos.append(f"{location}: {message}")
 
 
 def validate_file_exists(path: Path, errors: list[str]) -> None:
@@ -262,7 +232,6 @@ def compare_headers(
     path: Path,
     errors: list[str],
 ) -> None:
-    """Report missing, extra, and reordered headers."""
     if actual == expected:
         return
 
@@ -272,25 +241,19 @@ def compare_headers(
 
     if missing:
         add_error(errors, location, "missing headers: " + ", ".join(missing))
-
     if extra:
         add_error(errors, location, "unexpected headers: " + ", ".join(extra))
-
     if not missing and not extra:
-        add_error(
-            errors,
-            location,
-            "headers are present but not in the required order",
-        )
+        add_error(errors, location, "headers are present but not in the required order")
 
 
 def write_report(
     errors: list[str],
     warnings: list[str],
+    infos: list[str],
     row_count: int,
     file_counts: dict[str, int],
 ) -> None:
-    """Write docs/validation-report.md."""
     lines = [
         "# Validation Report",
         "",
@@ -299,6 +262,7 @@ def write_report(
         f"- Question rows validated: {row_count}",
         f"- Errors: {len(errors)}",
         f"- Warnings: {len(warnings)}",
+        f"- Information: {len(infos)}",
         "",
         "## File counts",
         "",
@@ -313,14 +277,15 @@ def write_report(
     lines.extend(["", "## Warnings", ""])
     lines.extend([f"- {warning}" for warning in warnings] if warnings else ["- None"])
 
+    lines.extend(["", "## Information", ""])
+    lines.extend([f"- {info}" for info in infos] if infos else ["- None"])
+
     lines.extend(
         [
             "",
             "## Notes",
             "",
-            "Automated validation checks structure, mappings, answer storage, "
-            "lifecycle rules, and several common quality problems. It does not "
-            "replace technical, editorial, or ambiguity review.",
+            "Automated validation checks structure, mappings, answer storage, lifecycle rules, and several common quality problems. It does not replace technical, editorial, or ambiguity review.",
             "",
         ]
     )
@@ -328,13 +293,11 @@ def write_report(
     REPORT_FILE.write_text("\n".join(lines), encoding="utf-8")
 
 
-# ---------------------------------------------------------------------------
-# Main validation
-# ---------------------------------------------------------------------------
-
 def main() -> int:
+    args = parse_args()
     errors: list[str] = []
     warnings: list[str] = []
+    infos: list[str] = []
     file_counts: dict[str, int] = {}
 
     required_files = [
@@ -350,14 +313,16 @@ def main() -> int:
         validate_file_exists(path, errors)
 
     if errors:
-        write_report(errors, warnings, 0, file_counts)
-        print("\n".join(f"ERROR: {message}" for message in errors))
-        print(f"\nValidation report: {relative_path(REPORT_FILE)}")
+        if args.write_report:
+            write_report(errors, warnings, infos, 0, file_counts)
+        for message in errors:
+            print(f"ERROR: {message}")
+        if args.write_report:
+            print(f"\nValidation report written: {relative_path(REPORT_FILE)}")
         return 1
 
     template_headers, template_rows = read_csv(BLANK_TEMPLATE_FILE)
     compare_headers(template_headers, ACTIVE_HEADERS, BLANK_TEMPLATE_FILE, errors)
-
     if template_rows:
         add_warning(
             warnings,
@@ -379,9 +344,7 @@ def main() -> int:
         "objective_text",
         "scope_summary",
     }
-    missing_objective_headers = sorted(
-        required_objective_headers - set(objective_headers)
-    )
+    missing_objective_headers = sorted(required_objective_headers - set(objective_headers))
     if missing_objective_headers:
         add_error(
             errors,
@@ -397,9 +360,7 @@ def main() -> int:
         "url",
         "notes",
     }
-    missing_source_headers = sorted(
-        required_source_headers - set(source_headers)
-    )
+    missing_source_headers = sorted(required_source_headers - set(source_headers))
     if missing_source_headers:
         add_error(
             errors,
@@ -411,30 +372,24 @@ def main() -> int:
     for row_number, row in enumerate(objective_rows, start=2):
         location = f"{relative_path(OBJECTIVE_MAP_FILE)}:{row_number}"
         objective_id = (row.get("objective_id") or "").strip()
-
         if not objective_id:
             add_error(errors, location, "objective_id is blank")
             continue
-
         if objective_id in objective_map:
             add_error(errors, location, f"duplicate objective_id {objective_id}")
             continue
-
         objective_map[objective_id] = row
 
     source_ids: set[str] = set()
     for row_number, row in enumerate(source_rows, start=2):
         location = f"{relative_path(SOURCE_REGISTER_FILE)}:{row_number}"
         source_id = (row.get("source_id") or "").strip()
-
         if not source_id:
             add_error(errors, location, "source_id is blank")
             continue
-
         if source_id in source_ids:
             add_error(errors, location, f"duplicate source_id {source_id}")
             continue
-
         source_ids.add(source_id)
 
     all_rows: list[tuple[Path, int, dict[str, str]]] = []
@@ -442,7 +397,6 @@ def main() -> int:
     for path, rules in QUESTION_FILES.items():
         headers, rows = read_csv(path)
         file_counts[relative_path(path)] = len(rows)
-
         compare_headers(headers, rules["expected_headers"], path, errors)
 
         for row_number, row in enumerate(rows, start=2):
@@ -450,9 +404,7 @@ def main() -> int:
             all_rows.append((path, row_number, row))
 
             missing_fields = sorted(
-                field
-                for field in REQUIRED_ALWAYS
-                if not (row.get(field) or "").strip()
+                field for field in REQUIRED_ALWAYS if not (row.get(field) or "").strip()
             )
             if missing_fields:
                 add_error(
@@ -463,49 +415,28 @@ def main() -> int:
 
             question_id = (row.get("question_id") or "").strip()
             if not QUESTION_ID_RE.fullmatch(question_id):
-                add_error(
-                    errors,
-                    location,
-                    "question_id must match SEC701-0000001 format",
-                )
+                add_error(errors, location, "question_id must match SEC701-0000001 format")
 
             if row.get("test_id") != "SEC-701":
                 add_error(errors, location, "test_id must be SEC-701")
-
             if row.get("certification") != "CompTIA Security+":
-                add_error(
-                    errors,
-                    location,
-                    "certification must be CompTIA Security+",
-                )
-
+                add_error(errors, location, "certification must be CompTIA Security+")
             if row.get("exam_version") != "SY0-701":
                 add_error(errors, location, "exam_version must be SY0-701")
-
             if row.get("objectives_version") != "6.0":
                 add_error(errors, location, "objectives_version must be 6.0")
 
             try:
-                question_version = int(
-                    (row.get("question_version") or "").strip()
-                )
+                question_version = int((row.get("question_version") or "").strip())
                 if question_version < 1:
                     raise ValueError
             except ValueError:
-                add_error(
-                    errors,
-                    location,
-                    "question_version must be a positive integer",
-                )
+                add_error(errors, location, "question_version must be a positive integer")
 
             for field, allowed_values in ENUMS.items():
                 value = (row.get(field) or "").strip()
                 if value not in allowed_values:
-                    add_error(
-                        errors,
-                        location,
-                        f"{field} has invalid value {value!r}",
-                    )
+                    add_error(errors, location, f"{field} has invalid value {value!r}")
 
             review_status = (row.get("review_status") or "").strip()
             if review_status not in rules["allowed_statuses"]:
@@ -513,13 +444,11 @@ def main() -> int:
                 add_error(
                     errors,
                     location,
-                    f"review_status {review_status!r} is not allowed in "
-                    f"{relative_path(path)}; allowed: {allowed}",
+                    f"review_status {review_status!r} is not allowed in {relative_path(path)}; allowed: {allowed}",
                 )
 
             objective_id = (row.get("objective_id") or "").strip()
             mapped_objective = objective_map.get(objective_id)
-
             if mapped_objective is None:
                 add_error(
                     errors,
@@ -531,19 +460,11 @@ def main() -> int:
                     actual = (row.get(field) or "").strip()
                     expected = (mapped_objective.get(field) or "").strip()
                     if actual != expected:
-                        add_error(
-                            errors,
-                            location,
-                            f"{field} does not match objective-map.csv",
-                        )
+                        add_error(errors, location, f"{field} does not match objective-map.csv")
 
             concept_key = (row.get("concept_key") or "").strip()
             if not CONCEPT_KEY_RE.fullmatch(concept_key):
-                add_error(
-                    errors,
-                    location,
-                    "concept_key must be lowercase kebab-case",
-                )
+                add_error(errors, location, "concept_key must be lowercase kebab-case")
 
             for date_field in ("date_added", "date_modified"):
                 date_value = (row.get(date_field) or "").strip()
@@ -556,45 +477,22 @@ def main() -> int:
 
             date_reviewed = (row.get("date_reviewed") or "").strip()
             if date_reviewed and not valid_iso_date(date_reviewed):
-                add_error(
-                    errors,
-                    location,
-                    "date_reviewed must be a valid YYYY-MM-DD date",
-                )
+                add_error(errors, location, "date_reviewed must be a valid YYYY-MM-DD date")
 
             if review_status in {"review", "approved"}:
                 if not date_reviewed:
-                    add_error(
-                        errors,
-                        location,
-                        "review and approved rows require date_reviewed",
-                    )
+                    add_error(errors, location, "review and approved rows require date_reviewed")
                 if not (row.get("reviewer") or "").strip():
-                    add_error(
-                        errors,
-                        location,
-                        "review and approved rows require reviewer",
-                    )
+                    add_error(errors, location, "review and approved rows require reviewer")
 
-            if review_status == "approved" and (
-                row.get("quality_flags") or ""
-            ).strip():
-                add_error(
-                    errors,
-                    location,
-                    "approved rows may not contain quality_flags",
-                )
+            if review_status == "approved" and (row.get("quality_flags") or "").strip():
+                add_error(errors, location, "approved rows may not contain quality_flags")
 
             date_added = (row.get("date_added") or "").strip()
             date_modified = (row.get("date_modified") or "").strip()
-
             if valid_iso_date(date_added) and valid_iso_date(date_modified):
                 if date_modified < date_added:
-                    add_error(
-                        errors,
-                        location,
-                        "date_modified may not precede date_added",
-                    )
+                    add_error(errors, location, "date_modified may not precede date_added")
 
             if (
                 date_reviewed
@@ -602,40 +500,20 @@ def main() -> int:
                 and valid_iso_date(date_added)
                 and date_reviewed < date_added
             ):
-                add_error(
-                    errors,
-                    location,
-                    "date_reviewed may not precede date_added",
-                )
+                add_error(errors, location, "date_reviewed may not precede date_added")
 
             choices = {
                 letter: (row.get(f"answer_{letter.lower()}") or "").strip()
                 for letter in "ABCD"
             }
-
             if len({normalized(choices[letter]) for letter in "ABCD"}) != 4:
                 add_error(errors, location, "answer choices must be distinct")
 
-            correct_answers = split_pipe_values(
-                row.get("correct_answers") or ""
-            )
-
-            if any(
-                answer not in {"A", "B", "C", "D"}
-                for answer in correct_answers
-            ):
-                add_error(
-                    errors,
-                    location,
-                    "correct_answers contains an invalid stored key",
-                )
-
+            correct_answers = split_pipe_values(row.get("correct_answers") or "")
+            if any(answer not in {"A", "B", "C", "D"} for answer in correct_answers):
+                add_error(errors, location, "correct_answers contains an invalid stored key")
             if correct_answers != sorted(set(correct_answers)):
-                add_error(
-                    errors,
-                    location,
-                    "correct_answers must be unique and sorted",
-                )
+                add_error(errors, location, "correct_answers must be unique and sorted")
 
             question_type = (row.get("question_type") or "").strip()
             instruction = (row.get("question_instruction") or "").strip()
@@ -650,24 +528,12 @@ def main() -> int:
 
             if question_type == "multi_select":
                 if len(correct_answers) < 2:
-                    add_error(
-                        errors,
-                        location,
-                        "multi_select requires at least two correct answers",
-                    )
+                    add_error(errors, location, "multi_select requires at least two correct answers")
                 if not instruction:
-                    add_error(
-                        errors,
-                        location,
-                        "multi_select requires question_instruction",
-                    )
+                    add_error(errors, location, "multi_select requires question_instruction")
 
             if question_type == "best_available" and not instruction:
-                add_error(
-                    errors,
-                    location,
-                    "best_available requires question_instruction",
-                )
+                add_error(errors, location, "best_available requires question_instruction")
 
             text_fields = [
                 row.get("question_text") or "",
@@ -676,33 +542,17 @@ def main() -> int:
                 choices["C"],
                 choices["D"],
             ]
-
             if any(POSITION_DEPENDENT_RE.search(text) for text in text_fields):
-                add_error(
-                    errors,
-                    location,
-                    "position-dependent answer wording detected",
-                )
+                add_error(errors, location, "position-dependent answer wording detected")
 
             question_text = (row.get("question_text") or "").strip()
-
             if question_text.lower().startswith("which is not"):
-                add_warning(
-                    warnings,
-                    location,
-                    "question uses an avoidable negative construction",
-                )
-
+                add_warning(warnings, location, "question uses an avoidable negative construction")
             if UNSUPPORTED_ABSOLUTE_RE.search(question_text):
-                add_warning(
-                    warnings,
-                    location,
-                    "question stem contains a possible unsupported absolute",
-                )
+                add_warning(warnings, location, "question stem contains a possible unsupported absolute")
 
             listed_sources = split_pipe_values(row.get("source_ids") or "")
             unknown_sources = sorted(set(listed_sources) - source_ids)
-
             if unknown_sources:
                 add_error(
                     errors,
@@ -712,28 +562,16 @@ def main() -> int:
 
             if rules["retired"]:
                 retired_date = (row.get("retired_date") or "").strip()
-                retirement_reason = (
-                    row.get("retirement_reason") or ""
-                ).strip()
-                replacement_id = (
-                    row.get("replacement_question_id") or ""
-                ).strip()
+                retirement_reason = (row.get("retirement_reason") or "").strip()
+                replacement_id = (row.get("replacement_question_id") or "").strip()
 
                 if not retired_date:
                     add_error(errors, location, "retired rows require retired_date")
                 elif not valid_iso_date(retired_date):
-                    add_error(
-                        errors,
-                        location,
-                        "retired_date must be a valid YYYY-MM-DD date",
-                    )
+                    add_error(errors, location, "retired_date must be a valid YYYY-MM-DD date")
 
                 if not retirement_reason:
-                    add_error(
-                        errors,
-                        location,
-                        "retired rows require retirement_reason",
-                    )
+                    add_error(errors, location, "retired rows require retirement_reason")
 
                 if replacement_id and not QUESTION_ID_RE.fullmatch(replacement_id):
                     add_error(
@@ -741,7 +579,6 @@ def main() -> int:
                         location,
                         "replacement_question_id must match SEC701-0000001 format",
                     )
-
                 if replacement_id == question_id:
                     add_error(
                         errors,
@@ -792,41 +629,46 @@ def main() -> int:
 
     active_answer_counts: Counter[str] = Counter()
     _, active_rows = read_csv(ACTIVE_FILE)
-
     for row in active_rows:
         for answer in split_pipe_values(row.get("correct_answers") or ""):
             active_answer_counts[answer] += 1
 
     if active_rows:
         distribution = ", ".join(
-            f"{letter}={active_answer_counts[letter]}"
-            for letter in "ABCD"
+            f"{letter}={active_answer_counts[letter]}" for letter in "ABCD"
         )
-        add_warning(
-            warnings,
+        add_info(
+            infos,
             relative_path(ACTIVE_FILE),
             "stored correct-answer distribution: " + distribution,
         )
 
-    write_report(
-        errors=errors,
-        warnings=warnings,
-        row_count=len(all_rows),
-        file_counts=file_counts,
-    )
+    if args.write_report:
+        write_report(
+            errors=errors,
+            warnings=warnings,
+            infos=infos,
+            row_count=len(all_rows),
+            file_counts=file_counts,
+        )
 
     print(f"Repository root: {REPO_ROOT}")
     print(f"Validated {len(all_rows)} question rows.")
     print(f"Errors: {len(errors)}")
     print(f"Warnings: {len(warnings)}")
+    print(f"Information: {len(infos)}")
 
     for error in errors:
         print(f"ERROR: {error}")
-
     for warning in warnings:
         print(f"WARNING: {warning}")
+    for info in infos:
+        print(f"INFO: {info}")
 
-    print(f"Validation report: {relative_path(REPORT_FILE)}")
+    if args.write_report:
+        print(f"Validation report written: {relative_path(REPORT_FILE)}")
+    else:
+        print("Validation report not rewritten. Use --write-report when an audit snapshot is needed.")
 
     return 1 if errors else 0
 
