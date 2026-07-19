@@ -1,16 +1,19 @@
 {
   "name": "certprep",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "description": "Free certification practice tests and focused study resources.",
   "type": "module",
   "scripts": {
     "validate:data": "node scripts/run_validator.mjs",
     "validate:data:report": "node scripts/run_validator.mjs --write-report",
+    "test:data": "node scripts/run_python_tests.mjs",
+    "test": "npm run test:data",
+    "build:data": "node scripts/run_quiz_data_builder.mjs",
     "build:site": "eleventy",
-    "build": "npm run validate:data && npm run build:site",
-    "start": "eleventy --serve",
-    "serve": "eleventy --serve"
+    "build": "npm run validate:data && npm test && npm run build:data && npm run build:site",
+    "start": "npm run validate:data && npm run build:data && eleventy --serve",
+    "serve": "npm start"
   },
   "engines": {
     "node": ">=20"

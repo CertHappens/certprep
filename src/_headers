@@ -1,0 +1,3 @@
+/quiz-data/*
+  X-Robots-Tag: noindex, nofollow, nosnippet
+  Cache-Control: public, max-age=0, must-revalidate

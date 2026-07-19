@@ -1,0 +1,25 @@
+# Node and Eleventy
+node_modules/
+_site/
+.cache/
+
+# Generated quiz data
+src/quiz-data/**/*.json
+!src/quiz-data/**/.gitkeep
+
+# Python caches and test artifacts
+__pycache__/
+*.py[cod]
+
+# Local environment files
+.env
+.env.*
+!.env.example
+
+# Operating system and editor files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.vscode/
+.idea/

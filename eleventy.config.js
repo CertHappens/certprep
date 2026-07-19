@@ -1,5 +1,8 @@
 export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ "src/assets": "assets" });
+  eleventyConfig.addPassthroughCopy({ "src/quiz-data": "quiz-data" });
+  eleventyConfig.addPassthroughCopy({ "src/_headers": "_headers" });
+
   eleventyConfig.addWatchTarget("src/assets/css");
 
   eleventyConfig.addFilter("currentYear", () => new Date().getFullYear());
