@@ -22,7 +22,7 @@ The domain distribution is 1/2/2/3/2, which closely follows the published 12%/22
 | SEC701-0000002 | The single account and many changing passwords remove the usual brute-force versus spraying ambiguity. | None identified. |
 | SEC701-0000003 | The requirement to retain only remediation access makes quarantine segmentation with a narrow ACL uniquely best. | Similar future containment questions should not reuse this same quarantine pattern. |
 | SEC701-0000004 | The separately protected reversible mapping makes tokenization distinct from hashing, masking, and encryption. | Some real systems implement tokens cryptographically; keep the question focused on the data-protection model, not implementation internals. |
-| SEC701-0000005 | Data-loss tolerance and restoration deadline are explicitly stated, so RPO and RTO are defensible. | Difficulty may calibrate closer to medium after learner data is available. |
+| SEC701-0000005 | Data-loss tolerance and restoration deadline are explicitly stated, so RPO and RTO are defensible. Version 2 replaced a distractor that duplicated another answer in reversed clause order. | Difficulty may calibrate closer to medium after learner data is available. |
 | SEC701-0000006 | The question asks for technical validation, not process approval, making rescanning clearly correct. | None identified. |
 | SEC701-0000007 | Uses current factor categories and avoids treating two credentials from one category as MFA. | None identified. |
 | SEC701-0000008 | The stem states active spread, containment, and preservation needs. Network isolation is clearly preferable to recovery, eradication, or lessons learned. | Operational playbooks may differ, so the phrase `most directly supports containment` is important and should remain. |
