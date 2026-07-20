@@ -1,20 +1,20 @@
 # Validation Report
 
-- Run date: 2026-07-19
-- Question rows validated: 54
+- Run date: 2026-07-20
+- Question rows validated: 78
 - Errors: 0
 - Warnings: 0
 - Information: 1
 
 ## Information
 
-- `data/security-plus/sec-701/questions.csv`: stored correct-answer distribution: A=14, B=14, C=13, D=13
+- `data/security-plus/sec-701/questions.csv`: stored correct-answer distribution: A=20, B=20, C=19, D=19
 
-## Additional batch checks
+## Additional Batch 004 checks
 
-- Batch 003 domain allocation: 3 / 5 / 4 / 7 / 5
-- Batch 003 difficulty distribution: easy 6, medium 12, hard 6
-- Batch 003 correct-answer distribution: A 6, B 6, C 6, D 6
+- Domain allocation: 3 / 5 / 4 / 7 / 5
+- Difficulty distribution: easy 6, medium 12, hard 6
+- Correct-answer distribution: A 6, B 6, C 6, D 6
 - Duplicate question IDs: none
 - Exact duplicate stems: none
 - Duplicate concept keys: none
