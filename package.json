@@ -1,8 +1,8 @@
 {
   "name": "certprep",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "private": true,
-  "description": "Free certification practice tests and focused study resources.",
+  "description": "Cert Happens provides free certification practice tests and focused study resources.",
   "type": "module",
   "scripts": {
     "validate:data": "node scripts/run_validator.mjs",
