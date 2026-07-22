@@ -20,16 +20,65 @@ sitemap: false
   </ol>
 </nav>
 
-<section class="page-shell content-section">
-  <p class="eyebrow">Paged quiz pilot route</p>
+<section
+  class="page-shell content-section"
+  data-paged-question-app
+  data-test-id="SEC-701"
+  data-question-position="{{ questionPosition }}"
+>
+  <p class="eyebrow">Paged quiz pilot</p>
   <h1>Security+ SY0-701 question {{ questionPosition }}</h1>
-  <p>
-    This numbered route is reserved for the paged quiz pilot. The active
-    practice test still uses the existing, production-tested quiz engine.
-  </p>
-  <p>
-    <a class="button-link" href="/security-plus/sy0-701/practice-test/">
-      Return to the working practice test
-    </a>
-  </p>
+
+  <div data-paged-view="restored" hidden>
+    <p>
+      <strong data-paged-position>Question {{ questionPosition }}</strong>
+      <span aria-hidden="true"> · </span>
+      <code data-paged-question-id></code>
+    </p>
+
+    <p>
+      <span data-paged-domain></span>
+      <span aria-hidden="true"> · </span>
+      <span data-paged-topic></span>
+    </p>
+
+    <h2 data-paged-question-text>Restoring saved question…</h2>
+
+    <p>
+      Browser-session bridge confirmed:
+      <strong data-paged-answer-status></strong>.
+    </p>
+
+    <p>
+      This pilot page restored the requested position from the active test and
+      saved it as the current question. Answer controls remain on the existing
+      practice-test page until the next implementation step.
+    </p>
+
+    <p>
+      <a class="button-link" href="/security-plus/sy0-701/practice-test/">
+        Continue in the working practice test
+      </a>
+    </p>
+  </div>
+
+  <div data-paged-view="unavailable">
+    <h2 data-paged-unavailable-heading>
+      Checking this browser tab for an active test…
+    </h2>
+    <p data-paged-unavailable-detail>
+      The numbered route only restores a test previously started in this tab.
+    </p>
+    <p>
+      <a class="button-link" href="/security-plus/sy0-701/practice-test/">
+        Open the working practice test
+      </a>
+    </p>
+  </div>
+
+  <noscript>
+    <p>JavaScript is required to restore a saved practice-test session.</p>
+  </noscript>
 </section>
+
+<script type="module" src="/assets/js/quiz/paged-question.js"></script>
