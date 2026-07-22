@@ -18,3 +18,5 @@ Phase 6 adds:
 
 The interactive quiz engine, question-reporting endpoint, question schema, and
 question data are unchanged.
+
+Phase 6 deployment verified after the build-output correction.
