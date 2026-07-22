@@ -3,6 +3,7 @@ import {
   savedAnswerStatus,
   updatePagedAnswerSelection,
 } from "./paged-answers.js";
+import { createPagedNavigationModel } from "./paged-navigation.js";
 import { restorePagedQuizSession } from "./paged-session.js";
 import { setSelectedAnswerIds } from "./session.js";
 import { saveStoredSession } from "./storage.js";
@@ -96,6 +97,7 @@ function renderRestoredSession(root, result) {
   }
 
   renderAnswers(answers, root, result);
+  renderPagedNavigation(root, result);
 }
 
 function renderAnswers(container, viewRoot, result) {
@@ -169,6 +171,82 @@ function renderAnswers(container, viewRoot, result) {
     label.append(input, letter, text);
     container.append(label);
   });
+}
+
+
+function configurePagedLink(link, path) {
+  if (!link) {
+    throw new Error("A paged navigation link is missing.");
+  }
+
+  if (path) {
+    link.href = path;
+    link.hidden = false;
+    link.removeAttribute("aria-disabled");
+    return;
+  }
+
+  link.removeAttribute("href");
+  link.hidden = true;
+  link.setAttribute("aria-disabled", "true");
+}
+
+function renderPagedNavigation(root, result) {
+  const model = createPagedNavigationModel(
+    result.session,
+    result.position,
+  );
+
+  setText(
+    root,
+    "[data-paged-summary]",
+    `${model.answered} answered, ${model.unanswered} unanswered, ${model.flagged} flagged`,
+  );
+
+  const progress = root.querySelector("[data-paged-progress]");
+  if (!progress) {
+    throw new Error("Missing paged question progress bar.");
+  }
+
+  progress.value = model.currentPosition;
+  progress.max = model.total;
+  progress.textContent = `${model.currentPosition} of ${model.total}`;
+
+  configurePagedLink(
+    root.querySelector("[data-paged-previous]"),
+    model.previousPath,
+  );
+  configurePagedLink(
+    root.querySelector("[data-paged-next]"),
+    model.nextPath,
+  );
+
+  const navigator = root.querySelector("[data-paged-navigator]");
+  if (!navigator) {
+    throw new Error("Missing paged question navigator.");
+  }
+
+  navigator.replaceChildren();
+
+  for (const item of model.items) {
+    const listItem = document.createElement("li");
+    const link = document.createElement("a");
+
+    link.href = item.path;
+    link.className = "quiz-navigator__button";
+    link.classList.toggle("is-answered", item.answered);
+    link.classList.toggle("is-flagged", item.flagged);
+    link.classList.toggle("is-current", item.current);
+    link.textContent = String(item.position);
+    link.setAttribute("aria-label", item.ariaLabel);
+
+    if (item.current) {
+      link.setAttribute("aria-current", "step");
+    }
+
+    listItem.append(link);
+    navigator.append(listItem);
+  }
 }
 
 function renderUnavailableSession(root, result) {

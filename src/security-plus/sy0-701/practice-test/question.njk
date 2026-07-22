@@ -30,11 +30,27 @@ sitemap: false
   <h1>Security+ SY0-701 question {{ questionPosition }}</h1>
 
   <div data-paged-view="restored" hidden>
-    <p>
-      <strong data-paged-position>Question {{ questionPosition }}</strong>
-      <span aria-hidden="true"> · </span>
-      <code data-paged-question-id></code>
-    </p>
+    <header>
+      <p>
+        <strong data-paged-position>Question {{ questionPosition }}</strong>
+        <span aria-hidden="true"> · </span>
+        <code data-paged-question-id></code>
+      </p>
+
+      <p data-paged-summary>Restoring progress…</p>
+
+      <progress
+        data-paged-progress
+        value="{{ questionPosition }}"
+        max="50"
+      >
+        Question {{ questionPosition }}
+      </progress>
+    </header>
+
+    <nav aria-label="Questions in this practice test">
+      <ol class="quiz-navigator__list" data-paged-navigator></ol>
+    </nav>
 
     <p>
       <span data-paged-domain></span>
@@ -59,9 +75,25 @@ sitemap: false
 
     <p class="visually-hidden" aria-live="polite" data-paged-live></p>
 
+    <nav aria-label="Previous and next question">
+      <a
+        class="button button--secondary"
+        data-paged-previous
+      >
+        Previous
+      </a>
+
+      <a
+        class="button"
+        data-paged-next
+      >
+        Next
+      </a>
+    </nav>
+
     <p>
-      This checkpoint saves answer selections into the same active browser
-      session used by the existing practice-test engine.
+      Each numbered link performs a full document navigation while preserving
+      this randomized test in the current browser tab.
     </p>
 
     <p>
