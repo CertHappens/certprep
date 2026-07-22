@@ -78,8 +78,8 @@ const requiredFiles = [
   "disclaimer/index.html",
   "contact/index.html",
   "security-plus/index.html",
-  "security-plus/practice-test/index.html",
   "security-plus/sy0-701/practice-test/index.html",
+  "_redirects",
   "assets/brand/certhappens-social-card.png"
 ];
 
@@ -172,12 +172,25 @@ if (await isFile(path.join(outputRoot, "robots.txt"))) {
   }
 }
 
+if (await isFile(path.join(outputRoot, "_redirects"))) {
+  const redirects = await readFile(path.join(outputRoot, "_redirects"), "utf8");
+  const expectedRedirects = [
+    "/security-plus/practice-test /security-plus/sy0-701/practice-test/ 302",
+    "/security-plus/practice-test/ /security-plus/sy0-701/practice-test/ 302"
+  ];
+
+  for (const rule of expectedRedirects) {
+    if (!redirects.includes(rule)) {
+      fail(`_redirects is missing required rule: ${rule}`);
+    }
+  }
+}
+
 if (await isFile(path.join(outputRoot, "sitemap.xml"))) {
   const sitemap = await readFile(path.join(outputRoot, "sitemap.xml"), "utf8");
   const expectedUrls = [
     "https://certhappens.com/",
     "https://certhappens.com/security-plus/",
-    "https://certhappens.com/security-plus/practice-test/",
     "https://certhappens.com/security-plus/sy0-701/practice-test/",
     "https://certhappens.com/privacy/",
     "https://certhappens.com/terms/",

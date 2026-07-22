@@ -258,9 +258,9 @@ export function createQuestionReporter({
       });
 
       await submitQuestionReport(payload, { endpoint });
-      setStatus("Report submitted. Thank you for helping improve the question bank.", "success");
+      setStatus("Thanks!\nCert happens. We'll review it.", "success");
       submitButton.hidden = true;
-      announce("Question report submitted.");
+      announce("Thanks. Cert happens. We'll review it.");
     } catch (error) {
       console.error(error);
       setStatus(error.message, "error");

@@ -1,0 +1,4 @@
+# Stable generic practice-test routes point to the current Security+ exam.
+# Keep these temporary because the current exam version will change over time.
+/security-plus/practice-test /security-plus/sy0-701/practice-test/ 302
+/security-plus/practice-test/ /security-plus/sy0-701/practice-test/ 302

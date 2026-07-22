@@ -1,6 +1,6 @@
 {
   "name": "certprep",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "private": true,
   "description": "Cert Happens provides free certification practice tests and focused study resources.",
   "type": "module",
