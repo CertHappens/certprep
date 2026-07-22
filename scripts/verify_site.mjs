@@ -1,5 +1,5 @@
 
-import { access, readFile, readdir } from "node:fs/promises";
+import { readFile, readdir, stat } from "node:fs/promises";
 import path from "node:path";
 
 const outputRoot = path.resolve("_site");
@@ -9,10 +9,9 @@ function fail(message) {
   errors.push(message);
 }
 
-async function exists(filePath) {
+async function isFile(filePath) {
   try {
-    await access(filePath);
-    return true;
+    return (await stat(filePath)).isFile();
   } catch {
     return false;
   }
@@ -85,7 +84,7 @@ const requiredFiles = [
 ];
 
 for (const relative of requiredFiles) {
-  if (!(await exists(path.join(outputRoot, relative)))) {
+  if (!(await isFile(path.join(outputRoot, relative)))) {
     fail(`Missing required build output: ${relative}`);
   }
 }
@@ -152,13 +151,13 @@ for (const file of htmlFiles) {
 
   for (const match of html.matchAll(/href=["']([^"']+)["']/gi)) {
     const target = localTarget(match[1]);
-    if (target && !(await exists(target))) {
+    if (target && !(await isFile(target))) {
       fail(`${relative}: broken internal link ${match[1]}`);
     }
   }
 }
 
-if (await exists(path.join(outputRoot, "site.webmanifest"))) {
+if (await isFile(path.join(outputRoot, "site.webmanifest"))) {
   try {
     JSON.parse(await readFile(path.join(outputRoot, "site.webmanifest"), "utf8"));
   } catch (error) {
@@ -166,14 +165,14 @@ if (await exists(path.join(outputRoot, "site.webmanifest"))) {
   }
 }
 
-if (await exists(path.join(outputRoot, "robots.txt"))) {
+if (await isFile(path.join(outputRoot, "robots.txt"))) {
   const robots = await readFile(path.join(outputRoot, "robots.txt"), "utf8");
   if (!robots.includes("Sitemap: https://certhappens.com/sitemap.xml")) {
     fail("robots.txt: canonical sitemap reference missing");
   }
 }
 
-if (await exists(path.join(outputRoot, "sitemap.xml"))) {
+if (await isFile(path.join(outputRoot, "sitemap.xml"))) {
   const sitemap = await readFile(path.join(outputRoot, "sitemap.xml"), "utf8");
   const expectedUrls = [
     "https://certhappens.com/",
