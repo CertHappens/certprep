@@ -2166,3 +2166,31 @@ h3 {
     box-shadow: none;
   }
 }
+
+/* Center and right-size the desktop exam viewport. */
+
+@media (min-width: 42.01rem) {
+  .paged-quiz {
+    width: min(calc(100% - 2rem), 58rem);
+    max-width: 58rem;
+  }
+
+  .paged-quiz__body {
+    width: 100%;
+    max-width: 50rem;
+    margin-inline: auto;
+  }
+
+  .paged-quiz > .eyebrow,
+  .paged-quiz > .paged-quiz__title {
+    width: 100%;
+    max-width: 50rem;
+    margin-inline: auto;
+  }
+
+  .paged-quiz__progress,
+  .paged-quiz .quiz-navigator__grid,
+  .paged-quiz__question-heading {
+    max-width: none;
+  }
+}
