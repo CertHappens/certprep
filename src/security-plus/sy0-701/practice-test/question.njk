@@ -21,16 +21,16 @@ sitemap: false
 </nav>
 
 <section
-  class="page-shell content-section"
+  class="page-shell content-section paged-quiz"
   data-paged-question-app
   data-test-id="SEC-701"
   data-question-position="{{ questionPosition }}"
 >
   <p class="eyebrow">Paged quiz pilot</p>
-  <h1>Security+ SY0-701 question {{ questionPosition }}</h1>
+  <h1 class="paged-quiz__title">Security+ SY0-701 question {{ questionPosition }}</h1>
 
   <div data-paged-view="restored" hidden>
-    <header>
+    <header class="paged-quiz__header">
       <p>
         <strong data-paged-position>Question {{ questionPosition }}</strong>
         <span aria-hidden="true"> · </span>
@@ -40,6 +40,7 @@ sitemap: false
       <p data-paged-summary>Restoring progress…</p>
 
       <progress
+        class="paged-quiz__progress"
         data-paged-progress
         value="{{ questionPosition }}"
         max="50"
@@ -48,8 +49,8 @@ sitemap: false
       </progress>
     </header>
 
-    <nav aria-label="Questions in this practice test">
-      <ol class="quiz-navigator__list" data-paged-navigator></ol>
+    <nav class="paged-quiz__navigator" aria-label="Questions in this practice test">
+      <ol class="quiz-navigator__grid" data-paged-navigator></ol>
     </nav>
 
     <p>
@@ -58,7 +59,7 @@ sitemap: false
       <span data-paged-topic></span>
     </p>
 
-    <h2 data-paged-question-text>Restoring saved question…</h2>
+    <h2 class="paged-quiz__question-heading" data-paged-question-text>Restoring saved question…</h2>
     <p data-paged-instruction hidden></p>
 
     <form class="quiz-answer-form">
@@ -75,7 +76,7 @@ sitemap: false
 
     <p class="visually-hidden" aria-live="polite" data-paged-live></p>
 
-    <nav aria-label="Previous and next question">
+    <nav class="paged-quiz__controls" aria-label="Previous and next question">
       <a
         class="button button--secondary"
         data-paged-previous

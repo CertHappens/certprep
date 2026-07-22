@@ -1567,3 +1567,65 @@ h3 {
     width: 100%;
   }
 }
+
+/* Paged quiz pilot presentation */
+
+.page-header--quiz h1 {
+  max-width: none;
+  font-size: clamp(1.1rem, 5.2vw, 2.75rem);
+  letter-spacing: -0.035em;
+  white-space: nowrap;
+}
+
+.paged-quiz {
+  padding-top: clamp(1.25rem, 3vw, 2rem);
+  padding-bottom: 3rem;
+}
+
+.paged-quiz__title {
+  max-width: none;
+  margin-bottom: 1rem;
+  font-size: clamp(1.75rem, 4vw, 2.8rem);
+}
+
+.paged-quiz__header {
+  margin-bottom: 1rem;
+}
+
+.paged-quiz__progress {
+  display: block;
+  width: min(100%, 34rem);
+  height: 0.65rem;
+  margin-top: 0.65rem;
+}
+
+.paged-quiz__navigator {
+  margin: 1rem 0 1.5rem;
+}
+
+.paged-quiz .quiz-navigator__grid {
+  grid-template-columns: repeat(10, minmax(2.25rem, 1fr));
+  max-width: 34rem;
+}
+
+.paged-quiz__question-heading {
+  max-width: 34ch;
+}
+
+.paged-quiz__controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+}
+
+@media (max-width: 42rem) {
+  .paged-quiz .quiz-navigator__grid {
+    grid-template-columns: repeat(5, minmax(2.25rem, 1fr));
+    max-width: none;
+  }
+
+  .paged-quiz__title {
+    font-size: clamp(1.65rem, 8vw, 2.2rem);
+  }
+}
