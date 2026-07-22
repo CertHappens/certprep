@@ -1809,3 +1809,28 @@ h3 {
     justify-content: flex-start;
   }
 }
+
+/* Keep paged quiz navigation controls at their expected edges. */
+
+.paged-quiz__controls {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+}
+
+.paged-quiz__controls [data-paged-previous] {
+  grid-column: 1;
+  justify-self: start;
+}
+
+.paged-quiz__controls [data-paged-next],
+.paged-quiz__controls [data-paged-finish] {
+  grid-column: 2;
+  justify-self: end;
+}
+
+@media (max-width: 42rem) {
+  .paged-quiz__controls .button {
+    width: auto;
+  }
+}
