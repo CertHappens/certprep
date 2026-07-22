@@ -2141,3 +2141,28 @@ h3 {
     margin-top: 0.6rem;
   }
 }
+
+/* Dedicated exam viewport */
+
+.paged-quiz {
+  width: min(calc(100% - 2rem), 68rem);
+  max-width: 68rem;
+  margin: 1.5rem auto 3rem;
+  padding: clamp(1.25rem, 2.5vw, 2rem);
+  background: #111925;
+  border: 1px solid #2f3d52;
+  border-radius: 1rem;
+  box-shadow:
+    0 1rem 2.5rem rgba(0, 0, 0, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.02);
+}
+
+@media (max-width: 42rem) {
+  .paged-quiz {
+    width: min(calc(100% - 0.75rem), 68rem);
+    margin: 0.5rem auto 1.5rem;
+    padding: 0.8rem;
+    border-radius: 0.85rem;
+    box-shadow: none;
+  }
+}
