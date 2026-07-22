@@ -1789,3 +1789,23 @@ h3 {
     text-align: center;
   }
 }
+
+/* Paged quiz flag action */
+
+.paged-quiz__status-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem 0.85rem;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.paged-quiz__flag {
+  min-width: 9.25rem;
+}
+
+@media (max-width: 42rem) {
+  .paged-quiz__status-actions {
+    justify-content: flex-start;
+  }
+}

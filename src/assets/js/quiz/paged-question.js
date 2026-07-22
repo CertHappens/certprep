@@ -4,11 +4,13 @@ import {
   updatePagedAnswerSelection,
 } from "./paged-answers.js";
 import { createPagedCompletionModel } from "./paged-completion.js";
+import { createPagedFlagPresentation } from "./paged-flag.js";
 import { createPagedNavigationModel } from "./paged-navigation.js";
 import { restorePagedQuizSession } from "./paged-session.js";
 import {
   completeQuizSession,
   setSelectedAnswerIds,
+  toggleQuestionFlag,
 } from "./session.js";
 import { saveStoredSession } from "./storage.js";
 
@@ -40,6 +42,7 @@ function initializePagedQuestion(root) {
 
   if (result.status === "restored") {
     renderRestoredSession(restoredView, result);
+    bindPagedFlag(restoredView, result);
     bindPagedCompletion(restoredView, result);
     return;
   }
@@ -102,6 +105,7 @@ function renderRestoredSession(root, result) {
   }
 
   renderAnswers(answers, root, result);
+  renderPagedFlag(root, result);
   renderPagedNavigation(root, result);
 }
 
@@ -178,6 +182,53 @@ function renderAnswers(container, viewRoot, result) {
   });
 }
 
+
+
+function renderPagedFlag(root, result) {
+  const button = root.querySelector("[data-paged-flag]");
+
+  if (!button) {
+    throw new Error("Missing paged flag button.");
+  }
+
+  const presentation = createPagedFlagPresentation(
+    result.state.flaggedForReview,
+  );
+
+  button.setAttribute("aria-pressed", presentation.pressed);
+  button.classList.toggle(
+    "is-flagged",
+    result.state.flaggedForReview,
+  );
+  button.textContent = presentation.label;
+}
+
+function bindPagedFlag(root, result) {
+  const button = root.querySelector("[data-paged-flag]");
+
+  if (!button) {
+    throw new Error("Missing paged flag button.");
+  }
+
+  button.addEventListener("click", () => {
+    const flagged = toggleQuestionFlag(
+      result.session,
+      result.state.question.id,
+    );
+
+    saveStoredSession(
+      window.sessionStorage,
+      result.storageKey,
+      result.session,
+    );
+
+    renderPagedFlag(root, result);
+    renderPagedNavigation(root, result);
+
+    const presentation = createPagedFlagPresentation(flagged);
+    announce(root, presentation.announcement);
+  });
+}
 
 function configurePagedLink(link, path) {
   if (!link) {

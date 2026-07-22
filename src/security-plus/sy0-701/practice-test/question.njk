@@ -40,9 +40,20 @@ sitemap: false
           </span>
         </p>
 
-        <p class="paged-quiz__summary" data-paged-summary>
-          Restoring progress…
-        </p>
+        <div class="paged-quiz__status-actions">
+          <p class="paged-quiz__summary" data-paged-summary>
+            Restoring progress…
+          </p>
+
+          <button
+            class="button button--secondary button--small quiz-flag-button paged-quiz__flag"
+            type="button"
+            aria-pressed="false"
+            data-paged-flag
+          >
+            Flag for review
+          </button>
+        </div>
       </div>
 
       <progress
