@@ -26,18 +26,24 @@ sitemap: false
   data-test-id="SEC-701"
   data-question-position="{{ questionPosition }}"
 >
-  <p class="eyebrow">Paged quiz pilot</p>
-  <h1 class="paged-quiz__title">Security+ SY0-701 question {{ questionPosition }}</h1>
+  <p class="eyebrow">Security+ SY0-701 practice test</p>
+  <h1 class="paged-quiz__title">Question {{ questionPosition }}</h1>
 
-  <div data-paged-view="restored" hidden>
+  <div class="paged-quiz__body" data-paged-view="restored" hidden>
     <header class="paged-quiz__header">
-      <p>
-        <strong data-paged-position>Question {{ questionPosition }}</strong>
-        <span aria-hidden="true"> · </span>
-        <code data-paged-question-id></code>
-      </p>
+      <div class="paged-quiz__status-row">
+        <p class="paged-quiz__position">
+          <strong data-paged-position>Question {{ questionPosition }}</strong>
+          <span class="paged-quiz__question-id">
+            <span aria-hidden="true"> · </span>
+            <code data-paged-question-id></code>
+          </span>
+        </p>
 
-      <p data-paged-summary>Restoring progress…</p>
+        <p class="paged-quiz__summary" data-paged-summary>
+          Restoring progress…
+        </p>
+      </div>
 
       <progress
         class="paged-quiz__progress"
@@ -53,7 +59,7 @@ sitemap: false
       <ol class="quiz-navigator__grid" data-paged-navigator></ol>
     </nav>
 
-    <p>
+    <p class="paged-quiz__meta">
       <span data-paged-domain></span>
       <span aria-hidden="true"> · </span>
       <span data-paged-topic></span>
@@ -69,7 +75,7 @@ sitemap: false
       </fieldset>
     </form>
 
-    <p>
+    <p class="visually-hidden">
       Browser-session answer state:
       <strong data-paged-answer-status></strong>.
     </p>
@@ -92,14 +98,9 @@ sitemap: false
       </a>
     </nav>
 
-    <p>
-      Each numbered link performs a full document navigation while preserving
-      this randomized test in the current browser tab.
-    </p>
-
-    <p>
-      <a class="button-link" href="/security-plus/sy0-701/practice-test/?mode=classic">
-        Open the single-page fallback
+    <p class="paged-quiz__fallback">
+      <a href="/security-plus/sy0-701/practice-test/?mode=classic">
+        Use the single-page fallback
       </a>
     </p>
   </div>

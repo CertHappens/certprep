@@ -1652,3 +1652,140 @@ h3 {
 .paged-quiz .quiz-navigator__button:hover {
   text-decoration: none;
 }
+
+/* Paged quiz compact layout */
+
+.paged-quiz {
+  padding-top: 0.75rem;
+}
+
+.paged-quiz__body {
+  max-width: 50rem;
+}
+
+.paged-quiz__title {
+  margin: 0 0 0.75rem;
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  line-height: 1.05;
+}
+
+.paged-quiz__header {
+  display: grid;
+  gap: 0.55rem;
+  margin-bottom: 0.75rem;
+}
+
+.paged-quiz__status-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1rem;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.paged-quiz__position,
+.paged-quiz__summary {
+  margin: 0;
+}
+
+.paged-quiz__position {
+  color: var(--text);
+}
+
+.paged-quiz__question-id {
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  font-weight: 500;
+}
+
+.paged-quiz__summary {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.paged-quiz__progress {
+  width: 100%;
+  max-width: 50rem;
+  margin: 0;
+}
+
+.paged-quiz__navigator {
+  margin: 0.75rem 0 1.25rem;
+}
+
+.paged-quiz .quiz-navigator__grid {
+  max-width: 36rem;
+}
+
+.paged-quiz__meta {
+  margin: 0 0 0.7rem;
+  color: var(--accent-strong);
+  font-size: 0.86rem;
+  font-weight: 800;
+}
+
+.paged-quiz__question-heading {
+  max-width: 44rem;
+  margin: 0 0 1rem;
+  font-size: clamp(1.45rem, 3vw, 2rem);
+  line-height: 1.28;
+  text-wrap: pretty;
+}
+
+.paged-quiz .quiz-answer-form {
+  margin-top: 1rem;
+}
+
+.paged-quiz .quiz-answer {
+  padding: 0.85rem 0.95rem;
+}
+
+.paged-quiz__controls {
+  justify-content: space-between;
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+}
+
+.paged-quiz__fallback {
+  margin: 1rem 0 0;
+  color: var(--text-muted);
+  font-size: 0.82rem;
+}
+
+.paged-quiz__fallback a {
+  color: inherit;
+}
+
+@media (max-width: 42rem) {
+  .paged-quiz {
+    padding-top: 0.35rem;
+  }
+
+  .paged-quiz__title {
+    font-size: clamp(1.65rem, 9vw, 2rem);
+  }
+
+  .paged-quiz__question-id {
+    display: none;
+  }
+
+  .paged-quiz__status-row {
+    display: grid;
+    gap: 0.25rem;
+  }
+
+  .paged-quiz__question-heading {
+    font-size: clamp(1.3rem, 6.8vw, 1.65rem);
+    line-height: 1.3;
+  }
+
+  .paged-quiz .quiz-answer {
+    padding: 0.8rem;
+  }
+
+  .paged-quiz__controls .button {
+    flex: 1 1 8rem;
+    text-align: center;
+  }
+}
