@@ -25,6 +25,7 @@ sitemap: false
   data-paged-question-app
   data-test-id="SEC-701"
   data-question-position="{{ questionPosition }}"
+  data-turnstile-site-key="{{ environment.turnstileSiteKey }}"
 >
   <p class="eyebrow">Security+ SY0-701 practice test</p>
   <h1 class="paged-quiz__title">Question {{ questionPosition }}</h1>
@@ -52,6 +53,14 @@ sitemap: false
             data-paged-flag
           >
             Flag for review
+          </button>
+
+          <button
+            class="button button--secondary button--small"
+            type="button"
+            data-paged-report
+          >
+            Report question
           </button>
         </div>
       </div>
@@ -138,6 +147,73 @@ sitemap: false
       </a>
     </p>
   </div>
+
+
+  <dialog class="question-report-dialog" aria-labelledby="paged-question-report-heading" data-report-dialog>
+    <form class="question-report-form" data-report-form>
+      <header class="question-report-dialog__header">
+        <div>
+          <p class="eyebrow">Question correction</p>
+          <h2 id="paged-question-report-heading">Report a questionable item</h2>
+          <p>Question ID: <code data-report-question-id></code></p>
+        </div>
+        <button
+          class="question-report-dialog__close"
+          type="button"
+          aria-label="Close report form"
+          data-report-close
+        >
+          ×
+        </button>
+      </header>
+
+      <fieldset class="question-report-categories">
+        <legend>What seems wrong?</legend>
+        <label><input type="radio" name="report-category" value="possible_typo"> <span>Possible typo</span></label>
+        <label><input type="radio" name="report-category" value="correct_answer_may_be_wrong"> <span>Correct answer may be wrong</span></label>
+        <label><input type="radio" name="report-category" value="explanation_unclear"> <span>Explanation is unclear</span></label>
+        <label><input type="radio" name="report-category" value="question_outdated"> <span>Question may be outdated</span></label>
+        <label><input type="radio" name="report-category" value="duplicate_question"> <span>Duplicate question</span></label>
+        <label><input type="radio" name="report-category" value="other"> <span>Other</span></label>
+      </fieldset>
+
+      <label class="question-report-note">
+        <span>Optional note</span>
+        <textarea
+          name="report-note"
+          rows="4"
+          maxlength="1000"
+          placeholder="Describe the issue or suggest a correction."
+        ></textarea>
+      </label>
+
+      <label class="question-report-honeypot" aria-hidden="true">
+        Website
+        <input type="text" name="website" tabindex="-1" autocomplete="off">
+      </label>
+
+      <div class="question-report-turnstile" data-report-turnstile></div>
+      <p
+        class="question-report-status"
+        role="status"
+        aria-live="polite"
+        data-report-status
+      ></p>
+
+      <div class="question-report-dialog__actions">
+        <button
+          class="button button--secondary"
+          type="button"
+          data-report-close
+        >
+          Cancel
+        </button>
+        <button class="button" type="submit" data-report-submit>
+          Submit report
+        </button>
+      </div>
+    </form>
+  </dialog>
 
   <noscript>
     <p>JavaScript is required to restore a saved practice-test session.</p>

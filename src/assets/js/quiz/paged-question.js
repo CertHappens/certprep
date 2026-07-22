@@ -6,6 +6,8 @@ import {
 import { createPagedCompletionModel } from "./paged-completion.js";
 import { createPagedFlagPresentation } from "./paged-flag.js";
 import { createPagedNavigationModel } from "./paged-navigation.js";
+import { createPagedReportContext } from "./paged-report.js";
+import { createQuestionReporter } from "./reporting.js";
 import { restorePagedQuizSession } from "./paged-session.js";
 import {
   completeQuizSession,
@@ -43,6 +45,7 @@ function initializePagedQuestion(root) {
   if (result.status === "restored") {
     renderRestoredSession(restoredView, result);
     bindPagedFlag(restoredView, result);
+    bindPagedReporting(root, restoredView, result);
     bindPagedCompletion(restoredView, result);
     return;
   }
@@ -227,6 +230,33 @@ function bindPagedFlag(root, result) {
 
     const presentation = createPagedFlagPresentation(flagged);
     announce(root, presentation.announcement);
+  });
+}
+
+
+function bindPagedReporting(root, viewRoot, result) {
+  const button = viewRoot.querySelector("[data-paged-report]");
+
+  if (!button) {
+    throw new Error("Missing paged report button.");
+  }
+
+  const reporter = createQuestionReporter({
+    root,
+    getSession: () => result.session,
+    announce: (message) => announce(viewRoot, message),
+  });
+
+  button.addEventListener("click", async () => {
+    const context = createPagedReportContext(
+      result.session,
+      result.position,
+    );
+
+    await reporter.open({
+      ...context,
+      opener: button,
+    });
   });
 }
 
