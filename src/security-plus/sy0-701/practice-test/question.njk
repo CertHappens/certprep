@@ -1,0 +1,219 @@
+---
+layout: layouts/base.njk
+pagination:
+  data: pagedQuiz.questionPositions
+  size: 1
+  alias: questionPosition
+eleventyComputed:
+  title: "Security+ SY0-701 Practice Test Question {{ questionPosition }}"
+  description: "Reserved route for question {{ questionPosition }} in the Cert Happens paged Security+ SY0-701 practice-test pilot."
+  permalink: "/security-plus/sy0-701/practice-test/question/{{ questionPosition }}/index.html"
+robots: noindex,nofollow,nosnippet
+sitemap: false
+---
+<nav class="breadcrumbs page-shell" aria-label="Breadcrumb">
+  <ol>
+    <li><a href="/">Home</a></li>
+    <li><a href="/security-plus/">Security+</a></li>
+    <li><a href="/security-plus/sy0-701/practice-test/">SY0-701 practice test</a></li>
+    <li aria-current="page">Question {{ questionPosition }}</li>
+  </ol>
+</nav>
+
+<section
+  class="page-shell content-section paged-quiz"
+  data-paged-question-app
+  data-test-id="SEC-701"
+  data-question-position="{{ questionPosition }}"
+  data-turnstile-site-key="{{ environment.turnstileSiteKey }}"
+  aria-busy="true"
+>
+  <p class="eyebrow">Security+ SY0-701 practice test</p>
+  <h1 class="paged-quiz__title">Question {{ questionPosition }}</h1>
+
+  <div class="paged-quiz__body" data-paged-view="restored" hidden>
+    <header class="paged-quiz__header">
+      <div class="paged-quiz__status-row">
+        <p class="paged-quiz__position">
+          <strong data-paged-position>Question {{ questionPosition }}</strong>
+          <span class="paged-quiz__question-id">
+            <span aria-hidden="true"> · </span>
+            <code data-paged-question-id></code>
+          </span>
+        </p>
+
+        <div class="paged-quiz__status-actions">
+          <p class="paged-quiz__summary" data-paged-summary>
+            Restoring progress…
+          </p>
+
+          <button
+            class="button button--secondary button--small quiz-flag-button paged-quiz__flag"
+            type="button"
+            aria-pressed="false"
+            data-paged-flag
+          >
+            Flag for review
+          </button>
+
+          <button
+            class="button button--secondary button--small"
+            type="button"
+            data-paged-report
+          >
+            Report question
+          </button>
+        </div>
+      </div>
+
+      <progress
+        class="paged-quiz__progress"
+        data-paged-progress
+        value="{{ questionPosition }}"
+        max="50"
+      >
+        Question {{ questionPosition }}
+      </progress>
+    </header>
+
+    <nav class="paged-quiz__navigator" aria-label="Questions in this practice test">
+      <ol class="quiz-navigator__grid" data-paged-navigator></ol>
+    </nav>
+
+    <p class="paged-quiz__meta">
+      <span data-paged-domain></span>
+      <span aria-hidden="true"> · </span>
+      <span data-paged-topic></span>
+    </p>
+
+    <h2 class="paged-quiz__question-heading" data-paged-question-text>Restoring saved question…</h2>
+    <p data-paged-instruction hidden></p>
+
+    <form class="quiz-answer-form">
+      <fieldset>
+        <legend class="visually-hidden">Select your answer</legend>
+        <div class="quiz-answers" data-paged-answers></div>
+      </fieldset>
+    </form>
+
+    <p class="visually-hidden">
+      Browser-session answer state:
+      <strong data-paged-answer-status></strong>.
+    </p>
+
+    <p class="visually-hidden" aria-live="polite" data-paged-live></p>
+
+    <nav class="paged-quiz__controls" aria-label="Previous and next question">
+      <a
+        class="button button--secondary"
+        data-paged-previous
+      >
+        Previous
+      </a>
+
+      <a
+        class="button"
+        data-paged-next
+      >
+        Next
+      </a>
+
+      <button
+        class="button"
+        type="button"
+        data-paged-finish
+        hidden
+      >
+        Finish test
+      </button>
+    </nav>
+
+  </div>
+
+  <div data-paged-view="unavailable" hidden>
+    <h2 data-paged-unavailable-heading>
+      No active test was found in this tab.
+    </h2>
+    <p data-paged-unavailable-detail>
+      Start a randomized practice test, then use a numbered question route in the same browser tab.
+    </p>
+    <p>
+      <a class="button-link" href="/security-plus/sy0-701/practice-test/">
+        Start a practice test
+      </a>
+    </p>
+  </div>
+
+
+  <dialog class="question-report-dialog" aria-labelledby="paged-question-report-heading" data-report-dialog>
+    <form class="question-report-form" data-report-form>
+      <header class="question-report-dialog__header">
+        <div>
+          <p class="eyebrow">Question correction</p>
+          <h2 id="paged-question-report-heading">Report a questionable item</h2>
+          <p>Question ID: <code data-report-question-id></code></p>
+        </div>
+        <button
+          class="question-report-dialog__close"
+          type="button"
+          aria-label="Close report form"
+          data-report-close
+        >
+          ×
+        </button>
+      </header>
+
+      <fieldset class="question-report-categories">
+        <legend>What seems wrong?</legend>
+        <label><input type="radio" name="report-category" value="possible_typo"> <span>Possible typo</span></label>
+        <label><input type="radio" name="report-category" value="correct_answer_may_be_wrong"> <span>Correct answer may be wrong</span></label>
+        <label><input type="radio" name="report-category" value="explanation_unclear"> <span>Explanation is unclear</span></label>
+        <label><input type="radio" name="report-category" value="question_outdated"> <span>Question may be outdated</span></label>
+        <label><input type="radio" name="report-category" value="duplicate_question"> <span>Duplicate question</span></label>
+        <label><input type="radio" name="report-category" value="other"> <span>Other</span></label>
+      </fieldset>
+
+      <label class="question-report-note">
+        <span>Optional note</span>
+        <textarea
+          name="report-note"
+          rows="4"
+          maxlength="1000"
+          placeholder="Describe the issue or suggest a correction."
+        ></textarea>
+      </label>
+
+      <label class="question-report-honeypot" aria-hidden="true">
+        Website
+        <input type="text" name="website" tabindex="-1" autocomplete="off">
+      </label>
+
+      <div class="question-report-turnstile" data-report-turnstile></div>
+      <p
+        class="question-report-status"
+        role="status"
+        aria-live="polite"
+        data-report-status
+      ></p>
+
+      <div class="question-report-dialog__actions">
+        <button
+          class="button button--secondary"
+          type="button"
+          data-report-close
+        >
+          Cancel
+        </button>
+        <button class="button" type="submit" data-report-submit>
+          Submit report
+        </button>
+      </div>
+    </form>
+  </dialog>
+
+  <noscript>
+    <p>JavaScript is required to restore a saved practice-test session.</p>
+  </noscript>
+</section>
+
+<script type="module" src="/assets/js/quiz/paged-question.js"></script>
