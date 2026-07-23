@@ -5,7 +5,9 @@ import {
   updatePagedAnswerSelection,
 } from "./paged-answers.js";
 import {
+  createPagedHistoryState,
   createPagedNavigationTransition,
+  resolvePagedHistoryPosition,
   shouldHandlePagedNavigationClick,
 } from "./paged-client-navigation.js";
 import { createPagedCompletionModel } from "./paged-completion.js";
@@ -53,6 +55,8 @@ function initializePagedQuestion(root) {
     bindPagedReporting(root, restoredView, result);
     bindPagedCompletion(restoredView, result);
     bindPagedClientNavigation(root, restoredView, result);
+    initializePagedHistory(result);
+    bindPagedHistoryNavigation(root, restoredView, result);
     return;
   }
 
@@ -406,7 +410,50 @@ function bindPagedClientNavigation(appRoot, viewRoot, result) {
   });
 }
 
-function navigateToPagedQuestion(appRoot, viewRoot, result, targetPosition) {
+function initializePagedHistory(result) {
+  const transition = createPagedNavigationTransition(
+    result.session,
+    result.position,
+    result.position,
+  );
+  const historyState = createPagedHistoryState(
+    window.history.state,
+    result.position,
+    result.total,
+  );
+
+  window.history.replaceState(historyState, "", transition.path);
+}
+
+function bindPagedHistoryNavigation(appRoot, viewRoot, result) {
+  window.addEventListener("popstate", (event) => {
+    const targetPosition = resolvePagedHistoryPosition(
+      event.state,
+      `${window.location.pathname}${window.location.search}${window.location.hash}`,
+      result.session.questionOrder.length,
+    );
+
+    if (!Number.isInteger(targetPosition)) {
+      return;
+    }
+
+    navigateToPagedQuestion(
+      appRoot,
+      viewRoot,
+      result,
+      targetPosition,
+      { historyMode: "replace" },
+    );
+  });
+}
+
+function navigateToPagedQuestion(
+  appRoot,
+  viewRoot,
+  result,
+  targetPosition,
+  { historyMode = "push" } = {},
+) {
   const transition = createPagedNavigationTransition(
     result.session,
     result.position,
@@ -428,14 +475,20 @@ function navigateToPagedQuestion(appRoot, viewRoot, result, targetPosition) {
     result.session,
   );
   renderRestoredSession(appRoot, viewRoot, result);
-  window.history.pushState(
-    {
-      certHappensPagedQuiz: true,
-      questionPosition: transition.targetPosition,
-    },
-    "",
-    transition.path,
+
+  const historyState = createPagedHistoryState(
+    window.history.state,
+    transition.targetPosition,
+    result.total,
   );
+
+  if (historyMode === "push") {
+    window.history.pushState(historyState, "", transition.path);
+  } else if (historyMode === "replace") {
+    window.history.replaceState(historyState, "", transition.path);
+  } else {
+    throw new Error(`Unsupported paged history mode: ${historyMode}`);
+  }
 
   const questionHeading = viewRoot.querySelector("[data-paged-question-text]");
   questionHeading?.focus();
