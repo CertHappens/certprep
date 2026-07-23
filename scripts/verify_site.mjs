@@ -81,6 +81,7 @@ const requiredFiles = [
   "security-plus/index.html",
   "security-plus/sy0-701/practice-test/index.html",
   "security-plus/sy0-701/study-guide/index.html",
+  "security-plus/sy0-701/study-guide/general-security-concepts/index.html",
   "_redirects",
   "assets/brand/certhappens-social-card.png",
   "assets/css/print.css",
@@ -227,6 +228,35 @@ for (const file of htmlFiles) {
     if (/<h1[^>]*>\s*CompTIA\b/i.test(html)) {
       fail(`${relative}: study guide H1 should not present the guide as CompTIA material`);
     }
+
+    if (!html.includes('/security-plus/sy0-701/study-guide/general-security-concepts/')) {
+      fail(`${relative}: study guide is missing its Domain 1 guide link`);
+    }
+  }
+
+  if (relative === "security-plus/sy0-701/study-guide/general-security-concepts/index.html") {
+    if (!html.includes("data-print-guide")) {
+      fail(`${relative}: Domain 1 guide is missing the shared Print | Save control`);
+    }
+
+    if (!/<h1>Security\+ SY0-701 Domain 1: General Security Concepts<\/h1>/.test(html)) {
+      fail(`${relative}: Domain 1 guide is missing its expected h1`);
+    }
+
+    const requiredSectionIds = [
+      "security-controls",
+      "core-concepts",
+      "zero-trust-physical-deception",
+      "change-management",
+      "cryptography-pki",
+      "review-checklist"
+    ];
+
+    for (const id of requiredSectionIds) {
+      if (!html.includes(`id="${id}"`)) {
+        fail(`${relative}: Domain 1 guide is missing section #${id}`);
+      }
+    }
   }
 
   if (relative.startsWith("security-plus/sy0-701/practice-test/question/")) {
@@ -276,6 +306,7 @@ if (await isFile(path.join(outputRoot, "sitemap.xml"))) {
     "https://certhappens.com/security-plus/",
     "https://certhappens.com/security-plus/sy0-701/practice-test/",
     "https://certhappens.com/security-plus/sy0-701/study-guide/",
+    "https://certhappens.com/security-plus/sy0-701/study-guide/general-security-concepts/",
     "https://certhappens.com/privacy/",
     "https://certhappens.com/terms/",
     "https://certhappens.com/disclaimer/",
@@ -288,12 +319,20 @@ if (await isFile(path.join(outputRoot, "sitemap.xml"))) {
     }
   }
 
-  const studyGuideEntry = sitemap.match(
-    /<url>[\s\S]*?<loc>https:\/\/certhappens\.com\/security-plus\/sy0-701\/study-guide\/<\/loc>[\s\S]*?<\/url>/
-  )?.[0];
+  const datedArticleUrls = [
+    "https://certhappens.com/security-plus/sy0-701/study-guide/",
+    "https://certhappens.com/security-plus/sy0-701/study-guide/general-security-concepts/"
+  ];
 
-  if (!studyGuideEntry || !/<lastmod>\d{4}-\d{2}-\d{2}<\/lastmod>/.test(studyGuideEntry)) {
-    fail("sitemap.xml: study guide publication or modification date is missing");
+  for (const url of datedArticleUrls) {
+    const escapedUrl = url.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    const entry = sitemap.match(
+      new RegExp(`<url>[\\s\\S]*?<loc>${escapedUrl}</loc>[\\s\\S]*?</url>`)
+    )?.[0];
+
+    if (!entry || !/<lastmod>\d{4}-\d{2}-\d{2}<\/lastmod>/.test(entry)) {
+      fail(`sitemap.xml: publication or modification date is missing for ${url}`);
+    }
   }
 }
 

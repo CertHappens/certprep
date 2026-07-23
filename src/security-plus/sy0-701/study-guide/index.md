@@ -41,6 +41,9 @@ keywords:
   - Security+ study guide
   - cybersecurity certification
 relatedLinks:
+  - title: "Domain 1: General Security Concepts"
+    url: /security-plus/sy0-701/study-guide/general-security-concepts/
+    description: Review security controls, zero trust, change management, cryptography, PKI, and certificates.
   - title: Take a randomized SY0-701 practice test
     url: /security-plus/sy0-701/practice-test/
     description: Choose 10, 20, 30, or 50 questions and review every explanation.
@@ -151,6 +154,8 @@ You should be able to:
 - Recognize the security purpose of change management.
 
 Pay attention to the assurance requested in the scenario. Encryption can protect confidentiality. A digital signature can support integrity, authentication, and non-repudiation when the surrounding key and trust processes are sound. An ordinary unkeyed hash can reveal a change in data, but it does not identify the sender.
+
+Continue with the [Domain 1: General Security Concepts guide](/security-plus/sy0-701/study-guide/general-security-concepts/) for control classifications, zero-trust components, change-management steps, and cryptography review.
 
 <h3>Domain 2.0: Threats, Vulnerabilities, and Mitigations, 22%</h3>
 

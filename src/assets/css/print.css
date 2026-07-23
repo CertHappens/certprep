@@ -64,8 +64,9 @@
     display: flex;
     min-height: 0;
     gap: 0.18in;
-    align-items: center;
-    justify-content: flex-start;
+    align-items: center !important;
+    justify-content: space-between !important;
+    flex-direction: row !important;
     flex-wrap: nowrap;
     padding: 0 0 0.14in;
   }
@@ -106,12 +107,12 @@
   .site-header__print-title {
     display: block;
     flex: 1 1 auto;
-    margin: 0;
+    margin: 0 0 0 auto !important;
     color: #111 !important;
     font-size: 15pt;
     font-weight: 700;
     line-height: 1.15;
-    text-align: left;
+    text-align: right !important;
   }
 
   main {
