@@ -1,12 +1,17 @@
 ---
-permalink: "sitemap.xml"
+permalink: /sitemap.xml
 sitemap: false
 eleventyExcludeFromCollections: true
 ---
+<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 {% for item in collections.sitemapPages %}
   <url>
     <loc>{{ (site.url ~ item.url) | xmlEscape }}</loc>
+{% set lastModified = item.data.dateModified or item.data.datePublished %}
+{% if lastModified %}
+    <lastmod>{{ lastModified | htmlDateString }}</lastmod>
+{% endif %}
   </url>
 {% endfor %}
 </urlset>

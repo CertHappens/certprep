@@ -1,4 +1,3 @@
-
 import { readFile, readdir, stat } from "node:fs/promises";
 import path from "node:path";
 
@@ -43,11 +42,13 @@ function getMeta(html, name, property = false) {
     `<meta\\s+[^>]*content=["']([^"']*)["'][^>]*${attribute}=["']${name}["'][^>]*>`,
     "i"
   );
+
   return html.match(expression)?.[1] || html.match(reverseExpression)?.[1] || "";
 }
 
 function localTarget(href) {
   const clean = href.split("#")[0].split("?")[0];
+
   if (!clean || !clean.startsWith("/") || clean.startsWith("//")) {
     return null;
   }
@@ -79,6 +80,7 @@ const requiredFiles = [
   "contact/index.html",
   "security-plus/index.html",
   "security-plus/sy0-701/practice-test/index.html",
+  "security-plus/sy0-701/study-guide/index.html",
   "_redirects",
   "assets/brand/certhappens-social-card.png"
 ];
@@ -95,8 +97,8 @@ const htmlFiles = allFiles.filter((file) => file.endsWith(".html"));
 for (const file of htmlFiles) {
   const relative = path.relative(outputRoot, file);
   const html = await readFile(file, "utf8");
-
   const title = html.match(/<title>([^<]+)<\/title>/i)?.[1]?.trim();
+
   if (!title) {
     fail(`${relative}: missing title`);
   }
@@ -118,8 +120,9 @@ for (const file of htmlFiles) {
   }
 
   if (!isNoIndex) {
-    const canonical = html.match(/<link\s+[^>]*rel=["']canonical["'][^>]*href=["']([^"']+)["'][^>]*>/i)?.[1]
-      || html.match(/<link\s+[^>]*href=["']([^"']+)["'][^>]*rel=["']canonical["'][^>]*>/i)?.[1];
+    const canonical =
+      html.match(/<link\s+[^>]*rel=["']canonical["'][^>]*href=["']([^"']+)["'][^>]*>/i)?.[1] ||
+      html.match(/<link\s+[^>]*href=["']([^"']+)["'][^>]*rel=["']canonical["'][^>]*>/i)?.[1];
 
     if (!canonical?.startsWith("https://certhappens.com/")) {
       fail(`${relative}: missing or invalid canonical URL`);
@@ -141,7 +144,9 @@ for (const file of htmlFiles) {
     }
   }
 
-  for (const match of html.matchAll(/<script\s+type=["']application\/ld\+json["']>([\s\S]*?)<\/script>/gi)) {
+  for (const match of html.matchAll(
+    /<script\s+type=["']application\/ld\+json["']>([\s\S]*?)<\/script>/gi
+  )) {
     try {
       JSON.parse(match[1]);
     } catch (error) {
@@ -153,6 +158,20 @@ for (const file of htmlFiles) {
     const target = localTarget(match[1]);
     if (target && !(await isFile(target))) {
       fail(`${relative}: broken internal link ${match[1]}`);
+    }
+  }
+
+  if (html.includes('class="article-body prose"')) {
+    if (!html.includes('"@type": "Article"')) {
+      fail(`${relative}: article page is missing Article structured data`);
+    }
+
+    if (!html.includes('"@type": "BreadcrumbList"')) {
+      fail(`${relative}: article page is missing breadcrumb structured data`);
+    }
+
+    if (!/<time\s+datetime=["']\d{4}-\d{2}-\d{2}["']/.test(html)) {
+      fail(`${relative}: article page is missing a machine-readable publication date`);
     }
   }
 }
@@ -192,6 +211,7 @@ if (await isFile(path.join(outputRoot, "sitemap.xml"))) {
     "https://certhappens.com/",
     "https://certhappens.com/security-plus/",
     "https://certhappens.com/security-plus/sy0-701/practice-test/",
+    "https://certhappens.com/security-plus/sy0-701/study-guide/",
     "https://certhappens.com/privacy/",
     "https://certhappens.com/terms/",
     "https://certhappens.com/disclaimer/",
@@ -202,6 +222,14 @@ if (await isFile(path.join(outputRoot, "sitemap.xml"))) {
     if (!sitemap.includes(`<loc>${url}</loc>`)) {
       fail(`sitemap.xml: missing ${url}`);
     }
+  }
+
+  const studyGuideEntry = sitemap.match(
+    /<url>[\s\S]*?<loc>https:\/\/certhappens\.com\/security-plus\/sy0-701\/study-guide\/<\/loc>[\s\S]*?<\/url>/
+  )?.[0];
+
+  if (!studyGuideEntry || !/<lastmod>\d{4}-\d{2}-\d{2}<\/lastmod>/.test(studyGuideEntry)) {
+    fail("sitemap.xml: study guide publication or modification date is missing");
   }
 }
 

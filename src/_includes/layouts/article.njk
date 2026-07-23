@@ -1,0 +1,122 @@
+---
+layout: layouts/base.njk
+---
+{% set articleAuthor = authors[author] %}
+{% set canonicalUrl = site.url ~ page.url %}
+{% set publishedDate = datePublished | htmlDateString %}
+{% set modifiedDate = (dateModified or datePublished) | htmlDateString %}
+{% set articleImageUrl = site.url ~ (socialImagePath or site.socialImagePath) %}
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": {{ title | json | safe }},
+  "description": {{ description | json | safe }},
+  "datePublished": {{ publishedDate | json | safe }},
+  "dateModified": {{ modifiedDate | json | safe }},
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": {{ canonicalUrl | json | safe }}
+  },
+  "author": {
+    "@type": {{ (articleAuthor.type or "Organization") | json | safe }},
+    "name": {{ articleAuthor.name | json | safe }},
+    "url": {{ (site.url ~ articleAuthor.url) | json | safe }}
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": {{ site.name | json | safe }},
+    "url": {{ site.url | json | safe }},
+    "logo": {
+      "@type": "ImageObject",
+      "url": {{ (site.url ~ site.logoPath) | json | safe }}
+    }
+  },
+  "image": {{ articleImageUrl | json | safe }}{% if articleSection %},
+  "articleSection": {{ articleSection | json | safe }}{% endif %}{% if keywords %},
+  "keywords": {{ keywords | join(", ") | json | safe }}{% endif %}
+}
+</script>
+
+{% if breadcrumbs %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {% for crumb in breadcrumbs %}
+    {
+      "@type": "ListItem",
+      "position": {{ loop.index }},
+      "name": {{ crumb.label | json | safe }},
+      "item": {{ (site.url ~ (crumb.url or page.url)) | json | safe }}
+    }{% if not loop.last %},{% endif %}
+    {% endfor %}
+  ]
+}
+</script>
+{% endif %}
+
+<header class="page-header page-header--compact article-header">
+  <div class="page-shell">
+    {% if breadcrumbs %}
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <ol>
+        {% for crumb in breadcrumbs %}
+        <li{% if loop.last %} aria-current="page"{% endif %}>
+          {% if crumb.url and not loop.last %}<a href="{{ crumb.url }}">{{ crumb.label }}</a>{% else %}{{ crumb.label }}{% endif %}
+        </li>
+        {% endfor %}
+      </ol>
+    </nav>
+    {% endif %}
+
+    {% if eyebrow %}<p class="eyebrow">{{ eyebrow }}</p>{% endif %}
+    <h1>{{ title }}</h1>
+    {% if lede %}<p class="lede">{{ lede }}</p>{% endif %}
+
+    <p class="article-meta">
+      <span>By {{ articleAuthor.name }}</span>
+      <span class="article-meta__separator" aria-hidden="true">·</span>
+      <span>Published <time datetime="{{ publishedDate }}">{{ datePublished | readableDate }}</time></span>
+      {% if modifiedDate != publishedDate %}
+      <span class="article-meta__separator" aria-hidden="true">·</span>
+      <span>Updated <time datetime="{{ modifiedDate }}">{{ (dateModified or datePublished) | readableDate }}</time></span>
+      {% endif %}
+    </p>
+  </div>
+</header>
+
+<div class="article-layout page-shell">
+  {% if toc %}
+  <aside class="article-toc">
+    <nav aria-labelledby="article-toc-title">
+      <h2 id="article-toc-title">On this page</h2>
+      <ol>
+        {% for item in toc %}
+        <li><a href="#{{ item.id }}">{{ item.label }}</a></li>
+        {% endfor %}
+      </ol>
+    </nav>
+  </aside>
+  {% endif %}
+
+  <article class="article-body prose">
+    {{ content | safe }}
+
+    {% if relatedLinks %}
+    <section class="article-related" aria-labelledby="related-resources-title">
+      <h2 id="related-resources-title">Related resources</h2>
+      <div class="article-related__grid">
+        {% for link in relatedLinks %}
+        <a class="article-related__item" href="{{ link.url }}">
+          <strong>{{ link.title }}</strong>
+          {% if link.description %}<span>{{ link.description }}</span>{% endif %}
+        </a>
+        {% endfor %}
+      </div>
+    </section>
+    {% endif %}
+  </article>
+</div>
