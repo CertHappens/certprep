@@ -82,6 +82,7 @@ const requiredFiles = [
   "security-plus/sy0-701/practice-test/index.html",
   "security-plus/sy0-701/study-guide/index.html",
   "security-plus/sy0-701/study-guide/general-security-concepts/index.html",
+  "security-plus/sy0-701/study-guide/threats-vulnerabilities-mitigations/index.html",
   "_redirects",
   "assets/brand/certhappens-social-card.png",
   "assets/css/site.css",
@@ -110,6 +111,21 @@ if (await isFile(siteCssPath)) {
   if (!siteCss.includes("table-layout: auto") || !siteCss.includes("overflow-wrap: anywhere")) {
     fail("site.css: shared article tables are missing flexible wrapping rules");
   }
+
+  const requiredFirstColumnRules = [
+    ".article-body th:first-child",
+    ".article-body td:first-child",
+    "min-width: 6.5rem",
+    "overflow-wrap: normal",
+    "word-break: normal",
+    "hyphens: none"
+  ];
+
+  for (const rule of requiredFirstColumnRules) {
+    if (!siteCss.includes(rule)) {
+      fail(`site.css: article-table first-column rule is missing: ${rule}`);
+    }
+  }
 }
 
 const printCssPath = path.join(outputRoot, "assets/css/print.css");
@@ -131,6 +147,21 @@ if (await isFile(printCssPath)) {
   for (const rule of requiredPrintTableRules) {
     if (!printCss.includes(rule)) {
       fail(`print.css: shared printable-table rule is missing: ${rule}`);
+    }
+  }
+
+
+  const requiredPrintFirstColumnRules = [
+    "th:first-child",
+    "td:first-child",
+    "min-width: 1.05in !important",
+    "word-break: normal !important",
+    "hyphens: none !important"
+  ];
+
+  for (const rule of requiredPrintFirstColumnRules) {
+    if (!printCss.includes(rule)) {
+      fail(`print.css: printable first-column rule is missing: ${rule}`);
     }
   }
 }
@@ -284,6 +315,10 @@ for (const file of htmlFiles) {
     if (!html.includes('/security-plus/sy0-701/study-guide/general-security-concepts/')) {
       fail(`${relative}: study guide is missing its Domain 1 guide link`);
     }
+
+    if (!html.includes('/security-plus/sy0-701/study-guide/threats-vulnerabilities-mitigations/')) {
+      fail(`${relative}: study guide is missing its Domain 2 guide link`);
+    }
   }
 
   if (relative === "security-plus/sy0-701/study-guide/general-security-concepts/index.html") {
@@ -307,6 +342,31 @@ for (const file of htmlFiles) {
     for (const id of requiredSectionIds) {
       if (!html.includes(`id="${id}"`)) {
         fail(`${relative}: Domain 1 guide is missing section #${id}`);
+      }
+    }
+  }
+
+  if (relative === "security-plus/sy0-701/study-guide/threats-vulnerabilities-mitigations/index.html") {
+    if (!html.includes("data-print-guide")) {
+      fail(`${relative}: Domain 2 guide is missing the shared Print | Save control`);
+    }
+
+    if (!/<h1>Security\+ SY0-701 Domain 2: Threats, Vulnerabilities, and Mitigations<\/h1>/.test(html)) {
+      fail(`${relative}: Domain 2 guide is missing its expected h1`);
+    }
+
+    const requiredSectionIds = [
+      "threat-actors",
+      "vectors-surfaces",
+      "vulnerabilities",
+      "malicious-activity",
+      "mitigations",
+      "review-checklist"
+    ];
+
+    for (const id of requiredSectionIds) {
+      if (!html.includes(`id="${id}"`)) {
+        fail(`${relative}: Domain 2 guide is missing section #${id}`);
       }
     }
   }
@@ -359,6 +419,7 @@ if (await isFile(path.join(outputRoot, "sitemap.xml"))) {
     "https://certhappens.com/security-plus/sy0-701/practice-test/",
     "https://certhappens.com/security-plus/sy0-701/study-guide/",
     "https://certhappens.com/security-plus/sy0-701/study-guide/general-security-concepts/",
+    "https://certhappens.com/security-plus/sy0-701/study-guide/threats-vulnerabilities-mitigations/",
     "https://certhappens.com/privacy/",
     "https://certhappens.com/terms/",
     "https://certhappens.com/disclaimer/",
@@ -373,7 +434,8 @@ if (await isFile(path.join(outputRoot, "sitemap.xml"))) {
 
   const datedArticleUrls = [
     "https://certhappens.com/security-plus/sy0-701/study-guide/",
-    "https://certhappens.com/security-plus/sy0-701/study-guide/general-security-concepts/"
+    "https://certhappens.com/security-plus/sy0-701/study-guide/general-security-concepts/",
+    "https://certhappens.com/security-plus/sy0-701/study-guide/threats-vulnerabilities-mitigations/"
   ];
 
   for (const url of datedArticleUrls) {

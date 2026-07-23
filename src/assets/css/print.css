@@ -287,6 +287,14 @@
     overflow-wrap: anywhere;
   }
 
+  th:first-child,
+  td:first-child {
+    min-width: 1.05in !important;
+    overflow-wrap: normal !important;
+    word-break: normal !important;
+    hyphens: none !important;
+  }
+
   pre,
   code {
     border-color: #aaa !important;

@@ -51,6 +51,9 @@ relatedLinks:
   - title: Security+ SY0-701 Study Guide
     url: /security-plus/sy0-701/study-guide/
     description: Return to the full exam roadmap, domain priorities, and study plan.
+  - title: "Domain 2: Threats, Vulnerabilities, and Mitigations"
+    url: /security-plus/sy0-701/study-guide/threats-vulnerabilities-mitigations/
+    description: Continue with threat actors, attack surfaces, vulnerabilities, indicators, and mitigations.
   - title: Take a randomized SY0-701 practice test
     url: /security-plus/sy0-701/practice-test/
     description: Apply these concepts in 10, 20, 30, or 50-question sessions.

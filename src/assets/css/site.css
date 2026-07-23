@@ -2414,6 +2414,14 @@ h3 {
   color: var(--text-muted);
 }
 
+.article-body th:first-child,
+.article-body td:first-child {
+  min-width: 6.5rem;
+  overflow-wrap: normal;
+  word-break: normal;
+  hyphens: none;
+}
+
 .article-body tr:last-child td {
   border-bottom: 0;
 }

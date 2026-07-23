@@ -44,6 +44,9 @@ relatedLinks:
   - title: "Domain 1: General Security Concepts"
     url: /security-plus/sy0-701/study-guide/general-security-concepts/
     description: Review security controls, zero trust, change management, cryptography, PKI, and certificates.
+  - title: "Domain 2: Threats, Vulnerabilities, and Mitigations"
+    url: /security-plus/sy0-701/study-guide/threats-vulnerabilities-mitigations/
+    description: Compare threat actors, attack paths, vulnerabilities, malicious activity, and practical mitigations.
   - title: Take a randomized SY0-701 practice test
     url: /security-plus/sy0-701/practice-test/
     description: Choose 10, 20, 30, or 50 questions and review every explanation.
@@ -171,6 +174,8 @@ Study the differences among:
 - Patching, hardening, segmentation, access control, isolation, and secure configuration
 
 Read the technical clues closely. Repeated login attempts from many IP addresses suggest a different attack pattern from many password attempts against one account. A malformed database query calls for a different response from a stolen session token. Small details often remove two or three tempting answers.
+
+Continue with the [Domain 2: Threats, Vulnerabilities, and Mitigations guide](/security-plus/sy0-701/study-guide/threats-vulnerabilities-mitigations/) for threat-actor comparisons, attack indicators, vulnerability types, and mitigation choices.
 
 <h3>Domain 3.0: Security Architecture, 18%</h3>
 
