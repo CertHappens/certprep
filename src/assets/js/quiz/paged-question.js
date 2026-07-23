@@ -4,6 +4,10 @@ import {
   savedAnswerStatus,
   updatePagedAnswerSelection,
 } from "./paged-answers.js";
+import {
+  createPagedNavigationTransition,
+  shouldHandlePagedNavigationClick,
+} from "./paged-client-navigation.js";
 import { createPagedCompletionModel } from "./paged-completion.js";
 import { createPagedFlagPresentation } from "./paged-flag.js";
 import { createPagedNavigationModel } from "./paged-navigation.js";
@@ -12,6 +16,8 @@ import { createQuestionReporter } from "./reporting.js";
 import { restorePagedQuizSession } from "./paged-session.js";
 import {
   completeQuizSession,
+  getCurrentQuestionState,
+  moveToQuestion,
   setSelectedAnswerIds,
   toggleQuestionFlag,
 } from "./session.js";
@@ -26,13 +32,11 @@ if (app) {
 function initializePagedQuestion(root) {
   const position = Number(root.dataset.questionPosition);
   const testId = root.dataset.testId;
-
   const result = restorePagedQuizSession({
     storage: window.sessionStorage,
     testId,
     position,
   });
-
   const restoredView = root.querySelector('[data-paged-view="restored"]');
   const unavailableView = root.querySelector('[data-paged-view="unavailable"]');
 
@@ -44,10 +48,11 @@ function initializePagedQuestion(root) {
   unavailableView.hidden = result.status === "restored";
 
   if (result.status === "restored") {
-    renderRestoredSession(restoredView, result);
+    renderRestoredSession(root, restoredView, result);
     bindPagedFlag(restoredView, result);
     bindPagedReporting(root, restoredView, result);
     bindPagedCompletion(restoredView, result);
+    bindPagedClientNavigation(root, restoredView, result);
     return;
   }
 
@@ -77,25 +82,56 @@ function announce(root, message) {
   }, 20);
 }
 
-function renderRestoredSession(root, result) {
+function updatePagedRouteIdentity(root, position) {
+  root.dataset.questionPosition = String(position);
+
+  const pageHeading = root.querySelector(".paged-quiz__title");
+  if (pageHeading) {
+    pageHeading.textContent = `Question ${position}`;
+  }
+
+  const breadcrumb = document.querySelector(
+    '.breadcrumbs [aria-current="page"]',
+  );
+  if (breadcrumb) {
+    breadcrumb.textContent = `Question ${position}`;
+  }
+
+  document.title = document.title.replace(
+    /Security\+ SY0-701 Practice Test Question \d+/,
+    `Security+ SY0-701 Practice Test Question ${position}`,
+  );
+}
+
+function renderRestoredSession(appRoot, viewRoot, result) {
   const { question } = result.state;
+  updatePagedRouteIdentity(appRoot, result.position);
 
   setText(
-    root,
+    viewRoot,
     "[data-paged-position]",
     `Question ${result.position} of ${result.total}`,
   );
-  setText(root, "[data-paged-question-id]", question.id);
-  setText(root, "[data-paged-domain]", `${question.domain.id} ${question.domain.name}`);
-  setText(root, "[data-paged-topic]", question.topic);
-  setText(root, "[data-paged-question-text]", question.text);
+  setText(viewRoot, "[data-paged-question-id]", question.id);
   setText(
-    root,
+    viewRoot,
+    "[data-paged-domain]",
+    `${question.domain.id} ${question.domain.name}`,
+  );
+  setText(viewRoot, "[data-paged-topic]", question.topic);
+  setText(viewRoot, "[data-paged-question-text]", question.text);
+  setText(
+    viewRoot,
     "[data-paged-answer-status]",
     savedAnswerStatus(result.state.selectedAnswerIds),
   );
 
-  const instruction = root.querySelector("[data-paged-instruction]");
+  const questionHeading = viewRoot.querySelector("[data-paged-question-text]");
+  if (questionHeading) {
+    questionHeading.tabIndex = -1;
+  }
+
+  const instruction = viewRoot.querySelector("[data-paged-instruction]");
   if (!instruction) {
     throw new Error("Missing paged question instruction.");
   }
@@ -103,14 +139,14 @@ function renderRestoredSession(root, result) {
   instruction.textContent = question.instruction || "";
   instruction.hidden = !question.instruction;
 
-  const answers = root.querySelector("[data-paged-answers]");
+  const answers = viewRoot.querySelector("[data-paged-answers]");
   if (!answers) {
     throw new Error("Missing paged question answers.");
   }
 
-  renderAnswers(answers, root, result);
-  renderPagedFlag(root, result);
-  renderPagedNavigation(root, result);
+  renderAnswers(answers, viewRoot, result);
+  renderPagedFlag(viewRoot, result);
+  renderPagedNavigation(viewRoot, result);
 }
 
 function renderAnswers(container, viewRoot, result) {
@@ -163,17 +199,12 @@ function renderAnswers(container, viewRoot, result) {
         displayedAnswerIds: state.displayedAnswerIds,
       });
 
-      setSelectedAnswerIds(
-        result.session,
-        question.id,
-        selectedAnswerIds,
-      );
+      setSelectedAnswerIds(result.session, question.id, selectedAnswerIds);
       saveStoredSession(
         window.sessionStorage,
         result.storageKey,
         result.session,
       );
-
       syncRenderedAnswers(container, state);
       setText(
         viewRoot,
@@ -181,18 +212,13 @@ function renderAnswers(container, viewRoot, result) {
         savedAnswerStatus(state.selectedAnswerIds),
       );
       renderPagedNavigation(viewRoot, result);
-      announce(
-        viewRoot,
-        `Answer saved for question ${result.position}.`,
-      );
+      announce(viewRoot, `Answer saved for question ${result.position}.`);
     });
 
     label.append(input, letter, text);
     container.append(label);
   });
 }
-
-
 
 function renderPagedFlag(root, result) {
   const button = root.querySelector("[data-paged-flag]");
@@ -204,12 +230,8 @@ function renderPagedFlag(root, result) {
   const presentation = createPagedFlagPresentation(
     result.state.flaggedForReview,
   );
-
   button.setAttribute("aria-pressed", presentation.pressed);
-  button.classList.toggle(
-    "is-flagged",
-    result.state.flaggedForReview,
-  );
+  button.classList.toggle("is-flagged", result.state.flaggedForReview);
   button.textContent = presentation.label;
 }
 
@@ -225,13 +247,11 @@ function bindPagedFlag(root, result) {
       result.session,
       result.state.question.id,
     );
-
     saveStoredSession(
       window.sessionStorage,
       result.storageKey,
       result.session,
     );
-
     renderPagedFlag(root, result);
     renderPagedNavigation(root, result);
 
@@ -239,7 +259,6 @@ function bindPagedFlag(root, result) {
     announce(root, presentation.announcement);
   });
 }
-
 
 function bindPagedReporting(root, viewRoot, result) {
   const button = viewRoot.querySelector("[data-paged-report]");
@@ -259,7 +278,6 @@ function bindPagedReporting(root, viewRoot, result) {
       result.session,
       result.position,
     );
-
     await reporter.open({
       ...context,
       opener: button,
@@ -267,19 +285,21 @@ function bindPagedReporting(root, viewRoot, result) {
   });
 }
 
-function configurePagedLink(link, path) {
+function configurePagedLink(link, path, targetPosition) {
   if (!link) {
     throw new Error("A paged navigation link is missing.");
   }
 
-  if (path) {
+  if (path && Number.isInteger(targetPosition)) {
     link.href = path;
+    link.dataset.pagedTargetPosition = String(targetPosition);
     link.hidden = false;
     link.removeAttribute("aria-disabled");
     return;
   }
 
   link.removeAttribute("href");
+  delete link.dataset.pagedTargetPosition;
   link.hidden = true;
   link.setAttribute("aria-disabled", "true");
 }
@@ -308,10 +328,12 @@ function renderPagedNavigation(root, result) {
   configurePagedLink(
     root.querySelector("[data-paged-previous]"),
     model.previousPath,
+    model.previousPath ? model.currentPosition - 1 : null,
   );
   configurePagedLink(
     root.querySelector("[data-paged-next]"),
     model.nextPath,
+    model.nextPath ? model.currentPosition + 1 : null,
   );
 
   const completion = createPagedCompletionModel(
@@ -338,6 +360,7 @@ function renderPagedNavigation(root, result) {
     const link = document.createElement("a");
 
     link.href = item.path;
+    link.dataset.pagedTargetPosition = String(item.position);
     link.className = "quiz-navigator__button";
     link.classList.toggle("is-answered", item.answered);
     link.classList.toggle("is-flagged", item.flagged);
@@ -354,6 +377,73 @@ function renderPagedNavigation(root, result) {
   }
 }
 
+function bindPagedClientNavigation(appRoot, viewRoot, result) {
+  viewRoot.addEventListener("click", (event) => {
+    if (!(event.target instanceof Element)) {
+      return;
+    }
+
+    const link = event.target.closest("a[data-paged-target-position]");
+    if (!link || !viewRoot.contains(link)) {
+      return;
+    }
+
+    if (
+      !shouldHandlePagedNavigationClick(event) ||
+      link.hasAttribute("download") ||
+      (link.target && link.target !== "_self")
+    ) {
+      return;
+    }
+
+    const targetPosition = Number(link.dataset.pagedTargetPosition);
+    if (!Number.isInteger(targetPosition)) {
+      return;
+    }
+
+    event.preventDefault();
+    navigateToPagedQuestion(appRoot, viewRoot, result, targetPosition);
+  });
+}
+
+function navigateToPagedQuestion(appRoot, viewRoot, result, targetPosition) {
+  const transition = createPagedNavigationTransition(
+    result.session,
+    result.position,
+    targetPosition,
+  );
+
+  if (!transition.changed) {
+    return;
+  }
+
+  moveToQuestion(result.session, transition.targetIndex);
+  result.position = transition.targetPosition;
+  result.total = result.session.questionOrder.length;
+  result.state = getCurrentQuestionState(result.session);
+
+  saveStoredSession(
+    window.sessionStorage,
+    result.storageKey,
+    result.session,
+  );
+  renderRestoredSession(appRoot, viewRoot, result);
+  window.history.pushState(
+    {
+      certHappensPagedQuiz: true,
+      questionPosition: transition.targetPosition,
+    },
+    "",
+    transition.path,
+  );
+
+  const questionHeading = viewRoot.querySelector("[data-paged-question-text]");
+  questionHeading?.focus();
+  announce(
+    viewRoot,
+    `Question ${transition.targetPosition} of ${result.total}.`,
+  );
+}
 
 function bindPagedCompletion(root, result) {
   const finishButton = root.querySelector("[data-paged-finish]");
@@ -389,7 +479,6 @@ function bindPagedCompletion(root, result) {
   });
 }
 
-
 function syncRenderedAnswers(container, state) {
   const domStates = createAnswerDomState(
     state.displayedAnswerIds,
@@ -399,9 +488,7 @@ function syncRenderedAnswers(container, state) {
     domStates.map((item) => [item.answerId, item]),
   );
 
-  for (const input of container.querySelectorAll(
-    ".quiz-answer__input",
-  )) {
+  for (const input of container.querySelectorAll(".quiz-answer__input")) {
     const domState = stateById.get(input.value);
 
     if (!domState) {
@@ -411,13 +498,10 @@ function syncRenderedAnswers(container, state) {
     }
 
     input.checked = domState.checked;
-
     const label = input.closest(".quiz-answer");
+
     if (label) {
-      label.classList.toggle(
-        "is-selected",
-        domState.selected,
-      );
+      label.classList.toggle("is-selected", domState.selected);
     }
   }
 }
@@ -437,7 +521,8 @@ function renderUnavailableSession(root, result) {
   } else if (result.status === "outside-session") {
     heading = `This session contains ${result.total} questions.`;
     detail =
-      `Question ${result.position} is outside the active test. Open a numbered route from 1 through ${result.total}.`;
+      `Question ${result.position} is outside the active test. ` +
+      `Open a numbered route from 1 through ${result.total}.`;
   } else if (result.status === "completed") {
     heading = "This test is already complete.";
     detail =
