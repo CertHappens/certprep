@@ -82,7 +82,9 @@ const requiredFiles = [
   "security-plus/sy0-701/practice-test/index.html",
   "security-plus/sy0-701/study-guide/index.html",
   "_redirects",
-  "assets/brand/certhappens-social-card.png"
+  "assets/brand/certhappens-social-card.png",
+  "assets/css/print.css",
+  "assets/js/print-guide.js"
 ];
 
 for (const relative of requiredFiles) {
@@ -176,6 +178,32 @@ for (const file of htmlFiles) {
 
     if (/class=["']article-meta["']/.test(html)) {
       fail(`${relative}: article page contains visible byline or date metadata`);
+    }
+
+    if (html.includes("data-print-guide")) {
+      if (!html.includes('href="/assets/css/print.css" media="print"')) {
+        fail(`${relative}: printable article is missing the shared print stylesheet`);
+      }
+
+      if (!html.includes('src="/assets/js/print-guide.js"')) {
+        fail(`${relative}: printable article is missing the shared print control script`);
+      }
+    }
+  }
+
+  if (relative === "security-plus/sy0-701/study-guide/index.html") {
+    if (!html.includes("data-print-guide")) {
+      fail(`${relative}: study guide is missing the Print / Save PDF control`);
+    }
+  }
+
+  if (relative.startsWith("security-plus/sy0-701/practice-test/question/")) {
+    if (!/<h1\b[^>]*data-paged-position[^>]*>/i.test(html)) {
+      fail(`${relative}: paged question heading is missing its dynamic position marker`);
+    }
+
+    if (/class=["']paged-quiz__question-id["']/.test(html)) {
+      fail(`${relative}: paged question still contains the retired duplicate question-ID wrapper`);
     }
   }
 }

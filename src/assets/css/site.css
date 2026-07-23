@@ -1678,9 +1678,9 @@ h3 {
 .paged-quiz__status-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.4rem 1rem;
-  align-items: baseline;
-  justify-content: space-between;
+  gap: 0.45rem 0.85rem;
+  align-items: center;
+  justify-content: flex-start;
 }
 
 .paged-quiz__position,
@@ -1689,18 +1689,19 @@ h3 {
 }
 
 .paged-quiz__position {
-  color: var(--text);
+  min-width: 0;
+  color: var(--text-muted);
+  font-size: 0.9rem;
 }
 
-.paged-quiz__question-id {
-  color: var(--text-muted);
-  font-size: 0.82rem;
-  font-weight: 500;
+.paged-quiz__position code {
+  color: var(--text);
+  font-size: 0.86em;
 }
 
 .paged-quiz__summary {
   color: var(--text-muted);
-  font-size: 0.9rem;
+  font-size: inherit;
 }
 
 .paged-quiz__progress {
@@ -1766,13 +1767,12 @@ h3 {
     font-size: clamp(1.65rem, 9vw, 2rem);
   }
 
-  .paged-quiz__question-id {
-    display: none;
+  .paged-quiz__status-row {
+    gap: 0.4rem 0.5rem;
   }
 
-  .paged-quiz__status-row {
-    display: grid;
-    gap: 0.25rem;
+  .paged-quiz__position {
+    font-size: 0.82rem;
   }
 
   .paged-quiz__question-heading {
@@ -1794,20 +1794,19 @@ h3 {
 
 .paged-quiz__status-actions {
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.45rem 0.85rem;
+  flex: 0 0 auto;
+  flex-wrap: nowrap;
+  gap: 0.45rem;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: flex-start;
+}
+
+.paged-quiz__status-actions .button {
+  white-space: nowrap;
 }
 
 .paged-quiz__flag {
-  min-width: 9.25rem;
-}
-
-@media (max-width: 42rem) {
-  .paged-quiz__status-actions {
-    justify-content: flex-start;
-  }
+  min-width: 9.75rem;
 }
 
 /* Keep paged quiz navigation controls at their expected edges. */
@@ -1963,27 +1962,16 @@ h3 {
     margin-bottom: 0.55rem;
   }
 
-  .paged-quiz__position {
-    font-size: 1rem;
-  }
-
-  .paged-quiz__summary {
-    font-size: 0.82rem;
-  }
-
   .paged-quiz__status-actions {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    width: 100%;
-    gap: 0.45rem;
+    width: auto;
+    gap: 0.4rem;
   }
 
   .paged-quiz__status-actions .button {
-    width: 100%;
-    min-height: 2.55rem;
-    padding: 0.55rem 0.45rem;
-    font-size: 0.82rem;
-    white-space: nowrap;
+    width: auto;
+    min-height: 2.35rem;
+    padding: 0.48rem 0.5rem;
+    font-size: 0.78rem;
   }
 
   .paged-quiz__progress {
@@ -2094,19 +2082,9 @@ h3 {
 /* Final mobile polish for paged practice tests */
 
 @media (max-width: 42rem) {
-  .paged-quiz__status-actions {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    align-items: stretch;
-  }
-
-  .paged-quiz__status-actions .paged-quiz__summary {
-    grid-column: 1 / -1;
-    margin-bottom: 0.1rem;
-  }
-
   .paged-quiz__status-actions .button {
     min-height: 2.35rem;
-    padding: 0.48rem 0.35rem;
+    padding: 0.48rem 0.5rem;
     font-size: 0.78rem;
   }
 
@@ -2182,7 +2160,7 @@ h3 {
   }
 
   .paged-quiz > .eyebrow,
-  .paged-quiz > .paged-quiz__title {
+  .paged-quiz__body > .paged-quiz__title {
     width: 100%;
     max-width: 50rem;
     margin-inline: auto;
@@ -2196,6 +2174,17 @@ h3 {
 }
 
 /* Educational article foundation */
+
+.article-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.35rem;
+}
+
+.article-print-button {
+  min-width: 10.5rem;
+}
 
 .article-header h1 {
   max-width: 22ch;

@@ -36,6 +36,12 @@ Use `dateModified` only when an article receives a meaningful factual or instruc
 
 Publication and modification dates are retained for structured data, the sitemap, and maintenance. The shared article layout does not display a byline or publication date in the visible page header.
 
+## Printable guides
+
+Add `printable: true` to an article when readers are likely to use it as printed study material or save it as a PDF. The shared article layout adds the **Print / Save PDF** control and uses the common print stylesheet.
+
+Keep the Markdown page as the single source of truth. Do not maintain a separate PDF copy unless a future resource requires a fixed-layout file that the browser print version cannot provide. Print styling should retain compact Cert Happens branding and instructional content while removing navigation, breadcrumbs, interactive actions, related-resource cards, and footer links.
+
 ## Heading and table-of-contents rules
 
 - The article layout creates the only `h1`.

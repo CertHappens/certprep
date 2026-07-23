@@ -76,6 +76,14 @@ layout: layouts/base.njk
     {% if eyebrow %}<p class="eyebrow">{{ eyebrow }}</p>{% endif %}
     <h1>{{ title }}</h1>
     {% if lede %}<p class="lede">{{ lede }}</p>{% endif %}
+
+    {% if printable %}
+    <div class="article-actions">
+      <button class="button button--secondary article-print-button" type="button" data-print-guide>
+        Print / Save PDF
+      </button>
+    </div>
+    {% endif %}
   </div>
 </header>
 
@@ -111,3 +119,7 @@ layout: layouts/base.njk
     {% endif %}
   </article>
 </div>
+
+{% if printable %}
+<script type="module" src="/assets/js/print-guide.js"></script>
+{% endif %}

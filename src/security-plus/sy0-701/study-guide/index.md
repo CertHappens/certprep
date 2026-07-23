@@ -4,6 +4,7 @@ title: CompTIA Security+ SY0-701 Study Guide
 description: Build a practical Security+ SY0-701 study plan with exam-domain priorities, key concepts, common mistakes, and a readiness checklist.
 permalink: /security-plus/sy0-701/study-guide/
 ogType: article
+printable: true
 author: certHappens
 datePublished: 2026-07-23
 articleSection: CompTIA Security+ SY0-701
