@@ -1,7 +1,8 @@
 ---
 layout: layouts/base.njk
 ---
-{% set articleAuthor = authors[author] %}
+{% set articleAuthorKey = author or "certHappens" %}
+{% set articleAuthor = authors[articleAuthorKey] %}
 {% set canonicalUrl = site.url ~ page.url %}
 {% set publishedDate = datePublished | htmlDateString %}
 {% set modifiedDate = (dateModified or datePublished) | htmlDateString %}
@@ -75,16 +76,6 @@ layout: layouts/base.njk
     {% if eyebrow %}<p class="eyebrow">{{ eyebrow }}</p>{% endif %}
     <h1>{{ title }}</h1>
     {% if lede %}<p class="lede">{{ lede }}</p>{% endif %}
-
-    <p class="article-meta">
-      <span>By {{ articleAuthor.name }}</span>
-      <span class="article-meta__separator" aria-hidden="true">·</span>
-      <span>Published <time datetime="{{ publishedDate }}">{{ datePublished | readableDate }}</time></span>
-      {% if modifiedDate != publishedDate %}
-      <span class="article-meta__separator" aria-hidden="true">·</span>
-      <span>Updated <time datetime="{{ modifiedDate }}">{{ (dateModified or datePublished) | readableDate }}</time></span>
-      {% endif %}
-    </p>
   </div>
 </header>
 

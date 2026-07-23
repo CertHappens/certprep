@@ -170,8 +170,12 @@ for (const file of htmlFiles) {
       fail(`${relative}: article page is missing breadcrumb structured data`);
     }
 
-    if (!/<time\s+datetime=["']\d{4}-\d{2}-\d{2}["']/.test(html)) {
-      fail(`${relative}: article page is missing a machine-readable publication date`);
+    if (!/"datePublished"\s*:\s*"\d{4}-\d{2}-\d{2}"/.test(html)) {
+      fail(`${relative}: article page is missing a structured publication date`);
+    }
+
+    if (/class=["']article-meta["']/.test(html)) {
+      fail(`${relative}: article page contains visible byline or date metadata`);
     }
   }
 }
