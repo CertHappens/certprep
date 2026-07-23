@@ -53,6 +53,9 @@ relatedLinks:
   - title: "Domain 2: Threats, Vulnerabilities, and Mitigations"
     url: /security-plus/sy0-701/study-guide/threats-vulnerabilities-mitigations/
     description: Review attack paths, weaknesses, indicators, and the controls that reduce risk.
+  - title: "Domain 4: Security Operations"
+    url: /security-plus/sy0-701/study-guide/security-operations/
+    description: Continue into secure administration, monitoring, vulnerability management, IAM, and incident response.
   - title: Take a randomized SY0-701 practice test
     url: /security-plus/sy0-701/practice-test/
     description: Apply architecture and recovery concepts in 10, 20, 30, or 50-question sessions.

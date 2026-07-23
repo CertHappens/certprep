@@ -50,6 +50,9 @@ relatedLinks:
   - title: "Domain 3: Security Architecture"
     url: /security-plus/sy0-701/study-guide/security-architecture/
     description: Connect cloud and infrastructure choices to data protection, resilience, backups, and recovery.
+  - title: "Domain 4: Security Operations"
+    url: /security-plus/sy0-701/study-guide/security-operations/
+    description: Review secure administration, vulnerability management, monitoring, IAM, incident response, and investigations.
   - title: Take a randomized SY0-701 practice test
     url: /security-plus/sy0-701/practice-test/
     description: Choose 10, 20, 30, or 50 questions and review every explanation.
@@ -121,19 +124,19 @@ The domain weights help you divide study time. Every domain still matters, and q
     </thead>
     <tbody>
       <tr>
-        <td>1.0 General Security Concepts</td>
+        <td><a href="/security-plus/sy0-701/study-guide/general-security-concepts/">1.0 General Security Concepts</a></td>
         <td>12%</td>
       </tr>
       <tr>
-        <td>2.0 Threats, Vulnerabilities, and Mitigations</td>
+        <td><a href="/security-plus/sy0-701/study-guide/threats-vulnerabilities-mitigations/">2.0 Threats, Vulnerabilities, and Mitigations</a></td>
         <td>22%</td>
       </tr>
       <tr>
-        <td>3.0 Security Architecture</td>
+        <td><a href="/security-plus/sy0-701/study-guide/security-architecture/">3.0 Security Architecture</a></td>
         <td>18%</td>
       </tr>
       <tr>
-        <td>4.0 Security Operations</td>
+        <td><a href="/security-plus/sy0-701/study-guide/security-operations/">4.0 Security Operations</a></td>
         <td>28%</td>
       </tr>
       <tr>
@@ -216,6 +219,8 @@ Expect to apply concepts involving:
 Sequence matters. A scenario may ask for the **first**, **next**, or **best** action during an incident. Containment, eradication, recovery, evidence preservation, communications, and lessons learned serve different purposes and occur at different points.
 
 Spend time with realistic output. Authentication records, firewall logs, DNS activity, endpoint alerts, and basic command results should feel familiar enough that you can locate the useful clue. Read only what the evidence supports. A log entry can be incomplete without becoming mysterious.
+
+Continue with the [Domain 4: Security Operations guide](/security-plus/sy0-701/study-guide/security-operations/) for secure administration, asset and vulnerability management, monitoring tools, IAM, automation, incident response, and investigation data.
 
 <h3>Domain 5.0: Security Program Management and Oversight, 20%</h3>
 

@@ -84,6 +84,7 @@ const requiredFiles = [
   "security-plus/sy0-701/study-guide/general-security-concepts/index.html",
   "security-plus/sy0-701/study-guide/threats-vulnerabilities-mitigations/index.html",
   "security-plus/sy0-701/study-guide/security-architecture/index.html",
+  "security-plus/sy0-701/study-guide/security-operations/index.html",
   "_redirects",
   "assets/brand/certhappens-social-card.png",
   "assets/css/site.css",
@@ -324,6 +325,24 @@ for (const file of htmlFiles) {
     if (!html.includes('/security-plus/sy0-701/study-guide/security-architecture/')) {
       fail(`${relative}: study guide is missing its Domain 3 guide link`);
     }
+
+    if (!html.includes('/security-plus/sy0-701/study-guide/security-operations/')) {
+      fail(`${relative}: study guide is missing its Domain 4 guide link`);
+    }
+
+    const linkedDomainRows = [
+      ["general-security-concepts", "1.0 General Security Concepts"],
+      ["threats-vulnerabilities-mitigations", "2.0 Threats, Vulnerabilities, and Mitigations"],
+      ["security-architecture", "3.0 Security Architecture"],
+      ["security-operations", "4.0 Security Operations"]
+    ];
+
+    for (const [route, label] of linkedDomainRows) {
+      const expectedLink = `<td><a href="/security-plus/sy0-701/study-guide/${route}/">${label}</a></td>`;
+      if (!html.includes(expectedLink)) {
+        fail(`${relative}: exam-domain table is missing its linked ${label} row`);
+      }
+    }
   }
 
   if (relative === "security-plus/sy0-701/study-guide/general-security-concepts/index.html") {
@@ -402,6 +421,39 @@ for (const file of htmlFiles) {
         fail(`${relative}: Domain 3 guide is missing section #${id}`);
       }
     }
+
+    if (!html.includes('/security-plus/sy0-701/study-guide/security-operations/')) {
+      fail(`${relative}: Domain 3 guide is missing its Domain 4 guide link`);
+    }
+  }
+
+  if (relative === "security-plus/sy0-701/study-guide/security-operations/index.html") {
+    if (!html.includes("data-print-guide")) {
+      fail(`${relative}: Domain 4 guide is missing the shared Print | Save control`);
+    }
+
+    if (!/<h1>Security\+ SY0-701 Domain 4: Security Operations<\/h1>/.test(html)) {
+      fail(`${relative}: Domain 4 guide is missing its expected h1`);
+    }
+
+    const requiredSectionIds = [
+      "secure-computing",
+      "asset-management",
+      "vulnerability-management",
+      "monitoring-alerting",
+      "enterprise-controls",
+      "identity-access",
+      "automation-orchestration",
+      "incident-response",
+      "investigation-data",
+      "review-checklist"
+    ];
+
+    for (const id of requiredSectionIds) {
+      if (!html.includes(`id="${id}"`)) {
+        fail(`${relative}: Domain 4 guide is missing section #${id}`);
+      }
+    }
   }
 
   if (relative.startsWith("security-plus/sy0-701/practice-test/question/")) {
@@ -454,6 +506,7 @@ if (await isFile(path.join(outputRoot, "sitemap.xml"))) {
     "https://certhappens.com/security-plus/sy0-701/study-guide/general-security-concepts/",
     "https://certhappens.com/security-plus/sy0-701/study-guide/threats-vulnerabilities-mitigations/",
     "https://certhappens.com/security-plus/sy0-701/study-guide/security-architecture/",
+    "https://certhappens.com/security-plus/sy0-701/study-guide/security-operations/",
     "https://certhappens.com/privacy/",
     "https://certhappens.com/terms/",
     "https://certhappens.com/disclaimer/",
@@ -470,7 +523,8 @@ if (await isFile(path.join(outputRoot, "sitemap.xml"))) {
     "https://certhappens.com/security-plus/sy0-701/study-guide/",
     "https://certhappens.com/security-plus/sy0-701/study-guide/general-security-concepts/",
     "https://certhappens.com/security-plus/sy0-701/study-guide/threats-vulnerabilities-mitigations/",
-    "https://certhappens.com/security-plus/sy0-701/study-guide/security-architecture/"
+    "https://certhappens.com/security-plus/sy0-701/study-guide/security-architecture/",
+    "https://certhappens.com/security-plus/sy0-701/study-guide/security-operations/"
   ];
 
   for (const url of datedArticleUrls) {
