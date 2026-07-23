@@ -196,12 +196,28 @@ for (const file of htmlFiles) {
       if (!html.includes('class="article-print-button__icon"')) {
         fail(`${relative}: printable article is missing the shared printer icon`);
       }
+
+      if (!html.includes('data-print-icon="printer"')) {
+        fail(`${relative}: printable article is missing the standard printer symbol`);
+      }
+
+      if (!html.includes('aria-label="Print or save this guide"')) {
+        fail(`${relative}: printable article is missing the accessible print-control name`);
+      }
+
+      if (!html.includes('<span aria-hidden="true">Print | Save</span>')) {
+        fail(`${relative}: printable article is missing the shared Print | Save label`);
+      }
+
+      if (html.includes("Print / Save PDF")) {
+        fail(`${relative}: printable article contains the retired print-control label`);
+      }
     }
   }
 
   if (relative === "security-plus/sy0-701/study-guide/index.html") {
     if (!html.includes("data-print-guide")) {
-      fail(`${relative}: study guide is missing the Print / Save PDF control`);
+      fail(`${relative}: study guide is missing the shared Print | Save control`);
     }
 
     if (!/<h1>Security\+ SY0-701 Study Guide<\/h1>/.test(html)) {

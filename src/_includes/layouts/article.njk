@@ -79,11 +79,31 @@ layout: layouts/base.njk
 
     {% if printable %}
     <div class="article-actions">
-      <button class="button button--secondary article-print-button" type="button" data-print-guide>
-        <svg class="article-print-button__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-          <path d="M7 3h10v5H7V3Zm10 10v8H7v-8h10Zm-2 2H9v4h6v-4Zm3-6a3 3 0 0 1 3 3v5h-2v-2h-1v-4H6v4H5v2H3v-5a3 3 0 0 1 3-3h12Zm-1 2.25a1 1 0 1 0 0 2 1 1 0 0 0 0-2Z" fill="currentColor"/>
+      <button
+        class="button button--secondary article-print-button"
+        type="button"
+        data-print-guide
+        aria-label="Print or save this guide"
+      >
+        <svg
+          class="article-print-button__icon"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+          focusable="false"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          data-print-icon="printer"
+        >
+          <path d="M7 8V3h10v5"/>
+          <rect x="3" y="8" width="18" height="9" rx="2.25"/>
+          <path d="M7 14h10v7H7z"/>
+          <path d="M17.5 11.5h.01"/>
+          <path d="M9.25 17.25h5.5M9.25 19.25h5.5"/>
         </svg>
-        <span>Print / Save PDF</span>
+        <span aria-hidden="true">Print | Save</span>
       </button>
     </div>
     {% endif %}

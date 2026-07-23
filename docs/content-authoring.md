@@ -38,9 +38,16 @@ Publication and modification dates are retained for structured data, the sitemap
 
 ## Printable guides
 
-Add `printable: true` to an article when readers are likely to use it as printed study material or save it as a PDF. The shared article layout adds the **Print / Save PDF** control and uses the common print stylesheet.
+Enable the shared print control only for resources that are useful as printed notes or saved documents:
 
-Keep the Markdown page as the single source of truth. Do not maintain a separate PDF copy unless a future resource requires a fixed-layout file that the browser print version cannot provide. Print styling should retain compact Cert Happens branding and instructional content while removing navigation, breadcrumbs, interactive actions, related-resource cards, and footer links.
+```yaml
+printable: true
+printTitle: Security+ SY0-701 Study Guide
+```
+
+The article layout supplies the centered **Print | Save** control, accessible button name, printer symbol, print script, and branded document header. `src/assets/css/print.css` handles the printable presentation. Keep the web article as the single content source rather than maintaining a separate PDF.
+
+Do not create article-specific print CSS unless the content introduces a pattern that should become reusable across guides.
 
 ## Heading and table-of-contents rules
 
