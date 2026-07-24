@@ -43,16 +43,16 @@ keywords:
   - detective controls
   - compensating controls
 relatedLinks:
-  - title: Domain 1: General Security Concepts
+  - title: "Domain 1: General Security Concepts"
     url: /security-plus/sy0-701/study-guide/general-security-concepts/
     description: Continue with zero trust, change management, cryptography, PKI, and the rest of Domain 1.
-  - title: Security+ acronyms and terms
+  - title: "Security+ acronyms and terms"
     url: /security-plus/acronyms/
     description: Search Security+ abbreviations and related terms with plain-English explanations.
-  - title: Take a randomized SY0-701 practice test
+  - title: "Take a randomized SY0-701 practice test"
     url: /security-plus/sy0-701/practice-test/
     description: Apply these distinctions in a fresh 10, 20, 30, or 50-question session.
-  - title: Security+ resource hub
+  - title: "Security+ resource hub"
     url: /security-plus/
     description: Find the current practice tests, study guides, and quick-review resources.
 ---
