@@ -2444,6 +2444,18 @@ h3 {
   font-weight: 800;
 }
 
+@media screen {
+  .article-body .scenario-classification-table th:nth-child(2),
+  .article-body .scenario-classification-table td:nth-child(2),
+  .article-body .scenario-classification-table th:nth-child(3),
+  .article-body .scenario-classification-table td:nth-child(3) {
+    white-space: nowrap;
+    overflow-wrap: normal;
+    word-break: normal;
+    hyphens: none;
+  }
+}
+
 .article-body td {
   color: var(--text-muted);
 }

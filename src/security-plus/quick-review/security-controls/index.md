@@ -253,7 +253,7 @@ A policy that requires visitors to wear badges is directive. A sign warning that
 The wording around a control often matters more than the name of the control.
 
 <div class="table-scroll" role="region" aria-label="Security control scenario classifications" tabindex="0">
-<table>
+<table class="scenario-classification-table">
   <thead>
     <tr>
       <th scope="col">Scenario</th>
