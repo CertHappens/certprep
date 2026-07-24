@@ -146,3 +146,23 @@ Link text should describe the destination. Avoid strings of unrelated links adde
 `layouts/article.njk` creates Article and BreadcrumbList structured data from front matter. Author records live in `src/_data/authors.json`.
 
 The organization author is `Cert Happens`. Authorship and publication dates remain in metadata and are not shown in the visible article header. An About page may be added later as a low-priority footer resource, but article publication does not depend on it.
+
+## Data-driven terminology references
+
+Shared terminology belongs in structured data rather than repeated Markdown tables. The Security+ acronym source is:
+
+```text
+src/_data/securityPlusAcronyms.json
+```
+
+Each entry stores the acronym, expansion, plain-English meaning, related terms, applicable domains, and exam-version coverage. Update an existing definition in one place rather than redefining the term across several pages.
+
+The public acronym route is version-stable:
+
+```text
+/security-plus/acronyms/
+```
+
+Add later Security+ exam versions to the same reference unless the terminology changes enough to make a separate resource meaningfully better for learners. The visible page may describe current exam coverage, but the title and URL should not be tied to one exam number.
+
+Search and filter controls are screen-only. Printable output must restore and include the complete reference, remove search controls, and continue to suppress advertising.

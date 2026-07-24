@@ -79,6 +79,7 @@ const requiredFiles = [
   "disclaimer/index.html",
   "contact/index.html",
   "security-plus/index.html",
+  "security-plus/acronyms/index.html",
   "security-plus/sy0-701/practice-test/index.html",
   "security-plus/sy0-701/study-guide/index.html",
   "security-plus/sy0-701/study-guide/general-security-concepts/index.html",
@@ -90,7 +91,8 @@ const requiredFiles = [
   "assets/brand/certhappens-social-card.png",
   "assets/css/site.css",
   "assets/css/print.css",
-  "assets/js/print-guide.js"
+  "assets/js/print-guide.js",
+  "assets/js/acronym-filter.js"
 ];
 
 for (const relative of requiredFiles) {
@@ -127,6 +129,22 @@ if (await isFile(siteCssPath)) {
   for (const rule of requiredFirstColumnRules) {
     if (!siteCss.includes(rule)) {
       fail(`site.css: article-table first-column rule is missing: ${rule}`);
+    }
+  }
+
+  const requiredAcronymRules = [
+    ".acronym-controls",
+    ".acronym-search",
+    ".acronym-index",
+    ".acronym-entry",
+    "grid-template-columns: minmax(6.5rem, 8rem) minmax(0, 1fr)",
+    "overflow-wrap: normal",
+    "word-break: normal"
+  ];
+
+  for (const rule of requiredAcronymRules) {
+    if (!siteCss.includes(rule)) {
+      fail(`site.css: shared acronym-reference rule is missing: ${rule}`);
     }
   }
 }
@@ -180,6 +198,20 @@ if (await isFile(printCssPath)) {
   for (const rule of requiredPrintAdRules) {
     if (!printCss.includes(rule)) {
       fail(`print.css: printable ad suppression is missing: ${rule}`);
+    }
+  }
+
+  const requiredAcronymPrintRules = [
+    ".acronym-controls",
+    ".acronym-index",
+    ".acronym-entry[hidden]",
+    "grid-template-columns: 0.85in minmax(0, 1fr)",
+    "break-inside: avoid-page"
+  ];
+
+  for (const rule of requiredAcronymPrintRules) {
+    if (!printCss.includes(rule)) {
+      fail(`print.css: printable acronym-reference rule is missing: ${rule}`);
     }
   }
 }
@@ -317,6 +349,48 @@ for (const file of htmlFiles) {
     }
   }
 
+  if (relative === "security-plus/index.html") {
+    if (!html.includes('href="/security-plus/acronyms/"')) {
+      fail(`${relative}: Security+ hub is missing the acronyms and terms link`);
+    }
+
+    if (!html.includes("Available now") || !html.includes("Open acronyms and terms")) {
+      fail(`${relative}: Quick Review card is not marked available`);
+    }
+  }
+
+  if (relative === "security-plus/acronyms/index.html") {
+    if (!html.includes("data-print-guide")) {
+      fail(`${relative}: acronym reference is missing the shared Print | Save control`);
+    }
+
+    if (!/<h1>Security\+ Acronyms and Terms<\/h1>/.test(html)) {
+      fail(`${relative}: acronym reference is missing its stable Security+ h1`);
+    }
+
+    const acronymEntryCount = (html.match(/data-acronym-entry/g) || []).length;
+    if (acronymEntryCount < 200) {
+      fail(`${relative}: expected at least 200 acronym entries, found ${acronymEntryCount}`);
+    }
+
+    const requiredAcronymMarkup = [
+      "data-acronym-search",
+      "data-acronym-clear",
+      "data-acronym-status",
+      "data-acronym-reference",
+      "data-acronym-empty",
+      'src="/assets/js/acronym-filter.js"',
+      "Context decides the meaning",
+      "Recovery time objective"
+    ];
+
+    for (const marker of requiredAcronymMarkup) {
+      if (!html.includes(marker)) {
+        fail(`${relative}: acronym reference is missing ${marker}`);
+      }
+    }
+  }
+
   if (relative === "security-plus/sy0-701/study-guide/index.html") {
     if (!html.includes("data-print-guide")) {
       fail(`${relative}: study guide is missing the shared Print | Save control`);
@@ -348,6 +422,10 @@ for (const file of htmlFiles) {
 
     if (!html.includes('/security-plus/sy0-701/study-guide/security-program-management-oversight/')) {
       fail(`${relative}: study guide is missing its Domain 5 guide link`);
+    }
+
+    if (!html.includes('/security-plus/acronyms/')) {
+      fail(`${relative}: study guide is missing the Security+ acronym reference link`);
     }
 
     const linkedDomainRows = [
@@ -552,13 +630,13 @@ if (await isFile(path.join(outputRoot, "sitemap.xml"))) {
   const expectedUrls = [
     "https://certhappens.com/",
     "https://certhappens.com/security-plus/",
+    "https://certhappens.com/security-plus/acronyms/",
     "https://certhappens.com/security-plus/sy0-701/practice-test/",
     "https://certhappens.com/security-plus/sy0-701/study-guide/",
     "https://certhappens.com/security-plus/sy0-701/study-guide/general-security-concepts/",
     "https://certhappens.com/security-plus/sy0-701/study-guide/threats-vulnerabilities-mitigations/",
     "https://certhappens.com/security-plus/sy0-701/study-guide/security-architecture/",
     "https://certhappens.com/security-plus/sy0-701/study-guide/security-operations/",
-    "https://certhappens.com/security-plus/sy0-701/study-guide/security-program-management-oversight/",
     "https://certhappens.com/security-plus/sy0-701/study-guide/security-program-management-oversight/",
     "https://certhappens.com/privacy/",
     "https://certhappens.com/terms/",
@@ -573,6 +651,7 @@ if (await isFile(path.join(outputRoot, "sitemap.xml"))) {
   }
 
   const datedArticleUrls = [
+    "https://certhappens.com/security-plus/acronyms/",
     "https://certhappens.com/security-plus/sy0-701/study-guide/",
     "https://certhappens.com/security-plus/sy0-701/study-guide/general-security-concepts/",
     "https://certhappens.com/security-plus/sy0-701/study-guide/threats-vulnerabilities-mitigations/",

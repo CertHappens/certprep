@@ -56,6 +56,9 @@ relatedLinks:
   - title: "Domain 5: Security Program Management and Oversight"
     url: /security-plus/sy0-701/study-guide/security-program-management-oversight/
     description: Review governance, risk, third parties, compliance, privacy, audits, and security awareness.
+  - title: Security+ Acronyms and Terms
+    url: /security-plus/acronyms/
+    description: Search and print a plain-English reference for the initials used throughout Security+ material.
   - title: Take a randomized SY0-701 practice test
     url: /security-plus/sy0-701/practice-test/
     description: Choose 10, 20, 30, or 50 questions and review every explanation.
@@ -66,6 +69,8 @@ relatedLinks:
 Security+ rewards judgment. Recognize the problem and choose an appropriate response. Doing this allows you to separate several answers that may all sound reasonable at first.
 
 Knowing that **RTO** means recovery time objective gives you a definition. The exam may then ask whether a business is concerned about downtime, acceptable data loss, or the usual repair time for a failed component. Your answer depends on recognizing which measurement the scenario describes.
+
+Use the [Security+ Acronyms and Terms reference](/security-plus/acronyms/) whenever unfamiliar initials interrupt your reading. Look up the expansion, connect it to the surrounding concept, and continue with the guide or question that introduced it.
 
 Use this guide to organize your preparation. Keep the official exam objectives nearby as the complete checklist for SY0-701.
 

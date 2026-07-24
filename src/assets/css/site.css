@@ -2483,3 +2483,202 @@ h3 {
     grid-template-columns: 1fr;
   }
 }
+
+/* Shared acronym and terminology reference */
+.acronym-controls {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(18rem, 1.1fr);
+  gap: 1.25rem 2rem;
+  margin-block: 2rem 1.25rem;
+  padding: 1.25rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-medium);
+  background: var(--surface-soft);
+}
+
+.acronym-controls__heading h2 {
+  margin: 0 0 0.45rem;
+  font-size: 1.4rem;
+}
+
+.acronym-controls__heading p,
+.acronym-search label,
+.acronym-results-status {
+  color: var(--text-muted);
+}
+
+.acronym-controls__heading p,
+.acronym-results-status {
+  margin: 0;
+}
+
+.acronym-search {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.acronym-search label {
+  font-size: 0.88rem;
+  font-weight: 750;
+}
+
+.acronym-search__row {
+  display: flex;
+  gap: 0.65rem;
+  align-items: stretch;
+}
+
+.acronym-search input {
+  min-width: 0;
+  flex: 1 1 auto;
+  padding: 0.72rem 0.82rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-small);
+  background: var(--surface-raised);
+  color: var(--text);
+  font: inherit;
+}
+
+.acronym-search input::placeholder {
+  color: var(--text-muted);
+  opacity: 0.82;
+}
+
+.acronym-search input:focus-visible {
+  border-color: var(--accent);
+  outline: 3px solid color-mix(in srgb, var(--accent) 35%, transparent);
+  outline-offset: 2px;
+}
+
+.acronym-search__clear {
+  flex: 0 0 auto;
+  min-width: 5rem;
+  padding-inline: 0.9rem;
+}
+
+.acronym-results-status {
+  min-height: 1.35em;
+  font-size: 0.88rem;
+}
+
+.acronym-index {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin: 1.25rem 0 2rem;
+}
+
+.acronym-index a {
+  display: inline-grid;
+  min-width: 2.25rem;
+  min-height: 2.25rem;
+  place-items: center;
+  border: 1px solid var(--border);
+  border-radius: 0.55rem;
+  background: var(--surface-soft);
+  color: var(--text);
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.acronym-index a:hover {
+  border-color: #50647d;
+  background: var(--surface-raised);
+}
+
+.acronym-group {
+  scroll-margin-top: 6rem;
+}
+
+.acronym-group + .acronym-group {
+  margin-top: 3rem;
+}
+
+.acronym-group > h2 {
+  margin-bottom: 0.7rem;
+}
+
+.acronym-list {
+  margin: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-medium);
+  background: var(--surface-soft);
+}
+
+.acronym-entry {
+  display: grid;
+  grid-template-columns: minmax(6.5rem, 8rem) minmax(0, 1fr);
+  gap: 1rem;
+  padding: 0.95rem 1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.acronym-entry:last-child {
+  border-bottom: 0;
+}
+
+.acronym-entry__term {
+  margin: 0;
+  color: var(--text);
+  font-size: 1rem;
+  font-weight: 850;
+  line-height: 1.35;
+  overflow-wrap: normal;
+  word-break: normal;
+  hyphens: none;
+}
+
+.acronym-entry__details {
+  display: grid;
+  gap: 0.3rem;
+  min-width: 0;
+  margin: 0;
+}
+
+.acronym-entry__expansion {
+  color: var(--text);
+  line-height: 1.4;
+}
+
+.acronym-entry__meaning {
+  color: var(--text-muted);
+  line-height: 1.55;
+}
+
+.acronym-entry__meta {
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  line-height: 1.45;
+  opacity: 0.86;
+}
+
+.acronym-no-results {
+  margin-block: 2rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-small);
+  background: var(--surface-soft);
+  color: var(--text-muted);
+}
+
+@media (max-width: 48rem) {
+  .acronym-controls {
+    grid-template-columns: 1fr;
+  }
+
+  .acronym-entry {
+    grid-template-columns: 1fr;
+    gap: 0.35rem;
+  }
+}
+
+@media (max-width: 30rem) {
+  .acronym-search__row {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .acronym-search__clear {
+    width: 100%;
+  }
+}
