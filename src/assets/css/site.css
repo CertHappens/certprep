@@ -18,6 +18,9 @@
   --radius-large: 1.35rem;
   --content-width: 72rem;
   --reading-width: 46rem;
+  --page-title-size: clamp(2.25rem, 4vw, 3rem);
+  --page-title-line-height: 1.08;
+  --page-title-letter-spacing: -0.025em;
 }
 
 * {
@@ -307,9 +310,14 @@ h3 {
   padding-block: clamp(3.2rem, 8vw, 5.5rem) 2.5rem;
 }
 
-.page-header h1 {
-  max-width: 18ch;
-  font-size: clamp(2.25rem, 6vw, 4rem);
+/* Shared primary title treatment for hubs, tests, guides, and references. */
+.page-header h1,
+.article-header h1 {
+  max-width: none;
+  margin: 0;
+  font-size: var(--page-title-size);
+  line-height: var(--page-title-line-height);
+  letter-spacing: var(--page-title-letter-spacing);
 }
 
 .breadcrumbs {
@@ -1571,9 +1579,6 @@ h3 {
 /* Paged quiz pilot presentation */
 
 .page-header--quiz h1 {
-  max-width: none;
-  font-size: clamp(1.1rem, 5.2vw, 2.75rem);
-  letter-spacing: -0.035em;
   white-space: nowrap;
 }
 
@@ -2196,11 +2201,6 @@ h3 {
 
 .site-header__print-title {
   display: none;
-}
-
-.article-header h1 {
-  max-width: none;
-  font-size: clamp(2.25rem, 4vw, 3rem);
 }
 
 .article-header .lede {

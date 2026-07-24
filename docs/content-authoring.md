@@ -80,6 +80,12 @@ Before adding a template, component, or CSS class:
 
 The expected long-term page types are the base layout, hub pages, articles, tools, and the stable quiz interface.
 
+## Shared visual system
+
+Primary public page headings use the shared page-title scale in `src/assets/css/site.css`. Hub, practice-test, guide, and reference layouts may keep different spacing and surrounding controls, but they should not define separate desktop H1 typography. Page-specific title rules are limited to necessary responsive behavior, such as allowing a compact quiz heading on small screens.
+
+Continue to reuse the existing eyebrow, breadcrumbs, lede, button, card, callout, table, article-navigation, and print patterns. Add a new visual component only when the existing patterns cannot present the content clearly. Do not consolidate the stable paged-quiz rules merely to reduce line count; several later declarations intentionally refine earlier responsive behavior.
+
 ## Writing standard
 
 Every article should solve a real reader problem. It should teach, compare, demonstrate, or help the reader make a decision.
