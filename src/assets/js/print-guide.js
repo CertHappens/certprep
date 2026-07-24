@@ -29,14 +29,15 @@ if (printButtons.length > 0) {
         width: max-content;
         color: rgba(17, 17, 17, 0.035);
         font-family: Arial, Helvetica, sans-serif;
-        font-size: 64pt;
+        font-size: 86pt;
         font-weight: 700;
         line-height: 1;
         letter-spacing: 0.01em;
         pointer-events: none;
-        transform: translate(-50%, -50%) rotate(-35deg);
+        transform: translate(-50%, -50%) rotate(-48deg);
         transform-origin: center;
         user-select: none;
+        white-space: nowrap;
       }
     }
   `;
