@@ -135,7 +135,9 @@ if (await isFile(siteCssPath)) {
   const requiredAcronymRules = [
     ".acronym-controls",
     ".acronym-search",
-    ".acronym-index",
+    ".article-toc--compact-grid",
+    ".article-toc--compact-grid ol",
+    "grid-template-columns: repeat(4, minmax(0, 1fr))",
     ".acronym-entry",
     "grid-template-columns: minmax(6.5rem, 8rem) minmax(0, 1fr)",
     "overflow-wrap: normal",
@@ -203,7 +205,7 @@ if (await isFile(printCssPath)) {
 
   const requiredAcronymPrintRules = [
     ".acronym-controls",
-    ".acronym-index",
+    ".article-toc",
     ".acronym-entry[hidden]",
     "grid-template-columns: 0.85in minmax(0, 1fr)",
     "break-inside: avoid-page"
@@ -388,6 +390,31 @@ for (const file of htmlFiles) {
       if (!html.includes(marker)) {
         fail(`${relative}: acronym reference is missing ${marker}`);
       }
+    }
+
+    if (!html.includes('class="article-toc article-toc--compact-grid"')) {
+      fail(`${relative}: acronym reference is missing the shared compact sidebar index`);
+    }
+
+    if (!html.includes('<h2 id="article-toc-title">Jump to</h2>')) {
+      fail(`${relative}: acronym sidebar is missing its Jump to heading`);
+    }
+
+    const acronymJumpLinkCount = (html.match(/href=["']#acronyms-[^"']+["']/g) || []).length;
+    if (acronymJumpLinkCount !== 23) {
+      fail(`${relative}: expected 23 sidebar acronym jump links, found ${acronymJumpLinkCount}`);
+    }
+
+    if (html.includes("data-acronym-index")) {
+      fail(`${relative}: retired in-body acronym index is still present`);
+    }
+
+    const sidebarPosition = html.indexOf('class="article-toc article-toc--compact-grid"');
+    const articlePosition = html.indexOf('class="article-body prose"');
+    const controlsPosition = html.indexOf('class="acronym-controls"');
+
+    if (!(sidebarPosition >= 0 && articlePosition > sidebarPosition && controlsPosition > articlePosition)) {
+      fail(`${relative}: acronym sidebar and main reference content are not in the expected two-column order`);
     }
   }
 
