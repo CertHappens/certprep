@@ -57,7 +57,7 @@ Do not place essential article text, headings, references, or navigation inside 
 
 ## Shared page-title scale
 
-The base stylesheet owns the visible `h1` scale. Article and reference pages use the shared `.article-header h1` rule, while hub and practice-test entry pages use the shared page-header rules. Do not add article-specific title sizes or inline heading styles. Long titles should wrap naturally within the shared scale rather than introducing a smaller one-off size.
+The base stylesheet owns the visible `h1` scale. Article and reference pages use the shared `.article-header h1` rule with a responsive range from `2.25rem` to `3rem`, while hub and practice-test entry pages use the shared page-header rules. Do not add article-specific title sizes or inline heading styles. Long titles should wrap naturally within the shared scale rather than introducing a smaller one-off size.
 
 ## Heading and table-of-contents rules
 
