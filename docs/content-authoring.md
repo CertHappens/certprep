@@ -55,6 +55,10 @@ Future advertising components must use the shared `ad-slot` class and `data-ad-s
 
 Do not place essential article text, headings, references, or navigation inside an ad container. Printed guides must remain complete when every advertising element is removed.
 
+## Shared page-title scale
+
+The base stylesheet owns the visible `h1` scale. Article and reference pages use the shared `.article-header h1` rule with a responsive range from `2.25rem` to `3rem`, while hub and practice-test entry pages use the shared page-header rules. Do not add article-specific title sizes or inline heading styles. Long titles should wrap naturally within the shared scale rather than introducing a smaller one-off size.
+
 ## Heading and table-of-contents rules
 
 - The article layout creates the only `h1`.
@@ -75,6 +79,12 @@ Before adding a template, component, or CSS class:
 4. Keep site navigation in `src/_data/siteNavigation.json` so the header and footer use one shared source.
 
 The expected long-term page types are the base layout, hub pages, articles, tools, and the stable quiz interface.
+
+## Shared visual system
+
+Primary public page headings use the shared page-title scale in `src/assets/css/site.css`. Hub, practice-test, guide, and reference layouts may keep different spacing and surrounding controls, but they should not define separate desktop H1 typography. Page-specific title rules are limited to necessary responsive behavior, such as allowing a compact quiz heading on small screens.
+
+Continue to reuse the existing eyebrow, breadcrumbs, lede, button, card, callout, table, article-navigation, and print patterns. Add a new visual component only when the existing patterns cannot present the content clearly. Do not consolidate the stable paged-quiz rules merely to reduce line count; several later declarations intentionally refine earlier responsive behavior.
 
 ## Writing standard
 

@@ -40,16 +40,25 @@ export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ "src/quiz-data": "quiz-data" });
   eleventyConfig.addPassthroughCopy({ "src/_headers": "_headers" });
   eleventyConfig.addPassthroughCopy({ "src/_redirects": "_redirects" });
+
   eleventyConfig.addWatchTarget("src/assets/css");
 
   eleventyConfig.addFilter("currentYear", () => new Date().getFullYear());
+
   eleventyConfig.addFilter("json", (value) =>
     JSON.stringify(value).replaceAll("<", "\\u003c")
   );
+
   eleventyConfig.addFilter("xmlEscape", escapeXml);
+
   eleventyConfig.addFilter("htmlDateString", (value) =>
     normalizeDate(value).toISOString().slice(0, 10)
   );
+
+  eleventyConfig.addFilter("schemaDateTime", (value) =>
+    normalizeDate(value).toISOString()
+  );
+
   eleventyConfig.addFilter("readableDate", (value) =>
     readableDateFormatter.format(normalizeDate(value))
   );

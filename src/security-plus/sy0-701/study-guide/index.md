@@ -120,7 +120,7 @@ Use fresh and randomized questions when possible. Repeating a small set can make
 
 <h2 id="domain-priorities">The five SY0-701 exam domains</h2>
 
-The domain weights help you divide study time. Every domain still matters, and questions often combine material from several of them.
+The domain weights help you divide study time. Every domain still matters, and questions often combine material from several of them. Select a domain name in the table to open its detailed printable guide.
 
 <div class="table-scroll" role="region" aria-label="SY0-701 exam domain weights" tabindex="0">
   <table>

@@ -6,6 +6,8 @@ layout: layouts/base.njk
 {% set canonicalUrl = site.url ~ page.url %}
 {% set publishedDate = datePublished | htmlDateString %}
 {% set modifiedDate = (dateModified or datePublished) | htmlDateString %}
+{% set publishedDateTime = datePublished | schemaDateTime %}
+{% set modifiedDateTime = (dateModified or datePublished) | schemaDateTime %}
 {% set articleImageUrl = site.url ~ (socialImagePath or site.socialImagePath) %}
 
 <script type="application/ld+json">
@@ -14,8 +16,8 @@ layout: layouts/base.njk
   "@type": "Article",
   "headline": {{ title | json | safe }},
   "description": {{ description | json | safe }},
-  "datePublished": {{ publishedDate | json | safe }},
-  "dateModified": {{ modifiedDate | json | safe }},
+  "datePublished": {{ publishedDateTime | json | safe }},
+  "dateModified": {{ modifiedDateTime | json | safe }},
   "mainEntityOfPage": {
     "@type": "WebPage",
     "@id": {{ canonicalUrl | json | safe }}
@@ -124,7 +126,10 @@ layout: layouts/base.njk
   </aside>
   {% endif %}
 
-  <article class="article-body prose">
+  <article
+    class="article-body prose"
+    data-schema-source='{"datePublished": "{{ publishedDate }}", "dateModified": "{{ modifiedDate }}"}'
+  >
     {{ content | safe }}
 
     {% if relatedLinks %}
