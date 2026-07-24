@@ -11,6 +11,7 @@ eleventyComputed:
 robots: noindex,nofollow,nosnippet
 sitemap: false
 ---
+
 <nav class="breadcrumbs page-shell" aria-label="Breadcrumb">
   <ol>
     <li><a href="/">Home</a></li>
@@ -29,24 +30,17 @@ sitemap: false
   aria-busy="true"
 >
   <p class="eyebrow">Security+ SY0-701 practice test</p>
-  <h1 class="paged-quiz__title">Question {{ questionPosition }}</h1>
 
   <div class="paged-quiz__body" data-paged-view="restored" hidden>
+    <h1 class="paged-quiz__title" data-paged-position>Question {{ questionPosition }}</h1>
+
     <header class="paged-quiz__header">
       <div class="paged-quiz__status-row">
         <p class="paged-quiz__position">
-          <strong data-paged-position>Question {{ questionPosition }}</strong>
-          <span class="paged-quiz__question-id">
-            <span aria-hidden="true"> · </span>
-            <code data-paged-question-id></code>
-          </span>
+          <code data-paged-question-id></code><span aria-hidden="true">, </span><span class="paged-quiz__summary" data-paged-summary>Restoring progress…</span>
         </p>
 
         <div class="paged-quiz__status-actions">
-          <p class="paged-quiz__summary" data-paged-summary>
-            Restoring progress…
-          </p>
-
           <button
             class="button button--secondary button--small quiz-flag-button paged-quiz__flag"
             type="button"
@@ -55,7 +49,6 @@ sitemap: false
           >
             Flag for review
           </button>
-
           <button
             class="button button--secondary button--small"
             type="button"
@@ -100,7 +93,6 @@ sitemap: false
       Browser-session answer state:
       <strong data-paged-answer-status></strong>.
     </p>
-
     <p class="visually-hidden" aria-live="polite" data-paged-live></p>
 
     <nav class="paged-quiz__controls" aria-label="Previous and next question">
@@ -110,14 +102,12 @@ sitemap: false
       >
         Previous
       </a>
-
       <a
         class="button"
         data-paged-next
       >
         Next
       </a>
-
       <button
         class="button"
         type="button"
@@ -127,7 +117,6 @@ sitemap: false
         Finish test
       </button>
     </nav>
-
   </div>
 
   <div data-paged-view="unavailable" hidden>
@@ -143,7 +132,6 @@ sitemap: false
       </a>
     </p>
   </div>
-
 
   <dialog class="question-report-dialog" aria-labelledby="paged-question-report-heading" data-report-dialog>
     <form class="question-report-form" data-report-form>
@@ -189,6 +177,7 @@ sitemap: false
       </label>
 
       <div class="question-report-turnstile" data-report-turnstile></div>
+
       <p
         class="question-report-status"
         role="status"

@@ -79,15 +79,142 @@ const requiredFiles = [
   "disclaimer/index.html",
   "contact/index.html",
   "security-plus/index.html",
+  "security-plus/acronyms/index.html",
   "security-plus/sy0-701/practice-test/index.html",
   "security-plus/sy0-701/study-guide/index.html",
+  "security-plus/sy0-701/study-guide/general-security-concepts/index.html",
+  "security-plus/sy0-701/study-guide/threats-vulnerabilities-mitigations/index.html",
+  "security-plus/sy0-701/study-guide/security-architecture/index.html",
+  "security-plus/sy0-701/study-guide/security-operations/index.html",
+  "security-plus/sy0-701/study-guide/security-program-management-oversight/index.html",
   "_redirects",
-  "assets/brand/certhappens-social-card.png"
+  "assets/brand/certhappens-social-card.png",
+  "assets/css/site.css",
+  "assets/css/print.css",
+  "assets/js/print-guide.js",
+  "assets/js/acronym-filter.js"
 ];
 
 for (const relative of requiredFiles) {
   if (!(await isFile(path.join(outputRoot, relative)))) {
     fail(`Missing required build output: ${relative}`);
+  }
+}
+
+const siteCssPath = path.join(outputRoot, "assets/css/site.css");
+if (await isFile(siteCssPath)) {
+  const siteCss = await readFile(siteCssPath, "utf8");
+
+  if (/\.article-body\s+(?:th|td):last-child/.test(siteCss)) {
+    fail("site.css: retired article-table last-column sizing rule is present");
+  }
+
+  if (!siteCss.includes(".table-scroll") || !siteCss.includes("overflow-x: auto")) {
+    fail("site.css: responsive article-table scrolling is missing");
+  }
+
+  if (!siteCss.includes("table-layout: auto") || !siteCss.includes("overflow-wrap: anywhere")) {
+    fail("site.css: shared article tables are missing flexible wrapping rules");
+  }
+
+  const requiredFirstColumnRules = [
+    ".article-body th:first-child",
+    ".article-body td:first-child",
+    "min-width: 6.5rem",
+    "overflow-wrap: normal",
+    "word-break: normal",
+    "hyphens: none"
+  ];
+
+  for (const rule of requiredFirstColumnRules) {
+    if (!siteCss.includes(rule)) {
+      fail(`site.css: article-table first-column rule is missing: ${rule}`);
+    }
+  }
+
+  const requiredAcronymRules = [
+    ".acronym-controls",
+    ".acronym-search",
+    ".article-toc--compact-grid",
+    ".article-toc--compact-grid ol",
+    "grid-template-columns: repeat(4, minmax(0, 1fr))",
+    ".acronym-entry",
+    "grid-template-columns: minmax(6.5rem, 8rem) minmax(0, 1fr)",
+    "overflow-wrap: normal",
+    "word-break: normal"
+  ];
+
+  for (const rule of requiredAcronymRules) {
+    if (!siteCss.includes(rule)) {
+      fail(`site.css: shared acronym-reference rule is missing: ${rule}`);
+    }
+  }
+}
+
+const printCssPath = path.join(outputRoot, "assets/css/print.css");
+if (await isFile(printCssPath)) {
+  const printCss = await readFile(printCssPath, "utf8");
+
+  if (/pre,\s*table,\s*figure\s*\{/.test(printCss)) {
+    fail("print.css: whole tables are still blocked from splitting across pages");
+  }
+
+  const requiredPrintTableRules = [
+    "display: table-header-group",
+    "page-break-inside: auto",
+    "white-space: normal !important",
+    "overflow-wrap: anywhere",
+    "border: 0 !important"
+  ];
+
+  for (const rule of requiredPrintTableRules) {
+    if (!printCss.includes(rule)) {
+      fail(`print.css: shared printable-table rule is missing: ${rule}`);
+    }
+  }
+
+
+  const requiredPrintFirstColumnRules = [
+    "th:first-child",
+    "td:first-child",
+    "min-width: 1.05in !important",
+    "word-break: normal !important",
+    "hyphens: none !important"
+  ];
+
+  for (const rule of requiredPrintFirstColumnRules) {
+    if (!printCss.includes(rule)) {
+      fail(`print.css: printable first-column rule is missing: ${rule}`);
+    }
+  }
+
+  const requiredPrintAdRules = [
+    ".ad-slot",
+    ".ad-container",
+    ".advertisement",
+    "[data-ad-slot]",
+    "[data-ad-unit]",
+    "ins.adsbygoogle"
+  ];
+
+  for (const rule of requiredPrintAdRules) {
+    if (!printCss.includes(rule)) {
+      fail(`print.css: printable ad suppression is missing: ${rule}`);
+    }
+  }
+
+  const requiredAcronymPrintRules = [
+    ".acronym-controls",
+    ".article-toc",
+    ".acronym-entry[hidden]",
+    "grid-template-columns: 0.85in minmax(0, 1fr)",
+    "break-inside: avoid-page"
+  ];
+
+  for (const rule of requiredAcronymPrintRules) {
+    if (!printCss.includes(rule)) {
+      fail(`print.css: printable acronym-reference rule is missing: ${rule}`);
+    }
   }
 }
 
@@ -162,6 +289,17 @@ for (const file of htmlFiles) {
   }
 
   if (html.includes('class="article-body prose"')) {
+    const articleTableCount = (html.match(/<table\b/gi) || []).length;
+    const tableScrollCount = (
+      html.match(/class=["'][^"']*\btable-scroll\b[^"']*["']/gi) || []
+    ).length;
+
+    if (articleTableCount > 0 && tableScrollCount !== articleTableCount) {
+      fail(
+        `${relative}: expected one shared table-scroll wrapper per article table, found ${tableScrollCount} wrappers for ${articleTableCount} tables`
+      );
+    }
+
     if (!html.includes('"@type": "Article"')) {
       fail(`${relative}: article page is missing Article structured data`);
     }
@@ -170,8 +308,317 @@ for (const file of htmlFiles) {
       fail(`${relative}: article page is missing breadcrumb structured data`);
     }
 
-    if (!/<time\s+datetime=["']\d{4}-\d{2}-\d{2}["']/.test(html)) {
-      fail(`${relative}: article page is missing a machine-readable publication date`);
+    if (!/"datePublished"\s*:\s*"\d{4}-\d{2}-\d{2}"/.test(html)) {
+      fail(`${relative}: article page is missing a structured publication date`);
+    }
+
+    if (/class=["']article-meta["']/.test(html)) {
+      fail(`${relative}: article page contains visible byline or date metadata`);
+    }
+
+    if (html.includes("data-print-guide")) {
+      if (!html.includes('href="/assets/css/print.css" media="print"')) {
+        fail(`${relative}: printable article is missing the shared print stylesheet`);
+      }
+
+      if (!html.includes('src="/assets/js/print-guide.js"')) {
+        fail(`${relative}: printable article is missing the shared print control script`);
+      }
+
+      if (!html.includes('class="site-header__print-title"')) {
+        fail(`${relative}: printable article is missing the branded print title`);
+      }
+
+      if (!html.includes('class="article-print-button__icon"')) {
+        fail(`${relative}: printable article is missing the shared printer icon`);
+      }
+
+      if (!html.includes('data-print-icon="printer"')) {
+        fail(`${relative}: printable article is missing the standard printer symbol`);
+      }
+
+      if (!html.includes('aria-label="Print or save this guide"')) {
+        fail(`${relative}: printable article is missing the accessible print-control name`);
+      }
+
+      if (!html.includes('<span aria-hidden="true">Print | Save</span>')) {
+        fail(`${relative}: printable article is missing the shared Print | Save label`);
+      }
+
+      if (html.includes("Print / Save PDF")) {
+        fail(`${relative}: printable article contains the retired print-control label`);
+      }
+    }
+  }
+
+  if (relative === "security-plus/index.html") {
+    if (!html.includes('href="/security-plus/acronyms/"')) {
+      fail(`${relative}: Security+ hub is missing the acronyms and terms link`);
+    }
+
+    if (!html.includes("Available now") || !html.includes("Open acronyms and terms")) {
+      fail(`${relative}: Quick Review card is not marked available`);
+    }
+  }
+
+  if (relative === "security-plus/acronyms/index.html") {
+    if (!html.includes("data-print-guide")) {
+      fail(`${relative}: acronym reference is missing the shared Print | Save control`);
+    }
+
+    if (!/<h1>Security\+ Acronyms and Terms<\/h1>/.test(html)) {
+      fail(`${relative}: acronym reference is missing its stable Security+ h1`);
+    }
+
+    const acronymEntryCount = (html.match(/data-acronym-entry/g) || []).length;
+    if (acronymEntryCount < 200) {
+      fail(`${relative}: expected at least 200 acronym entries, found ${acronymEntryCount}`);
+    }
+
+    const requiredAcronymMarkup = [
+      "data-acronym-search",
+      "data-acronym-clear",
+      "data-acronym-status",
+      "data-acronym-reference",
+      "data-acronym-empty",
+      'src="/assets/js/acronym-filter.js"',
+      "Context decides the meaning",
+      "Recovery time objective"
+    ];
+
+    for (const marker of requiredAcronymMarkup) {
+      if (!html.includes(marker)) {
+        fail(`${relative}: acronym reference is missing ${marker}`);
+      }
+    }
+
+    if (!html.includes('class="article-toc article-toc--compact-grid"')) {
+      fail(`${relative}: acronym reference is missing the shared compact sidebar index`);
+    }
+
+    if (!html.includes('<h2 id="article-toc-title">Jump to</h2>')) {
+      fail(`${relative}: acronym sidebar is missing its Jump to heading`);
+    }
+
+    const acronymJumpLinkCount = (html.match(/href=["']#acronyms-[^"']+["']/g) || []).length;
+    if (acronymJumpLinkCount !== 23) {
+      fail(`${relative}: expected 23 sidebar acronym jump links, found ${acronymJumpLinkCount}`);
+    }
+
+    if (html.includes("data-acronym-index")) {
+      fail(`${relative}: retired in-body acronym index is still present`);
+    }
+
+    const sidebarPosition = html.indexOf('class="article-toc article-toc--compact-grid"');
+    const articlePosition = html.indexOf('class="article-body prose"');
+    const controlsPosition = html.indexOf('class="acronym-controls"');
+
+    if (!(sidebarPosition >= 0 && articlePosition > sidebarPosition && controlsPosition > articlePosition)) {
+      fail(`${relative}: acronym sidebar and main reference content are not in the expected two-column order`);
+    }
+  }
+
+  if (relative === "security-plus/sy0-701/study-guide/index.html") {
+    if (!html.includes("data-print-guide")) {
+      fail(`${relative}: study guide is missing the shared Print | Save control`);
+    }
+
+    if (!/<h1>Security\+ SY0-701 Study Guide<\/h1>/.test(html)) {
+      fail(`${relative}: study guide is missing the independent Security+ title`);
+    }
+
+    if (/<h1[^>]*>\s*CompTIA\b/i.test(html)) {
+      fail(`${relative}: study guide H1 should not present the guide as CompTIA material`);
+    }
+
+    if (!html.includes('/security-plus/sy0-701/study-guide/general-security-concepts/')) {
+      fail(`${relative}: study guide is missing its Domain 1 guide link`);
+    }
+
+    if (!html.includes('/security-plus/sy0-701/study-guide/threats-vulnerabilities-mitigations/')) {
+      fail(`${relative}: study guide is missing its Domain 2 guide link`);
+    }
+
+    if (!html.includes('/security-plus/sy0-701/study-guide/security-architecture/')) {
+      fail(`${relative}: study guide is missing its Domain 3 guide link`);
+    }
+
+    if (!html.includes('/security-plus/sy0-701/study-guide/security-operations/')) {
+      fail(`${relative}: study guide is missing its Domain 4 guide link`);
+    }
+
+    if (!html.includes('/security-plus/sy0-701/study-guide/security-program-management-oversight/')) {
+      fail(`${relative}: study guide is missing its Domain 5 guide link`);
+    }
+
+    if (!html.includes('/security-plus/acronyms/')) {
+      fail(`${relative}: study guide is missing the Security+ acronym reference link`);
+    }
+
+    const linkedDomainRows = [
+      ["general-security-concepts", "1.0 General Security Concepts"],
+      ["threats-vulnerabilities-mitigations", "2.0 Threats, Vulnerabilities, and Mitigations"],
+      ["security-architecture", "3.0 Security Architecture"],
+      ["security-operations", "4.0 Security Operations"],
+      ["security-program-management-oversight", "5.0 Security Program Management and Oversight"]
+    ];
+
+    for (const [route, label] of linkedDomainRows) {
+      const expectedLink = `<td><a href="/security-plus/sy0-701/study-guide/${route}/">${label}</a></td>`;
+      if (!html.includes(expectedLink)) {
+        fail(`${relative}: exam-domain table is missing its linked ${label} row`);
+      }
+    }
+  }
+
+  if (relative === "security-plus/sy0-701/study-guide/general-security-concepts/index.html") {
+    if (!html.includes("data-print-guide")) {
+      fail(`${relative}: Domain 1 guide is missing the shared Print | Save control`);
+    }
+
+    if (!/<h1>Security\+ SY0-701 Domain 1: General Security Concepts<\/h1>/.test(html)) {
+      fail(`${relative}: Domain 1 guide is missing its expected h1`);
+    }
+
+    const requiredSectionIds = [
+      "security-controls",
+      "core-concepts",
+      "zero-trust-physical-deception",
+      "change-management",
+      "cryptography-pki",
+      "review-checklist"
+    ];
+
+    for (const id of requiredSectionIds) {
+      if (!html.includes(`id="${id}"`)) {
+        fail(`${relative}: Domain 1 guide is missing section #${id}`);
+      }
+    }
+  }
+
+  if (relative === "security-plus/sy0-701/study-guide/threats-vulnerabilities-mitigations/index.html") {
+    if (!html.includes("data-print-guide")) {
+      fail(`${relative}: Domain 2 guide is missing the shared Print | Save control`);
+    }
+
+    if (!/<h1>Security\+ SY0-701 Domain 2: Threats, Vulnerabilities, and Mitigations<\/h1>/.test(html)) {
+      fail(`${relative}: Domain 2 guide is missing its expected h1`);
+    }
+
+    const requiredSectionIds = [
+      "threat-actors",
+      "vectors-surfaces",
+      "vulnerabilities",
+      "malicious-activity",
+      "mitigations",
+      "review-checklist"
+    ];
+
+    for (const id of requiredSectionIds) {
+      if (!html.includes(`id="${id}"`)) {
+        fail(`${relative}: Domain 2 guide is missing section #${id}`);
+      }
+    }
+
+    if (!html.includes('/security-plus/sy0-701/study-guide/security-architecture/')) {
+      fail(`${relative}: Domain 2 guide is missing its Domain 3 guide link`);
+    }
+  }
+
+  if (relative === "security-plus/sy0-701/study-guide/security-architecture/index.html") {
+    if (!html.includes("data-print-guide")) {
+      fail(`${relative}: Domain 3 guide is missing the shared Print | Save control`);
+    }
+
+    if (!/<h1>Security\+ SY0-701 Domain 3: Security Architecture<\/h1>/.test(html)) {
+      fail(`${relative}: Domain 3 guide is missing its expected h1`);
+    }
+
+    const requiredSectionIds = [
+      "architecture-models",
+      "enterprise-infrastructure",
+      "data-protection",
+      "resilience-recovery",
+      "review-checklist"
+    ];
+
+    for (const id of requiredSectionIds) {
+      if (!html.includes(`id="${id}"`)) {
+        fail(`${relative}: Domain 3 guide is missing section #${id}`);
+      }
+    }
+
+    if (!html.includes('/security-plus/sy0-701/study-guide/security-operations/')) {
+      fail(`${relative}: Domain 3 guide is missing its Domain 4 guide link`);
+    }
+  }
+
+  if (relative === "security-plus/sy0-701/study-guide/security-operations/index.html") {
+    if (!html.includes("data-print-guide")) {
+      fail(`${relative}: Domain 4 guide is missing the shared Print | Save control`);
+    }
+
+    if (!/<h1>Security\+ SY0-701 Domain 4: Security Operations<\/h1>/.test(html)) {
+      fail(`${relative}: Domain 4 guide is missing its expected h1`);
+    }
+
+    const requiredSectionIds = [
+      "secure-computing",
+      "asset-management",
+      "vulnerability-management",
+      "monitoring-alerting",
+      "enterprise-controls",
+      "identity-access",
+      "automation-orchestration",
+      "incident-response",
+      "investigation-data",
+      "review-checklist"
+    ];
+
+    for (const id of requiredSectionIds) {
+      if (!html.includes(`id="${id}"`)) {
+        fail(`${relative}: Domain 4 guide is missing section #${id}`);
+      }
+    }
+
+    if (!html.includes('/security-plus/sy0-701/study-guide/security-program-management-oversight/')) {
+      fail(`${relative}: Domain 4 guide is missing its Domain 5 guide link`);
+    }
+  }
+
+  if (relative === "security-plus/sy0-701/study-guide/security-program-management-oversight/index.html") {
+    if (!html.includes("data-print-guide")) {
+      fail(`${relative}: Domain 5 guide is missing the shared Print | Save control`);
+    }
+
+    if (!/<h1>Security\+ SY0-701 Domain 5: Security Program Management and Oversight<\/h1>/.test(html)) {
+      fail(`${relative}: Domain 5 guide is missing its expected h1`);
+    }
+
+    const requiredSectionIds = [
+      "security-governance",
+      "risk-management",
+      "third-party-risk",
+      "compliance-privacy",
+      "audits-assessments",
+      "security-awareness",
+      "review-checklist"
+    ];
+
+    for (const id of requiredSectionIds) {
+      if (!html.includes(`id="${id}"`)) {
+        fail(`${relative}: Domain 5 guide is missing section #${id}`);
+      }
+    }
+  }
+
+  if (relative.startsWith("security-plus/sy0-701/practice-test/question/")) {
+    if (!/<h1\b[^>]*data-paged-position[^>]*>/i.test(html)) {
+      fail(`${relative}: paged question heading is missing its dynamic position marker`);
+    }
+
+    if (/class=["']paged-quiz__question-id["']/.test(html)) {
+      fail(`${relative}: paged question still contains the retired duplicate question-ID wrapper`);
     }
   }
 }
@@ -210,8 +657,14 @@ if (await isFile(path.join(outputRoot, "sitemap.xml"))) {
   const expectedUrls = [
     "https://certhappens.com/",
     "https://certhappens.com/security-plus/",
+    "https://certhappens.com/security-plus/acronyms/",
     "https://certhappens.com/security-plus/sy0-701/practice-test/",
     "https://certhappens.com/security-plus/sy0-701/study-guide/",
+    "https://certhappens.com/security-plus/sy0-701/study-guide/general-security-concepts/",
+    "https://certhappens.com/security-plus/sy0-701/study-guide/threats-vulnerabilities-mitigations/",
+    "https://certhappens.com/security-plus/sy0-701/study-guide/security-architecture/",
+    "https://certhappens.com/security-plus/sy0-701/study-guide/security-operations/",
+    "https://certhappens.com/security-plus/sy0-701/study-guide/security-program-management-oversight/",
     "https://certhappens.com/privacy/",
     "https://certhappens.com/terms/",
     "https://certhappens.com/disclaimer/",
@@ -224,12 +677,25 @@ if (await isFile(path.join(outputRoot, "sitemap.xml"))) {
     }
   }
 
-  const studyGuideEntry = sitemap.match(
-    /<url>[\s\S]*?<loc>https:\/\/certhappens\.com\/security-plus\/sy0-701\/study-guide\/<\/loc>[\s\S]*?<\/url>/
-  )?.[0];
+  const datedArticleUrls = [
+    "https://certhappens.com/security-plus/acronyms/",
+    "https://certhappens.com/security-plus/sy0-701/study-guide/",
+    "https://certhappens.com/security-plus/sy0-701/study-guide/general-security-concepts/",
+    "https://certhappens.com/security-plus/sy0-701/study-guide/threats-vulnerabilities-mitigations/",
+    "https://certhappens.com/security-plus/sy0-701/study-guide/security-architecture/",
+    "https://certhappens.com/security-plus/sy0-701/study-guide/security-operations/",
+    "https://certhappens.com/security-plus/sy0-701/study-guide/security-program-management-oversight/"
+  ];
 
-  if (!studyGuideEntry || !/<lastmod>\d{4}-\d{2}-\d{2}<\/lastmod>/.test(studyGuideEntry)) {
-    fail("sitemap.xml: study guide publication or modification date is missing");
+  for (const url of datedArticleUrls) {
+    const escapedUrl = url.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    const entry = sitemap.match(
+      new RegExp(`<url>[\\s\\S]*?<loc>${escapedUrl}</loc>[\\s\\S]*?</url>`)
+    )?.[0];
+
+    if (!entry || !/<lastmod>\d{4}-\d{2}-\d{2}<\/lastmod>/.test(entry)) {
+      fail(`sitemap.xml: publication or modification date is missing for ${url}`);
+    }
   }
 }
 

@@ -1,7 +1,8 @@
 ---
 layout: layouts/base.njk
 ---
-{% set articleAuthor = authors[author] %}
+{% set articleAuthorKey = author or "certHappens" %}
+{% set articleAuthor = authors[articleAuthorKey] %}
 {% set canonicalUrl = site.url ~ page.url %}
 {% set publishedDate = datePublished | htmlDateString %}
 {% set modifiedDate = (dateModified or datePublished) | htmlDateString %}
@@ -76,23 +77,44 @@ layout: layouts/base.njk
     <h1>{{ title }}</h1>
     {% if lede %}<p class="lede">{{ lede }}</p>{% endif %}
 
-    <p class="article-meta">
-      <span>By {{ articleAuthor.name }}</span>
-      <span class="article-meta__separator" aria-hidden="true">·</span>
-      <span>Published <time datetime="{{ publishedDate }}">{{ datePublished | readableDate }}</time></span>
-      {% if modifiedDate != publishedDate %}
-      <span class="article-meta__separator" aria-hidden="true">·</span>
-      <span>Updated <time datetime="{{ modifiedDate }}">{{ (dateModified or datePublished) | readableDate }}</time></span>
-      {% endif %}
-    </p>
+    {% if printable %}
+    <div class="article-actions">
+      <button
+        class="button button--secondary article-print-button"
+        type="button"
+        data-print-guide
+        aria-label="Print or save this guide"
+      >
+        <svg
+          class="article-print-button__icon"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+          focusable="false"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          data-print-icon="printer"
+        >
+          <path d="M7 8V3h10v5"/>
+          <rect x="3" y="8" width="18" height="9" rx="2.25"/>
+          <path d="M7 14h10v7H7z"/>
+          <path d="M17.5 11.5h.01"/>
+          <path d="M9.25 17.25h5.5M9.25 19.25h5.5"/>
+        </svg>
+        <span aria-hidden="true">Print | Save</span>
+      </button>
+    </div>
+    {% endif %}
   </div>
 </header>
 
 <div class="article-layout page-shell">
   {% if toc %}
-  <aside class="article-toc">
+  <aside class="article-toc{% if tocVariant %} article-toc--{{ tocVariant }}{% endif %}">
     <nav aria-labelledby="article-toc-title">
-      <h2 id="article-toc-title">On this page</h2>
+      <h2 id="article-toc-title">{{ tocHeading or "On this page" }}</h2>
       <ol>
         {% for item in toc %}
         <li><a href="#{{ item.id }}">{{ item.label }}</a></li>
@@ -120,3 +142,7 @@ layout: layouts/base.njk
     {% endif %}
   </article>
 </div>
+
+{% if printable %}
+<script type="module" src="/assets/js/print-guide.js"></script>
+{% endif %}

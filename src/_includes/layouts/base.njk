@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="{{ site.language }}">
 <head>
@@ -18,7 +17,6 @@
   <title>{{ fullTitle }}</title>
   <meta name="description" content="{{ pageDescription }}">
   <meta name="robots" content="{{ robots or 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1' }}">
-
   <link rel="canonical" href="{{ canonicalUrl }}">
 
   <meta property="og:type" content="{{ ogType or 'website' }}">
@@ -46,6 +44,9 @@
   <link rel="stylesheet" href="/assets/css/site.css">
   <link rel="stylesheet" href="/assets/css/brand.css">
   <link rel="stylesheet" href="/assets/css/phase6.css">
+  {% if printable %}
+  <link rel="stylesheet" href="/assets/css/print.css" media="print">
+  {% endif %}
 
   <script type="application/ld+json">
   {
@@ -167,9 +168,14 @@
         </span>
       </a>
 
+      {% if printable %}
+      <span class="site-header__print-title" aria-hidden="true">{{ printTitle or title }}</span>
+      {% endif %}
+
       <nav class="primary-nav" aria-label="Primary navigation">
-        <a href="/security-plus/">Security+</a>
-        <a href="/security-plus/sy0-701/practice-test/">Practice Tests</a>
+        {% for item in siteNavigation.primary %}
+        <a href="{{ item.url }}">{{ item.label }}</a>
+        {% endfor %}
       </nav>
     </div>
   </header>
@@ -181,12 +187,10 @@
   <footer class="site-footer">
     <div class="page-shell site-footer__inner">
       <nav class="site-footer__nav" aria-label="Footer navigation">
-        <a href="/privacy/">Privacy</a>
-        <a href="/terms/">Terms</a>
-        <a href="/disclaimer/">Disclaimer</a>
-        <a href="/contact/">Contact and corrections</a>
+        {% for item in siteNavigation.footer %}
+        <a href="{{ item.url }}">{{ item.label }}</a>
+        {% endfor %}
       </nav>
-
       <p>&copy; {{ "" | currentYear }} {{ site.name }}.</p>
       <p class="site-footer__disclaimer">
         This independent study resource is not affiliated with or endorsed by CompTIA.

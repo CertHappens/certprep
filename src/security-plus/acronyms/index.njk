@@ -1,0 +1,169 @@
+---
+layout: layouts/article.njk
+title: Security+ Acronyms and Terms
+description: Look up Security+ acronyms with full expansions, plain-English meanings, related terms, search, and a clean printable reference.
+permalink: /security-plus/acronyms/
+ogType: article
+printable: true
+printTitle: Security+ Acronyms and Terms
+author: certHappens
+datePublished: 2026-07-23
+articleSection: Security+ quick review
+eyebrow: Security+ quick review
+lede: Find the initials that interrupted your reading, understand what they mean, and return to the concept you were studying.
+breadcrumbs:
+  - label: Home
+    url: /
+  - label: Security+
+    url: /security-plus/
+  - label: Acronyms and Terms
+    url: /security-plus/acronyms/
+keywords:
+  - Security+ acronyms
+  - cybersecurity abbreviations
+  - Security+ terminology
+  - SY0-701 acronyms
+tocHeading: Jump to
+tocVariant: compact-grid
+toc:
+  - id: acronyms-numbers
+    label: 0-9
+  - id: acronyms-a
+    label: A
+  - id: acronyms-b
+    label: B
+  - id: acronyms-c
+    label: C
+  - id: acronyms-d
+    label: D
+  - id: acronyms-e
+    label: E
+  - id: acronyms-f
+    label: F
+  - id: acronyms-g
+    label: G
+  - id: acronyms-h
+    label: H
+  - id: acronyms-i
+    label: I
+  - id: acronyms-k
+    label: K
+  - id: acronyms-l
+    label: L
+  - id: acronyms-m
+    label: M
+  - id: acronyms-n
+    label: N
+  - id: acronyms-o
+    label: O
+  - id: acronyms-p
+    label: P
+  - id: acronyms-r
+    label: R
+  - id: acronyms-s
+    label: S
+  - id: acronyms-t
+    label: T
+  - id: acronyms-u
+    label: U
+  - id: acronyms-v
+    label: V
+  - id: acronyms-w
+    label: W
+  - id: acronyms-x
+    label: X
+relatedLinks:
+  - title: Security+ SY0-701 Study Guide
+    url: /security-plus/sy0-701/study-guide/
+    description: Follow the main roadmap and continue into all five exam-domain guides.
+  - title: Take a randomized SY0-701 practice test
+    url: /security-plus/sy0-701/practice-test/
+    description: Apply the terminology in scenario-based questions and review every explanation.
+  - title: Return to the Security+ resource hub
+    url: /security-plus/
+    description: Find current practice, study, and quick-review resources.
+---
+<p>
+  Acronyms are easier to remember when they are attached to a system, decision, or scenario. Use this reference when unfamiliar initials interrupt a guide, practice question, log, or conversation. Then return to the surrounding material and apply the term in context.
+</p>
+
+<p>
+  This list covers {{ securityPlusAcronyms.entryCount }} common Security+ acronyms and terms drawn from the current SY0-701 objectives and the CertHappens study guides. The page uses a stable Security+ address so later exam versions can add terminology without creating a separate reference for every revision.
+</p>
+
+<div class="article-callout">
+  <p><strong>Context decides the meaning.</strong> Some initials have more than one valid expansion. MAC, PAM, RA, RBAC, SAN, and SOC are common examples. Read the full scenario before choosing a definition.</p>
+</div>
+
+<section class="acronym-controls" role="search" aria-labelledby="acronym-search-title" data-acronym-controls>
+  <div class="acronym-controls__heading">
+    <h2 id="acronym-search-title">Search the reference</h2>
+    <p id="acronym-search-help">Search by acronym, expansion, plain-English meaning, related term, or exam domain.</p>
+  </div>
+  <div class="acronym-search">
+    <label for="acronym-search-input">Acronym or concept</label>
+    <div class="acronym-search__row">
+      <input
+        id="acronym-search-input"
+        type="search"
+        inputmode="search"
+        autocomplete="off"
+        placeholder="Try RTO, encryption, email, or Domain 4"
+        aria-describedby="acronym-search-help acronym-search-status"
+        data-acronym-search
+      >
+      <button class="button button--secondary acronym-search__clear" type="button" data-acronym-clear hidden>Clear</button>
+    </div>
+    <p class="acronym-results-status" id="acronym-search-status" data-acronym-status aria-live="polite">Showing all {{ securityPlusAcronyms.entryCount }} entries.</p>
+  </div>
+</section>
+
+
+<div class="acronym-reference" data-acronym-reference data-total-entries="{{ securityPlusAcronyms.entryCount }}">
+  {% for group in securityPlusAcronyms.groups %}
+  <section class="acronym-group" id="acronyms-{{ group.id }}" data-acronym-group>
+    <h2>{{ group.label }}</h2>
+    <dl class="acronym-list">
+      {% for entry in group.entries %}
+      <div
+        class="acronym-entry"
+        id="acronym-{{ entry.id }}"
+        data-acronym-entry
+        data-search-text="{{ entry.term | lower | escape }} {{ entry.expansion | lower | escape }} {{ entry.meaning | lower | escape }} {{ entry.related | join(' ') | lower | escape }} domain {{ entry.domains | join(' domain ') | escape }}"
+      >
+        <dt class="acronym-entry__term">{{ entry.term }}</dt>
+        <dd class="acronym-entry__details">
+          <strong class="acronym-entry__expansion">{{ entry.expansion }}</strong>
+          <span class="acronym-entry__meaning">{{ entry.meaning }}</span>
+          <span class="acronym-entry__meta">
+            Domain{% if entry.domains | length > 1 %}s{% endif %} {{ entry.domains | join(', ') }}{% if entry.related | length %} · Related: {{ entry.related | join(', ') }}{% endif %}
+          </span>
+        </dd>
+      </div>
+      {% endfor %}
+    </dl>
+  </section>
+  {% endfor %}
+</div>
+
+<p class="acronym-no-results" data-acronym-empty hidden>
+  No matching terms were found. Try the full phrase, a related concept, or a broader word.
+</p>
+
+<h2 id="how-to-use-acronyms">Use acronyms as signposts</h2>
+
+<p>
+  Expanding the letters is the first step. Exam questions usually require the purpose, limitation, or relationship behind the term. Knowing that RPO means recovery point objective should lead to acceptable data loss. Knowing that RTO means recovery time objective should lead to acceptable downtime.
+</p>
+
+<p>
+  When two terms look similar, compare the problem each one solves. SIEM collects and correlates security events. SOAR connects tools and automates workflows. EDR focuses on endpoint detection and response. XDR combines signals across several security layers. The expansion helps, while the operational difference earns the answer.
+</p>
+
+<h2 id="official-reference">Official reference</h2>
+
+<p>
+  The current Security+ objectives include an official SY0-701 acronym appendix. Use the <a href="https://www.examcompass.com/comptia-certifications/security-plus/comptia-security-plus-sy0-701-exam-objectives.pdf">published exam objectives</a> as the final scope checklist for the exam version you are preparing to take.
+</p>
+
+<script type="module" src="/assets/js/acronym-filter.js"></script>

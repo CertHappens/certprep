@@ -1,0 +1,30 @@
+{
+  "primary": [
+    {
+      "label": "Practice Tests",
+      "url": "/security-plus/sy0-701/practice-test/"
+    },
+    {
+      "label": "Study",
+      "url": "/security-plus/sy0-701/study-guide/"
+    }
+  ],
+  "footer": [
+    {
+      "label": "Privacy",
+      "url": "/privacy/"
+    },
+    {
+      "label": "Terms",
+      "url": "/terms/"
+    },
+    {
+      "label": "Disclaimer",
+      "url": "/disclaimer/"
+    },
+    {
+      "label": "Contact and corrections",
+      "url": "/contact/"
+    }
+  ]
+}

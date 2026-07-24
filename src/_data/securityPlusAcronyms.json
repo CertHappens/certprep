@@ -1,0 +1,4091 @@
+{
+  "title": "Security+ Acronyms and Terms",
+  "currentExamVersion": "SY0-701",
+  "datePublished": "2026-07-23",
+  "entryCount": 245,
+  "groups": [
+    {
+      "letter": "#",
+      "id": "numbers",
+      "entries": [
+        {
+          "id": "2fa",
+          "term": "2FA",
+          "expansion": "Two-factor authentication",
+          "meaning": "Authentication that requires two different factor types, such as a password and a hardware token.",
+          "domains": [
+            "4"
+          ],
+          "related": [
+            "MFA"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "3des",
+          "term": "3DES",
+          "expansion": "Triple Data Encryption Standard",
+          "meaning": "A legacy symmetric cipher that applies DES three times. Modern systems should prefer stronger algorithms such as AES.",
+          "domains": [
+            "1"
+          ],
+          "related": [
+            "DES",
+            "AES"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        }
+      ],
+      "label": "0-9"
+    },
+    {
+      "letter": "A",
+      "id": "a",
+      "entries": [
+        {
+          "id": "aaa",
+          "term": "AAA",
+          "expansion": "Authentication, authorization, and accounting",
+          "meaning": "A framework that verifies identity, decides permitted actions, and records activity.",
+          "domains": [
+            "1",
+            "4"
+          ],
+          "related": [
+            "RADIUS",
+            "TACACS+"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "acl",
+          "term": "ACL",
+          "expansion": "Access control list",
+          "meaning": "A set of rules that permits or denies access to a resource, network path, or object.",
+          "domains": [
+            "1",
+            "3",
+            "4"
+          ],
+          "related": [
+            "DAC",
+            "RBAC"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "aes",
+          "term": "AES",
+          "expansion": "Advanced Encryption Standard",
+          "meaning": "A widely used symmetric encryption standard for protecting data at rest and in transit.",
+          "domains": [
+            "1",
+            "3"
+          ],
+          "related": [
+            "3DES",
+            "GCM"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "aes-256",
+          "term": "AES-256",
+          "expansion": "Advanced Encryption Standard with a 256-bit key",
+          "meaning": "AES using a 256-bit key. The key size is one part of security; mode, key handling, and implementation also matter.",
+          "domains": [
+            "1",
+            "3"
+          ],
+          "related": [
+            "AES",
+            "GCM"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "ah",
+          "term": "AH",
+          "expansion": "Authentication Header",
+          "meaning": "An IPsec component that provides integrity and origin authentication without encrypting the payload.",
+          "domains": [
+            "1",
+            "3"
+          ],
+          "related": [
+            "ESP",
+            "IPsec"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "ai",
+          "term": "AI",
+          "expansion": "Artificial intelligence",
+          "meaning": "Systems that perform tasks associated with human reasoning, recognition, prediction, or generation.",
+          "domains": [
+            "2",
+            "4",
+            "5"
+          ],
+          "related": [],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "ale",
+          "term": "ALE",
+          "expansion": "Annualized loss expectancy",
+          "meaning": "The estimated yearly financial loss from a risk, calculated as SLE multiplied by ARO.",
+          "domains": [
+            "5"
+          ],
+          "related": [
+            "ARO",
+            "SLE"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "api",
+          "term": "API",
+          "expansion": "Application programming interface",
+          "meaning": "A defined way for software components or services to exchange requests and data.",
+          "domains": [
+            "2",
+            "3",
+            "4"
+          ],
+          "related": [],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "apt",
+          "term": "APT",
+          "expansion": "Advanced persistent threat",
+          "meaning": "A capable, well-resourced threat actor that maintains long-term access while pursuing a strategic objective.",
+          "domains": [
+            "2"
+          ],
+          "related": [
+            "TTP"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "aro",
+          "term": "ARO",
+          "expansion": "Annualized rate of occurrence",
+          "meaning": "The expected number of times a loss event occurs in one year.",
+          "domains": [
+            "5"
+          ],
+          "related": [
+            "ALE",
+            "SLE"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "arp",
+          "term": "ARP",
+          "expansion": "Address Resolution Protocol",
+          "meaning": "A protocol that maps an IPv4 address to a local network hardware address.",
+          "domains": [
+            "2",
+            "3",
+            "4"
+          ],
+          "related": [
+            "MAC"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "aslr",
+          "term": "ASLR",
+          "expansion": "Address space layout randomization",
+          "meaning": "A memory protection that changes where processes and libraries are loaded, making exploitation less predictable.",
+          "domains": [
+            "2",
+            "4"
+          ],
+          "related": [
+            "DEP"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "att-ck",
+          "term": "ATT&CK",
+          "expansion": "Adversarial Tactics, Techniques, and Common Knowledge",
+          "meaning": "MITRE's knowledge base for describing adversary behavior through tactics and techniques.",
+          "domains": [
+            "2",
+            "4"
+          ],
+          "related": [
+            "TTP",
+            "STIX",
+            "TAXII"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "aup",
+          "term": "AUP",
+          "expansion": "Acceptable use policy",
+          "meaning": "A policy that defines permitted and prohibited use of organizational systems and data.",
+          "domains": [
+            "5"
+          ],
+          "related": [],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "av",
+          "term": "AV",
+          "expansion": "Antivirus",
+          "meaning": "Software that detects, blocks, and removes known or suspicious malicious software.",
+          "domains": [
+            "2",
+            "4"
+          ],
+          "related": [
+            "EDR",
+            "XDR"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        }
+      ],
+      "label": "A"
+    },
+    {
+      "letter": "B",
+      "id": "b",
+      "entries": [
+        {
+          "id": "bcp",
+          "term": "BCP",
+          "expansion": "Business continuity planning",
+          "meaning": "Planning that keeps essential business functions operating during and after a disruption.",
+          "domains": [
+            "3",
+            "5"
+          ],
+          "related": [
+            "DRP",
+            "COOP"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "bgp",
+          "term": "BGP",
+          "expansion": "Border Gateway Protocol",
+          "meaning": "The routing protocol used to exchange reachability information between autonomous systems on the internet.",
+          "domains": [
+            "2",
+            "3"
+          ],
+          "related": [],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "bia",
+          "term": "BIA",
+          "expansion": "Business impact analysis",
+          "meaning": "A process that identifies critical functions and evaluates the consequences of disruption.",
+          "domains": [
+            "3",
+            "5"
+          ],
+          "related": [
+            "RTO",
+            "RPO"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "bios",
+          "term": "BIOS",
+          "expansion": "Basic input/output system",
+          "meaning": "Legacy firmware that initializes hardware and starts the boot process.",
+          "domains": [
+            "2",
+            "3",
+            "4"
+          ],
+          "related": [
+            "UEFI"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "bpa",
+          "term": "BPA",
+          "expansion": "Business partners agreement",
+          "meaning": "An agreement that defines responsibilities and expectations between organizations working together.",
+          "domains": [
+            "5"
+          ],
+          "related": [
+            "MSA",
+            "MOU",
+            "SOW"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "byod",
+          "term": "BYOD",
+          "expansion": "Bring your own device",
+          "meaning": "A model that permits personally owned devices to access organizational resources.",
+          "domains": [
+            "3",
+            "4",
+            "5"
+          ],
+          "related": [
+            "COPE",
+            "COBO",
+            "CYOD"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        }
+      ],
+      "label": "B"
+    },
+    {
+      "letter": "C",
+      "id": "c",
+      "entries": [
+        {
+          "id": "ca",
+          "term": "CA",
+          "expansion": "Certificate authority",
+          "meaning": "A trusted organization or system that issues and signs digital certificates.",
+          "domains": [
+            "1"
+          ],
+          "related": [
+            "PKI",
+            "RA",
+            "CRL",
+            "OCSP"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "captcha",
+          "term": "CAPTCHA",
+          "expansion": "Completely Automated Public Turing test to tell Computers and Humans Apart",
+          "meaning": "A challenge intended to distinguish human users from automated activity.",
+          "domains": [
+            "2",
+            "4"
+          ],
+          "related": [],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "casb",
+          "term": "CASB",
+          "expansion": "Cloud access security broker",
+          "meaning": "A control point that applies security policy between users and cloud services.",
+          "domains": [
+            "3",
+            "4"
+          ],
+          "related": [
+            "SASE",
+            "SWG"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "cctv",
+          "term": "CCTV",
+          "expansion": "Closed-circuit television",
+          "meaning": "Video surveillance used to monitor and record activity within a controlled environment.",
+          "domains": [
+            "1",
+            "4"
+          ],
+          "related": [],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "cert",
+          "term": "CERT",
+          "expansion": "Computer emergency response team",
+          "meaning": "A team that coordinates preparation for and response to cybersecurity incidents.",
+          "domains": [
+            "4",
+            "5"
+          ],
+          "related": [
+            "CIRT",
+            "IR"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "chap",
+          "term": "CHAP",
+          "expansion": "Challenge Handshake Authentication Protocol",
+          "meaning": "An authentication protocol that uses challenge-response exchanges instead of sending the password directly.",
+          "domains": [
+            "1",
+            "4"
+          ],
+          "related": [
+            "PAP"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "cia",
+          "term": "CIA",
+          "expansion": "Confidentiality, integrity, and availability",
+          "meaning": "Three foundational security goals: prevent unauthorized disclosure, preserve trustworthy data, and keep services usable.",
+          "domains": [
+            "1"
+          ],
+          "related": [],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "cirt",
+          "term": "CIRT",
+          "expansion": "Computer incident response team",
+          "meaning": "A group responsible for preparing for, investigating, containing, and recovering from incidents.",
+          "domains": [
+            "4",
+            "5"
+          ],
+          "related": [
+            "CERT",
+            "IRP"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "cobo",
+          "term": "COBO",
+          "expansion": "Corporate-owned, business-only",
+          "meaning": "A device ownership model in which the organization owns the device and restricts it to business use.",
+          "domains": [
+            "3",
+            "4"
+          ],
+          "related": [
+            "COPE",
+            "BYOD",
+            "CYOD"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "coop",
+          "term": "COOP",
+          "expansion": "Continuity of operations planning",
+          "meaning": "Planning that sustains essential organizational functions during disruption.",
+          "domains": [
+            "3",
+            "5"
+          ],
+          "related": [
+            "BCP",
+            "DRP"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "cope",
+          "term": "COPE",
+          "expansion": "Corporate-owned, personally enabled",
+          "meaning": "A device model in which the organization owns the device but permits limited personal use.",
+          "domains": [
+            "3",
+            "4"
+          ],
+          "related": [
+            "COBO",
+            "BYOD",
+            "CYOD"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "crl",
+          "term": "CRL",
+          "expansion": "Certificate revocation list",
+          "meaning": "A published list of certificates that should no longer be trusted before their expiration dates.",
+          "domains": [
+            "1"
+          ],
+          "related": [
+            "CA",
+            "OCSP"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "csp",
+          "term": "CSP",
+          "expansion": "Cloud service provider",
+          "meaning": "A company that delivers cloud computing services such as IaaS, PaaS, or SaaS.",
+          "domains": [
+            "3",
+            "5"
+          ],
+          "related": [
+            "IaaS",
+            "PaaS",
+            "SaaS"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "csr",
+          "term": "CSR",
+          "expansion": "Certificate signing request",
+          "meaning": "A request containing a public key and identity information that is submitted for certificate issuance.",
+          "domains": [
+            "1"
+          ],
+          "related": [
+            "CA",
+            "PKI"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "csrf",
+          "term": "CSRF",
+          "expansion": "Cross-site request forgery",
+          "meaning": "An attack that causes a signed-in browser to send an unintended request to a trusted application.",
+          "domains": [
+            "2"
+          ],
+          "related": [
+            "XSRF",
+            "XSS"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "cve",
+          "term": "CVE",
+          "expansion": "Common Vulnerabilities and Exposures",
+          "meaning": "A standardized identifier assigned to a publicly known vulnerability.",
+          "domains": [
+            "2",
+            "4"
+          ],
+          "related": [
+            "CVSS",
+            "SCAP"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "cvss",
+          "term": "CVSS",
+          "expansion": "Common Vulnerability Scoring System",
+          "meaning": "A scoring framework used to describe vulnerability severity and environmental impact.",
+          "domains": [
+            "2",
+            "4"
+          ],
+          "related": [
+            "CVE"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "cyod",
+          "term": "CYOD",
+          "expansion": "Choose your own device",
+          "meaning": "A model in which users select an approved device from an organizational list.",
+          "domains": [
+            "3",
+            "4"
+          ],
+          "related": [
+            "BYOD",
+            "COPE",
+            "COBO"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        }
+      ],
+      "label": "C"
+    },
+    {
+      "letter": "D",
+      "id": "d",
+      "entries": [
+        {
+          "id": "dac",
+          "term": "DAC",
+          "expansion": "Discretionary access control",
+          "meaning": "An access model in which an object's owner can decide who receives access.",
+          "domains": [
+            "1",
+            "4"
+          ],
+          "related": [
+            "MAC",
+            "RBAC"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "ddos",
+          "term": "DDoS",
+          "expansion": "Distributed denial-of-service",
+          "meaning": "A denial-of-service attack launched from many systems at once to exhaust a target's resources.",
+          "domains": [
+            "2"
+          ],
+          "related": [
+            "DoS"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "dep",
+          "term": "DEP",
+          "expansion": "Data execution prevention",
+          "meaning": "A memory protection that blocks code execution in regions intended only for data.",
+          "domains": [
+            "2",
+            "4"
+          ],
+          "related": [
+            "ASLR"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "des",
+          "term": "DES",
+          "expansion": "Data Encryption Standard",
+          "meaning": "A legacy symmetric cipher with a key size too small for modern security needs.",
+          "domains": [
+            "1"
+          ],
+          "related": [
+            "3DES",
+            "AES"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "dhcp",
+          "term": "DHCP",
+          "expansion": "Dynamic Host Configuration Protocol",
+          "meaning": "A protocol that automatically assigns IP configuration to network clients.",
+          "domains": [
+            "2",
+            "3",
+            "4"
+          ],
+          "related": [],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "dhe",
+          "term": "DHE",
+          "expansion": "Diffie-Hellman Ephemeral",
+          "meaning": "A temporary Diffie-Hellman key exchange that supports forward secrecy when used correctly.",
+          "domains": [
+            "1"
+          ],
+          "related": [
+            "ECDHE",
+            "PFS"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "dkim",
+          "term": "DKIM",
+          "expansion": "DomainKeys Identified Mail",
+          "meaning": "An email authentication method that uses a domain's digital signature to help verify message integrity and origin.",
+          "domains": [
+            "2",
+            "4"
+          ],
+          "related": [
+            "DMARC",
+            "SPF"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "dlp",
+          "term": "DLP",
+          "expansion": "Data loss prevention",
+          "meaning": "Controls that identify sensitive information and restrict unauthorized transfer or exposure.",
+          "domains": [
+            "3",
+            "4",
+            "5"
+          ],
+          "related": [],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "dmarc",
+          "term": "DMARC",
+          "expansion": "Domain-based Message Authentication, Reporting, and Conformance",
+          "meaning": "An email policy and reporting framework that builds on SPF and DKIM.",
+          "domains": [
+            "2",
+            "4"
+          ],
+          "related": [
+            "DKIM",
+            "SPF"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "dns",
+          "term": "DNS",
+          "expansion": "Domain Name System",
+          "meaning": "The distributed service that maps names to records such as IP addresses and mail servers.",
+          "domains": [
+            "2",
+            "3",
+            "4"
+          ],
+          "related": [
+            "DNSSEC"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "dnssec",
+          "term": "DNSSEC",
+          "expansion": "Domain Name System Security Extensions",
+          "meaning": "Extensions that add signed DNS data so resolvers can validate integrity and origin.",
+          "domains": [
+            "1",
+            "3",
+            "4"
+          ],
+          "related": [
+            "DNS"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "dos",
+          "term": "DoS",
+          "expansion": "Denial-of-service",
+          "meaning": "An attack or condition that prevents legitimate users from accessing a service.",
+          "domains": [
+            "2"
+          ],
+          "related": [
+            "DDoS"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "dpo",
+          "term": "DPO",
+          "expansion": "Data protection officer",
+          "meaning": "A role that oversees privacy obligations and data-protection practices.",
+          "domains": [
+            "5"
+          ],
+          "related": [
+            "GDPR"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "drp",
+          "term": "DRP",
+          "expansion": "Disaster recovery plan",
+          "meaning": "A documented approach for restoring technology and data after a major disruption.",
+          "domains": [
+            "3",
+            "5"
+          ],
+          "related": [
+            "BCP",
+            "RTO",
+            "RPO"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "dsa",
+          "term": "DSA",
+          "expansion": "Digital Signature Algorithm",
+          "meaning": "A public-key algorithm designed for digital signatures.",
+          "domains": [
+            "1"
+          ],
+          "related": [
+            "ECDSA",
+            "RSA"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        }
+      ],
+      "label": "D"
+    },
+    {
+      "letter": "E",
+      "id": "e",
+      "entries": [
+        {
+          "id": "eap",
+          "term": "EAP",
+          "expansion": "Extensible Authentication Protocol",
+          "meaning": "A framework that supports multiple authentication methods, often in enterprise wireless and network access.",
+          "domains": [
+            "1",
+            "4"
+          ],
+          "related": [],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "ecc",
+          "term": "ECC",
+          "expansion": "Elliptic curve cryptography",
+          "meaning": "Public-key cryptography based on elliptic curves, offering strong security with comparatively small keys.",
+          "domains": [
+            "1"
+          ],
+          "related": [
+            "ECDHE",
+            "ECDSA"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "ecdhe",
+          "term": "ECDHE",
+          "expansion": "Elliptic Curve Diffie-Hellman Ephemeral",
+          "meaning": "An ephemeral elliptic-curve key exchange that can provide forward secrecy.",
+          "domains": [
+            "1"
+          ],
+          "related": [
+            "DHE",
+            "PFS"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "ecdsa",
+          "term": "ECDSA",
+          "expansion": "Elliptic Curve Digital Signature Algorithm",
+          "meaning": "An elliptic-curve algorithm used to create and verify digital signatures.",
+          "domains": [
+            "1"
+          ],
+          "related": [
+            "DSA",
+            "RSA"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "edr",
+          "term": "EDR",
+          "expansion": "Endpoint detection and response",
+          "meaning": "Endpoint security that collects activity, detects suspicious behavior, and supports investigation and response.",
+          "domains": [
+            "2",
+            "4"
+          ],
+          "related": [
+            "AV",
+            "XDR"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "esp",
+          "term": "ESP",
+          "expansion": "Encapsulating Security Payload",
+          "meaning": "An IPsec component that can provide encryption, integrity, and authentication for network traffic.",
+          "domains": [
+            "1",
+            "3"
+          ],
+          "related": [
+            "AH",
+            "IPsec"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "eula",
+          "term": "EULA",
+          "expansion": "End-user license agreement",
+          "meaning": "A contract that defines how software may be installed, used, and distributed.",
+          "domains": [
+            "5"
+          ],
+          "related": [],
+          "examVersions": [
+            "SY0-701"
+          ]
+        }
+      ],
+      "label": "E"
+    },
+    {
+      "letter": "F",
+      "id": "f",
+      "entries": [
+        {
+          "term": "FAR",
+          "expansion": "False acceptance rate",
+          "meaning": "The rate at which a biometric system incorrectly accepts an unauthorized person.",
+          "domains": [
+            "1",
+            "4"
+          ],
+          "related": [
+            "FRR"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ],
+          "id": "far"
+        },
+        {
+          "id": "fde",
+          "term": "FDE",
+          "expansion": "Full-disk encryption",
+          "meaning": "Encryption that protects an entire storage device, usually when the device is powered off or locked.",
+          "domains": [
+            "1",
+            "3",
+            "4"
+          ],
+          "related": [
+            "SED"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "fim",
+          "term": "FIM",
+          "expansion": "File integrity monitoring",
+          "meaning": "A control that detects unexpected changes to important files or configurations.",
+          "domains": [
+            "1",
+            "4"
+          ],
+          "related": [
+            "HIDS"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "frr",
+          "term": "FRR",
+          "expansion": "False rejection rate",
+          "meaning": "The rate at which a biometric system incorrectly rejects an authorized user.",
+          "domains": [
+            "1",
+            "4"
+          ],
+          "related": [],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "ftp",
+          "term": "FTP",
+          "expansion": "File Transfer Protocol",
+          "meaning": "A legacy file-transfer protocol that does not encrypt credentials or content by default.",
+          "domains": [
+            "2",
+            "3",
+            "4"
+          ],
+          "related": [
+            "FTPS",
+            "SFTP"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "ftps",
+          "term": "FTPS",
+          "expansion": "FTP Secure",
+          "meaning": "FTP protected with TLS. It is different from SFTP, which runs through SSH.",
+          "domains": [
+            "1",
+            "3",
+            "4"
+          ],
+          "related": [
+            "FTP",
+            "SFTP",
+            "TLS"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        }
+      ],
+      "label": "F"
+    },
+    {
+      "letter": "G",
+      "id": "g",
+      "entries": [
+        {
+          "id": "gcm",
+          "term": "GCM",
+          "expansion": "Galois/Counter Mode",
+          "meaning": "An authenticated encryption mode commonly used with AES to provide confidentiality and integrity.",
+          "domains": [
+            "1"
+          ],
+          "related": [
+            "AES"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "gdpr",
+          "term": "GDPR",
+          "expansion": "General Data Protection Regulation",
+          "meaning": "A European Union privacy regulation governing personal-data processing and individual rights.",
+          "domains": [
+            "5"
+          ],
+          "related": [
+            "DPO",
+            "PII"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "gpg",
+          "term": "GPG",
+          "expansion": "GNU Privacy Guard",
+          "meaning": "An open implementation of the OpenPGP standard for encryption and digital signatures.",
+          "domains": [
+            "1"
+          ],
+          "related": [
+            "PGP"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "gpo",
+          "term": "GPO",
+          "expansion": "Group Policy Object",
+          "meaning": "A collection of Windows configuration settings applied through Active Directory Group Policy.",
+          "domains": [
+            "4"
+          ],
+          "related": [],
+          "examVersions": [
+            "SY0-701"
+          ]
+        }
+      ],
+      "label": "G"
+    },
+    {
+      "letter": "H",
+      "id": "h",
+      "entries": [
+        {
+          "id": "ha",
+          "term": "HA",
+          "expansion": "High availability",
+          "meaning": "Design practices that reduce downtime through redundancy, failover, and removal of single points of failure.",
+          "domains": [
+            "3"
+          ],
+          "related": [
+            "RTO"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "hids",
+          "term": "HIDS",
+          "expansion": "Host-based intrusion detection system",
+          "meaning": "A host control that monitors local events, files, or activity and raises alerts.",
+          "domains": [
+            "2",
+            "4"
+          ],
+          "related": [
+            "HIPS",
+            "NIDS"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "hips",
+          "term": "HIPS",
+          "expansion": "Host-based intrusion prevention system",
+          "meaning": "A host control that can detect and actively block suspicious local activity.",
+          "domains": [
+            "2",
+            "4"
+          ],
+          "related": [
+            "HIDS",
+            "NIPS"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "hmac",
+          "term": "HMAC",
+          "expansion": "Hash-based message authentication code",
+          "meaning": "A keyed hash that provides integrity and source authentication between parties that share a secret.",
+          "domains": [
+            "1"
+          ],
+          "related": [
+            "HOTP"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "hotp",
+          "term": "HOTP",
+          "expansion": "HMAC-based one-time password",
+          "meaning": "A counter-based one-time password generated from a shared secret and HMAC.",
+          "domains": [
+            "1",
+            "4"
+          ],
+          "related": [
+            "TOTP"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "hsm",
+          "term": "HSM",
+          "expansion": "Hardware security module",
+          "meaning": "A dedicated device that generates, protects, and uses cryptographic keys within a controlled boundary.",
+          "domains": [
+            "1",
+            "3"
+          ],
+          "related": [
+            "TPM"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "http",
+          "term": "HTTP",
+          "expansion": "Hypertext Transfer Protocol",
+          "meaning": "The application protocol used for web requests and responses without built-in transport encryption.",
+          "domains": [
+            "2",
+            "3",
+            "4"
+          ],
+          "related": [
+            "HTTPS"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "https",
+          "term": "HTTPS",
+          "expansion": "Hypertext Transfer Protocol Secure",
+          "meaning": "HTTP protected by TLS to provide encrypted and authenticated transport.",
+          "domains": [
+            "1",
+            "3",
+            "4"
+          ],
+          "related": [
+            "HTTP",
+            "TLS"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "hvac",
+          "term": "HVAC",
+          "expansion": "Heating, ventilation, and air conditioning",
+          "meaning": "Environmental systems that maintain safe temperature, humidity, and airflow for facilities and equipment.",
+          "domains": [
+            "3"
+          ],
+          "related": [],
+          "examVersions": [
+            "SY0-701"
+          ]
+        }
+      ],
+      "label": "H"
+    },
+    {
+      "letter": "I",
+      "id": "i",
+      "entries": [
+        {
+          "id": "iaas",
+          "term": "IaaS",
+          "expansion": "Infrastructure as a service",
+          "meaning": "A cloud model in which the provider supplies infrastructure while the customer manages operating systems, applications, and much of the configuration.",
+          "domains": [
+            "3"
+          ],
+          "related": [
+            "PaaS",
+            "SaaS"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "iac",
+          "term": "IaC",
+          "expansion": "Infrastructure as code",
+          "meaning": "The management of infrastructure through versioned, repeatable configuration files or templates.",
+          "domains": [
+            "3",
+            "4"
+          ],
+          "related": [],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "iam",
+          "term": "IAM",
+          "expansion": "Identity and access management",
+          "meaning": "Processes and technologies for creating identities, authenticating users, and controlling access.",
+          "domains": [
+            "1",
+            "4",
+            "5"
+          ],
+          "related": [
+            "PAM",
+            "SSO"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "icmp",
+          "term": "ICMP",
+          "expansion": "Internet Control Message Protocol",
+          "meaning": "A network protocol used for diagnostics and control messages, including many ping and error responses.",
+          "domains": [
+            "2",
+            "3",
+            "4"
+          ],
+          "related": [],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "ics",
+          "term": "ICS",
+          "expansion": "Industrial control system",
+          "meaning": "Technology used to monitor and control industrial processes and physical equipment.",
+          "domains": [
+            "2",
+            "3",
+            "4"
+          ],
+          "related": [
+            "SCADA",
+            "OT"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "idp",
+          "term": "IdP",
+          "expansion": "Identity provider",
+          "meaning": "A service that authenticates a user and issues identity assertions or tokens to relying applications.",
+          "domains": [
+            "1",
+            "4"
+          ],
+          "related": [
+            "SAML",
+            "SSO"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "ids",
+          "term": "IDS",
+          "expansion": "Intrusion detection system",
+          "meaning": "A control that identifies suspicious activity and generates alerts without necessarily blocking traffic.",
+          "domains": [
+            "2",
+            "4"
+          ],
+          "related": [
+            "IPS",
+            "NIDS",
+            "HIDS"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "ike",
+          "term": "IKE",
+          "expansion": "Internet Key Exchange",
+          "meaning": "A protocol used to negotiate security associations and keys for IPsec.",
+          "domains": [
+            "1",
+            "3"
+          ],
+          "related": [
+            "IPsec"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "imap",
+          "term": "IMAP",
+          "expansion": "Internet Message Access Protocol",
+          "meaning": "A protocol that lets email clients access and synchronize messages stored on a mail server.",
+          "domains": [
+            "3",
+            "4"
+          ],
+          "related": [
+            "POP",
+            "SMTP"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "ioc",
+          "term": "IoC",
+          "expansion": "Indicator of compromise",
+          "meaning": "Evidence that may suggest malicious activity, such as a known hash, domain, process, or registry change.",
+          "domains": [
+            "2",
+            "4"
+          ],
+          "related": [
+            "TTP"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "iot",
+          "term": "IoT",
+          "expansion": "Internet of Things",
+          "meaning": "Network-connected devices that sense, process, or control physical environments, often with limited resources and long lifecycles.",
+          "domains": [
+            "2",
+            "3",
+            "4"
+          ],
+          "related": [],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "ip",
+          "term": "IP",
+          "expansion": "Internet Protocol",
+          "meaning": "The network-layer protocol used to address and route packets between systems.",
+          "domains": [
+            "2",
+            "3",
+            "4"
+          ],
+          "related": [
+            "TCP/IP"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "ips",
+          "term": "IPS",
+          "expansion": "Intrusion prevention system",
+          "meaning": "A control placed inline to detect and block suspicious traffic.",
+          "domains": [
+            "2",
+            "4"
+          ],
+          "related": [
+            "IDS",
+            "NIPS",
+            "HIPS"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "ipsec",
+          "term": "IPsec",
+          "expansion": "Internet Protocol Security",
+          "meaning": "A suite of protocols that protects IP traffic through authentication, integrity, and optional encryption.",
+          "domains": [
+            "1",
+            "3"
+          ],
+          "related": [
+            "AH",
+            "ESP",
+            "IKE"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "ir",
+          "term": "IR",
+          "expansion": "Incident response",
+          "meaning": "The organized process for preparing for, detecting, containing, eradicating, and recovering from incidents.",
+          "domains": [
+            "4",
+            "5"
+          ],
+          "related": [
+            "IRP",
+            "CIRT"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "irp",
+          "term": "IRP",
+          "expansion": "Incident response plan",
+          "meaning": "A documented plan that assigns roles, procedures, communications, and escalation paths for incidents.",
+          "domains": [
+            "4",
+            "5"
+          ],
+          "related": [
+            "IR",
+            "CIRT"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "iso",
+          "term": "ISO",
+          "expansion": "International Organization for Standardization",
+          "meaning": "An international standards body that publishes management and technical standards.",
+          "domains": [
+            "5"
+          ],
+          "related": [],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "isp",
+          "term": "ISP",
+          "expansion": "Internet service provider",
+          "meaning": "An organization that supplies connectivity and related network services.",
+          "domains": [
+            "3",
+            "5"
+          ],
+          "related": [],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "iv",
+          "term": "IV",
+          "expansion": "Initialization vector",
+          "meaning": "A value used with a cipher mode to ensure repeated plaintext does not produce identical ciphertext under the same key.",
+          "domains": [
+            "1"
+          ],
+          "related": [],
+          "examVersions": [
+            "SY0-701"
+          ]
+        }
+      ],
+      "label": "I"
+    },
+    {
+      "letter": "K",
+      "id": "k",
+      "entries": [
+        {
+          "id": "kdc",
+          "term": "KDC",
+          "expansion": "Key distribution center",
+          "meaning": "A trusted Kerberos service that issues tickets and session keys.",
+          "domains": [
+            "1",
+            "4"
+          ],
+          "related": [
+            "TGT"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "kek",
+          "term": "KEK",
+          "expansion": "Key-encryption key",
+          "meaning": "A cryptographic key used to encrypt or wrap another key.",
+          "domains": [
+            "1"
+          ],
+          "related": [],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "term": "KMS",
+          "expansion": "Key management system",
+          "meaning": "A service or platform that creates, stores, rotates, distributes, and controls the use of cryptographic keys.",
+          "domains": [
+            "1",
+            "3",
+            "4"
+          ],
+          "related": [
+            "HSM"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ],
+          "id": "kms"
+        },
+        {
+          "term": "KRI",
+          "expansion": "Key risk indicator",
+          "meaning": "A measurable signal used to show rising exposure or changing risk conditions.",
+          "domains": [
+            "5"
+          ],
+          "related": [],
+          "examVersions": [
+            "SY0-701"
+          ],
+          "id": "kri"
+        }
+      ],
+      "label": "K"
+    },
+    {
+      "letter": "L",
+      "id": "l",
+      "entries": [
+        {
+          "id": "lan",
+          "term": "LAN",
+          "expansion": "Local area network",
+          "meaning": "A network covering a limited area such as an office, home, or campus segment.",
+          "domains": [
+            "3",
+            "4"
+          ],
+          "related": [
+            "VLAN"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "ldap",
+          "term": "LDAP",
+          "expansion": "Lightweight Directory Access Protocol",
+          "meaning": "A protocol used to query and manage directory services.",
+          "domains": [
+            "1",
+            "4"
+          ],
+          "related": [
+            "IAM"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        }
+      ],
+      "label": "L"
+    },
+    {
+      "letter": "M",
+      "id": "m",
+      "entries": [
+        {
+          "id": "mac",
+          "term": "MAC",
+          "expansion": "Mandatory access control",
+          "meaning": "An access model in which centrally assigned labels and rules determine access rather than individual owners.",
+          "domains": [
+            "1",
+            "4"
+          ],
+          "related": [
+            "DAC",
+            "RBAC"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "mac-2",
+          "term": "MAC",
+          "expansion": "Media access control",
+          "meaning": "The data-link layer function and hardware addressing used on local networks.",
+          "domains": [
+            "2",
+            "3",
+            "4"
+          ],
+          "related": [
+            "ARP"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "mac-3",
+          "term": "MAC",
+          "expansion": "Message authentication code",
+          "meaning": "A short cryptographic value created with a secret key to verify integrity and authenticity.",
+          "domains": [
+            "1"
+          ],
+          "related": [
+            "HMAC"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "mdm",
+          "term": "MDM",
+          "expansion": "Mobile device management",
+          "meaning": "Administration that applies configuration, compliance, inventory, and remote actions to mobile devices.",
+          "domains": [
+            "3",
+            "4"
+          ],
+          "related": [
+            "UEM"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "mfa",
+          "term": "MFA",
+          "expansion": "Multifactor authentication",
+          "meaning": "Authentication that requires evidence from at least two different factor categories.",
+          "domains": [
+            "1",
+            "4"
+          ],
+          "related": [
+            "2FA",
+            "TOTP",
+            "HOTP"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "moa",
+          "term": "MOA",
+          "expansion": "Memorandum of agreement",
+          "meaning": "A document that records agreed responsibilities and commitments between parties.",
+          "domains": [
+            "5"
+          ],
+          "related": [
+            "MOU",
+            "MSA"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "mou",
+          "term": "MOU",
+          "expansion": "Memorandum of understanding",
+          "meaning": "A document that describes a shared understanding or intent between parties, often with less contractual detail than a formal agreement.",
+          "domains": [
+            "5"
+          ],
+          "related": [
+            "MOA",
+            "MSA"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "msa",
+          "term": "MSA",
+          "expansion": "Master service agreement",
+          "meaning": "A contract that establishes general terms for an ongoing vendor relationship.",
+          "domains": [
+            "5"
+          ],
+          "related": [
+            "SOW",
+            "SLA"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "msp",
+          "term": "MSP",
+          "expansion": "Managed service provider",
+          "meaning": "A third party that operates technology services for a customer.",
+          "domains": [
+            "2",
+            "5"
+          ],
+          "related": [
+            "MSSP"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "mssp",
+          "term": "MSSP",
+          "expansion": "Managed security service provider",
+          "meaning": "A third party that delivers managed security monitoring, protection, or response services.",
+          "domains": [
+            "4",
+            "5"
+          ],
+          "related": [
+            "MSP",
+            "SOC"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "mtbf",
+          "term": "MTBF",
+          "expansion": "Mean time between failures",
+          "meaning": "The average operating time between repairable failures, often used as a reliability measure.",
+          "domains": [
+            "3",
+            "5"
+          ],
+          "related": [
+            "MTTF",
+            "MTTR"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "mttf",
+          "term": "MTTF",
+          "expansion": "Mean time to failure",
+          "meaning": "The average expected operating time before a nonrepairable component fails.",
+          "domains": [
+            "3",
+            "5"
+          ],
+          "related": [
+            "MTBF"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "mttr",
+          "term": "MTTR",
+          "expansion": "Mean time to recover",
+          "meaning": "The average time required to restore a service after failure. Some organizations use the same initials for mean time to repair, so read the surrounding definition.",
+          "domains": [
+            "3",
+            "5"
+          ],
+          "related": [
+            "RTO",
+            "MTBF"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        }
+      ],
+      "label": "M"
+    },
+    {
+      "letter": "N",
+      "id": "n",
+      "entries": [
+        {
+          "id": "nac",
+          "term": "NAC",
+          "expansion": "Network access control",
+          "meaning": "Technology that evaluates users or devices before and during network access, then permits, restricts, or isolates them.",
+          "domains": [
+            "3",
+            "4"
+          ],
+          "related": [],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "nat",
+          "term": "NAT",
+          "expansion": "Network address translation",
+          "meaning": "A network function that rewrites IP address information between address spaces.",
+          "domains": [
+            "3",
+            "4"
+          ],
+          "related": [
+            "PAT"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "nda",
+          "term": "NDA",
+          "expansion": "Non-disclosure agreement",
+          "meaning": "A contract that restricts unauthorized disclosure of confidential information.",
+          "domains": [
+            "5"
+          ],
+          "related": [],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "nfc",
+          "term": "NFC",
+          "expansion": "Near-field communication",
+          "meaning": "A very short-range wireless technology commonly used for payments, badges, and device pairing.",
+          "domains": [
+            "2",
+            "3",
+            "4"
+          ],
+          "related": [
+            "RFID"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "ngfw",
+          "term": "NGFW",
+          "expansion": "Next-generation firewall",
+          "meaning": "A firewall that combines traditional traffic filtering with deeper inspection and application-aware controls.",
+          "domains": [
+            "3",
+            "4"
+          ],
+          "related": [
+            "WAF",
+            "UTM"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "nids",
+          "term": "NIDS",
+          "expansion": "Network-based intrusion detection system",
+          "meaning": "A network sensor that analyzes traffic and alerts on suspicious activity.",
+          "domains": [
+            "2",
+            "4"
+          ],
+          "related": [
+            "NIPS",
+            "HIDS"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "nips",
+          "term": "NIPS",
+          "expansion": "Network-based intrusion prevention system",
+          "meaning": "An inline network control that analyzes and can block suspicious traffic.",
+          "domains": [
+            "2",
+            "4"
+          ],
+          "related": [
+            "NIDS",
+            "HIPS"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "nist",
+          "term": "NIST",
+          "expansion": "National Institute of Standards and Technology",
+          "meaning": "A United States agency that publishes widely used cybersecurity standards, frameworks, and guidance.",
+          "domains": [
+            "3",
+            "4",
+            "5"
+          ],
+          "related": [],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "ntp",
+          "term": "NTP",
+          "expansion": "Network Time Protocol",
+          "meaning": "A protocol used to synchronize system clocks, which is important for logs, authentication, and investigations.",
+          "domains": [
+            "3",
+            "4"
+          ],
+          "related": [],
+          "examVersions": [
+            "SY0-701"
+          ]
+        }
+      ],
+      "label": "N"
+    },
+    {
+      "letter": "O",
+      "id": "o",
+      "entries": [
+        {
+          "id": "oauth",
+          "term": "OAuth",
+          "expansion": "Open Authorization",
+          "meaning": "A framework that lets a user grant an application limited access to a resource without sharing the user's password.",
+          "domains": [
+            "1",
+            "4"
+          ],
+          "related": [
+            "SAML"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "ocsp",
+          "term": "OCSP",
+          "expansion": "Online Certificate Status Protocol",
+          "meaning": "A protocol used to check whether a certificate has been revoked.",
+          "domains": [
+            "1"
+          ],
+          "related": [
+            "CRL",
+            "CA"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "term": "OIDC",
+          "expansion": "OpenID Connect",
+          "meaning": "An identity layer built on OAuth 2.0 that lets an application verify a user's identity and receive basic profile claims.",
+          "domains": [
+            "1",
+            "4"
+          ],
+          "related": [
+            "OAuth",
+            "SSO",
+            "IdP"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ],
+          "id": "oidc"
+        },
+        {
+          "id": "os",
+          "term": "OS",
+          "expansion": "Operating system",
+          "meaning": "The software layer that manages hardware, processes, memory, files, and system services.",
+          "domains": [
+            "2",
+            "3",
+            "4"
+          ],
+          "related": [],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "osint",
+          "term": "OSINT",
+          "expansion": "Open-source intelligence",
+          "meaning": "Information collected from publicly available sources for analysis or investigation.",
+          "domains": [
+            "2",
+            "4"
+          ],
+          "related": [],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "ot",
+          "term": "OT",
+          "expansion": "Operational technology",
+          "meaning": "Hardware and software that monitors or controls physical processes, equipment, and industrial operations.",
+          "domains": [
+            "2",
+            "3",
+            "4"
+          ],
+          "related": [
+            "ICS",
+            "SCADA"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "owasp",
+          "term": "OWASP",
+          "expansion": "Open Worldwide Application Security Project",
+          "meaning": "A nonprofit project that publishes practical application-security guidance and testing resources.",
+          "domains": [
+            "2",
+            "4"
+          ],
+          "related": [],
+          "examVersions": [
+            "SY0-701"
+          ]
+        }
+      ],
+      "label": "O"
+    },
+    {
+      "letter": "P",
+      "id": "p",
+      "entries": [
+        {
+          "id": "paas",
+          "term": "PaaS",
+          "expansion": "Platform as a service",
+          "meaning": "A cloud model in which the provider manages the underlying platform while the customer deploys applications and data.",
+          "domains": [
+            "3"
+          ],
+          "related": [
+            "IaaS",
+            "SaaS"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "pam",
+          "term": "PAM",
+          "expansion": "Pluggable authentication modules",
+          "meaning": "A Unix and Linux framework that lets applications use configurable authentication methods.",
+          "domains": [
+            "1",
+            "4"
+          ],
+          "related": [],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "pam-2",
+          "term": "PAM",
+          "expansion": "Privileged access management",
+          "meaning": "Controls for issuing, monitoring, limiting, and reviewing highly privileged access.",
+          "domains": [
+            "1",
+            "4",
+            "5"
+          ],
+          "related": [
+            "IAM"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "pap",
+          "term": "PAP",
+          "expansion": "Password Authentication Protocol",
+          "meaning": "A legacy authentication protocol that sends credentials without challenge-response protection.",
+          "domains": [
+            "1",
+            "4"
+          ],
+          "related": [
+            "CHAP"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "pat",
+          "term": "PAT",
+          "expansion": "Port address translation",
+          "meaning": "A form of NAT that maps many internal connections to one public address by tracking transport-layer ports.",
+          "domains": [
+            "3",
+            "4"
+          ],
+          "related": [
+            "NAT"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "pbkdf2",
+          "term": "PBKDF2",
+          "expansion": "Password-Based Key Derivation Function 2",
+          "meaning": "A password-based key derivation function that applies a salt and many iterations to increase guessing cost.",
+          "domains": [
+            "1"
+          ],
+          "related": [],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "pcap",
+          "term": "PCAP",
+          "expansion": "Packet capture",
+          "meaning": "A file or process that records network packets for troubleshooting, monitoring, or investigation.",
+          "domains": [
+            "2",
+            "4"
+          ],
+          "related": [],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "pci-dss",
+          "term": "PCI DSS",
+          "expansion": "Payment Card Industry Data Security Standard",
+          "meaning": "An industry security standard for organizations that store, process, or transmit payment-card data.",
+          "domains": [
+            "5"
+          ],
+          "related": [],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "term": "PEP",
+          "expansion": "Policy enforcement point",
+          "meaning": "The zero-trust component that allows, blocks, or ends a connection according to a policy decision.",
+          "domains": [
+            "1",
+            "3",
+            "4"
+          ],
+          "related": [],
+          "examVersions": [
+            "SY0-701"
+          ],
+          "id": "pep"
+        },
+        {
+          "id": "pfs",
+          "term": "PFS",
+          "expansion": "Perfect forward secrecy",
+          "meaning": "A property that keeps past sessions protected even if a long-term private key is later compromised.",
+          "domains": [
+            "1"
+          ],
+          "related": [
+            "DHE",
+            "ECDHE"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "pgp",
+          "term": "PGP",
+          "expansion": "Pretty Good Privacy",
+          "meaning": "A system and standard family used for encryption and digital signatures, especially for files and email.",
+          "domains": [
+            "1"
+          ],
+          "related": [
+            "GPG",
+            "S/MIME"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "phi",
+          "term": "PHI",
+          "expansion": "Protected health information",
+          "meaning": "Health information linked to an individual and protected under applicable healthcare privacy rules.",
+          "domains": [
+            "5"
+          ],
+          "related": [
+            "PII"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "pii",
+          "term": "PII",
+          "expansion": "Personally identifiable information",
+          "meaning": "Information that can identify, contact, or distinguish a person, alone or when combined with other data.",
+          "domains": [
+            "3",
+            "5"
+          ],
+          "related": [
+            "PHI"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "piv",
+          "term": "PIV",
+          "expansion": "Personal Identity Verification",
+          "meaning": "A United States federal identity standard and smart-card credential for personnel and contractors.",
+          "domains": [
+            "1",
+            "4"
+          ],
+          "related": [],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "pkcs",
+          "term": "PKCS",
+          "expansion": "Public-Key Cryptography Standards",
+          "meaning": "A family of standards covering key formats, signatures, certificates, and cryptographic messages.",
+          "domains": [
+            "1"
+          ],
+          "related": [
+            "PKI"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "pki",
+          "term": "PKI",
+          "expansion": "Public-key infrastructure",
+          "meaning": "The people, policies, services, keys, and certificates used to establish and manage public-key trust.",
+          "domains": [
+            "1"
+          ],
+          "related": [
+            "CA",
+            "RA",
+            "CRL",
+            "OCSP"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "pop",
+          "term": "POP",
+          "expansion": "Post Office Protocol",
+          "meaning": "An email retrieval protocol commonly used to download messages from a server.",
+          "domains": [
+            "3",
+            "4"
+          ],
+          "related": [
+            "IMAP",
+            "SMTP"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "psk",
+          "term": "PSK",
+          "expansion": "Pre-shared key",
+          "meaning": "A secret configured on participating systems before secure communication begins.",
+          "domains": [
+            "1",
+            "3",
+            "4"
+          ],
+          "related": [],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "pup",
+          "term": "PUP",
+          "expansion": "Potentially unwanted program",
+          "meaning": "Software that may be undesirable or risky even when it is not classified as outright malware.",
+          "domains": [
+            "2",
+            "4"
+          ],
+          "related": [],
+          "examVersions": [
+            "SY0-701"
+          ]
+        }
+      ],
+      "label": "P"
+    },
+    {
+      "letter": "R",
+      "id": "r",
+      "entries": [
+        {
+          "id": "ra",
+          "term": "RA",
+          "expansion": "Recovery agent",
+          "meaning": "An authorized identity or process that can recover encrypted data when the normal user key is unavailable.",
+          "domains": [
+            "1",
+            "3"
+          ],
+          "related": [],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "ra-2",
+          "term": "RA",
+          "expansion": "Registration authority",
+          "meaning": "A PKI role that verifies identity and approves certificate requests for a certificate authority.",
+          "domains": [
+            "1"
+          ],
+          "related": [
+            "CA",
+            "PKI"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "radius",
+          "term": "RADIUS",
+          "expansion": "Remote Authentication Dial-In User Service",
+          "meaning": "A protocol that centralizes authentication, authorization, and accounting for network access.",
+          "domains": [
+            "1",
+            "4"
+          ],
+          "related": [
+            "AAA",
+            "TACACS+"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "raid",
+          "term": "RAID",
+          "expansion": "Redundant array of independent disks",
+          "meaning": "A method of combining disks for performance, capacity, or fault tolerance. RAID does not replace backups.",
+          "domains": [
+            "3"
+          ],
+          "related": [],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "rat",
+          "term": "RAT",
+          "expansion": "Remote access Trojan",
+          "meaning": "Malware that gives an attacker remote control of a compromised system.",
+          "domains": [
+            "2"
+          ],
+          "related": [],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "rbac",
+          "term": "RBAC",
+          "expansion": "Role-based access control",
+          "meaning": "An access model that assigns permissions to job roles and then assigns users to those roles.",
+          "domains": [
+            "1",
+            "4"
+          ],
+          "related": [
+            "DAC",
+            "MAC"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "rbac-2",
+          "term": "RBAC",
+          "expansion": "Rule-based access control",
+          "meaning": "An access approach that evaluates rules or conditions such as time, network, or device state.",
+          "domains": [
+            "1",
+            "4"
+          ],
+          "related": [],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "rdp",
+          "term": "RDP",
+          "expansion": "Remote Desktop Protocol",
+          "meaning": "A Microsoft protocol for interactive remote desktop sessions.",
+          "domains": [
+            "2",
+            "3",
+            "4"
+          ],
+          "related": [],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "rfid",
+          "term": "RFID",
+          "expansion": "Radio-frequency identification",
+          "meaning": "A technology that uses radio signals to identify tags, cards, assets, or devices.",
+          "domains": [
+            "1",
+            "2",
+            "4"
+          ],
+          "related": [
+            "NFC"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "roi",
+          "term": "ROI",
+          "expansion": "Return on investment",
+          "meaning": "A financial measure comparing the value gained from an investment with its cost.",
+          "domains": [
+            "5"
+          ],
+          "related": [],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "rpo",
+          "term": "RPO",
+          "expansion": "Recovery point objective",
+          "meaning": "The maximum acceptable amount of data loss measured backward in time from a disruption.",
+          "domains": [
+            "3",
+            "5"
+          ],
+          "related": [
+            "RTO",
+            "MTTR"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "rsa",
+          "term": "RSA",
+          "expansion": "Rivest-Shamir-Adleman",
+          "meaning": "A public-key algorithm used for encryption, key transport, and digital signatures when configured securely.",
+          "domains": [
+            "1"
+          ],
+          "related": [
+            "ECC",
+            "DSA"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "rto",
+          "term": "RTO",
+          "expansion": "Recovery time objective",
+          "meaning": "The maximum acceptable time for restoring a service after disruption. The phrase return to operations can be a useful memory cue, but the Security+ term is Recovery Time Objective.",
+          "domains": [
+            "3",
+            "5"
+          ],
+          "related": [
+            "RPO",
+            "MTTR",
+            "MTBF"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "rtos",
+          "term": "RTOS",
+          "expansion": "Real-time operating system",
+          "meaning": "An operating system designed to respond within predictable timing constraints, often in embedded or industrial systems.",
+          "domains": [
+            "3"
+          ],
+          "related": [
+            "ICS",
+            "OT"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        }
+      ],
+      "label": "R"
+    },
+    {
+      "letter": "S",
+      "id": "s",
+      "entries": [
+        {
+          "id": "s-mime",
+          "term": "S/MIME",
+          "expansion": "Secure/Multipurpose Internet Mail Extensions",
+          "meaning": "A standard that uses certificates to encrypt and digitally sign email.",
+          "domains": [
+            "1",
+            "4"
+          ],
+          "related": [
+            "PGP",
+            "PKI"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "saas",
+          "term": "SaaS",
+          "expansion": "Software as a service",
+          "meaning": "A cloud model in which the provider operates the application while the customer manages users, data, and selected configuration.",
+          "domains": [
+            "3"
+          ],
+          "related": [
+            "IaaS",
+            "PaaS"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "sae",
+          "term": "SAE",
+          "expansion": "Simultaneous Authentication of Equals",
+          "meaning": "The password-authenticated key exchange used by WPA3-Personal.",
+          "domains": [
+            "1",
+            "4"
+          ],
+          "related": [
+            "WPA"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "saml",
+          "term": "SAML",
+          "expansion": "Security Assertion Markup Language",
+          "meaning": "An XML-based standard used to exchange authentication and authorization assertions, commonly for federation and single sign-on.",
+          "domains": [
+            "1",
+            "4"
+          ],
+          "related": [
+            "IdP",
+            "SSO",
+            "OAuth"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "san",
+          "term": "SAN",
+          "expansion": "Storage area network",
+          "meaning": "A dedicated network that provides block-level access to shared storage.",
+          "domains": [
+            "3"
+          ],
+          "related": [],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "san-2",
+          "term": "SAN",
+          "expansion": "Subject alternative name",
+          "meaning": "A certificate field that lists additional hostnames, IP addresses, or identities covered by the certificate.",
+          "domains": [
+            "1"
+          ],
+          "related": [
+            "PKI"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "sase",
+          "term": "SASE",
+          "expansion": "Secure access service edge",
+          "meaning": "A cloud-delivered architecture that combines network connectivity and security services near users and resources.",
+          "domains": [
+            "3",
+            "4"
+          ],
+          "related": [
+            "CASB",
+            "SWG",
+            "SD-WAN"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "scada",
+          "term": "SCADA",
+          "expansion": "Supervisory control and data acquisition",
+          "meaning": "Systems that monitor and control industrial processes across distributed locations.",
+          "domains": [
+            "2",
+            "3",
+            "4"
+          ],
+          "related": [
+            "ICS",
+            "OT"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "scap",
+          "term": "SCAP",
+          "expansion": "Security Content Automation Protocol",
+          "meaning": "A collection of standards for exchanging vulnerability, configuration, and security-measurement information.",
+          "domains": [
+            "2",
+            "4"
+          ],
+          "related": [
+            "CVE",
+            "CVSS"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "sd-wan",
+          "term": "SD-WAN",
+          "expansion": "Software-defined wide area network",
+          "meaning": "A centrally managed WAN architecture that selects paths and applies policy across multiple links.",
+          "domains": [
+            "3",
+            "4"
+          ],
+          "related": [
+            "SASE"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "sdlc",
+          "term": "SDLC",
+          "expansion": "Software development life cycle",
+          "meaning": "A structured process for planning, building, testing, deploying, and maintaining software.",
+          "domains": [
+            "2",
+            "4",
+            "5"
+          ],
+          "related": [],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "sdn",
+          "term": "SDN",
+          "expansion": "Software-defined networking",
+          "meaning": "A network architecture that separates centralized control logic from packet forwarding.",
+          "domains": [
+            "3",
+            "4"
+          ],
+          "related": [],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "sed",
+          "term": "SED",
+          "expansion": "Self-encrypting drive",
+          "meaning": "A storage device with built-in hardware encryption controlled by the drive.",
+          "domains": [
+            "1",
+            "3"
+          ],
+          "related": [
+            "FDE"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "sftp",
+          "term": "SFTP",
+          "expansion": "SSH File Transfer Protocol",
+          "meaning": "A secure file-transfer protocol that runs over SSH. It is different from FTPS.",
+          "domains": [
+            "1",
+            "3",
+            "4"
+          ],
+          "related": [
+            "FTP",
+            "FTPS",
+            "SSH"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "sha",
+          "term": "SHA",
+          "expansion": "Secure Hash Algorithm",
+          "meaning": "A family of cryptographic hash functions used for integrity and other security constructions.",
+          "domains": [
+            "1"
+          ],
+          "related": [
+            "HMAC"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "siem",
+          "term": "SIEM",
+          "expansion": "Security information and event management",
+          "meaning": "A platform that collects, correlates, searches, and alerts on logs and security events.",
+          "domains": [
+            "4"
+          ],
+          "related": [
+            "SOAR",
+            "SOC"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "sla",
+          "term": "SLA",
+          "expansion": "Service-level agreement",
+          "meaning": "A contract or commitment that defines measurable service expectations such as uptime and response times.",
+          "domains": [
+            "5"
+          ],
+          "related": [
+            "MSA",
+            "SOW"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "sle",
+          "term": "SLE",
+          "expansion": "Single loss expectancy",
+          "meaning": "The estimated financial loss from one occurrence of a risk event.",
+          "domains": [
+            "5"
+          ],
+          "related": [
+            "ALE",
+            "ARO"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "smb",
+          "term": "SMB",
+          "expansion": "Server Message Block",
+          "meaning": "A protocol used for shared files, printers, and related services, especially in Windows environments.",
+          "domains": [
+            "2",
+            "3",
+            "4"
+          ],
+          "related": [],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "sms",
+          "term": "SMS",
+          "expansion": "Short Message Service",
+          "meaning": "The text-messaging service used by mobile networks. SMS can deliver authentication codes but is vulnerable to interception and account takeover.",
+          "domains": [
+            "2",
+            "4"
+          ],
+          "related": [
+            "MFA"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "smtp",
+          "term": "SMTP",
+          "expansion": "Simple Mail Transfer Protocol",
+          "meaning": "The standard protocol for sending and relaying email.",
+          "domains": [
+            "2",
+            "3",
+            "4"
+          ],
+          "related": [
+            "IMAP",
+            "POP"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "snmp",
+          "term": "SNMP",
+          "expansion": "Simple Network Management Protocol",
+          "meaning": "A protocol used to monitor and manage network devices and report operational information.",
+          "domains": [
+            "3",
+            "4"
+          ],
+          "related": [],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "soar",
+          "term": "SOAR",
+          "expansion": "Security orchestration, automation, and response",
+          "meaning": "Technology that connects security tools and automates repeatable investigation and response workflows.",
+          "domains": [
+            "4"
+          ],
+          "related": [
+            "SIEM",
+            "SOC"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "soc",
+          "term": "SOC",
+          "expansion": "Security operations center",
+          "meaning": "A team or function that monitors, investigates, and responds to security events.",
+          "domains": [
+            "4",
+            "5"
+          ],
+          "related": [
+            "SIEM",
+            "SOAR",
+            "MSSP"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "soc-2",
+          "term": "SoC",
+          "expansion": "System on a chip",
+          "meaning": "An integrated circuit that combines multiple computing components on one chip.",
+          "domains": [
+            "2",
+            "3"
+          ],
+          "related": [],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "term": "SOP",
+          "expansion": "Standard operating procedure",
+          "meaning": "A documented sequence of steps for performing a routine task consistently.",
+          "domains": [
+            "1",
+            "4",
+            "5"
+          ],
+          "related": [],
+          "examVersions": [
+            "SY0-701"
+          ],
+          "id": "sop"
+        },
+        {
+          "id": "sow",
+          "term": "SOW",
+          "expansion": "Statement of work",
+          "meaning": "A document that defines the specific work, deliverables, schedule, and responsibilities for an engagement.",
+          "domains": [
+            "5"
+          ],
+          "related": [
+            "MSA",
+            "SLA"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "spf",
+          "term": "SPF",
+          "expansion": "Sender Policy Framework",
+          "meaning": "An email authentication mechanism that publishes which servers may send mail for a domain.",
+          "domains": [
+            "2",
+            "4"
+          ],
+          "related": [
+            "DKIM",
+            "DMARC"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "sql",
+          "term": "SQL",
+          "expansion": "Structured Query Language",
+          "meaning": "A language used to create, query, and manage relational databases.",
+          "domains": [
+            "2",
+            "4"
+          ],
+          "related": [
+            "SQLi"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "sqli",
+          "term": "SQLi",
+          "expansion": "SQL injection",
+          "meaning": "An injection attack that alters a database query through untrusted input.",
+          "domains": [
+            "2"
+          ],
+          "related": [
+            "SQL"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "ssh",
+          "term": "SSH",
+          "expansion": "Secure Shell",
+          "meaning": "A protocol for encrypted remote administration, command execution, tunneling, and file transfer.",
+          "domains": [
+            "1",
+            "3",
+            "4"
+          ],
+          "related": [
+            "SFTP"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "ssl",
+          "term": "SSL",
+          "expansion": "Secure Sockets Layer",
+          "meaning": "A retired predecessor to TLS. Modern secure services should use supported TLS versions.",
+          "domains": [
+            "1",
+            "3",
+            "4"
+          ],
+          "related": [
+            "TLS"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "sso",
+          "term": "SSO",
+          "expansion": "Single sign-on",
+          "meaning": "An identity arrangement that lets a user authenticate once and access multiple connected services.",
+          "domains": [
+            "1",
+            "4"
+          ],
+          "related": [
+            "SAML",
+            "IdP"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "stix",
+          "term": "STIX",
+          "expansion": "Structured Threat Information eXpression",
+          "meaning": "A structured format for describing and exchanging cyber threat intelligence.",
+          "domains": [
+            "2",
+            "4"
+          ],
+          "related": [
+            "TAXII",
+            "ATT&CK"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "swg",
+          "term": "SWG",
+          "expansion": "Secure web gateway",
+          "meaning": "A control that filters and inspects web traffic according to security policy.",
+          "domains": [
+            "3",
+            "4"
+          ],
+          "related": [
+            "SASE",
+            "CASB"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        }
+      ],
+      "label": "S"
+    },
+    {
+      "letter": "T",
+      "id": "t",
+      "entries": [
+        {
+          "id": "tacacs",
+          "term": "TACACS+",
+          "expansion": "Terminal Access Controller Access-Control System Plus",
+          "meaning": "A protocol commonly used for centralized administration access to network devices, with separate authentication, authorization, and accounting functions.",
+          "domains": [
+            "1",
+            "4"
+          ],
+          "related": [
+            "RADIUS",
+            "AAA"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "taxii",
+          "term": "TAXII",
+          "expansion": "Trusted Automated eXchange of Intelligence Information",
+          "meaning": "A protocol for exchanging structured threat intelligence such as STIX content.",
+          "domains": [
+            "2",
+            "4"
+          ],
+          "related": [
+            "STIX"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "tcp-ip",
+          "term": "TCP/IP",
+          "expansion": "Transmission Control Protocol/Internet Protocol",
+          "meaning": "The core protocol suite used for communication across modern IP networks.",
+          "domains": [
+            "2",
+            "3",
+            "4"
+          ],
+          "related": [
+            "IP",
+            "UDP"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "tgt",
+          "term": "TGT",
+          "expansion": "Ticket-granting ticket",
+          "meaning": "A Kerberos ticket used to request service tickets after initial authentication.",
+          "domains": [
+            "1",
+            "4"
+          ],
+          "related": [
+            "KDC"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "tkip",
+          "term": "TKIP",
+          "expansion": "Temporal Key Integrity Protocol",
+          "meaning": "A legacy Wi-Fi security protocol introduced as an interim improvement over WEP and now considered obsolete.",
+          "domains": [
+            "1",
+            "3",
+            "4"
+          ],
+          "related": [
+            "WEP",
+            "WPA"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "tls",
+          "term": "TLS",
+          "expansion": "Transport Layer Security",
+          "meaning": "A protocol that protects network communication with encryption, integrity, and certificate-based authentication.",
+          "domains": [
+            "1",
+            "3",
+            "4"
+          ],
+          "related": [
+            "HTTPS",
+            "SSL"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "toc",
+          "term": "TOC",
+          "expansion": "Time of check",
+          "meaning": "The moment a program verifies a condition before using a resource. A change between TOC and TOU can create a race condition.",
+          "domains": [
+            "2"
+          ],
+          "related": [
+            "TOU"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "totp",
+          "term": "TOTP",
+          "expansion": "Time-based one-time password",
+          "meaning": "A short-lived code generated from a shared secret and the current time.",
+          "domains": [
+            "1",
+            "4"
+          ],
+          "related": [
+            "HOTP",
+            "MFA"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "tou",
+          "term": "TOU",
+          "expansion": "Time of use",
+          "meaning": "The moment a program uses a resource after checking it. A change since TOC may create a vulnerability.",
+          "domains": [
+            "2"
+          ],
+          "related": [
+            "TOC"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "tpm",
+          "term": "TPM",
+          "expansion": "Trusted Platform Module",
+          "meaning": "A hardware security component that protects keys and supports measured boot, attestation, and device-bound cryptography.",
+          "domains": [
+            "1",
+            "3",
+            "4"
+          ],
+          "related": [
+            "HSM"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "ttp",
+          "term": "TTP",
+          "expansion": "Tactics, techniques, and procedures",
+          "meaning": "A description of how a threat actor operates, from broad goals to specific methods and repeatable actions.",
+          "domains": [
+            "2",
+            "4"
+          ],
+          "related": [
+            "ATT&CK",
+            "IoC"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        }
+      ],
+      "label": "T"
+    },
+    {
+      "letter": "U",
+      "id": "u",
+      "entries": [
+        {
+          "id": "uat",
+          "term": "UAT",
+          "expansion": "User acceptance testing",
+          "meaning": "Testing performed by users or business representatives to confirm that a system meets operational requirements.",
+          "domains": [
+            "1",
+            "4",
+            "5"
+          ],
+          "related": [],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "uba",
+          "term": "UBA",
+          "expansion": "User behavior analytics",
+          "meaning": "Analysis that identifies unusual user activity by comparing behavior with established patterns.",
+          "domains": [
+            "4"
+          ],
+          "related": [],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "udp",
+          "term": "UDP",
+          "expansion": "User Datagram Protocol",
+          "meaning": "A connectionless transport protocol with low overhead and no built-in delivery guarantee.",
+          "domains": [
+            "2",
+            "3",
+            "4"
+          ],
+          "related": [
+            "TCP/IP"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "term": "UEBA",
+          "expansion": "User and entity behavior analytics",
+          "meaning": "Analytics that identify unusual behavior by users, accounts, devices, or other entities.",
+          "domains": [
+            "4"
+          ],
+          "related": [
+            "UBA",
+            "SIEM"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ],
+          "id": "ueba"
+        },
+        {
+          "id": "uefi",
+          "term": "UEFI",
+          "expansion": "Unified Extensible Firmware Interface",
+          "meaning": "Modern firmware that initializes hardware and supports features such as Secure Boot.",
+          "domains": [
+            "2",
+            "3",
+            "4"
+          ],
+          "related": [
+            "BIOS"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "uem",
+          "term": "UEM",
+          "expansion": "Unified endpoint management",
+          "meaning": "Centralized administration for mobile devices, desktops, and other endpoints.",
+          "domains": [
+            "3",
+            "4"
+          ],
+          "related": [
+            "MDM"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "ups",
+          "term": "UPS",
+          "expansion": "Uninterruptible power supply",
+          "meaning": "A battery-backed device that supplies short-term power and conditions electricity during an outage or fluctuation.",
+          "domains": [
+            "3"
+          ],
+          "related": [],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "uri",
+          "term": "URI",
+          "expansion": "Uniform Resource Identifier",
+          "meaning": "A general identifier for a resource, including locators and other naming schemes.",
+          "domains": [
+            "2",
+            "3",
+            "4"
+          ],
+          "related": [
+            "URL"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "url",
+          "term": "URL",
+          "expansion": "Uniform Resource Locator",
+          "meaning": "A URI that identifies a resource by location and access method.",
+          "domains": [
+            "2",
+            "3",
+            "4"
+          ],
+          "related": [
+            "URI"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "usb",
+          "term": "USB",
+          "expansion": "Universal Serial Bus",
+          "meaning": "A standard for connecting peripherals, storage, power, and data interfaces.",
+          "domains": [
+            "2",
+            "3",
+            "4"
+          ],
+          "related": [],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "utm",
+          "term": "UTM",
+          "expansion": "Unified threat management",
+          "meaning": "A security appliance that combines several controls such as firewalling, intrusion prevention, filtering, and malware protection.",
+          "domains": [
+            "3",
+            "4"
+          ],
+          "related": [
+            "NGFW"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        }
+      ],
+      "label": "U"
+    },
+    {
+      "letter": "V",
+      "id": "v",
+      "entries": [
+        {
+          "id": "vdi",
+          "term": "VDI",
+          "expansion": "Virtual desktop infrastructure",
+          "meaning": "A platform that hosts desktop environments centrally and delivers them to users remotely.",
+          "domains": [
+            "3",
+            "4"
+          ],
+          "related": [
+            "VM"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "vlan",
+          "term": "VLAN",
+          "expansion": "Virtual local area network",
+          "meaning": "A logical Layer 2 network segment created on switching infrastructure.",
+          "domains": [
+            "3",
+            "4"
+          ],
+          "related": [
+            "LAN"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "vm",
+          "term": "VM",
+          "expansion": "Virtual machine",
+          "meaning": "A software-defined computer that runs an operating system on virtualized hardware.",
+          "domains": [
+            "2",
+            "3",
+            "4"
+          ],
+          "related": [
+            "VDI"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "voip",
+          "term": "VoIP",
+          "expansion": "Voice over Internet Protocol",
+          "meaning": "Voice communication carried over IP networks.",
+          "domains": [
+            "2",
+            "3",
+            "4"
+          ],
+          "related": [],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "vpc",
+          "term": "VPC",
+          "expansion": "Virtual private cloud",
+          "meaning": "A logically isolated cloud network in which customers define subnets, routes, and security controls.",
+          "domains": [
+            "3",
+            "4"
+          ],
+          "related": [],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "vpn",
+          "term": "VPN",
+          "expansion": "Virtual private network",
+          "meaning": "An encrypted tunnel that protects traffic across an untrusted network.",
+          "domains": [
+            "1",
+            "3",
+            "4"
+          ],
+          "related": [
+            "IPsec",
+            "TLS"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        }
+      ],
+      "label": "V"
+    },
+    {
+      "letter": "W",
+      "id": "w",
+      "entries": [
+        {
+          "id": "waf",
+          "term": "WAF",
+          "expansion": "Web application firewall",
+          "meaning": "A control that inspects and filters HTTP traffic to protect web applications.",
+          "domains": [
+            "2",
+            "3",
+            "4"
+          ],
+          "related": [
+            "NGFW"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "term": "WAN",
+          "expansion": "Wide area network",
+          "meaning": "A network that connects systems across large geographic areas or multiple sites.",
+          "domains": [
+            "3",
+            "4"
+          ],
+          "related": [
+            "LAN",
+            "SD-WAN"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ],
+          "id": "wan"
+        },
+        {
+          "id": "wap",
+          "term": "WAP",
+          "expansion": "Wireless access point",
+          "meaning": "A device that connects wireless clients to a network.",
+          "domains": [
+            "2",
+            "3",
+            "4"
+          ],
+          "related": [],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "wep",
+          "term": "WEP",
+          "expansion": "Wired Equivalent Privacy",
+          "meaning": "An obsolete Wi-Fi security protocol with serious cryptographic weaknesses.",
+          "domains": [
+            "1",
+            "2",
+            "4"
+          ],
+          "related": [
+            "WPA",
+            "TKIP"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "wids",
+          "term": "WIDS",
+          "expansion": "Wireless intrusion detection system",
+          "meaning": "A control that monitors wireless activity and alerts on suspicious access points or behavior.",
+          "domains": [
+            "2",
+            "4"
+          ],
+          "related": [
+            "WIPS"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "wips",
+          "term": "WIPS",
+          "expansion": "Wireless intrusion prevention system",
+          "meaning": "A control that detects and can respond to unauthorized or malicious wireless activity.",
+          "domains": [
+            "2",
+            "4"
+          ],
+          "related": [
+            "WIDS"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "wpa",
+          "term": "WPA",
+          "expansion": "Wi-Fi Protected Access",
+          "meaning": "A family of Wi-Fi security standards that replaced WEP. WPA3 uses SAE for personal authentication.",
+          "domains": [
+            "1",
+            "3",
+            "4"
+          ],
+          "related": [
+            "WEP",
+            "SAE"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "wps",
+          "term": "WPS",
+          "expansion": "Wi-Fi Protected Setup",
+          "meaning": "A simplified Wi-Fi enrollment feature whose PIN method has well-known security weaknesses.",
+          "domains": [
+            "2",
+            "4"
+          ],
+          "related": [
+            "WPA"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        }
+      ],
+      "label": "W"
+    },
+    {
+      "letter": "X",
+      "id": "x",
+      "entries": [
+        {
+          "id": "xdr",
+          "term": "XDR",
+          "expansion": "Extended detection and response",
+          "meaning": "A platform that correlates detection and response data across endpoints, identities, email, cloud, and networks.",
+          "domains": [
+            "2",
+            "4"
+          ],
+          "related": [
+            "EDR",
+            "SIEM"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "xml",
+          "term": "XML",
+          "expansion": "Extensible Markup Language",
+          "meaning": "A structured text format used to represent and exchange data.",
+          "domains": [
+            "2",
+            "4"
+          ],
+          "related": [
+            "SAML"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "xor",
+          "term": "XOR",
+          "expansion": "Exclusive OR",
+          "meaning": "A logical operation that outputs true when inputs differ and is used in many cryptographic constructions.",
+          "domains": [
+            "1"
+          ],
+          "related": [],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "xsrf",
+          "term": "XSRF",
+          "expansion": "Cross-site request forgery",
+          "meaning": "Another abbreviation for CSRF, an attack that causes a browser to submit an unintended authenticated request.",
+          "domains": [
+            "2"
+          ],
+          "related": [
+            "CSRF"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "xss",
+          "term": "XSS",
+          "expansion": "Cross-site scripting",
+          "meaning": "An injection attack that causes untrusted script to run in another user's browser.",
+          "domains": [
+            "2"
+          ],
+          "related": [
+            "CSRF"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        }
+      ],
+      "label": "X"
+    }
+  ]
+}
