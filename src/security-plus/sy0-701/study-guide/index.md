@@ -56,6 +56,12 @@ relatedLinks:
   - title: "Domain 5: Security Program Management and Oversight"
     url: /security-plus/sy0-701/study-guide/security-program-management-oversight/
     description: Review governance, risk, third parties, compliance, privacy, audits, and security awareness.
+  - title: Security Controls Quick Reference
+    url: /security-plus/quick-review/security-controls/
+    description: Compare technical, managerial, operational, and physical controls with their security functions.
+  - title: Recovery Metrics Quick Reference
+    url: /security-plus/quick-review/recovery-metrics/
+    description: Separate RTO, RPO, MTTR, and MTBF with timelines, calculations, and scenario clues.
   - title: Security+ Acronyms and Terms
     url: /security-plus/acronyms/
     description: Search and print a plain-English reference for the initials used throughout Security+ material.
@@ -170,6 +176,8 @@ You should be able to:
 - Describe what hashing, encryption, digital signatures, certificates, and key-management processes accomplish.
 - Recognize the security purpose of change management.
 
+Use the [Security Controls Quick Reference](/security-plus/quick-review/security-controls/) when you need a focused comparison of control categories, functions, and scenario clues.
+
 Pay attention to the assurance requested in the scenario. Encryption can protect confidentiality. A digital signature can support integrity, authentication, and non-repudiation when the surrounding key and trust processes are sound. An ordinary unkeyed hash can reveal a change in data, but it does not identify the sender.
 
 Continue with the [Domain 1: General Security Concepts guide](/security-plus/sy0-701/study-guide/general-security-concepts/) for control classifications, zero-trust components, change-management steps, and cryptography review.
@@ -204,6 +212,8 @@ Important comparisons include:
 - Data at rest, data in transit, and data in use
 - Backups, replication, snapshots, and recovery sites
 - RTO, RPO, MTTR, and MTBF
+
+Use the [Recovery Metrics Quick Reference](/security-plus/quick-review/recovery-metrics/) to compare the four measurements with timelines, calculations, and scenario examples.
 
 Architecture questions often include constraints. Availability, latency, cost, safety, regulatory obligations, or a legacy dependency may rule out an otherwise strong control. Identify the business requirement before comparing the technical options.
 
