@@ -66,7 +66,7 @@ A firewall rule that blocks prohibited traffic is a **technical** control becaus
 
 The same control may serve more than one function. A visible camera may discourage an attempt, while its recording helps investigators detect what happened. Use the purpose emphasized by the scenario instead of assigning every control one permanent label.
 
-## The two-label model
+<h2 id="two-labels">The two-label model</h2>
 
 Security+ objective 1.1 separates controls into implementation categories and security functions.
 
@@ -96,7 +96,7 @@ Security+ objective 1.1 separates controls into implementation categories and se
 
 When an answer choice mixes a category with a function, slow down and check what the question actually requested. “Technical” and “detective” can both describe the same intrusion detection system, but they answer different questions.
 
-## Control categories
+<h2 id="control-categories">Control categories</h2>
 
 ### Technical controls
 
@@ -168,7 +168,7 @@ Common examples include:
 
 A single security program often uses all four categories. A written visitor policy is managerial. Reception staff following the check-in procedure are operational. An electronic system validating a badge is technical. The locked entrance and barriers are physical.
 
-## Control functions
+<h2 id="control-functions">Control functions</h2>
 
 <div class="table-scroll" role="region" aria-label="Security control functions" tabindex="0">
 <table>
@@ -248,7 +248,7 @@ A directive control tells people what is required. A deterrent control tries to 
 
 A policy that requires visitors to wear badges is directive. A sign warning that an area is monitored may be deterrent. Some controls can support both purposes, so use the outcome described in the question.
 
-## Classify the scenario
+<h2 id="classify-scenario">Classify the scenario</h2>
 
 The wording around a control often matters more than the name of the control.
 
@@ -352,7 +352,7 @@ The wording around a control often matters more than the name of the control.
 
 Questions usually provide enough context to select the function being tested. Read the verb and the intended outcome.
 
-## Common exam traps
+<h2 id="exam-traps">Common exam traps</h2>
 
 ### Answering with a category when the question asks for a function
 
@@ -380,7 +380,7 @@ A directive says what must be done. A deterrent makes misconduct less appealing.
 
 Technology may generate an alert, but analysts triaging it are performing an operational control. A policy may require access reviews, but the employees conducting the review are carrying out an operational process.
 
-## Rapid review grid
+<h2 id="rapid-review">Rapid review grid</h2>
 
 <div class="table-scroll" role="region" aria-label="Security controls rapid review" tabindex="0">
 <table>
@@ -411,7 +411,7 @@ A useful exam shortcut is to build the classification in one sentence:
 
 For example: “This is a technical control because the identity platform enforces it, and it is preventive because access is blocked until MFA succeeds.”
 
-## Review checklist
+<h2 id="review-checklist">Review checklist</h2>
 
 Before moving on, confirm that you can:
 
@@ -427,7 +427,7 @@ Before moving on, confirm that you can:
 
 For the broader Domain 1 material, continue with the [General Security Concepts guide](/security-plus/sy0-701/study-guide/general-security-concepts/).
 
-## Official references
+<h2 id="official-references">Official references</h2>
 
 Security control categories and functions appear in CompTIA Security+ SY0-701 objective 1.1. Use the official objectives as the authoritative checklist for the exam version.
 
