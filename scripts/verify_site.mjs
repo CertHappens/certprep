@@ -46,6 +46,26 @@ function getMeta(html, name, property = false) {
   return html.match(expression)?.[1] || html.match(reverseExpression)?.[1] || "";
 }
 
+function getNamedInputValues(html, name) {
+  const values = [];
+
+  for (const match of html.matchAll(/<input\b[^>]*>/gi)) {
+    const tag = match[0];
+    const inputName = tag.match(/\bname=["']([^"']+)["']/i)?.[1];
+
+    if (inputName !== name) {
+      continue;
+    }
+
+    const value = tag.match(/\bvalue=["']([^"']+)["']/i)?.[1];
+    if (value !== undefined) {
+      values.push(value);
+    }
+  }
+
+  return values;
+}
+
 function localTarget(href) {
   const clean = href.split("#")[0].split("?")[0];
 
@@ -111,6 +131,86 @@ const requiredFiles = [
 for (const relative of requiredFiles) {
   if (!(await isFile(path.join(outputRoot, relative)))) {
     fail(`Missing required build output: ${relative}`);
+  }
+}
+
+const generatedQuizSpecs = [
+  {
+    path: "quiz-data/security-plus/sec-701/manifest.json",
+    testId: "SEC-701",
+    practiceTestPath: "/security-plus/sy0-701/practice-test"
+  },
+  {
+    path: "quiz-data/network-plus/n10-009/manifest.json",
+    testId: "NET-009",
+    practiceTestPath: "/network-plus/n10-009/practice-test"
+  }
+];
+
+const generatedQuizManifests = new Map();
+
+for (const expected of generatedQuizSpecs) {
+  const filePath = path.join(outputRoot, expected.path);
+
+  if (!(await isFile(filePath))) {
+    continue;
+  }
+
+  try {
+    const manifest = JSON.parse(await readFile(filePath, "utf8"));
+    generatedQuizManifests.set(expected.testId, manifest);
+
+    if (manifest.test?.testId !== expected.testId) {
+      fail(`${expected.path}: unexpected test ID`);
+    }
+
+    if (manifest.test?.practiceTestPath !== expected.practiceTestPath) {
+      fail(`${expected.path}: unexpected practice-test path`);
+    }
+
+    if (
+      !Number.isInteger(manifest.availableQuestionCount) ||
+      manifest.availableQuestionCount < 1
+    ) {
+      fail(`${expected.path}: invalid approved question count`);
+    }
+
+    if (
+      !Array.isArray(manifest.questionCountOptions) ||
+      manifest.questionCountOptions.length < 1 ||
+      manifest.questionCountOptions.some(
+        (option) =>
+          !Number.isInteger(option) ||
+          option < 1 ||
+          option > manifest.availableQuestionCount
+      )
+    ) {
+      fail(`${expected.path}: invalid question-count options`);
+    }
+
+    if (
+      !manifest.questionCountOptions.includes(manifest.defaultQuestionCount)
+    ) {
+      fail(`${expected.path}: default question count is not an available option`);
+    }
+
+    const questionsRelative = String(manifest.questionsFile || "").replace(/^\/+/, "");
+    const questionsPath = path.join(outputRoot, questionsRelative);
+
+    if (!(await isFile(questionsPath))) {
+      fail(`${expected.path}: questions file is missing`);
+      continue;
+    }
+
+    const questions = JSON.parse(await readFile(questionsPath, "utf8"));
+    if (
+      questions.questionCount !== manifest.availableQuestionCount ||
+      questions.questions?.length !== manifest.availableQuestionCount
+    ) {
+      fail(`${expected.path}: manifest and questions file counts do not match`);
+    }
+  } catch (error) {
+    fail(`${expected.path}: invalid generated quiz data (${error.message})`);
   }
 }
 
@@ -528,10 +628,7 @@ for (const file of htmlFiles) {
     const requiredPracticeMarkers = [
       "Network+ N10-009 practice test",
       'data-test-id="NET-009"',
-      'data-questions-url="/quiz-data/network-plus/n10-009/questions.json"',
-      "24</strong> approved questions",
-      'value="10"',
-      'value="20"'
+      'data-questions-url="/quiz-data/network-plus/n10-009/questions.json"'
     ];
 
     for (const marker of requiredPracticeMarkers) {
@@ -540,8 +637,28 @@ for (const file of htmlFiles) {
       }
     }
 
-    if (html.includes('value="30"') || html.includes('value="50"')) {
-      fail(`${relative}: Network+ practice test exposes a length larger than the current bank`);
+    const manifest = generatedQuizManifests.get("NET-009");
+    if (manifest) {
+      const questionCountMarker =
+        `${manifest.availableQuestionCount}</strong> approved questions`;
+
+      if (!html.includes(questionCountMarker)) {
+        fail(
+          `${relative}: Network+ practice test does not show the generated approved question count`
+        );
+      }
+
+      const renderedOptions = getNamedInputValues(html, "question-count").map(Number);
+      if (
+        renderedOptions.length !== manifest.questionCountOptions.length ||
+        renderedOptions.some(
+          (option, index) => option !== manifest.questionCountOptions[index]
+        )
+      ) {
+        fail(
+          `${relative}: Network+ practice-test lengths do not match the generated manifest`
+        );
+      }
     }
   }
 
@@ -830,43 +947,6 @@ for (const file of htmlFiles) {
     if (!html.includes(`data-test-id="${expectedTestId}"`)) {
       fail(`${relative}: paged question is missing data-test-id ${expectedTestId}`);
     }
-  }
-}
-
-const generatedQuizFiles = [
-  {
-    path: "quiz-data/security-plus/sec-701/manifest.json",
-    testId: "SEC-701",
-    questionCount: 150,
-    practiceTestPath: "/security-plus/sy0-701/practice-test"
-  },
-  {
-    path: "quiz-data/network-plus/n10-009/manifest.json",
-    testId: "NET-009",
-    questionCount: 24,
-    practiceTestPath: "/network-plus/n10-009/practice-test"
-  }
-];
-
-for (const expected of generatedQuizFiles) {
-  const filePath = path.join(outputRoot, expected.path);
-  if (!(await isFile(filePath))) {
-    continue;
-  }
-
-  try {
-    const manifest = JSON.parse(await readFile(filePath, "utf8"));
-    if (manifest.test?.testId !== expected.testId) {
-      fail(`${expected.path}: unexpected test ID`);
-    }
-    if (manifest.test?.practiceTestPath !== expected.practiceTestPath) {
-      fail(`${expected.path}: unexpected practice-test path`);
-    }
-    if (manifest.availableQuestionCount !== expected.questionCount) {
-      fail(`${expected.path}: unexpected approved question count`);
-    }
-  } catch (error) {
-    fail(`${expected.path}: invalid JSON (${error.message})`);
   }
 }
 
