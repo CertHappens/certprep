@@ -167,18 +167,6 @@ permalink: /network-plus/n10-009/practice-test/
           </div>
         </div>
 
-        <section class="quiz-results__section" aria-labelledby="quiz-next-steps-heading">
-          <div class="callout">
-            <h2 id="quiz-next-steps-heading">What would you like to do next?</h2>
-            <p>Your completed test is saved in this browser tab. Read the detailed explanations below, return to this test for a question-by-question review, or start a fresh randomized test.</p>
-            <div class="button-row">
-              <button class="button button--secondary" type="button" data-quiz-return>Review this test</button>
-              <button class="button" type="button" data-quiz-restart>Start a new test</button>
-            </div>
-            <p><a href="/network-plus/">Return to Network+ resources</a></p>
-          </div>
-        </section>
-
         <section class="quiz-results__section" aria-labelledby="domain-results-heading">
           <div class="quiz-results__section-heading">
             <h2 id="domain-results-heading">Score by domain</h2>
@@ -187,10 +175,23 @@ permalink: /network-plus/n10-009/practice-test/
           <div class="quiz-domain-results" data-results-domains></div>
         </section>
 
-        <section class="quiz-results__section" aria-labelledby="review-results-heading">
+        <section class="quiz-results__section" aria-labelledby="quiz-next-steps-heading">
+          <div class="callout">
+            <h2 id="quiz-next-steps-heading">What would you like to do next?</h2>
+            <p>Your incorrect and unanswered questions, correct answers, and explanations are listed directly below. You can also reopen the full test question by question or start a fresh randomized test.</p>
+            <div class="button-row">
+              <a class="button button--secondary" href="#missed-question-review">Jump to missed questions</a>
+              <button class="button button--secondary" type="button" data-quiz-return>Review the full test question by question</button>
+              <button class="button" type="button" data-quiz-restart>Start a new test</button>
+            </div>
+            <p><a href="/network-plus/">Return to Network+ resources</a></p>
+          </div>
+        </section>
+
+        <section class="quiz-results__section" id="missed-question-review" aria-labelledby="review-results-heading">
           <div class="quiz-results__section-heading">
             <h2 id="review-results-heading">Incorrect and unanswered review</h2>
-            <p>Answer letters below match the order you saw during this test.</p>
+            <p>Your incorrect and unanswered questions are listed below with the correct answer and explanation. Answer letters match the order you saw during this test.</p>
           </div>
 
           <div class="quiz-review-list" data-review-primary></div>
@@ -206,7 +207,7 @@ permalink: /network-plus/n10-009/practice-test/
         </section>
 
         <div class="quiz-results__actions">
-          <button class="button button--secondary" type="button" data-quiz-return>Review this test</button>
+          <button class="button button--secondary" type="button" data-quiz-return>Review the full test question by question</button>
           <button class="button" type="button" data-quiz-restart>Start a new test</button>
           <a href="/network-plus/">Return to Network+ resources</a>
         </div>

@@ -69,7 +69,9 @@ function getNamedInputValues(html, name) {
 function verifyQuizResultActions(html, relative, resourcePath, resourceLabel) {
   const requiredMarkers = [
     "What would you like to do next?",
-    "Your completed test is saved in this browser tab.",
+    "Your incorrect and unanswered questions, correct answers, and explanations are listed directly below.",
+    'href="#missed-question-review">Jump to missed questions</a>',
+    'id="missed-question-review"',
     `href="${resourcePath}">${resourceLabel}</a>`
   ];
 
@@ -81,7 +83,7 @@ function verifyQuizResultActions(html, relative, resourcePath, resourceLabel) {
 
   const reviewButtonCount = (html.match(/data-quiz-return/g) || []).length;
   if (reviewButtonCount !== 2) {
-    fail(`${relative}: expected 2 Review this test actions, found ${reviewButtonCount}`);
+    fail(`${relative}: expected 2 full-test review actions, found ${reviewButtonCount}`);
   }
 
   const restartButtonCount = (html.match(/data-quiz-restart/g) || []).length;
@@ -89,9 +91,9 @@ function verifyQuizResultActions(html, relative, resourcePath, resourceLabel) {
     fail(`${relative}: expected 2 Start a new test actions, found ${restartButtonCount}`);
   }
 
-  const reviewLabelCount = (html.match(/>Review this test<\/button>/g) || []).length;
+  const reviewLabelCount = (html.match(/>Review the full test question by question<\/button>/g) || []).length;
   if (reviewLabelCount !== 2) {
-    fail(`${relative}: expected 2 Review this test labels, found ${reviewLabelCount}`);
+    fail(`${relative}: expected 2 full-test review labels, found ${reviewLabelCount}`);
   }
 
   const restartLabelCount = (html.match(/>Start a new test<\/button>/g) || []).length;
@@ -99,8 +101,30 @@ function verifyQuizResultActions(html, relative, resourcePath, resourceLabel) {
     fail(`${relative}: expected 2 Start a new test labels, found ${restartLabelCount}`);
   }
 
+  const jumpLinkCount = (html.match(/href="#missed-question-review">Jump to missed questions<\/a>/g) || []).length;
+  if (jumpLinkCount !== 1) {
+    fail(`${relative}: expected 1 Jump to missed questions action, found ${jumpLinkCount}`);
+  }
+
+  const domainPosition = html.indexOf('id="domain-results-heading"');
+  const nextStepsPosition = html.indexOf('id="quiz-next-steps-heading"');
+  const missedReviewPosition = html.indexOf('id="missed-question-review"');
+
+  if (
+    domainPosition < 0 ||
+    nextStepsPosition < 0 ||
+    missedReviewPosition < 0 ||
+    !(domainPosition < nextStepsPosition && nextStepsPosition < missedReviewPosition)
+  ) {
+    fail(`${relative}: result sections are not ordered as score by domain, next steps, then missed-question review`);
+  }
+
   if (html.includes(">Return to test</button>")) {
     fail(`${relative}: retired Return to test label is still present`);
+  }
+
+  if (html.includes(">Review this test</button>")) {
+    fail(`${relative}: ambiguous Review this test label is still present`);
   }
 
   if (html.includes(">Start another randomized test</button>")) {
