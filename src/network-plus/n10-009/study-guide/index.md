@@ -52,7 +52,7 @@ keywords:
   - networking certification
   - network troubleshooting
 relatedLinks:
-  - title: Domain 1: Networking Concepts
+  - title: "Domain 1: Networking Concepts"
     url: /network-plus/n10-009/study-guide/networking-concepts/
     description: Trace traffic through the OSI model and review devices, cloud, protocols, media, addressing, IPv6, and modern network designs.
   - title: Network+ N10-009 Practice Test
