@@ -2,7 +2,10 @@ import {
   formatElapsedTime,
   gradeQuizSession,
 } from "./grading.js";
-import { getPagedEntryPath } from "./paged-entry.js";
+import {
+  getPagedEntryPath,
+  getPagedReturnPath,
+} from "./paged-entry.js";
 import { createQuestionReporter } from "./reporting.js";
 import {
   completeQuizSession,
@@ -263,8 +266,19 @@ async function initializeQuiz(root) {
   });
 
   elements.returnToTest.addEventListener("click", () => {
+    const pagedReturnPath = getPagedReturnPath(
+      session,
+      window.location.search,
+    );
+
     reopenQuizSession(session);
     persist();
+
+    if (pagedReturnPath) {
+      enterPagedQuiz(pagedReturnPath);
+      return;
+    }
+
     renderQuestion({ focusHeading: true });
   });
 
