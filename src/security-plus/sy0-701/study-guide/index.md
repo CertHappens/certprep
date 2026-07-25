@@ -8,6 +8,7 @@ printable: true
 printTitle: Security+ SY0-701 Study Guide
 author: certHappens
 datePublished: 2026-07-23
+dateModified: 2026-07-24
 articleSection: Security+ SY0-701
 eyebrow: Security+ study guide
 lede: A practical roadmap for learning the SY0-701 material, finding weak spots, and turning practice-test results into a useful study plan.
@@ -59,6 +60,9 @@ relatedLinks:
   - title: Security Controls Quick Reference
     url: /security-plus/quick-review/security-controls/
     description: Compare technical, managerial, operational, and physical controls with their security functions.
+  - title: "Hashing, Encryption, and Encoding Quick Reference"
+    url: /security-plus/quick-review/hashing-encryption-encoding/
+    description: Match confidentiality, integrity, authenticity, and data representation to the appropriate cryptographic method.
   - title: Recovery Metrics Quick Reference
     url: /security-plus/quick-review/recovery-metrics/
     description: Separate RTO, RPO, MTTR, and MTBF with timelines, calculations, and scenario clues.
@@ -179,6 +183,8 @@ You should be able to:
 Use the [Security Controls Quick Reference](/security-plus/quick-review/security-controls/) when you need a focused comparison of control categories, functions, and scenario clues.
 
 Pay attention to the assurance requested in the scenario. Encryption can protect confidentiality. A digital signature can support integrity, authentication, and non-repudiation when the surrounding key and trust processes are sound. An ordinary unkeyed hash can reveal a change in data, but it does not identify the sender.
+
+Use the [Hashing, Encryption, and Encoding Quick Reference](/security-plus/quick-review/hashing-encryption-encoding/) to compare those methods with digital signatures, HMAC, salts, and key stretching.
 
 Continue with the [Domain 1: General Security Concepts guide](/security-plus/sy0-701/study-guide/general-security-concepts/) for control classifications, zero-trust components, change-management steps, and cryptography review.
 
