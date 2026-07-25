@@ -1,70 +1,121 @@
-# SEC-701 Batch 004 Critical Review
+# NET-009 Batch 004 Review
 
-## Batch summary
+- Batch ID: `NET009-BATCH-004`
+- Review date: 2026-07-25
+- Questions generated: 30
+- Review status: Approved under the accelerated staging authorization
+- Permanent IDs: `NET009-0000079` through `NET009-0000108`
 
-- Batch ID: `SEC701-BATCH-004`
-- Questions: 24
-- IDs: `SEC701-0000055` through `SEC701-0000078`
-- Status: `approved`
-- Reviewer: `initial-quality-review`
-- Approval date: `2026-07-20`
-- Domain allocation: 3 / 5 / 4 / 7 / 5
-- Difficulty distribution: easy = 6, medium = 12, hard = 6
-- Stored correct-answer distribution: A = 6, B = 6, C = 6, D = 6
-- Exact duplicate stems: none
-- Duplicate concept keys: none
-- Exact or reversed-clause duplicate answer choices: none
-- High-similarity near-duplicate stems: none
+## Coverage-driven batch size
 
-The questions were automatically approved under the accelerated workflow authorized for growth from 30 to 150 questions. Each question was compared against the complete 54-question starting bank before merging.
+Batch 004 contains 30 questions because that count supports a near-exact official domain allocation and allows meaningful coverage of remaining subtopics without padding.
 
-## Cumulative domain coverage
+| Domain | Official weight | Batch 004 count | Batch percentage |
+|---|---:|---:|---:|
+| 1.0 Networking Concepts | 23% | 7 | 23.3% |
+| 2.0 Network Implementation | 20% | 6 | 20.0% |
+| 3.0 Network Operations | 19% | 6 | 20.0% |
+| 4.0 Network Security | 14% | 4 | 13.3% |
+| 5.0 Network Troubleshooting | 24% | 7 | 23.3% |
 
-| Domain | Before | Added | Total | Total share | Exam weight |
-|---|---:|---:|---:|---:|---:|
-| 1.0 General Security Concepts | 7 | 3 | 10 | 12.8% | 12% |
-| 2.0 Threats, Vulnerabilities, and Mitigations | 11 | 5 | 16 | 20.5% | 22% |
-| 3.0 Security Architecture | 9 | 4 | 13 | 16.7% | 18% |
-| 4.0 Security Operations | 16 | 7 | 23 | 29.5% | 28% |
-| 5.0 Security Program Management and Oversight | 11 | 5 | 16 | 20.5% | 20% |
+## Distribution checks
 
-## Question-by-question review
+| Measure | Result | Planned | Status |
+|---|---:|---:|---|
+| Easy | 7 | 7 | Pass |
+| Medium | 16 | 16 | Pass |
+| Hard | 7 | 7 | Pass |
+| Single choice | 26 | 26 | Pass |
+| Multi-select | 2 | 2 | Pass |
+| Best available | 2 | 2 | Pass |
+| Direct | 7 | 7 | Pass |
+| Scenario | 18 | 18 | Pass |
+| Comparison | 3 | 3 | Pass |
+| Calculation | 2 | 2 | Pass |
 
-| ID | Objective | Topic | Quality finding |
-|---|---|---|---|
-| SEC701-0000055 | 1.1 | Compensating controls | The legacy limitation is temporary, and the answer supplies comparable protection, documentation, ownership, and a path back to the primary control. |
-| SEC701-0000056 | 1.2 | Deception technology | The item has no legitimate use and generates an alert when accessed, which uniquely identifies a honeytoken. |
-| SEC701-0000057 | 1.4 | Password salting | The explanation distinguishes salts from encryption, password strength, and computational work factors. |
-| SEC701-0000058 | 2.1 | Hacktivist motivation | The public manifesto and policy grievance establish ideological motivation without implying insider access or financial goals. |
-| SEC701-0000059 | 2.2 | Business email compromise | Independent contact verification directly addresses a potentially compromised vendor mailbox and avoids relying on the same channel. |
-| SEC701-0000060 | 2.3 | Stored cross-site scripting | Persistence in the database and later execution in other users' browsers provide the defining stored-XSS facts. |
-| SEC701-0000061 | 2.4 | Pass-the-hash attacks | The stem explicitly states that the NTLM hash is used without recovering the plaintext password, distinguishing pass-the-hash. |
-| SEC701-0000062 | 2.5 | Least functionality | The service has no business purpose, so removal and port blocking directly apply least functionality. |
-| SEC701-0000063 | 3.1 | Infrastructure as code | Reviewed version-controlled templates and automated deployment address both consistency and configuration drift. |
-| SEC701-0000064 | 3.2 | Secure remote administration | The required protections are stated directly and align with SSH rather than insecure or noninteractive alternatives. |
-| SEC701-0000065 | 3.3 | Data states | The record is decrypted and actively processed in memory, making the data state unambiguous. |
-| SEC701-0000066 | 3.4 | Alternate recovery sites | The site has equipment but still requires restoration and configuration, which distinguishes warm from hot and cold sites. |
-| SEC701-0000067 | 4.1 | Selective mobile wipe | The personal-device requirement makes selective enterprise wipe clearly preferable to a factory reset. |
-| SEC701-0000068 | 4.2 | Asset ownership and classification | Ownership, purpose, classification, and lifecycle status are the missing asset-management elements needed before other controls can be assigned. |
-| SEC701-0000069 | 4.3 | Vulnerability exception handling | The answer manages an unpatchable safety-critical device with a time-bound exception, compensating controls, and recurring review. |
-| SEC701-0000070 | 4.4 | Behavioral baselining | Per-system baselines solve both the noisy high-volume workload and the missed low-volume anomaly without creating a monitoring blind spot. |
-| SEC701-0000071 | 4.5 | DNS filtering | The question asks specifically for resolution blocking and optional redirection, which maps directly to DNS deny or sinkhole controls. |
-| SEC701-0000072 | 4.6 | Delegated authorization | Limited resource access without password disclosure is the defining OAuth delegated-authorization use case. |
-| SEC701-0000073 | 4.7 | Security orchestration | The workflow coordinates several security platforms, distinguishing orchestration from a single automated task. |
-| SEC701-0000074 | 5.1 | Policy exceptions | The formal time-bound exception preserves the standard while documenting risk ownership, temporary controls, and remediation. |
-| SEC701-0000075 | 5.2 | Risk tolerance | The 30-minute outage limit is specific and measurable, while the moderate risk statement remains a broad appetite declaration. |
-| SEC701-0000076 | 5.3 | Independent vendor assurance | The requested assurance concerns independent evidence of operating effectiveness over time, not vendor assertions or financial risk transfer. |
-| SEC701-0000077 | 5.4 | Legal holds | The pending deletion and litigation notice make suspension of routine disposition under legal hold the required action. |
-| SEC701-0000078 | 5.6 | Role-based security training | The specialized courses align training with job responsibilities and exposure while retaining a common baseline for everyone. |
+## Correct-answer distribution
 
-## Similarity review
+| Stored key | Batch 004 selections | Cumulative selections |
+|---|---:|---:|
+| A | 8 | 29 |
+| B | 8 | 29 |
+| C | 8 | 29 |
+| D | 8 | 29 |
 
-- No stem pair reached the reporting threshold.
+The two multi-select questions create 32 correct selections. Batch 004 is exactly balanced, and the cumulative bank remains exactly balanced.
 
-## Batch-level observations
+## Coverage improvements
 
-- No question depends on stored or displayed answer position.
-- No question uses all-of-the-above, none-of-the-above, or linked answer labels.
-- Each scenario includes the facts needed to support its intended decision.
-- Incorrect-answer explanations identify why the choice does not fit and where the concept would apply.
-- All 28 published objectives remain represented in the approved bank.
+Batch 004 adds or deepens coverage for:
+
+- Layer 3 forwarding and TTL behavior
+- Reverse proxies
+- NAS versus SAN
+- Dedicated cloud connectivity
+- DHCP and NTP ports
+- Category 6A and 10GBASE-T
+- IPv4 link-local addressing and APIPA
+- Router subinterfaces and voice VLANs
+- Wireless channel planning and band steering
+- MDF and IDF design
+- Power-capacity calculations
+- Logical diagrams, SLAs, and performance baselines
+- Hot recovery sites
+- SLAAC and site-to-site VPNs
+- MFA factors, SAML, DDoS, and port security
+- Fiber polarity, incorrect subnet masks, packet-loss calculations, Nmap, protocol analysis, and cable certification
+
+All 25 numbered objectives retain approved coverage.
+
+## Programmatic arithmetic checks
+
+- `NET009-0000091`: Confirmed a 120 V, 20 A circuit at 80% allows 1,920 W; the stated equipment uses 1,620 W; remaining capacity is 300 W.
+- `NET009-0000105`: Confirmed 45 lost packets out of 9,000 equals 0.5% loss.
+
+## Question inventory
+
+| ID | Objective | Topic | Difficulty | Type | Style | Correct |
+|---|---|---|---|---|---|---|
+| NET009-0000079 | 1.1 | OSI network layer | medium | single_choice | scenario | C |
+| NET009-0000080 | 1.2 | Proxy services | medium | single_choice | scenario | A |
+| NET009-0000081 | 1.2 | Network storage | easy | single_choice | comparison | B |
+| NET009-0000082 | 1.3 | Cloud connectivity | hard | best_available | scenario | D |
+| NET009-0000083 | 1.4 | Common ports and services | medium | multi_select | direct | A|C |
+| NET009-0000084 | 1.5 | Copper Ethernet media | easy | single_choice | direct | B |
+| NET009-0000085 | 1.7 | IPv4 link-local addressing | easy | single_choice | scenario | D |
+| NET009-0000086 | 2.1 | Router subinterfaces | medium | single_choice | scenario | C |
+| NET009-0000087 | 2.2 | Voice VLANs | medium | single_choice | scenario | A |
+| NET009-0000088 | 2.3 | Wireless channel planning | easy | single_choice | direct | B |
+| NET009-0000089 | 2.3 | Band steering | medium | single_choice | scenario | D |
+| NET009-0000090 | 2.4 | Telecommunications spaces | hard | single_choice | scenario | C |
+| NET009-0000091 | 2.4 | Power capacity | hard | single_choice | calculation | A |
+| NET009-0000092 | 3.1 | Network documentation | easy | single_choice | direct | B |
+| NET009-0000093 | 3.1 | Service-level agreements | medium | single_choice | scenario | D |
+| NET009-0000094 | 3.2 | Performance baselines | medium | single_choice | scenario | A |
+| NET009-0000095 | 3.3 | Recovery sites | hard | single_choice | comparison | C |
+| NET009-0000096 | 3.4 | IPv6 address configuration | medium | single_choice | scenario | B |
+| NET009-0000097 | 3.5 | Site-to-site VPNs | medium | single_choice | scenario | D |
+| NET009-0000098 | 4.1 | Multifactor authentication | easy | multi_select | direct | A|D |
+| NET009-0000099 | 4.1 | Federated identity | medium | single_choice | direct | B |
+| NET009-0000100 | 4.2 | Denial-of-service attacks | medium | single_choice | scenario | C |
+| NET009-0000101 | 4.3 | Switch port security | hard | best_available | scenario | A |
+| NET009-0000102 | 5.1 | Troubleshooting methodology | medium | single_choice | scenario | A |
+| NET009-0000103 | 5.2 | Fiber polarity | medium | single_choice | scenario | B |
+| NET009-0000104 | 5.3 | Subnet mask troubleshooting | hard | single_choice | scenario | C |
+| NET009-0000105 | 5.4 | Packet loss | medium | single_choice | calculation | D |
+| NET009-0000106 | 5.5 | Network discovery tools | easy | single_choice | direct | B |
+| NET009-0000107 | 5.5 | Protocol analysis | hard | single_choice | scenario | C |
+| NET009-0000108 | 5.5 | Copper verification tools | medium | single_choice | comparison | D |
+
+## Internal quality review
+
+- All 108 permanent question IDs are unique and sequential.
+- All 108 concept keys are unique.
+- All answer choices are populated and distinct after normalization.
+- Multi-select instructions state exactly how many answers to select.
+- Best-available questions state the decision criterion.
+- No answer-position-dependent wording, all-of-the-above choices, or none-of-the-above choices are used.
+- Each answer choice has a separate explanation.
+- Every referenced source ID exists in `source-register.csv`.
+- Approved rows contain review dates and the accelerated internal reviewer.
+- Draft and retired files remain header-only.
