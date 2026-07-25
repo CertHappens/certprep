@@ -3,6 +3,10 @@ import assert from "node:assert/strict";
 
 import { sampleWithoutReplacement, shuffleCopy } from "../src/assets/js/quiz/shuffle.js";
 import {
+  COMPLETED_TEST_REPLACEMENT_MESSAGE,
+  confirmCompletedTestReplacement,
+} from "../src/assets/js/quiz/results-actions.js";
+import {
   completeQuizSession,
   createQuizSession,
   getAnsweredCount,
@@ -166,4 +170,28 @@ test("storage helpers save, load, and clear a session", () => {
 
 test("an invalid random source is rejected", () => {
   assert.throws(() => shuffleCopy([1, 2], () => 1), RangeError);
+});
+
+test("starting a new test from completed results requires confirmation", () => {
+  let receivedMessage = "";
+
+  const confirmed = confirmCompletedTestReplacement((message) => {
+    receivedMessage = message;
+    return true;
+  });
+
+  assert.equal(confirmed, true);
+  assert.equal(receivedMessage, COMPLETED_TEST_REPLACEMENT_MESSAGE);
+});
+
+test("canceling completed-result replacement keeps the saved test", () => {
+  const confirmed = confirmCompletedTestReplacement(() => false);
+  assert.equal(confirmed, false);
+});
+
+test("completed-result replacement rejects a missing confirmation function", () => {
+  assert.throws(
+    () => confirmCompletedTestReplacement(null),
+    /confirmation function is required/,
+  );
 });

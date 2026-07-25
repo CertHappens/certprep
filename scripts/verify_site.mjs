@@ -46,6 +46,68 @@ function getMeta(html, name, property = false) {
   return html.match(expression)?.[1] || html.match(reverseExpression)?.[1] || "";
 }
 
+function getNamedInputValues(html, name) {
+  const values = [];
+
+  for (const match of html.matchAll(/<input\b[^>]*>/gi)) {
+    const tag = match[0];
+    const inputName = tag.match(/\bname=["']([^"']+)["']/i)?.[1];
+
+    if (inputName !== name) {
+      continue;
+    }
+
+    const value = tag.match(/\bvalue=["']([^"']+)["']/i)?.[1];
+    if (value !== undefined) {
+      values.push(value);
+    }
+  }
+
+  return values;
+}
+
+function verifyQuizResultActions(html, relative, resourcePath, resourceLabel) {
+  const requiredMarkers = [
+    "What would you like to do next?",
+    "Your completed test is saved in this browser tab.",
+    `href="${resourcePath}">${resourceLabel}</a>`
+  ];
+
+  for (const marker of requiredMarkers) {
+    if (!html.includes(marker)) {
+      fail(`${relative}: completed-test actions are missing ${marker}`);
+    }
+  }
+
+  const reviewButtonCount = (html.match(/data-quiz-return/g) || []).length;
+  if (reviewButtonCount !== 2) {
+    fail(`${relative}: expected 2 Review this test actions, found ${reviewButtonCount}`);
+  }
+
+  const restartButtonCount = (html.match(/data-quiz-restart/g) || []).length;
+  if (restartButtonCount !== 2) {
+    fail(`${relative}: expected 2 Start a new test actions, found ${restartButtonCount}`);
+  }
+
+  const reviewLabelCount = (html.match(/>Review this test<\/button>/g) || []).length;
+  if (reviewLabelCount !== 2) {
+    fail(`${relative}: expected 2 Review this test labels, found ${reviewLabelCount}`);
+  }
+
+  const restartLabelCount = (html.match(/>Start a new test<\/button>/g) || []).length;
+  if (restartLabelCount !== 2) {
+    fail(`${relative}: expected 2 Start a new test labels, found ${restartLabelCount}`);
+  }
+
+  if (html.includes(">Return to test</button>")) {
+    fail(`${relative}: retired Return to test label is still present`);
+  }
+
+  if (html.includes(">Start another randomized test</button>")) {
+    fail(`${relative}: retired Start another randomized test label is still present`);
+  }
+}
+
 function localTarget(href) {
   const clean = href.split("#")[0].split("?")[0];
 
@@ -80,6 +142,12 @@ const requiredFiles = [
   "contact/index.html",
   "security-plus/index.html",
   "security-plus/acronyms/index.html",
+  "network-plus/index.html",
+  "network-plus/n10-009/study-guide/index.html",
+  "network-plus/n10-009/study-guide/networking-concepts/index.html",
+  "network-plus/n10-009/practice-test/index.html",
+  "network-plus/n10-009/practice-test/question/1/index.html",
+  "network-plus/n10-009/practice-test/question/50/index.html",
   "security-plus/sy0-701/practice-test/index.html",
   "security-plus/sy0-701/study-guide/index.html",
   "security-plus/sy0-701/study-guide/general-security-concepts/index.html",
@@ -92,12 +160,100 @@ const requiredFiles = [
   "assets/css/site.css",
   "assets/css/print.css",
   "assets/js/print-guide.js",
-  "assets/js/acronym-filter.js"
+  "assets/js/acronym-filter.js",
+  "assets/js/quiz/app.js",
+  "assets/js/quiz/results-actions.js",
+  "assets/js/quiz/paged-question.js",
+  "quiz-data/catalog.json",
+  "quiz-data/security-plus/sec-701/manifest.json",
+  "quiz-data/security-plus/sec-701/questions.json",
+  "quiz-data/network-plus/n10-009/manifest.json",
+  "quiz-data/network-plus/n10-009/questions.json"
 ];
 
 for (const relative of requiredFiles) {
   if (!(await isFile(path.join(outputRoot, relative)))) {
     fail(`Missing required build output: ${relative}`);
+  }
+}
+
+const generatedQuizSpecs = [
+  {
+    path: "quiz-data/security-plus/sec-701/manifest.json",
+    testId: "SEC-701",
+    practiceTestPath: "/security-plus/sy0-701/practice-test"
+  },
+  {
+    path: "quiz-data/network-plus/n10-009/manifest.json",
+    testId: "NET-009",
+    practiceTestPath: "/network-plus/n10-009/practice-test"
+  }
+];
+
+const generatedQuizManifests = new Map();
+
+for (const expected of generatedQuizSpecs) {
+  const filePath = path.join(outputRoot, expected.path);
+
+  if (!(await isFile(filePath))) {
+    continue;
+  }
+
+  try {
+    const manifest = JSON.parse(await readFile(filePath, "utf8"));
+    generatedQuizManifests.set(expected.testId, manifest);
+
+    if (manifest.test?.testId !== expected.testId) {
+      fail(`${expected.path}: unexpected test ID`);
+    }
+
+    if (manifest.test?.practiceTestPath !== expected.practiceTestPath) {
+      fail(`${expected.path}: unexpected practice-test path`);
+    }
+
+    if (
+      !Number.isInteger(manifest.availableQuestionCount) ||
+      manifest.availableQuestionCount < 1
+    ) {
+      fail(`${expected.path}: invalid approved question count`);
+    }
+
+    if (
+      !Array.isArray(manifest.questionCountOptions) ||
+      manifest.questionCountOptions.length < 1 ||
+      manifest.questionCountOptions.some(
+        (option) =>
+          !Number.isInteger(option) ||
+          option < 1 ||
+          option > manifest.availableQuestionCount
+      )
+    ) {
+      fail(`${expected.path}: invalid question-count options`);
+    }
+
+    if (
+      !manifest.questionCountOptions.includes(manifest.defaultQuestionCount)
+    ) {
+      fail(`${expected.path}: default question count is not an available option`);
+    }
+
+    const questionsRelative = String(manifest.questionsFile || "").replace(/^\/+/, "");
+    const questionsPath = path.join(outputRoot, questionsRelative);
+
+    if (!(await isFile(questionsPath))) {
+      fail(`${expected.path}: questions file is missing`);
+      continue;
+    }
+
+    const questions = JSON.parse(await readFile(questionsPath, "utf8"));
+    if (
+      questions.questionCount !== manifest.availableQuestionCount ||
+      questions.questions?.length !== manifest.availableQuestionCount
+    ) {
+      fail(`${expected.path}: manifest and questions file counts do not match`);
+    }
+  } catch (error) {
+    fail(`${expected.path}: invalid generated quiz data (${error.message})`);
   }
 }
 
@@ -185,6 +341,20 @@ if (await isFile(printCssPath)) {
   for (const rule of requiredPrintFirstColumnRules) {
     if (!printCss.includes(rule)) {
       fail(`print.css: printable first-column rule is missing: ${rule}`);
+    }
+  }
+
+
+  const requiredCompactSecondColumnRules = [
+    ".table--compact-second-column th:nth-child(2)",
+    ".table--compact-second-column td:nth-child(2)",
+    "min-width: 0.55in !important",
+    "white-space: nowrap !important"
+  ];
+
+  for (const rule of requiredCompactSecondColumnRules) {
+    if (!printCss.includes(rule)) {
+      fail(`print.css: compact second-column utility is missing: ${rule}`);
     }
   }
 
@@ -347,6 +517,205 @@ for (const file of htmlFiles) {
 
       if (html.includes("Print / Save PDF")) {
         fail(`${relative}: printable article contains the retired print-control label`);
+      }
+    }
+  }
+
+  if (relative === "index.html") {
+    const requiredHomepageMarkers = [
+      "Certification study and practice",
+      "Choose an exam and start studying",
+      'href="/security-plus/sy0-701/practice-test/">Start Security+ practice test</a>',
+      'href="/network-plus/n10-009/practice-test/">Start Network+ practice test</a>'
+    ];
+
+    for (const marker of requiredHomepageMarkers) {
+      if (!html.includes(marker)) {
+        fail(`${relative}: homepage is missing ${marker}`);
+      }
+    }
+
+    if (html.includes("Free certification practice")) {
+      fail(`${relative}: retired free-practice eyebrow is still present`);
+    }
+  }
+
+  if (relative === "network-plus/index.html") {
+    if (!/<h1>CompTIA Network\+ N10-009<\/h1>/.test(html)) {
+      fail(`${relative}: Network+ hub is missing its expected h1`);
+    }
+
+    if (!html.includes('href="/network-plus/n10-009/practice-test/"')) {
+      fail(`${relative}: Network+ hub is missing the N10-009 practice-test link`);
+    }
+
+    if (!html.includes('href="/network-plus/n10-009/study-guide/"')) {
+      fail(`${relative}: Network+ hub is missing the N10-009 study-guide link`);
+    }
+
+    if (!html.includes('href="/network-plus/n10-009/study-guide/networking-concepts/"')) {
+      fail(`${relative}: Network+ hub is missing the detailed Domain 1 guide link`);
+    }
+
+    if (!html.includes('href="/ports-protocols/"')) {
+      fail(`${relative}: Network+ hub is missing the shared ports and protocols link`);
+    }
+  }
+
+  if (relative === "network-plus/n10-009/study-guide/index.html") {
+    if (!html.includes("data-print-guide")) {
+      fail(`${relative}: Network+ study guide is missing the shared Print | Save control`);
+    }
+
+    if (!/<h1>Network\+ N10-009 Study Guide<\/h1>/.test(html)) {
+      fail(`${relative}: Network+ study guide is missing its expected h1`);
+    }
+
+    if (/<h1[^>]*>\s*CompTIA\b/i.test(html)) {
+      fail(`${relative}: Network+ study guide H1 should not present the guide as CompTIA material`);
+    }
+
+    const requiredSectionIds = [
+      "exam-snapshot",
+      "domain-priorities",
+      "networking-concepts",
+      "network-implementation",
+      "network-operations",
+      "network-security",
+      "network-troubleshooting",
+      "practical-study-plan",
+      "performance-based-questions",
+      "readiness-checklist",
+      "official-references"
+    ];
+
+    for (const id of requiredSectionIds) {
+      if (!html.includes(`id="${id}"`)) {
+        fail(`${relative}: Network+ study guide is missing section #${id}`);
+      }
+    }
+
+    if (!html.includes('/ports-protocols/')) {
+      fail(`${relative}: Network+ study guide is missing the shared ports and protocols link`);
+    }
+
+    if (!html.includes('/network-plus/n10-009/practice-test/')) {
+      fail(`${relative}: Network+ study guide is missing its practice-test link`);
+    }
+
+    if (!html.includes('/network-plus/n10-009/study-guide/networking-concepts/')) {
+      fail(`${relative}: Network+ study guide is missing its detailed Domain 1 link`);
+    }
+
+    if (!html.includes("APS transports network data physically")) {
+      fail(`${relative}: Network+ study guide is missing the OSI mnemonic`);
+    }
+
+    if (!html.includes('class="table--compact-second-column"')) {
+      fail(`${relative}: Network+ domain table is missing the compact second-column utility`);
+    }
+  }
+
+
+  if (relative === "network-plus/n10-009/study-guide/networking-concepts/index.html") {
+    if (!html.includes("data-print-guide")) {
+      fail(`${relative}: Network+ Domain 1 guide is missing the shared Print | Save control`);
+    }
+
+    if (!/<h1>Network\+ N10-009 Domain 1: Networking Concepts<\/h1>/.test(html)) {
+      fail(`${relative}: Network+ Domain 1 guide is missing its expected h1`);
+    }
+
+    const requiredSectionIds = [
+      "domain-map",
+      "osi-model",
+      "devices-functions",
+      "cloud-concepts",
+      "ports-protocols",
+      "traffic-types",
+      "media-transceivers",
+      "topologies",
+      "ipv4-addressing",
+      "subnetting",
+      "ipv6-addressing",
+      "modern-networks",
+      "trace-a-session",
+      "exam-traps",
+      "rapid-review",
+      "official-references"
+    ];
+
+    for (const id of requiredSectionIds) {
+      if (!html.includes(`id="${id}"`)) {
+        fail(`${relative}: Network+ Domain 1 guide is missing section #${id}`);
+      }
+    }
+
+    const requiredContent = [
+      "APS transports network data physically",
+      "192.168.40.77/26",
+      "2001:db8::42",
+      "Infrastructure as code",
+      "/ports-protocols/",
+      "/network-plus/n10-009/practice-test/"
+    ];
+
+    for (const marker of requiredContent) {
+      if (!html.includes(marker)) {
+        fail(`${relative}: Network+ Domain 1 guide is missing ${marker}`);
+      }
+    }
+  }
+
+  if (relative === "security-plus/sy0-701/practice-test/index.html") {
+    verifyQuizResultActions(
+      html,
+      relative,
+      "/security-plus/",
+      "Return to Security+ resources"
+    );
+  }
+
+  if (relative === "network-plus/n10-009/practice-test/index.html") {
+    verifyQuizResultActions(
+      html,
+      relative,
+      "/network-plus/",
+      "Return to Network+ resources"
+    );
+    const requiredPracticeMarkers = [
+      "Network+ N10-009 practice test",
+      'data-test-id="NET-009"',
+      'data-questions-url="/quiz-data/network-plus/n10-009/questions.json"'
+    ];
+
+    for (const marker of requiredPracticeMarkers) {
+      if (!html.includes(marker)) {
+        fail(`${relative}: Network+ practice test is missing ${marker}`);
+      }
+    }
+
+    const manifest = generatedQuizManifests.get("NET-009");
+    if (manifest) {
+      const questionCountMarker =
+        `${manifest.availableQuestionCount}</strong> approved questions`;
+
+      if (!html.includes(questionCountMarker)) {
+        fail(
+          `${relative}: Network+ practice test does not show the generated approved question count`
+        );
+      }
+
+      const renderedOptions = getNamedInputValues(html, "question-count").map(Number);
+      if (
+        renderedOptions.length !== manifest.questionCountOptions.length ||
+        renderedOptions.some(
+          (option, index) => option !== manifest.questionCountOptions[index]
+        )
+      ) {
+        fail(
+          `${relative}: Network+ practice-test lengths do not match the generated manifest`
+        );
       }
     }
   }
@@ -612,7 +981,14 @@ for (const file of htmlFiles) {
     }
   }
 
-  if (relative.startsWith("security-plus/sy0-701/practice-test/question/")) {
+  const isSecurityPagedQuestion = relative.startsWith(
+    "security-plus/sy0-701/practice-test/question/"
+  );
+  const isNetworkPagedQuestion = relative.startsWith(
+    "network-plus/n10-009/practice-test/question/"
+  );
+
+  if (isSecurityPagedQuestion || isNetworkPagedQuestion) {
     if (!/<h1\b[^>]*data-paged-position[^>]*>/i.test(html)) {
       fail(`${relative}: paged question heading is missing its dynamic position marker`);
     }
@@ -620,6 +996,28 @@ for (const file of htmlFiles) {
     if (/class=["']paged-quiz__question-id["']/.test(html)) {
       fail(`${relative}: paged question still contains the retired duplicate question-ID wrapper`);
     }
+
+    if (!/\bnoindex\b/i.test(robots)) {
+      fail(`${relative}: paged question must remain noindex`);
+    }
+
+    const expectedTestId = isNetworkPagedQuestion ? "NET-009" : "SEC-701";
+    if (!html.includes(`data-test-id="${expectedTestId}"`)) {
+      fail(`${relative}: paged question is missing data-test-id ${expectedTestId}`);
+    }
+  }
+}
+
+if (await isFile(path.join(outputRoot, "quiz-data/catalog.json"))) {
+  try {
+    const catalog = JSON.parse(
+      await readFile(path.join(outputRoot, "quiz-data/catalog.json"), "utf8")
+    );
+    if (catalog.quizzes?.length !== 2) {
+      fail("quiz-data/catalog.json: expected two configured quizzes");
+    }
+  } catch (error) {
+    fail(`quiz-data/catalog.json: invalid JSON (${error.message})`);
   }
 }
 
@@ -642,7 +1040,9 @@ if (await isFile(path.join(outputRoot, "_redirects"))) {
   const redirects = await readFile(path.join(outputRoot, "_redirects"), "utf8");
   const expectedRedirects = [
     "/security-plus/practice-test /security-plus/sy0-701/practice-test/ 302",
-    "/security-plus/practice-test/ /security-plus/sy0-701/practice-test/ 302"
+    "/security-plus/practice-test/ /security-plus/sy0-701/practice-test/ 302",
+    "/network-plus/practice-test /network-plus/n10-009/practice-test/ 302",
+    "/network-plus/practice-test/ /network-plus/n10-009/practice-test/ 302"
   ];
 
   for (const rule of expectedRedirects) {
@@ -658,6 +1058,10 @@ if (await isFile(path.join(outputRoot, "sitemap.xml"))) {
     "https://certhappens.com/",
     "https://certhappens.com/security-plus/",
     "https://certhappens.com/security-plus/acronyms/",
+    "https://certhappens.com/network-plus/",
+    "https://certhappens.com/network-plus/n10-009/study-guide/",
+    "https://certhappens.com/network-plus/n10-009/study-guide/networking-concepts/",
+    "https://certhappens.com/network-plus/n10-009/practice-test/",
     "https://certhappens.com/security-plus/sy0-701/practice-test/",
     "https://certhappens.com/security-plus/sy0-701/study-guide/",
     "https://certhappens.com/security-plus/sy0-701/study-guide/general-security-concepts/",
@@ -677,8 +1081,21 @@ if (await isFile(path.join(outputRoot, "sitemap.xml"))) {
     }
   }
 
+  const excludedQuestionPrefixes = [
+    "https://certhappens.com/security-plus/sy0-701/practice-test/question/",
+    "https://certhappens.com/network-plus/n10-009/practice-test/question/"
+  ];
+
+  for (const prefix of excludedQuestionPrefixes) {
+    if (sitemap.includes(`<loc>${prefix}`)) {
+      fail(`sitemap.xml: paged question route must remain excluded (${prefix})`);
+    }
+  }
+
   const datedArticleUrls = [
     "https://certhappens.com/security-plus/acronyms/",
+    "https://certhappens.com/network-plus/n10-009/study-guide/",
+    "https://certhappens.com/network-plus/n10-009/study-guide/networking-concepts/",
     "https://certhappens.com/security-plus/sy0-701/study-guide/",
     "https://certhappens.com/security-plus/sy0-701/study-guide/general-security-concepts/",
     "https://certhappens.com/security-plus/sy0-701/study-guide/threats-vulnerabilities-mitigations/",

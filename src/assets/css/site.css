@@ -1364,6 +1364,7 @@ h3 {
 .quiz-results__actions {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   gap: 0.75rem;
   border-top: 1px solid var(--border);
   background: rgb(11 15 22 / 0.38);
