@@ -1,677 +1,451 @@
 #!/usr/bin/env python3
-"""Validate the SEC-701 question bank.
-
-Run from any directory:
-    python scripts/validate_question_bank.py
-
-Write the tracked Markdown report only when intentionally requested:
-    python scripts/validate_question_bank.py --write-report
-
-The script uses only the Python standard library.
-"""
+"""Validate every configured Cert Happens question bank."""
 
 from __future__ import annotations
 
-import argparse
-from collections import Counter, defaultdict
 import csv
-from datetime import datetime
-from pathlib import Path
+import difflib
 import re
 import sys
+from collections import Counter
+from datetime import date
+from pathlib import Path
 
-
-SCRIPT_PATH = Path(__file__).resolve()
-SCRIPTS_DIR = SCRIPT_PATH.parent
-REPO_ROOT = SCRIPTS_DIR.parent
-DATA_DIR = REPO_ROOT / "data" / "security-plus" / "sec-701"
-DOCS_DIR = REPO_ROOT / "docs"
-
-DRAFT_FILE = DATA_DIR / "draft-questions.csv"
-ACTIVE_FILE = DATA_DIR / "questions.csv"
-RETIRED_FILE = DATA_DIR / "retired-questions.csv"
-OBJECTIVE_MAP_FILE = DATA_DIR / "objective-map.csv"
-SOURCE_REGISTER_FILE = DATA_DIR / "source-register.csv"
-BLANK_TEMPLATE_FILE = DOCS_DIR / "blank-question-template.csv"
-REPORT_FILE = DOCS_DIR / "validation-report.md"
-
-ACTIVE_HEADERS = [
-    "question_id",
-    "test_id",
-    "certification",
-    "exam_version",
-    "objectives_version",
-    "question_version",
-    "batch_id",
-    "domain_id",
-    "domain_name",
-    "objective_id",
-    "objective_text",
-    "topic",
-    "concept_key",
-    "difficulty",
-    "question_type",
-    "question_style",
-    "question_instruction",
-    "question_text",
-    "answer_a",
-    "answer_b",
-    "answer_c",
-    "answer_d",
-    "correct_answers",
-    "correct_explanation",
-    "answer_a_explanation",
-    "answer_b_explanation",
-    "answer_c_explanation",
-    "answer_d_explanation",
-    "study_topics",
-    "source_ids",
-    "reference_notes",
-    "date_added",
-    "date_modified",
-    "date_reviewed",
-    "review_status",
-    "reviewer",
-    "quality_flags",
-    "author_notes",
+BANK_CONFIGS = [
+    {
+        "label": "SEC-701",
+        "path": ("data", "security-plus", "sec-701"),
+        "test_id": "SEC-701",
+        "certification": "CompTIA Security+",
+        "exam_version": "SY0-701",
+        "objectives_version": "6.0",
+        "id_pattern": r"^SEC701-(\d{7})$",
+        "batch_pattern": r"^SEC701-(?:BATCH-\d{3}|SAMPLE-001)$",
+        "expected_objectives": {
+            "1.1", "1.2", "1.3", "1.4",
+            "2.1", "2.2", "2.3", "2.4", "2.5",
+            "3.1", "3.2", "3.3", "3.4",
+            "4.1", "4.2", "4.3", "4.4", "4.5", "4.6", "4.7", "4.8", "4.9",
+            "5.1", "5.2", "5.3", "5.4", "5.5", "5.6",
+        },
+    },
+    {
+        "label": "NET-009",
+        "path": ("data", "network-plus", "n10-009"),
+        "test_id": "NET-009",
+        "certification": "CompTIA Network+",
+        "exam_version": "N10-009",
+        "objectives_version": "6.0",
+        "id_pattern": r"^NET009-(\d{7})$",
+        "batch_pattern": r"^NET009-BATCH-\d{3}$",
+        "expected_objectives": {
+            "1.1", "1.2", "1.3", "1.4", "1.5", "1.6", "1.7", "1.8",
+            "2.1", "2.2", "2.3", "2.4",
+            "3.1", "3.2", "3.3", "3.4", "3.5",
+            "4.1", "4.2", "4.3",
+            "5.1", "5.2", "5.3", "5.4", "5.5",
+        },
+    },
 ]
 
-RETIREMENT_HEADERS = [
-    "retired_date",
-    "retirement_reason",
-    "replacement_question_id",
+TEST_ID = ""
+CERTIFICATION = ""
+EXAM_VERSION = ""
+OBJECTIVES_VERSION = ""
+BANK_PATH: tuple[str, ...] = ()
+EXPECTED_OBJECTIVES: set[str] = set()
+ID_RE = re.compile(r"$^")
+BATCH_RE = re.compile(r"$^")
+DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
+CONCEPT_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
+
+
+def configure_bank(config: dict[str, object]) -> None:
+    global TEST_ID, CERTIFICATION, EXAM_VERSION, OBJECTIVES_VERSION
+    global BANK_PATH, EXPECTED_OBJECTIVES, ID_RE, BATCH_RE
+
+    TEST_ID = str(config["test_id"])
+    CERTIFICATION = str(config["certification"])
+    EXAM_VERSION = str(config["exam_version"])
+    OBJECTIVES_VERSION = str(config["objectives_version"])
+    BANK_PATH = tuple(str(part) for part in config["path"])
+    EXPECTED_OBJECTIVES = set(config["expected_objectives"])
+    ID_RE = re.compile(str(config["id_pattern"]))
+    BATCH_RE = re.compile(str(config["batch_pattern"]))
+
+
+ABSOLUTE_RE = re.compile(r"\b(always|never|guarantees?|completely|impossible)\b", re.I)
+POSITION_RE = re.compile(
+    r"\b(all|none) of the above\b|\bboth [ABCD] and [ABCD]\b|"
+    r"\b(previous|next|above|below) (answer|choice|option)\b",
+    re.I,
+)
+
+QUESTION_HEADERS = [
+    "question_id","test_id","certification","exam_version","objectives_version",
+    "question_version","batch_id","domain_id","domain_name","objective_id",
+    "objective_text","topic","concept_key","difficulty","question_type",
+    "question_style","question_instruction","question_text","answer_a","answer_b",
+    "answer_c","answer_d","correct_answers","correct_explanation",
+    "answer_a_explanation","answer_b_explanation","answer_c_explanation",
+    "answer_d_explanation","study_topics","source_ids","reference_notes",
+    "date_added","date_modified","date_reviewed","review_status","reviewer",
+    "quality_flags","author_notes"
 ]
-RETIRED_HEADERS = ACTIVE_HEADERS + RETIREMENT_HEADERS
-
-REQUIRED_ALWAYS = {
-    "question_id",
-    "test_id",
-    "certification",
-    "exam_version",
-    "objectives_version",
-    "question_version",
-    "batch_id",
-    "domain_id",
-    "domain_name",
-    "objective_id",
-    "objective_text",
-    "topic",
-    "concept_key",
-    "difficulty",
-    "question_type",
-    "question_style",
-    "question_text",
-    "answer_a",
-    "answer_b",
-    "answer_c",
-    "answer_d",
-    "correct_answers",
-    "correct_explanation",
-    "answer_a_explanation",
-    "answer_b_explanation",
-    "answer_c_explanation",
-    "answer_d_explanation",
-    "study_topics",
-    "source_ids",
-    "reference_notes",
-    "date_added",
-    "date_modified",
-    "review_status",
-}
-
-QUESTION_FILES = {
-    DRAFT_FILE: {
-        "allowed_statuses": {"draft", "review"},
-        "expected_headers": ACTIVE_HEADERS,
-        "retired": False,
-    },
-    ACTIVE_FILE: {
-        "allowed_statuses": {"approved"},
-        "expected_headers": ACTIVE_HEADERS,
-        "retired": False,
-    },
-    RETIRED_FILE: {
-        "allowed_statuses": {"draft", "review", "approved"},
-        "expected_headers": RETIRED_HEADERS,
-        "retired": True,
-    },
-}
+RETIRED_HEADERS = QUESTION_HEADERS + [
+    "retired_date","retirement_reason","replacement_question_id"
+]
+OBJECTIVE_HEADERS = [
+    "test_id","exam_version","objectives_version","domain_id","domain_name",
+    "domain_weight_percent","objective_id","objective_text","scope_summary"
+]
+SOURCE_HEADERS = [
+    "source_id","organization","title","publication_version","url","notes"
+]
 
 ENUMS = {
-    "difficulty": {"easy", "medium", "hard"},
-    "question_type": {"single_choice", "multi_select", "best_available"},
-    "question_style": {"direct", "scenario", "comparison", "calculation"},
-    "review_status": {"draft", "review", "approved"},
+    "difficulty": {"easy","medium","hard"},
+    "question_type": {"single_choice","multi_select","best_available"},
+    "question_style": {"direct","scenario","comparison","calculation"},
+    "review_status": {"draft","review","approved"},
+}
+FILE_STATUS = {
+    "draft-questions.csv": {"draft","review"},
+    "questions.csv": {"approved"},
+    "retired-questions.csv": {"approved"},
 }
 
-QUESTION_ID_RE = re.compile(r"^SEC701-\d{7}$")
-CONCEPT_KEY_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
-DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
-POSITION_DEPENDENT_RE = re.compile(
-    r"\b("
-    r"all of the above|"
-    r"none of the above|"
-    r"both [a-d] and [a-d]|"
-    r"answers? [a-d](?: and [a-d])?|"
-    r"choice [a-d]|"
-    r"option [a-d]|"
-    r"previous answer|"
-    r"following answer|"
-    r"choice above|"
-    r"choice below"
-    r")\b",
-    re.IGNORECASE,
-)
-UNSUPPORTED_ABSOLUTE_RE = re.compile(
-    r"\b(always|never|guarantees?|completely prevents?|impossible)\b",
-    re.IGNORECASE,
-)
+def normalized(value: str) -> str:
+    return re.sub(r"[^a-z0-9]+", " ", value.lower()).strip()
 
+def reversed_clause_signature(value: str) -> tuple[str, ...]:
+    clauses = [normalized(part) for part in re.split(r"\band\b", value, flags=re.I)]
+    return tuple(sorted(part for part in clauses if part))
 
-def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument(
-        "--write-report",
-        action="store_true",
-        help="Rewrite docs/validation-report.md with the current results.",
-    )
-    return parser.parse_args()
-
-
-def relative_path(path: Path) -> str:
+def parse_date(value: str) -> date | None:
+    if not value:
+        return None
     try:
-        return str(path.relative_to(REPO_ROOT))
+        return date.fromisoformat(value)
     except ValueError:
-        return str(path)
+        return None
 
+def read_csv(path: Path, expected_headers: list[str], errors: list[str]) -> list[dict[str, str]]:
+    if not path.exists():
+        errors.append(f"Missing file: {path}")
+        return []
+    with path.open(newline="", encoding="utf-8-sig") as handle:
+        reader = csv.DictReader(handle)
+        if reader.fieldnames != expected_headers:
+            errors.append(
+                f"{path.name}: header mismatch.\n"
+                f"  Expected: {expected_headers}\n"
+                f"  Found:    {reader.fieldnames}"
+            )
+        return list(reader)
 
-def read_csv(path: Path) -> tuple[list[str], list[dict[str, str]]]:
-    with path.open("r", newline="", encoding="utf-8-sig") as file:
-        reader = csv.DictReader(file)
-        return reader.fieldnames or [], [dict(row) for row in reader]
-
-
-def normalized(text: str) -> str:
-    return re.sub(r"[^a-z0-9]+", " ", (text or "").casefold()).strip()
-
-
-def split_pipe_values(value: str) -> list[str]:
-    return [part.strip() for part in (value or "").split("|") if part.strip()]
-
-
-def valid_iso_date(value: str) -> bool:
-    if not DATE_RE.fullmatch(value or ""):
-        return False
-    try:
-        datetime.strptime(value, "%Y-%m-%d")
-    except ValueError:
-        return False
-    return True
-
-
-def add_error(errors: list[str], location: str, message: str) -> None:
-    errors.append(f"{location}: {message}")
-
-
-def add_warning(warnings: list[str], location: str, message: str) -> None:
-    warnings.append(f"{location}: {message}")
-
-
-def add_info(infos: list[str], location: str, message: str) -> None:
-    infos.append(f"{location}: {message}")
-
-
-def validate_file_exists(path: Path, errors: list[str]) -> None:
-    if not path.is_file():
-        add_error(errors, relative_path(path), "required file is missing")
-
-
-def compare_headers(
-    actual: list[str],
-    expected: list[str],
-    path: Path,
-    errors: list[str],
-) -> None:
-    if actual == expected:
-        return
-
-    location = relative_path(path)
-    missing = [header for header in expected if header not in actual]
-    extra = [header for header in actual if header not in expected]
-
-    if missing:
-        add_error(errors, location, "missing headers: " + ", ".join(missing))
-    if extra:
-        add_error(errors, location, "unexpected headers: " + ", ".join(extra))
-    if not missing and not extra:
-        add_error(errors, location, "headers are present but not in the required order")
-
-
-def write_report(
-    errors: list[str],
-    warnings: list[str],
-    infos: list[str],
-    row_count: int,
-    file_counts: dict[str, int],
-) -> None:
-    lines = [
-        "# Validation Report",
-        "",
-        f"- Run time: {datetime.now().astimezone().isoformat(timespec='seconds')}",
-        "- Validator: `scripts/validate_question_bank.py`",
-        f"- Question rows validated: {row_count}",
-        f"- Errors: {len(errors)}",
-        f"- Warnings: {len(warnings)}",
-        f"- Information: {len(infos)}",
-        "",
-        "## File counts",
-        "",
-    ]
-
-    for filename, count in file_counts.items():
-        lines.append(f"- `{filename}`: {count}")
-
-    lines.extend(["", "## Errors", ""])
-    lines.extend([f"- {error}" for error in errors] if errors else ["- None"])
-
-    lines.extend(["", "## Warnings", ""])
-    lines.extend([f"- {warning}" for warning in warnings] if warnings else ["- None"])
-
-    lines.extend(["", "## Information", ""])
-    lines.extend([f"- {info}" for info in infos] if infos else ["- None"])
-
-    lines.extend(
-        [
-            "",
-            "## Notes",
-            "",
-            "Automated validation checks structure, mappings, answer storage, lifecycle rules, and several common quality problems. It does not replace technical, editorial, or ambiguity review.",
-            "",
-        ]
-    )
-
-    REPORT_FILE.write_text("\n".join(lines), encoding="utf-8")
-
-
-def main() -> int:
-    args = parse_args()
+def validate() -> tuple[list[str], list[str], list[str]]:
+    root = Path(__file__).resolve().parents[1]
+    bank = root.joinpath(*BANK_PATH)
     errors: list[str] = []
     warnings: list[str] = []
-    infos: list[str] = []
-    file_counts: dict[str, int] = {}
+    info: list[str] = []
 
-    required_files = [
-        DRAFT_FILE,
-        ACTIVE_FILE,
-        RETIRED_FILE,
-        OBJECTIVE_MAP_FILE,
-        SOURCE_REGISTER_FILE,
-        BLANK_TEMPLATE_FILE,
-    ]
-
-    for path in required_files:
-        validate_file_exists(path, errors)
-
-    if errors:
-        if args.write_report:
-            write_report(errors, warnings, infos, 0, file_counts)
-        for message in errors:
-            print(f"ERROR: {message}")
-        if args.write_report:
-            print(f"\nValidation report written: {relative_path(REPORT_FILE)}")
-        return 1
-
-    template_headers, template_rows = read_csv(BLANK_TEMPLATE_FILE)
-    compare_headers(template_headers, ACTIVE_HEADERS, BLANK_TEMPLATE_FILE, errors)
-    if template_rows:
-        add_warning(
-            warnings,
-            relative_path(BLANK_TEMPLATE_FILE),
-            "blank template contains data rows",
-        )
-
-    objective_headers, objective_rows = read_csv(OBJECTIVE_MAP_FILE)
-    source_headers, source_rows = read_csv(SOURCE_REGISTER_FILE)
-
-    required_objective_headers = {
-        "test_id",
-        "exam_version",
-        "objectives_version",
-        "domain_id",
-        "domain_name",
-        "domain_weight_percent",
-        "objective_id",
-        "objective_text",
-        "scope_summary",
-    }
-    missing_objective_headers = sorted(required_objective_headers - set(objective_headers))
-    if missing_objective_headers:
-        add_error(
+    objectives = read_csv(bank / "objective-map.csv", OBJECTIVE_HEADERS, errors)
+    sources = read_csv(bank / "source-register.csv", SOURCE_HEADERS, errors)
+    question_sets = {
+        name: read_csv(
+            bank / name,
+            RETIRED_HEADERS if name == "retired-questions.csv" else QUESTION_HEADERS,
             errors,
-            relative_path(OBJECTIVE_MAP_FILE),
-            "missing required headers: " + ", ".join(missing_objective_headers),
         )
-
-    required_source_headers = {
-        "source_id",
-        "organization",
-        "title",
-        "publication_version",
-        "url",
-        "notes",
+        for name in FILE_STATUS
     }
-    missing_source_headers = sorted(required_source_headers - set(source_headers))
-    if missing_source_headers:
-        add_error(
-            errors,
-            relative_path(SOURCE_REGISTER_FILE),
-            "missing required headers: " + ", ".join(missing_source_headers),
-        )
 
-    objective_map: dict[str, dict[str, str]] = {}
-    for row_number, row in enumerate(objective_rows, start=2):
-        location = f"{relative_path(OBJECTIVE_MAP_FILE)}:{row_number}"
-        objective_id = (row.get("objective_id") or "").strip()
-        if not objective_id:
-            add_error(errors, location, "objective_id is blank")
-            continue
-        if objective_id in objective_map:
-            add_error(errors, location, f"duplicate objective_id {objective_id}")
-            continue
-        objective_map[objective_id] = row
+    objective_by_id: dict[str, dict[str, str]] = {}
+    for index, row in enumerate(objectives, start=2):
+        label = f"objective-map.csv row {index}"
+        if row["objective_id"] in objective_by_id:
+            errors.append(f"{label}: duplicate objective_id {row['objective_id']}")
+        objective_by_id[row["objective_id"]] = row
+        if row["test_id"] != TEST_ID:
+            errors.append(f"{label}: test_id must be {TEST_ID}")
+        if row["exam_version"] != EXAM_VERSION:
+            errors.append(f"{label}: exam_version must be {EXAM_VERSION}")
+        if row["objectives_version"] != OBJECTIVES_VERSION:
+            errors.append(f"{label}: objectives_version must be {OBJECTIVES_VERSION}")
+        try:
+            weight = int(row["domain_weight_percent"])
+            if not 0 < weight <= 100:
+                raise ValueError
+        except ValueError:
+            errors.append(f"{label}: invalid domain_weight_percent")
 
-    source_ids: set[str] = set()
-    for row_number, row in enumerate(source_rows, start=2):
-        location = f"{relative_path(SOURCE_REGISTER_FILE)}:{row_number}"
-        source_id = (row.get("source_id") or "").strip()
-        if not source_id:
-            add_error(errors, location, "source_id is blank")
-            continue
-        if source_id in source_ids:
-            add_error(errors, location, f"duplicate source_id {source_id}")
-            continue
-        source_ids.add(source_id)
+    if set(objective_by_id) != EXPECTED_OBJECTIVES:
+        missing = sorted(EXPECTED_OBJECTIVES - set(objective_by_id))
+        extra = sorted(set(objective_by_id) - EXPECTED_OBJECTIVES)
+        errors.append(f"objective-map.csv objective set mismatch; missing={missing}, extra={extra}")
 
-    all_rows: list[tuple[Path, int, dict[str, str]]] = []
+    domain_weights: dict[str, int] = {}
+    for row in objectives:
+        domain_weights.setdefault(row["domain_id"], int(row["domain_weight_percent"]))
+        if domain_weights[row["domain_id"]] != int(row["domain_weight_percent"]):
+            errors.append(f"objective-map.csv: inconsistent weight for domain {row['domain_id']}")
+    if sum(domain_weights.values()) != 100:
+        errors.append(f"objective-map.csv: domain weights total {sum(domain_weights.values())}, expected 100")
 
-    for path, rules in QUESTION_FILES.items():
-        headers, rows = read_csv(path)
-        file_counts[relative_path(path)] = len(rows)
-        compare_headers(headers, rules["expected_headers"], path, errors)
+    source_ids = {row["source_id"] for row in sources if row["source_id"]}
+    if len(source_ids) != len(sources):
+        errors.append("source-register.csv: blank or duplicate source_id")
+    for index, row in enumerate(sources, start=2):
+        if not row["organization"] or not row["title"] or not row["url"]:
+            errors.append(f"source-register.csv row {index}: organization, title, and url are required")
 
-        for row_number, row in enumerate(rows, start=2):
-            location = f"{relative_path(path)}:{row_number}"
-            all_rows.append((path, row_number, row))
+    all_ids: dict[str, str] = {}
+    all_stems: dict[str, str] = {}
+    all_concepts: dict[str, str] = {}
+    sequence_numbers: list[int] = []
+    stored_rows: list[tuple[str, dict[str, str]]] = []
 
-            missing_fields = sorted(
-                field for field in REQUIRED_ALWAYS if not (row.get(field) or "").strip()
-            )
-            if missing_fields:
-                add_error(
-                    errors,
-                    location,
-                    "missing required fields: " + ", ".join(missing_fields),
-                )
+    for filename, rows in question_sets.items():
+        allowed_status = FILE_STATUS[filename]
+        for index, row in enumerate(rows, start=2):
+            label = f"{filename} row {index}"
+            stored_rows.append((label, row))
+            qid = row.get("question_id", "")
+            match = ID_RE.fullmatch(qid)
+            if not match:
+                errors.append(f"{label}: invalid question_id {qid!r}")
+            else:
+                sequence_numbers.append(int(match.group(1)))
+            if qid in all_ids:
+                errors.append(f"{label}: duplicate ID also found at {all_ids[qid]}")
+            all_ids[qid] = label
 
-            question_id = (row.get("question_id") or "").strip()
-            if not QUESTION_ID_RE.fullmatch(question_id):
-                add_error(errors, location, "question_id must match SEC701-0000001 format")
-
-            if row.get("test_id") != "SEC-701":
-                add_error(errors, location, "test_id must be SEC-701")
-            if row.get("certification") != "CompTIA Security+":
-                add_error(errors, location, "certification must be CompTIA Security+")
-            if row.get("exam_version") != "SY0-701":
-                add_error(errors, location, "exam_version must be SY0-701")
-            if row.get("objectives_version") != "6.0":
-                add_error(errors, location, "objectives_version must be 6.0")
+            for field, expected in (
+                ("test_id", TEST_ID),
+                ("certification", CERTIFICATION),
+                ("exam_version", EXAM_VERSION),
+                ("objectives_version", OBJECTIVES_VERSION),
+            ):
+                if row.get(field) != expected:
+                    errors.append(f"{label}: {field} must be {expected!r}")
 
             try:
-                question_version = int((row.get("question_version") or "").strip())
-                if question_version < 1:
+                if int(row.get("question_version", "")) < 1:
                     raise ValueError
             except ValueError:
-                add_error(errors, location, "question_version must be a positive integer")
+                errors.append(f"{label}: question_version must be a positive integer")
 
-            for field, allowed_values in ENUMS.items():
-                value = (row.get(field) or "").strip()
-                if value not in allowed_values:
-                    add_error(errors, location, f"{field} has invalid value {value!r}")
+            if not BATCH_RE.fullmatch(row.get("batch_id", "")):
+                errors.append(f"{label}: invalid batch_id")
 
-            review_status = (row.get("review_status") or "").strip()
-            if review_status not in rules["allowed_statuses"]:
-                allowed = ", ".join(sorted(rules["allowed_statuses"]))
-                add_error(
-                    errors,
-                    location,
-                    f"review_status {review_status!r} is not allowed in {relative_path(path)}; allowed: {allowed}",
+            for field, allowed in ENUMS.items():
+                if row.get(field) not in allowed:
+                    errors.append(f"{label}: invalid {field} value {row.get(field)!r}")
+            if row.get("review_status") not in allowed_status:
+                errors.append(
+                    f"{label}: review_status {row.get('review_status')!r} is not allowed in {filename}"
                 )
 
-            objective_id = (row.get("objective_id") or "").strip()
-            mapped_objective = objective_map.get(objective_id)
-            if mapped_objective is None:
-                add_error(
-                    errors,
-                    location,
-                    f"objective_id {objective_id!r} is not in objective-map.csv",
-                )
+            objective = objective_by_id.get(row.get("objective_id", ""))
+            if not objective:
+                errors.append(f"{label}: objective_id not found in objective-map.csv")
             else:
-                for field in ("domain_id", "domain_name", "objective_text"):
-                    actual = (row.get(field) or "").strip()
-                    expected = (mapped_objective.get(field) or "").strip()
-                    if actual != expected:
-                        add_error(errors, location, f"{field} does not match objective-map.csv")
+                for field in ("domain_id","domain_name","objective_text"):
+                    if row.get(field) != objective.get(field):
+                        errors.append(f"{label}: {field} does not match objective-map.csv")
 
-            concept_key = (row.get("concept_key") or "").strip()
-            if not CONCEPT_KEY_RE.fullmatch(concept_key):
-                add_error(errors, location, "concept_key must be lowercase kebab-case")
+            if not CONCEPT_RE.fullmatch(row.get("concept_key", "")):
+                errors.append(f"{label}: concept_key must be lowercase kebab-case")
 
-            for date_field in ("date_added", "date_modified"):
-                date_value = (row.get(date_field) or "").strip()
-                if not valid_iso_date(date_value):
-                    add_error(
-                        errors,
-                        location,
-                        f"{date_field} must be a valid YYYY-MM-DD date",
-                    )
-
-            date_reviewed = (row.get("date_reviewed") or "").strip()
-            if date_reviewed and not valid_iso_date(date_reviewed):
-                add_error(errors, location, "date_reviewed must be a valid YYYY-MM-DD date")
-
-            if review_status in {"review", "approved"}:
-                if not date_reviewed:
-                    add_error(errors, location, "review and approved rows require date_reviewed")
-                if not (row.get("reviewer") or "").strip():
-                    add_error(errors, location, "review and approved rows require reviewer")
-
-            if review_status == "approved" and (row.get("quality_flags") or "").strip():
-                add_error(errors, location, "approved rows may not contain quality_flags")
-
-            date_added = (row.get("date_added") or "").strip()
-            date_modified = (row.get("date_modified") or "").strip()
-            if valid_iso_date(date_added) and valid_iso_date(date_modified):
-                if date_modified < date_added:
-                    add_error(errors, location, "date_modified may not precede date_added")
-
-            if (
-                date_reviewed
-                and valid_iso_date(date_reviewed)
-                and valid_iso_date(date_added)
-                and date_reviewed < date_added
-            ):
-                add_error(errors, location, "date_reviewed may not precede date_added")
-
-            choices = {
-                letter: (row.get(f"answer_{letter.lower()}") or "").strip()
-                for letter in "ABCD"
-            }
-            if len({normalized(choices[letter]) for letter in "ABCD"}) != 4:
-                add_error(errors, location, "answer choices must be distinct")
-
-            correct_answers = split_pipe_values(row.get("correct_answers") or "")
-            if any(answer not in {"A", "B", "C", "D"} for answer in correct_answers):
-                add_error(errors, location, "correct_answers contains an invalid stored key")
-            if correct_answers != sorted(set(correct_answers)):
-                add_error(errors, location, "correct_answers must be unique and sorted")
-
-            question_type = (row.get("question_type") or "").strip()
-            instruction = (row.get("question_instruction") or "").strip()
-
-            if question_type in {"single_choice", "best_available"}:
-                if len(correct_answers) != 1:
-                    add_error(
-                        errors,
-                        location,
-                        f"{question_type} requires exactly one correct answer",
-                    )
-
-            if question_type == "multi_select":
-                if len(correct_answers) < 2:
-                    add_error(errors, location, "multi_select requires at least two correct answers")
-                if not instruction:
-                    add_error(errors, location, "multi_select requires question_instruction")
-
-            if question_type == "best_available" and not instruction:
-                add_error(errors, location, "best_available requires question_instruction")
-
-            text_fields = [
-                row.get("question_text") or "",
-                choices["A"],
-                choices["B"],
-                choices["C"],
-                choices["D"],
+            required = [
+                "question_id","test_id","certification","exam_version","objectives_version",
+                "question_version","batch_id","domain_id","domain_name","objective_id",
+                "objective_text","topic","concept_key","difficulty","question_type",
+                "question_text","answer_a","answer_b","answer_c","answer_d",
+                "correct_answers","correct_explanation","answer_a_explanation",
+                "answer_b_explanation","answer_c_explanation","answer_d_explanation",
+                "study_topics","source_ids","reference_notes","date_added",
+                "date_modified","review_status",
             ]
-            if any(POSITION_DEPENDENT_RE.search(text) for text in text_fields):
-                add_error(errors, location, "position-dependent answer wording detected")
+            for field in required:
+                if not row.get(field, "").strip():
+                    errors.append(f"{label}: required field {field} is blank")
 
-            question_text = (row.get("question_text") or "").strip()
-            if question_text.lower().startswith("which is not"):
-                add_warning(warnings, location, "question uses an avoidable negative construction")
-            if UNSUPPORTED_ABSOLUTE_RE.search(question_text):
-                add_warning(warnings, location, "question stem contains a possible unsupported absolute")
+            added = parse_date(row.get("date_added", ""))
+            modified = parse_date(row.get("date_modified", ""))
+            reviewed = parse_date(row.get("date_reviewed", ""))
+            for field, parsed in (("date_added", added), ("date_modified", modified)):
+                if parsed is None:
+                    errors.append(f"{label}: {field} must be a valid YYYY-MM-DD date")
+            if row.get("date_reviewed") and reviewed is None:
+                errors.append(f"{label}: date_reviewed must be a valid YYYY-MM-DD date")
+            if added and modified and modified < added:
+                errors.append(f"{label}: date_modified precedes date_added")
+            if reviewed and added and reviewed < added:
+                errors.append(f"{label}: date_reviewed precedes date_added")
+            if reviewed and modified and reviewed < modified:
+                warnings.append(f"{label}: date_reviewed precedes date_modified; re-review may be needed")
 
-            listed_sources = split_pipe_values(row.get("source_ids") or "")
-            unknown_sources = sorted(set(listed_sources) - source_ids)
-            if unknown_sources:
-                add_error(
-                    errors,
-                    location,
-                    "unknown source IDs: " + ", ".join(unknown_sources),
+            if row.get("review_status") in {"review","approved"}:
+                if not row.get("date_reviewed"):
+                    errors.append(f"{label}: reviewed rows require date_reviewed")
+                if not row.get("reviewer"):
+                    errors.append(f"{label}: reviewed rows require reviewer")
+            if row.get("review_status") == "approved" and row.get("quality_flags"):
+                errors.append(f"{label}: approved rows must have blank quality_flags")
+
+            choices = {letter: row.get(f"answer_{letter.lower()}", "").strip() for letter in "ABCD"}
+            choice_norms = [normalized(value) for value in choices.values()]
+            if any(not value for value in choices.values()):
+                errors.append(f"{label}: all four answer choices must be populated")
+            if len(set(choice_norms)) != 4:
+                errors.append(f"{label}: answer choices must be distinct after normalization")
+            clause_sigs = [reversed_clause_signature(value) for value in choices.values()]
+            if len(set(clause_sigs)) != 4:
+                errors.append(f"{label}: reversed-clause duplicate choices detected")
+
+            correct = [part.strip() for part in row.get("correct_answers", "").split("|") if part.strip()]
+            if any(letter not in {"A","B","C","D"} for letter in correct):
+                errors.append(f"{label}: correct_answers contains an invalid stored key")
+            if correct != sorted(set(correct)):
+                errors.append(f"{label}: correct_answers must be sorted and unique")
+            qtype = row.get("question_type")
+            if qtype in {"single_choice","best_available"} and len(correct) != 1:
+                errors.append(f"{label}: {qtype} requires exactly one correct answer")
+            if qtype == "multi_select":
+                if len(correct) < 2:
+                    errors.append(f"{label}: multi_select requires at least two correct answers")
+                if not row.get("question_instruction"):
+                    errors.append(f"{label}: multi_select requires question_instruction")
+            if qtype == "best_available" and not row.get("question_instruction"):
+                errors.append(f"{label}: best_available requires question_instruction")
+
+            position_fields = [row.get("question_text", ""), *choices.values()]
+            if any(POSITION_RE.search(value) for value in position_fields):
+                errors.append(f"{label}: position-dependent answer wording detected")
+
+            listed_sources = [x for x in row.get("source_ids", "").split("|") if x]
+            unknown = sorted(set(listed_sources) - source_ids)
+            if unknown:
+                errors.append(f"{label}: unknown source IDs: {', '.join(unknown)}")
+
+            stem_norm = normalized(row.get("question_text", ""))
+            if stem_norm:
+                if stem_norm in all_stems:
+                    errors.append(f"{label}: exact duplicate stem also found at {all_stems[stem_norm]}")
+                all_stems[stem_norm] = label
+
+            concept = row.get("concept_key", "")
+            if concept:
+                if concept in all_concepts:
+                    warnings.append(f"{label}: duplicate concept_key also found at {all_concepts[concept]}")
+                else:
+                    all_concepts[concept] = label
+
+            absolute_text = re.sub(
+                r"\bmost completely\b",
+                "",
+                row.get("question_text", ""),
+                flags=re.I,
+            )
+            if ABSOLUTE_RE.search(absolute_text):
+                warnings.append(f"{label}: unsupported absolute may need review")
+
+            if filename == "retired-questions.csv":
+                if not row.get("retired_date") or not row.get("retirement_reason"):
+                    errors.append(f"{label}: retired rows require retired_date and retirement_reason")
+                retired = parse_date(row.get("retired_date", ""))
+                if retired is None:
+                    errors.append(f"{label}: retired_date must be a valid YYYY-MM-DD date")
+                if retired and added and retired < added:
+                    errors.append(f"{label}: retired_date precedes date_added")
+                replacement = row.get("replacement_question_id", "")
+                if replacement and not ID_RE.fullmatch(replacement):
+                    errors.append(f"{label}: invalid replacement_question_id")
+
+    for i, (label_a, row_a) in enumerate(stored_rows):
+        stem_a = normalized(row_a.get("question_text", ""))
+        if not stem_a:
+            continue
+        for label_b, row_b in stored_rows[i + 1:]:
+            stem_b = normalized(row_b.get("question_text", ""))
+            if not stem_b or stem_a == stem_b:
+                continue
+            ratio = difflib.SequenceMatcher(None, stem_a, stem_b).ratio()
+            if ratio >= 0.88:
+                warnings.append(
+                    f"Near-duplicate stems ({ratio:.2f}): {label_a} and {label_b}"
                 )
 
-            if rules["retired"]:
-                retired_date = (row.get("retired_date") or "").strip()
-                retirement_reason = (row.get("retirement_reason") or "").strip()
-                replacement_id = (row.get("replacement_question_id") or "").strip()
+    if sequence_numbers:
+        ordered = sorted(sequence_numbers)
+        if ordered[0] != 1:
+            warnings.append(f"Question sequence starts at {ordered[0]:07d}, not 0000001")
+        gaps = [
+            f"{a + 1:07d}-{b - 1:07d}" if b - a > 2 else f"{a + 1:07d}"
+            for a, b in zip(ordered, ordered[1:])
+            if b != a + 1
+        ]
+        if gaps:
+            warnings.append("Question sequence contains gaps: " + ", ".join(gaps))
 
-                if not retired_date:
-                    add_error(errors, location, "retired rows require retired_date")
-                elif not valid_iso_date(retired_date):
-                    add_error(errors, location, "retired_date must be a valid YYYY-MM-DD date")
+    answer_counts = Counter()
+    domain_counts = Counter()
+    difficulty_counts = Counter()
+    type_counts = Counter()
+    style_counts = Counter()
+    for _, row in stored_rows:
+        if row.get("review_status") == "approved" and row.get("question_id") in all_ids:
+            for key in row.get("correct_answers", "").split("|"):
+                if key:
+                    answer_counts[key] += 1
+            domain_counts[row.get("domain_id")] += 1
+            difficulty_counts[row.get("difficulty")] += 1
+            type_counts[row.get("question_type")] += 1
+            style_counts[row.get("question_style")] += 1
 
-                if not retirement_reason:
-                    add_error(errors, location, "retired rows require retirement_reason")
+    info.append(f"Objectives: {len(objectives)}")
+    info.append(f"Registered sources: {len(sources)}")
+    info.append(f"Question rows: {len(stored_rows)}")
+    info.append(f"Approved answer-key counts: {dict(sorted(answer_counts.items()))}")
+    info.append(f"Approved domain counts: {dict(sorted(domain_counts.items()))}")
+    info.append(f"Approved difficulty counts: {dict(sorted(difficulty_counts.items()))}")
+    info.append(f"Approved type counts: {dict(sorted(type_counts.items()))}")
+    info.append(f"Approved style counts: {dict(sorted(style_counts.items()))}")
 
-                if replacement_id and not QUESTION_ID_RE.fullmatch(replacement_id):
-                    add_error(
-                        errors,
-                        location,
-                        "replacement_question_id must match SEC701-0000001 format",
-                    )
-                if replacement_id == question_id:
-                    add_error(
-                        errors,
-                        location,
-                        "replacement_question_id may not equal question_id",
-                    )
+    return errors, warnings, info
 
-    question_id_locations: defaultdict[str, list[str]] = defaultdict(list)
-    stem_locations: defaultdict[str, list[str]] = defaultdict(list)
-    concept_locations: defaultdict[str, list[str]] = defaultdict(list)
+def main() -> int:
+    total_errors = 0
+    total_warnings = 0
 
-    for path, row_number, row in all_rows:
-        location = f"{relative_path(path)}:{row_number}"
-        question_id = (row.get("question_id") or "").strip()
-        stem = normalized(row.get("question_text") or "")
-        concept_key = (row.get("concept_key") or "").strip()
+    for index, config in enumerate(BANK_CONFIGS):
+        configure_bank(config)
+        errors, warnings, info = validate()
+        heading = f"{config['label']} QUESTION BANK VALIDATION"
+        if index:
+            print()
+        print(heading)
+        print("=" * len(heading))
+        for line in info:
+            print(f"INFO: {line}")
+        for line in warnings:
+            print(f"WARNING: {line}")
+        for line in errors:
+            print(f"ERROR: {line}")
+        print("-" * len(heading))
+        print(f"Errors: {len(errors)}")
+        print(f"Warnings: {len(warnings)}")
+        total_errors += len(errors)
+        total_warnings += len(warnings)
 
-        if question_id:
-            question_id_locations[question_id].append(location)
-        if stem:
-            stem_locations[stem].append(location)
-        if concept_key:
-            concept_locations[concept_key].append(location)
-
-    for question_id, locations in question_id_locations.items():
-        if len(locations) > 1:
-            add_error(
-                errors,
-                "question bank",
-                f"duplicate question_id {question_id}: " + ", ".join(locations),
-            )
-
-    for locations in stem_locations.values():
-        if len(locations) > 1:
-            add_error(
-                errors,
-                "question bank",
-                "exact normalized duplicate stem: " + ", ".join(locations),
-            )
-
-    for concept_key, locations in concept_locations.items():
-        if len(locations) > 1:
-            add_warning(
-                warnings,
-                "question bank",
-                f"repeated concept_key {concept_key}: " + ", ".join(locations),
-            )
-
-    active_answer_counts: Counter[str] = Counter()
-    _, active_rows = read_csv(ACTIVE_FILE)
-    for row in active_rows:
-        for answer in split_pipe_values(row.get("correct_answers") or ""):
-            active_answer_counts[answer] += 1
-
-    if active_rows:
-        distribution = ", ".join(
-            f"{letter}={active_answer_counts[letter]}" for letter in "ABCD"
-        )
-        add_info(
-            infos,
-            relative_path(ACTIVE_FILE),
-            "stored correct-answer distribution: " + distribution,
-        )
-
-    if args.write_report:
-        write_report(
-            errors=errors,
-            warnings=warnings,
-            infos=infos,
-            row_count=len(all_rows),
-            file_counts=file_counts,
-        )
-
-    print(f"Repository root: {REPO_ROOT}")
-    print(f"Validated {len(all_rows)} question rows.")
-    print(f"Errors: {len(errors)}")
-    print(f"Warnings: {len(warnings)}")
-    print(f"Information: {len(infos)}")
-
-    for error in errors:
-        print(f"ERROR: {error}")
-    for warning in warnings:
-        print(f"WARNING: {warning}")
-    for info in infos:
-        print(f"INFO: {info}")
-
-    if args.write_report:
-        print(f"Validation report written: {relative_path(REPORT_FILE)}")
-    else:
-        print("Validation report not rewritten. Use --write-report when an audit snapshot is needed.")
-
-    return 1 if errors else 0
-
+    print()
+    print(f"Validated question banks: {len(BANK_CONFIGS)}")
+    print(f"Total errors: {total_errors}")
+    print(f"Total warnings: {total_warnings}")
+    return 1 if total_errors else 0
 
 if __name__ == "__main__":
-    sys.exit(main())
+    raise SystemExit(main())

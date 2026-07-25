@@ -10,6 +10,9 @@ import {
 
 function createSession() {
   return {
+    test: {
+      practiceTestPath: "/security-plus/sy0-701/practice-test",
+    },
     questionOrder: ["question-1", "question-2", "question-3"],
   };
 }
@@ -40,6 +43,19 @@ test("creates a client-side transition for another question", () => {
     targetIndex: 2,
     path: "/security-plus/sy0-701/practice-test/question/3/",
   });
+});
+
+
+
+test("creates a Network+ client-side transition", () => {
+  const session = createSession();
+  session.test.practiceTestPath = "/network-plus/n10-009/practice-test";
+  const transition = createPagedNavigationTransition(session, 1, 2);
+
+  assert.equal(
+    transition.path,
+    "/network-plus/n10-009/practice-test/question/2/",
+  );
 });
 
 test("marks a transition to the current question as unchanged", () => {
@@ -105,6 +121,7 @@ test("falls back to the route for an unmarked history entry", () => {
       { questionPosition: 3 },
       "/security-plus/sy0-701/practice-test/question/2/",
       3,
+      "/security-plus/sy0-701/practice-test",
     ),
     2,
   );
@@ -121,6 +138,20 @@ test("falls back to the route when marked history state is invalid", () => {
       3,
     ),
     2,
+  );
+});
+
+
+
+test("history fallback parses the active Network+ route", () => {
+  assert.equal(
+    resolvePagedHistoryPosition(
+      null,
+      "/network-plus/n10-009/practice-test/question/3/",
+      3,
+      "/network-plus/n10-009/practice-test",
+    ),
+    3,
   );
 });
 

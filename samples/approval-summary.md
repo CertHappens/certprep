@@ -1,41 +1,29 @@
-# SEC-701 Question Approval Summary
+# NET-009 Approval Summary
 
-- Approval date: `2026-07-20`
-- Batch approved: `SEC701-BATCH-007`
-- Previously approved questions: 126
-- Newly approved questions: 24
-- Total production questions: 150
-- Remaining draft questions: 0
-- Published objectives represented: 28 of 28
-- Accelerated automatic-approval phase: complete
-- Future workflow: draft, explicit review, then approval
+## Current status
 
-## Stored correct-answer distribution
+- Exam: CompTIA Network+ N10-009
+- Objectives document: Version 6.0
+- Project test ID: `NET-009`
+- Question namespace: `NET009-0000001`
+- Latest batch: `NET009-BATCH-003`
+- Approved question rows: 78
+- Review rows: 0
+- Draft rows: 0
+- Retired rows: 0
+- Registered sources: 53
+- Numbered objectives with approved coverage: 25 of 25
 
-- A: 38
-- B: 38
-- C: 37
-- D: 37
+## Batch 003 decision
 
-## Difficulty distribution
+The repository owner authorized accelerated approval during the early staging build. Batch 003 was internally reviewed, validated, marked `approved`, and appended directly to `questions.csv`.
 
-- easy: 39
-- medium: 75
-- hard: 36
+Batch sizing is no longer fixed at 24. Future batch sizes should be chosen according to remaining objective, subtopic, difficulty, and cumulative domain-weight needs.
 
-## Domain distribution
+The normal approval structure remains available. `draft-questions.csv` remains header-only, `review_status` remains part of the schema, and retirement metadata remains defined for future use.
 
-- 1.0: 18 (12.0%)
-- 2.0: 33 (22.0%)
-- 3.0: 27 (18.0%)
-- 4.0: 42 (28.0%)
-- 5.0: 30 (20.0%)
+## Permanent range
 
-## Question-style distribution
-
-- direct: 26
-- scenario: 106
-- comparison: 15
-- calculation: 3
-
-Batch 007 was added directly to `questions.csv` as the final accelerated batch. `draft-questions.csv` remains header-only in this package. The next new batch should be placed in the draft file for explicit review.
+- First ID: `NET009-0000001`
+- Last ID: `NET009-0000078`
+- Next available ID: `NET009-0000079`

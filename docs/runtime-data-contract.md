@@ -12,6 +12,7 @@ The production converter reads only the active file configured in `config/quiz-c
 
 ```text
 data/security-plus/sec-701/questions.csv
+data/network-plus/n10-009/questions.csv
 ```
 
 Draft and retired questions are validated elsewhere but are never included in public runtime data.
@@ -22,6 +23,8 @@ Draft and retired questions are validated elsewhere but are never included in pu
 src/quiz-data/catalog.json
 src/quiz-data/security-plus/sec-701/manifest.json
 src/quiz-data/security-plus/sec-701/questions.json
+src/quiz-data/network-plus/n10-009/manifest.json
+src/quiz-data/network-plus/n10-009/questions.json
 ```
 
 Eleventy copies these files to the equivalent `/quiz-data/` URLs during the production build.
@@ -92,6 +95,17 @@ The runtime output intentionally excludes internal management and review fields,
 - Quality flags
 - Author notes
 - Authoring and review dates
+
+## Practice-test route
+
+Each generated test object includes `practiceTestPath`, the canonical route for that exam version's practice-test entry page. Paged navigation uses this value to keep Security+ and Network+ sessions on their own question routes while preserving the same shared quiz engine.
+
+```json
+{
+  "testId": "NET-009",
+  "practiceTestPath": "/network-plus/n10-009/practice-test"
+}
+```
 
 ## Data version
 

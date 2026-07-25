@@ -60,7 +60,11 @@ export function createPagedNavigationModel(session, currentPosition) {
 
     return {
       position,
-      path: buildQuestionPath(position),
+      path: buildQuestionPath(
+        position,
+        total,
+        session.test?.practiceTestPath,
+      ),
       answered: isAnswered,
       flagged: isFlagged,
       current: isCurrent,
@@ -76,11 +80,19 @@ export function createPagedNavigationModel(session, currentPosition) {
     flagged,
     previousPath:
       currentPosition > 1
-        ? buildQuestionPath(currentPosition - 1)
+        ? buildQuestionPath(
+            currentPosition - 1,
+            total,
+            session.test?.practiceTestPath,
+          )
         : null,
     nextPath:
       currentPosition < total
-        ? buildQuestionPath(currentPosition + 1)
+        ? buildQuestionPath(
+            currentPosition + 1,
+            total,
+            session.test?.practiceTestPath,
+          )
         : null,
     items,
   };

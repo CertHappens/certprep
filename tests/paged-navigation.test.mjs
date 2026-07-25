@@ -7,6 +7,9 @@ import {
 
 function makeSession() {
   return {
+    test: {
+      practiceTestPath: "/security-plus/sy0-701/practice-test",
+    },
     questionOrder: ["q1", "q2", "q3", "q4"],
     questions: {
       q1: { selectedAnswerIds: ["q1-a"], flaggedForReview: false },
@@ -45,6 +48,23 @@ test("last question has no next path", () => {
     "/security-plus/sy0-701/practice-test/question/3/",
   );
   assert.equal(model.nextPath, null);
+});
+
+
+
+test("navigation paths follow the active certification", () => {
+  const session = makeSession();
+  session.test.practiceTestPath = "/network-plus/n10-009/practice-test";
+  const model = createPagedNavigationModel(session, 2);
+
+  assert.equal(
+    model.previousPath,
+    "/network-plus/n10-009/practice-test/question/1/",
+  );
+  assert.equal(
+    model.nextPath,
+    "/network-plus/n10-009/practice-test/question/3/",
+  );
 });
 
 test("navigation totals count answered, unanswered, and flagged questions", () => {

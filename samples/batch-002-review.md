@@ -1,63 +1,94 @@
-# SEC-701 Batch 002 Critical Review
+# NET-009 Batch 002 Review
 
-## Batch summary
+- Batch ID: `NET009-BATCH-002`
+- Review date: 2026-07-25
+- Questions generated: 24
+- Review status: Approved under the accelerated staging authorization
+- Permanent IDs: `NET009-0000025` through `NET009-0000048`
 
-- Batch ID: `SEC701-BATCH-002`
-- Questions: 20
-- IDs: `SEC701-0000011` through `SEC701-0000030`
-- Status: `approved`
-- New stored-answer distribution: A = 5, B = 5, C = 5, D = 5
-- New difficulty distribution: easy = 6, medium = 10, hard = 4
-- Exact duplicate stems: none
-- Duplicate concept keys: none
-- Exact or reversed-clause duplicate answer choices: none
+## Distribution checks
 
-The batch supplies one question for each of the 18 objectives that was not represented by the approved starter set. It adds a second question for objectives 2.2 and 3.2 to improve cumulative domain balance. The project owner approved all 20 questions on `2026-07-19`. Across the 30 approved questions, all 28 published objectives now have at least one question.
+| Measure | Result | Target | Status |
+|---|---:|---:|---|
+| Domain 1.0 | 6 | 6 | Pass |
+| Domain 2.0 | 5 | 5 | Pass |
+| Domain 3.0 | 4 | 4 | Pass |
+| Domain 4.0 | 3 | 3 | Pass |
+| Domain 5.0 | 6 | 6 | Pass |
+| Easy | 6 | 6 | Pass |
+| Medium | 12 | 12 | Pass |
+| Hard | 6 | 6 | Pass |
+| Single choice | 20 | 20 | Pass |
+| Multi-select | 2 | 2 | Pass |
+| Best available | 2 | 2 | Pass |
+| Direct | 6 | 6 | Pass |
+| Scenario | 12 | 12 | Pass |
+| Comparison | 4 | 4 | Pass |
+| Calculation | 2 | 2 | Pass |
 
-## Cumulative domain coverage
+## Correct-answer distribution
 
-| Domain | Approved | Review batch | Total | Total share | Exam weight |
-|---|---:|---:|---:|---:|---:|
-| 1.0 General Security Concepts | 1 | 3 | 4 | 13.3% | 12% |
-| 2.0 Threats, Vulnerabilities, and Mitigations | 2 | 4 | 6 | 20.0% | 22% |
-| 3.0 Security Architecture | 2 | 3 | 5 | 16.7% | 18% |
-| 4.0 Security Operations | 3 | 6 | 9 | 30.0% | 28% |
-| 5.0 Security Program Management and Oversight | 2 | 4 | 6 | 20.0% | 20% |
+| Stored key | Batch 002 selections | Cumulative selections |
+|---|---:|---:|
+| A | 7 | 13 |
+| B | 6 | 13 |
+| C | 6 | 13 |
+| D | 7 | 13 |
 
-## Question-by-question review
+The two multi-select questions create 26 correct selections. Batch 002 complements Batch 001's 6, 7, 7, 6 distribution, producing an exactly balanced cumulative distribution of 13 selections for each stored key.
 
-| ID | Objective | Primary concept | Initial quality finding |
-|---|---|---|---|
-| SEC701-0000011 | 1.1 | Security control classification | The physical barrier and preventive purpose are explicit, so both category and type are defensible. |
-| SEC701-0000012 | 1.2 | Zero Trust components | The data-path wording distinguishes the policy enforcement point from the decision and administration components. |
-| SEC701-0000013 | 1.3 | Change rollback planning | The stem asks for a reversal procedure, avoiding confusion with impact analysis or scheduling. |
-| SEC701-0000014 | 2.1 | Insider threats | Authorized employee access and the stated retaliatory purpose make both actor type and motivation clear. |
-| SEC701-0000015 | 2.2 | Supply-chain attacks | Compromise occurs in the vendor build and distribution process, making supply chain uniquely correct. |
-| SEC701-0000016 | 2.2 | Message-based social engineering | The phrase 'most specifically' prevents broad phishing terminology from competing with smishing. |
-| SEC701-0000017 | 2.3 | Race conditions | The file changes between check and use, providing the defining facts of a TOCTOU race. |
-| SEC701-0000018 | 3.1 | Container architecture | The question tests a real architecture distinction without claiming containers provide no isolation. |
-| SEC701-0000019 | 3.2 | DMZ architecture | The required flow and trust boundaries make the DMZ plus internal database design clearly strongest. |
-| SEC701-0000020 | 3.2 | Failure modes | The requirement explicitly denies unvalidated access, so fail-closed is not a judgment call. |
-| SEC701-0000021 | 4.1 | Application allowlisting | Unknown malware is included to distinguish allowlisting from signature-based denylisting. |
-| SEC701-0000022 | 4.2 | Media sanitization | The stem supplies the conditions needed for cryptographic erase and requires hardware reuse. |
-| SEC701-0000023 | 4.4 | SIEM alert tuning | The exception is narrowly scoped, preserving detection outside the authorized scanner context. |
-| SEC701-0000024 | 4.5 | Intrusion prevention | Inline automatic blocking is the defining difference between IPS and IDS in this question. |
-| SEC701-0000025 | 4.7 | Security automation safeguards | The answer retains automation while adding decision quality and recovery safeguards. |
-| SEC701-0000026 | 4.9 | Investigation data sources | The request for exact transmitted bytes makes packet capture more direct than summarized logs. |
-| SEC701-0000027 | 5.1 | Governance documents | Mandatory technical parameters under a broader policy identify a standard rather than a procedure. |
-| SEC701-0000028 | 5.4 | Privacy and data minimization | The service purpose requires only email, so removing unnecessary sensitive data directly applies minimization. |
-| SEC701-0000029 | 5.5 | Penetration testing approaches | The tester has no internal knowledge or access, establishing a black-box assessment. |
-| SEC701-0000030 | 5.6 | Phishing awareness | The measured weakness is reporting, and the selected action teaches and remeasures that behavior. |
+## Objective coverage
 
-## Batch-level observations
+- Numbered objectives covered by Batch 002: 25 of 25.
+- Cumulative numbered objectives covered: 25 of 25.
+- Previously untouched objectives 1.6, 1.8, and 3.5 now have approved coverage.
+- Every official numbered N10-009 objective now has at least one approved question.
+- Objective 1.8 receives two questions to distinguish SD-WAN from VXLAN.
+- Objective 3.5 receives two questions to cover management paths and VPN tunneling.
+- Objective 5.2 receives two questions to cover PoE capacity and fiber optical power.
 
-- No question depends on stored or displayed answer position.
-- No question uses all-of-the-above, none-of-the-above, or linked answer labels.
-- Scenario questions include the material facts needed to distinguish the intended answer.
-- Incorrect-choice explanations state why the choice does not fit and where the concept would apply.
-- The new answer-key distribution is deliberately balanced, but technical correctness remains the governing rule.
-- The cumulative bank is close to the published domain weights. Domain 4 is slightly high and Domains 2 and 3 remain slightly low, which should guide later batches.
+## Programmatic arithmetic checks
 
-## Approval result
+- `NET009-0000030`: Confirmed a /26 provides 64 total addresses and 62 conventional usable hosts; a /27 provides only 30 usable hosts.
+- `NET009-0000044`: Confirmed 24 access points at 18 W require 432 W, exceeding a 370 W PoE budget by 62 W.
+- `NET009-0000048`: Confirmed -2 dBm minus 12 dB equals -14 dBm and provides 4 dB of margin above a -18 dBm receiver-sensitivity threshold.
 
-All 20 questions were approved by the project owner on `2026-07-19` and moved into `questions.csv`. `draft-questions.csv` is now header-only. Future batches should continue to use the same review and promotion workflow.
+## Question inventory
+
+| ID | Objective | Topic | Difficulty | Type | Style | Correct |
+|---|---|---|---|---|---|---|
+| NET009-0000025 | 1.6 | Data center architecture | medium | single_choice | scenario | D |
+| NET009-0000026 | 1.8 | Software-defined WAN | medium | best_available | scenario | A |
+| NET009-0000027 | 1.8 | Network overlays | hard | single_choice | comparison | C |
+| NET009-0000028 | 1.1 | OSI protocol data units | easy | single_choice | direct | B |
+| NET009-0000029 | 1.4 | Network traffic types | medium | multi_select | direct | A|D |
+| NET009-0000030 | 1.7 | IPv4 subnet sizing | hard | single_choice | calculation | C |
+| NET009-0000031 | 2.1 | Address translation | easy | single_choice | direct | A |
+| NET009-0000032 | 2.2 | Spanning tree | medium | single_choice | scenario | D |
+| NET009-0000033 | 2.3 | Wireless security | medium | single_choice | comparison | B |
+| NET009-0000034 | 2.4 | Data center airflow | hard | best_available | scenario | C |
+| NET009-0000035 | 2.1 | First-hop redundancy | easy | single_choice | direct | D |
+| NET009-0000036 | 3.5 | Management access | medium | single_choice | comparison | A |
+| NET009-0000037 | 3.5 | Remote-access VPN | medium | multi_select | scenario | B|D |
+| NET009-0000038 | 3.2 | SNMP monitoring | easy | single_choice | direct | C |
+| NET009-0000039 | 3.4 | DHCP relay | hard | single_choice | scenario | B |
+| NET009-0000040 | 4.1 | Authorization | easy | single_choice | scenario | A |
+| NET009-0000041 | 4.2 | DHCP attacks | medium | single_choice | scenario | C |
+| NET009-0000042 | 4.3 | Access control lists | hard | single_choice | scenario | D |
+| NET009-0000043 | 5.1 | Troubleshooting methodology | easy | single_choice | direct | B |
+| NET009-0000044 | 5.2 | Power over Ethernet | medium | single_choice | scenario | A |
+| NET009-0000045 | 5.3 | Switching loops | hard | single_choice | scenario | C |
+| NET009-0000046 | 5.4 | Real-time traffic performance | medium | single_choice | comparison | D |
+| NET009-0000047 | 5.5 | Copper cable testing | medium | single_choice | scenario | B |
+| NET009-0000048 | 5.2 | Fiber optical power | medium | single_choice | calculation | A |
+
+## Internal quality review
+
+- All Batch 002 IDs and concept keys are unique across the complete 48-question bank.
+- Batch 002 avoids the narrow concepts tested in Batch 001 while reinforcing broader objective coverage.
+- All answer choices are populated and distinct after normalization.
+- No displayed-letter-dependent wording, all-of-the-above choices, or none-of-the-above choices are used.
+- Each answer choice has a separate teaching explanation.
+- Every source ID used by Batch 002 exists in `source-register.csv`.
+- Approved rows contain review dates and the accelerated internal reviewer.
+- The draft file remains header-only, and the retirement structure remains available.

@@ -37,6 +37,7 @@ class QuizDataBuilderTests(unittest.TestCase):
             "objective_map_csv": "data/security-plus/sec-701/objective-map.csv",
             "output_directory": "src/quiz-data/security-plus/sec-701",
             "public_base_path": "/quiz-data/security-plus/sec-701",
+            "practice_test_path": "/security-plus/sy0-701/practice-test",
             "question_count_options": [10, 20, 30, 50],
             "preferred_default_question_count": 30,
         }
@@ -152,6 +153,14 @@ class QuizDataBuilderTests(unittest.TestCase):
             self.assertEqual(
                 catalog_entry["questionsFile"],
                 "/quiz-data/security-plus/sec-701/questions.json",
+            )
+            self.assertEqual(
+                manifest["test"]["practiceTestPath"],
+                "/security-plus/sy0-701/practice-test",
+            )
+            self.assertEqual(
+                catalog_entry["test"]["practiceTestPath"],
+                "/security-plus/sy0-701/practice-test",
             )
 
             with (output_directory / "questions.json").open(

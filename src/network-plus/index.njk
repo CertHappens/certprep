@@ -1,0 +1,107 @@
+---
+layout: layouts/base.njk
+title: CompTIA Network+ Practice and Study Resources
+description: Prepare for CompTIA Network+ N10-009 with randomized practice tests, a practical study roadmap, and shared networking references.
+permalink: /network-plus/
+---
+{% set quiz = quizCatalog.byTestId["NET-009"] %}
+
+<header class="page-header page-header--compact">
+  <div class="page-shell">
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="/">Home</a></li>
+        <li aria-current="page">Network+</li>
+      </ol>
+    </nav>
+
+    <p class="eyebrow">Certification hub</p>
+    <h1>CompTIA Network+ N10-009</h1>
+    <p class="lede">
+      Build the networking foundation, practice troubleshooting decisions, and connect protocols to the systems that use them.
+    </p>
+  </div>
+</header>
+
+<section class="section">
+  <div class="page-shell">
+    <div class="card-grid">
+      <article class="card">
+        <p class="card__meta">Available now</p>
+        <h2>Practice tests</h2>
+        <p>Start a randomized 10- or 20-question session from {{ quiz.availableQuestionCount }} approved N10-009 questions. Review every answer choice with a detailed explanation.</p>
+        <a class="button" href="/network-plus/n10-009/practice-test/">Start a Network+ practice test</a>
+      </article>
+
+      <article class="card">
+        <p class="card__meta">Available now</p>
+        <h2>Study guides</h2>
+        <p>Use the full N10-009 roadmap to organize all five exam domains, then open a detailed printable guide for deeper review.</p>
+        <a class="button button--secondary" href="/network-plus/n10-009/study-guide/">Open the N10-009 study guide</a>
+
+        <h3>Detailed domain guides</h3>
+        <ul>
+          <li><a href="/network-plus/n10-009/study-guide/networking-concepts/">Domain 1: Networking Concepts</a></li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <p class="card__meta">Available now</p>
+        <h2>Ports and protocols</h2>
+        <p>Search common services by port, transport, purpose, or security clue, then print the complete reference for offline review.</p>
+        <a class="button button--secondary" href="/ports-protocols/">Open ports and protocols</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section section--bordered">
+  <div class="page-shell">
+    <div class="section-heading">
+      <p class="eyebrow">Exam structure</p>
+      <h2>What N10-009 measures</h2>
+      <p>
+        Network+ combines design choices, implementation, routine operations, security, and troubleshooting. The largest domain is Network Troubleshooting, so preparation should include diagrams, commands, packet evidence, and fault isolation rather than definitions alone.
+      </p>
+    </div>
+
+    <div class="table-scroll" role="region" aria-label="Network+ N10-009 exam domains" tabindex="0">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Domain</th>
+            <th scope="col">Weight</th>
+            <th scope="col">Main decisions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><a href="/network-plus/n10-009/study-guide/networking-concepts/">1.0 Networking Concepts</a></td>
+            <td>23%</td>
+            <td>How traffic moves, which device or service fits, and how addressing, media, topology, cloud, and modern network designs work together.</td>
+          </tr>
+          <tr>
+            <td>2.0 Network Implementation</td>
+            <td>20%</td>
+            <td>How to select and configure routing, switching, wireless, and physical infrastructure.</td>
+          </tr>
+          <tr>
+            <td>3.0 Network Operations</td>
+            <td>19%</td>
+            <td>How to document, monitor, recover, manage services, and administer networks consistently.</td>
+          </tr>
+          <tr>
+            <td>4.0 Network Security</td>
+            <td>14%</td>
+            <td>How to protect access, recognize network attacks, harden devices, and apply defensive controls.</td>
+          </tr>
+          <tr>
+            <td>5.0 Network Troubleshooting</td>
+            <td>24%</td>
+            <td>How to isolate physical, service, performance, routing, switching, and wireless problems with evidence and appropriate tools.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>

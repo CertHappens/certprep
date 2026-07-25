@@ -1,21 +1,23 @@
 ---
 layout: layouts/base.njk
 title: Cert Happens
-description: Free randomized certification practice tests, detailed answer explanations, and focused study resources at CertHappens.com.
+description: Randomized certification practice tests, detailed answer explanations, and focused study resources at CertHappens.com.
 permalink: /
 ---
+{% set securityQuiz = quizCatalog.byTestId["SEC-701"] %}
+{% set networkQuiz = quizCatalog.byTestId["NET-009"] %}
 
 <section class="hero">
   <div class="page-shell hero__inner">
-    <p class="eyebrow">Free certification practice</p>
+    <p class="eyebrow">Certification study and practice</p>
     <h1>Practice. Review. Cert happens.</h1>
     <p class="lede">
-      Build confidence with randomized practice tests, clear answer explanations,
-      and focused study resources organized around exam objectives.
+      Study with focused guides and quick references, then sharpen your test-taking skills
+      with realistic practice questions and clear answer explanations.
     </p>
     <div class="button-row">
-      <a class="button" href="/security-plus/sy0-701/practice-test/">Start Security+ practice</a>
-      <a class="button button--secondary" href="/security-plus/">View the certification hub</a>
+      <a class="button" href="/security-plus/sy0-701/practice-test/">Start Security+ practice test</a>
+      <a class="button button--secondary" href="/network-plus/n10-009/practice-test/">Start Network+ practice test</a>
     </div>
   </div>
 </section>
@@ -23,36 +25,33 @@ permalink: /
 <section class="section section--bordered">
   <div class="page-shell">
     <div class="section-heading">
-      <p class="eyebrow">Starting with</p>
-      <h2>CompTIA Security+ SY0-701</h2>
+      <p class="eyebrow">Certification resources</p>
+      <h2>Choose an exam and start studying</h2>
       <p>
-        The first practice bank represents the official SY0-701 exam version and
-        uses the project test ID SEC-701 behind the scenes.
+        Security+ and Network+ both include version-specific study resources and randomized practice tests. Shared references connect topics that appear across both exams.
       </p>
     </div>
 
     <div class="card-grid">
       <article class="card">
-        <p class="card__meta">Practice tests</p>
-        <h3>Randomized question sessions</h3>
-        <p>Choose a question count, work one item at a time, and review missed concepts when finished.</p>
-        <a class="card__link" href="/security-plus/sy0-701/practice-test/">Start the SY0-701 test</a>
+        <p class="card__meta">Practice and study</p>
+        <h3>CompTIA Security+ SY0-701</h3>
+        <p>Use the {{ securityQuiz.availableQuestionCount }}-question bank, five domain guides, quick reviews, acronyms, and detailed answer explanations.</p>
+        <a class="card__link" href="/security-plus/">Explore Security+ resources</a>
       </article>
 
       <article class="card">
-        <p class="card__meta">Explanations</p>
-        <h3>Review the reasoning</h3>
-        <p>Each approved item includes the correct explanation and a reason each alternative does not fit.</p>
+        <p class="card__meta">Practice and study</p>
+        <h3>CompTIA Network+ N10-009</h3>
+        <p>Use the {{ networkQuiz.availableQuestionCount }}-question bank, full N10-009 roadmap, and shared networking references to practice real troubleshooting decisions.</p>
+        <a class="card__link" href="/network-plus/">Explore Network+ resources</a>
       </article>
 
       <article class="card">
-        <p class="card__meta">Study resources</p>
-        <h3>Useful reference material</h3>
-        <p>
-          Printable domain guides and a searchable acronym reference are available now.
-          Quick-review comparisons, ports, protocols, and tools are planned.
-        </p>
-        <a class="card__link" href="/security-plus/">Explore Security+ study resources</a>
+        <p class="card__meta">Shared reference</p>
+        <h3>Ports and protocols</h3>
+        <p>Search common services, transport choices, secure alternatives, and protocols that do not use TCP or UDP ports.</p>
+        <a class="card__link" href="/ports-protocols/">Open the searchable reference</a>
       </article>
     </div>
   </div>

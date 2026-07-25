@@ -11,6 +11,30 @@ function isIntegerInRange(value, minimum, maximum) {
   );
 }
 
+function escapeRegularExpression(value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+export function normalizePracticeTestPath(
+  value = PRACTICE_TEST_PATH,
+) {
+  if (typeof value !== "string") {
+    throw new TypeError("Practice-test path must be a string.");
+  }
+
+  const normalized = `/${value.trim().replace(/^\/+|\/+$/g, "")}`;
+
+  if (
+    normalized === "/" ||
+    normalized.includes("?") ||
+    normalized.includes("#")
+  ) {
+    throw new TypeError("Practice-test path must be an absolute site path.");
+  }
+
+  return normalized;
+}
+
 export function isValidQuestionPosition(
   position,
   maximum = MAX_PAGED_QUESTION_COUNT,
@@ -25,6 +49,7 @@ export function isValidQuestionPosition(
 export function buildQuestionPath(
   position,
   maximum = MAX_PAGED_QUESTION_COUNT,
+  practiceTestPath = PRACTICE_TEST_PATH,
 ) {
   if (!isValidQuestionPosition(position, maximum)) {
     throw new RangeError(
@@ -32,20 +57,24 @@ export function buildQuestionPath(
     );
   }
 
-  return `${PRACTICE_TEST_PATH}/question/${position}/`;
+  return `${normalizePracticeTestPath(practiceTestPath)}/question/${position}/`;
 }
 
 export function parseQuestionPosition(
   locationValue,
   maximum = MAX_PAGED_QUESTION_COUNT,
+  practiceTestPath = PRACTICE_TEST_PATH,
 ) {
   if (typeof locationValue !== "string") {
     return null;
   }
 
   const pathname = locationValue.split(/[?#]/, 1)[0];
+  const basePath = escapeRegularExpression(
+    normalizePracticeTestPath(practiceTestPath),
+  );
   const expression = new RegExp(
-    `^${PRACTICE_TEST_PATH}/question/([1-9][0-9]*)/?$`,
+    `^${basePath}/question/([1-9][0-9]*)/?$`,
   );
   const match = pathname.match(expression);
 

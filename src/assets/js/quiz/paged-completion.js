@@ -1,5 +1,9 @@
-export const PAGED_RESULTS_PATH =
-  "/security-plus/sy0-701/practice-test/";
+import {
+  PRACTICE_TEST_PATH,
+  normalizePracticeTestPath,
+} from "./routes.js";
+
+export const PAGED_RESULTS_PATH = `${PRACTICE_TEST_PATH}/`;
 
 function requireSession(session) {
   if (
@@ -52,7 +56,9 @@ export function createPagedCompletionModel(
     isFinal,
     total,
     unanswered,
-    resultsPath: PAGED_RESULTS_PATH,
+    resultsPath: `${normalizePracticeTestPath(
+      session.test?.practiceTestPath,
+    )}/`,
     confirmationMessage:
       isFinal && unanswered > 0
         ? `Finish this test with ${unanswered} unanswered question${

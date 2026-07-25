@@ -34,7 +34,11 @@ export function createPagedNavigationTransition(
     currentPosition,
     targetPosition,
     targetIndex: targetPosition - 1,
-    path: buildQuestionPath(targetPosition),
+    path: buildQuestionPath(
+      targetPosition,
+      total,
+      session.test?.practiceTestPath,
+    ),
   };
 }
 
@@ -63,6 +67,7 @@ export function resolvePagedHistoryPosition(
   historyState,
   locationValue,
   maximum,
+  practiceTestPath,
 ) {
   if (
     historyState?.[PAGED_HISTORY_MARKER] === true &&
@@ -71,7 +76,11 @@ export function resolvePagedHistoryPosition(
     return historyState.questionPosition;
   }
 
-  return parseQuestionPosition(locationValue, maximum);
+  return parseQuestionPosition(
+    locationValue,
+    maximum,
+    practiceTestPath,
+  );
 }
 
 export function shouldHandlePagedNavigationClick(event) {

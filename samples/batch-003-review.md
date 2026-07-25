@@ -1,69 +1,114 @@
-# SEC-701 Batch 003 Critical Review
+# NET-009 Batch 003 Review
 
-## Batch summary
+- Batch ID: `NET009-BATCH-003`
+- Review date: 2026-07-25
+- Questions generated: 30
+- Review status: Approved under the accelerated staging authorization
+- Permanent IDs: `NET009-0000049` through `NET009-0000078`
 
-- Batch ID: `SEC701-BATCH-003`
-- Questions: 24
-- IDs: `SEC701-0000031` through `SEC701-0000054`
-- Status: `approved`
-- Reviewer: `initial-quality-review`
-- Domain allocation: 3 / 5 / 4 / 7 / 5
-- Difficulty distribution: easy = 6, medium = 12, hard = 6
-- Stored correct-answer distribution: A = 6, B = 6, C = 6, D = 6
-- Exact duplicate stems: none
-- Duplicate concept keys: none
-- Exact or reversed-clause duplicate answer choices: none
-- High-similarity near-duplicate stems: none
+## Why Batch 003 contains 30 questions
 
-The questions were automatically approved under the accelerated workflow authorized for growth from 30 to 150 questions. Automatic approval followed structural validation, source review, answer-choice checks, and comparison against the full existing bank.
+Batch size is now driven by Network+ coverage needs rather than a fixed 24-question template. Thirty questions allow a near-exact official domain-weight allocation while adding meaningful subtopic depth without padding:
 
-## Cumulative domain coverage
+| Domain | Official weight | Batch 003 count | Batch percentage |
+|---|---:|---:|---:|
+| 1.0 Networking Concepts | 23% | 7 | 23.3% |
+| 2.0 Network Implementation | 20% | 6 | 20.0% |
+| 3.0 Network Operations | 19% | 6 | 20.0% |
+| 4.0 Network Security | 14% | 4 | 13.3% |
+| 5.0 Network Troubleshooting | 24% | 7 | 23.3% |
 
-| Domain | Before | Added | Total | Total share | Exam weight |
-|---|---:|---:|---:|---:|---:|
-| 1.0 General Security Concepts | 4 | 3 | 7 | 13.0% | 12% |
-| 2.0 Threats, Vulnerabilities, and Mitigations | 6 | 5 | 11 | 20.4% | 22% |
-| 3.0 Security Architecture | 5 | 4 | 9 | 16.7% | 18% |
-| 4.0 Security Operations | 9 | 7 | 16 | 29.6% | 28% |
-| 5.0 Security Program Management and Oversight | 6 | 5 | 11 | 20.4% | 20% |
+## Distribution checks
 
-## Question-by-question review
+| Measure | Result | Planned | Status |
+|---|---:|---:|---|
+| Easy | 7 | 7 | Pass |
+| Medium | 16 | 16 | Pass |
+| Hard | 7 | 7 | Pass |
+| Single choice | 26 | 26 | Pass |
+| Multi-select | 2 | 2 | Pass |
+| Best available | 2 | 2 | Pass |
+| Direct | 7 | 7 | Pass |
+| Scenario | 17 | 17 | Pass |
+| Comparison | 4 | 4 | Pass |
+| Calculation | 2 | 2 | Pass |
 
-| ID | Objective | Topic | Quality finding |
-|---|---|---|---|
-| SEC701-0000031 | 1.2 | Authorization | The stem clearly separates identity verification from a later role-permission decision. |
-| SEC701-0000032 | 1.3 | Configuration version control | The requirements for authorship, comparison, history, and restoration point specifically to version control. |
-| SEC701-0000033 | 1.4 | Certificate revocation checking | The certificate remains within its dates, and the near-real-time single-certificate requirement distinguishes OCSP. |
-| SEC701-0000034 | 2.1 | Threat actor capability and motivation | Limited resources, public tooling, defacement, and recognition provide both actor capability and motivation. |
-| SEC701-0000035 | 2.2 | Removable-media social engineering | The enticing label and malicious USB jointly establish baiting through removable media. |
-| SEC701-0000036 | 2.3 | SQL injection prevention | The unsafe string concatenation and SQL syntax make parameterized queries the direct code-level remediation. |
-| SEC701-0000037 | 2.4 | DNS tunneling indicators | TXT traffic, long encoded labels, and abnormal volume distinguish DNS tunneling from a domain-generation pattern. |
-| SEC701-0000038 | 2.5 | Service-account least privilege | The excessive domain privilege is directly corrected through a dedicated, noninteractive least-privilege account. |
-| SEC701-0000039 | 3.1 | Serverless shared responsibility | The answer reflects the stable division between provider-managed platform infrastructure and customer-controlled application assets. |
-| SEC701-0000040 | 3.2 | Out-of-band management | The requirement for an isolated path that survives production disruption uniquely identifies out-of-band management. |
-| SEC701-0000041 | 3.3 | Data sovereignty | The wording asks about legal jurisdiction rather than only the contractual storage location, distinguishing sovereignty from residency. |
-| SEC701-0000042 | 3.4 | Differential backups | The restoration set follows the defining behavior of differential backups without requiring an unnecessary chain. |
-| SEC701-0000043 | 4.1 | Enterprise wireless authentication | Per-user directory authentication and individual revocation distinguish Enterprise mode from shared credentials. |
-| SEC701-0000044 | 4.3 | Risk-based vulnerability prioritization | Active exploitation, public exposure, sensitive data, and business impact outweigh a higher base score on an isolated asset. |
-| SEC701-0000045 | 4.4 | Log time synchronization | Clock drift and mixed time zones are directly addressed by synchronization and normalization rather than retention or integrity controls. |
-| SEC701-0000046 | 4.5 | Outbound data loss prevention | The rule must inspect sensitive content and enforce an approved transfer channel, which is the purpose of DLP. |
-| SEC701-0000047 | 4.6 | SAML federation | Signed XML assertions between an identity provider and service provider identify SAML without relying on answer position. |
-| SEC701-0000048 | 4.8 | Chain of custody | The record described contains the defining elements of evidence chain of custody. |
-| SEC701-0000049 | 4.9 | Network flow records | The requested historical connection metadata maps to flow records, and the stem explicitly states that payloads are unavailable. |
-| SEC701-0000050 | 5.1 | RACI accountability | Final authority and sign-off identify the accountable RACI role, while the training manager remains responsible. |
-| SEC701-0000051 | 5.2 | Annualized risk reduction | The calculation separates current ALE, residual ALE, and annual risk reduction; distractors correspond to common mistakes. |
-| SEC701-0000052 | 5.3 | Right-to-audit clauses | The requested contractual ability to inspect controls and evidence is the right to audit rather than confidentiality or performance language. |
-| SEC701-0000053 | 5.5 | Penetration-test scope control | The signed scope excludes the partner asset, making a pause and formal consultation the only authorized first action. |
-| SEC701-0000054 | 5.6 | Physical security awareness | The response protects the physical boundary and uses an approved visitor process without encouraging confrontation. |
+## Correct-answer distribution
 
-## Similarity review
+| Stored key | Batch 003 selections | Cumulative selections |
+|---|---:|---:|
+| A | 8 | 21 |
+| B | 8 | 21 |
+| C | 8 | 21 |
+| D | 8 | 21 |
 
-- No stem pair reached the reporting threshold.
+The two multi-select questions create 32 correct selections. Batch 003 is exactly balanced with eight selections for each stored key. The cumulative bank remains exactly balanced at 21 selections for each key.
 
-## Batch-level observations
+## Coverage improvements
 
-- No question uses all-of-the-above, none-of-the-above, or linked answer labels.
-- Scenario questions contain the material facts needed to support the intended decision.
-- Explanations address every stored choice and identify when incorrect concepts would apply.
-- The cumulative correct-answer distribution is balanced without changing technical answers to force a pattern.
-- All 28 objectives remain represented after the merge.
+Batch 003 adds or deepens coverage for:
+
+- Intrusion detection versus inline prevention
+- SaaS and cloud security groups
+- SSH and common management ports
+- Fiber connectors and collapsed-core architecture
+- Infrastructure as code and source control
+- OSPF, eBGP, inter-VLAN routing, route summarization, MTU, and directional antennas
+- IPAM, IPFIX, syslog, high-availability modes, DHCP pool sizing, and jump hosts
+- PKI certificates, evil twins, screened subnets, and device hardening
+- Duplex mismatches, duplicate IP addressing, default routes, wireless roaming, DNS tools, and LLDP
+
+All 25 numbered objectives retain approved coverage, and the new questions target distinct concepts rather than restating prior stems.
+
+## Programmatic arithmetic checks
+
+- `NET009-0000059`: Confirmed `10.20.8.0/22` covers exactly `10.20.8.0/24` through `10.20.11.0/24`.
+- `NET009-0000066`: Confirmed the inclusive DHCP range contains 150 addresses and 15 exclusions leave 135 dynamic leases.
+
+## Question inventory
+
+| ID | Objective | Topic | Difficulty | Type | Style | Correct |
+|---|---|---|---|---|---|---|
+| NET009-0000049 | 1.2 | Intrusion detection and prevention | medium | single_choice | comparison | A |
+| NET009-0000050 | 1.3 | Cloud service models | easy | single_choice | direct | B |
+| NET009-0000051 | 1.3 | Cloud network security | medium | best_available | scenario | C |
+| NET009-0000052 | 1.4 | Secure remote management | medium | single_choice | direct | D |
+| NET009-0000053 | 1.5 | Fiber connectors | easy | single_choice | direct | A |
+| NET009-0000054 | 1.6 | Campus architecture | hard | single_choice | scenario | B |
+| NET009-0000055 | 1.8 | Infrastructure as code | medium | single_choice | scenario | C |
+| NET009-0000056 | 2.1 | Interior routing protocols | medium | single_choice | scenario | D |
+| NET009-0000057 | 2.1 | External routing | hard | best_available | scenario | A |
+| NET009-0000058 | 2.2 | Inter-VLAN routing | medium | single_choice | scenario | B |
+| NET009-0000059 | 2.1 | Route summarization | hard | single_choice | calculation | C |
+| NET009-0000060 | 2.3 | Wireless antennas | easy | single_choice | scenario | D |
+| NET009-0000061 | 2.2 | Maximum transmission unit | medium | single_choice | scenario | A |
+| NET009-0000062 | 3.1 | IP address management | easy | single_choice | direct | B |
+| NET009-0000063 | 3.2 | Flow monitoring | medium | single_choice | comparison | C |
+| NET009-0000064 | 3.2 | Centralized logging | medium | single_choice | scenario | D |
+| NET009-0000065 | 3.3 | High availability models | medium | multi_select | comparison | A|C |
+| NET009-0000066 | 3.4 | DHCP pool capacity | hard | single_choice | calculation | B |
+| NET009-0000067 | 3.5 | Privileged management access | medium | single_choice | scenario | D |
+| NET009-0000068 | 4.1 | Public key infrastructure | easy | single_choice | direct | A |
+| NET009-0000069 | 4.2 | Wireless attacks | medium | single_choice | scenario | C |
+| NET009-0000070 | 4.3 | Network zones | hard | single_choice | scenario | B |
+| NET009-0000071 | 4.3 | Device hardening | medium | multi_select | scenario | B|D |
+| NET009-0000072 | 5.1 | Troubleshooting documentation | easy | single_choice | direct | C |
+| NET009-0000073 | 5.2 | Ethernet interface negotiation | medium | single_choice | scenario | A |
+| NET009-0000074 | 5.3 | Duplicate addressing | hard | single_choice | scenario | D |
+| NET009-0000075 | 5.3 | Route troubleshooting | medium | single_choice | scenario | B |
+| NET009-0000076 | 5.4 | Wireless roaming | medium | single_choice | scenario | C |
+| NET009-0000077 | 5.5 | DNS troubleshooting tools | easy | single_choice | direct | A |
+| NET009-0000078 | 5.5 | Neighbor discovery | hard | single_choice | comparison | D |
+
+## Internal quality review
+
+- All 78 permanent question IDs are unique and sequential.
+- All 78 concept keys are unique.
+- Every answer choice is populated and distinct after normalization.
+- Multi-select instructions state exactly how many answers to select.
+- Best-available questions state the decision criterion.
+- No answer-position-dependent wording, all-of-the-above choices, or none-of-the-above choices are used.
+- Each answer choice has a separate explanation.
+- Every referenced source ID exists in `source-register.csv`.
+- Approved rows contain review dates and the accelerated internal reviewer.
+- The draft file remains header-only, and the normal review and retirement structure remains available.

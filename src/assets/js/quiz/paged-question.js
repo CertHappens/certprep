@@ -435,6 +435,7 @@ function bindPagedHistoryNavigation(appRoot, viewRoot, result) {
       event.state,
       `${window.location.pathname}${window.location.search}${window.location.hash}`,
       result.session.questionOrder.length,
+      result.session.test?.practiceTestPath,
     );
 
     if (!Number.isInteger(targetPosition)) {

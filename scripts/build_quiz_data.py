@@ -342,9 +342,14 @@ def build_quiz(
     public_base_path = "/" + str(
         quiz_config.get("public_base_path", "")
     ).strip().strip("/")
+    practice_test_path = "/" + str(
+        quiz_config.get("practice_test_path", "")
+    ).strip().strip("/")
 
     if not public_base_path.strip("/"):
         raise BuildError(f"Quiz {slug}: public_base_path is required.")
+    if not practice_test_path.strip("/"):
+        raise BuildError(f"Quiz {slug}: practice_test_path is required.")
 
     source_rows = read_csv(questions_path)
     if not source_rows:
@@ -362,6 +367,7 @@ def build_quiz(
         )
 
     test = consistent_test_metadata(source_rows, slug)
+    test["practiceTestPath"] = practice_test_path
     questions = [build_public_question(row) for row in source_rows]
     objective_rows = read_csv(objective_map_path)
     domains = build_domains(objective_rows, test, questions)

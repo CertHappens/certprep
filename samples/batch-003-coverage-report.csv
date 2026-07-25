@@ -1,66 +1,26 @@
-dimension,value,count,percentage,target_exam_weight_percent,notes
-domain,1.0 General Security Concepts,3,12.5,12,Planned 24-question allocation.
-domain,"2.0 Threats, Vulnerabilities, and Mitigations",5,20.8,22,Planned 24-question allocation.
-domain,3.0 Security Architecture,4,16.7,18,Planned 24-question allocation.
-domain,4.0 Security Operations,7,29.2,28,Planned 24-question allocation.
-domain,5.0 Security Program Management and Oversight,5,20.8,20,Planned 24-question allocation.
-objective,1.2 Summarize fundamental security concepts.,1,4.2,,
-objective,1.3 Explain the importance of change management processes and the impact to security.,1,4.2,,
-objective,1.4 Explain the importance of using appropriate cryptographic solutions.,1,4.2,,
-objective,2.1 Compare and contrast common threat actors and motivations.,1,4.2,,
-objective,2.2 Explain common threat vectors and attack surfaces.,1,4.2,,
-objective,2.3 Explain various types of vulnerabilities.,1,4.2,,
-objective,"2.4 Given a scenario, analyze indicators of malicious activity.",1,4.2,,
-objective,2.5 Explain the purpose of mitigation techniques used to secure the enterprise.,1,4.2,,
-objective,3.1 Compare and contrast security implications of different architecture models.,1,4.2,,
-objective,"3.2 Given a scenario, apply security principles to secure enterprise infrastructure.",1,4.2,,
-objective,3.3 Compare and contrast concepts and strategies to protect data.,1,4.2,,
-objective,3.4 Explain the importance of resilience and recovery in security architecture.,1,4.2,,
-objective,"4.1 Given a scenario, apply common security techniques to computing resources.",1,4.2,,
-objective,4.3 Explain various activities associated with vulnerability management.,1,4.2,,
-objective,4.4 Explain security alerting and monitoring concepts and tools.,1,4.2,,
-objective,"4.5 Given a scenario, modify enterprise capabilities to enhance security.",1,4.2,,
-objective,"4.6 Given a scenario, implement and maintain identity and access management.",1,4.2,,
-objective,4.8 Explain appropriate incident response activities.,1,4.2,,
-objective,"4.9 Given a scenario, use data sources to support an investigation.",1,4.2,,
-objective,5.1 Summarize elements of effective security governance.,1,4.2,,
-objective,5.2 Explain elements of the risk management process.,1,4.2,,
-objective,5.3 Explain the processes associated with third-party risk assessment and management.,1,4.2,,
-objective,5.5 Explain types and purposes of audits and assessments.,1,4.2,,
-objective,"5.6 Given a scenario, implement security awareness practices.",1,4.2,,
-topic,Annualized risk reduction,1,4.2,,
-topic,Authorization,1,4.2,,
-topic,Certificate revocation checking,1,4.2,,
-topic,Chain of custody,1,4.2,,
-topic,Configuration version control,1,4.2,,
-topic,DNS tunneling indicators,1,4.2,,
-topic,Data sovereignty,1,4.2,,
-topic,Differential backups,1,4.2,,
-topic,Enterprise wireless authentication,1,4.2,,
-topic,Log time synchronization,1,4.2,,
-topic,Network flow records,1,4.2,,
-topic,Out-of-band management,1,4.2,,
-topic,Outbound data loss prevention,1,4.2,,
-topic,Penetration-test scope control,1,4.2,,
-topic,Physical security awareness,1,4.2,,
-topic,RACI accountability,1,4.2,,
-topic,Removable-media social engineering,1,4.2,,
-topic,Right-to-audit clauses,1,4.2,,
-topic,Risk-based vulnerability prioritization,1,4.2,,
-topic,SAML federation,1,4.2,,
-topic,SQL injection prevention,1,4.2,,
-topic,Serverless shared responsibility,1,4.2,,
-topic,Service-account least privilege,1,4.2,,
-topic,Threat actor capability and motivation,1,4.2,,
-difficulty,easy,6,25.0,,
-difficulty,hard,6,25.0,,
-difficulty,medium,12,50.0,,
-question_type,single_choice,24,100.0,,
-question_style,calculation,1,4.2,,
-question_style,comparison,2,8.3,,
-question_style,direct,5,20.8,,
-question_style,scenario,16,66.7,,
-stored_correct_answer,A,6,25.0,,
-stored_correct_answer,B,6,25.0,,
-stored_correct_answer,C,6,25.0,,
-stored_correct_answer,D,6,25.0,,
+test_id,exam_version,objectives_version,batch_id,domain_id,domain_name,domain_weight_percent,objective_id,objective_text,batch_question_count,cumulative_approved_count,batch_question_ids
+NET-009,N10-009,6.0,NET009-BATCH-003,1.0,Networking Concepts,23,1.1,Explain concepts related to the Open Systems Interconnection (OSI) reference model.,0,2,
+NET-009,N10-009,6.0,NET009-BATCH-003,1.0,Networking Concepts,23,1.2,"Compare and contrast networking appliances, applications, and functions.",1,2,NET009-0000049
+NET-009,N10-009,6.0,NET009-BATCH-003,1.0,Networking Concepts,23,1.3,Summarize cloud concepts and connectivity options.,2,3,NET009-0000050|NET009-0000051
+NET-009,N10-009,6.0,NET009-BATCH-003,1.0,Networking Concepts,23,1.4,"Explain common networking ports, protocols, services, and traffic types.",1,3,NET009-0000052
+NET-009,N10-009,6.0,NET009-BATCH-003,1.0,Networking Concepts,23,1.5,Compare and contrast transmission media and transceivers.,1,2,NET009-0000053
+NET-009,N10-009,6.0,NET009-BATCH-003,1.0,Networking Concepts,23,1.6,"Compare and contrast network topologies, architectures, and types.",1,2,NET009-0000054
+NET-009,N10-009,6.0,NET009-BATCH-003,1.0,Networking Concepts,23,1.7,"Given a scenario, use appropriate IPv4 network addressing.",0,2,
+NET-009,N10-009,6.0,NET009-BATCH-003,1.0,Networking Concepts,23,1.8,Summarize evolving use cases for modern network environments.,1,3,NET009-0000055
+NET-009,N10-009,6.0,NET009-BATCH-003,2.0,Network Implementation,20,2.1,Explain characteristics of routing technologies.,3,6,NET009-0000056|NET009-0000057|NET009-0000059
+NET-009,N10-009,6.0,NET009-BATCH-003,2.0,Network Implementation,20,2.2,"Given a scenario, configure switching technologies and features.",2,5,NET009-0000058|NET009-0000061
+NET-009,N10-009,6.0,NET009-BATCH-003,2.0,Network Implementation,20,2.3,"Given a scenario, select and configure wireless devices and technologies.",1,3,NET009-0000060
+NET-009,N10-009,6.0,NET009-BATCH-003,2.0,Network Implementation,20,2.4,Explain important factors of physical installations.,0,2,
+NET-009,N10-009,6.0,NET009-BATCH-003,3.0,Network Operations,19,3.1,Explain the purpose of organizational processes and procedures.,1,2,NET009-0000062
+NET-009,N10-009,6.0,NET009-BATCH-003,3.0,Network Operations,19,3.2,"Given a scenario, use network monitoring technologies.",2,4,NET009-0000063|NET009-0000064
+NET-009,N10-009,6.0,NET009-BATCH-003,3.0,Network Operations,19,3.3,Explain disaster recovery (DR) concepts.,1,2,NET009-0000065
+NET-009,N10-009,6.0,NET009-BATCH-003,3.0,Network Operations,19,3.4,"Given a scenario, implement IPv4 and IPv6 network services.",1,3,NET009-0000066
+NET-009,N10-009,6.0,NET009-BATCH-003,3.0,Network Operations,19,3.5,Compare and contrast network access and management methods.,1,3,NET009-0000067
+NET-009,N10-009,6.0,NET009-BATCH-003,4.0,Network Security,14,4.1,Explain the importance of basic network security concepts.,1,3,NET009-0000068
+NET-009,N10-009,6.0,NET009-BATCH-003,4.0,Network Security,14,4.2,Summarize various types of attacks and their impact to the network.,1,3,NET009-0000069
+NET-009,N10-009,6.0,NET009-BATCH-003,4.0,Network Security,14,4.3,"Given a scenario, apply network security features, defense techniques, and solutions.",2,4,NET009-0000070|NET009-0000071
+NET-009,N10-009,6.0,NET009-BATCH-003,5.0,Network Troubleshooting,24,5.1,Explain the troubleshooting methodology.,1,3,NET009-0000072
+NET-009,N10-009,6.0,NET009-BATCH-003,5.0,Network Troubleshooting,24,5.2,"Given a scenario, troubleshoot common cabling and physical interface issues.",1,4,NET009-0000073
+NET-009,N10-009,6.0,NET009-BATCH-003,5.0,Network Troubleshooting,24,5.3,"Given a scenario, troubleshoot common issues with network services.",2,4,NET009-0000074|NET009-0000075
+NET-009,N10-009,6.0,NET009-BATCH-003,5.0,Network Troubleshooting,24,5.4,"Given a scenario, troubleshoot common performance issues.",1,4,NET009-0000076
+NET-009,N10-009,6.0,NET009-BATCH-003,5.0,Network Troubleshooting,24,5.5,"Given a scenario, use the appropriate tool or protocol to solve networking issues.",2,4,NET009-0000077|NET009-0000078
