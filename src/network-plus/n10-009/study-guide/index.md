@@ -52,6 +52,9 @@ keywords:
   - networking certification
   - network troubleshooting
 relatedLinks:
+  - title: Domain 1: Networking Concepts
+    url: /network-plus/n10-009/study-guide/networking-concepts/
+    description: Trace traffic through the OSI model and review devices, cloud, protocols, media, addressing, IPv6, and modern network designs.
   - title: Network+ N10-009 Practice Test
     url: /network-plus/n10-009/practice-test/
     description: Apply the concepts in randomized questions with detailed answer explanations.
@@ -162,7 +165,7 @@ The percentages guide your study time, but the domains overlap. A troubleshootin
 
 <h2 id="networking-concepts">Domain 1: Networking Concepts</h2>
 
-This domain supplies the vocabulary and mental model used throughout the rest of the exam.
+This domain supplies the vocabulary and mental model used throughout the rest of the exam. The [detailed Domain 1 guide](/network-plus/n10-009/study-guide/networking-concepts/) expands the roadmap with worked subnetting, device comparisons, cloud decisions, media choices, IPv6 examples, and a complete traffic-flow walkthrough.
 
 <h3>Follow traffic through the OSI model</h3>
 

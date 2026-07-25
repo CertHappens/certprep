@@ -82,6 +82,7 @@ const requiredFiles = [
   "security-plus/acronyms/index.html",
   "network-plus/index.html",
   "network-plus/n10-009/study-guide/index.html",
+  "network-plus/n10-009/study-guide/networking-concepts/index.html",
   "network-plus/n10-009/practice-test/index.html",
   "network-plus/n10-009/practice-test/question/1/index.html",
   "network-plus/n10-009/practice-test/question/50/index.html",
@@ -409,6 +410,10 @@ for (const file of htmlFiles) {
       fail(`${relative}: Network+ hub is missing the N10-009 study-guide link`);
     }
 
+    if (!html.includes('href="/network-plus/n10-009/study-guide/networking-concepts/"')) {
+      fail(`${relative}: Network+ hub is missing the detailed Domain 1 guide link`);
+    }
+
     if (!html.includes('href="/ports-protocols/"')) {
       fail(`${relative}: Network+ hub is missing the shared ports and protocols link`);
     }
@@ -455,12 +460,67 @@ for (const file of htmlFiles) {
       fail(`${relative}: Network+ study guide is missing its practice-test link`);
     }
 
+    if (!html.includes('/network-plus/n10-009/study-guide/networking-concepts/')) {
+      fail(`${relative}: Network+ study guide is missing its detailed Domain 1 link`);
+    }
+
     if (!html.includes("APS transports network data physically")) {
       fail(`${relative}: Network+ study guide is missing the OSI mnemonic`);
     }
 
     if (!html.includes('class="table--compact-second-column"')) {
       fail(`${relative}: Network+ domain table is missing the compact second-column utility`);
+    }
+  }
+
+
+  if (relative === "network-plus/n10-009/study-guide/networking-concepts/index.html") {
+    if (!html.includes("data-print-guide")) {
+      fail(`${relative}: Network+ Domain 1 guide is missing the shared Print | Save control`);
+    }
+
+    if (!/<h1>Network\+ N10-009 Domain 1: Networking Concepts<\/h1>/.test(html)) {
+      fail(`${relative}: Network+ Domain 1 guide is missing its expected h1`);
+    }
+
+    const requiredSectionIds = [
+      "domain-map",
+      "osi-model",
+      "devices-functions",
+      "cloud-concepts",
+      "ports-protocols",
+      "traffic-types",
+      "media-transceivers",
+      "topologies",
+      "ipv4-addressing",
+      "subnetting",
+      "ipv6-addressing",
+      "modern-networks",
+      "trace-a-session",
+      "exam-traps",
+      "rapid-review",
+      "official-references"
+    ];
+
+    for (const id of requiredSectionIds) {
+      if (!html.includes(`id="${id}"`)) {
+        fail(`${relative}: Network+ Domain 1 guide is missing section #${id}`);
+      }
+    }
+
+    const requiredContent = [
+      "APS transports network data physically",
+      "192.168.40.77/26",
+      "2001:db8::42",
+      "Infrastructure as code",
+      "/ports-protocols/",
+      "/network-plus/n10-009/practice-test/"
+    ];
+
+    for (const marker of requiredContent) {
+      if (!html.includes(marker)) {
+        fail(`${relative}: Network+ Domain 1 guide is missing ${marker}`);
+      }
     }
   }
 
@@ -862,6 +922,7 @@ if (await isFile(path.join(outputRoot, "sitemap.xml"))) {
     "https://certhappens.com/security-plus/acronyms/",
     "https://certhappens.com/network-plus/",
     "https://certhappens.com/network-plus/n10-009/study-guide/",
+    "https://certhappens.com/network-plus/n10-009/study-guide/networking-concepts/",
     "https://certhappens.com/network-plus/n10-009/practice-test/",
     "https://certhappens.com/security-plus/sy0-701/practice-test/",
     "https://certhappens.com/security-plus/sy0-701/study-guide/",
@@ -896,6 +957,7 @@ if (await isFile(path.join(outputRoot, "sitemap.xml"))) {
   const datedArticleUrls = [
     "https://certhappens.com/security-plus/acronyms/",
     "https://certhappens.com/network-plus/n10-009/study-guide/",
+    "https://certhappens.com/network-plus/n10-009/study-guide/networking-concepts/",
     "https://certhappens.com/security-plus/sy0-701/study-guide/",
     "https://certhappens.com/security-plus/sy0-701/study-guide/general-security-concepts/",
     "https://certhappens.com/security-plus/sy0-701/study-guide/threats-vulnerabilities-mitigations/",
