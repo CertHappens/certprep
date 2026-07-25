@@ -1,55 +1,26 @@
-dimension,value,count,percentage,target_exam_weight_percent,notes
-domain,1.0 General Security Concepts,3,15.0,12,Batch distribution supports cumulative balance rather than matching weights in isolation.
-domain,"2.0 Threats, Vulnerabilities, and Mitigations",4,20.0,22,Batch distribution supports cumulative balance rather than matching weights in isolation.
-domain,3.0 Security Architecture,3,15.0,18,Batch distribution supports cumulative balance rather than matching weights in isolation.
-domain,4.0 Security Operations,6,30.0,28,Batch distribution supports cumulative balance rather than matching weights in isolation.
-domain,5.0 Security Program Management and Oversight,4,20.0,20,Batch distribution supports cumulative balance rather than matching weights in isolation.
-objective,1.1 Compare and contrast various types of security controls.,1,5.0,,
-objective,1.2 Summarize fundamental security concepts.,1,5.0,,
-objective,1.3 Explain the importance of change management processes and the impact to security.,1,5.0,,
-objective,2.1 Compare and contrast common threat actors and motivations.,1,5.0,,
-objective,2.2 Explain common threat vectors and attack surfaces.,2,10.0,,
-objective,2.3 Explain various types of vulnerabilities.,1,5.0,,
-objective,3.1 Compare and contrast security implications of different architecture models.,1,5.0,,
-objective,"3.2 Given a scenario, apply security principles to secure enterprise infrastructure.",2,10.0,,
-objective,"4.1 Given a scenario, apply common security techniques to computing resources.",1,5.0,,
-objective,"4.2 Explain the security implications of proper hardware, software, and data asset management.",1,5.0,,
-objective,4.4 Explain security alerting and monitoring concepts and tools.,1,5.0,,
-objective,"4.5 Given a scenario, modify enterprise capabilities to enhance security.",1,5.0,,
-objective,4.7 Explain the importance of automation and orchestration related to secure operations.,1,5.0,,
-objective,"4.9 Given a scenario, use data sources to support an investigation.",1,5.0,,
-objective,5.1 Summarize elements of effective security governance.,1,5.0,,
-objective,5.4 Summarize elements of effective security compliance.,1,5.0,,
-objective,5.5 Explain types and purposes of audits and assessments.,1,5.0,,
-objective,"5.6 Given a scenario, implement security awareness practices.",1,5.0,,
-topic,Application allowlisting,1,5.0,,
-topic,Change rollback planning,1,5.0,,
-topic,Container architecture,1,5.0,,
-topic,DMZ architecture,1,5.0,,
-topic,Failure modes,1,5.0,,
-topic,Governance documents,1,5.0,,
-topic,Insider threats,1,5.0,,
-topic,Intrusion prevention,1,5.0,,
-topic,Investigation data sources,1,5.0,,
-topic,Media sanitization,1,5.0,,
-topic,Message-based social engineering,1,5.0,,
-topic,Penetration testing approaches,1,5.0,,
-topic,Phishing awareness,1,5.0,,
-topic,Privacy and data minimization,1,5.0,,
-topic,Race conditions,1,5.0,,
-topic,SIEM alert tuning,1,5.0,,
-topic,Security automation safeguards,1,5.0,,
-topic,Security control classification,1,5.0,,
-topic,Supply-chain attacks,1,5.0,,
-topic,Zero Trust components,1,5.0,,
-difficulty,easy,6,30.0,,
-difficulty,hard,4,20.0,,
-difficulty,medium,10,50.0,,
-question_type,single_choice,20,100.0,,
-question_style,comparison,1,5.0,,
-question_style,direct,3,15.0,,
-question_style,scenario,16,80.0,,
-stored_correct_answer,A,5,25.0,,
-stored_correct_answer,B,5,25.0,,
-stored_correct_answer,C,5,25.0,,
-stored_correct_answer,D,5,25.0,,
+test_id,exam_version,objectives_version,batch_id,domain_id,domain_name,domain_weight_percent,objective_id,objective_text,batch_question_count,cumulative_approved_count,batch_question_ids
+NET-009,N10-009,6.0,NET009-BATCH-002,1.0,Networking Concepts,23,1.1,Explain concepts related to the Open Systems Interconnection (OSI) reference model.,1,2,NET009-0000028
+NET-009,N10-009,6.0,NET009-BATCH-002,1.0,Networking Concepts,23,1.2,"Compare and contrast networking appliances, applications, and functions.",0,1,
+NET-009,N10-009,6.0,NET009-BATCH-002,1.0,Networking Concepts,23,1.3,Summarize cloud concepts and connectivity options.,0,1,
+NET-009,N10-009,6.0,NET009-BATCH-002,1.0,Networking Concepts,23,1.4,"Explain common networking ports, protocols, services, and traffic types.",1,2,NET009-0000029
+NET-009,N10-009,6.0,NET009-BATCH-002,1.0,Networking Concepts,23,1.5,Compare and contrast transmission media and transceivers.,0,1,
+NET-009,N10-009,6.0,NET009-BATCH-002,1.0,Networking Concepts,23,1.6,"Compare and contrast network topologies, architectures, and types.",1,1,NET009-0000025
+NET-009,N10-009,6.0,NET009-BATCH-002,1.0,Networking Concepts,23,1.7,"Given a scenario, use appropriate IPv4 network addressing.",1,2,NET009-0000030
+NET-009,N10-009,6.0,NET009-BATCH-002,1.0,Networking Concepts,23,1.8,Summarize evolving use cases for modern network environments.,2,2,NET009-0000026|NET009-0000027
+NET-009,N10-009,6.0,NET009-BATCH-002,2.0,Network Implementation,20,2.1,Explain characteristics of routing technologies.,2,3,NET009-0000031|NET009-0000035
+NET-009,N10-009,6.0,NET009-BATCH-002,2.0,Network Implementation,20,2.2,"Given a scenario, configure switching technologies and features.",1,3,NET009-0000032
+NET-009,N10-009,6.0,NET009-BATCH-002,2.0,Network Implementation,20,2.3,"Given a scenario, select and configure wireless devices and technologies.",1,2,NET009-0000033
+NET-009,N10-009,6.0,NET009-BATCH-002,2.0,Network Implementation,20,2.4,Explain important factors of physical installations.,1,2,NET009-0000034
+NET-009,N10-009,6.0,NET009-BATCH-002,3.0,Network Operations,19,3.1,Explain the purpose of organizational processes and procedures.,0,1,
+NET-009,N10-009,6.0,NET009-BATCH-002,3.0,Network Operations,19,3.2,"Given a scenario, use network monitoring technologies.",1,2,NET009-0000038
+NET-009,N10-009,6.0,NET009-BATCH-002,3.0,Network Operations,19,3.3,Explain disaster recovery (DR) concepts.,0,1,
+NET-009,N10-009,6.0,NET009-BATCH-002,3.0,Network Operations,19,3.4,"Given a scenario, implement IPv4 and IPv6 network services.",1,2,NET009-0000039
+NET-009,N10-009,6.0,NET009-BATCH-002,3.0,Network Operations,19,3.5,Compare and contrast network access and management methods.,2,2,NET009-0000036|NET009-0000037
+NET-009,N10-009,6.0,NET009-BATCH-002,4.0,Network Security,14,4.1,Explain the importance of basic network security concepts.,1,2,NET009-0000040
+NET-009,N10-009,6.0,NET009-BATCH-002,4.0,Network Security,14,4.2,Summarize various types of attacks and their impact to the network.,1,2,NET009-0000041
+NET-009,N10-009,6.0,NET009-BATCH-002,4.0,Network Security,14,4.3,"Given a scenario, apply network security features, defense techniques, and solutions.",1,2,NET009-0000042
+NET-009,N10-009,6.0,NET009-BATCH-002,5.0,Network Troubleshooting,24,5.1,Explain the troubleshooting methodology.,1,2,NET009-0000043
+NET-009,N10-009,6.0,NET009-BATCH-002,5.0,Network Troubleshooting,24,5.2,"Given a scenario, troubleshoot common cabling and physical interface issues.",2,3,NET009-0000044|NET009-0000048
+NET-009,N10-009,6.0,NET009-BATCH-002,5.0,Network Troubleshooting,24,5.3,"Given a scenario, troubleshoot common issues with network services.",1,2,NET009-0000045
+NET-009,N10-009,6.0,NET009-BATCH-002,5.0,Network Troubleshooting,24,5.4,"Given a scenario, troubleshoot common performance issues.",1,3,NET009-0000046
+NET-009,N10-009,6.0,NET009-BATCH-002,5.0,Network Troubleshooting,24,5.5,"Given a scenario, use the appropriate tool or protocol to solve networking issues.",1,2,NET009-0000047
