@@ -66,6 +66,48 @@ function getNamedInputValues(html, name) {
   return values;
 }
 
+function verifyQuizResultActions(html, relative, resourcePath, resourceLabel) {
+  const requiredMarkers = [
+    "What would you like to do next?",
+    "Your completed test is saved in this browser tab.",
+    `href="${resourcePath}">${resourceLabel}</a>`
+  ];
+
+  for (const marker of requiredMarkers) {
+    if (!html.includes(marker)) {
+      fail(`${relative}: completed-test actions are missing ${marker}`);
+    }
+  }
+
+  const reviewButtonCount = (html.match(/data-quiz-return/g) || []).length;
+  if (reviewButtonCount !== 2) {
+    fail(`${relative}: expected 2 Review this test actions, found ${reviewButtonCount}`);
+  }
+
+  const restartButtonCount = (html.match(/data-quiz-restart/g) || []).length;
+  if (restartButtonCount !== 2) {
+    fail(`${relative}: expected 2 Start a new test actions, found ${restartButtonCount}`);
+  }
+
+  const reviewLabelCount = (html.match(/>Review this test<\/button>/g) || []).length;
+  if (reviewLabelCount !== 2) {
+    fail(`${relative}: expected 2 Review this test labels, found ${reviewLabelCount}`);
+  }
+
+  const restartLabelCount = (html.match(/>Start a new test<\/button>/g) || []).length;
+  if (restartLabelCount !== 2) {
+    fail(`${relative}: expected 2 Start a new test labels, found ${restartLabelCount}`);
+  }
+
+  if (html.includes(">Return to test</button>")) {
+    fail(`${relative}: retired Return to test label is still present`);
+  }
+
+  if (html.includes(">Start another randomized test</button>")) {
+    fail(`${relative}: retired Start another randomized test label is still present`);
+  }
+}
+
 function localTarget(href) {
   const clean = href.split("#")[0].split("?")[0];
 
@@ -120,6 +162,7 @@ const requiredFiles = [
   "assets/js/print-guide.js",
   "assets/js/acronym-filter.js",
   "assets/js/quiz/app.js",
+  "assets/js/quiz/results-actions.js",
   "assets/js/quiz/paged-question.js",
   "quiz-data/catalog.json",
   "quiz-data/security-plus/sec-701/manifest.json",
@@ -624,7 +667,22 @@ for (const file of htmlFiles) {
     }
   }
 
+  if (relative === "security-plus/sy0-701/practice-test/index.html") {
+    verifyQuizResultActions(
+      html,
+      relative,
+      "/security-plus/",
+      "Return to Security+ resources"
+    );
+  }
+
   if (relative === "network-plus/n10-009/practice-test/index.html") {
+    verifyQuizResultActions(
+      html,
+      relative,
+      "/network-plus/",
+      "Return to Network+ resources"
+    );
     const requiredPracticeMarkers = [
       "Network+ N10-009 practice test",
       'data-test-id="NET-009"',

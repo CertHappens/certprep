@@ -7,6 +7,7 @@ import {
   getPagedReturnPath,
 } from "./paged-entry.js";
 import { createQuestionReporter } from "./reporting.js";
+import { confirmCompletedTestReplacement } from "./results-actions.js";
 import {
   completeQuizSession,
   createQuizSession,
@@ -265,7 +266,7 @@ async function initializeQuiz(root) {
     announce(`Test completed. Your score is ${gradeQuizSession(session).percentage} percent.`);
   });
 
-  elements.returnToTest.addEventListener("click", () => {
+  const reviewCompletedTest = () => {
     const pagedReturnPath = getPagedReturnPath(
       session,
       window.location.search,
@@ -280,14 +281,30 @@ async function initializeQuiz(root) {
     }
 
     renderQuestion({ focusHeading: true });
-  });
+  };
 
-  elements.startAnother.addEventListener("click", () => {
+  for (const button of elements.returnToTestButtons) {
+    button.addEventListener("click", reviewCompletedTest);
+  }
+
+  const startNewTest = () => {
+    const confirmed = confirmCompletedTestReplacement(
+      (message) => window.confirm(message),
+    );
+
+    if (!confirmed) {
+      return;
+    }
+
     clearStoredSession(storage, storageKey);
     session = null;
     renderSetup();
     elements.setupHeading.focus();
-  });
+  };
+
+  for (const button of elements.startAnotherButtons) {
+    button.addEventListener("click", startNewTest);
+  }
 
   window.addEventListener("beforeunload", (event) => {
     if (
@@ -609,6 +626,14 @@ function collectElements(root) {
     return element;
   };
 
+  const getAll = (selector) => {
+    const elements = [...root.querySelectorAll(selector)];
+    if (elements.length === 0) {
+      throw new Error(`Missing quiz interface elements: ${selector}`);
+    }
+    return elements;
+  };
+
   return {
     views: [...root.querySelectorAll("[data-quiz-view]")],
     setupForm: get("[data-quiz-setup-form]"),
@@ -641,8 +666,8 @@ function collectElements(root) {
     correctReviewDetails: get("[data-review-correct-details]"),
     correctReviewSummary: get("[data-review-correct-summary]"),
     correctReviewList: get("[data-review-correct]"),
-    returnToTest: get("[data-quiz-return]"),
-    startAnother: get("[data-quiz-restart]"),
+    returnToTestButtons: getAll("[data-quiz-return]"),
+    startAnotherButtons: getAll("[data-quiz-restart]"),
     liveRegion: get("[data-quiz-live]"),
   };
 }
