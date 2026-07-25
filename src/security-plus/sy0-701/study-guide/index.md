@@ -57,6 +57,9 @@ relatedLinks:
   - title: "Domain 5: Security Program Management and Oversight"
     url: /security-plus/sy0-701/study-guide/security-program-management-oversight/
     description: Review governance, risk, third parties, compliance, privacy, audits, and security awareness.
+  - title: Security+ Quick Review Guides
+    url: /security-plus/quick-review/
+    description: Browse printable comparison guides for controls, recovery metrics, and cryptographic methods.
   - title: Security Controls Quick Reference
     url: /security-plus/quick-review/security-controls/
     description: Compare technical, managerial, operational, and physical controls with their security functions.

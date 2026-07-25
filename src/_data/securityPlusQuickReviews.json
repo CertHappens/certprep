@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Security Controls Quick Reference",
+    "shortTitle": "Security controls",
+    "url": "/security-plus/quick-review/security-controls/",
+    "description": "Classify technical, managerial, operational, and physical controls, then separate preventive, deterrent, detective, corrective, compensating, and directive functions.",
+    "buttonLabel": "Review security controls",
+    "meta": "Categories, functions, and scenario clues"
+  },
+  {
+    "title": "Recovery Metrics Quick Reference",
+    "shortTitle": "Recovery metrics",
+    "url": "/security-plus/quick-review/recovery-metrics/",
+    "description": "Compare RTO, RPO, MTTR, and MTBF with timelines, calculations, recovery-planning distinctions, and common exam traps.",
+    "buttonLabel": "Review recovery metrics",
+    "meta": "RTO, RPO, MTTR, and MTBF"
+  },
+  {
+    "title": "Hashing, Encryption, and Encoding Quick Reference",
+    "shortTitle": "Hashing, encryption, and encoding",
+    "url": "/security-plus/quick-review/hashing-encryption-encoding/",
+    "description": "Match confidentiality, integrity, authenticity, and data representation to hashing, encryption, encoding, signatures, HMAC, salts, and key stretching.",
+    "buttonLabel": "Compare cryptographic methods",
+    "meta": "Cryptographic methods and password protection"
+  }
+]

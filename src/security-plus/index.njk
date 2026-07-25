@@ -51,13 +51,16 @@ permalink: /security-plus/
       <article class="card">
         <p class="card__meta">Available now</p>
         <h2>Quick review</h2>
-        <p>Compare security controls, recovery metrics, and cryptographic methods, or search {{ securityPlusAcronyms.entryCount }} acronyms with plain-English explanations.</p>
-        <div class="button-row">
-          <a class="button button--secondary" href="/security-plus/quick-review/security-controls/">Review security controls</a>
-          <a class="button button--secondary" href="/security-plus/quick-review/recovery-metrics/">Review recovery metrics</a>
-          <a class="button button--secondary" href="/security-plus/quick-review/hashing-encryption-encoding/">Compare cryptographic methods</a>
-          <a class="button button--secondary" href="/security-plus/acronyms/">Open acronyms and terms</a>
-        </div>
+        <p>Use focused, printable comparisons for concepts that are easy to confuse in exam scenarios.</p>
+        <a class="button button--secondary" href="/security-plus/quick-review/">Browse all Quick Review guides</a>
+
+        <h3>Current guides</h3>
+        <ul>
+          {% for guide in securityPlusQuickReviews %}
+          <li><a href="{{ guide.url }}">{{ guide.shortTitle }}</a></li>
+          {% endfor %}
+          <li><a href="/security-plus/acronyms/">Open acronyms and terms</a></li>
+        </ul>
       </article>
     </div>
   </div>
