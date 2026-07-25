@@ -1,0 +1,39 @@
+source_id,organization,title,publication_version,url,notes
+SRC-COMPTIA-N10009-V6,CompTIA,CompTIA Network+ N10-009 V9 Certification Exam Objectives,Version 6.0,https://lecbyo.files.cmp.optimizely.com/download/35a7403ab73211ef9dcda6f347fbf652,"Authoritative source for the exam code, domains, weights, numbered objectives, and listed scope."
+SRC-IANA-SERVICE-NAMES,IANA,Service Name and Transport Protocol Port Number Registry,Current registry,https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xhtml,Primary registry for assigned service names and TCP or UDP port numbers.
+SRC-IANA-PROTOCOL-NUMBERS,IANA,Protocol Numbers,Current registry,https://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml,Primary registry for IP protocol numbers.
+SRC-RFC1918,IETF,Address Allocation for Private Internets,RFC 1918,https://www.rfc-editor.org/info/rfc1918,Private IPv4 address ranges.
+SRC-RFC3927,IETF,Dynamic Configuration of IPv4 Link-Local Addresses,RFC 3927,https://www.rfc-editor.org/info/rfc3927,IPv4 link-local addressing used by APIPA implementations.
+SRC-RFC4632,IETF,Classless Inter-domain Routing (CIDR): The Internet Address Assignment and Aggregation Plan,RFC 4632,https://www.rfc-editor.org/info/rfc4632,CIDR addressing and route aggregation.
+SRC-RFC4291,IETF,IP Version 6 Addressing Architecture,RFC 4291,https://www.rfc-editor.org/info/rfc4291,IPv6 address architecture.
+SRC-RFC8200,IETF,"Internet Protocol, Version 6 (IPv6) Specification",RFC 8200,https://www.rfc-editor.org/info/rfc8200,Core IPv6 protocol specification.
+SRC-RFC4862,IETF,IPv6 Stateless Address Autoconfiguration,RFC 4862,https://www.rfc-editor.org/info/rfc4862,SLAAC behavior.
+SRC-RFC6146,IETF,Stateful NAT64: Network Address and Protocol Translation from IPv6 Clients to IPv4 Servers,RFC 6146,https://www.rfc-editor.org/info/rfc6146,NAT64 operation.
+SRC-RFC9293,IETF,Transmission Control Protocol (TCP),RFC 9293,https://www.rfc-editor.org/info/rfc9293,Current TCP specification.
+SRC-RFC768,IETF,User Datagram Protocol,RFC 768,https://www.rfc-editor.org/info/rfc768,UDP specification.
+SRC-RFC792,IETF,Internet Control Message Protocol,RFC 792,https://www.rfc-editor.org/info/rfc792,ICMP for IPv4.
+SRC-RFC826,IETF,An Ethernet Address Resolution Protocol,RFC 826,https://www.rfc-editor.org/info/rfc826,ARP behavior.
+SRC-RFC1034,IETF,Domain Names - Concepts and Facilities,RFC 1034,https://www.rfc-editor.org/info/rfc1034,DNS architecture and concepts.
+SRC-RFC1035,IETF,Domain Names - Implementation and Specification,RFC 1035,https://www.rfc-editor.org/info/rfc1035,DNS message and record behavior.
+SRC-RFC2131,IETF,Dynamic Host Configuration Protocol,RFC 2131,https://www.rfc-editor.org/info/rfc2131,DHCP operation.
+SRC-RFC2328,IETF,OSPF Version 2,RFC 2328,https://www.rfc-editor.org/info/rfc2328,OSPFv2 routing.
+SRC-RFC4271,IETF,A Border Gateway Protocol 4 (BGP-4),RFC 4271,https://www.rfc-editor.org/info/rfc4271,BGP-4 routing.
+SRC-RFC7868,IETF,Cisco's Enhanced Interior Gateway Routing Protocol (EIGRP),RFC 7868,https://www.rfc-editor.org/info/rfc7868,Informational description of EIGRP.
+SRC-RFC3022,IETF,Traditional IP Network Address Translator (Traditional NAT),RFC 3022,https://www.rfc-editor.org/info/rfc3022,Traditional NAT concepts.
+SRC-RFC2784,IETF,Generic Routing Encapsulation (GRE),RFC 2784,https://www.rfc-editor.org/info/rfc2784,GRE tunneling.
+SRC-RFC4301,IETF,Security Architecture for the Internet Protocol,RFC 4301,https://www.rfc-editor.org/info/rfc4301,IPsec architecture.
+SRC-RFC3411,IETF,An Architecture for Describing Simple Network Management Protocol (SNMP) Management Frameworks,RFC 3411,https://www.rfc-editor.org/info/rfc3411,SNMP management framework.
+SRC-RFC5424,IETF,The Syslog Protocol,RFC 5424,https://www.rfc-editor.org/info/rfc5424,Syslog message protocol.
+SRC-RFC7011,IETF,Specification of the IP Flow Information Export (IPFIX) Protocol for the Exchange of Flow Information,RFC 7011,https://www.rfc-editor.org/info/rfc7011,IPFIX flow export.
+SRC-RFC5905,IETF,Network Time Protocol Version 4: Protocol and Algorithms Specification,RFC 5905,https://www.rfc-editor.org/info/rfc5905,NTPv4 operation.
+SRC-RFC8915,IETF,Network Time Security for the Network Time Protocol,RFC 8915,https://www.rfc-editor.org/info/rfc8915,NTS security for NTP.
+SRC-RFC8484,IETF,DNS Queries over HTTPS (DoH),RFC 8484,https://www.rfc-editor.org/info/rfc8484,DNS over HTTPS.
+SRC-RFC7858,IETF,Specification for DNS over Transport Layer Security (TLS),RFC 7858,https://www.rfc-editor.org/info/rfc7858,DNS over TLS.
+SRC-RFC4033,IETF,DNS Security Introduction and Requirements,RFC 4033,https://www.rfc-editor.org/info/rfc4033,DNSSEC overview and requirements.
+SRC-NIST-SP800-207,NIST,Zero Trust Architecture,SP 800-207,https://csrc.nist.gov/pubs/sp/800/207/final,Primary source for Zero Trust architecture concepts.
+SRC-NIST-SP800-34R1,NIST,Contingency Planning Guide for Federal Information Systems,SP 800-34 Rev. 1,https://csrc.nist.gov/pubs/sp/800/34/r1/final,"Continuity, recovery planning, alternate sites, and testing."
+SRC-NIST-SP800-41R1,NIST,Guidelines on Firewalls and Firewall Policy,SP 800-41 Rev. 1,https://csrc.nist.gov/pubs/sp/800/41/r1/final,Firewall policy and network zone guidance.
+SRC-IEEE-8021Q,IEEE,IEEE Standard for Local and Metropolitan Area Networks: Bridges and Bridged Networks,IEEE 802.1Q,https://standards.ieee.org/ieee/802.1Q/,"VLAN tagging, bridged networking, and related switching standards."
+SRC-IEEE-8021X,IEEE,IEEE Standard for Local and Metropolitan Area Networks: Port-Based Network Access Control,IEEE 802.1X,https://standards.ieee.org/ieee/802.1X/,Port-based network access control.
+SRC-IEEE-80211,IEEE,IEEE Standard for Information Technology: Wireless LAN Medium Access Control and Physical Layer Specifications,IEEE 802.11,https://standards.ieee.org/ieee/802.11/,Wireless LAN standards family.
+SRC-IEEE-8023,IEEE,IEEE Standard for Ethernet,IEEE 802.3,https://standards.ieee.org/ieee/802.3/,Ethernet physical and data-link standards family.
