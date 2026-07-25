@@ -69,6 +69,9 @@ relatedLinks:
   - title: Recovery Metrics Quick Reference
     url: /security-plus/quick-review/recovery-metrics/
     description: Separate RTO, RPO, MTTR, and MTBF with timelines, calculations, and scenario clues.
+  - title: Common Ports and Protocols Reference
+    url: /ports-protocols/
+    description: Search and print common service ports, secure alternatives, transport protocols, and IP protocol numbers.
   - title: Security+ Acronyms and Terms
     url: /security-plus/acronyms/
     description: Search and print a plain-English reference for the initials used throughout Security+ material.
@@ -246,6 +249,8 @@ Expect to apply concepts involving:
 Sequence matters. A scenario may ask for the **first**, **next**, or **best** action during an incident. Containment, eradication, recovery, evidence preservation, communications, and lessons learned serve different purposes and occur at different points.
 
 Spend time with realistic output. Authentication records, firewall logs, DNS activity, endpoint alerts, and basic command results should feel familiar enough that you can locate the useful clue. Read only what the evidence supports. A log entry can be incomplete without becoming mysterious.
+
+Use the [Common Ports and Protocols Reference](/ports-protocols/) to connect service names and transport choices to firewall, monitoring, remote-access, email, and VPN scenarios.
 
 Continue with the [Domain 4: Security Operations guide](/security-plus/sy0-701/study-guide/security-operations/) for secure administration, asset and vulnerability management, monitoring tools, IAM, automation, incident response, and investigation data.
 

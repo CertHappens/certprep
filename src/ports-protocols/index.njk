@@ -1,0 +1,309 @@
+---
+layout: layouts/article.njk
+title: Common Ports and Protocols Reference
+description: Search and print common TCP and UDP ports, secure protocol alternatives, IP protocol numbers, and exam-focused networking clues.
+permalink: /ports-protocols/
+ogType: article
+printable: true
+printTitle: Common Ports and Protocols Reference
+author: certHappens
+datePublished: 2026-07-24
+articleSection: Networking reference
+eyebrow: Networking reference
+lede: Match the service, transport, and security property instead of memorizing a port number in isolation.
+breadcrumbs:
+  - label: Home
+    url: /
+  - label: Ports and Protocols
+    url: /ports-protocols/
+tocHeading: On this page
+tocVariant: compact-grid
+toc:
+  - id: port-basics
+    label: Port basics
+  - id: search-reference
+    label: Search
+  - id: ports-web-file
+    label: Web and files
+  - id: ports-email
+    label: Email
+  - id: ports-core-network
+    label: Core services
+  - id: ports-auth-management
+    label: Authentication
+  - id: ports-monitoring-logging
+    label: Monitoring
+  - id: ports-file-data
+    label: Files and data
+  - id: ports-voice-vpn-routing
+    label: Voice, VPN, routing
+  - id: protocols-without-ports
+    label: No port number
+  - id: secure-pairs
+    label: Secure pairs
+  - id: exam-traps
+    label: Exam traps
+  - id: official-references
+    label: References
+keywords:
+  - common ports and protocols
+  - Security+ ports
+  - Network+ ports
+  - TCP and UDP ports
+  - secure protocols
+relatedLinks:
+  - title: Security+ Quick Review Guides
+    url: /security-plus/quick-review/
+    description: Review controls, recovery metrics, and cryptographic methods.
+  - title: Security+ SY0-701 Study Guide
+    url: /security-plus/sy0-701/study-guide/
+    description: Follow the complete study roadmap and all five domain guides.
+  - title: Security+ Acronyms and Terms
+    url: /security-plus/acronyms/
+    description: Search the abbreviations used throughout certification material.
+  - title: Take a randomized SY0-701 practice test
+    url: /security-plus/sy0-701/practice-test/
+    description: Apply networking and security concepts in fresh scenarios.
+---
+
+<p>
+  Port numbers are useful clues, not proof of what an application is doing. Services can be moved to nonstandard ports, several protocols negotiate additional connections, and encrypted traffic can conceal the application from a simple port-based inspection.
+</p>
+
+<p>
+  This reference lists common exam and operational defaults. It uses a certification-neutral address so the same page can support Security+ now and Network+ later.
+</p>
+
+<div class="article-callout">
+  <p><strong>Read the whole scenario.</strong> TCP 22 suggests SSH, SFTP, or SCP. The requested action tells you which one fits.</p>
+</div>
+
+<h2 id="port-basics">Port basics</h2>
+
+<div class="table-scroll" role="region" aria-label="TCP and UDP port number ranges" tabindex="0">
+  <table>
+    <thead>
+      <tr>
+        <th scope="col">Range</th>
+        <th scope="col">IANA category</th>
+        <th scope="col">What it usually means</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in commonPortsProtocols.ranges %}
+      <tr>
+        <td><strong>{{ item.range }}</strong></td>
+        <td>{{ item.name }}</td>
+        <td>{{ item.meaning }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<ul>
+  <li><strong>TCP</strong> establishes a connection and provides ordered, reliable delivery.</li>
+  <li><strong>UDP</strong> sends independent datagrams with less transport overhead and no delivery guarantee.</li>
+  <li>A client normally connects from a temporary source port to the service's destination port.</li>
+  <li>A firewall rule should account for direction, transport, state, source, destination, and business need, not just the number.</li>
+</ul>
+
+<h2 id="search-reference">Search the reference</h2>
+
+<section class="acronym-controls" role="search" aria-labelledby="ports-search-title" data-port-controls>
+  <div class="acronym-controls__heading">
+    <h3 id="ports-search-title">Find a service, port, or clue</h3>
+    <p id="ports-search-help">Search by protocol, port number, transport, purpose, security note, or related term.</p>
+  </div>
+
+  <div class="acronym-search">
+    <label for="ports-search-input">Port or concept</label>
+    <div class="acronym-search__row">
+      <input
+        id="ports-search-input"
+        type="search"
+        inputmode="search"
+        autocomplete="off"
+        placeholder="Try 443, SSH, email, plaintext, or VPN"
+        aria-describedby="ports-search-help ports-search-status"
+        data-port-search
+      >
+      <button class="button button--secondary acronym-search__clear" type="button" data-port-clear hidden>Clear</button>
+    </div>
+    <p class="acronym-results-status" id="ports-search-status" data-port-status aria-live="polite">Showing all {{ commonPortsProtocols.entryCount }} entries.</p>
+  </div>
+</section>
+
+<div data-port-reference data-total-entries="{{ commonPortsProtocols.entryCount }}">
+  {% for group in commonPortsProtocols.groups %}
+  <section id="ports-{{ group.id }}" data-port-group>
+    <h2>{{ group.label }}</h2>
+    <div class="table-scroll" role="region" aria-label="{{ group.label }} ports and protocols" tabindex="0">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Service</th>
+            <th scope="col">Port</th>
+            <th scope="col">Transport</th>
+            <th scope="col">Purpose and security clue</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for entry in group.entries %}
+          <tr
+            data-port-entry
+            data-search-text="{{ entry.service | lower | escape }} {{ entry.port | lower | escape }} {{ entry.transport | lower | escape }} {{ entry.purpose | lower | escape }} {{ entry.security | lower | escape }} {{ entry.keywords | lower | escape }}"
+          >
+            <td><strong>{{ entry.service }}</strong></td>
+            <td>{{ entry.port }}</td>
+            <td>{{ entry.transport }}</td>
+            <td>{{ entry.purpose }} <span class="text-muted">{{ entry.security }}</span></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </section>
+  {% endfor %}
+</div>
+
+<p class="acronym-no-results" data-port-empty hidden>
+  No matching ports or protocols were found. Try the number, full service name, transport, or a broader term.
+</p>
+
+<h2 id="protocols-without-ports">Protocols without TCP or UDP ports</h2>
+
+<p>
+  Some exam distractors turn an IP protocol number into a fake port number. ICMP, GRE, ESP, AH, and OSPF operate directly over IP. ARP operates below IP on the local link.
+</p>
+
+<div class="table-scroll" role="region" aria-label="Protocols that do not use TCP or UDP ports" tabindex="0">
+  <table>
+    <thead>
+      <tr>
+        <th scope="col">Protocol</th>
+        <th scope="col">Identifier</th>
+        <th scope="col">Purpose</th>
+        <th scope="col">Exam clue</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in commonPortsProtocols.portlessProtocols %}
+      <tr>
+        <td><strong>{{ item.name }}</strong></td>
+        <td>{{ item.identifier }}</td>
+        <td>{{ item.purpose }}</td>
+        <td>{{ item.clue }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<h2 id="secure-pairs">Secure and insecure pairs</h2>
+
+<div class="table-scroll" role="region" aria-label="Common secure and insecure protocol comparisons" tabindex="0">
+  <table>
+    <thead>
+      <tr>
+        <th scope="col">Plain or legacy choice</th>
+        <th scope="col">Protected alternative</th>
+        <th scope="col">Difference to remember</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Telnet, TCP 23</td>
+        <td>SSH, TCP 22</td>
+        <td>SSH protects remote administration with encryption and authentication.</td>
+      </tr>
+      <tr>
+        <td>HTTP, TCP 80</td>
+        <td>HTTPS, TCP or UDP 443</td>
+        <td>HTTPS adds TLS. HTTP/3 uses QUIC over UDP.</td>
+      </tr>
+      <tr>
+        <td>FTP, TCP 20 and 21</td>
+        <td>SFTP on TCP 22 or FTPS on FTP-related ports</td>
+        <td>SFTP is an SSH protocol. FTPS is FTP protected with TLS.</td>
+      </tr>
+      <tr>
+        <td>LDAP, TCP or UDP 389</td>
+        <td>LDAPS, TCP 636, or LDAP upgraded with TLS</td>
+        <td>The protected connection reduces exposure of credentials and directory data.</td>
+      </tr>
+      <tr>
+        <td>IMAP 143 and POP3 110</td>
+        <td>IMAPS 993 and POP3S 995</td>
+        <td>The secure variants begin with TLS.</td>
+      </tr>
+      <tr>
+        <td>Syslog, UDP 514</td>
+        <td>Syslog over TLS, TCP 6514</td>
+        <td>TLS adds confidentiality and server authentication to log transport.</td>
+      </tr>
+      <tr>
+        <td>SNMPv1 or SNMPv2c</td>
+        <td>SNMPv3, usually UDP 161 and 162</td>
+        <td>The version changes the security properties, not the usual port pair.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<h2 id="exam-traps">Common exam traps</h2>
+
+<h3>SFTP and FTPS are not the same protocol</h3>
+
+<p>
+  SFTP runs through SSH on TCP 22. FTPS adds TLS to FTP and retains FTP's control and data-channel behavior.
+</p>
+
+<h3>DNS uses both UDP and TCP</h3>
+
+<p>
+  UDP is common for ordinary queries. TCP is used when the exchange requires it, including traditional zone transfers and responses that do not fit the available UDP path.
+</p>
+
+<h3>A secure protocol can share a familiar port</h3>
+
+<p>
+  SNMPv3 normally uses the same UDP 161 and 162 pair as earlier SNMP versions. The version and configuration provide the stronger security.
+</p>
+
+<h3>One application can use more than one connection</h3>
+
+<p>
+  FTP separates control and data. SIP negotiates media that normally flows over separate RTP ports. Firewalls and troubleshooting steps must account for the full exchange.
+</p>
+
+<h3>Port numbers do not identify every network protocol</h3>
+
+<p>
+  ESP is IP protocol 50, not port 50. OSPF is IP protocol 89, not port 89. GRE is IP protocol 47 even when TCP 1723 controls a PPTP tunnel.
+</p>
+
+<h3>Default does not mean mandatory</h3>
+
+<p>
+  Administrators can move services, proxies can front them, and applications can tunnel one protocol inside another. Use the port as evidence, then confirm with configuration, packet details, logs, or application-aware inspection.
+</p>
+
+<h2 id="official-references">Official references</h2>
+
+<p>
+  IANA maintains the authoritative service-name and transport-port registry. Certification objectives determine which services belong in a particular exam version, while the registry and protocol standards define the assignments and behavior.
+</p>
+
+<ul>
+  <li><a href="https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xhtml">IANA Service Name and Transport Protocol Port Number Registry</a></li>
+  <li><a href="https://www.rfc-editor.org/rfc/rfc6335">RFC 6335: Service Name and Port Number Registry Procedures</a></li>
+  <li><a href="https://www.rfc-editor.org/rfc/rfc4251">RFC 4251: The Secure Shell Protocol Architecture</a></li>
+  <li><a href="https://www.rfc-editor.org/rfc/rfc8446">RFC 8446: TLS 1.3</a></li>
+  <li><a href="https://www.rfc-editor.org/rfc/rfc7296">RFC 7296: Internet Key Exchange Protocol Version 2</a></li>
+  <li><a href="https://www.rfc-editor.org/rfc/rfc8907">RFC 8907: TACACS+</a></li>
+  <li><a href="https://www.comptia.org/en-us/certifications/security/">CompTIA Security+ certification page</a></li>
+  <li><a href="https://www.comptia.org/en-us/certifications/network/">CompTIA Network+ certification page</a></li>
+</ul>
+
+<script type="module" src="/assets/js/ports-protocols-filter.js"></script>
