@@ -2723,3 +2723,31 @@ h3 {
     width: 100%;
   }
 }
+
+.ports-search-print-note {
+  display: none;
+}
+
+@media print {
+  .ports-search-print-note {
+    display: block !important;
+  }
+
+  .ports-protocols-table th:nth-child(2),
+  .ports-protocols-table td:nth-child(2) {
+    min-width: 0.45in !important;
+    white-space: nowrap !important;
+    overflow-wrap: normal !important;
+    word-break: normal !important;
+    hyphens: none !important;
+  }
+
+  .ports-protocols-table th:nth-child(3),
+  .ports-protocols-table td:nth-child(3) {
+    min-width: 0.65in !important;
+    white-space: nowrap !important;
+    overflow-wrap: normal !important;
+    word-break: normal !important;
+    hyphens: none !important;
+  }
+}
