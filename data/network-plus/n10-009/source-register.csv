@@ -37,3 +37,6 @@ SRC-IEEE-8021Q,IEEE,IEEE Standard for Local and Metropolitan Area Networks: Brid
 SRC-IEEE-8021X,IEEE,IEEE Standard for Local and Metropolitan Area Networks: Port-Based Network Access Control,IEEE 802.1X,https://standards.ieee.org/ieee/802.1X/,Port-based network access control.
 SRC-IEEE-80211,IEEE,IEEE Standard for Information Technology: Wireless LAN Medium Access Control and Physical Layer Specifications,IEEE 802.11,https://standards.ieee.org/ieee/802.11/,Wireless LAN standards family.
 SRC-IEEE-8023,IEEE,IEEE Standard for Ethernet,IEEE 802.3,https://standards.ieee.org/ieee/802.3/,Ethernet physical and data-link standards family.
+SRC-IEEE-8021AX,IEEE,IEEE Standard for Local and Metropolitan Area Networks: Link Aggregation,IEEE 802.1AX,https://standards.ieee.org/ieee/802.1AX/,Link aggregation architecture and operation.
+SRC-RFC2865,IETF,Remote Authentication Dial In User Service (RADIUS),RFC 2865,https://www.rfc-editor.org/info/rfc2865,RADIUS authentication and transport behavior.
+SRC-RFC8907,IETF,The Terminal Access Controller Access-Control System Plus (TACACS+) Protocol,RFC 8907,https://www.rfc-editor.org/info/rfc8907,"TACACS+ protocol behavior and separation of authentication, authorization, and accounting."

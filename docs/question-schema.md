@@ -123,6 +123,10 @@ replacement_question_id
 
 `single_choice` and `best_available` require exactly one correct stored key. `multi_select` requires two or more sorted, unique pipe-delimited keys and an instruction stating exactly how many answers to select. `best_available` requires an instruction identifying the stated decision criterion.
 
+## Temporary accelerated staging phase
+
+Beginning with Batch 001, the repository owner authorized an accelerated early-build workflow for staging. New questions may be internally reviewed, validated, marked `approved`, and written directly to `questions.csv`. The normal draft, review, approval, and retirement structure remains in place and can be reactivated when the bank grows or when the owner ends the accelerated phase. Reported issues are corrected through normal versioning or retirement rules.
+
 ## Review workflow
 
 1. Write new records in `draft-questions.csv`.
