@@ -1,0 +1,67 @@
+---
+layout: layouts/base.njk
+title: Security+ Quick Review Guides for SY0-701
+description: Review Security+ SY0-701 concepts with printable comparisons for security controls, recovery metrics, and cryptographic methods.
+permalink: /security-plus/quick-review/
+breadcrumbs:
+  - label: Home
+    url: /
+  - label: Security+
+    url: /security-plus/
+  - label: Quick Review
+    url: /security-plus/quick-review/
+---
+
+<header class="page-header page-header--compact">
+  <div class="page-shell">
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="/">Home</a></li>
+        <li><a href="/security-plus/">Security+</a></li>
+        <li aria-current="page">Quick Review</li>
+      </ol>
+    </nav>
+
+    <p class="eyebrow">Security+ quick review</p>
+    <h1>Security+ SY0-701 Quick Review</h1>
+    <p class="lede">
+      Focused comparisons for concepts that are easy to blur together when several answers sound reasonable.
+    </p>
+  </div>
+</header>
+
+<section class="section">
+  <div class="page-shell">
+    <p>
+      Each guide explains the distinction, works through realistic scenarios, and ends with a rapid-review grid.
+      The pages are designed for both screen review and clean printing.
+    </p>
+
+    <div class="card-grid">
+      {% for guide in securityPlusQuickReviews %}
+      <article class="card">
+        <p class="card__meta">{{ guide.meta }}</p>
+        <h2>{{ guide.title }}</h2>
+        <p>{{ guide.description }}</p>
+        <a class="button button--secondary" href="{{ guide.url }}">{{ guide.buttonLabel }}</a>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="page-shell">
+    <h2>Keep reviewing</h2>
+    <p>
+      Use the quick references to correct a specific weak spot, then apply the distinction in a fresh question set.
+      The acronym reference is useful when unfamiliar initials interrupt the topic you are studying.
+    </p>
+    <div class="button-row">
+      <a class="button" href="/security-plus/sy0-701/practice-test/">Start a practice test</a>
+      <a class="button button--secondary" href="/ports-protocols/">Open ports and protocols</a>
+      <a class="button button--secondary" href="/security-plus/acronyms/">Open acronyms and terms</a>
+      <a class="button button--secondary" href="/security-plus/sy0-701/study-guide/">Open the full study guide</a>
+    </div>
+  </div>
+</section>

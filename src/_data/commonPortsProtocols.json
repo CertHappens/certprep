@@ -1,0 +1,559 @@
+{
+  "entryCount": 55,
+  "groups": [
+    {
+      "id": "web-file",
+      "label": "Web and file transfer",
+      "entries": [
+        {
+          "service": "FTP data",
+          "port": "20",
+          "transport": "TCP",
+          "purpose": "Active-mode FTP data connection",
+          "security": "FTP is plaintext. Passive mode uses a negotiated high port instead of TCP 20.",
+          "keywords": "file transfer active passive"
+        },
+        {
+          "service": "FTP control",
+          "port": "21",
+          "transport": "TCP",
+          "purpose": "FTP commands and session control",
+          "security": "Credentials and data are plaintext unless the session is upgraded with TLS.",
+          "keywords": "file transfer commands explicit ftps starttls"
+        },
+        {
+          "service": "SSH, SFTP, and SCP",
+          "port": "22",
+          "transport": "TCP",
+          "purpose": "Encrypted remote shell and SSH-based file transfer",
+          "security": "SFTP and SCP use SSH. They do not use the FTP ports.",
+          "keywords": "secure shell remote administration file transfer"
+        },
+        {
+          "service": "Telnet",
+          "port": "23",
+          "transport": "TCP",
+          "purpose": "Remote terminal access",
+          "security": "Plaintext. Prefer SSH for remote administration.",
+          "keywords": "remote shell insecure plaintext"
+        },
+        {
+          "service": "TFTP",
+          "port": "69",
+          "transport": "UDP",
+          "purpose": "Simple file transfer, often for boot or device configuration",
+          "security": "No built-in authentication or encryption.",
+          "keywords": "trivial file transfer boot configuration"
+        },
+        {
+          "service": "HTTP",
+          "port": "80",
+          "transport": "TCP",
+          "purpose": "Unencrypted web traffic",
+          "security": "Content and credentials are exposed unless another protection layer is used.",
+          "keywords": "web plaintext"
+        },
+        {
+          "service": "HTTPS",
+          "port": "443",
+          "transport": "TCP / UDP",
+          "purpose": "HTTP protected by TLS",
+          "security": "HTTP/1.1 and HTTP/2 commonly use TCP. HTTP/3 uses QUIC over UDP.",
+          "keywords": "web tls ssl quic http3 secure"
+        },
+        {
+          "service": "Implicit FTPS data",
+          "port": "989",
+          "transport": "TCP",
+          "purpose": "TLS-protected FTP data channel",
+          "security": "Implicit FTPS begins with TLS. Explicit FTPS normally starts on TCP 21.",
+          "keywords": "secure ftp tls data"
+        },
+        {
+          "service": "Implicit FTPS control",
+          "port": "990",
+          "transport": "TCP",
+          "purpose": "TLS-protected FTP control channel",
+          "security": "Do not confuse FTPS with SFTP, which uses SSH on TCP 22.",
+          "keywords": "secure ftp tls control"
+        }
+      ]
+    },
+    {
+      "id": "email",
+      "label": "Email",
+      "entries": [
+        {
+          "service": "SMTP relay",
+          "port": "25",
+          "transport": "TCP",
+          "purpose": "Mail transfer between servers",
+          "security": "STARTTLS may protect transport, but policy and certificate validation still matter.",
+          "keywords": "email mail transfer relay"
+        },
+        {
+          "service": "POP3",
+          "port": "110",
+          "transport": "TCP",
+          "purpose": "Download mail to a client",
+          "security": "Plaintext unless upgraded with TLS.",
+          "keywords": "email retrieval download"
+        },
+        {
+          "service": "IMAP",
+          "port": "143",
+          "transport": "TCP",
+          "purpose": "Access and synchronize server-hosted mail",
+          "security": "Plaintext unless upgraded with TLS.",
+          "keywords": "email retrieval synchronization"
+        },
+        {
+          "service": "Submissions",
+          "port": "465",
+          "transport": "TCP",
+          "purpose": "Mail submission using implicit TLS",
+          "security": "The TLS session begins before SMTP commands are exchanged.",
+          "keywords": "email secure smtp implicit tls smtps"
+        },
+        {
+          "service": "Message submission",
+          "port": "587",
+          "transport": "TCP",
+          "purpose": "Authenticated client-to-server mail submission",
+          "security": "Commonly protected with STARTTLS.",
+          "keywords": "email smtp submission starttls"
+        },
+        {
+          "service": "IMAPS",
+          "port": "993",
+          "transport": "TCP",
+          "purpose": "IMAP using implicit TLS",
+          "security": "Protects mail access in transit.",
+          "keywords": "email secure imap tls"
+        },
+        {
+          "service": "POP3S",
+          "port": "995",
+          "transport": "TCP",
+          "purpose": "POP3 using implicit TLS",
+          "security": "Protects mail retrieval in transit.",
+          "keywords": "email secure pop tls"
+        }
+      ]
+    },
+    {
+      "id": "core-network",
+      "label": "Name, address, and time services",
+      "entries": [
+        {
+          "service": "DNS",
+          "port": "53",
+          "transport": "UDP / TCP",
+          "purpose": "Name resolution and DNS data exchange",
+          "security": "UDP is common for queries. TCP is used for zone transfers and responses that need it.",
+          "keywords": "domain name resolution zone transfer"
+        },
+        {
+          "service": "DHCPv4 server",
+          "port": "67",
+          "transport": "UDP",
+          "purpose": "Receive client requests and provide IPv4 configuration",
+          "security": "Rogue DHCP services can redirect or disrupt clients.",
+          "keywords": "address configuration server bootp"
+        },
+        {
+          "service": "DHCPv4 client",
+          "port": "68",
+          "transport": "UDP",
+          "purpose": "Receive IPv4 configuration from a DHCP server",
+          "security": "Client and server use different well-known ports.",
+          "keywords": "address configuration client bootp"
+        },
+        {
+          "service": "NTP",
+          "port": "123",
+          "transport": "UDP",
+          "purpose": "Time synchronization",
+          "security": "Accurate time supports logs, authentication, and investigations. Restrict untrusted sources.",
+          "keywords": "network time synchronization clock"
+        },
+        {
+          "service": "DHCPv6 client",
+          "port": "546",
+          "transport": "UDP",
+          "purpose": "Receive IPv6 configuration",
+          "security": "The client listens on UDP 546.",
+          "keywords": "ipv6 address configuration client"
+        },
+        {
+          "service": "DHCPv6 server",
+          "port": "547",
+          "transport": "UDP",
+          "purpose": "Provide IPv6 configuration and relay service",
+          "security": "The server and relay side use UDP 547.",
+          "keywords": "ipv6 address configuration server relay"
+        },
+        {
+          "service": "DNS over TLS",
+          "port": "853",
+          "transport": "TCP",
+          "purpose": "Encrypt DNS traffic with TLS",
+          "security": "Protects the DNS transport path. DNS over HTTPS commonly uses TCP or UDP 443.",
+          "keywords": "dot encrypted name resolution tls doh"
+        }
+      ]
+    },
+    {
+      "id": "auth-management",
+      "label": "Authentication, directory, and remote management",
+      "entries": [
+        {
+          "service": "TACACS+",
+          "port": "49",
+          "transport": "TCP",
+          "purpose": "Centralized device administration and AAA",
+          "security": "Separates authentication, authorization, and accounting functions.",
+          "keywords": "aaa network device administration cisco"
+        },
+        {
+          "service": "Kerberos",
+          "port": "88",
+          "transport": "TCP / UDP",
+          "purpose": "Ticket-based network authentication",
+          "security": "Time synchronization and key distribution are central to Kerberos operation.",
+          "keywords": "authentication ticket kdc active directory"
+        },
+        {
+          "service": "LDAP",
+          "port": "389",
+          "transport": "TCP / UDP",
+          "purpose": "Directory queries and updates",
+          "security": "Use TLS protection when credentials or sensitive directory data cross the network.",
+          "keywords": "directory active directory starttls"
+        },
+        {
+          "service": "LDAPS",
+          "port": "636",
+          "transport": "TCP",
+          "purpose": "LDAP using implicit TLS",
+          "security": "Encrypts the directory connection in transit.",
+          "keywords": "secure directory ldap tls"
+        },
+        {
+          "service": "RADIUS authentication",
+          "port": "1812",
+          "transport": "UDP",
+          "purpose": "Centralized network-access authentication and authorization",
+          "security": "Traditional RADIUS does not encrypt the entire packet.",
+          "keywords": "aaa wifi vpn authentication"
+        },
+        {
+          "service": "RADIUS accounting",
+          "port": "1813",
+          "transport": "UDP",
+          "purpose": "Record network-access session activity",
+          "security": "Accounting is separate from the authentication service.",
+          "keywords": "aaa accounting session records"
+        },
+        {
+          "service": "RDP",
+          "port": "3389",
+          "transport": "TCP / UDP",
+          "purpose": "Microsoft remote desktop",
+          "security": "Use Network Level Authentication, TLS, access controls, and limited exposure.",
+          "keywords": "remote desktop windows administration"
+        },
+        {
+          "service": "VNC",
+          "port": "5900",
+          "transport": "TCP",
+          "purpose": "Remote graphical desktop",
+          "security": "Security varies by implementation. A protected tunnel may be needed.",
+          "keywords": "remote desktop screen sharing"
+        }
+      ]
+    },
+    {
+      "id": "monitoring-logging",
+      "label": "Monitoring, logging, and network management",
+      "entries": [
+        {
+          "service": "SNMP queries",
+          "port": "161",
+          "transport": "UDP",
+          "purpose": "Read or change managed-device information",
+          "security": "Prefer SNMPv3 for authentication and privacy.",
+          "keywords": "monitoring management mib poll"
+        },
+        {
+          "service": "SNMP traps and informs",
+          "port": "162",
+          "transport": "UDP",
+          "purpose": "Receive unsolicited management notifications",
+          "security": "The manager receives traps on UDP 162.",
+          "keywords": "monitoring alert notification"
+        },
+        {
+          "service": "Syslog",
+          "port": "514",
+          "transport": "UDP",
+          "purpose": "Send event and log messages",
+          "security": "Traditional UDP syslog provides no confidentiality or delivery guarantee.",
+          "keywords": "logging events siem"
+        },
+        {
+          "service": "NETCONF over SSH",
+          "port": "830",
+          "transport": "TCP",
+          "purpose": "Structured network-device configuration and management",
+          "security": "SSH provides the protected transport.",
+          "keywords": "network automation management xml ssh"
+        },
+        {
+          "service": "Syslog over TLS",
+          "port": "6514",
+          "transport": "TCP",
+          "purpose": "Protect syslog messages with TLS",
+          "security": "Adds confidentiality and certificate-based transport protection.",
+          "keywords": "secure logging tls siem"
+        }
+      ]
+    },
+    {
+      "id": "file-data",
+      "label": "File sharing, storage, and databases",
+      "entries": [
+        {
+          "service": "NetBIOS name service",
+          "port": "137",
+          "transport": "UDP",
+          "purpose": "Legacy NetBIOS name registration and lookup",
+          "security": "Commonly associated with older Windows networking.",
+          "keywords": "windows legacy name resolution"
+        },
+        {
+          "service": "NetBIOS datagram service",
+          "port": "138",
+          "transport": "UDP",
+          "purpose": "Legacy connectionless NetBIOS traffic",
+          "security": "Restrict legacy exposure across network boundaries.",
+          "keywords": "windows legacy datagram"
+        },
+        {
+          "service": "NetBIOS session service",
+          "port": "139",
+          "transport": "TCP",
+          "purpose": "Legacy session-based Windows file and printer sharing",
+          "security": "Modern SMB commonly uses TCP 445 directly.",
+          "keywords": "windows legacy smb file sharing"
+        },
+        {
+          "service": "SMB / CIFS",
+          "port": "445",
+          "transport": "TCP",
+          "purpose": "Windows file, printer, and named-pipe sharing",
+          "security": "Limit exposure, use current SMB versions, and require appropriate signing or encryption.",
+          "keywords": "windows file sharing active directory"
+        },
+        {
+          "service": "Microsoft SQL Server",
+          "port": "1433",
+          "transport": "TCP",
+          "purpose": "Default SQL Server database service",
+          "security": "Databases may use custom ports. Restrict network access and protect credentials.",
+          "keywords": "mssql database"
+        },
+        {
+          "service": "Oracle Net listener",
+          "port": "1521",
+          "transport": "TCP",
+          "purpose": "Common Oracle database listener",
+          "security": "The configured listener port can differ.",
+          "keywords": "oracle database"
+        },
+        {
+          "service": "NFS",
+          "port": "2049",
+          "transport": "TCP / UDP",
+          "purpose": "Network file system access",
+          "security": "Use strong identity controls and restrict exports. Modern deployments commonly use TCP.",
+          "keywords": "unix linux file sharing"
+        },
+        {
+          "service": "iSCSI",
+          "port": "3260",
+          "transport": "TCP",
+          "purpose": "Block storage over IP",
+          "security": "Segmentation, authentication, and protected management reduce storage exposure.",
+          "keywords": "storage san block"
+        },
+        {
+          "service": "MySQL",
+          "port": "3306",
+          "transport": "TCP",
+          "purpose": "Default MySQL database service",
+          "security": "Do not expose databases broadly. Use TLS and least-privilege accounts.",
+          "keywords": "database mariadb"
+        },
+        {
+          "service": "PostgreSQL",
+          "port": "5432",
+          "transport": "TCP",
+          "purpose": "Default PostgreSQL database service",
+          "security": "Restrict listeners and client networks, then protect authentication and transport.",
+          "keywords": "database postgres"
+        }
+      ]
+    },
+    {
+      "id": "voice-vpn-routing",
+      "label": "Voice, VPN, and routing",
+      "entries": [
+        {
+          "service": "BGP",
+          "port": "179",
+          "transport": "TCP",
+          "purpose": "Exchange routes between autonomous systems",
+          "security": "Peer controls and route validation help reduce route leaks and hijacking.",
+          "keywords": "routing border gateway"
+        },
+        {
+          "service": "IKE / ISAKMP",
+          "port": "500",
+          "transport": "UDP",
+          "purpose": "Negotiate IPsec security associations",
+          "security": "NAT traversal commonly moves IPsec traffic to UDP 4500.",
+          "keywords": "vpn ipsec key exchange"
+        },
+        {
+          "service": "RIP",
+          "port": "520",
+          "transport": "UDP",
+          "purpose": "Exchange IPv4 distance-vector routes",
+          "security": "RIP has limited scale and should not be accepted from untrusted peers.",
+          "keywords": "routing distance vector ipv4"
+        },
+        {
+          "service": "RIPng",
+          "port": "521",
+          "transport": "UDP",
+          "purpose": "Exchange IPv6 distance-vector routes",
+          "security": "RIPng is the IPv6 counterpart to RIP.",
+          "keywords": "routing distance vector ipv6"
+        },
+        {
+          "service": "L2TP",
+          "port": "1701",
+          "transport": "UDP",
+          "purpose": "Layer 2 tunneling",
+          "security": "L2TP does not provide encryption by itself and is often paired with IPsec.",
+          "keywords": "vpn tunnel l2tp ipsec"
+        },
+        {
+          "service": "PPTP control",
+          "port": "1723",
+          "transport": "TCP",
+          "purpose": "Control a PPTP tunnel",
+          "security": "PPTP also uses GRE and is considered obsolete for secure remote access.",
+          "keywords": "vpn tunnel gre legacy"
+        },
+        {
+          "service": "IPsec NAT traversal",
+          "port": "4500",
+          "transport": "UDP",
+          "purpose": "Carry IPsec through NAT",
+          "security": "Encapsulates IPsec ESP when NAT is present.",
+          "keywords": "vpn natt ike esp"
+        },
+        {
+          "service": "SIP",
+          "port": "5060",
+          "transport": "TCP / UDP",
+          "purpose": "Establish and control voice or video sessions",
+          "security": "Signaling is not encrypted by default. RTP media normally uses negotiated dynamic ports.",
+          "keywords": "voip voice signaling rtp"
+        },
+        {
+          "service": "SIPS",
+          "port": "5061",
+          "transport": "TCP",
+          "purpose": "SIP signaling protected by TLS",
+          "security": "Protecting signaling does not automatically encrypt the RTP media stream.",
+          "keywords": "voip voice secure sip tls srtp"
+        }
+      ]
+    }
+  ],
+  "portlessProtocols": [
+    {
+      "name": "ICMP",
+      "identifier": "IP protocol 1",
+      "purpose": "IPv4 control messages, errors, and diagnostics",
+      "clue": "Ping uses ICMP echo messages, not a TCP or UDP port."
+    },
+    {
+      "name": "IGMP",
+      "identifier": "IP protocol 2",
+      "purpose": "IPv4 multicast group management",
+      "clue": "It operates directly over IP."
+    },
+    {
+      "name": "GRE",
+      "identifier": "IP protocol 47",
+      "purpose": "Generic packet encapsulation",
+      "clue": "PPTP uses TCP 1723 for control and GRE for tunneled payloads."
+    },
+    {
+      "name": "IPsec ESP",
+      "identifier": "IP protocol 50",
+      "purpose": "IPsec confidentiality, integrity, and authentication services",
+      "clue": "With NAT traversal, ESP is encapsulated in UDP 4500."
+    },
+    {
+      "name": "IPsec AH",
+      "identifier": "IP protocol 51",
+      "purpose": "IPsec integrity and authentication without confidentiality",
+      "clue": "AH is an IP protocol number, not port 51."
+    },
+    {
+      "name": "ICMPv6",
+      "identifier": "IP protocol 58",
+      "purpose": "IPv6 control, diagnostics, and neighbor discovery",
+      "clue": "Blocking it indiscriminately can break essential IPv6 functions."
+    },
+    {
+      "name": "OSPF",
+      "identifier": "IP protocol 89",
+      "purpose": "Link-state interior routing",
+      "clue": "OSPF does not use TCP or UDP."
+    },
+    {
+      "name": "ARP",
+      "identifier": "EtherType 0x0806",
+      "purpose": "Map IPv4 addresses to local-link MAC addresses",
+      "clue": "ARP is a link-layer protocol and has no TCP or UDP port."
+    }
+  ],
+  "ranges": [
+    {
+      "range": "0",
+      "name": "Reserved",
+      "meaning": "Not assigned as a usable service port."
+    },
+    {
+      "range": "1-1023",
+      "name": "System ports",
+      "meaning": "Commonly called well-known ports."
+    },
+    {
+      "range": "1024-49151",
+      "name": "User ports",
+      "meaning": "Commonly called registered ports."
+    },
+    {
+      "range": "49152-65535",
+      "name": "Dynamic or private ports",
+      "meaning": "Often used as temporary client-side or application-selected ports."
+    }
+  ]
+}
