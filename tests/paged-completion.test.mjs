@@ -10,6 +10,9 @@ function makeSession(answeredPositions = []) {
   const answered = new Set(answeredPositions);
 
   return {
+    test: {
+      practiceTestPath: "/security-plus/sy0-701/practice-test",
+    },
     questionOrder: ["q1", "q2", "q3"],
     questions: {
       q1: {
@@ -52,6 +55,19 @@ test("the final question can finish immediately when all questions are answered"
   assert.equal(model.unanswered, 0);
   assert.equal(model.confirmationMessage, null);
   assert.equal(model.resultsPath, PAGED_RESULTS_PATH);
+});
+
+
+
+test("Network+ results return to the Network+ practice-test route", () => {
+  const session = makeSession([1, 2, 3]);
+  session.test.practiceTestPath = "/network-plus/n10-009/practice-test";
+  const model = createPagedCompletionModel(session, 3);
+
+  assert.equal(
+    model.resultsPath,
+    "/network-plus/n10-009/practice-test/",
+  );
 });
 
 test("one unanswered question receives singular confirmation copy", () => {

@@ -12,6 +12,9 @@ function makeSession({
   count = 10,
 } = {}) {
   return {
+    test: {
+      practiceTestPath: "/security-plus/sy0-701/practice-test",
+    },
     completedAt,
     currentIndex,
     questionOrder: Array.from(
@@ -39,6 +42,18 @@ test("an unfinished session resumes its current numbered position", () => {
   assert.equal(
     getPagedEntryPath(makeSession({ currentIndex: 6 })),
     "/security-plus/sy0-701/practice-test/question/7/",
+  );
+});
+
+
+
+test("a Network+ session enters its own numbered route", () => {
+  const session = makeSession({ currentIndex: 1 });
+  session.test.practiceTestPath = "/network-plus/n10-009/practice-test";
+
+  assert.equal(
+    getPagedEntryPath(session),
+    "/network-plus/n10-009/practice-test/question/2/",
   );
 });
 

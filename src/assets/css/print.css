@@ -302,6 +302,15 @@
     hyphens: none !important;
   }
 
+  .table--compact-second-column th:nth-child(2),
+  .table--compact-second-column td:nth-child(2) {
+    min-width: 0.55in !important;
+    white-space: nowrap !important;
+    overflow-wrap: normal !important;
+    word-break: normal !important;
+    hyphens: none !important;
+  }
+
   pre,
   code {
     border-color: #aaa !important;

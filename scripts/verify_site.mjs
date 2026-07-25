@@ -82,6 +82,9 @@ const requiredFiles = [
   "security-plus/acronyms/index.html",
   "network-plus/index.html",
   "network-plus/n10-009/study-guide/index.html",
+  "network-plus/n10-009/practice-test/index.html",
+  "network-plus/n10-009/practice-test/question/1/index.html",
+  "network-plus/n10-009/practice-test/question/50/index.html",
   "security-plus/sy0-701/practice-test/index.html",
   "security-plus/sy0-701/study-guide/index.html",
   "security-plus/sy0-701/study-guide/general-security-concepts/index.html",
@@ -94,7 +97,14 @@ const requiredFiles = [
   "assets/css/site.css",
   "assets/css/print.css",
   "assets/js/print-guide.js",
-  "assets/js/acronym-filter.js"
+  "assets/js/acronym-filter.js",
+  "assets/js/quiz/app.js",
+  "assets/js/quiz/paged-question.js",
+  "quiz-data/catalog.json",
+  "quiz-data/security-plus/sec-701/manifest.json",
+  "quiz-data/security-plus/sec-701/questions.json",
+  "quiz-data/network-plus/n10-009/manifest.json",
+  "quiz-data/network-plus/n10-009/questions.json"
 ];
 
 for (const relative of requiredFiles) {
@@ -187,6 +197,20 @@ if (await isFile(printCssPath)) {
   for (const rule of requiredPrintFirstColumnRules) {
     if (!printCss.includes(rule)) {
       fail(`print.css: printable first-column rule is missing: ${rule}`);
+    }
+  }
+
+
+  const requiredCompactSecondColumnRules = [
+    ".table--compact-second-column th:nth-child(2)",
+    ".table--compact-second-column td:nth-child(2)",
+    "min-width: 0.55in !important",
+    "white-space: nowrap !important"
+  ];
+
+  for (const rule of requiredCompactSecondColumnRules) {
+    if (!printCss.includes(rule)) {
+      fail(`print.css: compact second-column utility is missing: ${rule}`);
     }
   }
 
@@ -353,9 +377,32 @@ for (const file of htmlFiles) {
     }
   }
 
+  if (relative === "index.html") {
+    const requiredHomepageMarkers = [
+      "Certification study and practice",
+      "Choose an exam and start studying",
+      'href="/security-plus/sy0-701/practice-test/">Start Security+ practice test</a>',
+      'href="/network-plus/n10-009/practice-test/">Start Network+ practice test</a>'
+    ];
+
+    for (const marker of requiredHomepageMarkers) {
+      if (!html.includes(marker)) {
+        fail(`${relative}: homepage is missing ${marker}`);
+      }
+    }
+
+    if (html.includes("Free certification practice")) {
+      fail(`${relative}: retired free-practice eyebrow is still present`);
+    }
+  }
+
   if (relative === "network-plus/index.html") {
     if (!/<h1>CompTIA Network\+ N10-009<\/h1>/.test(html)) {
       fail(`${relative}: Network+ hub is missing its expected h1`);
+    }
+
+    if (!html.includes('href="/network-plus/n10-009/practice-test/"')) {
+      fail(`${relative}: Network+ hub is missing the N10-009 practice-test link`);
     }
 
     if (!html.includes('href="/network-plus/n10-009/study-guide/"')) {
@@ -402,6 +449,39 @@ for (const file of htmlFiles) {
 
     if (!html.includes('/ports-protocols/')) {
       fail(`${relative}: Network+ study guide is missing the shared ports and protocols link`);
+    }
+
+    if (!html.includes('/network-plus/n10-009/practice-test/')) {
+      fail(`${relative}: Network+ study guide is missing its practice-test link`);
+    }
+
+    if (!html.includes("APS transports network data physically")) {
+      fail(`${relative}: Network+ study guide is missing the OSI mnemonic`);
+    }
+
+    if (!html.includes('class="table--compact-second-column"')) {
+      fail(`${relative}: Network+ domain table is missing the compact second-column utility`);
+    }
+  }
+
+  if (relative === "network-plus/n10-009/practice-test/index.html") {
+    const requiredPracticeMarkers = [
+      "Network+ N10-009 practice test",
+      'data-test-id="NET-009"',
+      'data-questions-url="/quiz-data/network-plus/n10-009/questions.json"',
+      "24</strong> approved questions",
+      'value="10"',
+      'value="20"'
+    ];
+
+    for (const marker of requiredPracticeMarkers) {
+      if (!html.includes(marker)) {
+        fail(`${relative}: Network+ practice test is missing ${marker}`);
+      }
+    }
+
+    if (html.includes('value="30"') || html.includes('value="50"')) {
+      fail(`${relative}: Network+ practice test exposes a length larger than the current bank`);
     }
   }
 
@@ -666,7 +746,14 @@ for (const file of htmlFiles) {
     }
   }
 
-  if (relative.startsWith("security-plus/sy0-701/practice-test/question/")) {
+  const isSecurityPagedQuestion = relative.startsWith(
+    "security-plus/sy0-701/practice-test/question/"
+  );
+  const isNetworkPagedQuestion = relative.startsWith(
+    "network-plus/n10-009/practice-test/question/"
+  );
+
+  if (isSecurityPagedQuestion || isNetworkPagedQuestion) {
     if (!/<h1\b[^>]*data-paged-position[^>]*>/i.test(html)) {
       fail(`${relative}: paged question heading is missing its dynamic position marker`);
     }
@@ -674,6 +761,65 @@ for (const file of htmlFiles) {
     if (/class=["']paged-quiz__question-id["']/.test(html)) {
       fail(`${relative}: paged question still contains the retired duplicate question-ID wrapper`);
     }
+
+    if (!/\bnoindex\b/i.test(robots)) {
+      fail(`${relative}: paged question must remain noindex`);
+    }
+
+    const expectedTestId = isNetworkPagedQuestion ? "NET-009" : "SEC-701";
+    if (!html.includes(`data-test-id="${expectedTestId}"`)) {
+      fail(`${relative}: paged question is missing data-test-id ${expectedTestId}`);
+    }
+  }
+}
+
+const generatedQuizFiles = [
+  {
+    path: "quiz-data/security-plus/sec-701/manifest.json",
+    testId: "SEC-701",
+    questionCount: 150,
+    practiceTestPath: "/security-plus/sy0-701/practice-test"
+  },
+  {
+    path: "quiz-data/network-plus/n10-009/manifest.json",
+    testId: "NET-009",
+    questionCount: 24,
+    practiceTestPath: "/network-plus/n10-009/practice-test"
+  }
+];
+
+for (const expected of generatedQuizFiles) {
+  const filePath = path.join(outputRoot, expected.path);
+  if (!(await isFile(filePath))) {
+    continue;
+  }
+
+  try {
+    const manifest = JSON.parse(await readFile(filePath, "utf8"));
+    if (manifest.test?.testId !== expected.testId) {
+      fail(`${expected.path}: unexpected test ID`);
+    }
+    if (manifest.test?.practiceTestPath !== expected.practiceTestPath) {
+      fail(`${expected.path}: unexpected practice-test path`);
+    }
+    if (manifest.availableQuestionCount !== expected.questionCount) {
+      fail(`${expected.path}: unexpected approved question count`);
+    }
+  } catch (error) {
+    fail(`${expected.path}: invalid JSON (${error.message})`);
+  }
+}
+
+if (await isFile(path.join(outputRoot, "quiz-data/catalog.json"))) {
+  try {
+    const catalog = JSON.parse(
+      await readFile(path.join(outputRoot, "quiz-data/catalog.json"), "utf8")
+    );
+    if (catalog.quizzes?.length !== 2) {
+      fail("quiz-data/catalog.json: expected two configured quizzes");
+    }
+  } catch (error) {
+    fail(`quiz-data/catalog.json: invalid JSON (${error.message})`);
   }
 }
 
@@ -696,7 +842,9 @@ if (await isFile(path.join(outputRoot, "_redirects"))) {
   const redirects = await readFile(path.join(outputRoot, "_redirects"), "utf8");
   const expectedRedirects = [
     "/security-plus/practice-test /security-plus/sy0-701/practice-test/ 302",
-    "/security-plus/practice-test/ /security-plus/sy0-701/practice-test/ 302"
+    "/security-plus/practice-test/ /security-plus/sy0-701/practice-test/ 302",
+    "/network-plus/practice-test /network-plus/n10-009/practice-test/ 302",
+    "/network-plus/practice-test/ /network-plus/n10-009/practice-test/ 302"
   ];
 
   for (const rule of expectedRedirects) {
@@ -714,6 +862,7 @@ if (await isFile(path.join(outputRoot, "sitemap.xml"))) {
     "https://certhappens.com/security-plus/acronyms/",
     "https://certhappens.com/network-plus/",
     "https://certhappens.com/network-plus/n10-009/study-guide/",
+    "https://certhappens.com/network-plus/n10-009/practice-test/",
     "https://certhappens.com/security-plus/sy0-701/practice-test/",
     "https://certhappens.com/security-plus/sy0-701/study-guide/",
     "https://certhappens.com/security-plus/sy0-701/study-guide/general-security-concepts/",
@@ -730,6 +879,17 @@ if (await isFile(path.join(outputRoot, "sitemap.xml"))) {
   for (const url of expectedUrls) {
     if (!sitemap.includes(`<loc>${url}</loc>`)) {
       fail(`sitemap.xml: missing ${url}`);
+    }
+  }
+
+  const excludedQuestionPrefixes = [
+    "https://certhappens.com/security-plus/sy0-701/practice-test/question/",
+    "https://certhappens.com/network-plus/n10-009/practice-test/question/"
+  ];
+
+  for (const prefix of excludedQuestionPrefixes) {
+    if (sitemap.includes(`<loc>${prefix}`)) {
+      fail(`sitemap.xml: paged question route must remain excluded (${prefix})`);
     }
   }
 

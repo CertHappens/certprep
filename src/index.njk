@@ -1,21 +1,23 @@
 ---
 layout: layouts/base.njk
 title: Cert Happens
-description: Free randomized certification practice tests, detailed answer explanations, and focused study resources at CertHappens.com.
+description: Randomized certification practice tests, detailed answer explanations, and focused study resources at CertHappens.com.
 permalink: /
 ---
+{% set securityQuiz = quizCatalog.byTestId["SEC-701"] %}
+{% set networkQuiz = quizCatalog.byTestId["NET-009"] %}
 
 <section class="hero">
   <div class="page-shell hero__inner">
-    <p class="eyebrow">Free certification practice</p>
+    <p class="eyebrow">Certification study and practice</p>
     <h1>Practice. Review. Cert happens.</h1>
     <p class="lede">
-      Build confidence with randomized practice tests, clear answer explanations,
-      and focused study resources organized around exam objectives.
+      Study with focused guides and quick references, then sharpen your test-taking skills
+      with realistic practice questions and clear answer explanations.
     </p>
     <div class="button-row">
-      <a class="button" href="/security-plus/sy0-701/practice-test/">Start Security+ practice</a>
-      <a class="button button--secondary" href="/network-plus/">Explore Network+ N10-009</a>
+      <a class="button" href="/security-plus/sy0-701/practice-test/">Start Security+ practice test</a>
+      <a class="button button--secondary" href="/network-plus/n10-009/practice-test/">Start Network+ practice test</a>
     </div>
   </div>
 </section>
@@ -24,9 +26,9 @@ permalink: /
   <div class="page-shell">
     <div class="section-heading">
       <p class="eyebrow">Certification resources</p>
-      <h2>Study the exam you are working toward</h2>
+      <h2>Choose an exam and start studying</h2>
       <p>
-        Security+ includes randomized practice and detailed study resources. Network+ begins with a substantial N10-009 roadmap and shared networking references while its original question bank is developed.
+        Security+ and Network+ both include version-specific study resources and randomized practice tests. Shared references connect topics that appear across both exams.
       </p>
     </div>
 
@@ -34,14 +36,14 @@ permalink: /
       <article class="card">
         <p class="card__meta">Practice and study</p>
         <h3>CompTIA Security+ SY0-701</h3>
-        <p>Use the 150-question bank, five domain guides, quick reviews, acronyms, and detailed answer explanations.</p>
+        <p>Use the {{ securityQuiz.availableQuestionCount }}-question bank, five domain guides, quick reviews, acronyms, and detailed answer explanations.</p>
         <a class="card__link" href="/security-plus/">Explore Security+ resources</a>
       </article>
 
       <article class="card">
-        <p class="card__meta">Study foundation</p>
+        <p class="card__meta">Practice and study</p>
         <h3>CompTIA Network+ N10-009</h3>
-        <p>Organize all five domains, practice troubleshooting decisions, and build the networking skills that support later labs and questions.</p>
+        <p>Use the {{ networkQuiz.availableQuestionCount }}-question bank, full N10-009 roadmap, and shared networking references to practice real troubleshooting decisions.</p>
         <a class="card__link" href="/network-plus/">Explore Network+ resources</a>
       </article>
 

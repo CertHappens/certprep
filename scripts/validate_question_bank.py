@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate the CompTIA Network+ N10-009 question bank."""
+"""Validate every configured Cert Happens question bank."""
 
 from __future__ import annotations
 
@@ -11,13 +11,69 @@ from collections import Counter
 from datetime import date
 from pathlib import Path
 
-TEST_ID = "NET-009"
-EXAM_VERSION = "N10-009"
-OBJECTIVES_VERSION = "6.0"
-ID_RE = re.compile(r"^NET009-(\d{7})$")
+BANK_CONFIGS = [
+    {
+        "label": "SEC-701",
+        "path": ("data", "security-plus", "sec-701"),
+        "test_id": "SEC-701",
+        "certification": "CompTIA Security+",
+        "exam_version": "SY0-701",
+        "objectives_version": "6.0",
+        "id_pattern": r"^SEC701-(\d{7})$",
+        "batch_pattern": r"^SEC701-(?:BATCH-\d{3}|SAMPLE-001)$",
+        "expected_objectives": {
+            "1.1", "1.2", "1.3", "1.4",
+            "2.1", "2.2", "2.3", "2.4", "2.5",
+            "3.1", "3.2", "3.3", "3.4",
+            "4.1", "4.2", "4.3", "4.4", "4.5", "4.6", "4.7", "4.8", "4.9",
+            "5.1", "5.2", "5.3", "5.4", "5.5", "5.6",
+        },
+    },
+    {
+        "label": "NET-009",
+        "path": ("data", "network-plus", "n10-009"),
+        "test_id": "NET-009",
+        "certification": "CompTIA Network+",
+        "exam_version": "N10-009",
+        "objectives_version": "6.0",
+        "id_pattern": r"^NET009-(\d{7})$",
+        "batch_pattern": r"^NET009-BATCH-\d{3}$",
+        "expected_objectives": {
+            "1.1", "1.2", "1.3", "1.4", "1.5", "1.6", "1.7", "1.8",
+            "2.1", "2.2", "2.3", "2.4",
+            "3.1", "3.2", "3.3", "3.4", "3.5",
+            "4.1", "4.2", "4.3",
+            "5.1", "5.2", "5.3", "5.4", "5.5",
+        },
+    },
+]
+
+TEST_ID = ""
+CERTIFICATION = ""
+EXAM_VERSION = ""
+OBJECTIVES_VERSION = ""
+BANK_PATH: tuple[str, ...] = ()
+EXPECTED_OBJECTIVES: set[str] = set()
+ID_RE = re.compile(r"$^")
+BATCH_RE = re.compile(r"$^")
 DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 CONCEPT_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
-BATCH_RE = re.compile(r"^NET009-BATCH-\d{3}$")
+
+
+def configure_bank(config: dict[str, object]) -> None:
+    global TEST_ID, CERTIFICATION, EXAM_VERSION, OBJECTIVES_VERSION
+    global BANK_PATH, EXPECTED_OBJECTIVES, ID_RE, BATCH_RE
+
+    TEST_ID = str(config["test_id"])
+    CERTIFICATION = str(config["certification"])
+    EXAM_VERSION = str(config["exam_version"])
+    OBJECTIVES_VERSION = str(config["objectives_version"])
+    BANK_PATH = tuple(str(part) for part in config["path"])
+    EXPECTED_OBJECTIVES = set(config["expected_objectives"])
+    ID_RE = re.compile(str(config["id_pattern"]))
+    BATCH_RE = re.compile(str(config["batch_pattern"]))
+
+
 ABSOLUTE_RE = re.compile(r"\b(always|never|guarantees?|completely|impossible)\b", re.I)
 POSITION_RE = re.compile(
     r"\b(all|none) of the above\b|\bboth [ABCD] and [ABCD]\b|"
@@ -90,7 +146,7 @@ def read_csv(path: Path, expected_headers: list[str], errors: list[str]) -> list
 
 def validate() -> tuple[list[str], list[str], list[str]]:
     root = Path(__file__).resolve().parents[1]
-    bank = root / "data" / "network-plus" / "n10-009"
+    bank = root.joinpath(*BANK_PATH)
     errors: list[str] = []
     warnings: list[str] = []
     info: list[str] = []
@@ -125,16 +181,9 @@ def validate() -> tuple[list[str], list[str], list[str]]:
         except ValueError:
             errors.append(f"{label}: invalid domain_weight_percent")
 
-    expected_objectives = {
-        "1.1","1.2","1.3","1.4","1.5","1.6","1.7","1.8",
-        "2.1","2.2","2.3","2.4",
-        "3.1","3.2","3.3","3.4","3.5",
-        "4.1","4.2","4.3",
-        "5.1","5.2","5.3","5.4","5.5",
-    }
-    if set(objective_by_id) != expected_objectives:
-        missing = sorted(expected_objectives - set(objective_by_id))
-        extra = sorted(set(objective_by_id) - expected_objectives)
+    if set(objective_by_id) != EXPECTED_OBJECTIVES:
+        missing = sorted(EXPECTED_OBJECTIVES - set(objective_by_id))
+        extra = sorted(set(objective_by_id) - EXPECTED_OBJECTIVES)
         errors.append(f"objective-map.csv objective set mismatch; missing={missing}, extra={extra}")
 
     domain_weights: dict[str, int] = {}
@@ -175,7 +224,7 @@ def validate() -> tuple[list[str], list[str], list[str]]:
 
             for field, expected in (
                 ("test_id", TEST_ID),
-                ("certification", "CompTIA Network+"),
+                ("certification", CERTIFICATION),
                 ("exam_version", EXAM_VERSION),
                 ("objectives_version", OBJECTIVES_VERSION),
             ):
@@ -295,7 +344,13 @@ def validate() -> tuple[list[str], list[str], list[str]]:
                 else:
                     all_concepts[concept] = label
 
-            if ABSOLUTE_RE.search(row.get("question_text", "")):
+            absolute_text = re.sub(
+                r"\bmost completely\b",
+                "",
+                row.get("question_text", ""),
+                flags=re.I,
+            )
+            if ABSOLUTE_RE.search(absolute_text):
                 warnings.append(f"{label}: unsupported absolute may need review")
 
             if filename == "retired-questions.csv":
@@ -363,19 +418,34 @@ def validate() -> tuple[list[str], list[str], list[str]]:
     return errors, warnings, info
 
 def main() -> int:
-    errors, warnings, info = validate()
-    print("NET-009 QUESTION BANK VALIDATION")
-    print("=" * 34)
-    for line in info:
-        print(f"INFO: {line}")
-    for line in warnings:
-        print(f"WARNING: {line}")
-    for line in errors:
-        print(f"ERROR: {line}")
-    print("-" * 34)
-    print(f"Errors: {len(errors)}")
-    print(f"Warnings: {len(warnings)}")
-    return 1 if errors else 0
+    total_errors = 0
+    total_warnings = 0
+
+    for index, config in enumerate(BANK_CONFIGS):
+        configure_bank(config)
+        errors, warnings, info = validate()
+        heading = f"{config['label']} QUESTION BANK VALIDATION"
+        if index:
+            print()
+        print(heading)
+        print("=" * len(heading))
+        for line in info:
+            print(f"INFO: {line}")
+        for line in warnings:
+            print(f"WARNING: {line}")
+        for line in errors:
+            print(f"ERROR: {line}")
+        print("-" * len(heading))
+        print(f"Errors: {len(errors)}")
+        print(f"Warnings: {len(warnings)}")
+        total_errors += len(errors)
+        total_warnings += len(warnings)
+
+    print()
+    print(f"Validated question banks: {len(BANK_CONFIGS)}")
+    print(f"Total errors: {total_errors}")
+    print(f"Total warnings: {total_warnings}")
+    return 1 if total_errors else 0
 
 if __name__ == "__main__":
     raise SystemExit(main())

@@ -6,6 +6,7 @@ import {
   PRACTICE_TEST_PATH,
   buildQuestionPath,
   isValidQuestionPosition,
+  normalizePracticeTestPath,
   parseQuestionPosition,
   questionPositionToSessionIndex,
   sessionIndexToQuestionPosition,
@@ -26,6 +27,36 @@ test("question paths are generated for the first and last supported positions", 
   assert.equal(
     buildQuestionPath(MAX_PAGED_QUESTION_COUNT),
     "/security-plus/sy0-701/practice-test/question/50/",
+  );
+});
+
+
+
+test("question paths support another certification route", () => {
+  const networkPath = "/network-plus/n10-009/practice-test";
+
+  assert.equal(
+    buildQuestionPath(1, 20, networkPath),
+    "/network-plus/n10-009/practice-test/question/1/",
+  );
+  assert.equal(
+    parseQuestionPosition(
+      "/network-plus/n10-009/practice-test/question/20/",
+      20,
+      networkPath,
+    ),
+    20,
+  );
+});
+
+test("practice-test paths are normalized and reject URL extras", () => {
+  assert.equal(
+    normalizePracticeTestPath("network-plus/n10-009/practice-test/"),
+    "/network-plus/n10-009/practice-test",
+  );
+  assert.throws(
+    () => normalizePracticeTestPath("/network-plus/?mode=test"),
+    TypeError,
   );
 });
 

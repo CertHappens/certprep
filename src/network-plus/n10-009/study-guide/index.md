@@ -52,9 +52,12 @@ keywords:
   - networking certification
   - network troubleshooting
 relatedLinks:
+  - title: Network+ N10-009 Practice Test
+    url: /network-plus/n10-009/practice-test/
+    description: Apply the concepts in randomized questions with detailed answer explanations.
   - title: Network+ resource hub
     url: /network-plus/
-    description: Find the current Network+ study resources and future practice-test status.
+    description: Find the current Network+ study guide, practice test, and shared references.
   - title: Common Ports and Protocols Reference
     url: /ports-protocols/
     description: Search service ports, transports, secure alternatives, and protocols that do not use TCP or UDP ports.
@@ -117,7 +120,7 @@ Use the [Common Ports and Protocols Reference](/ports-protocols/) when a service
 The official objectives assign these weights:
 
 <div class="table-scroll" role="region" aria-label="Network+ N10-009 domains and study priorities" tabindex="0">
-  <table>
+  <table class="table--compact-second-column">
     <thead>
       <tr>
         <th scope="col">Domain</th>
@@ -162,6 +165,18 @@ The percentages guide your study time, but the domains overlap. A troubleshootin
 This domain supplies the vocabulary and mental model used throughout the rest of the exam.
 
 <h3>Follow traffic through the OSI model</h3>
+
+A useful top-to-bottom mnemonic is **APS transports network data physically**:
+
+- **A**pplication
+- **P**resentation
+- **S**ession
+- **Transport**
+- **Network**
+- **Data** Link
+- **Physical**
+
+The wording stays close to what the stack does, which makes it easier to rebuild than an unrelated sentence. After writing the seven layers, attach a familiar clue to each one. Damaged fiber belongs at Physical. MAC addresses and switching belong at Data Link. IP addressing and routing belong at Network. TCP and UDP belong at Transport.
 
 The OSI model is most useful when it helps you locate a responsibility or fault:
 

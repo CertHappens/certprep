@@ -7,7 +7,7 @@ export default {
   domainName: "CertHappens.com",
   tagline: "Practice. Review. Cert happens.",
   description:
-    "Free certification practice tests with randomized sessions, detailed answer explanations, and focused study resources.",
+    "Certification practice tests with randomized sessions, detailed answer explanations, and focused study resources.",
   url: siteUrl,
   canonicalHost: "certhappens.com",
   language: "en",

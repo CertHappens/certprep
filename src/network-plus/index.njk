@@ -1,9 +1,10 @@
 ---
 layout: layouts/base.njk
 title: CompTIA Network+ Practice and Study Resources
-description: Prepare for CompTIA Network+ N10-009 with a practical study roadmap, shared networking references, and future randomized practice tests.
+description: Prepare for CompTIA Network+ N10-009 with randomized practice tests, a practical study roadmap, and shared networking references.
 permalink: /network-plus/
 ---
+{% set quiz = quizCatalog.byTestId["NET-009"] %}
 
 <header class="page-header page-header--compact">
   <div class="page-shell">
@@ -27,9 +28,16 @@ permalink: /network-plus/
     <div class="card-grid">
       <article class="card">
         <p class="card__meta">Available now</p>
+        <h2>Practice tests</h2>
+        <p>Start a randomized 10- or 20-question session from {{ quiz.availableQuestionCount }} approved N10-009 questions. Review every answer choice with a detailed explanation.</p>
+        <a class="button" href="/network-plus/n10-009/practice-test/">Start a Network+ practice test</a>
+      </article>
+
+      <article class="card">
+        <p class="card__meta">Available now</p>
         <h2>Study guide</h2>
         <p>Use the full N10-009 roadmap to organize all five exam domains, plan hands-on practice, and identify weak areas.</p>
-        <a class="button" href="/network-plus/n10-009/study-guide/">Open the N10-009 study guide</a>
+        <a class="button button--secondary" href="/network-plus/n10-009/study-guide/">Open the N10-009 study guide</a>
       </article>
 
       <article class="card">
@@ -37,13 +45,6 @@ permalink: /network-plus/
         <h2>Ports and protocols</h2>
         <p>Search common services by port, transport, purpose, or security clue, then print the complete reference for offline review.</p>
         <a class="button button--secondary" href="/ports-protocols/">Open ports and protocols</a>
-      </article>
-
-      <article class="card">
-        <p class="card__meta">In development</p>
-        <h2>Practice tests</h2>
-        <p>The Network+ question bank will use the same randomized, explanation-focused testing approach as the current Security+ practice test.</p>
-        <p>No empty test route is published yet. The study guide and shared references are ready to use while the original question bank is built and reviewed.</p>
       </article>
     </div>
   </div>

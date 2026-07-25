@@ -7,8 +7,29 @@
       "objective_map_csv": "data/security-plus/sec-701/objective-map.csv",
       "output_directory": "src/quiz-data/security-plus/sec-701",
       "public_base_path": "/quiz-data/security-plus/sec-701",
-      "question_count_options": [10, 20, 30, 50],
-      "preferred_default_question_count": 30
+      "question_count_options": [
+        10,
+        20,
+        30,
+        50
+      ],
+      "preferred_default_question_count": 30,
+      "practice_test_path": "/security-plus/sy0-701/practice-test"
+    },
+    {
+      "slug": "network-plus/n10-009",
+      "questions_csv": "data/network-plus/n10-009/questions.csv",
+      "objective_map_csv": "data/network-plus/n10-009/objective-map.csv",
+      "output_directory": "src/quiz-data/network-plus/n10-009",
+      "public_base_path": "/quiz-data/network-plus/n10-009",
+      "practice_test_path": "/network-plus/n10-009/practice-test",
+      "question_count_options": [
+        10,
+        20,
+        30,
+        50
+      ],
+      "preferred_default_question_count": 20
     }
   ]
 }
