@@ -80,6 +80,8 @@ const requiredFiles = [
   "contact/index.html",
   "security-plus/index.html",
   "security-plus/acronyms/index.html",
+  "network-plus/index.html",
+  "network-plus/n10-009/study-guide/index.html",
   "security-plus/sy0-701/practice-test/index.html",
   "security-plus/sy0-701/study-guide/index.html",
   "security-plus/sy0-701/study-guide/general-security-concepts/index.html",
@@ -348,6 +350,58 @@ for (const file of htmlFiles) {
       if (html.includes("Print / Save PDF")) {
         fail(`${relative}: printable article contains the retired print-control label`);
       }
+    }
+  }
+
+  if (relative === "network-plus/index.html") {
+    if (!/<h1>CompTIA Network\+ N10-009<\/h1>/.test(html)) {
+      fail(`${relative}: Network+ hub is missing its expected h1`);
+    }
+
+    if (!html.includes('href="/network-plus/n10-009/study-guide/"')) {
+      fail(`${relative}: Network+ hub is missing the N10-009 study-guide link`);
+    }
+
+    if (!html.includes('href="/ports-protocols/"')) {
+      fail(`${relative}: Network+ hub is missing the shared ports and protocols link`);
+    }
+  }
+
+  if (relative === "network-plus/n10-009/study-guide/index.html") {
+    if (!html.includes("data-print-guide")) {
+      fail(`${relative}: Network+ study guide is missing the shared Print | Save control`);
+    }
+
+    if (!/<h1>Network\+ N10-009 Study Guide<\/h1>/.test(html)) {
+      fail(`${relative}: Network+ study guide is missing its expected h1`);
+    }
+
+    if (/<h1[^>]*>\s*CompTIA\b/i.test(html)) {
+      fail(`${relative}: Network+ study guide H1 should not present the guide as CompTIA material`);
+    }
+
+    const requiredSectionIds = [
+      "exam-snapshot",
+      "domain-priorities",
+      "networking-concepts",
+      "network-implementation",
+      "network-operations",
+      "network-security",
+      "network-troubleshooting",
+      "practical-study-plan",
+      "performance-based-questions",
+      "readiness-checklist",
+      "official-references"
+    ];
+
+    for (const id of requiredSectionIds) {
+      if (!html.includes(`id="${id}"`)) {
+        fail(`${relative}: Network+ study guide is missing section #${id}`);
+      }
+    }
+
+    if (!html.includes('/ports-protocols/')) {
+      fail(`${relative}: Network+ study guide is missing the shared ports and protocols link`);
     }
   }
 
@@ -658,6 +712,8 @@ if (await isFile(path.join(outputRoot, "sitemap.xml"))) {
     "https://certhappens.com/",
     "https://certhappens.com/security-plus/",
     "https://certhappens.com/security-plus/acronyms/",
+    "https://certhappens.com/network-plus/",
+    "https://certhappens.com/network-plus/n10-009/study-guide/",
     "https://certhappens.com/security-plus/sy0-701/practice-test/",
     "https://certhappens.com/security-plus/sy0-701/study-guide/",
     "https://certhappens.com/security-plus/sy0-701/study-guide/general-security-concepts/",
@@ -679,6 +735,7 @@ if (await isFile(path.join(outputRoot, "sitemap.xml"))) {
 
   const datedArticleUrls = [
     "https://certhappens.com/security-plus/acronyms/",
+    "https://certhappens.com/network-plus/n10-009/study-guide/",
     "https://certhappens.com/security-plus/sy0-701/study-guide/",
     "https://certhappens.com/security-plus/sy0-701/study-guide/general-security-concepts/",
     "https://certhappens.com/security-plus/sy0-701/study-guide/threats-vulnerabilities-mitigations/",

@@ -1,12 +1,12 @@
 {
   "primary": [
     {
-      "label": "Practice Tests",
-      "url": "/security-plus/sy0-701/practice-test/"
+      "label": "Security+",
+      "url": "/security-plus/"
     },
     {
-      "label": "Study",
-      "url": "/security-plus/sy0-701/study-guide/"
+      "label": "Network+",
+      "url": "/network-plus/"
     }
   ],
   "footer": [
