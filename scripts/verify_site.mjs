@@ -1008,7 +1008,7 @@ for (const file of htmlFiles) {
       "Duplicate IP address",
       "Packet loss",
       "Jitter",
-      "client disassociation",
+      "Client disassociation",
       "traceroute",
       "Link Layer Discovery Protocol",
       "Visual fault locator",
