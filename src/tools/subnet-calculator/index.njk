@@ -1,0 +1,230 @@
+---
+layout: layouts/article.njk
+title: IPv4 Subnet Calculator
+description: Calculate IPv4 network and broadcast addresses, usable host ranges, masks, wildcard masks, address status, and binary subnet details.
+permalink: /tools/subnet-calculator/
+ogType: article
+printable: true
+printTitle: IPv4 Subnet Calculator
+author: certHappens
+datePublished: 2026-07-26
+articleSection: Networking Tools
+eyebrow: Networking tool
+lede: Enter an IPv4 address with a CIDR prefix or subnet mask to find its boundaries, host capacity, special-use status, and binary calculation.
+breadcrumbs:
+  - label: Home
+    url: /
+  - label: Network+
+    url: /network-plus/
+  - label: IPv4 Subnet Calculator
+    url: /tools/subnet-calculator/
+toc:
+  - id: calculator
+    label: Calculator
+  - id: read-results
+    label: Read the results
+  - id: subnet-math
+    label: Subnet math
+  - id: special-prefixes
+    label: /31 and /32
+  - id: limits
+    label: What this tool does not verify
+keywords:
+  - IPv4 subnet calculator
+  - CIDR calculator
+  - subnet mask calculator
+  - network address calculator
+  - broadcast address calculator
+  - wildcard mask
+relatedLinks:
+  - title: IPv4 Subnetting Reference
+    url: /network-plus/n10-009/study-guide/ipv4-subnetting/
+    description: Learn CIDR blocks, host counts, borrowed bits, block-size shortcuts, special ranges, and worked examples.
+  - title: "Domain 1: Networking Concepts"
+    url: /network-plus/n10-009/study-guide/networking-concepts/
+    description: Connect subnetting to addressing, traffic flow, devices, cloud networks, and troubleshooting clues.
+  - title: "Domain 2: Network Implementation"
+    url: /network-plus/n10-009/study-guide/network-implementation/
+    description: Apply prefixes to routes, VLAN gateways, subinterfaces, and implementation decisions.
+  - title: Network+ N10-009 Practice Test
+    url: /network-plus/n10-009/practice-test/
+    description: Apply subnetting and other networking concepts in randomized questions with detailed explanations.
+---
+<p>A subnet calculator is useful for checking work, but the result becomes much more valuable when you can explain the boundary. The calculator below shows both the answer and the steps that produced it.</p>
+
+<section class="subnet-calculator" id="calculator" data-subnet-calculator>
+  <div class="subnet-calculator__intro">
+    <h2>Calculate an IPv4 subnet</h2>
+    <p>Use CIDR notation in the first field, or enter a plain IPv4 address and supply the prefix or dotted-decimal mask in the second field.</p>
+  </div>
+
+  <form class="subnet-calculator__form" data-subnet-form novalidate>
+    <div class="subnet-calculator__field">
+      <label for="subnet-address">IPv4 address</label>
+      <input
+        id="subnet-address"
+        name="address"
+        type="text"
+        value="192.168.40.77/26"
+        inputmode="url"
+        autocomplete="off"
+        autocapitalize="off"
+        spellcheck="false"
+        aria-describedby="subnet-address-help"
+        data-subnet-address
+      >
+      <p id="subnet-address-help" class="subnet-calculator__help">Examples: <code>192.168.40.77/26</code> or <code>192.168.40.77</code></p>
+    </div>
+
+    <div class="subnet-calculator__field">
+      <label for="subnet-mask">CIDR prefix or subnet mask</label>
+      <input
+        id="subnet-mask"
+        name="mask"
+        type="text"
+        value=""
+        inputmode="decimal"
+        autocomplete="off"
+        autocapitalize="off"
+        spellcheck="false"
+        aria-describedby="subnet-mask-help"
+        data-subnet-mask
+      >
+      <p id="subnet-mask-help" class="subnet-calculator__help">Optional when the first field includes CIDR. Examples: <code>/26</code>, <code>26</code>, or <code>255.255.255.192</code></p>
+    </div>
+
+    <div class="subnet-calculator__actions">
+      <button class="button" type="submit">Calculate subnet</button>
+      <button class="button button--secondary" type="reset">Restore example</button>
+    </div>
+  </form>
+
+  <p class="subnet-calculator__error" role="alert" tabindex="-1" data-subnet-error hidden></p>
+
+  <section class="subnet-calculator__results" aria-labelledby="subnet-results-heading" aria-live="polite" data-subnet-results hidden>
+    <h2 id="subnet-results-heading" tabindex="-1" data-subnet-results-heading>Subnet results</h2>
+
+    <dl class="subnet-results-grid">
+      <div>
+        <dt>Normalized input</dt>
+        <dd class="subnet-value" data-subnet-output="cidr"></dd>
+      </div>
+      <div>
+        <dt>Network address</dt>
+        <dd class="subnet-value" data-subnet-output="network"></dd>
+      </div>
+      <div>
+        <dt>Broadcast address</dt>
+        <dd class="subnet-value" data-subnet-output="broadcast"></dd>
+      </div>
+      <div>
+        <dt>First usable address</dt>
+        <dd class="subnet-value" data-subnet-output="first-usable"></dd>
+      </div>
+      <div>
+        <dt>Last usable address</dt>
+        <dd class="subnet-value" data-subnet-output="last-usable"></dd>
+      </div>
+      <div>
+        <dt>Total addresses</dt>
+        <dd data-subnet-output="total"></dd>
+      </div>
+      <div>
+        <dt>Usable addresses</dt>
+        <dd data-subnet-output="usable"></dd>
+      </div>
+      <div>
+        <dt>Subnet mask</dt>
+        <dd class="subnet-value" data-subnet-output="mask"></dd>
+      </div>
+      <div>
+        <dt>CIDR prefix</dt>
+        <dd class="subnet-value" data-subnet-output="prefix"></dd>
+      </div>
+      <div>
+        <dt>Wildcard mask</dt>
+        <dd class="subnet-value" data-subnet-output="wildcard"></dd>
+      </div>
+      <div>
+        <dt>Input address role</dt>
+        <dd data-subnet-output="role"></dd>
+      </div>
+      <div>
+        <dt>Legacy address class</dt>
+        <dd data-subnet-output="legacy-class"></dd>
+      </div>
+    </dl>
+
+    <div class="subnet-status" data-subnet-status-badge>
+      <p class="subnet-status__label"><strong>Address status:</strong> <span data-subnet-output="status"></span></p>
+      <p data-subnet-output="status-detail"></p>
+    </div>
+
+    <h3>Binary address and mask</h3>
+    <div class="table-scroll subnet-binary-table" role="region" aria-label="Binary IPv4 address and mask calculation" tabindex="0">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Octet</th>
+            <th scope="col">Address</th>
+            <th scope="col">Mask</th>
+            <th scope="col">Network bits</th>
+            <th scope="col">Wildcard bits</th>
+          </tr>
+        </thead>
+        <tbody data-subnet-binary-body></tbody>
+      </table>
+    </div>
+
+    <h3>How this result was calculated</h3>
+    <ol class="subnet-explanation" data-subnet-explanation></ol>
+  </section>
+
+  <noscript>
+    <p class="subnet-calculator__error">This calculator requires JavaScript. The subnetting reference below remains available without it.</p>
+  </noscript>
+</section>
+
+<h2 id="read-results">How to read the results</h2>
+
+<p>The <strong>network address</strong> is the first address in the calculated block. Under traditional IPv4 subnetting, it identifies the subnet rather than an endpoint. The <strong>broadcast address</strong> is the last address and reaches every host in that local broadcast domain when directed broadcast behavior is supported.</p>
+
+<p>The first and last usable addresses sit between those boundaries. A router interface does not have to use the first usable address, even though labs and diagrams often place the default gateway there. The address plan decides which usable address belongs to each device.</p>
+
+<p>The <strong>wildcard mask</strong> is the bitwise inverse of the subnet mask. A mask bit of 1 becomes 0, and a mask bit of 0 becomes 1. Wildcard masks appear in technologies such as access control lists and some routing configurations.</p>
+
+<p>The status describes the entered address, not every address in the calculated block. A private result means the input falls within an RFC 1918 range. Documentation results belong to TEST-NET blocks intended for examples. Public means the calculator did not match a listed special-purpose block. It does not confirm ownership or prove that the address is reachable from the internet.</p>
+
+<h2 id="subnet-math">What the calculator is doing</h2>
+
+<p>IPv4 contains 32 bits. The CIDR prefix tells the calculator how many leading bits belong to the network portion. A <code>/26</code> fixes 26 bits and leaves 6 host bits.</p>
+
+<p>The total number of addresses is:</p>
+
+<pre><code>2^(host bits)</code></pre>
+
+<p>For a <code>/26</code>, that is <code>2^6 = 64</code>. Traditional subnetting reserves the first and last addresses as the network and broadcast addresses, leaving 62 usable host positions.</p>
+
+<p>The network address is calculated with a bitwise AND:</p>
+
+<pre><code>IPv4 address AND subnet mask = network address</code></pre>
+
+<p>The broadcast boundary is calculated by combining the network address with the wildcard mask. The binary table exposes those octets so you can see which bits remain fixed and which bits vary inside the block.</p>
+
+<p>For practice without relying on the calculator, use the <a href="/network-plus/n10-009/study-guide/ipv4-subnetting/">IPv4 Subnetting Reference</a>. It covers powers of two, borrowed bits, block sizes, VLSM, special ranges, and worked examples.</p>
+
+<h2 id="special-prefixes">How /31 and /32 results differ</h2>
+
+<p>A <code>/31</code> contains two addresses. RFC 3021 permits both addresses to serve as endpoints on a point-to-point link, so the usual subtraction for a network and directed broadcast address is not applied. This calculator reports both endpoint addresses and states that no directed broadcast is used for that design.</p>
+
+<p>A <code>/32</code> contains one address. It is commonly used as a host route or to identify one interface address. There is no separate broadcast address, and the first and last address are the same.</p>
+
+<p>Those cases depend on context. A <code>/31</code> is appropriate for supported point-to-point links, not a normal multi-access LAN that needs ordinary broadcast behavior.</p>
+
+<h2 id="limits">What this calculator does not verify</h2>
+
+<p>The result is mathematical. It does not query routing tables, DHCP scopes, address-management records, regional registries, or the current owner of a public address. It also does not determine whether a gateway, VLAN, firewall rule, or upstream route is configured correctly.</p>
+
+<p>An address can fit the subnet math and still fail in the network. For example, two hosts may share a calculated prefix but belong to different VLANs. A valid host address may already be assigned to another device. A public-looking address may not be allocated or advertised. Use the calculation as one piece of evidence, then verify the actual network design.</p>
+
+<script type="module" src="/assets/js/subnet-calculator.js"></script>

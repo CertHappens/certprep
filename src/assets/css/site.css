@@ -2752,3 +2752,205 @@ h3 {
     hyphens: none !important;
   }
 }
+
+/* IPv4 subnet calculator and reference */
+.subnet-calculator {
+  margin-block: 2rem 3rem;
+  padding: clamp(1rem, 3vw, 1.5rem);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-medium);
+  background: var(--surface-soft);
+}
+
+.subnet-calculator__intro h2,
+.subnet-calculator__results h2 {
+  margin-top: 0;
+}
+
+.subnet-calculator__intro p {
+  margin-bottom: 0;
+}
+
+.subnet-calculator__form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem 1.25rem;
+  margin-top: 1.5rem;
+}
+
+.subnet-calculator__field {
+  display: grid;
+  gap: 0.4rem;
+  min-width: 0;
+}
+
+.subnet-calculator__field label {
+  color: var(--text);
+  font-weight: 800;
+}
+
+.subnet-calculator__field input {
+  width: 100%;
+  min-height: 3rem;
+  padding: 0.7rem 0.8rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-small);
+  background: var(--surface-raised);
+  color: var(--text);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+}
+
+.subnet-calculator__field input::placeholder {
+  color: var(--text-muted);
+  opacity: 0.82;
+}
+
+.subnet-calculator__field input:focus-visible {
+  border-color: var(--accent);
+}
+
+.subnet-calculator__help {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.86rem;
+  line-height: 1.45;
+}
+
+.subnet-calculator__actions {
+  display: flex;
+  grid-column: 1 / -1;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.subnet-calculator__actions .button {
+  cursor: pointer;
+}
+
+.subnet-calculator__error {
+  margin: 1.25rem 0 0;
+  padding: 0.85rem 1rem;
+  border: 1px solid #895454;
+  border-left: 0.3rem solid #ff9b9b;
+  border-radius: var(--radius-small);
+  background: rgb(70 23 29 / 0.42);
+  color: #ffd7d7;
+  font-weight: 700;
+}
+
+.subnet-calculator__results {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+}
+
+.subnet-results-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin: 1.25rem 0 0;
+}
+
+.subnet-results-grid > div {
+  min-width: 0;
+  padding: 0.85rem 0.95rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-small);
+  background: var(--surface-raised);
+}
+
+.subnet-results-grid dt {
+  color: var(--accent-strong);
+  font-size: 0.75rem;
+  font-weight: 850;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.subnet-results-grid dd {
+  margin: 0.3rem 0 0;
+  color: var(--text);
+  font-size: 1rem;
+  font-weight: 750;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+.subnet-value {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+}
+
+.subnet-status {
+  margin-top: 1rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid #38516d;
+  border-left: 0.3rem solid var(--accent);
+  border-radius: var(--radius-small);
+  background: rgb(20 34 50 / 0.8);
+}
+
+.subnet-status[data-status="private"] {
+  border-left-color: var(--success);
+}
+
+.subnet-status[data-status="loopback"],
+.subnet-status[data-status="link-local"],
+.subnet-status[data-status="documentation"] {
+  border-left-color: var(--warning);
+}
+
+.subnet-status[data-status="multicast"],
+.subnet-status[data-status="other-reserved"] {
+  border-left-color: #d3a4ff;
+}
+
+.subnet-status p {
+  margin: 0;
+}
+
+.subnet-status p + p {
+  margin-top: 0.35rem;
+}
+
+.subnet-status__label span {
+  color: var(--text);
+}
+
+.subnet-binary-table table {
+  min-width: 49rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 0.86rem;
+}
+
+.subnet-binary-table th,
+.subnet-binary-table td {
+  white-space: nowrap;
+}
+
+.subnet-explanation {
+  margin-bottom: 0;
+}
+
+@media screen and (max-width: 42rem) {
+  .subnet-calculator__form,
+  .subnet-results-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .subnet-calculator__actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .subnet-calculator__actions .button {
+    width: 100%;
+  }
+}
+
+@media screen and (min-width: 42.01rem) {
+  .subnet-reference-table th:nth-child(-n + 4),
+  .subnet-reference-table td:nth-child(-n + 4) {
+    white-space: nowrap;
+  }
+}

@@ -52,6 +52,12 @@ keywords:
   - networking certification
   - network troubleshooting
 relatedLinks:
+  - title: IPv4 Subnetting Reference
+    url: /network-plus/n10-009/study-guide/ipv4-subnetting/
+    description: Rebuild CIDR masks, host counts, borrowed bits, boundaries, special ranges, and VLSM allocations from a repeatable method.
+  - title: IPv4 Subnet Calculator
+    url: /tools/subnet-calculator/
+    description: Check network and broadcast addresses, usable ranges, masks, wildcard masks, binary work, and address status.
   - title: "Domain 1: Networking Concepts"
     url: /network-plus/n10-009/study-guide/networking-concepts/
     description: Trace traffic through the OSI model and review devices, cloud, protocols, media, addressing, IPv6, and modern network designs.
@@ -231,7 +237,7 @@ Traffic can also be unicast, multicast, broadcast, or anycast. Learn who receive
 
 <h3>Addressing and subnetting</h3>
 
-For IPv4, practice until you can determine the network address, broadcast address, usable host range, prefix length, and whether two hosts share a subnet. Understand private ranges, APIPA, loopback, public addressing, and variable-length subnetting.
+For IPv4, practice until you can determine the network address, broadcast address, usable host range, prefix length, and whether two hosts share a subnet. Understand private ranges, APIPA, loopback, public addressing, and variable-length subnetting. Use the [IPv4 Subnetting Reference](/network-plus/n10-009/study-guide/ipv4-subnetting/) to learn the method, then check calculations with the [IPv4 Subnet Calculator](/tools/subnet-calculator/).
 
 A reliable subnetting process is more valuable than a memorized chart you cannot recreate:
 

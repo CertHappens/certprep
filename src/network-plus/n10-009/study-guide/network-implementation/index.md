@@ -62,6 +62,12 @@ keywords:
   - wireless implementation
   - network installation
 relatedLinks:
+  - title: IPv4 Subnetting Reference
+    url: /network-plus/n10-009/study-guide/ipv4-subnetting/
+    description: Review CIDR boundaries, host counts, masks, special ranges, and VLSM before applying prefixes to routes and VLANs.
+  - title: IPv4 Subnet Calculator
+    url: /tools/subnet-calculator/
+    description: Check the exact network represented by an address, prefix, or dotted-decimal mask.
   - title: Network+ N10-009 Practice Test
     url: /network-plus/n10-009/practice-test/
     description: Apply routing, switching, wireless, and installation decisions in randomized questions.
@@ -235,7 +241,7 @@ BGP does not simply choose the path with the fewest router hops. Policy and path
 
 <h2 id="route-selection">Route selection</h2>
 
-Several routes may appear to reach the same destination. Evaluate them in the correct order.
+Several routes may appear to reach the same destination. Evaluate them in the correct order. When a route boundary is not obvious, use the [IPv4 Subnetting Reference](/network-plus/n10-009/study-guide/ipv4-subnetting/) to rebuild the prefix or check it with the [IPv4 Subnet Calculator](/tools/subnet-calculator/).
 
 <h3>1. Longest prefix match</h3>
 

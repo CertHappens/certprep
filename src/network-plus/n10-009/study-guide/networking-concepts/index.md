@@ -62,6 +62,12 @@ keywords:
   - IPv6 addressing
   - network topologies
 relatedLinks:
+  - title: IPv4 Subnetting Reference
+    url: /network-plus/n10-009/study-guide/ipv4-subnetting/
+    description: Practice CIDR masks, host counts, borrowed bits, boundaries, special ranges, and VLSM with worked examples.
+  - title: IPv4 Subnet Calculator
+    url: /tools/subnet-calculator/
+    description: Check subnet boundaries, usable ranges, masks, wildcard masks, binary work, and address status.
   - title: Network+ N10-009 Practice Test
     url: /network-plus/n10-009/practice-test/
     description: Apply networking concepts in randomized questions with detailed explanations.
@@ -461,7 +467,7 @@ The ranges above describe the historical class system. Special-use ranges and re
 
 Subnetting divides an address block into smaller networks. The prefix controls how many bits identify the network and how many remain for addresses inside each subnet.
 
-A dependable process is more valuable than a chart you cannot recreate:
+A dependable process is more valuable than a chart you cannot recreate. The [IPv4 Subnetting Reference](/network-plus/n10-009/study-guide/ipv4-subnetting/) expands this method with borrowed bits, special ranges, VLSM, and additional worked examples. The [IPv4 Subnet Calculator](/tools/subnet-calculator/) can check each answer and show the binary steps.
 
 1. Convert the prefix to the relevant mask.
 2. Identify the changing octet.
