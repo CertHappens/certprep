@@ -74,6 +74,9 @@ relatedLinks:
   - title: Network+ N10-009 Study Guide
     url: /network-plus/n10-009/study-guide/
     description: Return to the complete roadmap for all five exam domains.
+  - title: "Domain 3: Network Operations"
+    url: /network-plus/n10-009/study-guide/network-operations/
+    description: Continue with documentation, monitoring, recovery, network services, VPN access, and management methods.
   - title: "Domain 1: Networking Concepts"
     url: /network-plus/n10-009/study-guide/networking-concepts/
     description: Review traffic flow, devices, addressing, media, topologies, and the OSI model that support implementation work.

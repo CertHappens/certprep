@@ -64,6 +64,9 @@ relatedLinks:
   - title: "Domain 2: Network Implementation"
     url: /network-plus/n10-009/study-guide/network-implementation/
     description: Apply routing, switching, wireless, and physical installation choices to realistic implementation scenarios.
+  - title: "Domain 3: Network Operations"
+    url: /network-plus/n10-009/study-guide/network-operations/
+    description: Build practical skills for documentation, monitoring, recovery, DHCP, DNS, time services, VPN access, and network management.
   - title: Network+ N10-009 Practice Test
     url: /network-plus/n10-009/practice-test/
     description: Apply the concepts in randomized questions with detailed answer explanations.
@@ -303,7 +306,7 @@ A technically correct network device can still fail in a poor environment. Overl
 
 <h2 id="network-operations">Domain 3: Network Operations</h2>
 
-Operations keeps the network understandable and supportable after installation.
+Operations keeps the network understandable and supportable after installation. The [detailed Domain 3 guide](/network-plus/n10-009/study-guide/network-operations/) expands this roadmap with documentation, lifecycle and change control, configuration management, monitoring evidence, disaster recovery, DHCP, SLAAC, DNS, time services, VPN access, and management paths.
 
 <h3>Documentation and controlled change</h3>
 
