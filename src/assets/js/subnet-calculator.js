@@ -497,7 +497,9 @@ export function calculateSubnet(addressValue, prefixOrMaskValue = "") {
       addressBinary: addressBinary[index],
       maskDecimal: maskOctets[index],
       maskBinary: maskBinary[index],
+      networkDecimal: networkOctets[index],
       networkBinary: networkBinary[index],
+      wildcardDecimal: wildcardOctets[index],
       wildcardBinary: wildcardBinary[index]
     })),
     explanation
@@ -560,26 +562,35 @@ function appendSegmentedValue(element, parts) {
   });
 }
 
-function appendBinaryOctetGrid(element, parts) {
+function appendBinaryOctetGrid(element, labelParts, binaryParts) {
   const accessibleText = document.createElement("span");
   accessibleText.className = "visually-hidden";
-  accessibleText.textContent = parts.join(".");
+  accessibleText.textContent = binaryParts.join(".");
 
   const grid = document.createElement("span");
   grid.className = "subnet-binary-mobile__octets";
   grid.setAttribute("aria-hidden", "true");
 
-  for (const part of parts) {
+  binaryParts.forEach((part, index) => {
+    const pair = document.createElement("span");
+    pair.className = "subnet-binary-mobile__octet-pair";
+
+    const label = document.createElement("span");
+    label.className = "subnet-binary-mobile__octet-label";
+    label.textContent = String(labelParts[index]);
+
     const octet = document.createElement("code");
     octet.className = "subnet-binary-mobile__octet";
     octet.textContent = part;
-    grid.append(octet);
-  }
+
+    pair.append(label, octet);
+    grid.append(pair);
+  });
 
   element.append(accessibleText, grid);
 }
 
-function createBinaryMobileGroup(label, decimalParts, binaryParts) {
+function createBinaryMobileGroup(label, labelParts, binaryParts, decimalParts = null) {
   const group = document.createElement("section");
   group.className = "subnet-binary-mobile__group";
 
@@ -596,7 +607,7 @@ function createBinaryMobileGroup(label, decimalParts, binaryParts) {
 
   const binary = document.createElement("div");
   binary.className = "subnet-binary-mobile__bits";
-  appendBinaryOctetGrid(binary, binaryParts);
+  appendBinaryOctetGrid(binary, labelParts, binaryParts);
   group.append(binary);
 
   return group;
@@ -607,21 +618,23 @@ function renderBinaryMobile(container, rows) {
     createBinaryMobileGroup(
       "Address",
       rows.map((row) => row.addressDecimal),
-      rows.map((row) => row.addressBinary)
+      rows.map((row) => row.addressBinary),
+      rows.map((row) => row.addressDecimal)
     ),
     createBinaryMobileGroup(
       "Mask",
       rows.map((row) => row.maskDecimal),
-      rows.map((row) => row.maskBinary)
+      rows.map((row) => row.maskBinary),
+      rows.map((row) => row.maskDecimal)
     ),
     createBinaryMobileGroup(
       "Network bits",
-      null,
+      rows.map((row) => row.networkDecimal),
       rows.map((row) => row.networkBinary)
     ),
     createBinaryMobileGroup(
       "Wildcard bits",
-      null,
+      rows.map((row) => row.wildcardDecimal),
       rows.map((row) => row.wildcardBinary)
     )
   );
