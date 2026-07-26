@@ -1,48 +1,26 @@
-dimension,value,approved_count,draft_review_count,total_count,percentage_of_total,target_exam_weight_percent,notes
-domain,1.0 General Security Concepts,21,0,21,12.1,12,Approved-bank distribution after Batch 008.
-domain,"2.0 Threats, Vulnerabilities, and Mitigations",38,0,38,21.8,22,Approved-bank distribution after Batch 008.
-domain,3.0 Security Architecture,31,0,31,17.8,18,Approved-bank distribution after Batch 008.
-domain,4.0 Security Operations,49,0,49,28.2,28,Approved-bank distribution after Batch 008.
-domain,5.0 Security Program Management and Oversight,35,0,35,20.1,20,Approved-bank distribution after Batch 008.
-objective,1.1 Compare and contrast various types of security controls.,5,0,5,2.9,,5 approved questions.
-objective,1.2 Summarize fundamental security concepts.,5,0,5,2.9,,5 approved questions.
-objective,1.3 Explain the importance of change management processes and the impact to security.,5,0,5,2.9,,5 approved questions.
-objective,1.4 Explain the importance of using appropriate cryptographic solutions.,6,0,6,3.4,,6 approved questions.
-objective,2.1 Compare and contrast common threat actors and motivations.,7,0,7,4.0,,7 approved questions.
-objective,2.2 Explain common threat vectors and attack surfaces.,8,0,8,4.6,,8 approved questions.
-objective,2.3 Explain various types of vulnerabilities.,8,0,8,4.6,,8 approved questions.
-objective,"2.4 Given a scenario, analyze indicators of malicious activity.",8,0,8,4.6,,8 approved questions.
-objective,2.5 Explain the purpose of mitigation techniques used to secure the enterprise.,7,0,7,4.0,,7 approved questions.
-objective,3.1 Compare and contrast security implications of different architecture models.,8,0,8,4.6,,8 approved questions.
-objective,"3.2 Given a scenario, apply security principles to secure enterprise infrastructure.",8,0,8,4.6,,8 approved questions.
-objective,3.3 Compare and contrast concepts and strategies to protect data.,7,0,7,4.0,,7 approved questions.
-objective,3.4 Explain the importance of resilience and recovery in security architecture.,8,0,8,4.6,,8 approved questions.
-objective,"4.1 Given a scenario, apply common security techniques to computing resources.",6,0,6,3.4,,6 approved questions.
-objective,"4.2 Explain the security implications of proper hardware, software, and data asset management.",6,0,6,3.4,,6 approved questions.
-objective,4.3 Explain various activities associated with vulnerability management.,6,0,6,3.4,,6 approved questions.
-objective,4.4 Explain security alerting and monitoring concepts and tools.,5,0,5,2.9,,5 approved questions.
-objective,"4.5 Given a scenario, modify enterprise capabilities to enhance security.",5,0,5,2.9,,5 approved questions.
-objective,"4.6 Given a scenario, implement and maintain identity and access management.",5,0,5,2.9,,5 approved questions.
-objective,4.7 Explain the importance of automation and orchestration related to secure operations.,5,0,5,2.9,,5 approved questions.
-objective,4.8 Explain appropriate incident response activities.,5,0,5,2.9,,5 approved questions.
-objective,"4.9 Given a scenario, use data sources to support an investigation.",6,0,6,3.4,,6 approved questions.
-objective,5.1 Summarize elements of effective security governance.,6,0,6,3.4,,6 approved questions.
-objective,5.2 Explain elements of the risk management process.,6,0,6,3.4,,6 approved questions.
-objective,5.3 Explain the processes associated with third-party risk assessment and management.,6,0,6,3.4,,6 approved questions.
-objective,5.4 Summarize elements of effective security compliance.,6,0,6,3.4,,6 approved questions.
-objective,5.5 Explain types and purposes of audits and assessments.,5,0,5,2.9,,5 approved questions.
-objective,"5.6 Given a scenario, implement security awareness practices.",6,0,6,3.4,,6 approved questions.
-difficulty,easy,45,0,45,25.9,,
-difficulty,medium,87,0,87,50.0,,
-difficulty,hard,42,0,42,24.1,,
-question_type,single_choice,174,0,174,100.0,,
-question_type,multi_select,0,0,0,0.0,,
-question_type,best_available,0,0,0,0.0,,
-question_style,direct,29,0,29,16.7,,
-question_style,scenario,125,0,125,71.8,,
-question_style,comparison,17,0,17,9.8,,
-question_style,calculation,3,0,3,1.7,,
-stored_correct_answer,A,44,0,44,25.3,,
-stored_correct_answer,B,44,0,44,25.3,,
-stored_correct_answer,C,43,0,43,24.7,,
-stored_correct_answer,D,43,0,43,24.7,,
+test_id,exam_version,objectives_version,domain_id,domain_name,domain_weight_percent,objective_id,objective_text,approved_count,review_count,draft_count,retired_count,total_active_count
+NET-009,N10-009,6.0,1.0,Networking Concepts,23,1.1,Explain concepts related to the Open Systems Interconnection (OSI) reference model.,4,0,0,0,4
+NET-009,N10-009,6.0,1.0,Networking Concepts,23,1.2,"Compare and contrast networking appliances, applications, and functions.",5,0,0,0,5
+NET-009,N10-009,6.0,1.0,Networking Concepts,23,1.3,Summarize cloud concepts and connectivity options.,5,0,0,0,5
+NET-009,N10-009,6.0,1.0,Networking Concepts,23,1.4,"Explain common networking ports, protocols, services, and traffic types.",5,0,0,0,5
+NET-009,N10-009,6.0,1.0,Networking Concepts,23,1.5,Compare and contrast transmission media and transceivers.,4,0,0,0,4
+NET-009,N10-009,6.0,1.0,Networking Concepts,23,1.6,"Compare and contrast network topologies, architectures, and types.",2,0,0,0,2
+NET-009,N10-009,6.0,1.0,Networking Concepts,23,1.7,"Given a scenario, use appropriate IPv4 network addressing.",3,0,0,0,3
+NET-009,N10-009,6.0,1.0,Networking Concepts,23,1.8,Summarize evolving use cases for modern network environments.,4,0,0,0,4
+NET-009,N10-009,6.0,2.0,Network Implementation,20,2.1,Explain characteristics of routing technologies.,9,0,0,0,9
+NET-009,N10-009,6.0,2.0,Network Implementation,20,2.2,"Given a scenario, configure switching technologies and features.",8,0,0,0,8
+NET-009,N10-009,6.0,2.0,Network Implementation,20,2.3,"Given a scenario, select and configure wireless devices and technologies.",6,0,0,0,6
+NET-009,N10-009,6.0,2.0,Network Implementation,20,2.4,Explain important factors of physical installations.,5,0,0,0,5
+NET-009,N10-009,6.0,3.0,Network Operations,19,3.1,Explain the purpose of organizational processes and procedures.,5,0,0,0,5
+NET-009,N10-009,6.0,3.0,Network Operations,19,3.2,"Given a scenario, use network monitoring technologies.",7,0,0,0,7
+NET-009,N10-009,6.0,3.0,Network Operations,19,3.3,Explain disaster recovery (DR) concepts.,5,0,0,0,5
+NET-009,N10-009,6.0,3.0,Network Operations,19,3.4,"Given a scenario, implement IPv4 and IPv6 network services.",5,0,0,0,5
+NET-009,N10-009,6.0,3.0,Network Operations,19,3.5,Compare and contrast network access and management methods.,4,0,0,0,4
+NET-009,N10-009,6.0,4.0,Network Security,14,4.1,Explain the importance of basic network security concepts.,6,0,0,0,6
+NET-009,N10-009,6.0,4.0,Network Security,14,4.2,Summarize various types of attacks and their impact to the network.,6,0,0,0,6
+NET-009,N10-009,6.0,4.0,Network Security,14,4.3,"Given a scenario, apply network security features, defense techniques, and solutions.",7,0,0,0,7
+NET-009,N10-009,6.0,5.0,Network Troubleshooting,24,5.1,Explain the troubleshooting methodology.,5,0,0,0,5
+NET-009,N10-009,6.0,5.0,Network Troubleshooting,24,5.2,"Given a scenario, troubleshoot common cabling and physical interface issues.",7,0,0,0,7
+NET-009,N10-009,6.0,5.0,Network Troubleshooting,24,5.3,"Given a scenario, troubleshoot common issues with network services.",6,0,0,0,6
+NET-009,N10-009,6.0,5.0,Network Troubleshooting,24,5.4,"Given a scenario, troubleshoot common performance issues.",6,0,0,0,6
+NET-009,N10-009,6.0,5.0,Network Troubleshooting,24,5.5,"Given a scenario, use the appropriate tool or protocol to solve networking issues.",9,0,0,0,9

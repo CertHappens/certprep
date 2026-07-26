@@ -1,40 +1,24 @@
-# SEC-701 Question Approval Summary
+# NET-009 Approval Summary
 
-- Approval date: `2026-07-25`
-- Batch approved: `SEC701-BATCH-008`
-- Previously approved questions: 150
-- Newly approved questions: 24
-- Total production questions: 174
-- Remaining draft questions: 0
-- Published objectives represented: 28 of 28
-- Current workflow: direct approval with staging testing and question reporting
+## Current status
 
-## Stored correct-answer distribution
+- Exam: CompTIA Network+ N10-009
+- Objectives document: Version 6.0
+- Project test ID: `NET-009`
+- Latest batch: `NET009-BATCH-005`
+- Approved question rows: 138
+- Review rows: 0
+- Draft rows: 0
+- Retired rows: 0
+- Registered sources: 57
+- Numbered objectives with approved coverage: 25 of 25
 
-- A: 44
-- B: 44
-- C: 43
-- D: 43
+## Batch 005 decision
 
-## Difficulty distribution
+Batch 005 was internally reviewed, validated, marked `approved`, and appended directly to `questions.csv` under the accelerated staging authorization. The normal approval structure remains available.
 
-- easy: 45
-- medium: 87
-- hard: 42
+## Permanent range
 
-## Domain distribution
-
-- 1.0: 21 (12.1%)
-- 2.0: 38 (21.8%)
-- 3.0: 31 (17.8%)
-- 4.0: 49 (28.2%)
-- 5.0: 35 (20.1%)
-
-## Question-style distribution
-
-- direct: 29
-- scenario: 125
-- comparison: 17
-- calculation: 3
-
-Batch 008 was promoted directly to `questions.csv`. `draft-questions.csv` remains header-only.
+- First ID: `NET009-0000001`
+- Last ID: `NET009-0000138`
+- Next available ID: `NET009-0000139`

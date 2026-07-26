@@ -1,28 +1,42 @@
-# Validation Report
+# NET-009 Validation Report
 
-- Run date: 2026-07-25
-- Question rows validated: 174
-- Errors: 0
-- Warnings: 0
-- Information: 1
+- Validation date: 2026-07-26
+- Package: Batch 005 approved staging overlay
+- Validator exit code: `0`
+- Questions evaluated: 138
+- Batch 005 questions: 30
+- Objective-map rows: 25
+- Registered sources: 57
 
-## Information
+## Result
 
-- `data/security-plus/sec-701/questions.csv`: stored correct-answer distribution: A=44, B=44, C=43, D=43
+```text
+NET-009 QUESTION BANK VALIDATION
+==================================
+INFO: Objectives: 25
+INFO: Registered sources: 57
+INFO: Question rows: 138
+INFO: Approved answer-key counts: {'A': 37, 'B': 37, 'C': 37, 'D': 37}
+INFO: Approved domain counts: {'1.0': 32, '2.0': 28, '3.0': 26, '4.0': 19, '5.0': 33}
+INFO: Approved difficulty counts: {'easy': 34, 'hard': 33, 'medium': 71}
+INFO: Approved type counts: {'best_available': 10, 'multi_select': 10, 'single_choice': 118}
+INFO: Approved style counts: {'calculation': 10, 'comparison': 19, 'direct': 35, 'scenario': 74}
+----------------------------------
+Errors: 0
+Warnings: 0
+```
 
-## Additional Batch 008 checks
+## Additional Batch 005 assertions
 
-- Review status after promotion: approved
-- Production question count: 174
-- Draft question count: 0
-- Domain allocation: 3 / 5 / 4 / 7 / 5
-- Difficulty distribution: easy 6, medium 12, hard 6
-- Correct-answer distribution: A 6, B 6, C 6, D 6
-- Duplicate question IDs: none
-- Exact duplicate stems: none
-- Duplicate concept keys: none
-- Exact duplicate answer choices: none
-- Reordered-clause duplicate answer choices: none
-- High-similarity near-duplicate stems: none
-
-Automated validation does not replace staging tests, learner feedback, or periodic technical review.
+- Batch domain distribution: 6, 6, 6, 5, 7
+- Cumulative domain distribution: 32, 28, 26, 19, 33
+- Batch difficulty distribution: 8 easy, 15 medium, 7 hard
+- Batch type distribution: 26 single choice, 2 multi-select, 2 best available
+- Batch style distribution: 9 direct, 15 scenario, 4 comparison, 2 calculation
+- Batch correct-key distribution: A 8, B 8, C 8, D 8
+- Cumulative correct-key distribution: A 37, B 37, C 37, D 37
+- Unique question IDs: 138
+- Unique concept keys: 138
+- Cumulative objective coverage: 25 of 25
+- Programmatic rack-capacity and transfer-time assertions: passed
+- Header-only draft and retired files: present
