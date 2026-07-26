@@ -82,6 +82,9 @@ relatedLinks:
   - title: "Domain 3: Network Operations"
     url: /network-plus/n10-009/study-guide/network-operations/
     description: Connect security decisions to monitoring, configuration control, logs, time services, VPN access, and management paths.
+  - title: "Domain 5: Network Troubleshooting"
+    url: /network-plus/n10-009/study-guide/network-troubleshooting/
+    description: Diagnose blocked traffic, rogue services, address failures, interface counters, wireless symptoms, and performance problems from evidence.
   - title: Common Ports and Protocols Reference
     url: /ports-protocols/
     description: Review RADIUS, LDAP, LDAPS, SSH, HTTPS, DNS, DHCP, and other services that appear in security scenarios.

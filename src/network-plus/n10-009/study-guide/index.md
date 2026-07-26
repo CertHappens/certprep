@@ -70,6 +70,9 @@ relatedLinks:
   - title: "Domain 4: Network Security"
     url: /network-plus/n10-009/study-guide/network-security/
     description: Apply identity, encryption, segmentation, attack recognition, device hardening, network access control, filtering, and security zones.
+  - title: "Domain 5: Network Troubleshooting"
+    url: /network-plus/n10-009/study-guide/network-troubleshooting/
+    description: Isolate physical, switching, routing, addressing, performance, wireless, and service faults with a repeatable method and appropriate tools.
   - title: Network+ N10-009 Practice Test
     url: /network-plus/n10-009/practice-test/
     description: Apply the concepts in randomized questions with detailed answer explanations.
@@ -396,7 +399,7 @@ A broad block can create a new outage. Before applying a rule, identify source, 
 
 <h2 id="network-troubleshooting">Domain 5: Network Troubleshooting</h2>
 
-Troubleshooting is the largest N10-009 domain. The methodology matters because a technically possible fix can still be the wrong first action.
+Troubleshooting is the largest N10-009 domain. The methodology matters because a technically possible fix can still be the wrong first action. The [detailed Domain 5 guide](/network-plus/n10-009/study-guide/network-troubleshooting/) expands this roadmap with physical and interface faults, switching and addressing failures, performance and wireless symptoms, tool selection, device commands, and worked troubleshooting scenarios.
 
 <h3>Use a repeatable method</h3>
 
