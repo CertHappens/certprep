@@ -1,67 +1,130 @@
-# SEC-701 Batch 007 Critical Review
+# NET-009 Batch 007 Review
 
-## Batch summary
+- Batch ID: `NET009-BATCH-007`
+- Review date: 2026-07-26
+- Questions generated: 30
+- Review status: Approved under the accelerated staging authorization
+- Permanent IDs: `NET009-0000151` through `NET009-0000180`
 
-- Batch ID: `SEC701-BATCH-007`
-- Questions: 24
-- IDs: `SEC701-0000127` through `SEC701-0000150`
-- Status: `approved`
-- Reviewer: `initial-quality-review`
-- Approval date: `2026-07-20`
-- Domain allocation: 2 / 7 / 6 / 5 / 4
-- Difficulty distribution: easy = 6, medium = 12, hard = 6
-- Stored correct-answer distribution: A = 6, B = 6, C = 6, D = 6
-- Exact duplicate stems: none
-- Duplicate concept keys: none
-- Exact or reversed-clause duplicate answer choices: none
-- High-similarity near-duplicate stems: none
+## Coverage-driven domain allocation
 
-This is the final automatically approved batch in the accelerated build phase. Its domain allocation was intentionally adjusted so the completed 150-question bank exactly matches the official 12% / 22% / 18% / 28% / 20% domain weights.
+Batch 007 resumes the normal 30-question size with a 7 / 6 / 6 / 4 / 7 allocation.
 
-## Cumulative domain coverage
-
-| Domain | Before | Added | Final total | Final share | Exam weight |
+| Domain | Official weight | Batch 007 | Final count | Final percentage | Difference |
 |---|---:|---:|---:|---:|---:|
-| 1.0 General Security Concepts | 16 | 2 | 18 | 12.0% | 12% |
-| 2.0 Threats, Vulnerabilities, and Mitigations | 26 | 7 | 33 | 22.0% | 22% |
-| 3.0 Security Architecture | 21 | 6 | 27 | 18.0% | 18% |
-| 4.0 Security Operations | 37 | 5 | 42 | 28.0% | 28% |
-| 5.0 Security Program Management and Oversight | 26 | 4 | 30 | 20.0% | 20% |
+| 1.0 Networking Concepts | 23% | 7 | 42 | 23.33% | +0.33 |
+| 2.0 Network Implementation | 20% | 6 | 36 | 20.00% | 0.00 |
+| 3.0 Network Operations | 19% | 6 | 34 | 18.89% | -0.11 |
+| 4.0 Network Security | 14% | 4 | 25 | 13.89% | -0.11 |
+| 5.0 Network Troubleshooting | 24% | 7 | 43 | 23.89% | -0.11 |
 
-## Question-by-question review
+The 180-question bank is within 0.34 percentage points of every official domain weight.
 
-| ID | Objective | Topic | Quality finding |
-|---|---|---|---|
-| SEC701-0000127 | 1.2 | Availability through redundancy | The redundant power design directly supports continued service and tests availability without conflating it with authorization or confidentiality. |
-| SEC701-0000128 | 1.4 | Keyed message authentication | The shared-secret and non-public-verification requirements distinguish HMAC from unkeyed hashes, certificate status, and bulk encryption. |
-| SEC701-0000129 | 2.1 | Competitor threat actors | The stolen bid data benefits a rival seeking commercial advantage, providing a clear competitor actor and motivation. |
-| SEC701-0000130 | 2.2 | Pretexting | The detailed false audit story is the mechanism used to induce disclosure, which is specifically pretexting. |
-| SEC701-0000131 | 2.3 | Directory traversal | Parent-directory sequences escape the intended path, providing the defining directory-traversal facts. |
-| SEC701-0000132 | 2.3 | Insecure deserialization | Server-side reconstruction of an attacker-controlled object triggers behavior during deserialization, clearly separating the weakness from browser attacks. |
-| SEC701-0000133 | 2.4 | On-path attack indicators | Gateway MAC instability and certificate warnings jointly support local traffic interception through ARP poisoning. |
-| SEC701-0000134 | 2.4 | Ransomware indicators | Bulk file rewriting, extension changes, and a payment demand form a strong ransomware indicator set. |
-| SEC701-0000135 | 2.5 | Privileged access workstations | The dedicated hardened administrative environment separates privileged credentials from common phishing and browsing exposure. |
-| SEC701-0000136 | 3.1 | IoT architecture | The answer accounts for constrained IoT capabilities through inventory, segmentation, restricted communication, and monitoring. |
-| SEC701-0000137 | 3.1 | Hybrid cloud architecture | The hybrid design limits raw regulated data, applies least privilege, protects the transfer, and monitors the cross-environment boundary. |
-| SEC701-0000138 | 3.2 | Site-to-site VPNs | Encrypted private-network connectivity between branch gateways is the direct site-to-site IPsec use case. |
-| SEC701-0000139 | 3.3 | Information rights management | The persistent view, forwarding, printing, copying, and expiration restrictions identify information rights management. |
-| SEC701-0000140 | 3.4 | Power resilience | The UPS bridges the generator startup interval and is distinct from recovery sites, load balancing, and data backups. |
-| SEC701-0000141 | 3.4 | Continuity tabletop exercises | Discussion-based plan walkthrough without system activation is a tabletop exercise rather than parallel or interruption testing. |
-| SEC701-0000142 | 4.2 | Asset tagging | The tag and durable inventory fields establish identification, ownership, location, and lifecycle accountability. |
-| SEC701-0000143 | 4.3 | False-positive validation | The response requires evidence-based validation of a possible backported patch before closing, escalating, or accepting the finding. |
-| SEC701-0000144 | 4.4 | Immutable security logs | Separate administrative control and immutable remote storage directly preserve evidence when the monitored administrator is compromised. |
-| SEC701-0000145 | 4.5 | Network access control posture | Posture assessment followed by normal or remediation-only network placement maps directly to NAC. |
-| SEC701-0000146 | 4.9 | Volatile memory analysis | The live volatile evidence requested for fileless and injected execution is most directly captured in a forensic memory image. |
-| SEC701-0000147 | 5.3 | Vendor concentration risk | Multiple critical services depend on one provider, producing concentration risk even when individual services are secure. |
-| SEC701-0000148 | 5.4 | Privacy impact assessments | The proposed biometric system requires purpose, collection, sharing, retention, vendor, and safeguard analysis before design decisions are finalized. |
-| SEC701-0000149 | 5.5 | Purple-team exercises | The offensive and defensive teams openly collaborate to tune detections and controls, which is the defining purple-team model. |
-| SEC701-0000150 | 5.6 | QR-code phishing awareness | The response avoids opening an unverified encoded destination, verifies through an approved channel, and reports the physical phishing lure. |
+## Distribution checks
 
-## Similarity review
+| Measure | Result | Planned | Status |
+|---|---:|---:|---|
+| Easy | 7 | 7 | Pass |
+| Medium | 16 | 16 | Pass |
+| Hard | 7 | 7 | Pass |
+| Single choice | 26 | 26 | Pass |
+| Multi-select | 2 | 2 | Pass |
+| Best available | 2 | 2 | Pass |
+| Direct | 7 | 7 | Pass |
+| Scenario | 18 | 18 | Pass |
+| Comparison | 3 | 3 | Pass |
+| Calculation | 2 | 2 | Pass |
 
-- Closest non-duplicate comparison: `SEC701-0000054` and `SEC701-0000126` with similarity score 0.52.
-- Closest non-duplicate comparison: `SEC701-0000018` and `SEC701-0000111` with similarity score 0.51.
+## Correct-answer distribution
 
-## Workflow transition
+| Stored key | Batch 007 selections | Cumulative selections |
+|---|---:|---:|
+| A | 7 | 48 |
+| B | 8 | 48 |
+| C | 8 | 48 |
+| D | 9 | 49 |
 
-The production bank has reached 150 approved questions. New questions after this batch should return to `draft-questions.csv` with `review_status = review` and should require explicit approval before promotion to `questions.csv`.
+The two multi-select questions create 32 correct selections. The cumulative distribution differs by no more than one selection.
+
+## Coverage improvements
+
+Batch 007 adds coverage for:
+
+- OSI application-layer services
+- Web application firewalls
+- SFTP
+- Multimode versus single-mode fiber
+- Full-mesh connection calculations
+- RFC 1918 private addressing
+- Software-defined networking
+- Static NAT and OSPF cost
+- BPDU guard and storm control
+- WPA3-Enterprise with 802.1X and RADIUS
+- Demarcation points
+- Physical network diagrams
+- SNMPv3 security
+- Offsite configuration backups
+- CNAME records and stateful DHCPv6
+- Local console management
+- AAA accounting and digital signatures
+- Wireless jamming and dynamic ARP inspection
+- Recent-change correlation
+- EMI and CRC/FCS errors
+- NTP time skew
+- Wireless signal-to-noise ratio
+- DHCP renewal and host routing-table tools
+
+All 25 numbered objectives retain approved coverage.
+
+## Programmatic calculation checks
+
+- `NET009-0000155`: Confirmed that a six-site full mesh requires 15 unique links.
+- `NET009-0000159`: Confirmed that 100 Mbps divided by 10 Mbps produces the stated OSPF cost of 10.
+- `NET009-0000156`: Confirmed the selected addresses are within the exact RFC 1918 ranges.
+
+## Question inventory
+
+| ID | Objective | Topic | Difficulty | Type | Style | Correct |
+|---|---|---|---|---|---|---|
+| NET009-0000151 | 1.1 | OSI application layer | easy | single_choice | direct | A |
+| NET009-0000152 | 1.2 | Application security appliances | medium | single_choice | scenario | B |
+| NET009-0000153 | 1.4 | Secure file transfer | easy | single_choice | direct | C |
+| NET009-0000154 | 1.5 | Fiber media selection | medium | single_choice | comparison | D |
+| NET009-0000155 | 1.6 | Full-mesh topology | hard | single_choice | calculation | A |
+| NET009-0000156 | 1.7 | Private IPv4 addressing | medium | multi_select | direct | B|D |
+| NET009-0000157 | 1.8 | Software-defined networking | hard | best_available | scenario | C |
+| NET009-0000158 | 2.1 | Static network address translation | medium | single_choice | scenario | D |
+| NET009-0000159 | 2.1 | OSPF interface cost | hard | single_choice | calculation | A |
+| NET009-0000160 | 2.2 | Spanning-tree edge protection | medium | single_choice | scenario | B |
+| NET009-0000161 | 2.2 | Broadcast control | medium | single_choice | scenario | C |
+| NET009-0000162 | 2.3 | Enterprise wireless authentication | hard | best_available | scenario | D |
+| NET009-0000163 | 2.4 | Service-provider handoff | easy | single_choice | direct | A |
+| NET009-0000164 | 3.1 | Physical network documentation | easy | single_choice | comparison | B |
+| NET009-0000165 | 3.2 | Secure network monitoring | medium | single_choice | scenario | C |
+| NET009-0000166 | 3.3 | Backup resilience | hard | single_choice | scenario | B |
+| NET009-0000167 | 3.4 | DNS aliases | easy | single_choice | direct | A |
+| NET009-0000168 | 3.4 | Stateful DHCPv6 | medium | single_choice | scenario | B |
+| NET009-0000169 | 3.5 | Local console management | medium | single_choice | scenario | C |
+| NET009-0000170 | 4.1 | AAA accounting | easy | single_choice | direct | D |
+| NET009-0000171 | 4.1 | Digital signatures | medium | multi_select | comparison | A|C |
+| NET009-0000172 | 4.2 | Wireless denial of service | hard | single_choice | scenario | B |
+| NET009-0000173 | 4.3 | ARP inspection | medium | single_choice | scenario | D |
+| NET009-0000174 | 5.1 | Problem identification | easy | single_choice | direct | A |
+| NET009-0000175 | 5.2 | Electromagnetic interference | medium | single_choice | scenario | B |
+| NET009-0000176 | 5.2 | Interface error counters | medium | single_choice | scenario | C |
+| NET009-0000177 | 5.3 | Time synchronization | hard | single_choice | scenario | D |
+| NET009-0000178 | 5.4 | Wireless signal quality | medium | single_choice | scenario | C |
+| NET009-0000179 | 5.5 | DHCP client tools | medium | single_choice | scenario | D |
+| NET009-0000180 | 5.5 | Routing-table inspection | medium | single_choice | scenario | D |
+
+## Internal quality review
+
+- All 180 permanent question IDs are unique and sequential.
+- All 180 concept keys are unique.
+- All answer choices are populated and distinct after normalization.
+- Multi-select instructions state exactly how many answers to select.
+- Best-available questions state the decision criterion.
+- Each answer choice has a separate explanation.
+- Every referenced source ID exists in `source-register.csv`.
+- Approved rows contain review dates and the accelerated internal reviewer.
+- Draft and retired files remain header-only.

@@ -1,30 +1,43 @@
-# Validation Report
+# NET-009 Validation Report
 
-- Run date: 2026-07-26
-- Question rows validated: 200
-- Errors: 0
-- Warnings: 0
-- Information: 1
+- Validation date: 2026-07-26
+- Package: Batch 007 approved staging overlay
+- Validator exit code: `0`
+- Questions evaluated: 180
+- Batch 007 questions: 30
+- Objective-map rows: 25
+- Registered sources: 61
 
-## Information
+## Result
 
-- `data/security-plus/sec-701/questions.csv`: stored correct-answer distribution: A=50, B=50, C=50, D=50
+```text
+NET-009 QUESTION BANK VALIDATION
+==================================
+INFO: Objectives: 25
+INFO: Registered sources: 61
+INFO: Question rows: 180
+INFO: Approved answer-key counts: {'A': 48, 'B': 48, 'C': 48, 'D': 49}
+INFO: Approved domain counts: {'1.0': 42, '2.0': 36, '3.0': 34, '4.0': 25, '5.0': 43}
+INFO: Approved difficulty counts: {'easy': 44, 'hard': 43, 'medium': 93}
+INFO: Approved type counts: {'best_available': 13, 'multi_select': 13, 'single_choice': 154}
+INFO: Approved style counts: {'calculation': 13, 'comparison': 23, 'direct': 46, 'scenario': 98}
+----------------------------------
+Errors: 0
+Warnings: 0
+```
 
-## Additional Batch 009 checks
+## Additional Batch 007 assertions
 
-- Batch question count: 26
-- Batch domain allocation: 3 / 6 / 5 / 7 / 5
-- Final cumulative domain distribution: 24 / 44 / 36 / 56 / 40
-- Final cumulative domain percentages: 12% / 22% / 18% / 28% / 20%
-- Batch difficulty distribution: easy 7, medium 13, hard 6
-- Batch correct-answer distribution: A 6, B 6, C 7, D 7
-- Final cumulative correct-answer distribution: A 50, B 50, C 50, D 50
-- Duplicate question IDs: none
-- Exact duplicate stems: none
-- Duplicate concept keys: none
-- Exact duplicate answer choices: none
-- Reordered-clause duplicate answer choices: none
-- High-similarity near-duplicate stems: none
-
-Automated validation does not replace staging tests, learner feedback, or
-periodic technical review.
+- Batch domain distribution: 7, 6, 6, 4, 7
+- Final cumulative domain distribution: 42, 36, 34, 25, 43
+- Batch difficulty distribution: 7 easy, 16 medium, 7 hard
+- Batch type distribution: 26 single choice, 2 multi-select, 2 best available
+- Batch style distribution: 7 direct, 18 scenario, 3 comparison, 2 calculation
+- Batch correct-key distribution: A 7, B 8, C 8, D 9
+- Cumulative correct-key distribution: A 48, B 48, C 48, D 49
+- Unique question IDs: 180
+- Unique concept keys: 180
+- Cumulative objective coverage: 25 of 25
+- Programmatic full-mesh, OSPF-cost, and private-address assertions: passed
+- Header-only draft and retired files: present
+- Prohibited-choice, unsupported-absolute, and dash-character scans: passed
