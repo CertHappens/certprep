@@ -1,43 +1,30 @@
-# NET-009 Validation Report
+# Validation Report
 
-- Validation date: 2026-07-26
-- Package: Batch 006 approved staging overlay
-- Validator exit code: `0`
-- Questions evaluated: 150
-- Batch 006 questions: 12
-- Objective-map rows: 25
-- Registered sources: 60
+- Run date: 2026-07-26
+- Question rows validated: 200
+- Errors: 0
+- Warnings: 0
+- Information: 1
 
-## Result
+## Information
 
-```text
-NET-009 QUESTION BANK VALIDATION
-==================================
-INFO: Objectives: 25
-INFO: Registered sources: 60
-INFO: Question rows: 150
-INFO: Approved answer-key counts: {'A': 41, 'B': 40, 'C': 40, 'D': 40}
-INFO: Approved domain counts: {'1.0': 35, '2.0': 30, '3.0': 28, '4.0': 21, '5.0': 36}
-INFO: Approved difficulty counts: {'easy': 37, 'hard': 36, 'medium': 77}
-INFO: Approved type counts: {'best_available': 11, 'multi_select': 11, 'single_choice': 128}
-INFO: Approved style counts: {'calculation': 11, 'comparison': 20, 'direct': 39, 'scenario': 80}
-----------------------------------
-Errors: 0
-Warnings: 0
-```
+- `data/security-plus/sec-701/questions.csv`: stored correct-answer distribution: A=50, B=50, C=50, D=50
 
-## Additional Batch 006 assertions
+## Additional Batch 009 checks
 
-- Batch domain distribution: 3, 2, 2, 2, 3
-- Final cumulative domain distribution: 35, 30, 28, 21, 36
-- Batch difficulty distribution: 3 easy, 6 medium, 3 hard
-- Batch type distribution: 10 single choice, 1 multi-select, 1 best available
-- Batch style distribution: 4 direct, 6 scenario, 1 comparison, 1 calculation
-- Batch correct-key distribution: A 4, B 3, C 3, D 3
-- Cumulative correct-key distribution: A 41, B 40, C 40, D 40
-- Unique question IDs: 150
-- Unique concept keys: 150
-- Cumulative objective coverage: 25 of 25
-- Programmatic subnet assertion: passed
-- Header-only draft and retired files: present
-- Em-dash and en-dash scan of question content: passed
+- Batch question count: 26
+- Batch domain allocation: 3 / 6 / 5 / 7 / 5
+- Final cumulative domain distribution: 24 / 44 / 36 / 56 / 40
+- Final cumulative domain percentages: 12% / 22% / 18% / 28% / 20%
+- Batch difficulty distribution: easy 7, medium 13, hard 6
+- Batch correct-answer distribution: A 6, B 6, C 7, D 7
+- Final cumulative correct-answer distribution: A 50, B 50, C 50, D 50
+- Duplicate question IDs: none
+- Exact duplicate stems: none
+- Duplicate concept keys: none
+- Exact duplicate answer choices: none
+- Reordered-clause duplicate answer choices: none
+- High-similarity near-duplicate stems: none
+
+Automated validation does not replace staging tests, learner feedback, or
+periodic technical review.

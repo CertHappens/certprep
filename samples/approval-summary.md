@@ -1,28 +1,40 @@
-# NET-009 Approval Summary
+# SEC-701 Question Approval Summary
 
-## Current status
+- Approval date: `2026-07-26`
+- Batch approved: `SEC701-BATCH-009`
+- Previously approved questions: 174
+- Newly approved questions: 26
+- Total production questions: 200
+- Remaining draft questions: 0
+- Published objectives represented: 28 of 28
+- Current workflow: direct approval with staging testing and question reporting
 
-- Exam: CompTIA Network+ N10-009
-- Objectives document: Version 6.0
-- Project test ID: `NET-009`
-- Latest batch: `NET009-BATCH-006`
-- Approved question rows: 150
-- Review rows: 0
-- Draft rows: 0
-- Retired rows: 0
-- Registered sources: 60
-- Numbered objectives with approved coverage: 25 of 25
+## Stored correct-answer distribution
 
-## Batch 006 decision
+- A: 50
+- B: 50
+- C: 50
+- D: 50
 
-Batch 006 was internally reviewed, validated, marked `approved`, and appended directly to `questions.csv` under the accelerated staging authorization.
+## Difficulty distribution
 
-This 12-question batch completes the initial 150-question bank and optimizes cumulative domain weighting. Future accelerated-approved batches may return to the normal 30-question size unless cumulative coverage indicates that another size is better.
+- easy: 52
+- medium: 100
+- hard: 48
 
-The normal approval structure remains available. `draft-questions.csv` remains header-only, `review_status` remains part of the schema, and retirement metadata remains defined for future use.
+## Domain distribution
 
-## Permanent range
+- 1.0: 24 (12.0%)
+- 2.0: 44 (22.0%)
+- 3.0: 36 (18.0%)
+- 4.0: 56 (28.0%)
+- 5.0: 40 (20.0%)
 
-- First ID: `NET009-0000001`
-- Last ID: `NET009-0000150`
-- Next available ID: `NET009-0000151`
+## Question-style distribution
+
+- direct: 30
+- scenario: 148
+- comparison: 18
+- calculation: 4
+
+Batch 009 was promoted directly to `questions.csv`. `draft-questions.csv` remains header-only.
