@@ -108,7 +108,7 @@ This order prevents a common mistake: finding the right host count but attaching
 The table combines masks, address counts, and familiar uses. Large blocks are included because route tables and private ranges often use them. Treat the usable-host column as subnet math, not a recommendation to place millions of devices in one broadcast domain.
 
 <div class="table-scroll" role="region" aria-label="Common IPv4 CIDR prefixes, masks, and host counts" tabindex="0">
-  <table class="subnet-reference-table">
+  <table class="mobile-card-table subnet-reference-table">
     <thead>
       <tr>
         <th scope="col">Prefix</th>
@@ -250,7 +250,7 @@ For `172.20.77.9/20`, the third octet is 77 and the block size is 16. Boundaries
 Subnet math still works inside special ranges, but the address category changes how the result should be interpreted.
 
 <div class="table-scroll" role="region" aria-label="Common private and special-use IPv4 address ranges" tabindex="0">
-  <table>
+  <table class="mobile-card-table special-ipv4-table">
     <thead>
       <tr>
         <th scope="col">Range</th>
@@ -366,7 +366,7 @@ Suppose `192.168.60.0/24` must support:
 A clean allocation is:
 
 <div class="table-scroll" role="region" aria-label="VLSM allocation example from a /24 parent network" tabindex="0">
-  <table>
+  <table class="mobile-card-table vlsm-allocation-table">
     <thead>
       <tr>
         <th scope="col">Need</th>

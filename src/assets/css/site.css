@@ -3082,3 +3082,128 @@ h3 {
     white-space: nowrap;
   }
 }
+
+/* Responsive study-guide tables */
+@media screen and (min-width: 42.01rem) {
+  .article-body .subnet-reference-table {
+    table-layout: fixed;
+    font-size: 0.88rem;
+  }
+
+  .article-body .subnet-reference-table th:first-child,
+  .article-body .subnet-reference-table td:first-child {
+    width: 8%;
+    min-width: 0;
+  }
+
+  .article-body .subnet-reference-table th:nth-child(2),
+  .article-body .subnet-reference-table td:nth-child(2) {
+    width: 20%;
+  }
+
+  .article-body .subnet-reference-table th:nth-child(3),
+  .article-body .subnet-reference-table td:nth-child(3) {
+    width: 18%;
+  }
+
+  .article-body .subnet-reference-table th:nth-child(4),
+  .article-body .subnet-reference-table td:nth-child(4) {
+    width: 21%;
+    white-space: normal;
+  }
+
+  .article-body .subnet-reference-table th:nth-child(5),
+  .article-body .subnet-reference-table td:nth-child(5) {
+    width: 33%;
+  }
+}
+
+@media screen and (max-width: 42rem) {
+  .table-scroll:has(> .mobile-card-table) {
+    overflow: visible;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+  }
+
+  .article-body .mobile-card-table,
+  .article-body .mobile-card-table tbody,
+  .article-body .mobile-card-table tr,
+  .article-body .mobile-card-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .article-body .mobile-card-table thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .article-body .mobile-card-table tbody {
+    display: grid;
+    gap: 0.85rem;
+  }
+
+  .article-body .mobile-card-table tr {
+    overflow: hidden;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-small);
+    background: var(--surface-soft);
+  }
+
+  .article-body .mobile-card-table td,
+  .article-body .mobile-card-table td:first-child {
+    display: grid;
+    grid-template-columns: minmax(6.5rem, 35%) minmax(0, 1fr);
+    gap: 0.75rem;
+    min-width: 0;
+    padding: 0.72rem 0.8rem;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-muted);
+    overflow-wrap: anywhere;
+  }
+
+  .article-body .mobile-card-table td:last-child {
+    border-bottom: 0;
+  }
+
+  .article-body .mobile-card-table td::before {
+    align-self: start;
+    color: var(--accent-strong);
+    font-size: 0.75rem;
+    font-weight: 850;
+    letter-spacing: 0.045em;
+    line-height: 1.35;
+    text-transform: uppercase;
+  }
+
+  .monitoring-solutions-table td:nth-child(1)::before { content: "Solution"; }
+  .monitoring-solutions-table td:nth-child(2)::before { content: "Question"; }
+  .monitoring-solutions-table td:nth-child(3)::before { content: "Useful evidence"; }
+
+  .domain3-dns-record-table td:nth-child(1)::before { content: "Record"; }
+  .domain3-dns-record-table td:nth-child(2)::before { content: "Use"; }
+  .domain3-dns-record-table td:nth-child(3)::before { content: "Example decision"; }
+
+  .subnet-reference-table td:nth-child(1)::before { content: "Prefix"; }
+  .subnet-reference-table td:nth-child(2)::before { content: "Subnet mask"; }
+  .subnet-reference-table td:nth-child(3)::before { content: "Total addresses"; }
+  .subnet-reference-table td:nth-child(4)::before { content: "Traditional usable"; }
+  .subnet-reference-table td:nth-child(5)::before { content: "Useful clue"; }
+
+  .special-ipv4-table td:nth-child(1)::before { content: "Range"; }
+  .special-ipv4-table td:nth-child(2)::before { content: "Category"; }
+  .special-ipv4-table td:nth-child(3)::before { content: "Operational clue"; }
+
+  .vlsm-allocation-table td:nth-child(1)::before { content: "Need"; }
+  .vlsm-allocation-table td:nth-child(2)::before { content: "Assigned block"; }
+  .vlsm-allocation-table td:nth-child(3)::before { content: "Usable range or endpoints"; }
+  .vlsm-allocation-table td:nth-child(4)::before { content: "Reason"; }
+}

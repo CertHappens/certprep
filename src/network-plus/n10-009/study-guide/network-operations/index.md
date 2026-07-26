@@ -402,7 +402,7 @@ Review the [Common Ports and Protocols Reference](/ports-protocols/) for SNMP, S
 <h2 id="monitoring-solutions">Match the monitoring solution to the dependency</h2>
 
 <div class="table-scroll" role="region" aria-label="Network monitoring solutions and checks" tabindex="0">
-  <table>
+  <table class="mobile-card-table monitoring-solutions-table">
     <thead>
       <tr>
         <th scope="col">Solution</th>
@@ -615,7 +615,7 @@ SLAAC can provide addressing without a stateful server assigning each address. D
 <h3>Record types</h3>
 
 <div class="table-scroll" role="region" aria-label="Common DNS record types and uses" tabindex="0">
-  <table class="table--compact-second-column">
+  <table class="mobile-card-table domain3-dns-record-table">
     <thead>
       <tr>
         <th scope="col">Record</th>
