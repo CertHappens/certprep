@@ -169,6 +169,7 @@ const requiredFiles = [
   "network-plus/index.html",
   "network-plus/n10-009/study-guide/index.html",
   "network-plus/n10-009/study-guide/networking-concepts/index.html",
+  "network-plus/n10-009/study-guide/network-implementation/index.html",
   "network-plus/n10-009/practice-test/index.html",
   "network-plus/n10-009/practice-test/question/1/index.html",
   "network-plus/n10-009/practice-test/question/50/index.html",
@@ -581,6 +582,10 @@ for (const file of htmlFiles) {
       fail(`${relative}: Network+ hub is missing the detailed Domain 1 guide link`);
     }
 
+    if (!html.includes('href="/network-plus/n10-009/study-guide/network-implementation/"')) {
+      fail(`${relative}: Network+ hub is missing the detailed Domain 2 guide link`);
+    }
+
     if (!html.includes('href="/ports-protocols/"')) {
       fail(`${relative}: Network+ hub is missing the shared ports and protocols link`);
     }
@@ -629,6 +634,10 @@ for (const file of htmlFiles) {
 
     if (!html.includes('/network-plus/n10-009/study-guide/networking-concepts/')) {
       fail(`${relative}: Network+ study guide is missing its detailed Domain 1 link`);
+    }
+
+    if (!html.includes('/network-plus/n10-009/study-guide/network-implementation/')) {
+      fail(`${relative}: Network+ study guide is missing its detailed Domain 2 link`);
     }
 
     if (!html.includes("APS transports network data physically")) {
@@ -687,6 +696,58 @@ for (const file of htmlFiles) {
     for (const marker of requiredContent) {
       if (!html.includes(marker)) {
         fail(`${relative}: Network+ Domain 1 guide is missing ${marker}`);
+      }
+    }
+  }
+
+  if (relative === "network-plus/n10-009/study-guide/network-implementation/index.html") {
+    if (!html.includes("data-print-guide")) {
+      fail(`${relative}: Network+ Domain 2 guide is missing the shared Print | Save control`);
+    }
+
+    if (!/<h1>Network\+ N10-009 Domain 2: Network Implementation<\/h1>/.test(html)) {
+      fail(`${relative}: Network+ Domain 2 guide is missing its expected h1`);
+    }
+
+    const requiredSectionIds = [
+      "domain-map",
+      "implementation-workflow",
+      "routing-technologies",
+      "route-selection",
+      "translation-redundancy",
+      "switching-technologies",
+      "vlans-trunks",
+      "aggregation-spanning-tree",
+      "interface-settings",
+      "wireless-design",
+      "wireless-security",
+      "physical-installations",
+      "implementation-scenarios",
+      "exam-traps",
+      "rapid-review",
+      "official-references"
+    ];
+
+    for (const id of requiredSectionIds) {
+      if (!html.includes(`id="${id}"`)) {
+        fail(`${relative}: Network+ Domain 2 guide is missing section #${id}`);
+      }
+    }
+
+    const requiredContent = [
+      "floating static route",
+      "longest prefix match",
+      "802.1Q trunks",
+      "Link aggregation",
+      "2.4 GHz",
+      "Uninterruptible power supply",
+      "/network-plus/n10-009/practice-test/",
+      "/network-plus/n10-009/study-guide/networking-concepts/"
+    ];
+
+    for (const marker of requiredContent) {
+      if (!html.includes(marker)) {
+        fail(`${relative}: Network+ Domain 2 guide is missing ${marker}`);
       }
     }
   }
@@ -1085,6 +1146,7 @@ if (await isFile(path.join(outputRoot, "sitemap.xml"))) {
     "https://certhappens.com/network-plus/",
     "https://certhappens.com/network-plus/n10-009/study-guide/",
     "https://certhappens.com/network-plus/n10-009/study-guide/networking-concepts/",
+    "https://certhappens.com/network-plus/n10-009/study-guide/network-implementation/",
     "https://certhappens.com/network-plus/n10-009/practice-test/",
     "https://certhappens.com/security-plus/sy0-701/practice-test/",
     "https://certhappens.com/security-plus/sy0-701/study-guide/",
@@ -1120,6 +1182,7 @@ if (await isFile(path.join(outputRoot, "sitemap.xml"))) {
     "https://certhappens.com/security-plus/acronyms/",
     "https://certhappens.com/network-plus/n10-009/study-guide/",
     "https://certhappens.com/network-plus/n10-009/study-guide/networking-concepts/",
+    "https://certhappens.com/network-plus/n10-009/study-guide/network-implementation/",
     "https://certhappens.com/security-plus/sy0-701/study-guide/",
     "https://certhappens.com/security-plus/sy0-701/study-guide/general-security-concepts/",
     "https://certhappens.com/security-plus/sy0-701/study-guide/threats-vulnerabilities-mitigations/",
