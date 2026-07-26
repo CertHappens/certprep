@@ -505,13 +505,6 @@
 }
 
 @media print {
-  /* The repeated print header and watermark already identify the site. Removing
-     this trailing pseudo-footer prevents it from becoming an otherwise blank page. */
-  .article-body::after {
-    display: none;
-    content: none;
-  }
-
   .domain3-dns-record-table {
     table-layout: fixed;
   }
