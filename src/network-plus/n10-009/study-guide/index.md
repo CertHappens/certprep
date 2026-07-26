@@ -55,6 +55,9 @@ relatedLinks:
   - title: "Domain 1: Networking Concepts"
     url: /network-plus/n10-009/study-guide/networking-concepts/
     description: Trace traffic through the OSI model and review devices, cloud, protocols, media, addressing, IPv6, and modern network designs.
+  - title: "Domain 2: Network Implementation"
+    url: /network-plus/n10-009/study-guide/network-implementation/
+    description: Apply routing, switching, wireless, and physical installation choices to realistic implementation scenarios.
   - title: Network+ N10-009 Practice Test
     url: /network-plus/n10-009/practice-test/
     description: Apply the concepts in randomized questions with detailed answer explanations.
@@ -255,6 +258,8 @@ Modern objectives also include SDN, SD-WAN, VXLAN, zero trust architecture, SASE
 <h2 id="network-implementation">Domain 2: Network Implementation</h2>
 
 Implementation questions ask you to select or configure the technology that meets the scenario's routing, switching, wireless, or physical requirements.
+
+Use the [Domain 2: Network Implementation guide](/network-plus/n10-009/study-guide/network-implementation/) for route selection, NAT and gateway redundancy, VLANs and trunks, spanning tree, link aggregation, wireless design, and physical installation planning.
 
 <h3>Routing decisions</h3>
 
