@@ -3,6 +3,8 @@ import path from "node:path";
 
 const outputRoot = path.resolve("_site");
 const errors = [];
+const googleAnalyticsMeasurementId = "G-7MYVYMG2H1";
+const expectsGoogleAnalytics = process.env.CF_PAGES_BRANCH === "main";
 
 function fail(message) {
   errors.push(message);
@@ -425,6 +427,22 @@ for (const file of htmlFiles) {
     fail(`${relative}: missing title`);
   }
 
+  const googleTagLoader = `https://www.googletagmanager.com/gtag/js?id=${googleAnalyticsMeasurementId}`;
+  const googleTagLoaderCount = html.split(googleTagLoader).length - 1;
+  const googleTagConfigCount = (
+    html.match(new RegExp(`gtag\\('config', '${googleAnalyticsMeasurementId}'\\)`, "g")) || []
+  ).length;
+
+  if (expectsGoogleAnalytics) {
+    if (googleTagLoaderCount !== 1 || googleTagConfigCount !== 1) {
+      fail(
+        `${relative}: production build must contain exactly one Google Analytics tag for ${googleAnalyticsMeasurementId}`
+      );
+    }
+  } else if (googleTagLoaderCount !== 0 || googleTagConfigCount !== 0) {
+    fail(`${relative}: non-main build must not contain the Google Analytics tag`);
+  }
+
   const description = getMeta(html, "description");
   if (!description) {
     fail(`${relative}: missing meta description`);
@@ -562,6 +580,21 @@ for (const file of htmlFiles) {
 
     if (html.includes("Free certification practice")) {
       fail(`${relative}: retired free-practice eyebrow is still present`);
+    }
+  }
+
+  if (relative === "privacy/index.html") {
+    const requiredAnalyticsDisclosures = [
+      "Cloudflare Web Analytics and Google Analytics 4",
+      "first-party cookies or similar browser storage",
+      "IP addresses",
+      "July 26, 2026"
+    ];
+
+    for (const marker of requiredAnalyticsDisclosures) {
+      if (!html.includes(marker)) {
+        fail(`${relative}: analytics disclosure is missing ${marker}`);
+      }
     }
   }
 
