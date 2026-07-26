@@ -523,9 +523,11 @@ function renderBinaryRows(tbody, rows) {
       row.networkBinary,
       row.wildcardBinary
     ];
+    const labels = ["Octet", "Address", "Mask", "Network bits", "Wildcard bits"];
 
     values.forEach((value, index) => {
       const cell = document.createElement(index === 0 ? "th" : "td");
+      cell.dataset.label = labels[index];
       if (index === 0) {
         cell.scope = "row";
       }
