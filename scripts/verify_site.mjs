@@ -740,7 +740,7 @@ for (const file of htmlFiles) {
       "802.1Q trunks",
       "Link aggregation",
       "2.4 GHz",
-      "Uninterruptible power supply",
+      "uninterruptible power supply",
       "/network-plus/n10-009/practice-test/",
       "/network-plus/n10-009/study-guide/networking-concepts/"
     ];
