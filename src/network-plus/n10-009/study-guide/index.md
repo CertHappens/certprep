@@ -67,6 +67,9 @@ relatedLinks:
   - title: "Domain 3: Network Operations"
     url: /network-plus/n10-009/study-guide/network-operations/
     description: Build practical skills for documentation, monitoring, recovery, DHCP, DNS, time services, VPN access, and network management.
+  - title: "Domain 4: Network Security"
+    url: /network-plus/n10-009/study-guide/network-security/
+    description: Apply identity, encryption, segmentation, attack recognition, device hardening, network access control, filtering, and security zones.
   - title: Network+ N10-009 Practice Test
     url: /network-plus/n10-009/practice-test/
     description: Apply the concepts in randomized questions with detailed answer explanations.
@@ -356,7 +359,7 @@ Administrative access can be in-band through the production network or out-of-ba
 
 <h2 id="network-security">Domain 4: Network Security</h2>
 
-Network security questions combine identity, encryption, segmentation, hardening, attack recognition, and policy enforcement.
+Network security questions combine identity, encryption, segmentation, hardening, attack recognition, and policy enforcement. The [detailed Domain 4 guide](/network-plus/n10-009/study-guide/network-security/) expands this roadmap with certificate trust, identity services, segmentation decisions, attack symptoms, device hardening, network access control, filtering, and security-zone scenarios.
 
 <h3>Identity and protected communications</h3>
 

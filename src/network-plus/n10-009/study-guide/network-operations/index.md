@@ -78,6 +78,9 @@ relatedLinks:
   - title: "Domain 2: Network Implementation"
     url: /network-plus/n10-009/study-guide/network-implementation/
     description: Review the routing, switching, wireless, and physical configurations that become operational baselines.
+  - title: "Domain 4: Network Security"
+    url: /network-plus/n10-009/study-guide/network-security/
+    description: Continue with identity, segmentation, attack recognition, hardening, network admission, filtering, and security zones.
   - title: IPv4 Subnetting Reference
     url: /network-plus/n10-009/study-guide/ipv4-subnetting/
     description: Rebuild subnet boundaries before creating DHCP scopes, exclusions, reservations, and IPAM records.

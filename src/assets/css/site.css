@@ -3184,6 +3184,10 @@ h3 {
     text-transform: uppercase;
   }
 
+  .article-body .mobile-card-table td[data-label]::before {
+    content: attr(data-label);
+  }
+
   .monitoring-solutions-table td:nth-child(1)::before { content: "Solution"; }
   .monitoring-solutions-table td:nth-child(2)::before { content: "Question"; }
   .monitoring-solutions-table td:nth-child(3)::before { content: "Useful evidence"; }

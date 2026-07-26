@@ -173,6 +173,7 @@ const requiredFiles = [
   "network-plus/n10-009/study-guide/networking-concepts/index.html",
   "network-plus/n10-009/study-guide/network-implementation/index.html",
   "network-plus/n10-009/study-guide/network-operations/index.html",
+  "network-plus/n10-009/study-guide/network-security/index.html",
   "network-plus/n10-009/study-guide/ipv4-subnetting/index.html",
   "tools/subnet-calculator/index.html",
   "network-plus/n10-009/practice-test/index.html",
@@ -628,6 +629,10 @@ for (const file of htmlFiles) {
       fail(`${relative}: Network+ hub is missing the detailed Domain 3 guide link`);
     }
 
+    if (!html.includes('href="/network-plus/n10-009/study-guide/network-security/"')) {
+      fail(`${relative}: Network+ hub is missing the detailed Domain 4 guide link`);
+    }
+
     if (!html.includes('href="/ports-protocols/"')) {
       fail(`${relative}: Network+ hub is missing the shared ports and protocols link`);
     }
@@ -692,6 +697,10 @@ for (const file of htmlFiles) {
 
     if (!html.includes('/network-plus/n10-009/study-guide/network-operations/')) {
       fail(`${relative}: Network+ study guide is missing its detailed Domain 3 link`);
+    }
+
+    if (!html.includes('/network-plus/n10-009/study-guide/network-security/')) {
+      fail(`${relative}: Network+ study guide is missing its detailed Domain 4 link`);
     }
 
     if (!html.includes('/network-plus/n10-009/study-guide/ipv4-subnetting/')) {
@@ -866,6 +875,7 @@ for (const file of htmlFiles) {
       "out-of-band management",
       "/network-plus/n10-009/practice-test/",
       "/network-plus/n10-009/study-guide/network-implementation/",
+      "/network-plus/n10-009/study-guide/network-security/",
       "/network-plus/n10-009/study-guide/ipv4-subnetting/",
       "/tools/subnet-calculator/",
       "/ports-protocols/"
@@ -874,6 +884,71 @@ for (const file of htmlFiles) {
     for (const content of requiredContent) {
       if (!html.includes(content)) {
         fail(`${relative}: Network+ Domain 3 guide is missing ${content}`);
+      }
+    }
+  }
+
+  if (relative === "network-plus/n10-009/study-guide/network-security/index.html") {
+    if (!html.includes("data-print-guide")) {
+      fail(`${relative}: Network+ Domain 4 guide is missing the shared Print | Save control`);
+    }
+
+    if (!/<h1>Network\+ N10-009 Domain 4: Network Security<\/h1>/.test(html)) {
+      fail(`${relative}: Network+ Domain 4 guide is missing its expected h1`);
+    }
+
+    const requiredSectionIds = [
+      "domain-map",
+      "security-decisions",
+      "encryption",
+      "certificates-pki",
+      "identity-access",
+      "physical-deception",
+      "terminology-compliance",
+      "segmentation",
+      "network-attacks",
+      "layer2-attacks",
+      "name-address-attacks",
+      "wireless-human-malware",
+      "hardening-nac",
+      "keys-rules-zones",
+      "security-scenarios",
+      "exam-traps",
+      "rapid-review",
+      "official-references"
+    ];
+
+    for (const id of requiredSectionIds) {
+      if (!html.includes(`id="${id}"`)) {
+        fail(`${relative}: Network+ Domain 4 guide is missing section #${id}`);
+      }
+    }
+
+    const requiredContent = [
+      "Data in transit",
+      "Public key infrastructure",
+      "RADIUS",
+      "TACACS+",
+      "least privilege",
+      "honeynet",
+      "PCI DSS",
+      "VLAN hopping",
+      "MAC flooding",
+      "ARP poisoning",
+      "DNS poisoning",
+      "rogue DHCP",
+      "evil twin",
+      "802.1X",
+      "screened subnet",
+      "/network-plus/n10-009/practice-test/",
+      "/network-plus/n10-009/study-guide/network-operations/",
+      "/ports-protocols/",
+      "/security-plus/"
+    ];
+
+    for (const marker of requiredContent) {
+      if (!html.includes(marker)) {
+        fail(`${relative}: Network+ Domain 4 guide is missing ${marker}`);
       }
     }
   }
@@ -1350,6 +1425,7 @@ if (await isFile(path.join(outputRoot, "sitemap.xml"))) {
     "https://certhappens.com/network-plus/n10-009/study-guide/networking-concepts/",
     "https://certhappens.com/network-plus/n10-009/study-guide/network-implementation/",
     "https://certhappens.com/network-plus/n10-009/study-guide/network-operations/",
+    "https://certhappens.com/network-plus/n10-009/study-guide/network-security/",
     "https://certhappens.com/network-plus/n10-009/study-guide/ipv4-subnetting/",
     "https://certhappens.com/tools/subnet-calculator/",
     "https://certhappens.com/network-plus/n10-009/practice-test/",
@@ -1389,6 +1465,7 @@ if (await isFile(path.join(outputRoot, "sitemap.xml"))) {
     "https://certhappens.com/network-plus/n10-009/study-guide/networking-concepts/",
     "https://certhappens.com/network-plus/n10-009/study-guide/network-implementation/",
     "https://certhappens.com/network-plus/n10-009/study-guide/network-operations/",
+    "https://certhappens.com/network-plus/n10-009/study-guide/network-security/",
     "https://certhappens.com/network-plus/n10-009/study-guide/ipv4-subnetting/",
     "https://certhappens.com/tools/subnet-calculator/",
     "https://certhappens.com/security-plus/sy0-701/study-guide/",
