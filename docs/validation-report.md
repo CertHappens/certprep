@@ -1,12 +1,12 @@
 # NET-009 Validation Report
 
 - Validation date: 2026-07-26
-- Package: Batch 005 approved staging overlay
+- Package: Batch 006 approved staging overlay
 - Validator exit code: `0`
-- Questions evaluated: 138
-- Batch 005 questions: 30
+- Questions evaluated: 150
+- Batch 006 questions: 12
 - Objective-map rows: 25
-- Registered sources: 57
+- Registered sources: 60
 
 ## Result
 
@@ -14,29 +14,30 @@
 NET-009 QUESTION BANK VALIDATION
 ==================================
 INFO: Objectives: 25
-INFO: Registered sources: 57
-INFO: Question rows: 138
-INFO: Approved answer-key counts: {'A': 37, 'B': 37, 'C': 37, 'D': 37}
-INFO: Approved domain counts: {'1.0': 32, '2.0': 28, '3.0': 26, '4.0': 19, '5.0': 33}
-INFO: Approved difficulty counts: {'easy': 34, 'hard': 33, 'medium': 71}
-INFO: Approved type counts: {'best_available': 10, 'multi_select': 10, 'single_choice': 118}
-INFO: Approved style counts: {'calculation': 10, 'comparison': 19, 'direct': 35, 'scenario': 74}
+INFO: Registered sources: 60
+INFO: Question rows: 150
+INFO: Approved answer-key counts: {'A': 41, 'B': 40, 'C': 40, 'D': 40}
+INFO: Approved domain counts: {'1.0': 35, '2.0': 30, '3.0': 28, '4.0': 21, '5.0': 36}
+INFO: Approved difficulty counts: {'easy': 37, 'hard': 36, 'medium': 77}
+INFO: Approved type counts: {'best_available': 11, 'multi_select': 11, 'single_choice': 128}
+INFO: Approved style counts: {'calculation': 11, 'comparison': 20, 'direct': 39, 'scenario': 80}
 ----------------------------------
 Errors: 0
 Warnings: 0
 ```
 
-## Additional Batch 005 assertions
+## Additional Batch 006 assertions
 
-- Batch domain distribution: 6, 6, 6, 5, 7
-- Cumulative domain distribution: 32, 28, 26, 19, 33
-- Batch difficulty distribution: 8 easy, 15 medium, 7 hard
-- Batch type distribution: 26 single choice, 2 multi-select, 2 best available
-- Batch style distribution: 9 direct, 15 scenario, 4 comparison, 2 calculation
-- Batch correct-key distribution: A 8, B 8, C 8, D 8
-- Cumulative correct-key distribution: A 37, B 37, C 37, D 37
-- Unique question IDs: 138
-- Unique concept keys: 138
+- Batch domain distribution: 3, 2, 2, 2, 3
+- Final cumulative domain distribution: 35, 30, 28, 21, 36
+- Batch difficulty distribution: 3 easy, 6 medium, 3 hard
+- Batch type distribution: 10 single choice, 1 multi-select, 1 best available
+- Batch style distribution: 4 direct, 6 scenario, 1 comparison, 1 calculation
+- Batch correct-key distribution: A 4, B 3, C 3, D 3
+- Cumulative correct-key distribution: A 41, B 40, C 40, D 40
+- Unique question IDs: 150
+- Unique concept keys: 150
 - Cumulative objective coverage: 25 of 25
-- Programmatic rack-capacity and transfer-time assertions: passed
+- Programmatic subnet assertion: passed
 - Header-only draft and retired files: present
+- Em-dash and en-dash scan of question content: passed
