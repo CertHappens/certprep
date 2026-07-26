@@ -2962,6 +2962,10 @@ h3 {
   margin-bottom: 0;
 }
 
+.subnet-binary-mobile {
+  display: none;
+}
+
 @media screen and (max-width: 42rem) {
   .subnet-calculator__form,
   .subnet-results-grid {
@@ -2979,89 +2983,63 @@ h3 {
 
   .subnet-binary-table {
     overflow: visible;
-    border: 0;
-    border-radius: 0;
-    background: transparent;
   }
 
-  .subnet-binary-table table,
-  .subnet-binary-table tbody,
-  .subnet-binary-table tr,
-  .subnet-binary-table th,
-  .subnet-binary-table td {
+  .subnet-binary-table table {
+    display: none;
+  }
+
+  .subnet-binary-mobile {
     display: block;
-    width: 100%;
-  }
-
-  .subnet-binary-table thead {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
-  }
-
-  .subnet-binary-table tbody {
-    display: grid;
-    gap: 0.8rem;
-  }
-
-  .subnet-binary-table tr {
     overflow: hidden;
     border: 1px solid var(--border);
     border-radius: var(--radius-small);
     background: var(--surface-soft);
   }
 
-  .subnet-binary-table th:first-child {
-    width: 100%;
-    padding: 0.62rem 0.8rem;
-    border-bottom: 1px solid var(--border);
-    background: var(--surface-raised);
+  .subnet-binary-mobile__group {
+    padding: 0.85rem 0.95rem;
+  }
+
+  .subnet-binary-mobile__group + .subnet-binary-mobile__group {
+    border-top: 1px solid var(--border);
+  }
+
+  .subnet-binary-mobile__group h4 {
+    margin: 0 0 0.42rem;
     color: var(--text);
-  }
-
-  .subnet-binary-table th:first-child::before {
-    content: attr(data-label) " ";
-    color: var(--accent-strong);
     font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    font-size: 0.75rem;
-    font-weight: 850;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
+    font-size: 0.88rem;
+    line-height: 1.3;
   }
 
-  .subnet-binary-table td {
-    display: grid;
-    grid-template-columns: minmax(6.75rem, 0.85fr) minmax(0, 1.15fr);
-    gap: 0.75rem;
-    align-items: center;
-    padding: 0.62rem 0.8rem;
-    border-bottom: 1px solid var(--border);
+  .subnet-binary-mobile__decimal,
+  .subnet-binary-mobile__bits {
+    display: block;
+    max-width: 100%;
+    color: var(--text-muted);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+    font-variant-numeric: tabular-nums;
+    line-height: 1.5;
+    white-space: nowrap;
   }
 
-  .subnet-binary-table td:last-child {
-    border-bottom: 0;
+  .subnet-binary-mobile__decimal {
+    margin-bottom: 0.18rem;
+    font-size: 0.9rem;
   }
 
-  .subnet-binary-table td::before {
-    color: var(--text);
-    content: attr(data-label);
-    font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    font-size: 0.78rem;
-    font-weight: 800;
-    line-height: 1.35;
+  .subnet-binary-mobile__bits {
+    padding: 0;
+    background: transparent;
+    font-size: clamp(0.64rem, 2.85vw, 0.78rem);
+    letter-spacing: -0.025em;
   }
-}
 
-@media screen and (max-width: 24rem) {
-  .subnet-binary-table td {
-    grid-template-columns: 1fr;
-    gap: 0.2rem;
+  .subnet-binary-mobile a[x-apple-data-detectors],
+  .subnet-binary-mobile a[href^="tel:"] {
+    color: inherit !important;
+    text-decoration: none !important;
   }
 }
 

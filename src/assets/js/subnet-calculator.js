@@ -539,6 +539,75 @@ function renderBinaryRows(tbody, rows) {
   }
 }
 
+function appendSegmentedValue(element, parts) {
+  const accessibleText = document.createElement("span");
+  accessibleText.className = "visually-hidden";
+  accessibleText.textContent = parts.join(".");
+  element.append(accessibleText);
+
+  parts.forEach((part, index) => {
+    const value = document.createElement("span");
+    value.textContent = part;
+    value.setAttribute("aria-hidden", "true");
+    element.append(value);
+
+    if (index < parts.length - 1) {
+      const separator = document.createElement("span");
+      separator.textContent = ".";
+      separator.setAttribute("aria-hidden", "true");
+      element.append(separator);
+    }
+  });
+}
+
+function createBinaryMobileGroup(label, decimalParts, binaryParts) {
+  const group = document.createElement("section");
+  group.className = "subnet-binary-mobile__group";
+
+  const heading = document.createElement("h4");
+  heading.textContent = label;
+  group.append(heading);
+
+  if (decimalParts) {
+    const decimal = document.createElement("div");
+    decimal.className = "subnet-binary-mobile__decimal";
+    appendSegmentedValue(decimal, decimalParts.map(String));
+    group.append(decimal);
+  }
+
+  const binary = document.createElement("code");
+  binary.className = "subnet-binary-mobile__bits";
+  appendSegmentedValue(binary, binaryParts);
+  group.append(binary);
+
+  return group;
+}
+
+function renderBinaryMobile(container, rows) {
+  container.replaceChildren(
+    createBinaryMobileGroup(
+      "Address",
+      rows.map((row) => row.addressDecimal),
+      rows.map((row) => row.addressBinary)
+    ),
+    createBinaryMobileGroup(
+      "Mask",
+      rows.map((row) => row.maskDecimal),
+      rows.map((row) => row.maskBinary)
+    ),
+    createBinaryMobileGroup(
+      "Network bits",
+      null,
+      rows.map((row) => row.networkBinary)
+    ),
+    createBinaryMobileGroup(
+      "Wildcard bits",
+      null,
+      rows.map((row) => row.wildcardBinary)
+    )
+  );
+}
+
 function renderExplanation(list, steps) {
   list.replaceChildren();
   for (const step of steps) {
@@ -556,7 +625,16 @@ function initializeSubnetCalculator(root) {
   const results = root.querySelector("[data-subnet-results]");
   const resultsHeading = root.querySelector("[data-subnet-results-heading]");
   const binaryBody = root.querySelector("[data-subnet-binary-body]");
+  const binaryRegion = binaryBody?.closest(".subnet-binary-table");
   const explanationList = root.querySelector("[data-subnet-explanation]");
+
+  let binaryMobile = binaryRegion?.querySelector("[data-subnet-binary-mobile]");
+  if (binaryRegion && !binaryMobile) {
+    binaryMobile = document.createElement("div");
+    binaryMobile.className = "subnet-binary-mobile";
+    binaryMobile.dataset.subnetBinaryMobile = "";
+    binaryRegion.append(binaryMobile);
+  }
 
   if (
     !form ||
@@ -566,6 +644,7 @@ function initializeSubnetCalculator(root) {
     !results ||
     !resultsHeading ||
     !binaryBody ||
+    !binaryMobile ||
     !explanationList
   ) {
     return;
@@ -598,6 +677,7 @@ function initializeSubnetCalculator(root) {
       }
 
       renderBinaryRows(binaryBody, calculation.binaryRows);
+      renderBinaryMobile(binaryMobile, calculation.binaryRows);
       renderExplanation(explanationList, calculation.explanation);
       results.hidden = false;
 
