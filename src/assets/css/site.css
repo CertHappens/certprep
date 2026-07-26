@@ -3021,25 +3021,43 @@ h3 {
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
     font-variant-numeric: tabular-nums;
     line-height: 1.5;
-    white-space: nowrap;
   }
 
   .subnet-binary-mobile__decimal {
-    margin-bottom: 0.18rem;
+    margin-bottom: 0.4rem;
     font-size: 0.9rem;
+    white-space: nowrap;
   }
 
-  .subnet-binary-mobile__bits {
-    padding: 0;
-    background: transparent;
-    font-size: clamp(0.64rem, 2.85vw, 0.78rem);
-    letter-spacing: -0.025em;
+  .subnet-binary-mobile__octets {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.38rem 0.65rem;
+    max-width: 18rem;
   }
 
+  .subnet-binary-mobile__octet {
+    display: block;
+    min-width: 0;
+    padding: 0.24rem 0.38rem;
+    border: 0;
+    border-radius: 0.3rem;
+    background: rgb(8 20 33 / 0.58);
+    color: var(--text);
+    font-size: clamp(0.72rem, 3.35vw, 0.82rem);
+    letter-spacing: 0.015em;
+    line-height: 1.35;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  .subnet-binary-mobile a,
   .subnet-binary-mobile a[x-apple-data-detectors],
   .subnet-binary-mobile a[href^="tel:"] {
     color: inherit !important;
+    -webkit-text-fill-color: currentColor !important;
     text-decoration: none !important;
+    pointer-events: none;
   }
 }
 

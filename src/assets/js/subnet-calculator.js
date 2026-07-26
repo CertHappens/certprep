@@ -560,6 +560,25 @@ function appendSegmentedValue(element, parts) {
   });
 }
 
+function appendBinaryOctetGrid(element, parts) {
+  const accessibleText = document.createElement("span");
+  accessibleText.className = "visually-hidden";
+  accessibleText.textContent = parts.join(".");
+
+  const grid = document.createElement("span");
+  grid.className = "subnet-binary-mobile__octets";
+  grid.setAttribute("aria-hidden", "true");
+
+  for (const part of parts) {
+    const octet = document.createElement("code");
+    octet.className = "subnet-binary-mobile__octet";
+    octet.textContent = part;
+    grid.append(octet);
+  }
+
+  element.append(accessibleText, grid);
+}
+
 function createBinaryMobileGroup(label, decimalParts, binaryParts) {
   const group = document.createElement("section");
   group.className = "subnet-binary-mobile__group";
@@ -575,9 +594,9 @@ function createBinaryMobileGroup(label, decimalParts, binaryParts) {
     group.append(decimal);
   }
 
-  const binary = document.createElement("code");
+  const binary = document.createElement("div");
   binary.className = "subnet-binary-mobile__bits";
-  appendSegmentedValue(binary, binaryParts);
+  appendBinaryOctetGrid(binary, binaryParts);
   group.append(binary);
 
   return group;
