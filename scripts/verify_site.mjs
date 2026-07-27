@@ -943,8 +943,7 @@ for (const file of htmlFiles) {
       "/ports-protocols/",
       "/network-plus/n10-009/practice-test/",
       "/network-plus/n10-009/study-guide/ipv4-subnetting/",
-      "/tools/subnet-calculator/",
-      "/network-plus/quick-review/vlans-trunks-stp-lacp/"
+      "/tools/subnet-calculator/"
     ];
 
     for (const marker of requiredContent) {
@@ -999,7 +998,8 @@ for (const file of htmlFiles) {
       "/network-plus/n10-009/study-guide/networking-concepts/",
       "/network-plus/n10-009/study-guide/network-operations/",
       "/network-plus/n10-009/study-guide/ipv4-subnetting/",
-      "/tools/subnet-calculator/"
+      "/tools/subnet-calculator/",
+      "/network-plus/quick-review/vlans-trunks-stp-lacp/"
     ];
 
     for (const marker of requiredContent) {
