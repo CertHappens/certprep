@@ -431,3 +431,100 @@
   }
 
 }
+
+@media print {
+  .subnet-calculator {
+    margin-block: 0.15in 0.25in;
+    padding: 0;
+    border: 0;
+    background: transparent !important;
+  }
+
+  .subnet-calculator__intro,
+  .subnet-calculator__form,
+  .subnet-calculator__error,
+  .subnet-calculator noscript {
+    display: none !important;
+  }
+
+  .subnet-calculator__results {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: 0;
+  }
+
+  .subnet-results-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.06in;
+    break-inside: auto;
+    page-break-inside: auto;
+  }
+
+  .subnet-results-grid > div {
+    padding: 0.06in 0.08in;
+    border: 1px solid #aaa !important;
+    background: #fff !important;
+    break-inside: avoid-page;
+    page-break-inside: avoid;
+  }
+
+  .subnet-results-grid dt,
+  .subnet-results-grid dd,
+  .subnet-status p {
+    color: #111 !important;
+  }
+
+  .subnet-results-grid dt {
+    font-size: 7.5pt;
+  }
+
+  .subnet-results-grid dd {
+    font-size: 9pt;
+  }
+
+  .subnet-status {
+    margin-top: 0.08in;
+    padding: 0.08in 0.1in;
+    border-color: #999 !important;
+    background: #f7f7f7 !important;
+    break-inside: avoid-page;
+    page-break-inside: avoid;
+  }
+
+  .subnet-binary-table table {
+    min-width: 0;
+    font-size: 7.5pt;
+  }
+
+  .subnet-binary-table th,
+  .subnet-binary-table td {
+    padding: 0.045in 0.05in;
+    white-space: nowrap !important;
+    overflow-wrap: normal !important;
+  }
+}
+
+@media print {
+  .domain3-dns-record-table {
+    table-layout: fixed;
+  }
+
+  .domain3-dns-record-table th:nth-child(1),
+  .domain3-dns-record-table td:nth-child(1) {
+    width: 0.75in !important;
+    min-width: 0.75in !important;
+  }
+
+  .domain3-dns-record-table th:nth-child(2),
+  .domain3-dns-record-table td:nth-child(2) {
+    width: 3.85in !important;
+    min-width: 0 !important;
+    white-space: normal !important;
+  }
+
+  .domain3-dns-record-table th:nth-child(3),
+  .domain3-dns-record-table td:nth-child(3) {
+    width: 2.6in !important;
+    min-width: 0 !important;
+  }
+}

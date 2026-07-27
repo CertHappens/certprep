@@ -169,9 +169,15 @@ const requiredFiles = [
   "security-plus/index.html",
   "security-plus/acronyms/index.html",
   "network-plus/index.html",
+  "network-plus/acronyms/index.html",
   "network-plus/n10-009/study-guide/index.html",
   "network-plus/n10-009/study-guide/networking-concepts/index.html",
   "network-plus/n10-009/study-guide/network-implementation/index.html",
+  "network-plus/n10-009/study-guide/network-operations/index.html",
+  "network-plus/n10-009/study-guide/network-security/index.html",
+  "network-plus/n10-009/study-guide/network-troubleshooting/index.html",
+  "network-plus/n10-009/study-guide/ipv4-subnetting/index.html",
+  "tools/subnet-calculator/index.html",
   "network-plus/n10-009/practice-test/index.html",
   "network-plus/n10-009/practice-test/question/1/index.html",
   "network-plus/n10-009/practice-test/question/50/index.html",
@@ -188,6 +194,7 @@ const requiredFiles = [
   "assets/css/print.css",
   "assets/js/print-guide.js",
   "assets/js/acronym-filter.js",
+  "assets/js/subnet-calculator.js",
   "assets/js/quiz/app.js",
   "assets/js/quiz/results-actions.js",
   "assets/js/quiz/paged-question.js",
@@ -569,7 +576,8 @@ for (const file of htmlFiles) {
       "Certification study and practice",
       "Choose an exam and start studying",
       'href="/security-plus/sy0-701/practice-test/">Start Security+ practice test</a>',
-      'href="/network-plus/n10-009/practice-test/">Start Network+ practice test</a>'
+      'href="/network-plus/n10-009/practice-test/">Start Network+ practice test</a>',
+      'href="/tools/subnet-calculator/">Open the IPv4 subnet calculator</a>'
     ];
 
     for (const marker of requiredHomepageMarkers) {
@@ -619,8 +627,85 @@ for (const file of htmlFiles) {
       fail(`${relative}: Network+ hub is missing the detailed Domain 2 guide link`);
     }
 
+    if (!html.includes('href="/network-plus/n10-009/study-guide/network-operations/"')) {
+      fail(`${relative}: Network+ hub is missing the detailed Domain 3 guide link`);
+    }
+
+    if (!html.includes('href="/network-plus/n10-009/study-guide/network-security/"')) {
+      fail(`${relative}: Network+ hub is missing the detailed Domain 4 guide link`);
+    }
+
+    if (!html.includes('href="/network-plus/n10-009/study-guide/network-troubleshooting/"')) {
+      fail(`${relative}: Network+ hub is missing the detailed Domain 5 guide link`);
+    }
+
+    if (!html.includes('href="/network-plus/acronyms/"')) {
+      fail(`${relative}: Network+ hub is missing the acronyms and terms link`);
+    }
+
     if (!html.includes('href="/ports-protocols/"')) {
       fail(`${relative}: Network+ hub is missing the shared ports and protocols link`);
+    }
+
+    if (!html.includes('href="/tools/subnet-calculator/"')) {
+      fail(`${relative}: Network+ hub is missing the IPv4 subnet calculator link`);
+    }
+
+    if (!html.includes('href="/network-plus/n10-009/study-guide/ipv4-subnetting/"')) {
+      fail(`${relative}: Network+ hub is missing the IPv4 subnetting reference link`);
+    }
+  }
+
+
+  if (relative === "network-plus/acronyms/index.html") {
+    if (!html.includes("data-print-guide")) {
+      fail(`${relative}: acronym reference is missing the shared Print | Save control`);
+    }
+
+    if (!/<h1>Network\+ Acronyms and Terms<\/h1>/.test(html)) {
+      fail(`${relative}: acronym reference is missing its stable Network+ h1`);
+    }
+
+    const acronymEntryCount = (html.match(/data-acronym-entry/g) || []).length;
+    if (acronymEntryCount < 170) {
+      fail(`${relative}: expected at least 170 acronym entries, found ${acronymEntryCount}`);
+    }
+
+    const requiredAcronymMarkup = [
+      "data-acronym-search",
+      "data-acronym-clear",
+      "data-acronym-status",
+      "data-acronym-reference",
+      "data-acronym-empty",
+      'src="/assets/js/acronym-filter.js"',
+      "Context decides the meaning",
+      "General Data Protection Regulation",
+      "Spanning Tree Protocol",
+      "Shielded Twisted Pair",
+      "Recovery Time Objective"
+    ];
+
+    for (const marker of requiredAcronymMarkup) {
+      if (!html.includes(marker)) {
+        fail(`${relative}: acronym reference is missing ${marker}`);
+      }
+    }
+
+    if (!html.includes('class="article-toc article-toc--compact-grid"')) {
+      fail(`${relative}: acronym reference is missing the shared compact sidebar index`);
+    }
+
+    if (!html.includes('<h2 id="article-toc-title">Jump to</h2>')) {
+      fail(`${relative}: acronym sidebar is missing its Jump to heading`);
+    }
+
+    const acronymJumpLinkCount = (html.match(/href=["']#acronyms-[^"']+["']/g) || []).length;
+    if (acronymJumpLinkCount !== 23) {
+      fail(`${relative}: expected 23 sidebar acronym jump links, found ${acronymJumpLinkCount}`);
+    }
+
+    if (html.includes("data-acronym-index")) {
+      fail(`${relative}: retired in-body acronym index is still present`);
     }
   }
 
@@ -657,6 +742,10 @@ for (const file of htmlFiles) {
       }
     }
 
+    if (!html.includes('/network-plus/acronyms/')) {
+      fail(`${relative}: Network+ study guide is missing the Network+ acronym reference link`);
+    }
+
     if (!html.includes('/ports-protocols/')) {
       fail(`${relative}: Network+ study guide is missing the shared ports and protocols link`);
     }
@@ -673,6 +762,26 @@ for (const file of htmlFiles) {
       fail(`${relative}: Network+ study guide is missing its detailed Domain 2 link`);
     }
 
+    if (!html.includes('/network-plus/n10-009/study-guide/network-operations/')) {
+      fail(`${relative}: Network+ study guide is missing its detailed Domain 3 link`);
+    }
+
+    if (!html.includes('/network-plus/n10-009/study-guide/network-security/')) {
+      fail(`${relative}: Network+ study guide is missing its detailed Domain 4 link`);
+    }
+
+    if (!html.includes('/network-plus/n10-009/study-guide/network-troubleshooting/')) {
+      fail(`${relative}: Network+ study guide is missing its detailed Domain 5 link`);
+    }
+
+    if (!html.includes('/network-plus/n10-009/study-guide/ipv4-subnetting/')) {
+      fail(`${relative}: Network+ study guide is missing the IPv4 subnetting reference link`);
+    }
+
+    if (!html.includes('/tools/subnet-calculator/')) {
+      fail(`${relative}: Network+ study guide is missing the IPv4 subnet calculator link`);
+    }
+
     if (!html.includes("APS transports network data physically")) {
       fail(`${relative}: Network+ study guide is missing the OSI mnemonic`);
     }
@@ -682,6 +791,20 @@ for (const file of htmlFiles) {
     }
   }
 
+
+
+  const networkGuidePages = [
+    "network-plus/n10-009/study-guide/networking-concepts/index.html",
+    "network-plus/n10-009/study-guide/network-implementation/index.html",
+    "network-plus/n10-009/study-guide/network-operations/index.html",
+    "network-plus/n10-009/study-guide/network-security/index.html",
+    "network-plus/n10-009/study-guide/network-troubleshooting/index.html",
+    "network-plus/n10-009/study-guide/ipv4-subnetting/index.html"
+  ];
+
+  if (networkGuidePages.includes(relative) && !html.includes('/network-plus/acronyms/')) {
+    fail(`${relative}: Network+ guide is missing the Network+ acronym reference link`);
+  }
 
   if (relative === "network-plus/n10-009/study-guide/networking-concepts/index.html") {
     if (!html.includes("data-print-guide")) {
@@ -723,7 +846,9 @@ for (const file of htmlFiles) {
       "2001:db8::42",
       "Infrastructure as code",
       "/ports-protocols/",
-      "/network-plus/n10-009/practice-test/"
+      "/network-plus/n10-009/practice-test/",
+      "/network-plus/n10-009/study-guide/ipv4-subnetting/",
+      "/tools/subnet-calculator/"
     ];
 
     for (const marker of requiredContent) {
@@ -775,12 +900,280 @@ for (const file of htmlFiles) {
       "2.4 GHz",
       "uninterruptible power supply",
       "/network-plus/n10-009/practice-test/",
-      "/network-plus/n10-009/study-guide/networking-concepts/"
+      "/network-plus/n10-009/study-guide/networking-concepts/",
+      "/network-plus/n10-009/study-guide/network-operations/",
+      "/network-plus/n10-009/study-guide/ipv4-subnetting/",
+      "/tools/subnet-calculator/"
     ];
 
     for (const marker of requiredContent) {
       if (!html.includes(marker)) {
         fail(`${relative}: Network+ Domain 2 guide is missing ${marker}`);
+      }
+    }
+  }
+
+  if (relative === "network-plus/n10-009/study-guide/network-operations/index.html") {
+    if (!html.includes("data-print-guide")) {
+      fail(`${relative}: Network+ Domain 3 guide is missing the shared Print | Save control`);
+    }
+
+    if (!/<h1>Network\+ N10-009 Domain 3: Network Operations<\/h1>/.test(html)) {
+      fail(`${relative}: Network+ Domain 3 guide is missing its expected h1`);
+    }
+
+    const requiredSectionIds = [
+      "domain-map",
+      "operations-cycle",
+      "documentation",
+      "lifecycle-change",
+      "configuration-management",
+      "monitoring-methods",
+      "monitoring-solutions",
+      "disaster-recovery",
+      "availability-sites",
+      "network-services",
+      "dhcp-slaac",
+      "dns",
+      "time-services",
+      "access-management",
+      "operations-scenarios",
+      "exam-traps",
+      "rapid-review",
+      "official-references"
+    ];
+
+    for (const id of requiredSectionIds) {
+      if (!html.includes(`id="${id}"`)) {
+        fail(`${relative}: Network+ Domain 3 guide is missing section #${id}`);
+      }
+    }
+
+    const requiredContent = [
+      "baseline or golden configuration",
+      "SNMPv3",
+      "Flow data",
+      "Recovery point objective",
+      "Discover, Offer, Request, and Acknowledgment",
+      "DNS Security Extensions",
+      "Network Time Security",
+      "out-of-band management",
+      "/network-plus/n10-009/practice-test/",
+      "/network-plus/n10-009/study-guide/network-implementation/",
+      "/network-plus/n10-009/study-guide/network-security/",
+      "/network-plus/n10-009/study-guide/ipv4-subnetting/",
+      "/tools/subnet-calculator/",
+      "/ports-protocols/"
+    ];
+
+    for (const content of requiredContent) {
+      if (!html.includes(content)) {
+        fail(`${relative}: Network+ Domain 3 guide is missing ${content}`);
+      }
+    }
+  }
+
+  if (relative === "network-plus/n10-009/study-guide/network-security/index.html") {
+    if (!html.includes("data-print-guide")) {
+      fail(`${relative}: Network+ Domain 4 guide is missing the shared Print | Save control`);
+    }
+
+    if (!/<h1>Network\+ N10-009 Domain 4: Network Security<\/h1>/.test(html)) {
+      fail(`${relative}: Network+ Domain 4 guide is missing its expected h1`);
+    }
+
+    const requiredSectionIds = [
+      "domain-map",
+      "security-decisions",
+      "encryption",
+      "certificates-pki",
+      "identity-access",
+      "physical-deception",
+      "terminology-compliance",
+      "segmentation",
+      "network-attacks",
+      "layer2-attacks",
+      "name-address-attacks",
+      "wireless-human-malware",
+      "hardening-nac",
+      "keys-rules-zones",
+      "security-scenarios",
+      "exam-traps",
+      "rapid-review",
+      "official-references"
+    ];
+
+    for (const id of requiredSectionIds) {
+      if (!html.includes(`id="${id}"`)) {
+        fail(`${relative}: Network+ Domain 4 guide is missing section #${id}`);
+      }
+    }
+
+    const requiredContent = [
+      "Data in transit",
+      "Public key infrastructure",
+      "RADIUS",
+      "TACACS+",
+      "least privilege",
+      "honeynet",
+      "PCI DSS",
+      "VLAN hopping",
+      "MAC flooding",
+      "ARP poisoning",
+      "DNS poisoning",
+      "rogue DHCP",
+      "evil twin",
+      "802.1X",
+      "screened subnet",
+      "/network-plus/n10-009/practice-test/",
+      "/network-plus/n10-009/study-guide/network-operations/",
+      "/network-plus/n10-009/study-guide/network-troubleshooting/",
+      "/ports-protocols/",
+      "/security-plus/"
+    ];
+
+    for (const marker of requiredContent) {
+      if (!html.includes(marker)) {
+        fail(`${relative}: Network+ Domain 4 guide is missing ${marker}`);
+      }
+    }
+  }
+
+  if (relative === "network-plus/n10-009/study-guide/network-troubleshooting/index.html") {
+    if (!html.includes("data-print-guide")) {
+      fail(`${relative}: Network+ Domain 5 guide is missing the shared Print | Save control`);
+    }
+
+    if (!/<h1>Network\+ N10-009 Domain 5: Network Troubleshooting<\/h1>/.test(html)) {
+      fail(`${relative}: Network+ Domain 5 guide is missing its expected h1`);
+    }
+
+    const requiredSectionIds = [
+      "domain-map",
+      "troubleshooting-method",
+      "scope-evidence",
+      "cabling-media",
+      "interface-counters",
+      "poe-transceivers",
+      "switching-services",
+      "routing-addressing",
+      "performance",
+      "wireless",
+      "software-tools",
+      "hardware-tools",
+      "device-commands",
+      "troubleshooting-scenarios",
+      "exam-traps",
+      "rapid-review",
+      "official-references"
+    ];
+
+    for (const id of requiredSectionIds) {
+      if (!html.includes(`id="${id}"`)) {
+        fail(`${relative}: Network+ Domain 5 guide is missing section #${id}`);
+      }
+    }
+
+    const requiredContent = [
+      "Establish a theory of probable cause",
+      "cyclic redundancy check",
+      "Power over Ethernet",
+      "error-disabled",
+      "Spanning Tree Protocol",
+      "Address pool exhaustion",
+      "Duplicate IP address",
+      "Packet loss",
+      "Jitter",
+      "Client disassociation",
+      "traceroute",
+      "Link Layer Discovery Protocol",
+      "Visual fault locator",
+      "show mac-address-table",
+      "/network-plus/n10-009/practice-test/",
+      "/network-plus/n10-009/study-guide/ipv4-subnetting/",
+      "/tools/subnet-calculator/",
+      "/ports-protocols/"
+    ];
+
+    for (const marker of requiredContent) {
+      if (!html.includes(marker)) {
+        fail(`${relative}: Network+ Domain 5 guide is missing ${marker}`);
+      }
+    }
+  }
+
+  if (relative === "network-plus/n10-009/study-guide/ipv4-subnetting/index.html") {
+    if (!html.includes("data-print-guide")) {
+      fail(`${relative}: IPv4 subnetting reference is missing the shared Print | Save control`);
+    }
+
+    if (!/<h1>IPv4 Subnetting Reference for Network\+<\/h1>/.test(html)) {
+      fail(`${relative}: IPv4 subnetting reference is missing its expected h1`);
+    }
+
+    const requiredSectionIds = [
+      "core-model",
+      "cidr-reference",
+      "powers-of-two",
+      "borrowed-bits",
+      "block-size",
+      "special-ranges",
+      "slash-31-32",
+      "worked-examples",
+      "vlsm",
+      "common-mistakes",
+      "practice-routine",
+      "official-references"
+    ];
+
+    for (const id of requiredSectionIds) {
+      if (!html.includes(`id="${id}"`)) {
+        fail(`${relative}: IPv4 subnetting reference is missing section #${id}`);
+      }
+    }
+
+    const requiredContent = [
+      "Borrowed subnet bits",
+      "256 - changing mask octet",
+      "192.0.2.0/24",
+      "RFC 3021",
+      "192.168.60.224/31",
+      "/tools/subnet-calculator/"
+    ];
+
+    for (const marker of requiredContent) {
+      if (!html.includes(marker)) {
+        fail(`${relative}: IPv4 subnetting reference is missing ${marker}`);
+      }
+    }
+  }
+
+  if (relative === "tools/subnet-calculator/index.html") {
+    if (!html.includes("data-print-guide")) {
+      fail(`${relative}: IPv4 subnet calculator is missing the shared Print | Save control`);
+    }
+
+    if (!/<h1>IPv4 Subnet Calculator<\/h1>/.test(html)) {
+      fail(`${relative}: IPv4 subnet calculator is missing its expected h1`);
+    }
+
+    const requiredMarkers = [
+      'data-subnet-calculator',
+      'data-subnet-form',
+      'data-subnet-address',
+      'data-subnet-mask',
+      'data-subnet-results',
+      'data-subnet-output="network"',
+      'data-subnet-output="broadcast"',
+      'data-subnet-output="wildcard"',
+      'data-subnet-binary-body',
+      'src="/assets/js/subnet-calculator.js"',
+      '/network-plus/n10-009/study-guide/ipv4-subnetting/'
+    ];
+
+    for (const marker of requiredMarkers) {
+      if (!html.includes(marker)) {
+        fail(`${relative}: IPv4 subnet calculator is missing ${marker}`);
       }
     }
   }
@@ -1180,6 +1573,11 @@ if (await isFile(path.join(outputRoot, "sitemap.xml"))) {
     "https://certhappens.com/network-plus/n10-009/study-guide/",
     "https://certhappens.com/network-plus/n10-009/study-guide/networking-concepts/",
     "https://certhappens.com/network-plus/n10-009/study-guide/network-implementation/",
+    "https://certhappens.com/network-plus/n10-009/study-guide/network-operations/",
+    "https://certhappens.com/network-plus/n10-009/study-guide/network-security/",
+    "https://certhappens.com/network-plus/n10-009/study-guide/network-troubleshooting/",
+    "https://certhappens.com/network-plus/n10-009/study-guide/ipv4-subnetting/",
+    "https://certhappens.com/tools/subnet-calculator/",
     "https://certhappens.com/network-plus/n10-009/practice-test/",
     "https://certhappens.com/security-plus/sy0-701/practice-test/",
     "https://certhappens.com/security-plus/sy0-701/study-guide/",
@@ -1216,6 +1614,11 @@ if (await isFile(path.join(outputRoot, "sitemap.xml"))) {
     "https://certhappens.com/network-plus/n10-009/study-guide/",
     "https://certhappens.com/network-plus/n10-009/study-guide/networking-concepts/",
     "https://certhappens.com/network-plus/n10-009/study-guide/network-implementation/",
+    "https://certhappens.com/network-plus/n10-009/study-guide/network-operations/",
+    "https://certhappens.com/network-plus/n10-009/study-guide/network-security/",
+    "https://certhappens.com/network-plus/n10-009/study-guide/network-troubleshooting/",
+    "https://certhappens.com/network-plus/n10-009/study-guide/ipv4-subnetting/",
+    "https://certhappens.com/tools/subnet-calculator/",
     "https://certhappens.com/security-plus/sy0-701/study-guide/",
     "https://certhappens.com/security-plus/sy0-701/study-guide/general-security-concepts/",
     "https://certhappens.com/security-plus/sy0-701/study-guide/threats-vulnerabilities-mitigations/",

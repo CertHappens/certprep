@@ -52,12 +52,30 @@ keywords:
   - networking certification
   - network troubleshooting
 relatedLinks:
+  - title: Network+ Acronyms and Terms
+    url: /network-plus/acronyms/
+    description: Look up full expansions, practical meanings, related terms, and the domains where each abbreviation appears.
+  - title: IPv4 Subnetting Reference
+    url: /network-plus/n10-009/study-guide/ipv4-subnetting/
+    description: Rebuild CIDR masks, host counts, borrowed bits, boundaries, special ranges, and VLSM allocations from a repeatable method.
+  - title: IPv4 Subnet Calculator
+    url: /tools/subnet-calculator/
+    description: Check network and broadcast addresses, usable ranges, masks, wildcard masks, binary work, and address status.
   - title: "Domain 1: Networking Concepts"
     url: /network-plus/n10-009/study-guide/networking-concepts/
     description: Trace traffic through the OSI model and review devices, cloud, protocols, media, addressing, IPv6, and modern network designs.
   - title: "Domain 2: Network Implementation"
     url: /network-plus/n10-009/study-guide/network-implementation/
     description: Apply routing, switching, wireless, and physical installation choices to realistic implementation scenarios.
+  - title: "Domain 3: Network Operations"
+    url: /network-plus/n10-009/study-guide/network-operations/
+    description: Build practical skills for documentation, monitoring, recovery, DHCP, DNS, time services, VPN access, and network management.
+  - title: "Domain 4: Network Security"
+    url: /network-plus/n10-009/study-guide/network-security/
+    description: Apply identity, encryption, segmentation, attack recognition, device hardening, network access control, filtering, and security zones.
+  - title: "Domain 5: Network Troubleshooting"
+    url: /network-plus/n10-009/study-guide/network-troubleshooting/
+    description: Isolate physical, switching, routing, addressing, performance, wireless, and service faults with a repeatable method and appropriate tools.
   - title: Network+ N10-009 Practice Test
     url: /network-plus/n10-009/practice-test/
     description: Apply the concepts in randomized questions with detailed answer explanations.
@@ -120,6 +138,8 @@ Build each topic through four kinds of understanding:
 Suppose you are studying DHCP. Memorizing UDP 67 and 68 helps, but it is only the beginning. You should also recognize a client with an APIPA address, explain why a relay is needed across routed boundaries, distinguish a reservation from an exclusion, and identify which scope option supplies the default gateway.
 
 Use the [Common Ports and Protocols Reference](/ports-protocols/) when a service name, transport, or secure alternative is unfamiliar. Return to the surrounding topic afterward so the number remains attached to a real network function.
+
+Use the [Network+ Acronyms and Terms reference](/network-plus/acronyms/) when initials interrupt the explanation. Expand the term, identify its practical role, then return to the scenario so the acronym stays attached to a device, protocol, measurement, or decision.
 
 <h2 id="domain-priorities">The five exam domains</h2>
 
@@ -231,7 +251,7 @@ Traffic can also be unicast, multicast, broadcast, or anycast. Learn who receive
 
 <h3>Addressing and subnetting</h3>
 
-For IPv4, practice until you can determine the network address, broadcast address, usable host range, prefix length, and whether two hosts share a subnet. Understand private ranges, APIPA, loopback, public addressing, and variable-length subnetting.
+For IPv4, practice until you can determine the network address, broadcast address, usable host range, prefix length, and whether two hosts share a subnet. Understand private ranges, APIPA, loopback, public addressing, and variable-length subnetting. Use the [IPv4 Subnetting Reference](/network-plus/n10-009/study-guide/ipv4-subnetting/) to learn the method, then check calculations with the [IPv4 Subnet Calculator](/tools/subnet-calculator/).
 
 A reliable subnetting process is more valuable than a memorized chart you cannot recreate:
 
@@ -297,7 +317,7 @@ A technically correct network device can still fail in a poor environment. Overl
 
 <h2 id="network-operations">Domain 3: Network Operations</h2>
 
-Operations keeps the network understandable and supportable after installation.
+Operations keeps the network understandable and supportable after installation. The [detailed Domain 3 guide](/network-plus/n10-009/study-guide/network-operations/) expands this roadmap with documentation, lifecycle and change control, configuration management, monitoring evidence, disaster recovery, DHCP, SLAAC, DNS, time services, VPN access, and management paths.
 
 <h3>Documentation and controlled change</h3>
 
@@ -347,7 +367,7 @@ Administrative access can be in-band through the production network or out-of-ba
 
 <h2 id="network-security">Domain 4: Network Security</h2>
 
-Network security questions combine identity, encryption, segmentation, hardening, attack recognition, and policy enforcement.
+Network security questions combine identity, encryption, segmentation, hardening, attack recognition, and policy enforcement. The [detailed Domain 4 guide](/network-plus/n10-009/study-guide/network-security/) expands this roadmap with certificate trust, identity services, segmentation decisions, attack symptoms, device hardening, network access control, filtering, and security-zone scenarios.
 
 <h3>Identity and protected communications</h3>
 
@@ -384,7 +404,7 @@ A broad block can create a new outage. Before applying a rule, identify source, 
 
 <h2 id="network-troubleshooting">Domain 5: Network Troubleshooting</h2>
 
-Troubleshooting is the largest N10-009 domain. The methodology matters because a technically possible fix can still be the wrong first action.
+Troubleshooting is the largest N10-009 domain. The methodology matters because a technically possible fix can still be the wrong first action. The [detailed Domain 5 guide](/network-plus/n10-009/study-guide/network-troubleshooting/) expands this roadmap with physical and interface faults, switching and addressing failures, performance and wireless symptoms, tool selection, device commands, and worked troubleshooting scenarios.
 
 <h3>Use a repeatable method</h3>
 

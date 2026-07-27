@@ -1,0 +1,2854 @@
+{
+  "title": "Network+ Acronyms and Terms",
+  "currentExamVersion": "N10-009",
+  "datePublished": "2026-07-26",
+  "entryCount": 177,
+  "groups": [
+    {
+      "letter": "#",
+      "id": "numbers",
+      "entries": [
+        {
+          "id": "802-1q",
+          "term": "802.1Q",
+          "expansion": "IEEE VLAN tagging standard",
+          "meaning": "Adds VLAN identification information to Ethernet frames on trunk links so one physical link can carry traffic for multiple VLANs.",
+          "domains": [
+            "2",
+            "5"
+          ],
+          "related": [
+            "VLAN",
+            "SVI"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "802-1x",
+          "term": "802.1X",
+          "expansion": "IEEE port-based network access control",
+          "meaning": "Controls access at a wired or wireless network edge by requiring authentication before ordinary traffic is permitted.",
+          "domains": [
+            "2",
+            "4"
+          ],
+          "related": [
+            "EAPoL",
+            "NAC",
+            "RADIUS"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        }
+      ],
+      "label": "0-9"
+    },
+    {
+      "letter": "A",
+      "id": "a",
+      "entries": [
+        {
+          "id": "a",
+          "term": "A",
+          "expansion": "Address",
+          "meaning": "A DNS record that maps a hostname to an IPv4 address.",
+          "domains": [
+            "3"
+          ],
+          "related": [
+            "AAAA",
+            "DNS"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "aaa",
+          "term": "AAA",
+          "expansion": "Authentication, Authorization, and Accounting",
+          "meaning": "A framework that verifies identity, decides permitted actions, and records activity.",
+          "domains": [
+            "4"
+          ],
+          "related": [
+            "RADIUS",
+            "TACACS+"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "aaaa",
+          "term": "AAAA",
+          "expansion": "IPv6 address record",
+          "meaning": "A DNS record that maps a hostname to an IPv6 address.",
+          "domains": [
+            "3"
+          ],
+          "related": [
+            "A",
+            "DNS"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "acl",
+          "term": "ACL",
+          "expansion": "Access Control List",
+          "meaning": "A set of rules that permits or denies access to a resource, network path, or object.",
+          "domains": [
+            "4",
+            "5"
+          ],
+          "related": [
+            "DAC",
+            "RBAC"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "ah",
+          "term": "AH",
+          "expansion": "Authentication Header",
+          "meaning": "An IPsec component that provides integrity and origin authentication without encrypting the payload.",
+          "domains": [
+            "1"
+          ],
+          "related": [
+            "ESP",
+            "IPsec"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "ap",
+          "term": "AP",
+          "expansion": "Access Point",
+          "meaning": "A wireless device that connects Wi-Fi clients to a wired or distributed network.",
+          "domains": [
+            "1",
+            "2",
+            "4"
+          ],
+          "related": [
+            "BSSID",
+            "SSID",
+            "WLAN"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "api",
+          "term": "API",
+          "expansion": "Application Programming Interface",
+          "meaning": "A defined way for software components or services to exchange requests and data.",
+          "domains": [
+            "3",
+            "4"
+          ],
+          "related": [],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "apipa",
+          "term": "APIPA",
+          "expansion": "Automatic Private Internet Protocol Addressing",
+          "meaning": "Windows terminology for automatic IPv4 link-local addressing in 169.254.0.0/16 when a client cannot obtain a normal DHCP lease.",
+          "domains": [
+            "1",
+            "3",
+            "5"
+          ],
+          "related": [
+            "DHCP",
+            "IPv4"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "arp",
+          "term": "ARP",
+          "expansion": "Address Resolution Protocol",
+          "meaning": "A protocol that maps an IPv4 address to a local network hardware address.",
+          "domains": [
+            "1",
+            "4",
+            "5"
+          ],
+          "related": [
+            "MAC"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "aup",
+          "term": "AUP",
+          "expansion": "Acceptable Use Policy",
+          "meaning": "A policy that defines permitted and prohibited use of organizational systems and data.",
+          "domains": [
+            "3",
+            "4"
+          ],
+          "related": [],
+          "examVersions": [
+            "N10-009"
+          ]
+        }
+      ],
+      "label": "A"
+    },
+    {
+      "letter": "B",
+      "id": "b",
+      "entries": [
+        {
+          "id": "bgp",
+          "term": "BGP",
+          "expansion": "Border Gateway Protocol",
+          "meaning": "The routing protocol used to exchange reachability information between autonomous systems on the internet.",
+          "domains": [
+            "2"
+          ],
+          "related": [],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "bnc",
+          "term": "BNC",
+          "expansion": "Bayonet Neill-Concelman",
+          "meaning": "A twist-lock coaxial connector found in legacy networking, video, and test equipment.",
+          "domains": [
+            "1"
+          ],
+          "related": [],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "bssid",
+          "term": "BSSID",
+          "expansion": "Basic Service Set Identifier",
+          "meaning": "The identifier for one wireless basic service set, commonly the MAC address of a specific access-point radio.",
+          "domains": [
+            "2",
+            "4"
+          ],
+          "related": [
+            "AP",
+            "ESSID",
+            "SSID"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "byod",
+          "term": "BYOD",
+          "expansion": "Bring Your Own Device",
+          "meaning": "A model that permits personally owned devices to access organizational resources.",
+          "domains": [
+            "4"
+          ],
+          "related": [],
+          "examVersions": [
+            "N10-009"
+          ]
+        }
+      ],
+      "label": "B"
+    },
+    {
+      "letter": "C",
+      "id": "c",
+      "entries": [
+        {
+          "id": "cam",
+          "term": "CAM",
+          "expansion": "Content-addressable Memory",
+          "meaning": "The switch memory table that associates learned MAC addresses with ports and VLANs for frame forwarding.",
+          "domains": [
+            "1",
+            "2",
+            "5"
+          ],
+          "related": [
+            "MAC",
+            "VLAN"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "cdn",
+          "term": "CDN",
+          "expansion": "Content Delivery Network",
+          "meaning": "A distributed group of servers that places content closer to users to reduce latency and origin-server load.",
+          "domains": [
+            "1"
+          ],
+          "related": [],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "cdp",
+          "term": "CDP",
+          "expansion": "Cisco Discovery Protocol",
+          "meaning": "A Cisco discovery protocol that advertises neighboring device identity and interface information on the local link.",
+          "domains": [
+            "5"
+          ],
+          "related": [],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "cia",
+          "term": "CIA",
+          "expansion": "Confidentiality, Integrity, and Availability",
+          "meaning": "Three foundational security goals: prevent unauthorized disclosure, preserve trustworthy data, and keep services usable.",
+          "domains": [
+            "4"
+          ],
+          "related": [],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "cidr",
+          "term": "CIDR",
+          "expansion": "Classless Inter-Domain Routing",
+          "meaning": "Prefix-length notation and route aggregation that describe networks without relying on legacy address classes.",
+          "domains": [
+            "1",
+            "2"
+          ],
+          "related": [
+            "IPv4",
+            "VLSM"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "cli",
+          "term": "CLI",
+          "expansion": "Command-line Interface",
+          "meaning": "A text-based interface used to enter commands and inspect device or operating-system output.",
+          "domains": [
+            "3",
+            "5"
+          ],
+          "related": [],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "cname",
+          "term": "CNAME",
+          "expansion": "Canonical Name",
+          "meaning": "A DNS alias record that points one name to another canonical hostname rather than directly to an address.",
+          "domains": [
+            "3"
+          ],
+          "related": [],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "cpu",
+          "term": "CPU",
+          "expansion": "Central Processing Unit",
+          "meaning": "The processor that executes instructions. High utilization can affect control-plane work, services, or device responsiveness.",
+          "domains": [
+            "3",
+            "4"
+          ],
+          "related": [],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "crc",
+          "term": "CRC",
+          "expansion": "Cyclic Redundancy Check",
+          "meaning": "An error-detection value checked on received frames. Rising CRC errors often point to cabling, interference, optic, or duplex problems.",
+          "domains": [
+            "5"
+          ],
+          "related": [
+            "RX",
+            "TX"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        }
+      ],
+      "label": "C"
+    },
+    {
+      "letter": "D",
+      "id": "d",
+      "entries": [
+        {
+          "id": "dac",
+          "term": "DAC",
+          "expansion": "Direct Attach Copper",
+          "meaning": "A short twinaxial copper cable assembly with integrated transceiver ends, commonly used for nearby high-speed switch or server connections.",
+          "domains": [
+            "1"
+          ],
+          "related": [],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "das",
+          "term": "DAS",
+          "expansion": "Direct-attached Storage",
+          "meaning": "Storage attached directly to one host rather than accessed through a file or storage network.",
+          "domains": [
+            "1"
+          ],
+          "related": [],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "dci",
+          "term": "DCI",
+          "expansion": "Data Center Interconnect",
+          "meaning": "Connectivity between data centers, often carrying routed traffic or extended logical networks between sites.",
+          "domains": [
+            "1"
+          ],
+          "related": [],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "ddos",
+          "term": "DDoS",
+          "expansion": "Distributed Denial-of-Service",
+          "meaning": "A denial-of-service attack launched from many systems at once to exhaust a target's resources.",
+          "domains": [
+            "4"
+          ],
+          "related": [
+            "DoS"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "dhcp",
+          "term": "DHCP",
+          "expansion": "Dynamic Host Configuration Protocol",
+          "meaning": "A protocol that automatically assigns IP configuration to network clients.",
+          "domains": [
+            "1",
+            "3",
+            "4",
+            "5"
+          ],
+          "related": [],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "dlp",
+          "term": "DLP",
+          "expansion": "Data Loss Prevention",
+          "meaning": "Controls that identify sensitive information and restrict unauthorized transfer or exposure.",
+          "domains": [
+            "4"
+          ],
+          "related": [],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "dns",
+          "term": "DNS",
+          "expansion": "Domain Name System",
+          "meaning": "The distributed service that maps names to records such as IP addresses and mail servers.",
+          "domains": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"
+          ],
+          "related": [
+            "DNSSEC"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "dnssec",
+          "term": "DNSSEC",
+          "expansion": "Domain Name System Security Extensions",
+          "meaning": "Extensions that add signed DNS data so resolvers can validate integrity and origin.",
+          "domains": [
+            "3",
+            "4"
+          ],
+          "related": [
+            "DNS"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "doh",
+          "term": "DoH",
+          "expansion": "DNS over HTTPS",
+          "meaning": "Carries DNS queries inside HTTPS, protecting the resolver traffic from simple observation or modification in transit.",
+          "domains": [
+            "3"
+          ],
+          "related": [
+            "DNS",
+            "DoT",
+            "HTTPS"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "dos",
+          "term": "DoS",
+          "expansion": "Denial-of-Service",
+          "meaning": "An attack or condition that prevents legitimate users from accessing a service.",
+          "domains": [
+            "4"
+          ],
+          "related": [
+            "DDoS"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "dot",
+          "term": "DoT",
+          "expansion": "DNS over TLS",
+          "meaning": "Carries DNS queries over a dedicated TLS-protected transport, normally TCP port 853.",
+          "domains": [
+            "3"
+          ],
+          "related": [
+            "DNS",
+            "DoH",
+            "TLS"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "dr",
+          "term": "DR",
+          "expansion": "Disaster Recovery",
+          "meaning": "Planning and technical arrangements used to restore systems, data, and services after a disruptive event.",
+          "domains": [
+            "3"
+          ],
+          "related": [],
+          "examVersions": [
+            "N10-009"
+          ]
+        }
+      ],
+      "label": "D"
+    },
+    {
+      "letter": "E",
+      "id": "e",
+      "entries": [
+        {
+          "id": "eapol",
+          "term": "EAPoL",
+          "expansion": "Extensible Authentication Protocol over LAN",
+          "meaning": "The local-link framing used to carry 802.1X authentication messages between a supplicant and an authenticator.",
+          "domains": [
+            "4"
+          ],
+          "related": [
+            "802.1X",
+            "RADIUS"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "eigrp",
+          "term": "EIGRP",
+          "expansion": "Enhanced Interior Gateway Routing Protocol",
+          "meaning": "A dynamic interior routing protocol that selects paths using a composite metric and exchanges routes within an organization.",
+          "domains": [
+            "2"
+          ],
+          "related": [
+            "OSPF",
+            "RIP",
+            "IS-IS"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "eol",
+          "term": "EOL",
+          "expansion": "End-of-Life",
+          "meaning": "The point when a product reaches the end of its planned life cycle. Availability, updates, and replacement planning may change.",
+          "domains": [
+            "3"
+          ],
+          "related": [],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "eos",
+          "term": "EOS",
+          "expansion": "End-of-Support",
+          "meaning": "The point when a vendor stops providing some or all support, fixes, or updates for a product or release.",
+          "domains": [
+            "3"
+          ],
+          "related": [],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "esp",
+          "term": "ESP",
+          "expansion": "Encapsulating Security Payload",
+          "meaning": "An IPsec component that can provide encryption, integrity, and authentication for network traffic.",
+          "domains": [
+            "1"
+          ],
+          "related": [
+            "AH",
+            "IPsec"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "essid",
+          "term": "ESSID",
+          "expansion": "Extended Service Set Identifier",
+          "meaning": "A name associated with an extended wireless service spanning multiple access points. In ordinary use, SSID is the more common term.",
+          "domains": [
+            "2"
+          ],
+          "related": [],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "eula",
+          "term": "EULA",
+          "expansion": "End User License Agreement",
+          "meaning": "A contract that defines how software may be installed, used, and distributed.",
+          "domains": [
+            "3"
+          ],
+          "related": [],
+          "examVersions": [
+            "N10-009"
+          ]
+        }
+      ],
+      "label": "E"
+    },
+    {
+      "letter": "F",
+      "id": "f",
+      "entries": [
+        {
+          "id": "fc",
+          "term": "FC",
+          "expansion": "Fibre Channel",
+          "meaning": "A high-speed storage networking technology commonly used to carry block-storage traffic in a SAN.",
+          "domains": [
+            "1",
+            "2",
+            "5"
+          ],
+          "related": [],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "fhrp",
+          "term": "FHRP",
+          "expansion": "First Hop Redundancy Protocol",
+          "meaning": "A family of gateway-redundancy protocols that presents a virtual default-gateway address backed by multiple routers.",
+          "domains": [
+            "2"
+          ],
+          "related": [
+            "VIP"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "ftp",
+          "term": "FTP",
+          "expansion": "File Transfer Protocol",
+          "meaning": "A legacy file-transfer protocol that does not encrypt credentials or content by default.",
+          "domains": [
+            "1"
+          ],
+          "related": [
+            "SFTP"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        }
+      ],
+      "label": "F"
+    },
+    {
+      "letter": "G",
+      "id": "g",
+      "entries": [
+        {
+          "id": "gdpr",
+          "term": "GDPR",
+          "expansion": "General Data Protection Regulation",
+          "meaning": "A European Union privacy regulation governing personal-data processing and individual rights.",
+          "domains": [
+            "4"
+          ],
+          "related": [],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "gre",
+          "term": "GRE",
+          "expansion": "Generic Routing Encapsulation",
+          "meaning": "A tunneling protocol that encapsulates one network-layer packet inside another but does not provide encryption by itself.",
+          "domains": [
+            "1"
+          ],
+          "related": [],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "gui",
+          "term": "GUI",
+          "expansion": "Graphical User Interface",
+          "meaning": "A graphical interface used to configure or monitor a system through windows, forms, menus, and visual controls.",
+          "domains": [
+            "3"
+          ],
+          "related": [],
+          "examVersions": [
+            "N10-009"
+          ]
+        }
+      ],
+      "label": "G"
+    },
+    {
+      "letter": "H",
+      "id": "h",
+      "entries": [
+        {
+          "id": "http",
+          "term": "HTTP",
+          "expansion": "Hypertext Transfer Protocol",
+          "meaning": "The application protocol used for web requests and responses without built-in transport encryption.",
+          "domains": [
+            "1",
+            "3"
+          ],
+          "related": [
+            "HTTPS"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "https",
+          "term": "HTTPS",
+          "expansion": "Hypertext Transfer Protocol Secure",
+          "meaning": "HTTP protected by TLS to provide encrypted and authenticated transport.",
+          "domains": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"
+          ],
+          "related": [
+            "HTTP",
+            "TLS"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        }
+      ],
+      "label": "H"
+    },
+    {
+      "letter": "I",
+      "id": "i",
+      "entries": [
+        {
+          "id": "iaas",
+          "term": "IaaS",
+          "expansion": "Infrastructure as a Service",
+          "meaning": "A cloud model in which the provider supplies infrastructure while the customer manages operating systems, applications, and much of the configuration.",
+          "domains": [
+            "1"
+          ],
+          "related": [
+            "PaaS",
+            "SaaS"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "iac",
+          "term": "IaC",
+          "expansion": "Infrastructure as Code",
+          "meaning": "The management of infrastructure through versioned, repeatable configuration files or templates.",
+          "domains": [
+            "1"
+          ],
+          "related": [],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "iam",
+          "term": "IAM",
+          "expansion": "Identity and Access Management",
+          "meaning": "Processes and technologies for creating identities, authenticating users, and controlling access.",
+          "domains": [
+            "4"
+          ],
+          "related": [
+            "SSO"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "icmp",
+          "term": "ICMP",
+          "expansion": "Internet Control Message Protocol",
+          "meaning": "A network protocol used for diagnostics and control messages, including many ping and error responses.",
+          "domains": [
+            "1",
+            "3"
+          ],
+          "related": [],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "icmpv6",
+          "term": "ICMPv6",
+          "expansion": "Internet Control Message Protocol for IPv6",
+          "meaning": "IPv6 control messaging used for errors, diagnostics, neighbor discovery, router discovery, and other essential IPv6 functions.",
+          "domains": [
+            "1",
+            "3",
+            "5"
+          ],
+          "related": [
+            "IPv6",
+            "SLAAC"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "ics",
+          "term": "ICS",
+          "expansion": "Industrial Control System",
+          "meaning": "Technology used to monitor and control industrial processes and physical equipment.",
+          "domains": [
+            "4"
+          ],
+          "related": [
+            "SCADA",
+            "OT"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "idf",
+          "term": "IDF",
+          "expansion": "Intermediate Distribution Frame",
+          "meaning": "A local telecommunications room that distributes cabling and network access within part of a building and normally uplinks to the MDF.",
+          "domains": [
+            "2"
+          ],
+          "related": [],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "ids",
+          "term": "IDS",
+          "expansion": "Intrusion Detection System",
+          "meaning": "A control that identifies suspicious activity and generates alerts without necessarily blocking traffic.",
+          "domains": [
+            "1",
+            "3"
+          ],
+          "related": [
+            "IPS"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "iiot",
+          "term": "IIoT",
+          "expansion": "Industrial Internet of Things",
+          "meaning": "Connected industrial sensors, controllers, and equipment whose availability, safety, and long service life affect network design.",
+          "domains": [
+            "4"
+          ],
+          "related": [],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "ike",
+          "term": "IKE",
+          "expansion": "Internet Key Exchange",
+          "meaning": "A protocol used to negotiate security associations and keys for IPsec.",
+          "domains": [
+            "1"
+          ],
+          "related": [
+            "IPsec"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "iot",
+          "term": "IoT",
+          "expansion": "Internet of Things",
+          "meaning": "Network-connected devices that sense, process, or control physical environments, often with limited resources and long lifecycles.",
+          "domains": [
+            "4"
+          ],
+          "related": [],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "ip",
+          "term": "IP",
+          "expansion": "Internet Protocol",
+          "meaning": "The network-layer protocol used to address and route packets between systems.",
+          "domains": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"
+          ],
+          "related": [
+            "TCP/IP"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "ipam",
+          "term": "IPAM",
+          "expansion": "IP Address Management",
+          "meaning": "A system for tracking IP networks, addresses, assignments, reservations, DNS relationships, and address-space usage.",
+          "domains": [
+            "3"
+          ],
+          "related": [
+            "DHCP",
+            "DNS"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "ips",
+          "term": "IPS",
+          "expansion": "Intrusion Prevention System",
+          "meaning": "A control placed inline to detect and block suspicious traffic.",
+          "domains": [
+            "1"
+          ],
+          "related": [
+            "IDS"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "ipsec",
+          "term": "IPsec",
+          "expansion": "Internet Protocol Security",
+          "meaning": "A suite of protocols that protects IP traffic through authentication, integrity, and optional encryption.",
+          "domains": [
+            "1",
+            "4"
+          ],
+          "related": [
+            "AH",
+            "ESP",
+            "IKE"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "ipv4",
+          "term": "IPv4",
+          "expansion": "Internet Protocol version 4",
+          "meaning": "The 32-bit Internet Protocol address format written as four decimal octets, such as 192.0.2.10.",
+          "domains": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"
+          ],
+          "related": [
+            "APIPA",
+            "CIDR",
+            "VLSM"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "ipv6",
+          "term": "IPv6",
+          "expansion": "Internet Protocol version 6",
+          "meaning": "The 128-bit Internet Protocol address format designed for a much larger address space and modern autoconfiguration behavior.",
+          "domains": [
+            "1",
+            "2",
+            "3",
+            "5"
+          ],
+          "related": [
+            "ICMPv6",
+            "NAT64",
+            "SLAAC"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "is-is",
+          "term": "IS-IS",
+          "expansion": "Intermediate System to Intermediate System",
+          "meaning": "A link-state interior routing protocol that exchanges topology information and calculates shortest paths within an autonomous system.",
+          "domains": [
+            "2"
+          ],
+          "related": [],
+          "examVersions": [
+            "N10-009"
+          ]
+        }
+      ],
+      "label": "I"
+    },
+    {
+      "letter": "L",
+      "id": "l",
+      "entries": [
+        {
+          "id": "lacp",
+          "term": "LACP",
+          "expansion": "Link Aggregation Control Protocol",
+          "meaning": "The standards-based protocol used to negotiate and maintain compatible links inside an Ethernet link-aggregation group.",
+          "domains": [
+            "2"
+          ],
+          "related": [
+            "STP"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "lan",
+          "term": "LAN",
+          "expansion": "Local Area Network",
+          "meaning": "A network covering a limited area such as an office, home, or campus segment.",
+          "domains": [
+            "1",
+            "2"
+          ],
+          "related": [
+            "VLAN"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "lc",
+          "term": "LC",
+          "expansion": "Local Connector",
+          "meaning": "A small fiber-optic connector commonly used on modern transceivers and patch panels.",
+          "domains": [
+            "1"
+          ],
+          "related": [],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "ldap",
+          "term": "LDAP",
+          "expansion": "Lightweight Directory Access Protocol",
+          "meaning": "A protocol used to query and manage directory services.",
+          "domains": [
+            "1",
+            "4"
+          ],
+          "related": [
+            "IAM"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "ldaps",
+          "term": "LDAPS",
+          "expansion": "Lightweight Directory Access Protocol over TLS",
+          "meaning": "LDAP protected by TLS, commonly associated with TCP port 636. Modern deployments may also use LDAP with StartTLS.",
+          "domains": [
+            "1",
+            "4"
+          ],
+          "related": [],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "lldp",
+          "term": "LLDP",
+          "expansion": "Link Layer Discovery Protocol",
+          "meaning": "A vendor-neutral local-link discovery protocol that advertises device, interface, VLAN, power, and other neighbor information.",
+          "domains": [
+            "5"
+          ],
+          "related": [
+            "CDP"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        }
+      ],
+      "label": "L"
+    },
+    {
+      "letter": "M",
+      "id": "m",
+      "entries": [
+        {
+          "id": "mac",
+          "term": "MAC",
+          "expansion": "Media Access Control",
+          "meaning": "The data-link layer function and hardware addressing used on local networks.",
+          "domains": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"
+          ],
+          "related": [
+            "ARP"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "mdf",
+          "term": "MDF",
+          "expansion": "Main Distribution Frame",
+          "meaning": "The main telecommunications room where external services, backbone cabling, and major distribution connections commonly meet.",
+          "domains": [
+            "2"
+          ],
+          "related": [
+            "IDF"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "mdi-x",
+          "term": "MDI-X",
+          "expansion": "Medium Dependent Interface Crossover",
+          "meaning": "An Ethernet port wiring arrangement that swaps transmit and receive pairs. Auto MDI-X lets modern ports correct this automatically.",
+          "domains": [
+            "1",
+            "5"
+          ],
+          "related": [],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "mfa",
+          "term": "MFA",
+          "expansion": "Multifactor Authentication",
+          "meaning": "Authentication that requires evidence from at least two different factor categories.",
+          "domains": [
+            "4"
+          ],
+          "related": [],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "mib",
+          "term": "MIB",
+          "expansion": "Management Information Base",
+          "meaning": "A structured collection of objects and identifiers that an SNMP manager can read or modify on a managed device.",
+          "domains": [
+            "3"
+          ],
+          "related": [],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "mpo",
+          "term": "MPO",
+          "expansion": "Multifiber Push On",
+          "meaning": "A multi-fiber connector that terminates several optical fibers in one compact connection.",
+          "domains": [
+            "1"
+          ],
+          "related": [],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "mtbf",
+          "term": "MTBF",
+          "expansion": "Mean Time Between Failures",
+          "meaning": "The average operating time between repairable failures, often used as a reliability measure.",
+          "domains": [
+            "3"
+          ],
+          "related": [
+            "MTTR"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "mttr",
+          "term": "MTTR",
+          "expansion": "Mean Time to Repair",
+          "meaning": "The average time required to restore a service after failure. Some organizations use the same initials for mean time to repair, so read the surrounding definition.",
+          "domains": [
+            "3"
+          ],
+          "related": [
+            "RTO",
+            "MTBF"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "mtu",
+          "term": "MTU",
+          "expansion": "Maximum Transmission Unit",
+          "meaning": "The largest network-layer packet or link-layer payload an interface can carry without fragmentation or another accommodation.",
+          "domains": [
+            "2"
+          ],
+          "related": [
+            "IP",
+            "VLAN"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "mx",
+          "term": "MX",
+          "expansion": "Mail Exchange",
+          "meaning": "A DNS record that identifies the mail server responsible for accepting email for a domain and includes a preference value.",
+          "domains": [
+            "3"
+          ],
+          "related": [
+            "DNS",
+            "SMTP"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        }
+      ],
+      "label": "M"
+    },
+    {
+      "letter": "N",
+      "id": "n",
+      "entries": [
+        {
+          "id": "nac",
+          "term": "NAC",
+          "expansion": "Network Access Control",
+          "meaning": "Technology that evaluates users or devices before and during network access, then permits, restricts, or isolates them.",
+          "domains": [
+            "4"
+          ],
+          "related": [],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "nas",
+          "term": "NAS",
+          "expansion": "Network-attached Storage",
+          "meaning": "A networked storage system that provides file-level access through protocols such as SMB or NFS.",
+          "domains": [
+            "1"
+          ],
+          "related": [],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "nat",
+          "term": "NAT",
+          "expansion": "Network Address Translation",
+          "meaning": "A network function that rewrites IP address information between address spaces.",
+          "domains": [
+            "1",
+            "2",
+            "3"
+          ],
+          "related": [
+            "PAT"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "nat64",
+          "term": "NAT64",
+          "expansion": "Network Address Translation 64",
+          "meaning": "A translation method that allows IPv6-only clients to communicate with IPv4 services, commonly with a DNS64 function.",
+          "domains": [
+            "1"
+          ],
+          "related": [
+            "IPv4",
+            "IPv6"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "nfv",
+          "term": "NFV",
+          "expansion": "Network Functions Virtualization",
+          "meaning": "Running network functions such as routing, firewalling, or load balancing as software rather than only on dedicated appliances.",
+          "domains": [
+            "1"
+          ],
+          "related": [],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "nic",
+          "term": "NIC",
+          "expansion": "Network Interface Card",
+          "meaning": "The hardware or virtual adapter that connects a system to a network and supplies link-layer functions such as a MAC address.",
+          "domains": [
+            "1",
+            "5"
+          ],
+          "related": [],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "ns",
+          "term": "NS",
+          "expansion": "Name Server",
+          "meaning": "A DNS record that identifies the authoritative name servers for a zone or delegated domain.",
+          "domains": [
+            "3"
+          ],
+          "related": [],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "ntp",
+          "term": "NTP",
+          "expansion": "Network Time Protocol",
+          "meaning": "A protocol used to synchronize system clocks, which is important for logs, authentication, and investigations.",
+          "domains": [
+            "1",
+            "3"
+          ],
+          "related": [],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "nts",
+          "term": "NTS",
+          "expansion": "Network Time Security",
+          "meaning": "A security extension for NTP that authenticates time synchronization and helps resist tampering and spoofed time sources.",
+          "domains": [
+            "3"
+          ],
+          "related": [
+            "NTP",
+            "TLS"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        }
+      ],
+      "label": "N"
+    },
+    {
+      "letter": "O",
+      "id": "o",
+      "entries": [
+        {
+          "id": "os",
+          "term": "OS",
+          "expansion": "Operating System",
+          "meaning": "The software layer that manages hardware, processes, memory, files, and system services.",
+          "domains": [
+            "3"
+          ],
+          "related": [],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "osi",
+          "term": "OSI",
+          "expansion": "Open Systems Interconnection",
+          "meaning": "A seven-layer reference model used to organize networking functions and structure troubleshooting reasoning.",
+          "domains": [
+            "1",
+            "2"
+          ],
+          "related": [],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "ospf",
+          "term": "OSPF",
+          "expansion": "Open Shortest Path First",
+          "meaning": "A link-state interior routing protocol that calculates shortest paths from exchanged topology information and uses areas for scale.",
+          "domains": [
+            "2"
+          ],
+          "related": [
+            "EIGRP",
+            "IS-IS",
+            "RIP"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "ot",
+          "term": "OT",
+          "expansion": "Operational Technology",
+          "meaning": "Hardware and software that monitors or controls physical processes, equipment, and industrial operations.",
+          "domains": [
+            "4"
+          ],
+          "related": [
+            "ICS",
+            "SCADA"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        }
+      ],
+      "label": "O"
+    },
+    {
+      "letter": "P",
+      "id": "p",
+      "entries": [
+        {
+          "id": "paas",
+          "term": "PaaS",
+          "expansion": "Platform as a Service",
+          "meaning": "A cloud model in which the provider manages the underlying platform while the customer deploys applications and data.",
+          "domains": [
+            "1"
+          ],
+          "related": [
+            "IaaS",
+            "SaaS"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "pat",
+          "term": "PAT",
+          "expansion": "Port Address Translation",
+          "meaning": "A form of NAT that maps many internal connections to one public address by tracking transport-layer ports.",
+          "domains": [
+            "2"
+          ],
+          "related": [
+            "NAT"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "pci-dss",
+          "term": "PCI DSS",
+          "expansion": "Payment Card Industry Data Security Standard",
+          "meaning": "An industry security standard for organizations that store, process, or transmit payment-card data.",
+          "domains": [
+            "4"
+          ],
+          "related": [],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "pdu",
+          "term": "PDU",
+          "expansion": "Power Distribution Unit",
+          "meaning": "A device that distributes electrical power to rack equipment. Do not confuse it with protocol data unit in an OSI discussion.",
+          "domains": [
+            "2",
+            "3"
+          ],
+          "related": [
+            "PoE",
+            "UPS"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "pki",
+          "term": "PKI",
+          "expansion": "Public Key Infrastructure",
+          "meaning": "The people, policies, services, keys, and certificates used to establish and manage public-key trust.",
+          "domains": [
+            "4"
+          ],
+          "related": [],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "poe",
+          "term": "PoE",
+          "expansion": "Power over Ethernet",
+          "meaning": "Supplies electrical power and Ethernet data over compatible copper cabling to devices such as access points, phones, and cameras.",
+          "domains": [
+            "2",
+            "5"
+          ],
+          "related": [
+            "PDU",
+            "UPS"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "psk",
+          "term": "PSK",
+          "expansion": "Pre-shared Key",
+          "meaning": "A secret configured on participating systems before secure communication begins.",
+          "domains": [
+            "2"
+          ],
+          "related": [],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "ptp",
+          "term": "PTP",
+          "expansion": "Precision Time Protocol",
+          "meaning": "A time-synchronization protocol designed for greater precision than ordinary NTP in supported networks and applications.",
+          "domains": [
+            "3"
+          ],
+          "related": [],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "ptr",
+          "term": "PTR",
+          "expansion": "Pointer",
+          "meaning": "A DNS reverse-lookup record that maps an IP address representation back to a hostname.",
+          "domains": [
+            "3"
+          ],
+          "related": [
+            "A",
+            "AAAA",
+            "DNS"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        }
+      ],
+      "label": "P"
+    },
+    {
+      "letter": "Q",
+      "id": "q",
+      "entries": [
+        {
+          "id": "qos",
+          "term": "QoS",
+          "expansion": "Quality of Service",
+          "meaning": "Classification, marking, queuing, shaping, and related policies used to manage delay, loss, and priority for different traffic.",
+          "domains": [
+            "1",
+            "2"
+          ],
+          "related": [],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "qsfp",
+          "term": "QSFP",
+          "expansion": "Quad Small Form-factor Pluggable",
+          "meaning": "A compact, high-density transceiver form factor commonly used for higher-speed links and breakout connections.",
+          "domains": [
+            "1"
+          ],
+          "related": [],
+          "examVersions": [
+            "N10-009"
+          ]
+        }
+      ],
+      "label": "Q"
+    },
+    {
+      "letter": "R",
+      "id": "r",
+      "entries": [
+        {
+          "id": "radius",
+          "term": "RADIUS",
+          "expansion": "Remote Authentication Dial-In User Service",
+          "meaning": "A protocol that centralizes authentication, authorization, and accounting for network access.",
+          "domains": [
+            "2",
+            "4"
+          ],
+          "related": [
+            "802.1X",
+            "TACACS+"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "rbac",
+          "term": "RBAC",
+          "expansion": "Role-based Access Control",
+          "meaning": "An access model that assigns permissions to job roles and then assigns users to those roles.",
+          "domains": [
+            "4"
+          ],
+          "related": [
+            "AAA",
+            "IAM"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "rdp",
+          "term": "RDP",
+          "expansion": "Remote Desktop Protocol",
+          "meaning": "A Microsoft protocol for interactive remote desktop sessions.",
+          "domains": [
+            "1"
+          ],
+          "related": [],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "rfc",
+          "term": "RFC",
+          "expansion": "Request for Comments",
+          "meaning": "A numbered publication in the Internet standards and engineering series. Some RFCs define standards, while others are informational.",
+          "domains": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"
+          ],
+          "related": [],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "rfid",
+          "term": "RFID",
+          "expansion": "Radio-frequency Identification",
+          "meaning": "A technology that uses radio signals to identify tags, cards, assets, or devices.",
+          "domains": [
+            "4"
+          ],
+          "related": [],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "rip",
+          "term": "RIP",
+          "expansion": "Routing Information Protocol",
+          "meaning": "A distance-vector interior routing protocol that uses hop count and has limited scale compared with modern alternatives.",
+          "domains": [
+            "2"
+          ],
+          "related": [],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "rj",
+          "term": "RJ",
+          "expansion": "Registered Jack",
+          "meaning": "A registered-jack designation used in connector names. Network cabling commonly uses the familiar RJ45-style modular connector.",
+          "domains": [
+            "1",
+            "5"
+          ],
+          "related": [],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "rpo",
+          "term": "RPO",
+          "expansion": "Recovery Point Objective",
+          "meaning": "The maximum acceptable amount of data loss measured backward in time from a disruption.",
+          "domains": [
+            "3"
+          ],
+          "related": [
+            "RTO",
+            "MTTR"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "rstp",
+          "term": "RSTP",
+          "expansion": "Rapid Spanning Tree Protocol",
+          "meaning": "A faster-converging evolution of spanning tree that moves switch ports through simplified states after topology changes.",
+          "domains": [
+            "2",
+            "5"
+          ],
+          "related": [
+            "STP"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "rto",
+          "term": "RTO",
+          "expansion": "Recovery Time Objective",
+          "meaning": "The maximum acceptable time for restoring a service after disruption. The phrase return to operations can be a useful memory cue, but the Security+ term is Recovery Time Objective.",
+          "domains": [
+            "3"
+          ],
+          "related": [
+            "RPO",
+            "MTTR",
+            "MTBF"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "rtp",
+          "term": "RTP",
+          "expansion": "Real-time Transport Protocol",
+          "meaning": "Carries real-time audio or video media, commonly using negotiated UDP ports while a signaling protocol such as SIP manages the session.",
+          "domains": [
+            "1"
+          ],
+          "related": [
+            "SIP",
+            "UDP"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "rx",
+          "term": "RX",
+          "expansion": "Receiver",
+          "meaning": "The receive side of a link, optic, or interface. Transposed transmit and receive paths can prevent link establishment.",
+          "domains": [
+            "1",
+            "5"
+          ],
+          "related": [],
+          "examVersions": [
+            "N10-009"
+          ]
+        }
+      ],
+      "label": "R"
+    },
+    {
+      "letter": "S",
+      "id": "s",
+      "entries": [
+        {
+          "id": "saas",
+          "term": "SaaS",
+          "expansion": "Software as a Service",
+          "meaning": "A cloud model in which the provider operates the application while the customer manages users, data, and selected configuration.",
+          "domains": [
+            "1"
+          ],
+          "related": [
+            "IaaS",
+            "PaaS"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "saml",
+          "term": "SAML",
+          "expansion": "Security Assertion Markup Language",
+          "meaning": "An XML-based standard used to exchange authentication and authorization assertions, commonly for federation and single sign-on.",
+          "domains": [
+            "4"
+          ],
+          "related": [
+            "SSO"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "san",
+          "term": "SAN",
+          "expansion": "Storage Area Network",
+          "meaning": "A dedicated storage network that presents block-level storage to servers, commonly using Fibre Channel or iSCSI.",
+          "domains": [
+            "1"
+          ],
+          "related": [
+            "FC",
+            "NAS"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "sase",
+          "term": "SASE",
+          "expansion": "Secure Access Service Edge",
+          "meaning": "A cloud-delivered architecture that combines network connectivity and security services near users and resources.",
+          "domains": [
+            "1"
+          ],
+          "related": [
+            "SD-WAN",
+            "SSE",
+            "ZTA"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "sc",
+          "term": "SC",
+          "expansion": "Subscriber Connector",
+          "meaning": "A push-pull fiber connector larger than LC and still found in patch panels, carrier facilities, and older installations.",
+          "domains": [
+            "1"
+          ],
+          "related": [],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "scada",
+          "term": "SCADA",
+          "expansion": "Supervisory Control and Data Acquisition",
+          "meaning": "Systems that monitor and control industrial processes across distributed locations.",
+          "domains": [
+            "4"
+          ],
+          "related": [
+            "ICS",
+            "OT"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "sd-wan",
+          "term": "SD-WAN",
+          "expansion": "Software-defined Wide Area Network",
+          "meaning": "A centrally managed WAN architecture that selects paths and applies policy across multiple links.",
+          "domains": [
+            "1"
+          ],
+          "related": [
+            "SASE"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "sdn",
+          "term": "SDN",
+          "expansion": "Software-defined Networking",
+          "meaning": "A network architecture that separates centralized control logic from packet forwarding.",
+          "domains": [
+            "1"
+          ],
+          "related": [],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "sfp",
+          "term": "SFP",
+          "expansion": "Small Form-factor Pluggable",
+          "meaning": "A modular transceiver form factor used for copper or fiber links at supported speeds and distances.",
+          "domains": [
+            "1"
+          ],
+          "related": [
+            "QSFP"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "sftp",
+          "term": "SFTP",
+          "expansion": "Secure File Transfer Protocol",
+          "meaning": "A secure file-transfer protocol that runs over SSH. It is different from FTPS.",
+          "domains": [
+            "1"
+          ],
+          "related": [
+            "FTP",
+            "SSH"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "siem",
+          "term": "SIEM",
+          "expansion": "Security Information and Event Management",
+          "meaning": "A platform that collects, correlates, searches, and alerts on logs and security events.",
+          "domains": [
+            "3"
+          ],
+          "related": [],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "sip",
+          "term": "SIP",
+          "expansion": "Session Initiation Protocol",
+          "meaning": "A signaling protocol used to establish, modify, and end voice or multimedia sessions; the media commonly travels separately over RTP.",
+          "domains": [
+            "1"
+          ],
+          "related": [
+            "RTP",
+            "VoIP"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "sla",
+          "term": "SLA",
+          "expansion": "Service-level Agreement",
+          "meaning": "A contract or commitment that defines measurable service expectations such as uptime and response times.",
+          "domains": [
+            "3"
+          ],
+          "related": [],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "slaac",
+          "term": "SLAAC",
+          "expansion": "Stateless Address Autoconfiguration",
+          "meaning": "An IPv6 mechanism that lets a host form an address from router-advertisement information without a stateful address lease.",
+          "domains": [
+            "3"
+          ],
+          "related": [
+            "DHCP",
+            "IPv6"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "smb",
+          "term": "SMB",
+          "expansion": "Server Message Block",
+          "meaning": "A protocol used for shared files, printers, and related services, especially in Windows environments.",
+          "domains": [
+            "1"
+          ],
+          "related": [],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "smtp",
+          "term": "SMTP",
+          "expansion": "Simple Mail Transfer Protocol",
+          "meaning": "The standard protocol for sending and relaying email.",
+          "domains": [
+            "1"
+          ],
+          "related": [],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "smtps",
+          "term": "SMTPS",
+          "expansion": "Simple Mail Transfer Protocol Secure",
+          "meaning": "SMTP protected with TLS. The term may refer to implicit TLS or, informally, to secure mail submission depending on context.",
+          "domains": [
+            "1"
+          ],
+          "related": [],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "snmp",
+          "term": "SNMP",
+          "expansion": "Simple Network Management Protocol",
+          "meaning": "A protocol used to monitor and manage network devices and report operational information.",
+          "domains": [
+            "1",
+            "3"
+          ],
+          "related": [],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "soa",
+          "term": "SOA",
+          "expansion": "Start of Authority",
+          "meaning": "The DNS record that identifies key authority and timing information for a zone, including the primary server and serial number.",
+          "domains": [
+            "3"
+          ],
+          "related": [
+            "DNS",
+            "NS"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "sql",
+          "term": "SQL",
+          "expansion": "Structured Query Language",
+          "meaning": "A language used to create, query, and manage relational databases.",
+          "domains": [
+            "1"
+          ],
+          "related": [],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "sse",
+          "term": "SSE",
+          "expansion": "Security Service Edge",
+          "meaning": "Cloud-delivered security services such as secure web access, cloud access security, and zero-trust access without the WAN transport portion of SASE.",
+          "domains": [
+            "1"
+          ],
+          "related": [
+            "SASE",
+            "ZTA"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "ssh",
+          "term": "SSH",
+          "expansion": "Secure Shell",
+          "meaning": "A protocol for encrypted remote administration, command execution, tunneling, and file transfer.",
+          "domains": [
+            "1",
+            "3",
+            "4"
+          ],
+          "related": [
+            "SFTP"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "ssid",
+          "term": "SSID",
+          "expansion": "Service Set Identifier",
+          "meaning": "The human-readable wireless network name advertised or configured for a Wi-Fi service.",
+          "domains": [
+            "1",
+            "2",
+            "4"
+          ],
+          "related": [],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "ssl",
+          "term": "SSL",
+          "expansion": "Secure Sockets Layer",
+          "meaning": "A retired predecessor to TLS. Modern secure services should negotiate supported TLS versions rather than legacy SSL.",
+          "domains": [
+            "1",
+            "4"
+          ],
+          "related": [
+            "TLS"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "sso",
+          "term": "SSO",
+          "expansion": "Single Sign-On",
+          "meaning": "An identity arrangement that lets a user authenticate once and access multiple connected services.",
+          "domains": [
+            "4"
+          ],
+          "related": [
+            "SAML"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "st",
+          "term": "ST",
+          "expansion": "Straight Tip",
+          "meaning": "A bayonet-style fiber connector used in some legacy campus, industrial, and test environments.",
+          "domains": [
+            "1"
+          ],
+          "related": [],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "stp-shielded-twisted-pair",
+          "term": "STP",
+          "expansion": "Shielded Twisted Pair",
+          "meaning": "Copper cabling with shielding that helps reduce electromagnetic interference when correctly selected, grounded, and installed.",
+          "domains": [
+            "1",
+            "5"
+          ],
+          "related": [
+            "UTP"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "stp-spanning-tree-protocol",
+          "term": "STP",
+          "expansion": "Spanning Tree Protocol",
+          "meaning": "A Layer 2 loop-prevention protocol that selects a root bridge and blocks redundant paths until they are needed.",
+          "domains": [
+            "2",
+            "5"
+          ],
+          "related": [
+            "RSTP",
+            "VLAN"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "svi",
+          "term": "SVI",
+          "expansion": "Switch Virtual Interface",
+          "meaning": "A logical Layer 3 interface associated with a VLAN, used for management or inter-VLAN routing on a multilayer switch.",
+          "domains": [
+            "2"
+          ],
+          "related": [
+            "VLAN"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        }
+      ],
+      "label": "S"
+    },
+    {
+      "letter": "T",
+      "id": "t",
+      "entries": [
+        {
+          "id": "tacacs-plus",
+          "term": "TACACS+",
+          "expansion": "Terminal Access Controller Access-Control System Plus",
+          "meaning": "A protocol commonly used for centralized administration access to network devices, with separate authentication, authorization, and accounting functions.",
+          "domains": [
+            "4"
+          ],
+          "related": [
+            "RADIUS",
+            "AAA"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "tcp",
+          "term": "TCP",
+          "expansion": "Transmission Control Protocol",
+          "meaning": "A connection-oriented transport protocol that provides ordered delivery, acknowledgments, retransmission, and flow control.",
+          "domains": [
+            "1",
+            "3",
+            "5"
+          ],
+          "related": [
+            "UDP",
+            "IP"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "tcp-ip",
+          "term": "TCP/IP",
+          "expansion": "Transmission Control Protocol/Internet Protocol",
+          "meaning": "The practical protocol suite built around IP addressing and transports such as TCP and UDP, rather than a single protocol.",
+          "domains": [
+            "1",
+            "5"
+          ],
+          "related": [
+            "IP",
+            "TCP",
+            "UDP"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "tftp",
+          "term": "TFTP",
+          "expansion": "Trivial File Transfer Protocol",
+          "meaning": "A minimal UDP file-transfer protocol without the authentication and features of FTP or SFTP, often used for boot or configuration files.",
+          "domains": [
+            "1"
+          ],
+          "related": [
+            "FTP",
+            "SFTP"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "tls",
+          "term": "TLS",
+          "expansion": "Transport Layer Security",
+          "meaning": "A protocol that protects network communication with encryption, integrity, and certificate-based authentication.",
+          "domains": [
+            "1",
+            "3",
+            "4"
+          ],
+          "related": [
+            "HTTPS",
+            "SSL"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "ttl",
+          "term": "TTL",
+          "expansion": "Time to Live",
+          "meaning": "A field that limits how many routed hops an IP packet can traverse, preventing packets from circulating indefinitely.",
+          "domains": [
+            "1",
+            "4"
+          ],
+          "related": [],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "tx",
+          "term": "TX",
+          "expansion": "Transmitter",
+          "meaning": "The transmit side of a link, optic, or interface. A TX/RX reversal or incompatible optic can prevent communication.",
+          "domains": [
+            "1",
+            "5"
+          ],
+          "related": [],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "txt",
+          "term": "TXT",
+          "expansion": "Text",
+          "meaning": "A DNS record containing text data, commonly used for domain verification and email-policy information.",
+          "domains": [
+            "3"
+          ],
+          "related": [],
+          "examVersions": [
+            "N10-009"
+          ]
+        }
+      ],
+      "label": "T"
+    },
+    {
+      "letter": "U",
+      "id": "u",
+      "entries": [
+        {
+          "id": "udp",
+          "term": "UDP",
+          "expansion": "User Datagram Protocol",
+          "meaning": "A connectionless transport protocol with low overhead and no built-in delivery guarantee.",
+          "domains": [
+            "1",
+            "4",
+            "5"
+          ],
+          "related": [
+            "TCP/IP"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "ups",
+          "term": "UPS",
+          "expansion": "Uninterruptible Power Supply",
+          "meaning": "A battery-backed device that supplies short-term power and conditions electricity during an outage or fluctuation.",
+          "domains": [
+            "2",
+            "3"
+          ],
+          "related": [],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "url",
+          "term": "URL",
+          "expansion": "Uniform Resource Locator",
+          "meaning": "A URI that identifies a resource by location and access method.",
+          "domains": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"
+          ],
+          "related": [],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "usb",
+          "term": "USB",
+          "expansion": "Universal Serial Bus",
+          "meaning": "A standard for connecting peripherals, storage, power, and data interfaces.",
+          "domains": [
+            "1",
+            "5"
+          ],
+          "related": [],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "utm",
+          "term": "UTM",
+          "expansion": "Unified Threat Management",
+          "meaning": "A security appliance that combines several controls such as firewalling, intrusion prevention, filtering, and malware protection.",
+          "domains": [
+            "4"
+          ],
+          "related": [],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "utp",
+          "term": "UTP",
+          "expansion": "Unshielded Twisted Pair",
+          "meaning": "Copper twisted-pair cabling without an overall shield, widely used for Ethernet in ordinary office environments.",
+          "domains": [
+            "5"
+          ],
+          "related": [],
+          "examVersions": [
+            "N10-009"
+          ]
+        }
+      ],
+      "label": "U"
+    },
+    {
+      "letter": "V",
+      "id": "v",
+      "entries": [
+        {
+          "id": "vip",
+          "term": "VIP",
+          "expansion": "Virtual IP",
+          "meaning": "A logical IP address associated with a redundant gateway, load balancer, cluster, or service rather than one fixed interface.",
+          "domains": [
+            "2"
+          ],
+          "related": [],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "vlan",
+          "term": "VLAN",
+          "expansion": "Virtual Local Area Network",
+          "meaning": "A logical Layer 2 network segment created on switching infrastructure.",
+          "domains": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"
+          ],
+          "related": [
+            "LAN"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "vlsm",
+          "term": "VLSM",
+          "expansion": "Variable Length Subnet Mask",
+          "meaning": "Using different prefix lengths within an address plan so each subnet receives an appropriately sized block.",
+          "domains": [
+            "1",
+            "2",
+            "5"
+          ],
+          "related": [
+            "CIDR",
+            "IPv4"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "voip",
+          "term": "VoIP",
+          "expansion": "Voice over IP",
+          "meaning": "Voice and related signaling carried over IP networks, with quality affected by latency, jitter, loss, and prioritization.",
+          "domains": [
+            "1",
+            "2",
+            "5"
+          ],
+          "related": [],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "vpc",
+          "term": "VPC",
+          "expansion": "Virtual Private Cloud",
+          "meaning": "A logically isolated cloud network in which customers define subnets, routes, and security controls.",
+          "domains": [
+            "1"
+          ],
+          "related": [],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "vpn",
+          "term": "VPN",
+          "expansion": "Virtual Private Network",
+          "meaning": "An encrypted tunnel that protects traffic across an untrusted network.",
+          "domains": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          "related": [
+            "IPsec",
+            "TLS"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "vxlan",
+          "term": "VXLAN",
+          "expansion": "Virtual Extensible LAN",
+          "meaning": "An overlay encapsulation that carries Layer 2 segments across a Layer 3 underlay using a larger logical segment identifier.",
+          "domains": [
+            "1"
+          ],
+          "related": [
+            "DCI",
+            "VLAN"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        }
+      ],
+      "label": "V"
+    },
+    {
+      "letter": "W",
+      "id": "w",
+      "entries": [
+        {
+          "id": "wan",
+          "term": "WAN",
+          "expansion": "Wide Area Network",
+          "meaning": "A network that connects systems across large geographic areas or multiple sites.",
+          "domains": [
+            "1",
+            "2",
+            "3"
+          ],
+          "related": [
+            "LAN",
+            "SD-WAN"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "wlan",
+          "term": "WLAN",
+          "expansion": "Wireless Local Area Network",
+          "meaning": "A local network that uses Wi-Fi radio links instead of only wired Ethernet connections.",
+          "domains": [
+            "1",
+            "2",
+            "5"
+          ],
+          "related": [],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "wpa",
+          "term": "WPA",
+          "expansion": "Wi-Fi Protected Access",
+          "meaning": "A family of Wi-Fi security standards. WPA2 and WPA3 provide stronger modern protections than the original WPA design.",
+          "domains": [
+            "2",
+            "4"
+          ],
+          "related": [
+            "PSK",
+            "WPS"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "wps",
+          "term": "WPS",
+          "expansion": "Wi-Fi Protected Setup",
+          "meaning": "A convenience method for enrolling devices in a Wi-Fi network. PIN-based WPS has well-known security concerns and is often disabled.",
+          "domains": [
+            "2",
+            "4"
+          ],
+          "related": [
+            "WPA"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        }
+      ],
+      "label": "W"
+    },
+    {
+      "letter": "Z",
+      "id": "z",
+      "entries": [
+        {
+          "id": "zta",
+          "term": "ZTA",
+          "expansion": "Zero Trust Architecture",
+          "meaning": "An architecture that continuously evaluates identity, device, resource, and policy signals instead of trusting a user because of network location.",
+          "domains": [
+            "1",
+            "4"
+          ],
+          "related": [
+            "SASE",
+            "SSE"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        }
+      ],
+      "label": "Z"
+    }
+  ]
+}
