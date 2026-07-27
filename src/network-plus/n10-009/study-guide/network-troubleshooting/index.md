@@ -64,9 +64,9 @@ keywords:
   - wireless troubleshooting
   - network tools
 relatedLinks:
-  - title: Network+ Quick Review
-    url: /network-plus/quick-review/
-    description: Compare monitoring evidence, troubleshooting tools, and switching decisions in focused printable guides.
+  - title: Network Troubleshooting Tools Quick Reference
+    url: /network-plus/quick-review/troubleshooting-tools/
+    description: Match host commands, path and DNS tests, packet tools, copper and fiber equipment, and wireless analyzers to a theory.
   - title: Network+ Acronyms and Terms
     url: /network-plus/acronyms/
     description: Look up full expansions, practical meanings, related terms, and the domains where each abbreviation appears.
@@ -425,6 +425,8 @@ Roaming depends on overlapping coverage, compatible security, consistent network
 Compare the service set identifier, security configuration, VLAN mapping, radio coverage, minimum data rates, power levels, and controller settings across the roaming area.
 
 <h2 id="software-tools">Choose software tools from the question you need answered</h2>
+
+<p>Use the <a href="/network-plus/quick-review/troubleshooting-tools/">Network Troubleshooting Tools Quick Reference</a> when command-line, packet, copper, fiber, or wireless tools seem interchangeable. State the theory first, then choose the least disruptive tool that can confirm or reject it.</p>
 
 <div class="table-scroll" role="region" aria-label="Network troubleshooting software tools" tabindex="0">
   <table class="mobile-card-table">

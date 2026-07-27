@@ -62,9 +62,9 @@ keywords:
   - wireless implementation
   - network installation
 relatedLinks:
-  - title: Network+ Quick Review
-    url: /network-plus/quick-review/
-    description: Compare monitoring evidence, troubleshooting tools, and switching decisions in focused printable guides.
+  - title: VLANs, Trunks, STP, and Link Aggregation Quick Reference
+    url: /network-plus/quick-review/vlans-trunks-stp-lacp/
+    description: Separate traffic membership, trunk transport, loop prevention, and link bundling through focused comparisons.
   - title: Network+ Acronyms and Terms
     url: /network-plus/acronyms/
     description: Look up full expansions, practical meanings, related terms, and the domains where each abbreviation appears.
@@ -374,7 +374,7 @@ A multilayer switch can perform inter-VLAN routing through switch virtual interf
 
 <h2 id="switching-technologies">Switching technologies and features</h2>
 
-A switch learns source MAC addresses and forwards frames according to the destination MAC address within the correct VLAN. Implementation questions usually add segmentation, redundancy, or interface behavior to that basic function.
+A switch learns source MAC addresses and forwards frames according to the destination MAC address within the correct VLAN. Implementation questions usually add segmentation, redundancy, or interface behavior to that basic function. Use the [VLANs, Trunks, STP, and Link Aggregation Quick Reference](/network-plus/quick-review/vlans-trunks-stp-lacp/) when those four jobs begin to blur together.
 
 <h3>Follow a frame through the switch</h3>
 

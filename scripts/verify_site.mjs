@@ -181,6 +181,7 @@ const requiredFiles = [
   "network-plus/n10-009/study-guide/network-security/index.html",
   "network-plus/n10-009/study-guide/network-troubleshooting/index.html",
   "network-plus/n10-009/study-guide/ipv4-subnetting/index.html",
+  "ports-protocols/index.html",
   "tools/subnet-calculator/index.html",
   "network-plus/n10-009/practice-test/index.html",
   "network-plus/n10-009/practice-test/question/1/index.html",
@@ -198,6 +199,7 @@ const requiredFiles = [
   "assets/css/print.css",
   "assets/js/print-guide.js",
   "assets/js/acronym-filter.js",
+  "assets/js/ports-protocols-filter.js",
   "assets/js/subnet-calculator.js",
   "assets/js/quiz/app.js",
   "assets/js/quiz/results-actions.js",
@@ -651,6 +653,18 @@ for (const file of htmlFiles) {
       fail(`${relative}: Network+ hub is missing the quick-review link`);
     }
 
+    const featuredQuickReviewLinks = [
+      "/network-plus/quick-review/monitoring-evidence/",
+      "/network-plus/quick-review/troubleshooting-tools/",
+      "/network-plus/quick-review/vlans-trunks-stp-lacp/"
+    ];
+
+    for (const href of featuredQuickReviewLinks) {
+      if (!html.includes(`href="${href}"`)) {
+        fail(`${relative}: Network+ hub is missing featured quick review ${href}`);
+      }
+    }
+
     if (!html.includes('href="/ports-protocols/"')) {
       fail(`${relative}: Network+ hub is missing the shared ports and protocols link`);
     }
@@ -859,6 +873,10 @@ for (const file of htmlFiles) {
       fail(`${relative}: Network+ study guide is missing the IPv4 subnet calculator link`);
     }
 
+    if (!html.includes('aria-label="Network+ resource chooser"') || !html.includes('class="mobile-card-table"')) {
+      fail(`${relative}: Network+ study guide is missing its responsive resource chooser`);
+    }
+
     if (!html.includes("APS transports network data physically")) {
       fail(`${relative}: Network+ study guide is missing the OSI mnemonic`);
     }
@@ -925,7 +943,8 @@ for (const file of htmlFiles) {
       "/ports-protocols/",
       "/network-plus/n10-009/practice-test/",
       "/network-plus/n10-009/study-guide/ipv4-subnetting/",
-      "/tools/subnet-calculator/"
+      "/tools/subnet-calculator/",
+      "/network-plus/quick-review/vlans-trunks-stp-lacp/"
     ];
 
     for (const marker of requiredContent) {
@@ -1040,7 +1059,8 @@ for (const file of htmlFiles) {
       "/network-plus/n10-009/study-guide/network-security/",
       "/network-plus/n10-009/study-guide/ipv4-subnetting/",
       "/tools/subnet-calculator/",
-      "/ports-protocols/"
+      "/ports-protocols/",
+      "/network-plus/quick-review/monitoring-evidence/"
     ];
 
     for (const content of requiredContent) {
@@ -1169,7 +1189,8 @@ for (const file of htmlFiles) {
       "/network-plus/n10-009/practice-test/",
       "/network-plus/n10-009/study-guide/ipv4-subnetting/",
       "/tools/subnet-calculator/",
-      "/ports-protocols/"
+      "/ports-protocols/",
+      "/network-plus/quick-review/troubleshooting-tools/"
     ];
 
     for (const marker of requiredContent) {
@@ -1225,6 +1246,27 @@ for (const file of htmlFiles) {
     }
   }
 
+  if (relative === "ports-protocols/index.html") {
+    const requiredPortReferenceMarkers = [
+      "data-port-search",
+      "data-port-reference",
+      'src="/assets/js/ports-protocols-filter.js"',
+      '/network-plus/n10-009/study-guide/',
+      '/network-plus/acronyms/',
+      '/network-plus/quick-review/',
+      '/network-plus/n10-009/practice-test/',
+      '/security-plus/sy0-701/study-guide/',
+      '/security-plus/acronyms/',
+      '/security-plus/sy0-701/practice-test/'
+    ];
+
+    for (const marker of requiredPortReferenceMarkers) {
+      if (!html.includes(marker)) {
+        fail(`${relative}: shared ports reference is missing ${marker}`);
+      }
+    }
+  }
+
   if (relative === "tools/subnet-calculator/index.html") {
     if (!html.includes("data-print-guide")) {
       fail(`${relative}: IPv4 subnet calculator is missing the shared Print | Save control`);
@@ -1245,7 +1287,9 @@ for (const file of htmlFiles) {
       'data-subnet-output="wildcard"',
       'data-subnet-binary-body',
       'src="/assets/js/subnet-calculator.js"',
-      '/network-plus/n10-009/study-guide/ipv4-subnetting/'
+      '/network-plus/n10-009/study-guide/ipv4-subnetting/',
+      '/network-plus/quick-review/troubleshooting-tools/',
+      '/network-plus/'
     ];
 
     for (const marker of requiredMarkers) {

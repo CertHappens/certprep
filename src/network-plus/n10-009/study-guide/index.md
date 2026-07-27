@@ -146,6 +146,52 @@ Use the [Network+ Acronyms and Terms reference](/network-plus/acronyms/) when in
 
 Use the [Network+ Quick Review guides](/network-plus/quick-review/) when two or more choices keep blending together. The focused comparisons cover monitoring evidence, troubleshooting tools, and switching decisions, then send you back to the detailed domain context.
 
+<h3>Choose the resource that matches the problem</h3>
+
+<div class="table-scroll" role="region" aria-label="Network+ resource chooser" tabindex="0">
+  <table class="mobile-card-table">
+    <thead>
+      <tr>
+        <th scope="col">Need</th>
+        <th scope="col">Best starting point</th>
+        <th scope="col">Use it for</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td data-label="Need">Complete domain context</td>
+        <td data-label="Best starting point"><a href="#domain-priorities">Five-domain roadmap</a></td>
+        <td data-label="Use it for">Choosing the detailed domain guide that matches a broad weakness.</td>
+      </tr>
+      <tr>
+        <td data-label="Need">Nearby choices separated</td>
+        <td data-label="Best starting point"><a href="/network-plus/quick-review/">Quick Review guides</a></td>
+        <td data-label="Use it for">Monitoring evidence, troubleshooting tools, and switching decisions that are easy to confuse.</td>
+      </tr>
+      <tr>
+        <td data-label="Need">An acronym expanded</td>
+        <td data-label="Best starting point"><a href="/network-plus/acronyms/">Acronyms and Terms</a></td>
+        <td data-label="Use it for">Full expansions, practical meanings, related terms, and domain context.</td>
+      </tr>
+      <tr>
+        <td data-label="Need">A service or port checked</td>
+        <td data-label="Best starting point"><a href="/ports-protocols/">Ports and Protocols</a></td>
+        <td data-label="Use it for">Default ports, transports, secure alternatives, and protocols without TCP or UDP ports.</td>
+      </tr>
+      <tr>
+        <td data-label="Need">Subnetting practice</td>
+        <td data-label="Best starting point"><a href="/network-plus/n10-009/study-guide/ipv4-subnetting/">Subnetting Reference</a> and <a href="/tools/subnet-calculator/">Calculator</a></td>
+        <td data-label="Use it for">Learning the method manually, then checking boundaries, ranges, masks, and binary work.</td>
+      </tr>
+      <tr>
+        <td data-label="Need">Application under pressure</td>
+        <td data-label="Best starting point"><a href="/network-plus/n10-009/practice-test/">N10-009 Practice Test</a></td>
+        <td data-label="Use it for">Testing mixed-domain decisions and reviewing why nearby alternatives do not fit.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
 <h2 id="domain-priorities">The five exam domains</h2>
 
 The official objectives assign these weights:

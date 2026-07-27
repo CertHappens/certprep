@@ -67,6 +67,9 @@ relatedLinks:
   - title: Monitoring Evidence Quick Reference
     url: /network-plus/quick-review/monitoring-evidence/
     description: Choose counters, logs, flow records, captures, and baselines for switch evidence.
+  - title: Troubleshooting Tools Quick Reference
+    url: /network-plus/quick-review/troubleshooting-tools/
+    description: Choose host, path, packet, cable, fiber, and wireless tools for a specific troubleshooting theory.
   - title: Network+ Acronyms and Terms
     url: /network-plus/acronyms/
     description: Expand VLAN, STP, RSTP, MSTP, LACP, SVI, and related switching terms.
