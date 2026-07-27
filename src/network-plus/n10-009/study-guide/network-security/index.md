@@ -67,6 +67,9 @@ keywords:
   - network segmentation
   - device hardening
 relatedLinks:
+  - title: Network+ Acronyms and Terms
+    url: /network-plus/acronyms/
+    description: Look up full expansions, practical meanings, related terms, and the domains where each abbreviation appears.
   - title: Network+ N10-009 Practice Test
     url: /network-plus/n10-009/practice-test/
     description: Apply identity, attack, segmentation, hardening, and access-control decisions in randomized questions.
@@ -196,7 +199,7 @@ Protect private keys from unauthorized use and extraction. Define who can reques
 
 <h2 id="identity-access">Distinguish authentication, authorization, and identity services</h2>
 
-**Authentication** verifies the claimed identity. **Authorization** decides what that identity may do. **Accounting** records activity, time, usage, or commands. The three functions are often grouped as AAA, but a scenario may ask for one specific decision.
+**Authentication** verifies the claimed identity. **Authorization** decides what that identity may do. **Accounting** records activity, time, usage, or commands. The three functions are often grouped as authentication, authorization, and accounting (AAA), but a scenario may ask for one specific decision.
 
 A valid login does not imply administrative access. A user can authenticate successfully and still be denied a protected VLAN, device command, file, or application because authorization policy does not permit it.
 
@@ -207,6 +210,8 @@ Multifactor authentication combines factors from different categories, such as s
 Single sign-on allows one authentication event or identity session to support access to multiple connected services. SSO improves usability and can centralize policy, but it also raises the importance of protecting the identity provider and session. SSO does not necessarily mean MFA. An environment may use both.
 
 Time-based authentication commonly generates a short-lived code from a shared secret and the current time. Clock drift can cause valid users to fail, which connects this security topic to the time-service controls in Domain 3.
+
+The table compares Remote Authentication Dial-In User Service (RADIUS), Terminal Access Controller Access-Control System Plus (TACACS+), Lightweight Directory Access Protocol (LDAP), Security Assertion Markup Language (SAML), and role-based access control (RBAC). Each term belongs to a different part of the identity or administration workflow.
 
 <div class="table-scroll" role="region" aria-label="Network identity and access services" tabindex="0">
   <table class="mobile-card-table domain4-identity-table">
@@ -319,7 +324,7 @@ Deception technology needs isolation and monitoring. A compromised decoy must no
 
 The terms describe relationships. A threat actor may use an exploit against a vulnerability in an asset, creating risk to confidentiality, integrity, or availability.
 
-<h3>CIA triad</h3>
+<h3>Confidentiality, integrity, and availability (CIA) triad</h3>
 
 - **Confidentiality** limits information disclosure to authorized parties.
 - **Integrity** protects information and systems from unauthorized or undetected change.
@@ -333,11 +338,13 @@ An audit compares evidence against stated requirements, policies, standards, or 
 
 **Data locality** concerns where data is stored, processed, transmitted, or otherwise handled. Architecture decisions may be constrained by region, jurisdiction, contract, or organizational policy. A cloud service's global reach does not remove those requirements.
 
-**PCI DSS** applies to environments that store, process, or transmit payment account data and to systems that can affect the security of that environment. **GDPR** establishes data-protection requirements involving personal data in its scope. Network+ expects recognition of the names and operational implications, not legal interpretation. Real compliance decisions require the applicable current text and qualified organizational guidance.
+**Payment Card Industry Data Security Standard (PCI DSS)** applies to environments that store, process, or transmit payment account data and to systems that can affect the security of that environment. **General Data Protection Regulation (GDPR)** establishes data-protection requirements involving personal data in its scope. Network+ expects recognition of the names and operational implications, not legal interpretation. Real compliance decisions require the applicable current text and qualified organizational guidance.
 
 <h2 id="segmentation">Use segmentation to reduce unnecessary trust</h2>
 
 Segmentation separates systems by role, risk, function, ownership, or required communication. VLANs create logical Layer 2 boundaries. Routers, Layer 3 switches, firewalls, ACLs, and security policies control traffic between segments. Microsegmentation can apply finer policy around workloads or applications, though the N10-009 objective focuses on the practical need to separate distinct device groups.
+
+The examples include Internet of Things (IoT), Industrial Internet of Things (IIoT), supervisory control and data acquisition (SCADA), industrial control systems (ICS), operational technology (OT), and bring your own device (BYOD) networks. The expansion identifies the device group; the policy decision comes from its risk and required communication.
 
 <div class="table-scroll" role="region" aria-label="Network segmentation examples" tabindex="0">
   <table class="mobile-card-table domain4-segmentation-table">

@@ -62,6 +62,9 @@ keywords:
   - IPv6 addressing
   - network topologies
 relatedLinks:
+  - title: Network+ Acronyms and Terms
+    url: /network-plus/acronyms/
+    description: Look up full expansions, practical meanings, related terms, and the domains where each abbreviation appears.
   - title: IPv4 Subnetting Reference
     url: /network-plus/n10-009/study-guide/ipv4-subnetting/
     description: Practice CIDR masks, host counts, borrowed bits, boundaries, special ranges, and VLSM with worked examples.

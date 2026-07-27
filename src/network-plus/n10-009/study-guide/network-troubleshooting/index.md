@@ -64,6 +64,9 @@ keywords:
   - wireless troubleshooting
   - network tools
 relatedLinks:
+  - title: Network+ Acronyms and Terms
+    url: /network-plus/acronyms/
+    description: Look up full expansions, practical meanings, related terms, and the domains where each abbreviation appears.
   - title: Network+ N10-009 Practice Test
     url: /network-plus/n10-009/practice-test/
     description: Apply troubleshooting decisions in randomized questions with detailed explanations.

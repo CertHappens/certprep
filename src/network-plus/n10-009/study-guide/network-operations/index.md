@@ -66,6 +66,9 @@ keywords:
   - DHCP and DNS
   - network management
 relatedLinks:
+  - title: Network+ Acronyms and Terms
+    url: /network-plus/acronyms/
+    description: Look up full expansions, practical meanings, related terms, and the domains where each abbreviation appears.
   - title: Network+ N10-009 Practice Test
     url: /network-plus/n10-009/practice-test/
     description: Apply operations decisions in randomized questions with detailed explanations.

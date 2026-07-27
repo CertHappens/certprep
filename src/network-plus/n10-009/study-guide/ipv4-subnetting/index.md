@@ -53,6 +53,9 @@ keywords:
   - VLSM
   - subnetting examples
 relatedLinks:
+  - title: Network+ Acronyms and Terms
+    url: /network-plus/acronyms/
+    description: Look up full expansions, practical meanings, related terms, and the domains where each abbreviation appears.
   - title: IPv4 Subnet Calculator
     url: /tools/subnet-calculator/
     description: Check network and broadcast boundaries, usable ranges, masks, wildcard masks, address status, and binary work.

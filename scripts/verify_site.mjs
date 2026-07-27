@@ -169,6 +169,7 @@ const requiredFiles = [
   "security-plus/index.html",
   "security-plus/acronyms/index.html",
   "network-plus/index.html",
+  "network-plus/acronyms/index.html",
   "network-plus/n10-009/study-guide/index.html",
   "network-plus/n10-009/study-guide/networking-concepts/index.html",
   "network-plus/n10-009/study-guide/network-implementation/index.html",
@@ -638,6 +639,10 @@ for (const file of htmlFiles) {
       fail(`${relative}: Network+ hub is missing the detailed Domain 5 guide link`);
     }
 
+    if (!html.includes('href="/network-plus/acronyms/"')) {
+      fail(`${relative}: Network+ hub is missing the acronyms and terms link`);
+    }
+
     if (!html.includes('href="/ports-protocols/"')) {
       fail(`${relative}: Network+ hub is missing the shared ports and protocols link`);
     }
@@ -648,6 +653,59 @@ for (const file of htmlFiles) {
 
     if (!html.includes('href="/network-plus/n10-009/study-guide/ipv4-subnetting/"')) {
       fail(`${relative}: Network+ hub is missing the IPv4 subnetting reference link`);
+    }
+  }
+
+
+  if (relative === "network-plus/acronyms/index.html") {
+    if (!html.includes("data-print-guide")) {
+      fail(`${relative}: acronym reference is missing the shared Print | Save control`);
+    }
+
+    if (!/<h1>Network\+ Acronyms and Terms<\/h1>/.test(html)) {
+      fail(`${relative}: acronym reference is missing its stable Network+ h1`);
+    }
+
+    const acronymEntryCount = (html.match(/data-acronym-entry/g) || []).length;
+    if (acronymEntryCount < 170) {
+      fail(`${relative}: expected at least 170 acronym entries, found ${acronymEntryCount}`);
+    }
+
+    const requiredAcronymMarkup = [
+      "data-acronym-search",
+      "data-acronym-clear",
+      "data-acronym-status",
+      "data-acronym-reference",
+      "data-acronym-empty",
+      'src="/assets/js/acronym-filter.js"',
+      "Context decides the meaning",
+      "General Data Protection Regulation",
+      "Spanning Tree Protocol",
+      "Shielded Twisted Pair",
+      "Recovery Time Objective"
+    ];
+
+    for (const marker of requiredAcronymMarkup) {
+      if (!html.includes(marker)) {
+        fail(`${relative}: acronym reference is missing ${marker}`);
+      }
+    }
+
+    if (!html.includes('class="article-toc article-toc--compact-grid"')) {
+      fail(`${relative}: acronym reference is missing the shared compact sidebar index`);
+    }
+
+    if (!html.includes('<h2 id="article-toc-title">Jump to</h2>')) {
+      fail(`${relative}: acronym sidebar is missing its Jump to heading`);
+    }
+
+    const acronymJumpLinkCount = (html.match(/href=["']#acronyms-[^"']+["']/g) || []).length;
+    if (acronymJumpLinkCount !== 23) {
+      fail(`${relative}: expected 23 sidebar acronym jump links, found ${acronymJumpLinkCount}`);
+    }
+
+    if (html.includes("data-acronym-index")) {
+      fail(`${relative}: retired in-body acronym index is still present`);
     }
   }
 
@@ -682,6 +740,10 @@ for (const file of htmlFiles) {
       if (!html.includes(`id="${id}"`)) {
         fail(`${relative}: Network+ study guide is missing section #${id}`);
       }
+    }
+
+    if (!html.includes('/network-plus/acronyms/')) {
+      fail(`${relative}: Network+ study guide is missing the Network+ acronym reference link`);
     }
 
     if (!html.includes('/ports-protocols/')) {
@@ -729,6 +791,20 @@ for (const file of htmlFiles) {
     }
   }
 
+
+
+  const networkGuidePages = [
+    "network-plus/n10-009/study-guide/networking-concepts/index.html",
+    "network-plus/n10-009/study-guide/network-implementation/index.html",
+    "network-plus/n10-009/study-guide/network-operations/index.html",
+    "network-plus/n10-009/study-guide/network-security/index.html",
+    "network-plus/n10-009/study-guide/network-troubleshooting/index.html",
+    "network-plus/n10-009/study-guide/ipv4-subnetting/index.html"
+  ];
+
+  if (networkGuidePages.includes(relative) && !html.includes('/network-plus/acronyms/')) {
+    fail(`${relative}: Network+ guide is missing the Network+ acronym reference link`);
+  }
 
   if (relative === "network-plus/n10-009/study-guide/networking-concepts/index.html") {
     if (!html.includes("data-print-guide")) {

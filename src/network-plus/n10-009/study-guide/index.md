@@ -52,6 +52,9 @@ keywords:
   - networking certification
   - network troubleshooting
 relatedLinks:
+  - title: Network+ Acronyms and Terms
+    url: /network-plus/acronyms/
+    description: Look up full expansions, practical meanings, related terms, and the domains where each abbreviation appears.
   - title: IPv4 Subnetting Reference
     url: /network-plus/n10-009/study-guide/ipv4-subnetting/
     description: Rebuild CIDR masks, host counts, borrowed bits, boundaries, special ranges, and VLSM allocations from a repeatable method.
@@ -135,6 +138,8 @@ Build each topic through four kinds of understanding:
 Suppose you are studying DHCP. Memorizing UDP 67 and 68 helps, but it is only the beginning. You should also recognize a client with an APIPA address, explain why a relay is needed across routed boundaries, distinguish a reservation from an exclusion, and identify which scope option supplies the default gateway.
 
 Use the [Common Ports and Protocols Reference](/ports-protocols/) when a service name, transport, or secure alternative is unfamiliar. Return to the surrounding topic afterward so the number remains attached to a real network function.
+
+Use the [Network+ Acronyms and Terms reference](/network-plus/acronyms/) when initials interrupt the explanation. Expand the term, identify its practical role, then return to the scenario so the acronym stays attached to a device, protocol, measurement, or decision.
 
 <h2 id="domain-priorities">The five exam domains</h2>
 
