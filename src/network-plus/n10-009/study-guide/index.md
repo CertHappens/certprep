@@ -52,6 +52,9 @@ keywords:
   - networking certification
   - network troubleshooting
 relatedLinks:
+  - title: Network+ Quick Review
+    url: /network-plus/quick-review/
+    description: Compare monitoring evidence, troubleshooting tools, and switching decisions in focused printable guides.
   - title: Network+ Acronyms and Terms
     url: /network-plus/acronyms/
     description: Look up full expansions, practical meanings, related terms, and the domains where each abbreviation appears.
@@ -140,6 +143,8 @@ Suppose you are studying DHCP. Memorizing UDP 67 and 68 helps, but it is only th
 Use the [Common Ports and Protocols Reference](/ports-protocols/) when a service name, transport, or secure alternative is unfamiliar. Return to the surrounding topic afterward so the number remains attached to a real network function.
 
 Use the [Network+ Acronyms and Terms reference](/network-plus/acronyms/) when initials interrupt the explanation. Expand the term, identify its practical role, then return to the scenario so the acronym stays attached to a device, protocol, measurement, or decision.
+
+Use the [Network+ Quick Review guides](/network-plus/quick-review/) when two or more choices keep blending together. The focused comparisons cover monitoring evidence, troubleshooting tools, and switching decisions, then send you back to the detailed domain context.
 
 <h2 id="domain-priorities">The five exam domains</h2>
 

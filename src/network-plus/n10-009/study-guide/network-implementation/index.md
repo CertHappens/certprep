@@ -62,6 +62,9 @@ keywords:
   - wireless implementation
   - network installation
 relatedLinks:
+  - title: Network+ Quick Review
+    url: /network-plus/quick-review/
+    description: Compare monitoring evidence, troubleshooting tools, and switching decisions in focused printable guides.
   - title: Network+ Acronyms and Terms
     url: /network-plus/acronyms/
     description: Look up full expansions, practical meanings, related terms, and the domains where each abbreviation appears.

@@ -1,0 +1,65 @@
+---
+layout: layouts/base.njk
+title: Network+ Quick Review Guides for N10-009
+description: Review Network+ N10-009 concepts with printable comparisons for monitoring evidence, troubleshooting tools, and switching decisions.
+permalink: /network-plus/quick-review/
+breadcrumbs:
+  - label: Home
+    url: /
+  - label: Network+
+    url: /network-plus/
+  - label: Quick Review
+    url: /network-plus/quick-review/
+---
+
+<header class="page-header page-header--compact">
+  <div class="page-shell">
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="/">Home</a></li>
+        <li><a href="/network-plus/">Network+</a></li>
+        <li aria-current="page">Quick Review</li>
+      </ol>
+    </nav>
+
+    <p class="eyebrow">Network+ quick review</p>
+    <h1>Network+ N10-009 Quick Review</h1>
+    <p class="lede">
+      Focused comparisons for network questions where several tools, protocols, or configurations appear plausible.
+    </p>
+  </div>
+</header>
+
+<section class="section">
+  <div class="page-shell">
+    <p>
+      Each guide starts with the decision you need to make, compares nearby choices, and works through realistic evidence. The pages are designed for screen review and clean printing.
+    </p>
+
+    <div class="card-grid">
+      {% for guide in networkPlusQuickReviews %}
+      <article class="card">
+        <p class="card__meta">{{ guide.meta }}</p>
+        <h2>{{ guide.title }}</h2>
+        <p>{{ guide.description }}</p>
+        <a class="button button--secondary" href="{{ guide.url }}">{{ guide.buttonLabel }}</a>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="page-shell">
+    <h2>Apply the distinction</h2>
+    <p>
+      Use a quick review to correct one weak spot, then test the decision in a fresh question session. The detailed domain guides provide the surrounding design and troubleshooting context.
+    </p>
+    <div class="button-row">
+      <a class="button" href="/network-plus/n10-009/practice-test/">Start a practice test</a>
+      <a class="button button--secondary" href="/network-plus/n10-009/study-guide/">Open the full study guide</a>
+      <a class="button button--secondary" href="/network-plus/acronyms/">Open acronyms and terms</a>
+      <a class="button button--secondary" href="/ports-protocols/">Open ports and protocols</a>
+    </div>
+  </div>
+</section>

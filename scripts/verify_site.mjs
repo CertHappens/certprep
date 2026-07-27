@@ -170,6 +170,10 @@ const requiredFiles = [
   "security-plus/acronyms/index.html",
   "network-plus/index.html",
   "network-plus/acronyms/index.html",
+  "network-plus/quick-review/index.html",
+  "network-plus/quick-review/monitoring-evidence/index.html",
+  "network-plus/quick-review/troubleshooting-tools/index.html",
+  "network-plus/quick-review/vlans-trunks-stp-lacp/index.html",
   "network-plus/n10-009/study-guide/index.html",
   "network-plus/n10-009/study-guide/networking-concepts/index.html",
   "network-plus/n10-009/study-guide/network-implementation/index.html",
@@ -643,6 +647,10 @@ for (const file of htmlFiles) {
       fail(`${relative}: Network+ hub is missing the acronyms and terms link`);
     }
 
+    if (!html.includes('href="/network-plus/quick-review/"')) {
+      fail(`${relative}: Network+ hub is missing the quick-review link`);
+    }
+
     if (!html.includes('href="/ports-protocols/"')) {
       fail(`${relative}: Network+ hub is missing the shared ports and protocols link`);
     }
@@ -656,6 +664,71 @@ for (const file of htmlFiles) {
     }
   }
 
+
+
+  if (relative === "network-plus/quick-review/index.html") {
+    if (!/<h1>Network\+ N10-009 Quick Review<\/h1>/.test(html)) {
+      fail(`${relative}: Network+ quick-review hub is missing its expected h1`);
+    }
+
+    const requiredQuickReviewLinks = [
+      "/network-plus/quick-review/monitoring-evidence/",
+      "/network-plus/quick-review/troubleshooting-tools/",
+      "/network-plus/quick-review/vlans-trunks-stp-lacp/",
+      "/network-plus/n10-009/practice-test/",
+      "/network-plus/n10-009/study-guide/"
+    ];
+
+    for (const href of requiredQuickReviewLinks) {
+      if (!html.includes(`href="${href}"`)) {
+        fail(`${relative}: quick-review hub is missing ${href}`);
+      }
+    }
+  }
+
+  const networkQuickReviewPages = {
+    "network-plus/quick-review/monitoring-evidence/index.html": [
+      "Evidence sources at a glance",
+      "Simple Network Management Protocol",
+      "Flow data",
+      "Packet capture",
+      "RFC 7011"
+    ],
+    "network-plus/quick-review/troubleshooting-tools/index.html": [
+      "Method before tool",
+      "ping",
+      "traceroute",
+      "Time-domain reflectometer",
+      "Optical time-domain reflectometer"
+    ],
+    "network-plus/quick-review/vlans-trunks-stp-lacp/index.html": [
+      "802.1Q trunk",
+      "Native VLAN",
+      "Inter-VLAN routing",
+      "Spanning Tree Protocol",
+      "Link Aggregation Control Protocol"
+    ]
+  };
+
+  if (Object.hasOwn(networkQuickReviewPages, relative)) {
+    if (!html.includes("data-print-guide")) {
+      fail(`${relative}: quick-review guide is missing the shared Print | Save control`);
+    }
+
+    if (!html.includes('/network-plus/quick-review/')) {
+      fail(`${relative}: quick-review guide is missing its hub link`);
+    }
+
+    if (!html.includes('/network-plus/n10-009/practice-test/')) {
+      fail(`${relative}: quick-review guide is missing its practice-test link`);
+    }
+
+    for (const marker of networkQuickReviewPages[relative]) {
+      if (!html.includes(marker)) {
+        fail(`${relative}: quick-review guide is missing ${marker}`);
+      }
+    }
+  }
 
   if (relative === "network-plus/acronyms/index.html") {
     if (!html.includes("data-print-guide")) {
@@ -744,6 +817,10 @@ for (const file of htmlFiles) {
 
     if (!html.includes('/network-plus/acronyms/')) {
       fail(`${relative}: Network+ study guide is missing the Network+ acronym reference link`);
+    }
+
+    if (!html.includes('/network-plus/quick-review/')) {
+      fail(`${relative}: Network+ study guide is missing the Network+ quick-review link`);
     }
 
     if (!html.includes('/ports-protocols/')) {
