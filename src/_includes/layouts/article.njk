@@ -42,25 +42,6 @@ layout: layouts/base.njk
 }
 </script>
 
-{% if breadcrumbs %}
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {% for crumb in breadcrumbs %}
-    {
-      "@type": "ListItem",
-      "position": {{ loop.index }},
-      "name": {{ crumb.label | json | safe }},
-      "item": {{ (site.url ~ (crumb.url or page.url)) | json | safe }}
-    }{% if not loop.last %},{% endif %}
-    {% endfor %}
-  ]
-}
-</script>
-{% endif %}
-
 <header class="page-header page-header--compact article-header">
   <div class="page-shell">
     {% if breadcrumbs %}

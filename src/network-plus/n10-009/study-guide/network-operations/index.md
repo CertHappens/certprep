@@ -66,6 +66,9 @@ keywords:
   - DHCP and DNS
   - network management
 relatedLinks:
+  - title: Network Monitoring Evidence Quick Reference
+    url: /network-plus/quick-review/monitoring-evidence/
+    description: Separate metrics, events, flow summaries, packet captures, copied traffic, baselines, and alerts.
   - title: Network+ Acronyms and Terms
     url: /network-plus/acronyms/
     description: Look up full expansions, practical meanings, related terms, and the domains where each abbreviation appears.
@@ -320,7 +323,7 @@ Protect configuration copies. They may contain address plans, usernames, passwor
 
 <h2 id="monitoring-methods">Select monitoring evidence by the question</h2>
 
-No single monitoring method answers every question. Choose the least expensive source that can confirm or reject the current theory, then collect deeper evidence when needed.
+No single monitoring method answers every question. Choose the least expensive source that can confirm or reject the current theory, then collect deeper evidence when needed. The [Network Monitoring Evidence Quick Reference](/network-plus/quick-review/monitoring-evidence/) provides a compact comparison when SNMP, logs, flow data, captures, mirroring, taps, baselines, and alerts all appear plausible.
 
 <div class="table-scroll" role="region" aria-label="Network monitoring methods and best uses" tabindex="0">
   <table>

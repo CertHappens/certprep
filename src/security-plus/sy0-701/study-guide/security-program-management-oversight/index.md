@@ -8,6 +8,7 @@ printable: true
 printTitle: "Security+ SY0-701 Domain 5: Security Program Management and Oversight"
 author: certHappens
 datePublished: 2026-07-23
+dateModified: 2026-07-27
 articleSection: Security+ SY0-701 Domain 5
 eyebrow: Security+ Domain 5 guide
 lede: Connect policies, risk decisions, vendor oversight, compliance work, and security awareness to the people responsible for each outcome.
@@ -51,6 +52,12 @@ keywords:
   - privacy
   - security awareness
 relatedLinks:
+  - title: Recovery Metrics Quick Reference
+    url: /security-plus/quick-review/recovery-metrics/
+    description: Compare RTO, RPO, MTTR, and MTBF for continuity and risk decisions.
+  - title: Security+ Acronyms and Terms
+    url: /security-plus/acronyms/
+    description: Expand governance, risk, compliance, privacy, and assessment abbreviations.
   - title: Security+ SY0-701 Study Guide
     url: /security-plus/sy0-701/study-guide/
     description: Return to the full exam roadmap, domain priorities, and study plan.

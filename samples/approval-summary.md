@@ -1,26 +1,32 @@
-# NET-009 Approval Summary
+# SEC-701 Approval and Revision Summary
 
-## Current status
+- Revision date: `2026-07-27`
+- Active approved questions: 225
+- Draft questions: 0
+- Existing questions revised: 37
+- New questions added: 0
+- Questions retired: 0
+- Correct-answer keys changed: 0
 
-- Exam: CompTIA Network+ N10-009
-- Objectives document: Version 6.0
-- Project test ID: `NET-009`
-- Latest batch: `NET009-BATCH-007`
-- Approved question rows: 180
-- Review rows: 0
-- Draft rows: 0
-- Retired rows: 0
-- Registered sources: 61
-- Numbered objectives with approved coverage: 25 of 25
+## Correct-key inclusion
 
-## Batch 007 decision
+- A: 58
+- B: 58
+- C: 58
+- D: 58
 
-Batch 007 was internally reviewed, validated, marked `approved`, and appended directly to `questions.csv` under the accelerated staging authorization.
+## Domain distribution
 
-The batch returns to the normal 30-question size after the 12-question balancing Batch 006. The normal approval structure remains available for later use.
+- 1.0: 27
+- 2.0: 50
+- 3.0: 40
+- 4.0: 63
+- 5.0: 45
 
-## Permanent range
+## Question types
 
-- First ID: `NET009-0000001`
-- Last ID: `NET009-0000180`
-- Next available ID: `NET009-0000181`
+- single_choice: 209
+- multi_select: 6
+- best_available: 10
+
+The revision preserved the active question count, domain assignments, objective assignments, and correct-answer keys.

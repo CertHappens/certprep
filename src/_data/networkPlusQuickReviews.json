@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Network Monitoring Evidence Quick Reference",
+    "shortTitle": "Monitoring evidence",
+    "url": "/network-plus/quick-review/monitoring-evidence/",
+    "description": "Choose among SNMP, syslog, flow records, packet captures, port mirroring, baselines, and APIs by matching the question to the evidence each source can provide.",
+    "buttonLabel": "Compare monitoring evidence",
+    "meta": "SNMP, logs, flow data, captures, and baselines"
+  },
+  {
+    "title": "Network Troubleshooting Tools Quick Reference",
+    "shortTitle": "Troubleshooting tools",
+    "url": "/network-plus/quick-review/troubleshooting-tools/",
+    "description": "Match command-line, capture, copper, fiber, and wireless tools to the fault you are trying to confirm without collecting unrelated evidence.",
+    "buttonLabel": "Choose a troubleshooting tool",
+    "meta": "Commands, packet tools, cable tools, and wireless analyzers"
+  },
+  {
+    "title": "VLANs, Trunks, STP, and Link Aggregation Quick Reference",
+    "shortTitle": "Switching decisions",
+    "url": "/network-plus/quick-review/vlans-trunks-stp-lacp/",
+    "description": "Separate access ports, trunks, tagging, native VLANs, inter-VLAN routing, spanning tree, and link aggregation through practical switching scenarios.",
+    "buttonLabel": "Review switching decisions",
+    "meta": "VLAN membership, loop prevention, and bundled links"
+  }
+]

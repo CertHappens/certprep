@@ -8,6 +8,7 @@ printable: true
 printTitle: "Security+ SY0-701 Domain 1: General Security Concepts"
 author: certHappens
 datePublished: 2026-07-23
+dateModified: 2026-07-27
 articleSection: Security+ SY0-701 Domain 1
 eyebrow: Security+ Domain 1 guide
 lede: Learn how the core security ideas fit together, where exam questions draw the line, and which clues point to the strongest answer.
@@ -48,6 +49,15 @@ keywords:
   - cryptography
   - PKI
 relatedLinks:
+  - title: Security Controls Quick Reference
+    url: /security-plus/quick-review/security-controls/
+    description: Separate control categories from preventive, detective, corrective, and other control functions.
+  - title: Hashing, Encryption, and Encoding Quick Reference
+    url: /security-plus/quick-review/hashing-encryption-encoding/
+    description: Compare transformation goals, signatures, HMAC, salts, and password protection.
+  - title: Security+ Acronyms and Terms
+    url: /security-plus/acronyms/
+    description: Expand abbreviations and compare related security terminology.
   - title: Security+ SY0-701 Study Guide
     url: /security-plus/sy0-701/study-guide/
     description: Return to the full exam roadmap, domain priorities, and study plan.

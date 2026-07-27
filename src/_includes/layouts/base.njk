@@ -27,7 +27,11 @@
 
   <title>{{ fullTitle }}</title>
   <meta name="description" content="{{ pageDescription }}">
-  <meta name="robots" content="{{ robots or 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1' }}">
+  {% set pageRobots = robots or "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" %}
+  {% if not environment.isProductionBuild %}
+    {% set pageRobots = "noindex,nofollow,nosnippet" %}
+  {% endif %}
+  <meta name="robots" content="{{ pageRobots }}">
   <link rel="canonical" href="{{ canonicalUrl }}">
 
   <meta property="og:type" content="{{ ogType or 'website' }}">
@@ -95,106 +99,18 @@
         },
         "inLanguage": {{ site.language | json | safe }}
       }
-      {% if page.url == "/security-plus/" %},
+      {% if breadcrumbs %},
       {
         "@type": "BreadcrumbList",
         "itemListElement": [
+          {% for crumb in breadcrumbs %}
           {
             "@type": "ListItem",
-            "position": 1,
-            "name": "Home",
-            "item": "{{ site.url }}/"
-          },
-          {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "Security+",
-            "item": "{{ site.url }}/security-plus/"
-          }
-        ]
-      }
-      {% elif page.url == "/network-plus/" %},
-      {
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Home",
-            "item": "{{ site.url }}/"
-          },
-          {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "Network+",
-            "item": "{{ site.url }}/network-plus/"
-          }
-        ]
-      }
-      {% elif page.url == "/security-plus/sy0-701/practice-test/" %},
-      {
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Home",
-            "item": "{{ site.url }}/"
-          },
-          {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "Security+",
-            "item": "{{ site.url }}/security-plus/"
-          },
-          {
-            "@type": "ListItem",
-            "position": 3,
-            "name": "SY0-701 practice test",
-            "item": "{{ site.url }}/security-plus/sy0-701/practice-test/"
-          }
-        ]
-      }
-      {% elif page.url == "/network-plus/n10-009/practice-test/" %},
-      {
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Home",
-            "item": "{{ site.url }}/"
-          },
-          {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "Network+",
-            "item": "{{ site.url }}/network-plus/"
-          },
-          {
-            "@type": "ListItem",
-            "position": 3,
-            "name": "N10-009 practice test",
-            "item": "{{ site.url }}/network-plus/n10-009/practice-test/"
-          }
-        ]
-      }
-      {% elif page.url == "/privacy/" or page.url == "/terms/" or page.url == "/disclaimer/" or page.url == "/contact/" %},
-      {
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Home",
-            "item": "{{ site.url }}/"
-          },
-          {
-            "@type": "ListItem",
-            "position": 2,
-            "name": {{ title | json | safe }},
-            "item": {{ canonicalUrl | json | safe }}
-          }
+            "position": {{ loop.index }},
+            "name": {{ crumb.label | json | safe }},
+            "item": {{ (site.url ~ (crumb.url or page.url)) | json | safe }}
+          }{% if not loop.last %},{% endif %}
+          {% endfor %}
         ]
       }
       {% endif %}

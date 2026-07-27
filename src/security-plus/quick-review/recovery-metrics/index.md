@@ -8,6 +8,7 @@ printable: true
 printTitle: Recovery Metrics Quick Reference for Security+ SY0-701
 author: certHappens
 datePublished: 2026-07-24
+dateModified: 2026-07-27
 articleSection: Security+ SY0-701 Quick Review
 eyebrow: Security+ quick review
 lede: Separate recovery targets from reliability averages, then use the wording of the scenario to choose the right metric.
@@ -16,6 +17,8 @@ breadcrumbs:
     url: /
   - label: Security+
     url: /security-plus/
+  - label: Quick Review
+    url: /security-plus/quick-review/
   - label: Recovery Metrics
     url: /security-plus/quick-review/recovery-metrics/
 toc:
@@ -47,6 +50,9 @@ keywords:
   - mean time to repair
   - mean time between failures
 relatedLinks:
+  - title: "Security+ Quick Review Guides"
+    url: /security-plus/quick-review/
+    description: Browse all focused comparisons and return to the quick-review hub.
   - title: "Domain 5: Security Program Management and Oversight"
     url: /security-plus/sy0-701/study-guide/security-program-management-oversight/
     description: Continue with business impact analysis, risk management, governance, compliance, audits, and awareness.

@@ -1,13 +1,14 @@
 ---
 layout: layouts/article.njk
 title: "Network+ N10-009 Domain 5: Network Troubleshooting"
-description: Study Network+ N10-009 Domain 5 through a repeatable troubleshooting method, physical and service fault isolation, performance analysis, wireless diagnosis, and tool selection.
+description: Learn Network+ N10-009 Domain 5 with a repeatable method for diagnosing cabling, switching, routing, wireless, performance, and service failures.
 permalink: /network-plus/n10-009/study-guide/network-troubleshooting/
 ogType: article
 printable: true
 printTitle: "Network+ N10-009 Domain 5: Network Troubleshooting"
 author: certHappens
 datePublished: 2026-07-26
+dateModified: 2026-07-27
 articleSection: Network+ N10-009 Domain 5
 eyebrow: Network+ domain 5 guide
 lede: Isolate the fault with evidence, change one thing for a reason, and verify the whole service after the fix.
@@ -64,6 +65,9 @@ keywords:
   - wireless troubleshooting
   - network tools
 relatedLinks:
+  - title: Network Troubleshooting Tools Quick Reference
+    url: /network-plus/quick-review/troubleshooting-tools/
+    description: Match host commands, path and DNS tests, packet tools, copper and fiber equipment, and wireless analyzers to a theory.
   - title: Network+ Acronyms and Terms
     url: /network-plus/acronyms/
     description: Look up full expansions, practical meanings, related terms, and the domains where each abbreviation appears.
@@ -422,6 +426,8 @@ Roaming depends on overlapping coverage, compatible security, consistent network
 Compare the service set identifier, security configuration, VLAN mapping, radio coverage, minimum data rates, power levels, and controller settings across the roaming area.
 
 <h2 id="software-tools">Choose software tools from the question you need answered</h2>
+
+<p>Use the <a href="/network-plus/quick-review/troubleshooting-tools/">Network Troubleshooting Tools Quick Reference</a> when command-line, packet, copper, fiber, or wireless tools seem interchangeable. State the theory first, then choose the least disruptive tool that can confirm or reject it.</p>
 
 <div class="table-scroll" role="region" aria-label="Network troubleshooting software tools" tabindex="0">
   <table class="mobile-card-table">

@@ -1,13 +1,14 @@
 ---
 layout: layouts/article.njk
 title: "Network+ N10-009 Domain 1: Networking Concepts"
-description: Build practical Network+ N10-009 Domain 1 skills across the OSI model, network devices, cloud connectivity, protocols, media, topologies, IPv4, IPv6, and modern network designs.
+description: Learn Network+ N10-009 Domain 1 with clear comparisons for models, devices, cloud, protocols, traffic, media, and IPv4 addressing.
 permalink: /network-plus/n10-009/study-guide/networking-concepts/
 ogType: article
 printable: true
 printTitle: "Network+ N10-009 Domain 1: Networking Concepts"
 author: certHappens
 datePublished: 2026-07-25
+dateModified: 2026-07-27
 articleSection: Network+ N10-009 Domain 1
 eyebrow: Network+ domain 1 guide
 lede: Build the mental model that lets you trace traffic, choose the right device or service, and recognize where a network problem begins.

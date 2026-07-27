@@ -8,6 +8,7 @@ printable: true
 printTitle: "Security+ SY0-701 Domain 2: Threats, Vulnerabilities, and Mitigations"
 author: certHappens
 datePublished: 2026-07-23
+dateModified: 2026-07-27
 articleSection: Security+ SY0-701 Domain 2
 eyebrow: Security+ Domain 2 guide
 lede: Follow an attack from the person or group behind it, through the path they use, to the weakness they exploit and the control that reduces the risk.
@@ -48,6 +49,12 @@ keywords:
   - malware
   - vulnerability mitigation
 relatedLinks:
+  - title: Security Controls Quick Reference
+    url: /security-plus/quick-review/security-controls/
+    description: Match a mitigation to the control category and function emphasized by the scenario.
+  - title: Security+ Acronyms and Terms
+    url: /security-plus/acronyms/
+    description: Expand attack, vulnerability, and mitigation abbreviations in context.
   - title: Security+ SY0-701 Study Guide
     url: /security-plus/sy0-701/study-guide/
     description: Return to the full exam roadmap, domain priorities, and study plan.

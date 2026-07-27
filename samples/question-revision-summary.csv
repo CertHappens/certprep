@@ -1,0 +1,38 @@
+question_id,previous_version,new_version,revision_category,correct_answer_length_before,longest_distractor_before,correct_answer_length_after,longest_distractor_after,date_modified,revision_summary
+SEC701-0000023,1,2,answer-length balance,132,61,64,66,2026-07-27,Moved the fixed scanner identity and schedule into the stem and shortened the scoped exception choice.
+SEC701-0000045,1,2,answer-length balance,97,40,71,76,2026-07-27,Expanded the distractors to comparable operational detail and shortened the time-synchronization choice.
+SEC701-0000069,1,2,answer-length balance,194,92,85,74,2026-07-27,Moved exception-governance detail into the scenario and shortened the correct response.
+SEC701-0000074,1,2,answer-length balance,147,90,88,77,2026-07-27,Shortened the formal exception choice and made the alternatives more parallel.
+SEC701-0000080,1,2,answer-length balance,105,63,84,64,2026-07-27,"Condensed the emergency-change follow-up while preserving review, validation, and baseline updates."
+SEC701-0000086,1,2,answer-length balance,140,52,67,62,2026-07-27,Added a practical network-design constraint and shortened the host-firewall response.
+SEC701-0000087,1,2,terminology and answer-length balance,138,73,96,73,2026-07-27,"Replaced decompose, monolithic, east-west, and distributed-transactions wording with plain-language microservices wording."
+SEC701-0000088,1,2,terminology,14,43,22,43,2026-07-27,Replaced bastion host with CompTIA-aligned plain-language jump-server terminology.
+SEC701-0000092,1,2,answer-length balance,111,69,91,76,2026-07-27,Shortened the lifecycle response and gave the distractors comparable detail.
+SEC701-0000095,1,2,terminology and answer-length balance,126,66,96,84,2026-07-27,Tested safe retry behavior without requiring the learner to know the term idempotent.
+SEC701-0000096,1,2,answer-length balance,122,49,63,57,2026-07-27,Used parallel incident-phase actions so the eradication choice is not identifiable by length.
+SEC701-0000105,1,2,answer-length balance,132,71,70,84,2026-07-27,Condensed the impact-analysis choice and strengthened the competing change-management actions.
+SEC701-0000111,1,2,answer-length balance,155,83,97,84,2026-07-27,Shortened the OT implication and removed extra controls from the correct choice.
+SEC701-0000113,1,2,terminology,16,16,12,16,2026-07-27,Replaced pseudonymization recognition with the CompTIA-listed tokenization concept.
+SEC701-0000119,1,2,answer-length balance,128,65,62,77,2026-07-27,Shortened the least-privilege response and added plausible but incomplete approval and logging alternatives.
+SEC701-0000124,1,2,answer-length balance,152,77,75,78,2026-07-27,Condensed the retention response while retaining requirements-based disposal.
+SEC701-0000137,1,2,answer-length balance,151,79,98,77,2026-07-27,Moved the security constraints into the stem and shortened the hybrid-integration choice.
+SEC701-0000142,1,2,answer-length balance,118,62,82,64,2026-07-27,Condensed the asset-accountability record without removing the key inventory fields.
+SEC701-0000144,1,2,answer-length balance,113,71,80,81,2026-07-27,Shortened the immutable-log design and added a realistic separately located but commonly administered distractor.
+SEC701-0000147,1,2,terminology,25,17,42,52,2026-07-27,Replaced vendor concentration risk as required vocabulary with a plain-language dependency description.
+SEC701-0000158,1,2,answer-length balance,139,68,92,85,2026-07-27,Shortened the egress-control response and strengthened a device-authentication distractor.
+SEC701-0000164,1,2,answer-length balance,131,63,90,65,2026-07-27,"Condensed the data-inventory response while retaining location, classification, owner, and flow information."
+SEC701-0000165,1,2,answer-length balance,158,74,71,74,2026-07-27,Put the passive-first and controlled-maintenance constraints in the stem and shortened the selected approach.
+SEC701-0000166,1,2,answer-length balance,131,67,81,74,2026-07-27,Shortened the just-in-time PAM response and added a plausible permanent-access alternative.
+SEC701-0000167,1,2,answer-length balance,141,72,85,79,2026-07-27,Condensed the automated lifecycle choice and added a plausible centralized manual-renewal alternative.
+SEC701-0000168,1,2,answer-length balance,133,62,86,63,2026-07-27,Shortened the lessons-learned action and made other phase activities more parallel.
+SEC701-0000172,1,2,terminology,118,58,78,64,2026-07-27,Replaced fourth-party risk as required vocabulary with a direct subcontractor-risk description.
+SEC701-0000173,1,2,answer-length balance,183,76,89,87,2026-07-27,"Moved identity verification, deadlines, and retention coordination into the stem and shortened the workflow choice."
+SEC701-0000174,1,2,answer-length balance,117,50,65,50,2026-07-27,Condensed the clean-desk action without removing locked storage or secure disposal.
+SEC701-0000187,1,2,answer-length balance,109,68,78,70,2026-07-27,Shortened the classification foundation and added a plausible department-specific labeling alternative.
+SEC701-0000190,1,2,answer-length balance,130,66,92,85,2026-07-27,Condensed the software-authorization response and added a plausible quarantine-only alternative.
+SEC701-0000193,1,2,terminology,4,5,59,52,2026-07-27,Replaced SCIM recognition with the broader automated identity lifecycle capability; SCIM remains in the explanation.
+SEC701-0000198,1,2,answer-length balance,153,79,101,86,2026-07-27,Shortened the risk-tiering choice and made the uniform-review alternative more substantial.
+SEC701-0000202,1,2,terminology and answer-length balance,122,75,90,75,2026-07-27,Replaced M-of-N terminology with a direct multiple-custodian requirement while retaining dual control in the explanation.
+SEC701-0000207,1,2,terminology,33,26,67,68,2026-07-27,Replaced BOLA as required vocabulary with a direct description of the missing object authorization check.
+SEC701-0000219,1,2,answer-length balance,149,75,97,80,2026-07-27,Shortened the safety-aware containment action and made immediate reimaging a more plausible competing response.
+SEC701-0000224,1,2,answer-length balance,133,58,101,81,2026-07-27,Condensed the operating-effectiveness evidence and expanded design-evidence distractors.

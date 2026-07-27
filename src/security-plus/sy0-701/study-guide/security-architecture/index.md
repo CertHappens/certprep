@@ -8,6 +8,7 @@ printable: true
 printTitle: "Security+ SY0-701 Domain 3: Security Architecture"
 author: certHappens
 datePublished: 2026-07-23
+dateModified: 2026-07-27
 articleSection: Security+ SY0-701 Domain 3
 eyebrow: Security+ Domain 3 guide
 lede: Connect architecture choices to security, availability, recovery, and the business constraints that shape a defensible design.
@@ -47,6 +48,12 @@ keywords:
   - disaster recovery
   - business continuity
 relatedLinks:
+  - title: Recovery Metrics Quick Reference
+    url: /security-plus/quick-review/recovery-metrics/
+    description: Separate recovery objectives from repair and reliability averages.
+  - title: Security+ Acronyms and Terms
+    url: /security-plus/acronyms/
+    description: Expand architecture, cloud, resilience, and data-protection abbreviations.
   - title: Security+ SY0-701 Study Guide
     url: /security-plus/sy0-701/study-guide/
     description: Return to the full exam roadmap, domain priorities, and study plan.
