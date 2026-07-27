@@ -1,19 +1,12 @@
-# SEC-701 Question Approval Summary
+# SEC-701 Approval and Revision Summary
 
-- Approval date: `2026-07-27`
-- Batch approved: `SEC701-BATCH-010`
-- Previously approved questions: 200
-- Newly approved questions: 25
-- Total production questions: 225
-- Remaining draft questions: 0
-- Published objectives represented: 28 of 28
-- Current workflow: direct approval with staging testing and question reporting
-
-## Question-type distribution
-
-- single_choice: 209
-- multi_select: 6
-- best_available: 10
+- Revision date: `2026-07-27`
+- Active approved questions: 225
+- Draft questions: 0
+- Existing questions revised: 37
+- New questions added: 0
+- Questions retired: 0
+- Correct-answer keys changed: 0
 
 ## Correct-key inclusion
 
@@ -22,25 +15,18 @@
 - C: 58
 - D: 58
 
-## Difficulty distribution
-
-- easy: 58
-- medium: 113
-- hard: 54
-
 ## Domain distribution
 
-- 1.0: 27 (12.0%)
-- 2.0: 50 (22.2%)
-- 3.0: 40 (17.8%)
-- 4.0: 63 (28.0%)
-- 5.0: 45 (20.0%)
+- 1.0: 27
+- 2.0: 50
+- 3.0: 40
+- 4.0: 63
+- 5.0: 45
 
-## Question-style distribution
+## Question types
 
-- direct: 34
-- scenario: 163
-- comparison: 23
-- calculation: 5
+- single_choice: 209
+- multi_select: 6
+- best_available: 10
 
-Batch 010 was promoted directly to `questions.csv`. `draft-questions.csv` remains header-only.
+The revision preserved the active question count, domain assignments, objective assignments, and correct-answer keys.
