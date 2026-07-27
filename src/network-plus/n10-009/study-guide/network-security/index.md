@@ -1,13 +1,14 @@
 ---
 layout: layouts/article.njk
 title: "Network+ N10-009 Domain 4: Network Security"
-description: Study Network+ N10-009 Domain 4 through practical identity, encryption, segmentation, attack recognition, hardening, network access control, filtering, and security-zone decisions.
+description: Learn Network+ N10-009 Domain 4 with practical comparisons for identity, encryption, segmentation, attacks, hardening, and access controls.
 permalink: /network-plus/n10-009/study-guide/network-security/
 ogType: article
 printable: true
 printTitle: "Network+ N10-009 Domain 4: Network Security"
 author: certHappens
 datePublished: 2026-07-26
+dateModified: 2026-07-27
 articleSection: Network+ N10-009 Domain 4
 eyebrow: Network+ domain 4 guide
 lede: Protect traffic and administrative access by matching each risk to the control point that can actually change the outcome.

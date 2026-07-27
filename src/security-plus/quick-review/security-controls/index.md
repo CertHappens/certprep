@@ -8,6 +8,7 @@ printable: true
 printTitle: Security Controls Quick Reference for Security+ SY0-701
 author: certHappens
 datePublished: 2026-07-24
+dateModified: 2026-07-27
 articleSection: Security+ SY0-701 Quick Review
 eyebrow: Security+ quick review
 lede: Classify a control by how it is implemented and by the job it performs, then use the scenario to decide which label matters.
@@ -16,6 +17,8 @@ breadcrumbs:
     url: /
   - label: Security+
     url: /security-plus/
+  - label: Quick Review
+    url: /security-plus/quick-review/
   - label: Security Controls
     url: /security-plus/quick-review/security-controls/
 toc:
@@ -43,6 +46,9 @@ keywords:
   - detective controls
   - compensating controls
 relatedLinks:
+  - title: "Security+ Quick Review Guides"
+    url: /security-plus/quick-review/
+    description: Browse all focused comparisons and return to the quick-review hub.
   - title: "Domain 1: General Security Concepts"
     url: /security-plus/sy0-701/study-guide/general-security-concepts/
     description: Continue with zero trust, change management, cryptography, PKI, and the rest of Domain 1.

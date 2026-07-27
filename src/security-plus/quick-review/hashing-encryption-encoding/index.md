@@ -8,6 +8,7 @@ printable: true
 printTitle: Hashing, Encryption, and Encoding Quick Reference for Security+ SY0-701
 author: certHappens
 datePublished: 2026-07-24
+dateModified: 2026-07-27
 articleSection: Security+ SY0-701 Quick Review
 eyebrow: Security+ quick review
 lede: Start with the security goal, then choose the transformation that actually provides it.
@@ -16,6 +17,8 @@ breadcrumbs:
     url: /
   - label: Security+
     url: /security-plus/
+  - label: Quick Review
+    url: /security-plus/quick-review/
   - label: Hashing, Encryption, and Encoding
     url: /security-plus/quick-review/hashing-encryption-encoding/
 toc:
@@ -50,6 +53,9 @@ keywords:
   - HMAC
   - password salting
 relatedLinks:
+  - title: "Security+ Quick Review Guides"
+    url: /security-plus/quick-review/
+    description: Browse all focused comparisons and return to the quick-review hub.
   - title: "Domain 1: General Security Concepts"
     url: /security-plus/sy0-701/study-guide/general-security-concepts/
     description: Continue with security controls, zero trust, change management, cryptography, PKI, and certificates.

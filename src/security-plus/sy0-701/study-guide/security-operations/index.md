@@ -8,6 +8,7 @@ printable: true
 printTitle: "Security+ SY0-701 Domain 4: Security Operations"
 author: certHappens
 datePublished: 2026-07-23
+dateModified: 2026-07-27
 articleSection: Security+ SY0-701 Domain 4
 eyebrow: Security+ Domain 4 guide
 lede: Connect daily security work to the evidence, sequence, and control decisions that make operations effective.
@@ -57,6 +58,12 @@ keywords:
   - incident response
   - digital forensics
 relatedLinks:
+  - title: Common Ports and Protocols Reference
+    url: /ports-protocols/
+    description: Connect monitoring, administration, authentication, and secure services to their network clues.
+  - title: Security+ Acronyms and Terms
+    url: /security-plus/acronyms/
+    description: Expand operational, identity, monitoring, and incident-response abbreviations.
   - title: Security+ SY0-701 Study Guide
     url: /security-plus/sy0-701/study-guide/
     description: Return to the full exam roadmap, domain priorities, and study plan.

@@ -156,43 +156,158 @@ function localTarget(href) {
   return path.join(outputRoot, clean.replace(/^\/+/, ""), "index.html");
 }
 
-const requiredFiles = [
+const publicPageFiles = [
   "index.html",
-  "404.html",
-  "robots.txt",
-  "sitemap.xml",
-  "site.webmanifest",
-  "privacy/index.html",
-  "terms/index.html",
-  "disclaimer/index.html",
   "contact/index.html",
-  "security-plus/index.html",
-  "security-plus/acronyms/index.html",
+  "disclaimer/index.html",
   "network-plus/index.html",
   "network-plus/acronyms/index.html",
-  "network-plus/quick-review/index.html",
-  "network-plus/quick-review/monitoring-evidence/index.html",
-  "network-plus/quick-review/troubleshooting-tools/index.html",
-  "network-plus/quick-review/vlans-trunks-stp-lacp/index.html",
+  "network-plus/n10-009/practice-test/index.html",
   "network-plus/n10-009/study-guide/index.html",
-  "network-plus/n10-009/study-guide/networking-concepts/index.html",
+  "network-plus/n10-009/study-guide/ipv4-subnetting/index.html",
   "network-plus/n10-009/study-guide/network-implementation/index.html",
   "network-plus/n10-009/study-guide/network-operations/index.html",
   "network-plus/n10-009/study-guide/network-security/index.html",
   "network-plus/n10-009/study-guide/network-troubleshooting/index.html",
-  "network-plus/n10-009/study-guide/ipv4-subnetting/index.html",
+  "network-plus/n10-009/study-guide/networking-concepts/index.html",
+  "network-plus/quick-review/index.html",
+  "network-plus/quick-review/monitoring-evidence/index.html",
+  "network-plus/quick-review/troubleshooting-tools/index.html",
+  "network-plus/quick-review/vlans-trunks-stp-lacp/index.html",
   "ports-protocols/index.html",
-  "tools/subnet-calculator/index.html",
-  "network-plus/n10-009/practice-test/index.html",
-  "network-plus/n10-009/practice-test/question/1/index.html",
-  "network-plus/n10-009/practice-test/question/50/index.html",
+  "privacy/index.html",
+  "security-plus/index.html",
+  "security-plus/acronyms/index.html",
+  "security-plus/quick-review/index.html",
+  "security-plus/quick-review/hashing-encryption-encoding/index.html",
+  "security-plus/quick-review/recovery-metrics/index.html",
+  "security-plus/quick-review/security-controls/index.html",
   "security-plus/sy0-701/practice-test/index.html",
   "security-plus/sy0-701/study-guide/index.html",
   "security-plus/sy0-701/study-guide/general-security-concepts/index.html",
-  "security-plus/sy0-701/study-guide/threats-vulnerabilities-mitigations/index.html",
   "security-plus/sy0-701/study-guide/security-architecture/index.html",
   "security-plus/sy0-701/study-guide/security-operations/index.html",
   "security-plus/sy0-701/study-guide/security-program-management-oversight/index.html",
+  "security-plus/sy0-701/study-guide/threats-vulnerabilities-mitigations/index.html",
+  "terms/index.html",
+  "tools/subnet-calculator/index.html"
+];
+
+const articlePageFiles = [
+  "network-plus/acronyms/index.html",
+  "network-plus/n10-009/study-guide/index.html",
+  "network-plus/n10-009/study-guide/ipv4-subnetting/index.html",
+  "network-plus/n10-009/study-guide/network-implementation/index.html",
+  "network-plus/n10-009/study-guide/network-operations/index.html",
+  "network-plus/n10-009/study-guide/network-security/index.html",
+  "network-plus/n10-009/study-guide/network-troubleshooting/index.html",
+  "network-plus/n10-009/study-guide/networking-concepts/index.html",
+  "network-plus/quick-review/monitoring-evidence/index.html",
+  "network-plus/quick-review/troubleshooting-tools/index.html",
+  "network-plus/quick-review/vlans-trunks-stp-lacp/index.html",
+  "ports-protocols/index.html",
+  "security-plus/acronyms/index.html",
+  "security-plus/quick-review/hashing-encryption-encoding/index.html",
+  "security-plus/quick-review/recovery-metrics/index.html",
+  "security-plus/quick-review/security-controls/index.html",
+  "security-plus/sy0-701/study-guide/index.html",
+  "security-plus/sy0-701/study-guide/general-security-concepts/index.html",
+  "security-plus/sy0-701/study-guide/security-architecture/index.html",
+  "security-plus/sy0-701/study-guide/security-operations/index.html",
+  "security-plus/sy0-701/study-guide/security-program-management-oversight/index.html",
+  "security-plus/sy0-701/study-guide/threats-vulnerabilities-mitigations/index.html",
+  "tools/subnet-calculator/index.html"
+];
+
+const publicPageFileSet = new Set(publicPageFiles);
+
+const wholeSitePageMarkers = new Map([
+  [
+    "index.html",
+    [
+      "five domain guides, quick reviews, acronyms, subnetting tools",
+      "/security-plus/",
+      "/network-plus/",
+      "/ports-protocols/",
+      "/tools/subnet-calculator/"
+    ]
+  ],
+  [
+    "404.html",
+    ["/security-plus/", "/network-plus/", "Return home"]
+  ],
+  [
+    "contact/index.html",
+    [
+      "/security-plus/sy0-701/practice-test/",
+      "/network-plus/n10-009/practice-test/",
+      "/privacy/"
+    ]
+  ],
+  [
+    "security-plus/acronyms/index.html",
+    [
+      "/security-plus/quick-review/",
+      "/ports-protocols/",
+      "/security-plus/sy0-701/practice-test/"
+    ]
+  ],
+  [
+    "security-plus/quick-review/hashing-encryption-encoding/index.html",
+    ["/security-plus/quick-review/", "/security-plus/acronyms/"]
+  ],
+  [
+    "security-plus/quick-review/recovery-metrics/index.html",
+    ["/security-plus/quick-review/", "/security-plus/acronyms/"]
+  ],
+  [
+    "security-plus/quick-review/security-controls/index.html",
+    ["/security-plus/quick-review/", "/security-plus/acronyms/"]
+  ],
+  [
+    "security-plus/sy0-701/study-guide/general-security-concepts/index.html",
+    [
+      "/security-plus/quick-review/security-controls/",
+      "/security-plus/quick-review/hashing-encryption-encoding/",
+      "/security-plus/acronyms/"
+    ]
+  ],
+  [
+    "security-plus/sy0-701/study-guide/threats-vulnerabilities-mitigations/index.html",
+    ["/security-plus/quick-review/security-controls/", "/security-plus/acronyms/"]
+  ],
+  [
+    "security-plus/sy0-701/study-guide/security-architecture/index.html",
+    ["/security-plus/quick-review/recovery-metrics/", "/security-plus/acronyms/"]
+  ],
+  [
+    "security-plus/sy0-701/study-guide/security-operations/index.html",
+    ["/ports-protocols/", "/security-plus/acronyms/"]
+  ],
+  [
+    "security-plus/sy0-701/study-guide/security-program-management-oversight/index.html",
+    ["/security-plus/quick-review/recovery-metrics/", "/security-plus/acronyms/"]
+  ]
+]);
+
+function publicUrlFromOutput(relative) {
+  if (relative === "index.html") {
+    return "https://certhappens.com/";
+  }
+
+  return `https://certhappens.com/${relative.replace(/index\.html$/, "")}`;
+}
+
+const requiredFiles = [
+  ...publicPageFiles,
+  "404.html",
+  "robots.txt",
+  "sitemap.xml",
+  "site.webmanifest",
+  "network-plus/n10-009/practice-test/question/1/index.html",
+  "network-plus/n10-009/practice-test/question/50/index.html",
+  "security-plus/sy0-701/practice-test/question/1/index.html",
+  "security-plus/sy0-701/practice-test/question/50/index.html",
   "_redirects",
   "assets/brand/certhappens-social-card.png",
   "assets/css/site.css",
@@ -463,6 +578,22 @@ for (const file of htmlFiles) {
 
   const robots = getMeta(html, "robots");
   const isNoIndex = /\bnoindex\b/i.test(robots);
+  const isPagedQuestionRoute =
+    relative.startsWith("security-plus/sy0-701/practice-test/question/") ||
+    relative.startsWith("network-plus/n10-009/practice-test/question/");
+  const isPublicPage = publicPageFileSet.has(relative);
+
+  if (expectsGoogleAnalytics) {
+    if (isPublicPage && isNoIndex) {
+      fail(`${relative}: public production page must remain indexable`);
+    }
+
+    if (!isPublicPage && !isNoIndex) {
+      fail(`${relative}: non-sitemap production route must remain noindex`);
+    }
+  } else if (!isNoIndex) {
+    fail(`${relative}: preview and local builds must remain noindex`);
+  }
 
   if (/mailto:/i.test(html)) {
     fail(`${relative}: clickable email link found; public contact addresses must remain text-only`);
@@ -472,18 +603,40 @@ for (const file of htmlFiles) {
     fail(`${relative}: unobscured CertHappens email address found`);
   }
 
-  if (!isNoIndex) {
-    const canonical =
-      html.match(/<link\s+[^>]*rel=["']canonical["'][^>]*href=["']([^"']+)["'][^>]*>/i)?.[1] ||
-      html.match(/<link\s+[^>]*href=["']([^"']+)["'][^>]*rel=["']canonical["'][^>]*>/i)?.[1];
+  const canonical =
+    html.match(/<link\s+[^>]*rel=["']canonical["'][^>]*href=["']([^"']+)["'][^>]*>/i)?.[1] ||
+    html.match(/<link\s+[^>]*href=["']([^"']+)["'][^>]*rel=["']canonical["'][^>]*>/i)?.[1];
 
-    if (!canonical?.startsWith("https://certhappens.com/")) {
-      fail(`${relative}: missing or invalid canonical URL`);
-    }
+  if (!canonical?.startsWith("https://certhappens.com/")) {
+    fail(`${relative}: missing or invalid canonical URL`);
+  }
 
-    if (!getMeta(html, "og:image", true)) {
-      fail(`${relative}: missing Open Graph image`);
-    }
+  if (!getMeta(html, "og:image", true)) {
+    fail(`${relative}: missing Open Graph image`);
+  }
+
+  if (!getMeta(html, "twitter:description") || !getMeta(html, "twitter:image")) {
+    fail(`${relative}: incomplete Twitter card metadata`);
+  }
+
+  if (!html.includes('class="skip-link"') || !html.includes('id="main-content"')) {
+    fail(`${relative}: shared skip link or main landmark is missing`);
+  }
+
+  if (!html.includes('class="site-footer"')) {
+    fail(`${relative}: shared site footer is missing`);
+  }
+
+  const breadcrumbStructuredDataCount = (
+    html.match(/"@type"\s*:\s*"BreadcrumbList"/g) || []
+  ).length;
+
+  if (isPublicPage && relative !== "index.html" && breadcrumbStructuredDataCount !== 1) {
+    fail(`${relative}: expected exactly one breadcrumb structured-data block, found ${breadcrumbStructuredDataCount}`);
+  }
+
+  if (relative === "index.html" && breadcrumbStructuredDataCount !== 0) {
+    fail(`${relative}: homepage should not contain breadcrumb structured data`);
   }
 
   const h1Count = (html.match(/<h1\b/gi) || []).length;
@@ -511,6 +664,13 @@ for (const file of htmlFiles) {
     const target = localTarget(match[1]);
     if (target && !(await isFile(target))) {
       fail(`${relative}: broken internal link ${match[1]}`);
+    }
+  }
+
+  const wholeSiteMarkers = wholeSitePageMarkers.get(relative) || [];
+  for (const marker of wholeSiteMarkers) {
+    if (!html.includes(marker)) {
+      fail(`${relative}: whole-site audit marker is missing ${marker}`);
     }
   }
 
@@ -1686,32 +1846,14 @@ if (await isFile(path.join(outputRoot, "_redirects"))) {
 
 if (await isFile(path.join(outputRoot, "sitemap.xml"))) {
   const sitemap = await readFile(path.join(outputRoot, "sitemap.xml"), "utf8");
-  const expectedUrls = [
-    "https://certhappens.com/",
-    "https://certhappens.com/security-plus/",
-    "https://certhappens.com/security-plus/acronyms/",
-    "https://certhappens.com/network-plus/",
-    "https://certhappens.com/network-plus/n10-009/study-guide/",
-    "https://certhappens.com/network-plus/n10-009/study-guide/networking-concepts/",
-    "https://certhappens.com/network-plus/n10-009/study-guide/network-implementation/",
-    "https://certhappens.com/network-plus/n10-009/study-guide/network-operations/",
-    "https://certhappens.com/network-plus/n10-009/study-guide/network-security/",
-    "https://certhappens.com/network-plus/n10-009/study-guide/network-troubleshooting/",
-    "https://certhappens.com/network-plus/n10-009/study-guide/ipv4-subnetting/",
-    "https://certhappens.com/tools/subnet-calculator/",
-    "https://certhappens.com/network-plus/n10-009/practice-test/",
-    "https://certhappens.com/security-plus/sy0-701/practice-test/",
-    "https://certhappens.com/security-plus/sy0-701/study-guide/",
-    "https://certhappens.com/security-plus/sy0-701/study-guide/general-security-concepts/",
-    "https://certhappens.com/security-plus/sy0-701/study-guide/threats-vulnerabilities-mitigations/",
-    "https://certhappens.com/security-plus/sy0-701/study-guide/security-architecture/",
-    "https://certhappens.com/security-plus/sy0-701/study-guide/security-operations/",
-    "https://certhappens.com/security-plus/sy0-701/study-guide/security-program-management-oversight/",
-    "https://certhappens.com/privacy/",
-    "https://certhappens.com/terms/",
-    "https://certhappens.com/disclaimer/",
-    "https://certhappens.com/contact/"
-  ];
+  const expectedUrls = publicPageFiles.map(publicUrlFromOutput);
+  const sitemapLocationCount = (sitemap.match(/<loc>/g) || []).length;
+
+  if (sitemapLocationCount !== expectedUrls.length) {
+    fail(
+      `sitemap.xml: expected ${expectedUrls.length} public URLs, found ${sitemapLocationCount}`
+    );
+  }
 
   for (const url of expectedUrls) {
     if (!sitemap.includes(`<loc>${url}</loc>`)) {
@@ -1730,23 +1872,7 @@ if (await isFile(path.join(outputRoot, "sitemap.xml"))) {
     }
   }
 
-  const datedArticleUrls = [
-    "https://certhappens.com/security-plus/acronyms/",
-    "https://certhappens.com/network-plus/n10-009/study-guide/",
-    "https://certhappens.com/network-plus/n10-009/study-guide/networking-concepts/",
-    "https://certhappens.com/network-plus/n10-009/study-guide/network-implementation/",
-    "https://certhappens.com/network-plus/n10-009/study-guide/network-operations/",
-    "https://certhappens.com/network-plus/n10-009/study-guide/network-security/",
-    "https://certhappens.com/network-plus/n10-009/study-guide/network-troubleshooting/",
-    "https://certhappens.com/network-plus/n10-009/study-guide/ipv4-subnetting/",
-    "https://certhappens.com/tools/subnet-calculator/",
-    "https://certhappens.com/security-plus/sy0-701/study-guide/",
-    "https://certhappens.com/security-plus/sy0-701/study-guide/general-security-concepts/",
-    "https://certhappens.com/security-plus/sy0-701/study-guide/threats-vulnerabilities-mitigations/",
-    "https://certhappens.com/security-plus/sy0-701/study-guide/security-architecture/",
-    "https://certhappens.com/security-plus/sy0-701/study-guide/security-operations/",
-    "https://certhappens.com/security-plus/sy0-701/study-guide/security-program-management-oversight/"
-  ];
+  const datedArticleUrls = articlePageFiles.map(publicUrlFromOutput);
 
   for (const url of datedArticleUrls) {
     const escapedUrl = url.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
