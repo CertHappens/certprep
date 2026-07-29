@@ -1,0 +1,232 @@
+{
+  "cissp": {
+    "slug": "cissp",
+    "name": "CISSP",
+    "fullName": "Certified Information Systems Security Professional",
+    "provider": "ISC2",
+    "eyebrow": "Certification overview",
+    "title": "CISSP Certification Overview",
+    "lede": "Understand the exam's scope, experience path, and management-level perspective before deciding how CISSP fits your security career.",
+    "sourceReviewed": "2026-07-29",
+    "status": {
+      "label": "Overview available",
+      "heading": "A useful starting point, not a full CISSP course",
+      "body": "Cert Happens does not yet offer a dedicated CISSP practice-test bank or eight-domain study guide. This overview explains the current certification structure and connects familiar Security+ and Network+ topics to the broader decisions CISSP candidates must prepare to make."
+    },
+    "summary": [
+      "CISSP covers security across an entire organization. Technical knowledge still matters, but candidates also need to connect controls to business objectives, legal duties, architecture, risk, operations, and program leadership.",
+      "The certification is aimed at experienced security practitioners, managers, architects, consultants, and senior technical professionals who need to reason across several security disciplines rather than stay inside one product or job function."
+    ],
+    "quickFacts": [
+      {
+        "label": "Delivery",
+        "value": "Computerized adaptive testing (CAT)"
+      },
+      {
+        "label": "Exam time",
+        "value": "3 hours"
+      },
+      {
+        "label": "Items",
+        "value": "100 to 150"
+      },
+      {
+        "label": "Passing score",
+        "value": "700 out of 1000"
+      },
+      {
+        "label": "Item format",
+        "value": "Multiple choice and advanced item types"
+      }
+    ],
+    "audience": {
+      "heading": "Who CISSP is built for",
+      "paragraphs": [
+        "CISSP is designed for experienced professionals who design, manage, assess, or lead security work. That can include security managers and executives, but it also includes architects, engineers, consultants, auditors, and senior practitioners whose decisions affect more than one system.",
+        "The breadth is part of the challenge. A candidate may be deeply experienced in operations, networking, governance, or architecture and still need deliberate study in the other domains."
+      ],
+      "signals": [
+        "You regularly connect technical findings to organizational risk.",
+        "You help choose, justify, or govern security controls.",
+        "You work across teams such as legal, privacy, software, networking, operations, and leadership.",
+        "You need to explain why a security decision is appropriate, not only how to configure it."
+      ]
+    },
+    "comparison": {
+      "heading": "How the perspective changes after Security+",
+      "intro": "Security+ provides a strong foundation for many CISSP topics. CISSP asks you to widen the frame around those topics.",
+      "entries": [
+        {
+          "title": "Controls and tools",
+          "securityPlus": "Recognize the control or tool that best addresses a stated problem.",
+          "advanced": "Evaluate whether the control fits business requirements, risk tolerance, architecture, policy, law, cost, and lifecycle obligations."
+        },
+        {
+          "title": "Incident response",
+          "securityPlus": "Choose the correct response action, evidence source, or containment step.",
+          "advanced": "Balance response priorities with governance, communications, legal considerations, business continuity, and lessons learned."
+        },
+        {
+          "title": "Architecture",
+          "securityPlus": "Identify secure design patterns and implementation choices.",
+          "advanced": "Select and defend architecture based on requirements, trust boundaries, system models, resilience, and organizational constraints."
+        },
+        {
+          "title": "Risk",
+          "securityPlus": "Understand risk concepts, treatment options, and common frameworks.",
+          "advanced": "Apply risk decisions across programs, suppliers, assets, data, compliance duties, and executive accountability."
+        }
+      ]
+    },
+    "domains": [
+      {
+        "number": "1",
+        "name": "Security and Risk Management",
+        "weight": "16%",
+        "focus": "Ethics, governance, law, policy, risk, supply chains, awareness, and business continuity foundations."
+      },
+      {
+        "number": "2",
+        "name": "Asset Security",
+        "weight": "10%",
+        "focus": "Information and asset classification, ownership, handling, retention, privacy, and secure lifecycle decisions."
+      },
+      {
+        "number": "3",
+        "name": "Security Architecture and Engineering",
+        "weight": "13%",
+        "focus": "Security models, engineering principles, cryptography, physical design, and architecture weaknesses across modern systems."
+      },
+      {
+        "number": "4",
+        "name": "Communication and Network Security",
+        "weight": "13%",
+        "focus": "Secure network architecture, communications technologies, transmission methods, and protected network operations."
+      },
+      {
+        "number": "5",
+        "name": "Identity and Access Management",
+        "weight": "13%",
+        "focus": "Identity lifecycles, authentication, authorization, federation, access models, and access-control governance."
+      },
+      {
+        "number": "6",
+        "name": "Security Assessment and Testing",
+        "weight": "12%",
+        "focus": "Assessment strategies, testing, audits, control validation, reporting, and analysis of security results."
+      },
+      {
+        "number": "7",
+        "name": "Security Operations",
+        "weight": "13%",
+        "focus": "Investigations, incident management, monitoring, resilience, recovery, change, patching, and operational security."
+      },
+      {
+        "number": "8",
+        "name": "Software Development Security",
+        "weight": "10%",
+        "focus": "Secure development lifecycles, software controls, acquisition, testing, supply chains, and application risk."
+      }
+    ],
+    "experience": {
+      "heading": "Experience and certification path",
+      "paragraphs": [
+        "To earn the CISSP certification, a candidate generally needs five years of cumulative full-time work experience in at least two of the eight domains. A qualifying degree or an approved credential can waive up to one year, but the waivers do not stack.",
+        "Security+ is currently on ISC2's approved credential list for the one-year experience waiver. Passing the exam without the required experience can lead to Associate of ISC2 status while the candidate earns the remaining experience. ISC2 currently allows up to six years to complete that requirement.",
+        "Passing the exam is followed by the certification application and endorsement process. Certified members must also support the ISC2 Code of Ethics, pay the annual maintenance fee, and meet continuing professional education requirements."
+      ],
+      "maintenance": [
+        {
+          "label": "CPE requirement",
+          "value": "120 credits during each three-year certification cycle"
+        },
+        {
+          "label": "Annual maintenance fee",
+          "value": "U.S. $135 for certified members"
+        },
+        {
+          "label": "Multiple ISC2 certifications",
+          "value": "One member AMF applies rather than a separate fee for every certification"
+        }
+      ]
+    },
+    "preparation": {
+      "heading": "A practical preparation sequence",
+      "steps": [
+        {
+          "title": "Start with the official outline",
+          "body": "Use the eight domains and their weights to identify weak areas before choosing books, courses, or question banks."
+        },
+        {
+          "title": "Translate experience into the full scope",
+          "body": "Map what you already do at work to the outline, then identify domains where your experience is indirect or mostly theoretical."
+        },
+        {
+          "title": "Study decisions, not isolated facts",
+          "body": "Practice connecting security choices to business objectives, policy, risk, architecture, legal duties, and operational consequences."
+        },
+        {
+          "title": "Review why alternatives are weaker",
+          "body": "A useful practice question should explain why a plausible option is not the best fit under the stated constraints."
+        },
+        {
+          "title": "Plan beyond exam day",
+          "body": "Understand endorsement, experience documentation, CPE reporting, and the annual maintenance obligation before scheduling the exam."
+        }
+      ]
+    },
+    "currentResources": {
+      "heading": "Useful Cert Happens resources available now",
+      "intro": "These resources are written for Security+ or Network+, so they do not replace CISSP-specific preparation. They can still help refresh technical foundations that appear inside the broader CISSP scope.",
+      "links": [
+        {
+          "title": "Security+ study guide",
+          "url": "/security-plus/sy0-701/study-guide/",
+          "description": "Refresh controls, architecture, operations, threats, governance, and risk concepts."
+        },
+        {
+          "title": "Security+ quick reviews",
+          "url": "/security-plus/quick-review/",
+          "description": "Compare controls, recovery metrics, and cryptographic concepts that are easy to blur together."
+        },
+        {
+          "title": "Network+ study guide",
+          "url": "/network-plus/n10-009/study-guide/",
+          "description": "Review network architecture, operations, security, and troubleshooting foundations."
+        },
+        {
+          "title": "Ports and protocols",
+          "url": "/ports-protocols/",
+          "description": "Refresh common services, transports, secure alternatives, and operational clues."
+        }
+      ],
+      "planned": [
+        "A Security+ to CISSP transition guide",
+        "A deeper guide to CISSP decision-making and organizational context",
+        "Dedicated CISSP practice questions only after the content and review process can support them"
+      ]
+    },
+    "officialSources": [
+      {
+        "label": "CISSP certification exam outline",
+        "url": "https://www.isc2.org/certifications/cissp/cissp-certification-exam-outline"
+      },
+      {
+        "label": "CISSP experience requirements",
+        "url": "https://www.isc2.org/certifications/cissp/cissp-experience-requirements"
+      },
+      {
+        "label": "What happens after an ISC2 exam",
+        "url": "https://www.isc2.org/exams/after-your-exam"
+      },
+      {
+        "label": "ISC2 member maintenance policy",
+        "url": "https://www.isc2.org/policies-procedures/member-policies"
+      },
+      {
+        "label": "ISC2 annual maintenance fees",
+        "url": "https://www.isc2.org/policies-procedures/amfs-overview"
+      }
+    ]
+  }
+}

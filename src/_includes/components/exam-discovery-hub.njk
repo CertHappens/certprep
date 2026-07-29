@@ -1,0 +1,182 @@
+{% if examHub %}
+<header class="page-header page-header--compact">
+  <div class="page-shell">
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <ol>
+        {% for crumb in breadcrumbs %}
+        <li{% if loop.last %} aria-current="page"{% endif %}>
+          {% if crumb.url and not loop.last %}<a href="{{ crumb.url }}">{{ crumb.label }}</a>{% else %}{{ crumb.label }}{% endif %}
+        </li>
+        {% endfor %}
+      </ol>
+    </nav>
+
+    <p class="eyebrow">{{ examHub.eyebrow }}</p>
+    <h1>{{ examHub.title }}</h1>
+    <p class="lede">{{ examHub.lede }}</p>
+  </div>
+</header>
+
+<section class="section">
+  <div class="page-shell">
+    <div class="callout">
+      <p class="eyebrow">{{ examHub.status.label }}</p>
+      <h2>{{ examHub.status.heading }}</h2>
+      <p>{{ examHub.status.body }}</p>
+    </div>
+  </div>
+</section>
+
+<section class="section section--bordered" aria-labelledby="exam-overview-heading">
+  <div class="page-shell">
+    <div class="section-heading">
+      <p class="eyebrow">At a glance</p>
+      <h2 id="exam-overview-heading">What {{ examHub.name }} covers</h2>
+      {% for paragraph in examHub.summary %}<p>{{ paragraph }}</p>{% endfor %}
+    </div>
+
+    <div class="card-grid">
+      {% for fact in examHub.quickFacts %}
+      <article class="card">
+        <p class="card__meta">{{ fact.label }}</p>
+        <h3>{{ fact.value }}</h3>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="exam-audience-heading">
+  <div class="page-shell">
+    <div class="section-heading">
+      <p class="eyebrow">Candidate fit</p>
+      <h2 id="exam-audience-heading">{{ examHub.audience.heading }}</h2>
+      {% for paragraph in examHub.audience.paragraphs %}<p>{{ paragraph }}</p>{% endfor %}
+    </div>
+    <div class="callout">
+      <strong>Signals that the scope may fit your work</strong>
+      <ul>
+        {% for signal in examHub.audience.signals %}<li>{{ signal }}</li>{% endfor %}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section section--bordered" aria-labelledby="exam-comparison-heading">
+  <div class="page-shell">
+    <div class="section-heading">
+      <p class="eyebrow">Building on a foundation</p>
+      <h2 id="exam-comparison-heading">{{ examHub.comparison.heading }}</h2>
+      <p>{{ examHub.comparison.intro }}</p>
+    </div>
+
+    <div class="card-grid">
+      {% for item in examHub.comparison.entries %}
+      <article class="card">
+        <h3>{{ item.title }}</h3>
+        <p><strong>Security+ foundation:</strong> {{ item.securityPlus }}</p>
+        <p><strong>{{ examHub.name }} perspective:</strong> {{ item.advanced }}</p>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="exam-domains-heading">
+  <div class="page-shell">
+    <div class="section-heading">
+      <p class="eyebrow">Official scope</p>
+      <h2 id="exam-domains-heading">Eight {{ examHub.name }} domains</h2>
+      <p>Weights are averages from the current ISC2 exam outline.</p>
+    </div>
+
+    <div class="card-grid">
+      {% for domain in examHub.domains %}
+      <article class="card">
+        <p class="card__meta">Domain {{ domain.number }} · {{ domain.weight }}</p>
+        <h3>{{ domain.name }}</h3>
+        <p>{{ domain.focus }}</p>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section section--bordered" aria-labelledby="exam-experience-heading">
+  <div class="page-shell">
+    <div class="section-heading">
+      <p class="eyebrow">Beyond the exam</p>
+      <h2 id="exam-experience-heading">{{ examHub.experience.heading }}</h2>
+      {% for paragraph in examHub.experience.paragraphs %}<p>{{ paragraph }}</p>{% endfor %}
+    </div>
+
+    <div class="card-grid">
+      {% for item in examHub.experience.maintenance %}
+      <article class="card">
+        <p class="card__meta">{{ item.label }}</p>
+        <h3>{{ item.value }}</h3>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="exam-preparation-heading">
+  <div class="page-shell">
+    <div class="section-heading">
+      <p class="eyebrow">Study approach</p>
+      <h2 id="exam-preparation-heading">{{ examHub.preparation.heading }}</h2>
+    </div>
+
+    <div class="card-grid">
+      {% for step in examHub.preparation.steps %}
+      <article class="card">
+        <p class="card__meta">Step {{ loop.index }}</p>
+        <h3>{{ step.title }}</h3>
+        <p>{{ step.body }}</p>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section section--bordered" aria-labelledby="exam-resources-heading">
+  <div class="page-shell">
+    <div class="section-heading">
+      <p class="eyebrow">Current resources</p>
+      <h2 id="exam-resources-heading">{{ examHub.currentResources.heading }}</h2>
+      <p>{{ examHub.currentResources.intro }}</p>
+    </div>
+
+    <div class="card-grid">
+      {% for link in examHub.currentResources.links %}
+      <article class="card">
+        <h3>{{ link.title }}</h3>
+        <p>{{ link.description }}</p>
+        <a class="card__link" href="{{ link.url }}">Open {{ link.title | lower }}</a>
+      </article>
+      {% endfor %}
+    </div>
+
+    <div class="callout">
+      <strong>Possible next CISSP resources</strong>
+      <ul>
+        {% for item in examHub.currentResources.planned %}<li>{{ item }}</li>{% endfor %}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="exam-sources-heading">
+  <div class="page-shell prose">
+    <h2 id="exam-sources-heading">Confirm current requirements with ISC2</h2>
+    <p>Exam policies, fees, and certification requirements can change. Check the official sources before making registration or maintenance decisions.</p>
+    <ul>
+      {% for source in examHub.officialSources %}
+      <li><a href="{{ source.url }}">{{ source.label }}</a></li>
+      {% endfor %}
+    </ul>
+    <p>Cert Happens is an independent study resource and is not affiliated with or endorsed by ISC2.</p>
+  </div>
+</section>
+{% endif %}

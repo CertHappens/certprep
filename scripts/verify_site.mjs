@@ -159,6 +159,7 @@ function localTarget(href) {
 const publicPageFiles = [
   "index.html",
   "contact/index.html",
+  "cissp/index.html",
   "disclaimer/index.html",
   "network-plus/index.html",
   "network-plus/acronyms/index.html",
@@ -228,8 +229,21 @@ const wholeSitePageMarkers = new Map([
       "five domain guides, quick reviews, acronyms, subnetting tools",
       "/security-plus/",
       "/network-plus/",
+      "/cissp/",
       "/ports-protocols/",
       "/tools/subnet-calculator/"
+    ]
+  ],
+  [
+    "cissp/index.html",
+    [
+      "CISSP Certification Overview",
+      "A useful starting point, not a full CISSP course",
+      "Security and Risk Management",
+      "Software Development Security",
+      "120 credits during each three-year certification cycle",
+      "/security-plus/sy0-701/study-guide/",
+      "https://www.isc2.org/certifications/cissp/cissp-certification-exam-outline"
     ]
   ],
   [
@@ -243,6 +257,10 @@ const wholeSitePageMarkers = new Map([
       "/network-plus/n10-009/practice-test/",
       "/privacy/"
     ]
+  ],
+  [
+    "security-plus/index.html",
+    ["/cissp/", "See how CISSP widens the security perspective"]
   ],
   [
     "security-plus/acronyms/index.html",
@@ -1770,6 +1788,38 @@ for (const file of htmlFiles) {
       if (!html.includes(`id="${id}"`)) {
         fail(`${relative}: Domain 5 guide is missing section #${id}`);
       }
+    }
+  }
+
+  if (relative === "cissp/index.html") {
+    if (!/<h1>CISSP Certification Overview<\/h1>/.test(html)) {
+      fail(`${relative}: expected CISSP overview h1 is missing`);
+    }
+
+    const requiredSectionIds = [
+      "exam-overview-heading",
+      "exam-audience-heading",
+      "exam-comparison-heading",
+      "exam-domains-heading",
+      "exam-experience-heading",
+      "exam-preparation-heading",
+      "exam-resources-heading",
+      "exam-sources-heading"
+    ];
+
+    for (const id of requiredSectionIds) {
+      if (!html.includes(`id="${id}"`)) {
+        fail(`${relative}: reusable exam hub is missing section #${id}`);
+      }
+    }
+
+    const domainCardCount = (html.match(/class="card__meta">Domain [1-8] ·/g) || []).length;
+    if (domainCardCount !== 8) {
+      fail(`${relative}: expected 8 CISSP domain cards, found ${domainCardCount}`);
+    }
+
+    if (!html.includes("not affiliated with or endorsed by ISC2")) {
+      fail(`${relative}: ISC2 independence statement is missing`);
     }
   }
 
