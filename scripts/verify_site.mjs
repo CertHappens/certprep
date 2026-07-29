@@ -160,6 +160,7 @@ const publicPageFiles = [
   "index.html",
   "contact/index.html",
   "cissp/index.html",
+  "ccna/index.html",
   "disclaimer/index.html",
   "network-plus/index.html",
   "network-plus/acronyms/index.html",
@@ -230,6 +231,7 @@ const wholeSitePageMarkers = new Map([
       "/security-plus/",
       "/network-plus/",
       "/cissp/",
+      "/ccna/",
       "/ports-protocols/",
       "/tools/subnet-calculator/"
     ]
@@ -247,6 +249,19 @@ const wholeSitePageMarkers = new Map([
     ]
   ],
   [
+    "ccna/index.html",
+    [
+      "CCNA 200-301 Exam Overview",
+      "Planning for the 200-301 v2.0 exam",
+      "Study now without building toward an obsolete target",
+      "Network Fundamentals",
+      "Automation and Programmability",
+      "February 3, 2027",
+      "/network-plus/n10-009/study-guide/",
+      "https://www.cisco.com/site/us/en/learn/training-certifications/exams/ccna.html"
+    ]
+  ],
+  [
     "404.html",
     ["/security-plus/", "/network-plus/", "Return home"]
   ],
@@ -261,6 +276,10 @@ const wholeSitePageMarkers = new Map([
   [
     "security-plus/index.html",
     ["/cissp/", "See how CISSP widens the security perspective"]
+  ],
+  [
+    "network-plus/index.html",
+    ["/ccna/", "See how CCNA builds on Network+"]
   ],
   [
     "security-plus/acronyms/index.html",
@@ -761,7 +780,9 @@ for (const file of htmlFiles) {
       "Choose an exam and start studying",
       'href="/security-plus/sy0-701/practice-test/">Start Security+ practice test</a>',
       'href="/network-plus/n10-009/practice-test/">Start Network+ practice test</a>',
-      'href="/tools/subnet-calculator/">Open the IPv4 subnet calculator</a>'
+      'href="/tools/subnet-calculator/">Open the IPv4 subnet calculator</a>',
+      'href="/cissp/">Explore the CISSP overview</a>',
+      'href="/ccna/">Explore the CCNA overview</a>'
     ];
 
     for (const marker of requiredHomepageMarkers) {
@@ -853,6 +874,10 @@ for (const file of htmlFiles) {
 
     if (!html.includes('href="/network-plus/n10-009/study-guide/ipv4-subnetting/"')) {
       fail(`${relative}: Network+ hub is missing the IPv4 subnetting reference link`);
+    }
+
+    if (!html.includes('href="/ccna/"')) {
+      fail(`${relative}: Network+ hub is missing the CCNA transition link`);
     }
   }
 
@@ -1820,6 +1845,50 @@ for (const file of htmlFiles) {
 
     if (!html.includes("not affiliated with or endorsed by ISC2")) {
       fail(`${relative}: ISC2 independence statement is missing`);
+    }
+  }
+
+  if (relative === "ccna/index.html") {
+    if (!/<h1>CCNA 200-301 Exam Overview<\/h1>/.test(html)) {
+      fail(`${relative}: expected CCNA overview h1 is missing`);
+    }
+
+    const requiredSectionIds = [
+      "exam-overview-heading",
+      "exam-transition-heading",
+      "exam-audience-heading",
+      "exam-comparison-heading",
+      "exam-domains-heading",
+      "exam-experience-heading",
+      "exam-preparation-heading",
+      "exam-resources-heading",
+      "exam-sources-heading"
+    ];
+
+    for (const id of requiredSectionIds) {
+      if (!html.includes(`id="${id}"`)) {
+        fail(`${relative}: reusable exam hub is missing section #${id}`);
+      }
+    }
+
+    const domainCardCount = (html.match(/class="card__meta">Domain [1-6]\.0 ·/g) || []).length;
+    if (domainCardCount !== 6) {
+      fail(`${relative}: expected 6 CCNA domain cards, found ${domainCardCount}`);
+    }
+
+    const requiredMarkers = [
+      "Last day for v1.1",
+      "First day for v2.0",
+      "Network+ foundation",
+      "One 200-301 exam",
+      "30 credits",
+      "not affiliated with or endorsed by Cisco"
+    ];
+
+    for (const marker of requiredMarkers) {
+      if (!html.includes(marker)) {
+        fail(`${relative}: CCNA overview is missing ${marker}`);
+      }
     }
   }
 

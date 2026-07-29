@@ -46,7 +46,28 @@
   </div>
 </section>
 
-<section class="section" aria-labelledby="exam-audience-heading">
+{% if examHub.transition %}
+<section class="section" aria-labelledby="exam-transition-heading">
+  <div class="page-shell">
+    <div class="section-heading">
+      <p class="eyebrow">{{ examHub.transition.eyebrow }}</p>
+      <h2 id="exam-transition-heading">{{ examHub.transition.heading }}</h2>
+      {% for paragraph in examHub.transition.paragraphs %}<p>{{ paragraph }}</p>{% endfor %}
+    </div>
+
+    <div class="card-grid">
+      {% for fact in examHub.transition.facts %}
+      <article class="card">
+        <p class="card__meta">{{ fact.label }}</p>
+        <h3>{{ fact.value }}</h3>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<section class="section{% if not examHub.transition %} section--bordered{% endif %}" aria-labelledby="exam-audience-heading">
   <div class="page-shell">
     <div class="section-heading">
       <p class="eyebrow">Candidate fit</p>
@@ -54,7 +75,7 @@
       {% for paragraph in examHub.audience.paragraphs %}<p>{{ paragraph }}</p>{% endfor %}
     </div>
     <div class="callout">
-      <strong>Signals that the scope may fit your work</strong>
+      <strong>{{ examHub.audience.signalHeading }}</strong>
       <ul>
         {% for signal in examHub.audience.signals %}<li>{{ signal }}</li>{% endfor %}
       </ul>
@@ -74,7 +95,7 @@
       {% for item in examHub.comparison.entries %}
       <article class="card">
         <h3>{{ item.title }}</h3>
-        <p><strong>Security+ foundation:</strong> {{ item.securityPlus }}</p>
+        <p><strong>{{ examHub.comparison.foundationLabel }}:</strong> {{ item.foundation }}</p>
         <p><strong>{{ examHub.name }} perspective:</strong> {{ item.advanced }}</p>
       </article>
       {% endfor %}
@@ -85,15 +106,15 @@
 <section class="section" aria-labelledby="exam-domains-heading">
   <div class="page-shell">
     <div class="section-heading">
-      <p class="eyebrow">Official scope</p>
-      <h2 id="exam-domains-heading">Eight {{ examHub.name }} domains</h2>
-      <p>Weights are averages from the current ISC2 exam outline.</p>
+      <p class="eyebrow">{{ examHub.scope.eyebrow }}</p>
+      <h2 id="exam-domains-heading">{{ examHub.scope.heading }}</h2>
+      <p>{{ examHub.scope.intro }}</p>
     </div>
 
     <div class="card-grid">
       {% for domain in examHub.domains %}
       <article class="card">
-        <p class="card__meta">Domain {{ domain.number }} · {{ domain.weight }}</p>
+        <p class="card__meta">{{ examHub.scope.itemLabel }} {{ domain.number }} · {{ domain.weight }}</p>
         <h3>{{ domain.name }}</h3>
         <p>{{ domain.focus }}</p>
       </article>
@@ -105,7 +126,7 @@
 <section class="section section--bordered" aria-labelledby="exam-experience-heading">
   <div class="page-shell">
     <div class="section-heading">
-      <p class="eyebrow">Beyond the exam</p>
+      <p class="eyebrow">{{ examHub.experience.eyebrow }}</p>
       <h2 id="exam-experience-heading">{{ examHub.experience.heading }}</h2>
       {% for paragraph in examHub.experience.paragraphs %}<p>{{ paragraph }}</p>{% endfor %}
     </div>
@@ -124,7 +145,7 @@
 <section class="section" aria-labelledby="exam-preparation-heading">
   <div class="page-shell">
     <div class="section-heading">
-      <p class="eyebrow">Study approach</p>
+      <p class="eyebrow">{{ examHub.preparation.eyebrow }}</p>
       <h2 id="exam-preparation-heading">{{ examHub.preparation.heading }}</h2>
     </div>
 
@@ -143,7 +164,7 @@
 <section class="section section--bordered" aria-labelledby="exam-resources-heading">
   <div class="page-shell">
     <div class="section-heading">
-      <p class="eyebrow">Current resources</p>
+      <p class="eyebrow">{{ examHub.currentResources.eyebrow }}</p>
       <h2 id="exam-resources-heading">{{ examHub.currentResources.heading }}</h2>
       <p>{{ examHub.currentResources.intro }}</p>
     </div>
@@ -159,7 +180,7 @@
     </div>
 
     <div class="callout">
-      <strong>Possible next CISSP resources</strong>
+      <strong>{{ examHub.currentResources.plannedHeading }}</strong>
       <ul>
         {% for item in examHub.currentResources.planned %}<li>{{ item }}</li>{% endfor %}
       </ul>
@@ -169,14 +190,14 @@
 
 <section class="section" aria-labelledby="exam-sources-heading">
   <div class="page-shell prose">
-    <h2 id="exam-sources-heading">Confirm current requirements with ISC2</h2>
-    <p>Exam policies, fees, and certification requirements can change. Check the official sources before making registration or maintenance decisions.</p>
+    <h2 id="exam-sources-heading">{{ examHub.sources.heading }}</h2>
+    <p>{{ examHub.sources.intro }}</p>
     <ul>
       {% for source in examHub.officialSources %}
       <li><a href="{{ source.url }}">{{ source.label }}</a></li>
       {% endfor %}
     </ul>
-    <p>Cert Happens is an independent study resource and is not affiliated with or endorsed by ISC2.</p>
+    <p>{{ examHub.sources.independence }}</p>
   </div>
 </section>
 {% endif %}

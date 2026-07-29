@@ -6,7 +6,7 @@ Exam discovery hubs provide useful certification guidance before Cert Happens co
 
 - `src/_data/examHubs.json` stores certification-specific facts and copy.
 - `src/_includes/components/exam-discovery-hub.njk` renders the shared hub structure.
-- A small route wrapper such as `src/cissp/index.njk` selects the correct data record and supplies page metadata and breadcrumbs.
+- A small route wrapper such as `src/cissp/index.njk` or `src/ccna/index.njk` selects the correct data record and supplies page metadata and breadcrumbs.
 
 ## Required content
 
@@ -20,6 +20,30 @@ Each hub should include:
 - A comparison with the closest existing Cert Happens certification
 - Existing Cert Happens resources that can refresh prerequisites without being presented as exam-specific preparation
 - Official vendor links for details that may change
+
+## Optional transition section
+
+Use the `transition` record when an exam version has a published retirement or launch date. It can explain:
+
+- Which version is currently active
+- The final date for the outgoing version
+- The launch date for the incoming version
+- Which foundational skills carry forward
+- Which version Cert Happens plans to support with a dedicated bank
+
+Do not publish guessed domain weights or task details for an incoming exam. Use only facts confirmed by the certification vendor.
+
+## Reusable labels
+
+The component reads certification-specific labels from the data record rather than assuming CISSP terminology. Important fields include:
+
+- `audience.signalHeading`
+- `comparison.foundationLabel`
+- `scope.eyebrow`, `scope.heading`, `scope.intro`, and `scope.itemLabel`
+- `experience.eyebrow`
+- `preparation.eyebrow`
+- `currentResources.eyebrow` and `currentResources.plannedHeading`
+- `sources.heading`, `sources.intro`, and `sources.independence`
 
 ## Publishing standard
 
@@ -47,4 +71,4 @@ Do not label a certification as fully supported until its practice tests, review
 
 The `sourceReviewed` field is internal and should be updated when official requirements are checked. It is not displayed as an article date.
 
-Before changing exam format, fees, experience requirements, domain weights, or maintenance obligations, confirm them against official vendor sources.
+Before changing exam format, fees, experience requirements, domain weights, transition dates, or maintenance obligations, confirm them against official vendor sources.

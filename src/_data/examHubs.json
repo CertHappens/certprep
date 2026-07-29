@@ -50,7 +50,8 @@
         "You help choose, justify, or govern security controls.",
         "You work across teams such as legal, privacy, software, networking, operations, and leadership.",
         "You need to explain why a security decision is appropriate, not only how to configure it."
-      ]
+      ],
+      "signalHeading": "Signals that the scope may fit your work"
     },
     "comparison": {
       "heading": "How the perspective changes after Security+",
@@ -58,25 +59,26 @@
       "entries": [
         {
           "title": "Controls and tools",
-          "securityPlus": "Recognize the control or tool that best addresses a stated problem.",
-          "advanced": "Evaluate whether the control fits business requirements, risk tolerance, architecture, policy, law, cost, and lifecycle obligations."
+          "advanced": "Evaluate whether the control fits business requirements, risk tolerance, architecture, policy, law, cost, and lifecycle obligations.",
+          "foundation": "Recognize the control or tool that best addresses a stated problem."
         },
         {
           "title": "Incident response",
-          "securityPlus": "Choose the correct response action, evidence source, or containment step.",
-          "advanced": "Balance response priorities with governance, communications, legal considerations, business continuity, and lessons learned."
+          "advanced": "Balance response priorities with governance, communications, legal considerations, business continuity, and lessons learned.",
+          "foundation": "Choose the correct response action, evidence source, or containment step."
         },
         {
           "title": "Architecture",
-          "securityPlus": "Identify secure design patterns and implementation choices.",
-          "advanced": "Select and defend architecture based on requirements, trust boundaries, system models, resilience, and organizational constraints."
+          "advanced": "Select and defend architecture based on requirements, trust boundaries, system models, resilience, and organizational constraints.",
+          "foundation": "Identify secure design patterns and implementation choices."
         },
         {
           "title": "Risk",
-          "securityPlus": "Understand risk concepts, treatment options, and common frameworks.",
-          "advanced": "Apply risk decisions across programs, suppliers, assets, data, compliance duties, and executive accountability."
+          "advanced": "Apply risk decisions across programs, suppliers, assets, data, compliance duties, and executive accountability.",
+          "foundation": "Understand risk concepts, treatment options, and common frameworks."
         }
-      ]
+      ],
+      "foundationLabel": "Security+ foundation"
     },
     "domains": [
       {
@@ -148,7 +150,8 @@
           "label": "Multiple ISC2 certifications",
           "value": "One member AMF applies rather than a separate fee for every certification"
         }
-      ]
+      ],
+      "eyebrow": "Beyond the exam"
     },
     "preparation": {
       "heading": "A practical preparation sequence",
@@ -173,7 +176,8 @@
           "title": "Plan beyond exam day",
           "body": "Understand endorsement, experience documentation, CPE reporting, and the annual maintenance obligation before scheduling the exam."
         }
-      ]
+      ],
+      "eyebrow": "Study approach"
     },
     "currentResources": {
       "heading": "Useful Cert Happens resources available now",
@@ -204,7 +208,9 @@
         "A Security+ to CISSP transition guide",
         "A deeper guide to CISSP decision-making and organizational context",
         "Dedicated CISSP practice questions only after the content and review process can support them"
-      ]
+      ],
+      "eyebrow": "Current resources",
+      "plannedHeading": "Possible next CISSP resources"
     },
     "officialSources": [
       {
@@ -226,6 +232,299 @@
       {
         "label": "ISC2 annual maintenance fees",
         "url": "https://www.isc2.org/policies-procedures/amfs-overview"
+      }
+    ],
+    "scope": {
+      "eyebrow": "Official scope",
+      "heading": "Eight CISSP domains",
+      "intro": "Weights are averages from the current ISC2 exam outline.",
+      "itemLabel": "Domain"
+    },
+    "sources": {
+      "heading": "Confirm current requirements with ISC2",
+      "intro": "Exam policies, fees, and certification requirements can change. Check the official sources before making registration or maintenance decisions.",
+      "independence": "Cert Happens is an independent study resource and is not affiliated with or endorsed by ISC2."
+    },
+    "transition": null
+  },
+  "ccna": {
+    "slug": "ccna",
+    "name": "CCNA",
+    "fullName": "Cisco Certified Network Associate",
+    "provider": "Cisco",
+    "eyebrow": "Certification overview",
+    "title": "CCNA 200-301 Exam Overview",
+    "lede": "Understand the current exam, the February 2027 refresh, and the hands-on skills that separate CCNA preparation from a vendor-neutral networking review.",
+    "sourceReviewed": "2026-07-29",
+    "status": {
+      "label": "CCNA foundation available",
+      "heading": "Planning for the 200-301 v2.0 exam",
+      "body": "Cert Happens does not yet offer a dedicated CCNA practice-test bank or Cisco IOS study guide. This overview explains the version transition, maps the current skill areas, and shows which existing Network+ resources can support the foundation while the v2.0 objective map and review workflow are built."
+    },
+    "summary": [
+      "CCNA measures whether a candidate can understand, configure, verify, and troubleshoot a small to medium network. Addressing, switching, routing, wireless, security, services, and automation are connected through practical operational decisions rather than treated as isolated definitions.",
+      "The current 200-301 v1.1 exam remains available through February 2, 2027. Cisco says the v2.0 exam launches February 3, 2027 with more practical assessment, troubleshooting, security-first thinking, and AI in network management and operations."
+    ],
+    "quickFacts": [
+      {
+        "label": "Exam code",
+        "value": "200-301 CCNA"
+      },
+      {
+        "label": "Current version",
+        "value": "v1.1"
+      },
+      {
+        "label": "Current exam time",
+        "value": "120 minutes"
+      },
+      {
+        "label": "Current price",
+        "value": "U.S. $300 plus applicable tax"
+      },
+      {
+        "label": "Current languages",
+        "value": "English and Japanese"
+      },
+      {
+        "label": "v2.0 launch",
+        "value": "February 3, 2027"
+      }
+    ],
+    "transition": {
+      "eyebrow": "Version transition",
+      "heading": "Study now without building toward an obsolete target",
+      "paragraphs": [
+        "Candidates planning to test by February 2, 2027 should continue using the current v1.1 blueprint. Cisco has said the refresh keeps the technical core, so current study in subnetting, switching, routing, services, security, and automation still carries forward.",
+        "Cert Happens will target its first dedicated CCNA question bank at v2.0. That avoids launching a short-lived bank while still giving current candidates a useful map of the skills that remain central to the certification."
+      ],
+      "facts": [
+        {
+          "label": "Last day for v1.1",
+          "value": "February 2, 2027"
+        },
+        {
+          "label": "First day for v2.0",
+          "value": "February 3, 2027"
+        },
+        {
+          "label": "Refresh emphasis",
+          "value": "Practical skills, troubleshooting, security, and AI"
+        }
+      ]
+    },
+    "audience": {
+      "heading": "Who CCNA is built for",
+      "paragraphs": [
+        "CCNA is aimed at people entering or advancing in network engineering, network administration, infrastructure support, and related security or cloud roles. It is also useful for experienced support professionals who need stronger routing, switching, and troubleshooting depth.",
+        "There is no formal certification prerequisite. The practical challenge is being able to move between concepts, command output, configuration intent, and fault evidence without losing track of how traffic should flow."
+      ],
+      "signalHeading": "Signals that CCNA may fit your next step",
+      "signals": [
+        "You understand basic networking and want to configure and verify it rather than only describe it.",
+        "You need stronger routing, switching, wireless, or infrastructure troubleshooting skills.",
+        "You work with Cisco IOS or expect to support Cisco-based environments.",
+        "You want a networking foundation that can lead toward security, cloud, automation, or professional-level Cisco study."
+      ]
+    },
+    "comparison": {
+      "heading": "What changes after Network+",
+      "intro": "Network+ provides broad vendor-neutral coverage. CCNA expects more configuration fluency, output interpretation, and device-level verification.",
+      "foundationLabel": "Network+ foundation",
+      "entries": [
+        {
+          "title": "Addressing and subnetting",
+          "foundation": "Calculate subnets, host ranges, masks, and addressing requirements.",
+          "advanced": "Apply IPv4 and IPv6 addressing to interfaces, routing decisions, VLAN designs, and troubleshooting evidence."
+        },
+        {
+          "title": "Switching",
+          "foundation": "Explain VLANs, trunks, spanning tree, link aggregation, and common Layer 2 faults.",
+          "advanced": "Interpret and verify Cisco switch configuration, trunk state, VLAN membership, spanning-tree roles, and EtherChannel operation."
+        },
+        {
+          "title": "Routing",
+          "foundation": "Understand route selection, static and dynamic routing, and common path problems.",
+          "advanced": "Read routing tables, select the most specific route, configure IPv4 and IPv6 paths, and verify OSPF and static routing behavior."
+        },
+        {
+          "title": "Troubleshooting",
+          "foundation": "Use a structured method and choose appropriate commands, tools, and evidence.",
+          "advanced": "Combine interface state, configuration, tables, logs, and command output to isolate the fault and choose the next verification step."
+        },
+        {
+          "title": "Automation and management",
+          "foundation": "Recognize APIs, configuration management, software-defined networking, and automation concepts.",
+          "advanced": "Understand how controllers, APIs, data formats, automation tools, and AI-assisted operations fit into modern Cisco network management."
+        }
+      ]
+    },
+    "scope": {
+      "eyebrow": "Current official scope",
+      "heading": "Six current CCNA v1.1 domains",
+      "intro": "These weights describe the current v1.1 exam. Cisco has published a v2.0 refresh for February 2027, so the dedicated Cert Happens bank will be mapped separately before launch.",
+      "itemLabel": "Domain"
+    },
+    "domains": [
+      {
+        "number": "1.0",
+        "name": "Network Fundamentals",
+        "weight": "20%",
+        "focus": "Network components, topologies, cabling, TCP/IP, IPv4 and IPv6 addressing, wireless principles, virtualization, and switching concepts."
+      },
+      {
+        "number": "2.0",
+        "name": "Network Access",
+        "weight": "20%",
+        "focus": "VLANs, trunks, discovery protocols, EtherChannel, spanning tree, wireless architecture, management access, and Layer 2 security."
+      },
+      {
+        "number": "3.0",
+        "name": "IP Connectivity",
+        "weight": "25%",
+        "focus": "Routing tables, forwarding decisions, static routing, single-area OSPF, first-hop redundancy, and verification of IPv4 and IPv6 paths."
+      },
+      {
+        "number": "4.0",
+        "name": "IP Services",
+        "weight": "10%",
+        "focus": "NAT, NTP, DHCP, DNS, SNMP, syslog, QoS, secure remote access, and device management services."
+      },
+      {
+        "number": "5.0",
+        "name": "Security Fundamentals",
+        "weight": "15%",
+        "focus": "Threats, vulnerabilities, access control, Layer 2 protections, device hardening, wireless security, VPN concepts, and security program elements."
+      },
+      {
+        "number": "6.0",
+        "name": "Automation and Programmability",
+        "weight": "10%",
+        "focus": "Controllers, software-defined architectures, APIs, data formats, configuration management, automation tools, and AI or machine learning in network operations."
+      }
+    ],
+    "experience": {
+      "eyebrow": "Exam and certification path",
+      "heading": "One exam, then an active certification cycle",
+      "paragraphs": [
+        "CCNA has no formal degree or prior-certification prerequisite. Earning it requires passing the current 200-301 exam version available on the candidate’s test date.",
+        "Most Cisco certifications, including CCNA, remain active for three years. Associate-level recertification can be completed through qualifying exams, 30 Continuing Education credits, or another current option listed in Cisco’s recertification policy.",
+        "Because the exam version changes in February 2027, candidates should verify the active blueprint before scheduling and make sure their preparation materials match their intended test date."
+      ],
+      "maintenance": [
+        {
+          "label": "Formal prerequisite",
+          "value": "None"
+        },
+        {
+          "label": "Certification exam",
+          "value": "One 200-301 exam"
+        },
+        {
+          "label": "Active cycle",
+          "value": "Three years"
+        },
+        {
+          "label": "Associate CE option",
+          "value": "30 credits"
+        }
+      ]
+    },
+    "preparation": {
+      "eyebrow": "Study approach",
+      "heading": "Build command fluency around the network model",
+      "steps": [
+        {
+          "title": "Lock down the fundamentals",
+          "body": "Be comfortable with subnetting, Ethernet, VLANs, trunks, routing logic, wireless basics, and common services before adding command memorization."
+        },
+        {
+          "title": "Use a lab from the beginning",
+          "body": "Practice on Packet Tracer, Cisco Modeling Labs, or suitable equipment so configuration and verification commands are connected to visible network behavior."
+        },
+        {
+          "title": "Read output before changing configuration",
+          "body": "Learn what normal interface, VLAN, spanning-tree, neighbor, and routing output looks like. Troubleshooting improves when evidence comes before guesses."
+        },
+        {
+          "title": "Practice the next best command",
+          "body": "Do not stop at identifying the likely fault. Decide which command or observation would confirm it with the least unnecessary change."
+        },
+        {
+          "title": "Track the exam version",
+          "body": "Use v1.1 material for a test scheduled by February 2, 2027. Use the published v2.0 scope for testing on or after February 3, 2027."
+        }
+      ]
+    },
+    "currentResources": {
+      "eyebrow": "Current resources",
+      "heading": "Useful Cert Happens networking resources available now",
+      "intro": "These resources are written for Network+, so they do not replace Cisco IOS labs or CCNA-specific preparation. They can strengthen the vendor-neutral foundation needed before configuration and verification practice.",
+      "links": [
+        {
+          "title": "Network+ study guide",
+          "url": "/network-plus/n10-009/study-guide/",
+          "description": "Review networking concepts, implementation, operations, security, and troubleshooting across all five N10-009 domains."
+        },
+        {
+          "title": "IPv4 subnetting reference",
+          "url": "/network-plus/n10-009/study-guide/ipv4-subnetting/",
+          "description": "Review masks, prefixes, boundaries, host capacity, and special-use addresses before applying them to interfaces and routes."
+        },
+        {
+          "title": "IPv4 subnet calculator",
+          "url": "/tools/subnet-calculator/",
+          "description": "Check network and broadcast boundaries, usable ranges, masks, and address status while practicing calculations manually."
+        },
+        {
+          "title": "VLANs, trunks, STP, and LACP",
+          "url": "/network-plus/quick-review/vlans-trunks-stp-lacp/",
+          "description": "Separate the Layer 2 features that later need Cisco-specific configuration and verification."
+        },
+        {
+          "title": "Troubleshooting tools",
+          "url": "/network-plus/quick-review/troubleshooting-tools/",
+          "description": "Match host commands, packet tools, cable testers, and wireless tools to the evidence each one provides."
+        },
+        {
+          "title": "Ports and protocols",
+          "url": "/ports-protocols/",
+          "description": "Refresh common services, transports, secure alternatives, and protocol behavior."
+        }
+      ],
+      "plannedHeading": "Planned CCNA v2.0 resources",
+      "planned": [
+        "A complete v2.0 objective map and source register",
+        "Cisco IOS command, configuration, and show-output presentation patterns",
+        "Original questions built around routing tables, configurations, verification output, and troubleshooting decisions",
+        "A weighted practice-test bank and domain guides after the review process is ready"
+      ]
+    },
+    "sources": {
+      "heading": "Confirm the active blueprint with Cisco",
+      "intro": "Exam versions, prices, topics, and recertification rules can change. Check the current Cisco pages before scheduling or making a long-term study plan.",
+      "independence": "Cert Happens is an independent study resource and is not affiliated with or endorsed by Cisco."
+    },
+    "officialSources": [
+      {
+        "label": "Current 200-301 CCNA exam page",
+        "url": "https://www.cisco.com/site/us/en/learn/training-certifications/exams/ccna.html"
+      },
+      {
+        "label": "Current CCNA exam topics",
+        "url": "https://learningnetwork.cisco.com/s/ccna-exam-topics"
+      },
+      {
+        "label": "Cisco announcement for the CCNA refresh",
+        "url": "https://blogs.cisco.com/learning/ai-updates-ccna-ccie-automation"
+      },
+      {
+        "label": "Cisco guidance for the v1.1 to v2.0 transition",
+        "url": "https://blogs.cisco.com/learning/stay-on-track-get-certified-before-the-ccna-refresh"
+      },
+      {
+        "label": "Cisco recertification policy",
+        "url": "https://www.cisco.com/site/us/en/learn/training-certifications/certifications/recertification/index.html"
       }
     ]
   }
