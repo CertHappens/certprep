@@ -2,11 +2,125 @@
   "primary": [
     {
       "label": "Security+",
-      "url": "/security-plus/"
+      "url": "/security-plus/",
+      "matchPrefix": "/security-plus/",
+      "menuId": "security-plus-navigation",
+      "groups": [
+        {
+          "label": "Overview",
+          "links": [
+            {
+              "label": "Security+ hub",
+              "url": "/security-plus/"
+            }
+          ]
+        },
+        {
+          "label": "Practice",
+          "links": [
+            {
+              "label": "SY0-701 practice test",
+              "url": "/security-plus/sy0-701/practice-test/"
+            }
+          ]
+        },
+        {
+          "label": "Study",
+          "links": [
+            {
+              "label": "Study guide",
+              "url": "/security-plus/sy0-701/study-guide/"
+            },
+            {
+              "label": "Quick reviews",
+              "url": "/security-plus/quick-review/"
+            }
+          ]
+        },
+        {
+          "label": "References",
+          "links": [
+            {
+              "label": "Acronyms",
+              "url": "/security-plus/acronyms/"
+            },
+            {
+              "label": "Ports and protocols",
+              "url": "/ports-protocols/"
+            }
+          ]
+        }
+      ]
     },
     {
       "label": "Network+",
-      "url": "/network-plus/"
+      "url": "/network-plus/",
+      "matchPrefix": "/network-plus/",
+      "menuId": "network-plus-navigation",
+      "groups": [
+        {
+          "label": "Overview",
+          "links": [
+            {
+              "label": "Network+ hub",
+              "url": "/network-plus/"
+            }
+          ]
+        },
+        {
+          "label": "Practice",
+          "links": [
+            {
+              "label": "N10-009 practice test",
+              "url": "/network-plus/n10-009/practice-test/"
+            }
+          ]
+        },
+        {
+          "label": "Study",
+          "links": [
+            {
+              "label": "Study guide",
+              "url": "/network-plus/n10-009/study-guide/"
+            },
+            {
+              "label": "Quick reviews",
+              "url": "/network-plus/quick-review/"
+            }
+          ]
+        },
+        {
+          "label": "References and tools",
+          "links": [
+            {
+              "label": "Acronyms",
+              "url": "/network-plus/acronyms/"
+            },
+            {
+              "label": "Ports and protocols",
+              "url": "/ports-protocols/"
+            },
+            {
+              "label": "IPv4 subnetting reference",
+              "url": "/network-plus/n10-009/study-guide/ipv4-subnetting/"
+            },
+            {
+              "label": "IPv4 subnet calculator",
+              "url": "/tools/subnet-calculator/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "CISSP",
+      "url": "/cissp/",
+      "matchPrefix": "/cissp/"
+    },
+    {
+      "label": "CCNA",
+      "url": "/ccna/",
+      "matchPrefix": "/ccna/"
     }
   ],
   "footer": [
