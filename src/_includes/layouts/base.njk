@@ -59,6 +59,7 @@
   <link rel="stylesheet" href="/assets/css/site.css">
   <link rel="stylesheet" href="/assets/css/brand.css">
   <link rel="stylesheet" href="/assets/css/phase6.css">
+  <link rel="stylesheet" href="/assets/css/navigation.css">
   {% if printable %}
   <link rel="stylesheet" href="/assets/css/print.css" media="print">
   {% endif %}
@@ -121,7 +122,7 @@
 <body>
   <a class="skip-link" href="#main-content">Skip to main content</a>
 
-  <header class="site-header">
+  <header class="site-header" data-site-header>
     <div class="site-header__inner page-shell">
       <a class="site-brand" href="/" aria-label="{{ site.name }} home">
         <img
@@ -141,9 +142,64 @@
       <span class="site-header__print-title" aria-hidden="true">{{ printTitle or title }}</span>
       {% endif %}
 
-      <nav class="primary-nav" aria-label="Primary navigation">
+      <button
+        class="site-nav-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="primary-navigation"
+        hidden
+        data-site-nav-toggle
+      >
+        <span class="site-nav-toggle__icon" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
+        <span data-site-nav-toggle-label>Menu</span>
+      </button>
+
+      <nav
+        class="primary-nav"
+        id="primary-navigation"
+        aria-label="Primary navigation"
+        data-primary-navigation
+        data-open="false"
+      >
         {% for item in siteNavigation.primary %}
-        <a href="{{ item.url }}">{{ item.label }}</a>
+          {% if item.groups %}
+          <details
+            class="primary-nav__details"
+            data-nav-submenu
+            data-nav-prefix="{{ item.matchPrefix }}"
+          >
+            <summary
+              class="primary-nav__summary"
+              aria-controls="{{ item.menuId }}"
+              aria-expanded="false"
+            >
+              <span>{{ item.label }}</span>
+              <span class="primary-nav__chevron" aria-hidden="true"></span>
+            </summary>
+            <div class="primary-nav__submenu" id="{{ item.menuId }}">
+              {% for group in item.groups %}
+              <section class="primary-nav__group" aria-labelledby="{{ item.menuId }}-group-{{ loop.index }}">
+                <p class="primary-nav__group-label" id="{{ item.menuId }}-group-{{ loop.index }}">{{ group.label }}</p>
+                <div class="primary-nav__group-links">
+                  {% for link in group.links %}
+                  <a class="primary-nav__submenu-link" href="{{ link.url }}">{{ link.label }}</a>
+                  {% endfor %}
+                </div>
+              </section>
+              {% endfor %}
+            </div>
+          </details>
+          {% else %}
+          <a
+            class="primary-nav__link"
+            href="{{ item.url }}"
+            data-nav-prefix="{{ item.matchPrefix }}"
+          >{{ item.label }}</a>
+          {% endif %}
         {% endfor %}
       </nav>
     </div>
@@ -167,5 +223,6 @@
       </p>
     </div>
   </footer>
+  <script src="/assets/js/site-navigation.js"></script>
 </body>
 </html>

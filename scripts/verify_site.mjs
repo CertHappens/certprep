@@ -348,7 +348,9 @@ const requiredFiles = [
   "_redirects",
   "assets/brand/certhappens-social-card.png",
   "assets/css/site.css",
+  "assets/css/navigation.css",
   "assets/css/print.css",
+  "assets/js/site-navigation.js",
   "assets/js/print-guide.js",
   "assets/js/acronym-filter.js",
   "assets/js/ports-protocols-filter.js",
@@ -495,6 +497,44 @@ if (await isFile(siteCssPath)) {
   for (const rule of requiredAcronymRules) {
     if (!siteCss.includes(rule)) {
       fail(`site.css: shared acronym-reference rule is missing: ${rule}`);
+    }
+  }
+}
+
+const navigationCssPath = path.join(outputRoot, "assets/css/navigation.css");
+if (await isFile(navigationCssPath)) {
+  const navigationCss = await readFile(navigationCssPath, "utf8");
+  const requiredNavigationCssRules = [
+    ".site-nav-toggle",
+    ".primary-nav__details",
+    ".primary-nav__submenu",
+    ".primary-nav__group-label",
+    ".primary-nav__submenu-link",
+    "@media screen and (max-width: 48rem)",
+    '.site-header[data-nav-enhanced="true"] .primary-nav[data-open="false"]'
+  ];
+
+  for (const rule of requiredNavigationCssRules) {
+    if (!navigationCss.includes(rule)) {
+      fail(`navigation.css: shared navigation rule is missing: ${rule}`);
+    }
+  }
+}
+
+const navigationScriptPath = path.join(outputRoot, "assets/js/site-navigation.js");
+if (await isFile(navigationScriptPath)) {
+  const navigationScript = await readFile(navigationScriptPath, "utf8");
+  const requiredNavigationScriptMarkers = [
+    'event.key !== "Escape"',
+    'setAttribute("aria-expanded"',
+    'window.matchMedia("(max-width: 48rem)")',
+    'closeSubmenus(submenu)',
+    'setNavigationOpen(false, { returnFocus: true })'
+  ];
+
+  for (const marker of requiredNavigationScriptMarkers) {
+    if (!navigationScript.includes(marker)) {
+      fail(`site-navigation.js: navigation behavior is missing: ${marker}`);
     }
   }
 }
@@ -662,6 +702,54 @@ for (const file of htmlFiles) {
 
   if (!html.includes('class="site-footer"')) {
     fail(`${relative}: shared site footer is missing`);
+  }
+
+  const requiredNavigationMarkers = [
+    'data-site-header',
+    'data-site-nav-toggle',
+    'aria-controls="primary-navigation"',
+    'id="primary-navigation"',
+    'data-primary-navigation',
+    'id="security-plus-navigation"',
+    'id="network-plus-navigation"',
+    'src="/assets/js/site-navigation.js"',
+    'href="/cissp/"',
+    'href="/ccna/"'
+  ];
+
+  for (const marker of requiredNavigationMarkers) {
+    if (!html.includes(marker)) {
+      fail(`${relative}: shared navigation is missing ${marker}`);
+    }
+  }
+
+  const navigationSubmenuCount = (html.match(/data-nav-submenu/g) || []).length;
+  if (navigationSubmenuCount !== 2) {
+    fail(`${relative}: expected 2 certification navigation submenus, found ${navigationSubmenuCount}`);
+  }
+
+  const requiredNavigationLinks = [
+    "/security-plus/",
+    "/security-plus/sy0-701/practice-test/",
+    "/security-plus/sy0-701/study-guide/",
+    "/security-plus/quick-review/",
+    "/security-plus/acronyms/",
+    "/network-plus/",
+    "/network-plus/n10-009/practice-test/",
+    "/network-plus/n10-009/study-guide/",
+    "/network-plus/quick-review/",
+    "/network-plus/acronyms/",
+    "/ports-protocols/",
+    "/network-plus/n10-009/study-guide/ipv4-subnetting/",
+    "/tools/subnet-calculator/",
+    "/cissp/",
+    "/ccna/"
+  ];
+
+  for (const href of requiredNavigationLinks) {
+    if (!html.includes(`href="${href}"`)) {
+      fail(`${relative}: shared navigation is missing ${href}`);
+    }
   }
 
   const breadcrumbStructuredDataCount = (
