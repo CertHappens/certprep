@@ -161,6 +161,7 @@ const publicPageFiles = [
   "contact/index.html",
   "cissp/index.html",
   "ccna/index.html",
+  "ccna/commands/index.html",
   "disclaimer/index.html",
   "network-plus/index.html",
   "network-plus/acronyms/index.html",
@@ -196,6 +197,7 @@ const publicPageFiles = [
 ];
 
 const articlePageFiles = [
+  "ccna/commands/index.html",
   "network-plus/acronyms/index.html",
   "network-plus/n10-009/study-guide/index.html",
   "network-plus/n10-009/study-guide/ipv4-subnetting/index.html",
@@ -240,7 +242,7 @@ const wholeSitePageMarkers = new Map([
     "cissp/index.html",
     [
       "CISSP Certification Overview",
-      "A useful starting point, not a full CISSP course",
+      "Start with scope, experience, and decision-making",
       "Security and Risk Management",
       "Software Development Security",
       "120 credits during each three-year certification cycle",
@@ -252,8 +254,8 @@ const wholeSitePageMarkers = new Map([
     "ccna/index.html",
     [
       "CCNA 200-301 Exam Overview",
-      "Building toward the published 200-301 v2.0 blueprint",
-      "Study now without building toward an obsolete target",
+      "Use v1.1 through February 2, 2027 and v2.0 starting February 3, 2027",
+      "CCNA and networking resources you can use now",
       "Network Infrastructure and Connectivity",
       "AI, and Network Operations and Management",
       "February 3, 2027",
