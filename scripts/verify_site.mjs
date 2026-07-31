@@ -1597,6 +1597,17 @@ for (const file of htmlFiles) {
       "/security-plus/",
       "Return to Security+ resources"
     );
+    const requiredPracticeMarkers = [
+      "Security+ SY0-701 practice test",
+      'data-test-id="SEC-701"',
+      'data-questions-url="/quiz-data/security-plus/sec-701/questions.json"'
+    ];
+
+    for (const marker of requiredPracticeMarkers) {
+      if (!html.includes(marker)) {
+        fail(`${relative}: Security+ practice test is missing ${marker}`);
+      }
+    }
   }
 
   if (relative === "network-plus/n10-009/practice-test/index.html") {
