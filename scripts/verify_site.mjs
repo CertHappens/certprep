@@ -1993,6 +1993,77 @@ for (const file of htmlFiles) {
         fail(`${relative}: CCNA overview is missing ${marker}`);
       }
     }
+
+    if (!html.includes('href="/ccna/commands/"')) {
+      fail(`${relative}: CCNA overview is missing the IOS command reference link`);
+    }
+
+    if (html.includes("Planned CCNA v2.0 resources")) {
+      fail(`${relative}: CCNA overview still exposes internal roadmap copy`);
+    }
+  }
+
+  if (relative === "ccna/commands/index.html") {
+    if (!/<h1>Core Cisco IOS Verification and Troubleshooting Commands for CCNA 200-301 v2\.0<\/h1>/.test(html)) {
+      fail(`${relative}: expected CCNA command reference h1 is missing`);
+    }
+
+    if (!html.includes('data-print-guide')) {
+      fail(`${relative}: CCNA command reference is missing the shared Print | Save control`);
+    }
+
+    const requiredSectionIds = [
+      "workflow",
+      "command-map",
+      "interfaces",
+      "vlans-trunks",
+      "etherchannel",
+      "spanning-tree",
+      "neighbors",
+      "routing",
+      "ospf",
+      "dhcp-fhrp",
+      "acl-nat",
+      "logs-path",
+      "sequence",
+      "official-references"
+    ];
+
+    for (const id of requiredSectionIds) {
+      if (!html.includes(`id="${id}"`)) {
+        fail(`${relative}: CCNA command reference is missing section #${id}`);
+      }
+    }
+
+    const requiredMarkers = [
+      "show ip interface brief",
+      "show interfaces trunk",
+      "show etherchannel summary",
+      "show spanning-tree",
+      "show ip route",
+      "show ipv6 route",
+      "show ip ospf neighbor",
+      "show ospfv3 neighbor",
+      "show ip dhcp pool",
+      "show ip dhcp binding",
+      "show standby brief",
+      "show vrrp brief",
+      "show ip access-lists",
+      "show ip nat translations",
+      "show logging",
+      'href="/ccna/"',
+      'href="/network-plus/n10-009/study-guide/ipv4-subnetting/"'
+    ];
+
+    for (const marker of requiredMarkers) {
+      if (!html.includes(marker)) {
+        fail(`${relative}: CCNA command reference is missing ${marker}`);
+      }
+    }
+  }
+
+  if (relative === "cissp/index.html" && html.includes("Possible next CISSP resources")) {
+    fail(`${relative}: CISSP overview still exposes internal roadmap copy`);
   }
 
   const isSecurityPagedQuestion = relative.startsWith(

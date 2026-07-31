@@ -9,9 +9,9 @@
     "lede": "Understand the exam's scope, experience path, and management-level perspective before deciding how CISSP fits your security career.",
     "sourceReviewed": "2026-07-29",
     "status": {
-      "label": "Overview available",
-      "heading": "A useful starting point, not a full CISSP course",
-      "body": "Cert Happens does not yet offer a dedicated CISSP practice-test bank or eight-domain study guide. This overview explains the current certification structure and connects familiar Security+ and Network+ topics to the broader decisions CISSP candidates must prepare to make."
+      "label": "How to use this overview",
+      "heading": "Start with scope, experience, and decision-making",
+      "body": "Use this page to understand the current CISSP exam structure, experience path, and the broader management and risk perspective expected from candidates. The linked Security+ and Network+ material is best used as a technical refresher, not as a substitute for CISSP-specific preparation."
     },
     "summary": [
       "CISSP covers security across an entire organization. Technical knowledge still matters, but candidates also need to connect controls to business objectives, legal duties, architecture, risk, operations, and program leadership.",
@@ -204,13 +204,7 @@
           "description": "Refresh common services, transports, secure alternatives, and operational clues."
         }
       ],
-      "planned": [
-        "A Security+ to CISSP transition guide",
-        "A deeper guide to CISSP decision-making and organizational context",
-        "Dedicated CISSP practice questions only after the content and review process can support them"
-      ],
-      "eyebrow": "Current resources",
-      "plannedHeading": "Possible next CISSP resources"
+      "eyebrow": "Current resources"
     },
     "officialSources": [
       {
@@ -257,9 +251,9 @@
     "lede": "Understand the current CCNA exam, the February 2027 v2.0 transition, and the practical networking skills emphasized by the incoming blueprint.",
     "sourceReviewed": "2026-07-31",
     "status": {
-      "label": "CCNA v2.0 foundation available",
-      "heading": "Building toward the published 200-301 v2.0 blueprint",
-      "body": "Cisco has now published the five-domain v2.0 exam blueprint. Cert Happens does not yet offer a dedicated CCNA practice-test bank, but this overview maps the incoming scope and connects existing networking resources to the skills candidates can strengthen before the v2.0 guides and practical questions are added."
+      "label": "Which blueprint should you study?",
+      "heading": "Use v1.1 through February 2, 2027 and v2.0 starting February 3, 2027",
+      "body": "If your exam is scheduled by February 2, prepare against the active v1.1 blueprint. For an exam on or after February 3, use the published v2.0 scope. The technical core overlaps heavily, so work on addressing, switching, routing, services, security, automation, and troubleshooting remains useful across the transition."
     },
     "summary": [
       "CCNA measures whether a candidate can understand, configure, verify, and troubleshoot a small to medium network. Addressing, switching, routing, security, services, and network operations are connected through practical decisions rather than treated as isolated definitions.",
@@ -293,10 +287,10 @@
     ],
     "transition": {
       "eyebrow": "Version transition",
-      "heading": "Study now without building toward an obsolete target",
+      "heading": "What carries forward to CCNA v2.0",
       "paragraphs": [
         "Candidates planning to test by February 2, 2027 should continue using the current v1.1 blueprint. Cisco has said the refresh keeps the technical core, so current study in subnetting, switching, routing, services, security, and automation still carries forward.",
-        "Cert Happens will target its first dedicated CCNA question bank at v2.0. That avoids launching a short-lived bank while still giving current candidates a useful map of the skills that remain central to the certification."
+        "For v2.0, put extra attention on practical verification and troubleshooting. Be ready to connect configuration intent with interface state, switching and routing tables, neighbor relationships, logs, packet evidence, security controls, and AI-assisted network operations."
       ],
       "facts": [
         {
@@ -452,9 +446,14 @@
     },
     "currentResources": {
       "eyebrow": "Current resources",
-      "heading": "Useful Cert Happens networking resources available now",
-      "intro": "These resources are written for Network+, so they do not replace Cisco IOS labs or CCNA-specific preparation. They can strengthen the vendor-neutral foundation needed before configuration and verification practice.",
+      "heading": "CCNA and networking resources you can use now",
+      "intro": "Start with the Cisco IOS command reference for device-level verification, then use the existing networking references to strengthen subnetting, Layer 2, protocol, and troubleshooting foundations.",
       "links": [
+        {
+          "title": "Cisco IOS verification and troubleshooting commands",
+          "url": "/ccna/commands/",
+          "description": "Choose show, routing, neighbor, ACL, NAT, logging, and path-testing commands based on the state you need to verify."
+        },
         {
           "title": "Network+ study guide",
           "url": "/network-plus/n10-009/study-guide/",
@@ -485,13 +484,6 @@
           "url": "/ports-protocols/",
           "description": "Refresh common services, transports, secure alternatives, and protocol behavior."
         }
-      ],
-      "plannedHeading": "Planned CCNA v2.0 resources",
-      "planned": [
-        "A five-domain v2.0 study-guide set mapped to the published Cisco blueprint",
-        "Cisco IOS command, configuration, and verification-output quick references",
-        "Focused troubleshooting reviews for switching, routing, services, security, and network operations",
-        "Accessible practical questions using command output, configurations, ordering, matching, and evidence-based troubleshooting without trying to imitate a full IOS terminal"
       ]
     },
     "sources": {
