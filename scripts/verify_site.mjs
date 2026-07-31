@@ -161,6 +161,7 @@ const publicPageFiles = [
   "contact/index.html",
   "cissp/index.html",
   "ccna/index.html",
+  "ccna/acronyms/index.html",
   "ccna/commands/index.html",
   "ccna/200-301-v2/study-guide/index.html",
   "ccna/200-301-v2/study-guide/network-infrastructure-connectivity/index.html",
@@ -201,6 +202,7 @@ const publicPageFiles = [
 ];
 
 const articlePageFiles = [
+  "ccna/acronyms/index.html",
   "ccna/commands/index.html",
   "ccna/200-301-v2/study-guide/index.html",
   "ccna/200-301-v2/study-guide/network-infrastructure-connectivity/index.html",
@@ -267,6 +269,7 @@ const wholeSitePageMarkers = new Map([
       "/ccna/200-301-v2/study-guide/network-infrastructure-connectivity/",
       "/ccna/200-301-v2/study-guide/switching-network-access/",
       "/ccna/200-301-v2/study-guide/ip-routing/",
+      "/ccna/acronyms/",
       "/ccna/commands/",
       "Use v1.1 through February 2, 2027 and v2.0 starting February 3, 2027",
       "Network Infrastructure and Connectivity",
@@ -284,6 +287,7 @@ const wholeSitePageMarkers = new Map([
       "/ccna/200-301-v2/study-guide/switching-network-access/",
       "/ccna/200-301-v2/study-guide/ip-routing/",
       "/ccna/commands/",
+      "/ccna/acronyms/",
       "February 3, 2027"
     ]
   ],
@@ -294,7 +298,8 @@ const wholeSitePageMarkers = new Map([
       "Domain 1 objective map",
       "Modified EUI-64",
       "ip helper-address",
-      "/tools/subnet-calculator/"
+      "/tools/subnet-calculator/",
+      "/ccna/acronyms/"
     ]
   ],
   [
@@ -306,7 +311,8 @@ const wholeSitePageMarkers = new Map([
       "show etherchannel summary",
       "Rapid PVST+",
       "spanning-tree guard root",
-      "/ccna/commands/"
+      "/ccna/commands/",
+      "/ccna/acronyms/"
     ]
   ],
   [
@@ -318,7 +324,8 @@ const wholeSitePageMarkers = new Map([
       "show ip ospf neighbor",
       "router ospfv3",
       "show standby brief",
-      "show vrrp brief"
+      "show vrrp brief",
+      "/ccna/acronyms/"
     ]
   ],
   [
@@ -811,6 +818,7 @@ for (const file of htmlFiles) {
     "/ccna/200-301-v2/study-guide/network-infrastructure-connectivity/",
     "/ccna/200-301-v2/study-guide/switching-network-access/",
     "/ccna/200-301-v2/study-guide/ip-routing/",
+    "/ccna/acronyms/",
     "/ccna/commands/",
     "/cissp/",
     "/ccna/"
@@ -2036,6 +2044,7 @@ for (const file of htmlFiles) {
       "/ccna/200-301-v2/study-guide/network-infrastructure-connectivity/",
       "/ccna/200-301-v2/study-guide/switching-network-access/",
       "/ccna/200-301-v2/study-guide/ip-routing/",
+      "/ccna/acronyms/",
       "/ccna/commands/",
       "/network-plus/n10-009/study-guide/ipv4-subnetting/",
       "/tools/subnet-calculator/",
@@ -2109,6 +2118,60 @@ for (const file of htmlFiles) {
     }
   }
 
+  if (relative === "ccna/acronyms/index.html") {
+    if (!html.includes("data-print-guide")) {
+      fail(`${relative}: acronym reference is missing the shared Print | Save control`);
+    }
+
+    if (!/<h1>CCNA Acronyms and Terms<\/h1>/.test(html)) {
+      fail(`${relative}: acronym reference is missing its stable CCNA h1`);
+    }
+
+    const acronymEntryCount = (html.match(/data-acronym-entry/g) || []).length;
+    if (acronymEntryCount < 60) {
+      fail(`${relative}: expected at least 60 acronym entries, found ${acronymEntryCount}`);
+    }
+
+    const requiredAcronymMarkup = [
+      "data-acronym-search",
+      "data-acronym-clear",
+      "data-acronym-status",
+      "data-acronym-reference",
+      "data-acronym-empty",
+      'src="/assets/js/acronym-filter.js"',
+      "Context still matters",
+      "Open Shortest Path First",
+      "Hot Standby Router Protocol",
+      "Virtual Router Redundancy Protocol",
+      "Link Aggregation Control Protocol",
+      "Received Signal Strength Indicator",
+      "Terminal Access Controller Access-Control System Plus"
+    ];
+
+    for (const marker of requiredAcronymMarkup) {
+      if (!html.includes(marker)) {
+        fail(`${relative}: acronym reference is missing ${marker}`);
+      }
+    }
+
+    if (!html.includes('class="article-toc article-toc--compact-grid"')) {
+      fail(`${relative}: acronym reference is missing the shared compact sidebar index`);
+    }
+
+    if (!html.includes('<h2 id="article-toc-title">Jump to</h2>')) {
+      fail(`${relative}: acronym sidebar is missing its Jump to heading`);
+    }
+
+    const acronymJumpLinkCount = (html.match(/href=["']#acronyms-[^"']+["']/g) || []).length;
+    if (acronymJumpLinkCount !== 19) {
+      fail(`${relative}: expected 19 sidebar acronym jump links, found ${acronymJumpLinkCount}`);
+    }
+
+    if (html.includes("data-acronym-index")) {
+      fail(`${relative}: retired in-body acronym index is still present`);
+    }
+  }
+
   if (relative === "ccna/commands/index.html") {
     if (!/<h1>Core Cisco IOS Verification and Troubleshooting Commands for CCNA 200-301 v2\.0<\/h1>/.test(html)) {
       fail(`${relative}: expected CCNA command reference h1 is missing`);
@@ -2158,6 +2221,7 @@ for (const file of htmlFiles) {
       "show ip nat translations",
       "show logging",
       'href="/ccna/"',
+      'href="/ccna/acronyms/"',
       'href="/network-plus/n10-009/study-guide/ipv4-subnetting/"'
     ];
 

@@ -8,6 +8,7 @@ printable: true
 printTitle: "CCNA 200-301 v2.0 Domain 3: IP Routing"
 author: certHappens
 datePublished: 2026-07-31
+dateModified: 2026-07-31
 articleSection: CCNA 200-301 v2.0 Domain 3
 eyebrow: CCNA v2.0 domain 3 guide
 lede: Follow the packet. Read the routing table, prove the next hop, verify the routing relationship, and separate route-selection problems from forwarding and return-path problems.
@@ -59,6 +60,9 @@ keywords:
   - VRRP
   - Cisco routing table
 relatedLinks:
+  - title: CCNA Acronyms and Terms
+    url: /ccna/acronyms/
+    description: Expand routing and first-hop redundancy abbreviations used throughout this guide.
   - title: CCNA 200-301 v2.0 Study Guide
     url: /ccna/200-301-v2/study-guide/
     description: Return to the complete five-domain v2.0 guide and practical study method.
@@ -75,7 +79,7 @@ relatedLinks:
     url: /tools/subnet-calculator/
     description: Check a prefix or address role after working the subnet calculation manually.
 ---
-Domain 3 accounts for **20%** of the published CCNA 200-301 v2.0 blueprint. Cisco expects you to interpret routing tables, troubleshoot IPv4 and IPv6 static routes, configure single-area OSPFv2 and OSPFv3, and interpret the operational status of Hot Standby Router Protocol (HSRP) and Virtual Router Redundancy Protocol (VRRP).
+Domain 3 accounts for **20%** of the published CCNA 200-301 v2.0 blueprint. Cisco expects you to interpret routing tables, troubleshoot IPv4 and IPv6 static routes, configure single-area Open Shortest Path First version 2 (OSPFv2) and version 3 (OSPFv3), and interpret the operational status of Hot Standby Router Protocol (HSRP) and Virtual Router Redundancy Protocol (VRRP).
 
 Routing becomes much easier when you keep three questions separate:
 
@@ -168,7 +172,7 @@ For CCNA troubleshooting, use this sequence:
 2. **Find all installed prefixes that contain it.** A route cannot win if the destination does not fall inside its prefix.
 3. **Choose the longest matching prefix.** `/32` is more specific than `/24`; `/24` is more specific than `/16`; `/0` is the least specific.
 4. **Read the next hop or exit interface.** Determine where the router intends to send the packet.
-5. **Prove the next hop is reachable.** Check connected routes, interface state, ARP or IPv6 neighbor state when appropriate, and recursive resolution.
+5. **Prove the next hop is reachable.** Check connected routes, interface state, Address Resolution Protocol (ARP) or IPv6 neighbor state when appropriate, and recursive resolution.
 6. **Check the return path.** A successful outbound forwarding decision does not guarantee that the destination can reply.
 
 A useful command sequence is:
@@ -309,9 +313,9 @@ show ipv6 neighbors
 
 When an IPv6 route looks correct but forwarding fails, confirm the next-hop scope and interface as carefully as the prefix itself.
 
-<h2 id="ospfv2">Single-area OSPFv2 for IPv4</h2>
+<h2 id="ospfv2">Single-area Open Shortest Path First version 2 (OSPFv2) for IPv4</h2>
 
-Open Shortest Path First (OSPF) is a link-state routing protocol. In v2.0 Domain 3, Cisco expects configuration of **single-area OSPFv2 for IPv4**.
+OSPF is a link-state routing protocol. In v2.0 Domain 3, Cisco expects configuration of **single-area OSPFv2 for IPv4**.
 
 A compact modern IOS configuration can enable OSPF directly on interfaces:
 
@@ -355,7 +359,7 @@ router ospf 10
 
 If two routers use the same router ID, OSPF operation becomes unreliable. When troubleshooting adjacency or unexpected topology information, verify uniqueness rather than assuming every dotted-decimal value is merely another interface address.
 
-<h2 id="adjacency">OSPF adjacency clues</h2>
+<h2 id="adjacency">Open Shortest Path First (OSPF) adjacency clues</h2>
 
 When OSPF routes are missing, determine whether the problem happens **before adjacency**, **during adjacency formation**, or **after adjacency**.
 
@@ -376,7 +380,7 @@ Common checks include:
 - Hello and dead timers must be compatible.
 - Router IDs must be unique.
 - Network-type expectations should match the link design.
-- MTU differences can interfere with later adjacency formation on some links even after Hellos are exchanged.
+- Maximum transmission unit (MTU) differences can interfere with later adjacency formation on some links even after Hellos are exchanged.
 
 Authentication is excluded from the v2.0 objective's neighbor-adjacency subtopic, so keep your Domain 3 study centered on the routing and operational conditions Cisco actually lists.
 
@@ -392,7 +396,7 @@ Do not memorize them as an isolated sequence only. Use the state to narrow the f
 - **EXSTART/EXCHANGE:** investigate database-exchange conditions such as MTU or network compatibility.
 - **FULL:** the adjacency completed with that neighbor.
 
-<h2 id="network-types">Point-to-point and broadcast OSPF behavior</h2>
+<h2 id="network-types">Point-to-point and broadcast Open Shortest Path First (OSPF) behavior</h2>
 
 The v2.0 blueprint specifically calls out **point-to-point** and **broadcast** OSPF behavior.
 
@@ -424,7 +428,7 @@ A router with interface priority `0` is ineligible to become DR or BDR. Among el
 
 This matters when reading output. A neighbor showing `FULL/DR` or `FULL/BDR` is telling you both adjacency state and that neighbor's role on the segment.
 
-<h2 id="ospfv3">Single-area OSPFv3 for IPv6</h2>
+<h2 id="ospfv3">Single-area Open Shortest Path First version 3 (OSPFv3) for IPv6</h2>
 
 The v2.0 blueprint pairs OSPFv2 with IPv4 and **OSPFv3 with IPv6**.
 
@@ -464,11 +468,11 @@ The troubleshooting questions remain familiar:
 
 OSPFv3 commonly uses IPv6 link-local addresses for neighbor communication on the local link. That is another reason to pay attention to the interface associated with a next hop rather than reading only the IPv6 address.
 
-<h2 id="fhrp">Interpret HSRP and VRRP operational state</h2>
+<h2 id="fhrp">First Hop Redundancy Protocol (FHRP): interpret HSRP and VRRP operational state</h2>
 
 First-hop redundancy protocols let multiple routers present a resilient default-gateway service to hosts. The host uses a **virtual IP address** as its gateway while the participating routers coordinate which device currently performs the forwarding role.
 
-For v2.0, Cisco's Domain 3 wording asks you to **interpret operational status** for HSRP and VRRP. Focus on reading the state rather than turning this section into a configuration-command memorization exercise.
+For v2.0, Cisco's Domain 3 wording asks you to **interpret operational status** for Hot Standby Router Protocol (HSRP) and Virtual Router Redundancy Protocol (VRRP). Focus on reading the state rather than turning this section into a configuration-command memorization exercise.
 
 ### HSRP
 
@@ -519,7 +523,7 @@ Do not let the different role names hide the shared purpose. Both protocols prov
 
 <h2 id="integrated-scenario">Integrated routing scenario</h2>
 
-A user in VLAN 20 can reach the local default gateway but cannot reach `10.40.8.25` at a remote site. Other remote networks still work.
+A user in virtual local area network (VLAN) 20 can reach the local default gateway but cannot reach `10.40.8.25` at a remote site. Other remote networks still work.
 
 R1 shows:
 

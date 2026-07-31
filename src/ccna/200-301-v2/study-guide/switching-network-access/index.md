@@ -8,6 +8,7 @@ printable: true
 printTitle: "CCNA 200-301 v2.0 Domain 2: Switching and Network Access"
 author: certHappens
 datePublished: 2026-07-31
+dateModified: 2026-07-31
 articleSection: CCNA 200-301 v2.0 Domain 2
 eyebrow: CCNA v2.0 domain 2 guide
 lede: Build the Layer 2 path deliberately, verify its operational state, and use spanning-tree, neighbor, and port-channel evidence before changing configuration.
@@ -58,6 +59,9 @@ keywords:
   - Cisco SVI
   - CDP LLDP
 relatedLinks:
+  - title: CCNA Acronyms and Terms
+    url: /ccna/acronyms/
+    description: Expand switching and Cisco abbreviations used throughout this guide.
   - title: CCNA 200-301 v2.0 Study Guide
     url: /ccna/200-301-v2/study-guide/
     description: Return to the complete five-domain v2.0 guide and practical study method.
@@ -74,9 +78,9 @@ relatedLinks:
     url: /ports-protocols/
     description: Review management and infrastructure protocols that appear elsewhere in CCNA configuration and troubleshooting.
 ---
-Domain 2 accounts for **25% of the published CCNA 200-301 v2.0 blueprint**. Cisco expects you to configure switching infrastructure, connect edge devices correctly, validate documentation from neighbor evidence, troubleshoot Layer 2 and Layer 3 operations, and configure Rapid Per-VLAN Spanning Tree Plus (Rapid PVST+).
+Domain 2 accounts for **25% of the published CCNA 200-301 v2.0 blueprint**. Cisco expects you to configure virtual local area network (VLAN) switching infrastructure, connect edge devices correctly, validate documentation from neighbor evidence, troubleshoot Layer 2 and Layer 3 operations, and configure Rapid Per-VLAN Spanning Tree Plus (Rapid PVST+).
 
-The central skill is separating **configured intent** from **operational state**. A port can be configured as a trunk without carrying the VLAN you need. An EtherChannel can exist while a member is suspended. A switch virtual interface (SVI) can have the correct IP address while its line protocol remains down. A physical uplink can be healthy while spanning tree intentionally keeps it from forwarding.
+The central skill is separating **configured intent** from **operational state**. A port can be configured as a trunk without carrying the virtual local area network (VLAN) you need. An EtherChannel can exist while a member is suspended. A switch virtual interface (SVI) can have the correct IP address while its line protocol remains down. A physical uplink can be healthy while spanning tree intentionally keeps it from forwarding.
 
 <div class="article-callout">
   <p><strong>Use this guide for v2.0.</strong> Cisco says the 200-301 v2.0 exam begins February 3, 2027. Candidates testing through February 2, 2027 should use the active v1.1 blueprint for exam-specific coverage.</p>
@@ -96,9 +100,9 @@ The central skill is separating **configured intent** from **operational state**
     <tbody>
       <tr><td data-label="Objective">2.1</td><td data-label="Main skill">Infrastructure connectivity</td><td data-label="Useful question">Is this link supposed to operate at Layer 2 or Layer 3, and does its trunk, port-channel, or SVI state match that design?</td></tr>
       <tr><td data-label="Objective">2.2</td><td data-label="Main skill">Edge-host ports</td><td data-label="Useful question">Does the access port match the attached endpoint's VLAN, power, voice, trunking, or aggregation requirements?</td></tr>
-      <tr><td data-label="Objective">2.3</td><td data-label="Main skill">CDP and LLDP validation</td><td data-label="Useful question">Does live neighbor information agree with the diagram, port label, and expected remote interface?</td></tr>
+      <tr><td data-label="Objective">2.3</td><td data-label="Main skill">Cisco Discovery Protocol (CDP) and Link Layer Discovery Protocol (LLDP) validation</td><td data-label="Useful question">Does live neighbor information agree with the diagram, port label, and expected remote interface?</td></tr>
       <tr><td data-label="Objective">2.4</td><td data-label="Main skill">Operational troubleshooting</td><td data-label="Useful question">Which show command, log, ping, trace, or packet observation can confirm the next Layer 2 or Layer 3 theory?</td></tr>
-      <tr><td data-label="Objective">2.5</td><td data-label="Main skill">Rapid PVST+</td><td data-label="Useful question">Which bridge is root, which ports should forward or discard, and which protection feature matches the port's intended role?</td></tr>
+      <tr><td data-label="Objective">2.5</td><td data-label="Main skill">Rapid Per-VLAN Spanning Tree Plus (Rapid PVST+)</td><td data-label="Useful question">Which bridge is root, which ports should forward or discard, and which protection feature matches the port's intended role?</td></tr>
     </tbody>
   </table>
 </div>
@@ -109,7 +113,7 @@ For any switched path, identify five things before troubleshooting:
 
 1. **Port role:** Is the interface an access port, trunk, routed port, port-channel member, or SVI?
 2. **Layer 2 membership:** Which VLAN or VLANs should cross the interface?
-3. **Aggregation:** Is the physical link standalone or part of an LACP EtherChannel?
+3. **Aggregation:** Is the physical link standalone or part of a Link Aggregation Control Protocol (LACP) EtherChannel?
 4. **Loop prevention:** Is spanning tree forwarding on this path or intentionally holding it in reserve?
 5. **Layer 3 handoff:** Where does traffic leave the VLAN through an SVI or routed interface?
 
@@ -193,7 +197,7 @@ interface GigabitEthernet1/0/47
 
 Exact defaults and supported commands vary by platform and software release. For exam work, focus on the relationship among trunk state, allowed VLANs, tagging, and the native VLAN.
 
-<h2 id="etherchannel">LACP EtherChannel: several links, one logical interface</h2>
+<h2 id="etherchannel">Link Aggregation Control Protocol (LACP) EtherChannel: several links, one logical interface</h2>
 
 EtherChannel bundles compatible physical interfaces into one logical port-channel. Link Aggregation Control Protocol (LACP) negotiates membership and helps both ends agree on which links belong to the bundle.
 
@@ -247,7 +251,7 @@ The member interfaces and logical interface must be compatible with the intended
   <p><strong>Evidence habit:</strong> `show etherchannel summary` is usually more useful than merely finding `channel-group` in the running configuration. Configuration tells you what someone asked for. The summary tells you what the switch formed.</p>
 </div>
 
-<h2 id="svi">Switch virtual interfaces connect VLANs to Layer 3</h2>
+<h2 id="svi">Switch virtual interfaces (SVIs) connect VLANs to Layer 3</h2>
 
 A switch virtual interface represents a VLAN at Layer 3. On a multilayer switch, an SVI can provide the default gateway for hosts in that VLAN or participate in routed management and control functions.
 
@@ -276,7 +280,7 @@ For inter-VLAN routing on a multilayer switch, IP routing must also be enabled w
 
 <h2 id="edge-ports">Edge-host ports should match the device attached to them</h2>
 
-Objective 2.2 broadens access-port thinking beyond a desktop computer. Cisco calls out desktops, printers, Internet of Things (IoT) devices, wireless access points, Voice over IP (VoIP) phones, virtualized hosts, and network appliances.
+Objective 2.2 broadens access-port thinking beyond a desktop computer. Cisco calls out desktops, printers, Internet of Things (IoT) devices, wireless access points (APs), Voice over IP (VoIP) phones, virtualized hosts, and network appliances.
 
 The endpoint type changes what a healthy switchport may need.
 
@@ -290,8 +294,8 @@ The endpoint type changes what a healthy switchport may need.
       </tr>
     </thead>
     <tbody>
-      <tr><td data-label="Attached device">Desktop or printer</td><td data-label="Common port considerations">Access VLAN, edge behavior, speed/duplex, endpoint authentication where used</td><td data-label="Useful evidence">Switchport mode, VLAN membership, MAC learning, interface state</td></tr>
-      <tr><td data-label="Attached device">IoT appliance</td><td data-label="Common port considerations">Access VLAN, PoE when required, segmentation, edge protections</td><td data-label="Useful evidence">VLAN, power state, MAC address, interface counters</td></tr>
+      <tr><td data-label="Attached device">Desktop or printer</td><td data-label="Common port considerations">Access VLAN, edge behavior, speed/duplex, endpoint authentication where used</td><td data-label="Useful evidence">Switchport mode, VLAN membership, Media Access Control (MAC) learning, interface state</td></tr>
+      <tr><td data-label="Attached device">IoT appliance</td><td data-label="Common port considerations">Access VLAN, Power over Ethernet (PoE) when required, segmentation, edge protections</td><td data-label="Useful evidence">VLAN, power state, MAC address, interface counters</td></tr>
       <tr><td data-label="Attached device">Wireless access point</td><td data-label="Common port considerations">PoE, access or trunk design, controller relationship, allowed VLANs</td><td data-label="Useful evidence">Power, trunk/access state, CDP or LLDP neighbor information</td></tr>
       <tr><td data-label="Attached device">VoIP phone</td><td data-label="Common port considerations">PoE, data VLAN, voice VLAN, downstream workstation when present</td><td data-label="Useful evidence">Voice VLAN, power, neighbor information, learned MAC addresses</td></tr>
       <tr><td data-label="Attached device">Virtualized host</td><td data-label="Common port considerations">Possible trunking, multiple VLANs, LACP or port-channel design, redundant uplinks</td><td data-label="Useful evidence">Trunk state, allowed VLANs, port-channel membership, MAC learning</td></tr>
@@ -326,9 +330,9 @@ interface GigabitEthernet1/0/12
 
 The data and voice VLANs solve different attachment requirements. Verify the design rather than assuming every endpoint on the physical port belongs to the same VLAN.
 
-<h2 id="neighbors">Use CDP and LLDP to test the documentation</h2>
+<h2 id="neighbors">Use Cisco Discovery Protocol (CDP) and Link Layer Discovery Protocol (LLDP) to test the documentation</h2>
 
-A diagram is a claim about the network. Cisco Discovery Protocol (CDP) and Link Layer Discovery Protocol (LLDP) provide live evidence about directly connected devices.
+A diagram is a claim about the network. CDP and LLDP provide live evidence about directly connected devices.
 
 CDP is Cisco proprietary. LLDP is a vendor-neutral standard. Both can expose information such as the neighboring device identity, local interface, remote port, capabilities, and management information depending on configuration and platform support.
 
@@ -373,7 +377,7 @@ The [Cisco IOS verification command reference](/ccna/commands/) is organized aro
 
 ### Ping tests reachability, not the entire design
 
-A successful ping proves that ICMP Echo traffic completed a round trip between the tested endpoints. It does not prove that every application, VLAN, ACL, or redundant path is correct.
+A successful ping proves that Internet Control Message Protocol (ICMP) Echo traffic completed a round trip between the tested endpoints. It does not prove that every application, VLAN, access control list (ACL), or redundant path is correct.
 
 Extended ping is useful when the source address or interface matters. Choosing a source can help answer whether traffic works from a particular routed interface or subnet rather than from whichever source the device would select automatically.
 
@@ -387,15 +391,15 @@ You do not need to treat a packet capture as a wall of hex. Look for evidence ti
 
 - Source and destination MAC addresses
 - 802.1Q VLAN tags when present
-- ARP or Neighbor Discovery exchanges
+- Address Resolution Protocol (ARP) or Neighbor Discovery exchanges
 - ICMP requests and replies
 - LACP messages
-- Spanning-tree BPDUs
+- Spanning-tree Bridge Protocol Data Units (BPDUs)
 - Retransmissions or repeated requests without replies
 
 If a capture shows an ARP request repeatedly leaving with no reply, that is different evidence from an interface that never transmitted anything.
 
-<h2 id="rapid-pvst">Rapid PVST+: redundancy without a Layer 2 loop</h2>
+<h2 id="rapid-pvst">Rapid Per-VLAN Spanning Tree Plus (Rapid PVST+): redundancy without a Layer 2 loop</h2>
 
 Redundant Layer 2 links improve resilience, but forwarding the same Ethernet frames around a physical loop can create broadcast storms, duplicate frames, and unstable MAC learning. Spanning Tree Protocol (STP) creates a loop-free logical topology while preserving redundant physical paths.
 
@@ -448,7 +452,7 @@ interface GigabitEthernet1/0/10
 
 Do not enable PortFast casually on switch-to-switch links. The feature assumes edge behavior and should match the actual topology.
 
-<h3>BPDU Guard protects the edge assumption</h3>
+<h3>Bridge Protocol Data Unit (BPDU) Guard protects the edge assumption</h3>
 
 If an edge port should never receive spanning-tree Bridge Protocol Data Units (BPDUs), BPDU Guard can react when that assumption is violated.
 

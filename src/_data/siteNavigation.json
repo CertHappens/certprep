@@ -170,6 +170,10 @@
           "label": "References",
           "links": [
             {
+              "label": "Acronyms and terms",
+              "url": "/ccna/acronyms/"
+            },
+            {
               "label": "IOS verification commands",
               "url": "/ccna/commands/"
             },

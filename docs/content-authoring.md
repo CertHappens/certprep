@@ -133,6 +133,19 @@ Complete this review before publishing an article:
 
 A few natural contrasts are acceptable when the subject requires them. The warning is about a repeated writing pattern, not a banned word.
 
+## Acronyms and initialisms
+
+Study guides must remain understandable without forcing a learner to leave the page for an acronym lookup.
+
+- Expand an important acronym or initialism at its first meaningful use on each guide page, for example `Open Shortest Path First (OSPF)`.
+- Expand it again at the beginning of a dedicated section when a learner could reasonably jump directly to that section from the table of contents.
+- After the expansion, use the shortened form normally within the same section. Do not mechanically repeat the full phrase on every occurrence.
+- Define terms again on separate guides. Do not assume the learner read another domain first.
+- Fundamental page-context terms such as IPv4, IPv6, IP, CCNA, Security+, and Network+ may remain shortened when expansion would add noise rather than clarity.
+- Acronym-reference pages supplement the guides. They are lookup and review tools, not a reason to leave unexplained initials in instructional copy.
+
+Apply this check during the human-writing review and update `dateModified` when the terminology change is a meaningful instructional improvement.
+
 ## Sources and maintenance
 
 - Use primary sources whenever possible for exam rules, objectives, standards, laws, protocols, and product behavior.
@@ -159,20 +172,24 @@ The organization author is `Cert Happens`. Authorship and publication dates rema
 
 ## Data-driven terminology references
 
-Shared terminology belongs in structured data rather than repeated Markdown tables. The Security+ acronym source is:
+Shared terminology belongs in structured data rather than repeated Markdown tables. Certification acronym sources currently include:
 
 ```text
 src/_data/securityPlusAcronyms.json
+src/_data/networkPlusAcronyms.json
+src/_data/ccnaAcronyms.json
 ```
 
 Each entry stores the acronym, expansion, plain-English meaning, related terms, applicable domains, and exam-version coverage. Update an existing definition in one place rather than redefining the term across several pages.
 
-The public acronym route is version-stable:
+Public acronym routes are version-stable, for example:
 
 ```text
 /security-plus/acronyms/
+/network-plus/acronyms/
+/ccna/acronyms/
 ```
 
-Add later Security+ exam versions to the same reference unless the terminology changes enough to make a separate resource meaningfully better for learners. The visible page may describe current exam coverage, but the title and URL should not be tied to one exam number.
+Add later exam versions to the same certification reference unless the terminology changes enough to make a separate resource meaningfully better for learners. The visible page may describe current exam coverage, but the title and URL should not be tied to one exam number.
 
 Search and filter controls are screen-only. Printable output must restore and include the complete reference, remove search controls, and continue to suppress advertising.

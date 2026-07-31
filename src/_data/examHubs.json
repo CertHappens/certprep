@@ -365,7 +365,7 @@
         "number": "1.0",
         "name": "Network Infrastructure and Connectivity",
         "weight": "25%",
-        "focus": "Interface and cabling faults, virtualization, IPv4 and IPv6 addressing, wireless principles, wired and wireless client connectivity, and DHCPv4 troubleshooting on IOS devices.",
+        "focus": "Interface and cabling faults, virtualization, IPv4 and IPv6 addressing, wireless principles, wired and wireless client connectivity, and Dynamic Host Configuration Protocol version 4 (DHCPv4) troubleshooting on IOS devices.",
         "url": "/ccna/200-301-v2/study-guide/network-infrastructure-connectivity/",
         "linkLabel": "Open Domain 1 guide"
       },
@@ -373,7 +373,7 @@
         "number": "2.0",
         "name": "Switching and Network Access",
         "weight": "25%",
-        "focus": "Layer 2 and Layer 3 interfaces, 802.1Q trunks, LACP EtherChannel, switch virtual interfaces, edge-port configuration, CDP and LLDP validation, troubleshooting output, and Rapid PVST+.",
+        "focus": "Layer 2 and Layer 3 interfaces, 802.1Q trunks, Link Aggregation Control Protocol (LACP) EtherChannel, switch virtual interfaces (SVIs), edge-port configuration, Cisco Discovery Protocol (CDP) and Link Layer Discovery Protocol (LLDP) validation, troubleshooting output, and Rapid Per-VLAN Spanning Tree Plus (Rapid PVST+).",
         "url": "/ccna/200-301-v2/study-guide/switching-network-access/",
         "linkLabel": "Open Domain 2 guide"
       },
@@ -381,7 +381,7 @@
         "number": "3.0",
         "name": "IP Routing",
         "weight": "20%",
-        "focus": "Routing-table interpretation, IPv4 and IPv6 static routing, single-area OSPFv2 and OSPFv3, and operational status of first-hop redundancy protocols.",
+        "focus": "Routing-table interpretation, IPv4 and IPv6 static routing, single-area Open Shortest Path First (OSPFv2 and OSPFv3), and operational status of first-hop redundancy protocols.",
         "url": "/ccna/200-301-v2/study-guide/ip-routing/",
         "linkLabel": "Open Domain 3 guide"
       },
@@ -460,6 +460,11 @@
           "title": "CCNA 200-301 v2.0 study guide",
           "url": "/ccna/200-301-v2/study-guide/",
           "description": "Work through the published five-domain v2.0 scope with configuration, verification, troubleshooting, and lab-oriented study guidance."
+        },
+        {
+          "title": "CCNA acronyms and terms",
+          "url": "/ccna/acronyms/",
+          "description": "Search networking and Cisco abbreviations by initials, full expansion, practical meaning, related terms, and v2.0 domain."
         },
         {
           "title": "Domain 1: Network Infrastructure and Connectivity",
