@@ -133,6 +133,19 @@
           ]
         },
         {
+          "label": "Subnetting",
+          "links": [
+            {
+              "label": "IPv4 subnetting reference",
+              "url": "/network-plus/n10-009/study-guide/ipv4-subnetting/"
+            },
+            {
+              "label": "IPv4 subnet calculator",
+              "url": "/tools/subnet-calculator/"
+            }
+          ]
+        },
+        {
           "label": "Study",
           "links": [
             {
@@ -146,23 +159,19 @@
             {
               "label": "Domain 2: Switching",
               "url": "/ccna/200-301-v2/study-guide/switching-network-access/"
+            },
+            {
+              "label": "Domain 3: Routing",
+              "url": "/ccna/200-301-v2/study-guide/ip-routing/"
             }
           ]
         },
         {
-          "label": "References and tools",
+          "label": "References",
           "links": [
             {
               "label": "IOS verification commands",
               "url": "/ccna/commands/"
-            },
-            {
-              "label": "IPv4 subnetting reference",
-              "url": "/network-plus/n10-009/study-guide/ipv4-subnetting/"
-            },
-            {
-              "label": "IPv4 subnet calculator",
-              "url": "/tools/subnet-calculator/"
             },
             {
               "label": "Ports and protocols",

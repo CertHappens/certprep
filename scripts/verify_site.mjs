@@ -165,6 +165,7 @@ const publicPageFiles = [
   "ccna/200-301-v2/study-guide/index.html",
   "ccna/200-301-v2/study-guide/network-infrastructure-connectivity/index.html",
   "ccna/200-301-v2/study-guide/switching-network-access/index.html",
+  "ccna/200-301-v2/study-guide/ip-routing/index.html",
   "disclaimer/index.html",
   "network-plus/index.html",
   "network-plus/acronyms/index.html",
@@ -204,6 +205,7 @@ const articlePageFiles = [
   "ccna/200-301-v2/study-guide/index.html",
   "ccna/200-301-v2/study-guide/network-infrastructure-connectivity/index.html",
   "ccna/200-301-v2/study-guide/switching-network-access/index.html",
+  "ccna/200-301-v2/study-guide/ip-routing/index.html",
   "network-plus/acronyms/index.html",
   "network-plus/n10-009/study-guide/index.html",
   "network-plus/n10-009/study-guide/ipv4-subnetting/index.html",
@@ -264,6 +266,7 @@ const wholeSitePageMarkers = new Map([
       "/ccna/200-301-v2/study-guide/",
       "/ccna/200-301-v2/study-guide/network-infrastructure-connectivity/",
       "/ccna/200-301-v2/study-guide/switching-network-access/",
+      "/ccna/200-301-v2/study-guide/ip-routing/",
       "/ccna/commands/",
       "Use v1.1 through February 2, 2027 and v2.0 starting February 3, 2027",
       "Network Infrastructure and Connectivity",
@@ -279,6 +282,7 @@ const wholeSitePageMarkers = new Map([
       "The five CCNA v2.0 domains",
       "/ccna/200-301-v2/study-guide/network-infrastructure-connectivity/",
       "/ccna/200-301-v2/study-guide/switching-network-access/",
+      "/ccna/200-301-v2/study-guide/ip-routing/",
       "/ccna/commands/",
       "February 3, 2027"
     ]
@@ -303,6 +307,18 @@ const wholeSitePageMarkers = new Map([
       "Rapid PVST+",
       "spanning-tree guard root",
       "/ccna/commands/"
+    ]
+  ],
+  [
+    "ccna/200-301-v2/study-guide/ip-routing/index.html",
+    [
+      "CCNA 200-301 v2.0 Domain 3: IP Routing",
+      "Domain 3 objective map",
+      "show ip route",
+      "show ip ospf neighbor",
+      "router ospfv3",
+      "show standby brief",
+      "show vrrp brief"
     ]
   ],
   [
@@ -757,6 +773,10 @@ for (const file of htmlFiles) {
     'id="security-plus-navigation"',
     'id="network-plus-navigation"',
     'id="ccna-navigation"',
+    'id="ccna-navigation-group-1">Overview',
+    'id="ccna-navigation-group-2">Subnetting',
+    'id="ccna-navigation-group-3">Study',
+    'id="ccna-navigation-group-4">References',
     'src="/assets/js/site-navigation.js"',
     'href="/cissp/"',
     'href="/ccna/"'
@@ -790,6 +810,7 @@ for (const file of htmlFiles) {
     "/ccna/200-301-v2/study-guide/",
     "/ccna/200-301-v2/study-guide/network-infrastructure-connectivity/",
     "/ccna/200-301-v2/study-guide/switching-network-access/",
+    "/ccna/200-301-v2/study-guide/ip-routing/",
     "/ccna/commands/",
     "/cissp/",
     "/ccna/"
@@ -2014,6 +2035,7 @@ for (const file of htmlFiles) {
       "/ccna/200-301-v2/study-guide/",
       "/ccna/200-301-v2/study-guide/network-infrastructure-connectivity/",
       "/ccna/200-301-v2/study-guide/switching-network-access/",
+      "/ccna/200-301-v2/study-guide/ip-routing/",
       "/ccna/commands/",
       "/network-plus/n10-009/study-guide/ipv4-subnetting/",
       "/tools/subnet-calculator/",
@@ -2050,7 +2072,8 @@ for (const file of htmlFiles) {
 
     const publishedDomainGuideLinks = [
       ["/ccna/200-301-v2/study-guide/network-infrastructure-connectivity/", "Open Domain 1 guide"],
-      ["/ccna/200-301-v2/study-guide/switching-network-access/", "Open Domain 2 guide"]
+      ["/ccna/200-301-v2/study-guide/switching-network-access/", "Open Domain 2 guide"],
+      ["/ccna/200-301-v2/study-guide/ip-routing/", "Open Domain 3 guide"]
     ];
     for (const [href, label] of publishedDomainGuideLinks) {
       if (!html.includes(`href="${href}"`) || !html.includes(label)) {

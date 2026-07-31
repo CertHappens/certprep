@@ -57,6 +57,9 @@ relatedLinks:
   - title: "Domain 2: Switching and Network Access"
     url: /ccna/200-301-v2/study-guide/switching-network-access/
     description: Configure and troubleshoot trunks, LACP EtherChannel, SVIs, edge ports, neighbor discovery, and Rapid PVST+.
+  - title: "Domain 3: IP Routing"
+    url: /ccna/200-301-v2/study-guide/ip-routing/
+    description: Interpret routing tables, troubleshoot static routes, configure single-area OSPFv2 and OSPFv3, and read HSRP and VRRP state.
   - title: Cisco IOS Verification and Troubleshooting Commands
     url: /ccna/commands/
     description: Choose the command that exposes the state you need to verify before changing configuration.
@@ -123,7 +126,7 @@ The same approach applies to switching and routing. If you configure a trunk, in
         <td data-label="What the work looks like">Configure physical interfaces, trunks, LACP EtherChannel, switch virtual interfaces, edge ports, and Rapid PVST+, then validate topology and operations from device evidence.</td>
       </tr>
       <tr>
-        <td data-label="Domain"><strong>3.0 IP Routing</strong></td>
+        <td data-label="Domain"><strong><a href="/ccna/200-301-v2/study-guide/ip-routing/">3.0 IP Routing</a></strong></td>
         <td data-label="Weight">20%</td>
         <td data-label="What the work looks like">Interpret route selection, troubleshoot IPv4 and IPv6 static routes, configure single-area OSPFv2 and OSPFv3, and interpret first-hop redundancy state.</td>
       </tr>
@@ -199,6 +202,8 @@ The longest matching prefix determines the forwarding choice among matching rout
 The v2.0 scope also includes IPv4 and IPv6 default, network, host, and floating static routes; single-area OSPFv2 for IPv4; OSPFv3 for IPv6; and operational interpretation of HSRP and VRRP.
 
 A good routing lab does not end when a route appears. Verify the neighbor when a routing protocol is involved, inspect the routing table, test the path, then deliberately break one condition and use the evidence to locate it.
+
+Read the full [Domain 3: IP Routing guide](/ccna/200-301-v2/study-guide/ip-routing/) for route-table interpretation, IPv4 and IPv6 static routes, floating statics, single-area OSPFv2 and OSPFv3, broadcast and point-to-point behavior, and HSRP/VRRP operational state.
 
 <h2 id="domain-4">Domain 4: Network Services and Security</h2>
 

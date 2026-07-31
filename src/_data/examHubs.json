@@ -248,7 +248,7 @@
     "provider": "Cisco",
     "eyebrow": "CCNA study resources",
     "title": "CCNA 200-301 Study Resources",
-    "lede": "Study CCNA with the v2.0 guide, Domain 1 and Domain 2 walkthroughs, IOS verification reference, subnetting tools, and supporting networking references. Exam-version details are included below so you can match the right blueprint to your test date.",
+    "lede": "Study CCNA with the v2.0 guide, Domains 1 through 3 walkthroughs, IOS verification reference, subnetting tools, and supporting networking references. Exam-version details are included below so you can match the right blueprint to your test date.",
     "sourceReviewed": "2026-07-31",
     "resourcesFirst": true,
     "status": {
@@ -381,7 +381,9 @@
         "number": "3.0",
         "name": "IP Routing",
         "weight": "20%",
-        "focus": "Routing-table interpretation, IPv4 and IPv6 static routing, single-area OSPFv2 and OSPFv3, and operational status of first-hop redundancy protocols."
+        "focus": "Routing-table interpretation, IPv4 and IPv6 static routing, single-area OSPFv2 and OSPFv3, and operational status of first-hop redundancy protocols.",
+        "url": "/ccna/200-301-v2/study-guide/ip-routing/",
+        "linkLabel": "Open Domain 3 guide"
       },
       {
         "number": "4.0",
@@ -400,8 +402,8 @@
       "eyebrow": "Exam and certification path",
       "heading": "One exam, then an active certification cycle",
       "paragraphs": [
-        "CCNA has no formal degree or prior-certification prerequisite. Earning it requires passing the current 200-301 exam version available on the candidate’s test date.",
-        "Most Cisco certifications, including CCNA, remain active for three years. Associate-level recertification can be completed through qualifying exams, 30 Continuing Education credits, or another current option listed in Cisco’s recertification policy.",
+        "CCNA has no formal degree or prior-certification prerequisite. Earning it requires passing the current 200-301 exam version available on the candidate\u2019s test date.",
+        "Most Cisco certifications, including CCNA, remain active for three years. Associate-level recertification can be completed through qualifying exams, 30 Continuing Education credits, or another current option listed in Cisco\u2019s recertification policy.",
         "Because the exam version changes in February 2027, candidates should verify the active blueprint before scheduling and make sure their preparation materials match their intended test date."
       ],
       "maintenance": [
@@ -468,6 +470,11 @@
           "title": "Domain 2: Switching and Network Access",
           "url": "/ccna/200-301-v2/study-guide/switching-network-access/",
           "description": "Configure and troubleshoot switch-to-switch and switch-to-router links, trunks, LACP EtherChannel, SVIs, edge ports, neighbor discovery, and Rapid PVST+."
+        },
+        {
+          "title": "Domain 3: IP Routing",
+          "url": "/ccna/200-301-v2/study-guide/ip-routing/",
+          "description": "Interpret routing tables, troubleshoot IPv4 and IPv6 static routes, configure single-area OSPFv2 and OSPFv3, and read HSRP and VRRP operational state."
         },
         {
           "title": "Cisco IOS verification and troubleshooting commands",
