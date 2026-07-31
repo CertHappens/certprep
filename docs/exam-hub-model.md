@@ -74,3 +74,12 @@ Discovery hubs are learner-facing pages, not project dashboards. Public copy sho
 
 Exam-version transition dates and availability warnings are appropriate on public pages when they affect which blueprint a visitor should use.
 
+
+## Discovery-first and resource-first hubs
+
+A certification hub can change emphasis as Cert Happens publishes useful material for that exam.
+
+- Discovery-first hubs lead with exam scope, audience, and requirements when few certification-specific resources exist.
+- Resource-first hubs set `resourcesFirst: true` and place published study resources immediately after the page header. Exam scope, version transitions, and certification details remain available as supporting information farther down the page.
+
+Promote a hub to resource-first when visitors can immediately do meaningful study work on Cert Happens. Do not wait for a full question bank if substantive guides, references, or tools already exist.

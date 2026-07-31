@@ -246,10 +246,11 @@
     "name": "CCNA",
     "fullName": "Cisco Certified Network Associate",
     "provider": "Cisco",
-    "eyebrow": "Certification overview",
-    "title": "CCNA 200-301 Exam Overview",
-    "lede": "Understand the current CCNA exam, the February 2027 v2.0 transition, and the practical networking skills emphasized by the published v2.0 blueprint.",
+    "eyebrow": "CCNA study resources",
+    "title": "CCNA 200-301 Study Resources",
+    "lede": "Study CCNA with the v2.0 guide, Domain 1 walkthrough, IOS verification reference, subnetting tools, and supporting networking references. Exam-version details are included below so you can match the right blueprint to your test date.",
     "sourceReviewed": "2026-07-31",
+    "resourcesFirst": true,
     "status": {
       "label": "Which blueprint should you study?",
       "heading": "Use v1.1 through February 2, 2027 and v2.0 starting February 3, 2027",
@@ -446,8 +447,8 @@
     },
     "currentResources": {
       "eyebrow": "Study resources",
-      "heading": "CCNA and networking resources you can use now",
-      "intro": "Start with the Cisco IOS command reference for device-level verification, then use the existing networking references to strengthen subnetting, Layer 2, protocol, and troubleshooting foundations.",
+      "heading": "Start studying CCNA",
+      "intro": "Use the CCNA-specific guides first, then reinforce subnetting and protocol knowledge with the shared networking references. These are published resources you can use now.",
       "links": [
         {
           "title": "CCNA 200-301 v2.0 study guide",
@@ -455,39 +456,29 @@
           "description": "Work through the published five-domain v2.0 scope with configuration, verification, troubleshooting, and lab-oriented study guidance."
         },
         {
+          "title": "Domain 1: Network Infrastructure and Connectivity",
+          "url": "/ccna/200-301-v2/study-guide/network-infrastructure-connectivity/",
+          "description": "Study link and cabling faults, IPv4 and IPv6, virtualization, wireless clients, and DHCPv4 with practical verification and troubleshooting."
+        },
+        {
           "title": "Cisco IOS verification and troubleshooting commands",
           "url": "/ccna/commands/",
           "description": "Choose show, routing, neighbor, ACL, NAT, logging, and path-testing commands based on the state you need to verify."
         },
         {
-          "title": "Network+ study guide",
-          "url": "/network-plus/n10-009/study-guide/",
-          "description": "Review networking concepts, implementation, operations, security, and troubleshooting across all five N10-009 domains."
-        },
-        {
           "title": "IPv4 subnetting reference",
           "url": "/network-plus/n10-009/study-guide/ipv4-subnetting/",
-          "description": "Review masks, prefixes, boundaries, host capacity, and special-use addresses before applying them to interfaces and routes."
+          "description": "Review masks, prefixes, boundaries, host capacity, wildcard masks, and special-use addresses before applying them to interfaces and routes."
         },
         {
           "title": "IPv4 subnet calculator",
           "url": "/tools/subnet-calculator/",
-          "description": "Check network and broadcast boundaries, usable ranges, masks, and address status while practicing calculations manually."
-        },
-        {
-          "title": "VLANs, trunks, STP, and LACP",
-          "url": "/network-plus/quick-review/vlans-trunks-stp-lacp/",
-          "description": "Separate the Layer 2 features that later need Cisco-specific configuration and verification."
-        },
-        {
-          "title": "Troubleshooting tools",
-          "url": "/network-plus/quick-review/troubleshooting-tools/",
-          "description": "Match host commands, packet tools, cable testers, and wireless tools to the evidence each one provides."
+          "description": "Check network and broadcast boundaries, usable ranges, masks, and address status after working the calculation manually."
         },
         {
           "title": "Ports and protocols",
           "url": "/ports-protocols/",
-          "description": "Refresh common services, transports, secure alternatives, and protocol behavior."
+          "description": "Refresh common services, transports, secure alternatives, and protocol behavior used throughout network configuration and troubleshooting."
         }
       ]
     },

@@ -257,14 +257,15 @@ const wholeSitePageMarkers = new Map([
   [
     "ccna/index.html",
     [
-      "CCNA 200-301 Exam Overview",
-      "Use v1.1 through February 2, 2027 and v2.0 starting February 3, 2027",
-      "CCNA and networking resources you can use now",
+      "CCNA 200-301 Study Resources",
+      "Start studying CCNA",
       "/ccna/200-301-v2/study-guide/",
+      "/ccna/200-301-v2/study-guide/network-infrastructure-connectivity/",
+      "/ccna/commands/",
+      "Use v1.1 through February 2, 2027 and v2.0 starting February 3, 2027",
       "Network Infrastructure and Connectivity",
       "AI, and Network Operations and Management",
       "February 3, 2027",
-      "/network-plus/n10-009/study-guide/",
       "https://www.cisco.com/site/us/en/learn/training-certifications/exams/ccna.html"
     ]
   ],
@@ -739,6 +740,7 @@ for (const file of htmlFiles) {
     'data-primary-navigation',
     'id="security-plus-navigation"',
     'id="network-plus-navigation"',
+    'id="ccna-navigation"',
     'src="/assets/js/site-navigation.js"',
     'href="/cissp/"',
     'href="/ccna/"'
@@ -751,8 +753,8 @@ for (const file of htmlFiles) {
   }
 
   const navigationSubmenuCount = (html.match(/data-nav-submenu/g) || []).length;
-  if (navigationSubmenuCount !== 2) {
-    fail(`${relative}: expected 2 certification navigation submenus, found ${navigationSubmenuCount}`);
+  if (navigationSubmenuCount !== 3) {
+    fail(`${relative}: expected 3 certification navigation submenus, found ${navigationSubmenuCount}`);
   }
 
   const requiredNavigationLinks = [
@@ -769,6 +771,9 @@ for (const file of htmlFiles) {
     "/ports-protocols/",
     "/network-plus/n10-009/study-guide/ipv4-subnetting/",
     "/tools/subnet-calculator/",
+    "/ccna/200-301-v2/study-guide/",
+    "/ccna/200-301-v2/study-guide/network-infrastructure-connectivity/",
+    "/ccna/commands/",
     "/cissp/",
     "/ccna/"
   ];
@@ -1975,8 +1980,31 @@ for (const file of htmlFiles) {
   }
 
   if (relative === "ccna/index.html") {
-    if (!/<h1>CCNA 200-301 Exam Overview<\/h1>/.test(html)) {
-      fail(`${relative}: expected CCNA overview h1 is missing`);
+    if (!/<h1>CCNA 200-301 Study Resources<\/h1>/.test(html)) {
+      fail(`${relative}: expected CCNA resource-hub h1 is missing`);
+    }
+
+    const resourceHeadingIndex = html.indexOf('id="exam-resources-heading"');
+    const versionHeadingIndex = html.indexOf("Use v1.1 through February 2, 2027 and v2.0 starting February 3, 2027");
+    const overviewHeadingIndex = html.indexOf('id="exam-overview-heading"');
+    if (resourceHeadingIndex < 0 || versionHeadingIndex < 0 || overviewHeadingIndex < 0) {
+      fail(`${relative}: CCNA resource-first section ordering markers are incomplete`);
+    } else if (!(resourceHeadingIndex < versionHeadingIndex && resourceHeadingIndex < overviewHeadingIndex)) {
+      fail(`${relative}: CCNA study resources must appear before exam-version and overview content`);
+    }
+
+    const requiredResourceLinks = [
+      "/ccna/200-301-v2/study-guide/",
+      "/ccna/200-301-v2/study-guide/network-infrastructure-connectivity/",
+      "/ccna/commands/",
+      "/network-plus/n10-009/study-guide/ipv4-subnetting/",
+      "/tools/subnet-calculator/",
+      "/ports-protocols/"
+    ];
+    for (const href of requiredResourceLinks) {
+      if (!html.includes(`href="${href}"`)) {
+        fail(`${relative}: CCNA resource hub is missing ${href}`);
+      }
     }
 
     const requiredSectionIds = [
