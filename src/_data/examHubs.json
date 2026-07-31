@@ -248,7 +248,7 @@
     "provider": "Cisco",
     "eyebrow": "Certification overview",
     "title": "CCNA 200-301 Exam Overview",
-    "lede": "Understand the current CCNA exam, the February 2027 v2.0 transition, and the practical networking skills emphasized by the incoming blueprint.",
+    "lede": "Understand the current CCNA exam, the February 2027 v2.0 transition, and the practical networking skills emphasized by the published v2.0 blueprint.",
     "sourceReviewed": "2026-07-31",
     "status": {
       "label": "Which blueprint should you study?",
@@ -354,7 +354,7 @@
       ]
     },
     "scope": {
-      "eyebrow": "Incoming official scope",
+      "eyebrow": "200-301 v2.0 blueprint",
       "heading": "Five CCNA v2.0 domains",
       "intro": "Cisco has published the v2.0 blueprint for exams beginning February 3, 2027. Candidates testing through February 2, 2027 should continue using the active v1.1 blueprint for their exam-specific preparation.",
       "itemLabel": "Domain"
@@ -445,10 +445,15 @@
       ]
     },
     "currentResources": {
-      "eyebrow": "Current resources",
+      "eyebrow": "Study resources",
       "heading": "CCNA and networking resources you can use now",
       "intro": "Start with the Cisco IOS command reference for device-level verification, then use the existing networking references to strengthen subnetting, Layer 2, protocol, and troubleshooting foundations.",
       "links": [
+        {
+          "title": "CCNA 200-301 v2.0 study guide",
+          "url": "/ccna/200-301-v2/study-guide/",
+          "description": "Work through the published five-domain v2.0 scope with configuration, verification, troubleshooting, and lab-oriented study guidance."
+        },
         {
           "title": "Cisco IOS verification and troubleshooting commands",
           "url": "/ccna/commands/",

@@ -162,6 +162,8 @@ const publicPageFiles = [
   "cissp/index.html",
   "ccna/index.html",
   "ccna/commands/index.html",
+  "ccna/200-301-v2/study-guide/index.html",
+  "ccna/200-301-v2/study-guide/network-infrastructure-connectivity/index.html",
   "disclaimer/index.html",
   "network-plus/index.html",
   "network-plus/acronyms/index.html",
@@ -198,6 +200,8 @@ const publicPageFiles = [
 
 const articlePageFiles = [
   "ccna/commands/index.html",
+  "ccna/200-301-v2/study-guide/index.html",
+  "ccna/200-301-v2/study-guide/network-infrastructure-connectivity/index.html",
   "network-plus/acronyms/index.html",
   "network-plus/n10-009/study-guide/index.html",
   "network-plus/n10-009/study-guide/ipv4-subnetting/index.html",
@@ -256,11 +260,32 @@ const wholeSitePageMarkers = new Map([
       "CCNA 200-301 Exam Overview",
       "Use v1.1 through February 2, 2027 and v2.0 starting February 3, 2027",
       "CCNA and networking resources you can use now",
+      "/ccna/200-301-v2/study-guide/",
       "Network Infrastructure and Connectivity",
       "AI, and Network Operations and Management",
       "February 3, 2027",
       "/network-plus/n10-009/study-guide/",
       "https://www.cisco.com/site/us/en/learn/training-certifications/exams/ccna.html"
+    ]
+  ],
+  [
+    "ccna/200-301-v2/study-guide/index.html",
+    [
+      "CCNA 200-301 v2.0 Study Guide",
+      "The five CCNA v2.0 domains",
+      "/ccna/200-301-v2/study-guide/network-infrastructure-connectivity/",
+      "/ccna/commands/",
+      "February 3, 2027"
+    ]
+  ],
+  [
+    "ccna/200-301-v2/study-guide/network-infrastructure-connectivity/index.html",
+    [
+      "CCNA 200-301 v2.0 Domain 1: Network Infrastructure and Connectivity",
+      "Domain 1 objective map",
+      "Modified EUI-64",
+      "ip helper-address",
+      "/tools/subnet-calculator/"
     ]
   ],
   [

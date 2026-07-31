@@ -56,9 +56,15 @@ keywords:
   - show ip ospf neighbor
   - Cisco IOS verification
 relatedLinks:
+  - title: CCNA 200-301 v2.0 Study Guide
+    url: /ccna/200-301-v2/study-guide/
+    description: Follow the five-domain v2.0 scope with practical configuration, verification, and troubleshooting guidance.
+  - title: "Domain 1: Network Infrastructure and Connectivity"
+    url: /ccna/200-301-v2/study-guide/network-infrastructure-connectivity/
+    description: Apply interface, addressing, wireless, endpoint, and DHCP troubleshooting in the first v2.0 domain.
   - title: CCNA 200-301 Overview
     url: /ccna/
-    description: Review the v1.1 to v2.0 transition and the five incoming exam domains.
+    description: Review the v1.1 to v2.0 transition and the five published v2.0 exam domains.
   - title: IPv4 Subnetting Reference
     url: /network-plus/n10-009/study-guide/ipv4-subnetting/
     description: Review prefixes, subnet boundaries, masks, usable ranges, and address roles.
