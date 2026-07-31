@@ -254,16 +254,16 @@
     "provider": "Cisco",
     "eyebrow": "Certification overview",
     "title": "CCNA 200-301 Exam Overview",
-    "lede": "Understand the current exam, the February 2027 refresh, and the hands-on skills that separate CCNA preparation from a vendor-neutral networking review.",
-    "sourceReviewed": "2026-07-29",
+    "lede": "Understand the current CCNA exam, the February 2027 v2.0 transition, and the practical networking skills emphasized by the incoming blueprint.",
+    "sourceReviewed": "2026-07-31",
     "status": {
-      "label": "CCNA foundation available",
-      "heading": "Planning for the 200-301 v2.0 exam",
-      "body": "Cert Happens does not yet offer a dedicated CCNA practice-test bank or Cisco IOS study guide. This overview explains the version transition, maps the current skill areas, and shows which existing Network+ resources can support the foundation while the v2.0 objective map and review workflow are built."
+      "label": "CCNA v2.0 foundation available",
+      "heading": "Building toward the published 200-301 v2.0 blueprint",
+      "body": "Cisco has now published the five-domain v2.0 exam blueprint. Cert Happens does not yet offer a dedicated CCNA practice-test bank, but this overview maps the incoming scope and connects existing networking resources to the skills candidates can strengthen before the v2.0 guides and practical questions are added."
     },
     "summary": [
-      "CCNA measures whether a candidate can understand, configure, verify, and troubleshoot a small to medium network. Addressing, switching, routing, wireless, security, services, and automation are connected through practical operational decisions rather than treated as isolated definitions.",
-      "The current 200-301 v1.1 exam remains available through February 2, 2027. Cisco says the v2.0 exam launches February 3, 2027 with more practical assessment, troubleshooting, security-first thinking, and AI in network management and operations."
+      "CCNA measures whether a candidate can understand, configure, verify, and troubleshoot a small to medium network. Addressing, switching, routing, security, services, and network operations are connected through practical decisions rather than treated as isolated definitions.",
+      "The current 200-301 v1.1 exam remains available through February 2, 2027. Cisco's published v2.0 blueprint takes effect February 3, 2027 and consolidates the exam into five domains with heavier emphasis on troubleshooting, practical configuration, security, and AI-assisted network operations."
     ],
     "quickFacts": [
       {
@@ -360,47 +360,41 @@
       ]
     },
     "scope": {
-      "eyebrow": "Current official scope",
-      "heading": "Six current CCNA v1.1 domains",
-      "intro": "These weights describe the current v1.1 exam. Cisco has published a v2.0 refresh for February 2027, so the dedicated Cert Happens bank will be mapped separately before launch.",
+      "eyebrow": "Incoming official scope",
+      "heading": "Five CCNA v2.0 domains",
+      "intro": "Cisco has published the v2.0 blueprint for exams beginning February 3, 2027. Candidates testing through February 2, 2027 should continue using the active v1.1 blueprint for their exam-specific preparation.",
       "itemLabel": "Domain"
     },
     "domains": [
       {
         "number": "1.0",
-        "name": "Network Fundamentals",
-        "weight": "20%",
-        "focus": "Network components, topologies, cabling, TCP/IP, IPv4 and IPv6 addressing, wireless principles, virtualization, and switching concepts."
+        "name": "Network Infrastructure and Connectivity",
+        "weight": "25%",
+        "focus": "Interface and cabling faults, virtualization, IPv4 and IPv6 addressing, wireless principles, wired and wireless client connectivity, and DHCPv4 troubleshooting on IOS devices."
       },
       {
         "number": "2.0",
-        "name": "Network Access",
-        "weight": "20%",
-        "focus": "VLANs, trunks, discovery protocols, EtherChannel, spanning tree, wireless architecture, management access, and Layer 2 security."
+        "name": "Switching and Network Access",
+        "weight": "25%",
+        "focus": "Layer 2 and Layer 3 interfaces, 802.1Q trunks, LACP EtherChannel, switch virtual interfaces, edge-port configuration, CDP and LLDP validation, troubleshooting output, and Rapid PVST+."
       },
       {
         "number": "3.0",
-        "name": "IP Connectivity",
-        "weight": "25%",
-        "focus": "Routing tables, forwarding decisions, static routing, single-area OSPF, first-hop redundancy, and verification of IPv4 and IPv6 paths."
+        "name": "IP Routing",
+        "weight": "20%",
+        "focus": "Routing-table interpretation, IPv4 and IPv6 static routing, single-area OSPFv2 and OSPFv3, and operational status of first-hop redundancy protocols."
       },
       {
         "number": "4.0",
-        "name": "IP Services",
-        "weight": "10%",
-        "focus": "NAT, NTP, DHCP, DNS, SNMP, syslog, QoS, secure remote access, and device management services."
+        "name": "Network Services and Security",
+        "weight": "20%",
+        "focus": "AAA management access, secure file transfer, NAT and PAT, DNS troubleshooting, IPsec VPN concepts, IPv4 access control lists, and Layer 2 protections such as DHCP snooping, Dynamic ARP Inspection, RA guard, and port security."
       },
       {
         "number": "5.0",
-        "name": "Security Fundamentals",
-        "weight": "15%",
-        "focus": "Threats, vulnerabilities, access control, Layer 2 protections, device hardening, wireless security, VPN concepts, and security program elements."
-      },
-      {
-        "number": "6.0",
-        "name": "Automation and Programmability",
+        "name": "AI, and Network Operations and Management",
         "weight": "10%",
-        "focus": "Controllers, software-defined architectures, APIs, data formats, configuration management, automation tools, and AI or machine learning in network operations."
+        "focus": "Agentic AI, generative-AI prompt selection for network operations, network management models, SNMP, Ansible-based command execution, and syslog interpretation."
       }
     ],
     "experience": {
@@ -494,10 +488,10 @@
       ],
       "plannedHeading": "Planned CCNA v2.0 resources",
       "planned": [
-        "A complete v2.0 objective map and source register",
-        "Cisco IOS command, configuration, and show-output presentation patterns",
-        "Original questions built around routing tables, configurations, verification output, and troubleshooting decisions",
-        "A weighted practice-test bank and domain guides after the review process is ready"
+        "A five-domain v2.0 study-guide set mapped to the published Cisco blueprint",
+        "Cisco IOS command, configuration, and verification-output quick references",
+        "Focused troubleshooting reviews for switching, routing, services, security, and network operations",
+        "Accessible practical questions using command output, configurations, ordering, matching, and evidence-based troubleshooting without trying to imitate a full IOS terminal"
       ]
     },
     "sources": {
@@ -509,6 +503,10 @@
       {
         "label": "Current 200-301 CCNA exam page",
         "url": "https://www.cisco.com/site/us/en/learn/training-certifications/exams/ccna.html"
+      },
+      {
+        "label": "Official 200-301 CCNA v2.0 exam topics",
+        "url": "https://learningcontent.cisco.com/documents/marketing/exam-topics/200-301_CCNA_v2.0_Exam_Topics_PDF.pdf"
       },
       {
         "label": "Current CCNA exam topics",

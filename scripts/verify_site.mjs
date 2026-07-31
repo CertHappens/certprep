@@ -252,10 +252,10 @@ const wholeSitePageMarkers = new Map([
     "ccna/index.html",
     [
       "CCNA 200-301 Exam Overview",
-      "Planning for the 200-301 v2.0 exam",
+      "Building toward the published 200-301 v2.0 blueprint",
       "Study now without building toward an obsolete target",
-      "Network Fundamentals",
-      "Automation and Programmability",
+      "Network Infrastructure and Connectivity",
+      "AI, and Network Operations and Management",
       "February 3, 2027",
       "/network-plus/n10-009/study-guide/",
       "https://www.cisco.com/site/us/en/learn/training-certifications/exams/ccna.html"
@@ -1970,15 +1970,19 @@ for (const file of htmlFiles) {
       }
     }
 
-    const domainCardCount = (html.match(/class="card__meta">Domain [1-6]\.0 ·/g) || []).length;
-    if (domainCardCount !== 6) {
-      fail(`${relative}: expected 6 CCNA domain cards, found ${domainCardCount}`);
+    const domainCardCount = (html.match(/class="card__meta">Domain [1-5]\.0 ·/g) || []).length;
+    if (domainCardCount !== 5) {
+      fail(`${relative}: expected 5 CCNA v2.0 domain cards, found ${domainCardCount}`);
     }
 
     const requiredMarkers = [
       "Last day for v1.1",
       "First day for v2.0",
       "Network+ foundation",
+      "25%",
+      "20%",
+      "10%",
+      "Official 200-301 CCNA v2.0 exam topics",
       "One 200-301 exam",
       "30 credits",
       "not affiliated with or endorsed by Cisco"
