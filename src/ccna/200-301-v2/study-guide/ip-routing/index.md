@@ -89,12 +89,23 @@ Use this guide for v2.0. Cisco says the 200-301 v2.0 exam begins February 3, 202
 
 <h2 id="domain-map">Domain 3 objective map</h2>
 
-| Objective | Main skill | Useful question |
-| --- | --- | --- |
-| 3.1 | Routing-table interpretation | Which installed route is the best match for this destination, and what next hop will the router use? |
-| 3.2 | IPv4 and IPv6 static routing | Is the route correctly defined, resolvable, preferred at the intended administrative distance, and supported by a working return path? |
-| 3.3 | Single-area OSPFv2 and OSPFv3 | Did the expected neighbors become adjacent, and did the intended routes enter the table? |
-| 3.4 | HSRP and VRRP status | Which device currently owns the forwarding role for the virtual gateway, and does the observed state match the design? |
+<div class="table-scroll" role="region" aria-label="CCNA v2.0 Domain 3 objective map" tabindex="0">
+  <table class="mobile-card-table">
+    <thead>
+      <tr>
+        <th scope="col">Objective</th>
+        <th scope="col">Main skill</th>
+        <th scope="col">Useful question</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td data-label="Objective">3.1</td><td data-label="Main skill">Routing-table interpretation</td><td data-label="Useful question">Which installed route is the best match for this destination, and what next hop will the router use?</td></tr>
+      <tr><td data-label="Objective">3.2</td><td data-label="Main skill">IPv4 and IPv6 static routing</td><td data-label="Useful question">Is the route correctly defined, resolvable, preferred at the intended administrative distance, and supported by a working return path?</td></tr>
+      <tr><td data-label="Objective">3.3</td><td data-label="Main skill">Single-area OSPFv2 and OSPFv3</td><td data-label="Useful question">Did the expected neighbors become adjacent, and did the intended routes enter the table?</td></tr>
+      <tr><td data-label="Objective">3.4</td><td data-label="Main skill">HSRP and VRRP status</td><td data-label="Useful question">Which device currently owns the forwarding role for the virtual gateway, and does the observed state match the design?</td></tr>
+    </tbody>
+  </table>
+</div>
 
 <h2 id="routing-table">Read the routing table as evidence</h2>
 
@@ -113,15 +124,25 @@ S*   0.0.0.0/0 [1/0] via 192.0.2.2
 
 Read each line deliberately.
 
-| Field | What it tells you |
-| --- | --- |
-| Route code | Where the route came from, such as connected, static, or OSPF |
-| Prefix and mask | Which destinations the route can match |
-| Administrative distance | Preference between competing route sources for the same destination prefix |
-| Metric | Cost used by the routing protocol when choosing among its candidate paths |
-| Next hop | The neighboring address that receives the packet next |
-| Exit interface | The local interface used to reach the next hop or destination |
-| `*` on a route code | A candidate default route in common IOS routing-table output |
+<div class="table-scroll" role="region" aria-label="Cisco IOS routing table fields" tabindex="0">
+  <table class="mobile-card-table">
+    <thead>
+      <tr>
+        <th scope="col">Field</th>
+        <th scope="col">What it tells you</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td data-label="Field">Route code</td><td data-label="What it tells you">Where the route came from, such as connected, static, or OSPF</td></tr>
+      <tr><td data-label="Field">Prefix and mask</td><td data-label="What it tells you">Which destinations the route can match</td></tr>
+      <tr><td data-label="Field">Administrative distance</td><td data-label="What it tells you">Preference between competing route sources for the same destination prefix</td></tr>
+      <tr><td data-label="Field">Metric</td><td data-label="What it tells you">Cost used by the routing protocol when choosing among its candidate paths</td></tr>
+      <tr><td data-label="Field">Next hop</td><td data-label="What it tells you">The neighboring address that receives the packet next</td></tr>
+      <tr><td data-label="Field">Exit interface</td><td data-label="What it tells you">The local interface used to reach the next hop or destination</td></tr>
+      <tr><td data-label="Field"><code>*</code> on a route code</td><td data-label="What it tells you">A candidate default route in common IOS routing-table output</td></tr>
+    </tbody>
+  </table>
+</div>
 
 For `10.40.8.25`, both `10.40.0.0/16` and `10.40.8.0/24` match. The `/24` wins because it is more specific.
 
