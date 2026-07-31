@@ -142,6 +142,10 @@
             {
               "label": "Domain 1: Infrastructure",
               "url": "/ccna/200-301-v2/study-guide/network-infrastructure-connectivity/"
+            },
+            {
+              "label": "Domain 2: Switching",
+              "url": "/ccna/200-301-v2/study-guide/switching-network-access/"
             }
           ]
         },

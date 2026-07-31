@@ -83,3 +83,7 @@ A certification hub can change emphasis as Cert Happens publishes useful materia
 - Resource-first hubs set `resourcesFirst: true` and place published study resources immediately after the page header. Exam scope, version transitions, and certification details remain available as supporting information farther down the page.
 
 Promote a hub to resource-first when visitors can immediately do meaningful study work on Cert Happens. Do not wait for a full question bank if substantive guides, references, or tools already exist.
+
+### Linking published domain guides
+
+Domain cards may expose a learner-facing guide as soon as that guide exists. Add `url` and `linkLabel` to the domain entry in `src/_data/examHubs.json`. The shared hub component renders the link only when `url` is present, so unpublished domains remain informational instead of advertising unfinished work.

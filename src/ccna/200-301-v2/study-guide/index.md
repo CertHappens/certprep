@@ -54,6 +54,9 @@ relatedLinks:
   - title: "Domain 1: Network Infrastructure and Connectivity"
     url: /ccna/200-301-v2/study-guide/network-infrastructure-connectivity/
     description: Diagnose links, addressing, wireless clients, virtualization, IPv4, IPv6, and DHCPv4 with a practical troubleshooting sequence.
+  - title: "Domain 2: Switching and Network Access"
+    url: /ccna/200-301-v2/study-guide/switching-network-access/
+    description: Configure and troubleshoot trunks, LACP EtherChannel, SVIs, edge ports, neighbor discovery, and Rapid PVST+.
   - title: Cisco IOS Verification and Troubleshooting Commands
     url: /ccna/commands/
     description: Choose the command that exposes the state you need to verify before changing configuration.
@@ -110,12 +113,12 @@ The same approach applies to switching and routing. If you configure a trunk, in
     </thead>
     <tbody>
       <tr>
-        <td data-label="Domain"><strong>1.0 Network Infrastructure and Connectivity</strong></td>
+        <td data-label="Domain"><strong><a href="/ccna/200-301-v2/study-guide/network-infrastructure-connectivity/">1.0 Network Infrastructure and Connectivity</a></strong></td>
         <td data-label="Weight">25%</td>
         <td data-label="What the work looks like">Diagnose links and cabling, troubleshoot IPv4 and IPv6, understand virtualization and wireless behavior, isolate client connectivity faults, and troubleshoot DHCPv4.</td>
       </tr>
       <tr>
-        <td data-label="Domain"><strong>2.0 Switching and Network Access</strong></td>
+        <td data-label="Domain"><strong><a href="/ccna/200-301-v2/study-guide/switching-network-access/">2.0 Switching and Network Access</a></strong></td>
         <td data-label="Weight">25%</td>
         <td data-label="What the work looks like">Configure physical interfaces, trunks, LACP EtherChannel, switch virtual interfaces, edge ports, and Rapid PVST+, then validate topology and operations from device evidence.</td>
       </tr>
@@ -170,6 +173,8 @@ Build the concepts around observable state:
 - Network documentation can be wrong. CDP and LLDP give you live neighbor evidence to compare with the diagram.
 
 Useful verification commands include `show vlan brief`, `show interfaces switchport`, `show interfaces trunk`, `show etherchannel summary`, `show spanning-tree`, `show cdp neighbors`, and `show lldp neighbors`.
+
+Read the full [Domain 2: Switching and Network Access guide](/ccna/200-301-v2/study-guide/switching-network-access/) for Layer 2 and Layer 3 interfaces, trunk configuration, LACP EtherChannel, SVIs, edge-host ports, neighbor validation, troubleshooting evidence, and Rapid PVST+.
 
 Use the [Cisco IOS Verification and Troubleshooting Commands](/ccna/commands/) reference to connect each command to the question it answers. The [VLANs, Trunks, STP, and LACP quick review](/network-plus/quick-review/vlans-trunks-stp-lacp/) is useful when the Layer 2 concepts need a vendor-neutral refresher before you return to Cisco configuration.
 

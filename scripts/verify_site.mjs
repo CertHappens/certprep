@@ -164,6 +164,7 @@ const publicPageFiles = [
   "ccna/commands/index.html",
   "ccna/200-301-v2/study-guide/index.html",
   "ccna/200-301-v2/study-guide/network-infrastructure-connectivity/index.html",
+  "ccna/200-301-v2/study-guide/switching-network-access/index.html",
   "disclaimer/index.html",
   "network-plus/index.html",
   "network-plus/acronyms/index.html",
@@ -202,6 +203,7 @@ const articlePageFiles = [
   "ccna/commands/index.html",
   "ccna/200-301-v2/study-guide/index.html",
   "ccna/200-301-v2/study-guide/network-infrastructure-connectivity/index.html",
+  "ccna/200-301-v2/study-guide/switching-network-access/index.html",
   "network-plus/acronyms/index.html",
   "network-plus/n10-009/study-guide/index.html",
   "network-plus/n10-009/study-guide/ipv4-subnetting/index.html",
@@ -261,6 +263,7 @@ const wholeSitePageMarkers = new Map([
       "Start studying CCNA",
       "/ccna/200-301-v2/study-guide/",
       "/ccna/200-301-v2/study-guide/network-infrastructure-connectivity/",
+      "/ccna/200-301-v2/study-guide/switching-network-access/",
       "/ccna/commands/",
       "Use v1.1 through February 2, 2027 and v2.0 starting February 3, 2027",
       "Network Infrastructure and Connectivity",
@@ -275,6 +278,7 @@ const wholeSitePageMarkers = new Map([
       "CCNA 200-301 v2.0 Study Guide",
       "The five CCNA v2.0 domains",
       "/ccna/200-301-v2/study-guide/network-infrastructure-connectivity/",
+      "/ccna/200-301-v2/study-guide/switching-network-access/",
       "/ccna/commands/",
       "February 3, 2027"
     ]
@@ -287,6 +291,18 @@ const wholeSitePageMarkers = new Map([
       "Modified EUI-64",
       "ip helper-address",
       "/tools/subnet-calculator/"
+    ]
+  ],
+  [
+    "ccna/200-301-v2/study-guide/switching-network-access/index.html",
+    [
+      "CCNA 200-301 v2.0 Domain 2: Switching and Network Access",
+      "Domain 2 objective map",
+      "show interfaces trunk",
+      "show etherchannel summary",
+      "Rapid PVST+",
+      "spanning-tree guard root",
+      "/ccna/commands/"
     ]
   ],
   [
@@ -773,6 +789,7 @@ for (const file of htmlFiles) {
     "/tools/subnet-calculator/",
     "/ccna/200-301-v2/study-guide/",
     "/ccna/200-301-v2/study-guide/network-infrastructure-connectivity/",
+    "/ccna/200-301-v2/study-guide/switching-network-access/",
     "/ccna/commands/",
     "/cissp/",
     "/ccna/"
@@ -1996,6 +2013,7 @@ for (const file of htmlFiles) {
     const requiredResourceLinks = [
       "/ccna/200-301-v2/study-guide/",
       "/ccna/200-301-v2/study-guide/network-infrastructure-connectivity/",
+      "/ccna/200-301-v2/study-guide/switching-network-access/",
       "/ccna/commands/",
       "/network-plus/n10-009/study-guide/ipv4-subnetting/",
       "/tools/subnet-calculator/",
@@ -2028,6 +2046,16 @@ for (const file of htmlFiles) {
     const domainCardCount = (html.match(/class="card__meta">Domain [1-5]\.0 ·/g) || []).length;
     if (domainCardCount !== 5) {
       fail(`${relative}: expected 5 CCNA v2.0 domain cards, found ${domainCardCount}`);
+    }
+
+    const publishedDomainGuideLinks = [
+      ["/ccna/200-301-v2/study-guide/network-infrastructure-connectivity/", "Open Domain 1 guide"],
+      ["/ccna/200-301-v2/study-guide/switching-network-access/", "Open Domain 2 guide"]
+    ];
+    for (const [href, label] of publishedDomainGuideLinks) {
+      if (!html.includes(`href="${href}"`) || !html.includes(label)) {
+        fail(`${relative}: published CCNA domain card is missing ${label}`);
+      }
     }
 
     const requiredMarkers = [
