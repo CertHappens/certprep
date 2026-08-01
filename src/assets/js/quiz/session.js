@@ -1,3 +1,4 @@
+import { isValidQuestionStimulus } from "./stimulus.js";
 import { sampleWithoutReplacement, shuffleCopy } from "./shuffle.js";
 
 export const QUIZ_SESSION_VERSION = 1;
@@ -120,6 +121,10 @@ export function isValidQuizSession(session, expectedTestId = null) {
     }
 
     if (!Array.isArray(correctAnswerIds) || correctAnswerIds.length === 0) {
+      return false;
+    }
+
+    if (!isValidQuestionStimulus(state.question.stimulus)) {
       return false;
     }
 

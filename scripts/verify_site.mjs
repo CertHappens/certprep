@@ -632,6 +632,7 @@ const requiredFiles = [
   "assets/js/quiz/app.js",
   "assets/js/quiz/results-actions.js",
   "assets/js/quiz/paged-question.js",
+  "assets/js/quiz/stimulus.js",
   "quiz-data/catalog.json",
   "quiz-data/security-plus/sec-701/manifest.json",
   "quiz-data/security-plus/sec-701/questions.json",
@@ -739,6 +740,18 @@ if (await isFile(siteCssPath)) {
 
   if (!siteCss.includes("table-layout: auto") || !siteCss.includes("overflow-wrap: anywhere")) {
     fail("site.css: shared article tables are missing flexible wrapping rules");
+  }
+
+  const requiredStimulusRules = [
+    ".quiz-stimulus",
+    ".quiz-stimulus__pre",
+    ".quiz-stimulus__table-scroll",
+    ".quiz-stimulus__table"
+  ];
+  for (const rule of requiredStimulusRules) {
+    if (!siteCss.includes(rule)) {
+      fail(`site.css: shared question-stimulus rule is missing: ${rule}`);
+    }
   }
 
   const requiredFirstColumnRules = [
@@ -2018,7 +2031,8 @@ for (const file of htmlFiles) {
     const requiredPracticeMarkers = [
       "Security+ SY0-701 practice test",
       'data-test-id="SEC-701"',
-      'data-questions-url="/quiz-data/security-plus/sec-701/questions.json"'
+      'data-questions-url="/quiz-data/security-plus/sec-701/questions.json"',
+      'data-quiz-stimulus'
     ];
 
     for (const marker of requiredPracticeMarkers) {
@@ -2038,7 +2052,8 @@ for (const file of htmlFiles) {
     const requiredPracticeMarkers = [
       "Network+ N10-009 practice test",
       'data-test-id="NET-009"',
-      'data-questions-url="/quiz-data/network-plus/n10-009/questions.json"'
+      'data-questions-url="/quiz-data/network-plus/n10-009/questions.json"',
+      'data-quiz-stimulus'
     ];
 
     for (const marker of requiredPracticeMarkers) {
@@ -2626,6 +2641,10 @@ for (const file of htmlFiles) {
     const expectedTestId = isNetworkPagedQuestion ? "NET-009" : "SEC-701";
     if (!html.includes(`data-test-id="${expectedTestId}"`)) {
       fail(`${relative}: paged question is missing data-test-id ${expectedTestId}`);
+    }
+
+    if (!hasPageMarker(html, "data-paged-stimulus")) {
+      fail(`${relative}: paged question is missing the shared stimulus container`);
     }
   }
 }

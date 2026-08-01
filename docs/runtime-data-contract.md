@@ -76,7 +76,13 @@ The quiz engine may shuffle answer objects for display, but it must preserve eac
   "studyTopics": [
     "Digital signatures",
     "Hashing"
-  ]
+  ],
+  "stimulus": {
+    "type": "preformatted",
+    "variant": "command_output",
+    "title": "Observed output",
+    "content": "..."
+  }
 }
 ```
 
@@ -112,3 +118,10 @@ Each generated test object includes `practiceTestPath`, the canonical route for 
 Each exam manifest contains a deterministic SHA-256 `dataVersion` calculated from the public test metadata and public question content. Editorial-only changes that do not affect public runtime content do not change this value.
 
 The future session model will store this value so an unfinished or completed test can be associated with the exact question data used when the session began.
+
+
+## Optional question stimulus
+
+A question may include one read-only `stimulus` object built from an optional JSON sidecar. Existing exams without a configured sidecar are unchanged. Supported first-layer stimulus types are preformatted command/configuration/log text and accessible evidence tables. See `docs/question-stimulus-schema.md`.
+
+Stimulus values become part of the public question snapshot and deterministic `dataVersion`. The browser renders every value with DOM `textContent`; authored HTML is never executed.

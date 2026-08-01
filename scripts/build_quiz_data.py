@@ -22,6 +22,7 @@ DEFAULT_CONFIG_PATH = PROJECT_ROOT / "config" / "quiz-catalog.json"
 GENERATED_ROOT = PROJECT_ROOT / "src" / "quiz-data"
 RUNTIME_SCHEMA_VERSION = 1
 ANSWER_KEYS = ("A", "B", "C", "D")
+PREFORMATTED_STIMULUS_VARIANTS = {"command_output", "configuration", "log", "plain_text"}
 
 
 class BuildError(Exception):
@@ -68,6 +69,102 @@ def split_pipe_values(value: str) -> list[str]:
 
     return [part.strip() for part in value.split("|") if part.strip()]
 
+
+
+def _required_text(value: Any, *, label: str, max_length: int) -> str:
+    if not isinstance(value, str) or not value.strip():
+        raise BuildError(f"{label} must be non-empty text.")
+    if len(value) > max_length:
+        raise BuildError(f"{label} exceeds {max_length} characters.")
+    if "\x00" in value:
+        raise BuildError(f"{label} contains a null character.")
+    return value.strip()
+
+
+def normalize_question_stimulus(question_id: str, value: Any) -> dict[str, Any]:
+    label = f"Question {question_id} stimulus"
+    if not isinstance(value, dict):
+        raise BuildError(f"{label} must be a JSON object.")
+
+    stimulus_type = value.get("type")
+    title = _required_text(value.get("title"), label=f"{label} title", max_length=160)
+
+    if stimulus_type == "preformatted":
+        allowed = {"type", "variant", "title", "content"}
+        extra = sorted(set(value) - allowed)
+        if extra:
+            raise BuildError(f"{label} contains unsupported fields: {', '.join(extra)}")
+        variant = value.get("variant")
+        if variant not in PREFORMATTED_STIMULUS_VARIANTS:
+            raise BuildError(f"{label} has unsupported preformatted variant {variant!r}.")
+        raw_content = value.get("content")
+        if not isinstance(raw_content, str) or not raw_content.strip():
+            raise BuildError(f"{label} content must be non-empty text.")
+        if len(raw_content) > 12000:
+            raise BuildError(f"{label} content exceeds 12000 characters.")
+        if "\x00" in raw_content:
+            raise BuildError(f"{label} content contains a null character.")
+        content = raw_content.replace("\r\n", "\n").replace("\r", "\n").strip("\n")
+        return {"type": "preformatted", "variant": variant, "title": title, "content": content}
+
+    if stimulus_type == "table":
+        allowed = {"type", "title", "caption", "columns", "rows"}
+        extra = sorted(set(value) - allowed)
+        if extra:
+            raise BuildError(f"{label} contains unsupported fields: {', '.join(extra)}")
+        caption_value = value.get("caption")
+        caption = None if caption_value in (None, "") else _required_text(caption_value, label=f"{label} caption", max_length=320)
+        columns = value.get("columns")
+        rows = value.get("rows")
+        if not isinstance(columns, list) or not 1 <= len(columns) <= 10:
+            raise BuildError(f"{label} requires 1 to 10 columns.")
+        normalized_columns = []
+        keys = []
+        import re
+        for index, column in enumerate(columns, start=1):
+            if not isinstance(column, dict) or set(column) != {"key", "label"}:
+                raise BuildError(f"{label} column {index} must contain only key and label.")
+            key = column.get("key")
+            if not isinstance(key, str) or not re.fullmatch(r"[a-z][a-z0-9_]*", key):
+                raise BuildError(f"{label} column {index} has an invalid key.")
+            column_label = _required_text(column.get("label"), label=f"{label} column {index} label", max_length=120)
+            keys.append(key)
+            normalized_columns.append({"key": key, "label": column_label})
+        if len(set(keys)) != len(keys):
+            raise BuildError(f"{label} column keys must be unique.")
+        if not isinstance(rows, list) or not 1 <= len(rows) <= 50:
+            raise BuildError(f"{label} requires 1 to 50 rows.")
+        normalized_rows = []
+        expected = set(keys)
+        for index, row in enumerate(rows, start=1):
+            if not isinstance(row, dict) or set(row) != expected:
+                raise BuildError(f"{label} row {index} must contain exactly the declared column keys.")
+            normalized_row = {}
+            for key in keys:
+                cell = row[key]
+                if not isinstance(cell, str) or len(cell) > 500 or "\x00" in cell:
+                    raise BuildError(f"{label} row {index} cell {key} must be text no longer than 500 characters.")
+                normalized_row[key] = cell
+            normalized_rows.append(normalized_row)
+        result = {"type": "table", "title": title, "columns": normalized_columns, "rows": normalized_rows}
+        if caption is not None:
+            result["caption"] = caption
+        return result
+
+    raise BuildError(f"{label} has unsupported type {stimulus_type!r}.")
+
+
+def load_question_stimuli(path: Path, known_question_ids: set[str]) -> dict[str, dict[str, Any]]:
+    registry = read_json(path)
+    if registry.get("schemaVersion") != 1:
+        raise BuildError(f"Unsupported stimulus schemaVersion in {path}: {registry.get('schemaVersion')!r}.")
+    values = registry.get("stimuli")
+    if not isinstance(values, dict):
+        raise BuildError(f"Stimulus registry {path} must contain a stimuli object.")
+    unknown = sorted(set(values) - known_question_ids)
+    if unknown:
+        raise BuildError(f"Stimulus registry {path} contains unknown question IDs: {', '.join(unknown)}")
+    return {question_id: normalize_question_stimulus(question_id, value) for question_id, value in values.items()}
 
 def stable_answer_id(question_id: str, stored_key: str) -> str:
     """Create a stable answer identity independent of displayed position."""
@@ -144,7 +241,7 @@ def calculate_question_count_settings(
     return enabled_options, default_count
 
 
-def build_public_question(row: dict[str, str]) -> dict[str, Any]:
+def build_public_question(row: dict[str, str], stimulus: dict[str, Any] | None = None) -> dict[str, Any]:
     question_id = row.get("question_id", "").strip()
     if not question_id:
         raise BuildError("Encountered an active question without a question_id.")
@@ -218,7 +315,7 @@ def build_public_question(row: dict[str, str]) -> dict[str, Any]:
             f"Question {question_id}: a correct answer does not match a stored answer."
         )
 
-    return {
+    question = {
         "id": question_id,
         "version": positive_integer(
             row.get("question_version", ""),
@@ -243,6 +340,9 @@ def build_public_question(row: dict[str, str]) -> dict[str, Any]:
         "correctExplanation": row.get("correct_explanation", "").strip(),
         "studyTopics": split_pipe_values(row.get("study_topics", "")),
     }
+    if stimulus is not None:
+        question["stimulus"] = stimulus
+    return question
 
 
 def consistent_test_metadata(rows: list[dict[str, str]], slug: str) -> dict[str, str]:
@@ -368,7 +468,14 @@ def build_quiz(
 
     test = consistent_test_metadata(source_rows, slug)
     test["practiceTestPath"] = practice_test_path
-    questions = [build_public_question(row) for row in source_rows]
+    stimuli: dict[str, dict[str, Any]] = {}
+    stimuli_path_value = str(quiz_config.get("stimuli_json", "")).strip()
+    if stimuli_path_value:
+        stimuli = load_question_stimuli(project_root / stimuli_path_value, set(question_ids))
+    questions = [
+        build_public_question(row, stimuli.get(row.get("question_id", "").strip()))
+        for row in source_rows
+    ]
     objective_rows = read_csv(objective_map_path)
     domains = build_domains(objective_rows, test, questions)
 

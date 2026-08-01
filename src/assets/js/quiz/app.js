@@ -7,6 +7,7 @@ import {
   getPagedReturnPath,
 } from "./paged-entry.js";
 import { createQuestionReporter } from "./reporting.js";
+import { renderQuestionStimulus } from "./stimulus.js";
 import { confirmCompletedTestReplacement } from "./results-actions.js";
 import {
   completeQuizSession,
@@ -161,6 +162,11 @@ async function initializeQuiz(root) {
       elements.instruction.textContent = "";
       elements.instruction.hidden = true;
     }
+
+    renderQuestionStimulus(elements.stimulus, question.stimulus, {
+      headingLevel: 3,
+      idPrefix: `${question.id}-active-stimulus`,
+    });
 
     renderAnswers(elements.answers, state, session, persist, announce, renderQuestion);
     renderNavigator(elements.navigator, session, (targetIndex) => {
@@ -540,6 +546,15 @@ function createReviewCard(result, onReport) {
     article.append(instruction);
   }
 
+  if (question.stimulus) {
+    const stimulus = document.createElement("div");
+    renderQuestionStimulus(stimulus, question.stimulus, {
+      headingLevel: 4,
+      idPrefix: `${question.id}-review-stimulus`,
+    });
+    article.append(stimulus);
+  }
+
   article.append(metadata, answerSummary, answerList, correctExplanation, actions);
   return article;
 }
@@ -646,6 +661,7 @@ function collectElements(root) {
     topic: get("[data-quiz-topic]"),
     questionHeading: get("[data-quiz-question-heading]"),
     instruction: get("[data-quiz-instruction]"),
+    stimulus: get("[data-quiz-stimulus]"),
     answers: get("[data-quiz-answers]"),
     navigator: get("[data-quiz-navigator]"),
     previous: get("[data-quiz-previous]"),

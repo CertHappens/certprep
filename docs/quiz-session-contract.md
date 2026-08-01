@@ -72,3 +72,8 @@ Each session stores the selected public question objects as a snapshot. A deploy
 ## Completion
 
 Phase 3 records `completedAt` and displays answered, unanswered, and flagged counts. Phase 4 will add grading, domain results, elapsed time, and answer review while retaining this session contract.
+
+
+## Optional stimulus snapshots
+
+When a public question includes a read-only stimulus, the complete normalized stimulus object is cloned into the session's question snapshot. Paged and classic navigation must render that stored snapshot rather than refetching or reconstructing evidence. This preserves command output, logs, configuration fragments, and table rows across reloads and completed-test review.

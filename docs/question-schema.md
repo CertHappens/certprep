@@ -147,3 +147,8 @@ Beginning with Batch 001, the repository owner authorized an accelerated early-b
 - Initial style target: 6 direct, 12 scenario, 4 comparison, 2 calculation.
 - New rows remain in review status until explicitly approved.
 - Subnetting and other arithmetic must be checked programmatically and explained step by step.
+
+
+## Optional read-only stimuli
+
+Command output, configuration fragments, logs, and evidence tables are stored outside the CSV in an optional per-exam stimulus JSON sidecar. This keeps the existing lifecycle columns stable and prevents multiline or nested evidence from being compressed into spreadsheet cells. See `docs/question-stimulus-schema.md`.

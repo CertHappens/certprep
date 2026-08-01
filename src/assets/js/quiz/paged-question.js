@@ -15,6 +15,7 @@ import { createPagedFlagPresentation } from "./paged-flag.js";
 import { createPagedNavigationModel } from "./paged-navigation.js";
 import { createPagedReportContext } from "./paged-report.js";
 import { createQuestionReporter } from "./reporting.js";
+import { renderQuestionStimulus } from "./stimulus.js";
 import { restorePagedQuizSession } from "./paged-session.js";
 import {
   completeQuizSession,
@@ -146,6 +147,15 @@ function renderRestoredSession(appRoot, viewRoot, result) {
 
   instruction.textContent = question.instruction || "";
   instruction.hidden = !question.instruction;
+
+  const stimulus = viewRoot.querySelector("[data-paged-stimulus]");
+  if (!stimulus) {
+    throw new Error("Missing paged question stimulus container.");
+  }
+  renderQuestionStimulus(stimulus, question.stimulus, {
+    headingLevel: 3,
+    idPrefix: `${question.id}-paged-stimulus`,
+  });
 
   const answers = viewRoot.querySelector("[data-paged-answers]");
   if (!answers) {
