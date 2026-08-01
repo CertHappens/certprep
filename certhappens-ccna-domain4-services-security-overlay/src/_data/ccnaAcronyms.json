@@ -1,0 +1,1314 @@
+{
+  "title": "CCNA Acronyms and Terms",
+  "currentExamVersion": "200-301 v2.0",
+  "datePublished": "2026-07-31",
+  "dateModified": "2026-07-31",
+  "entryCount": 77,
+  "groups": [
+    {
+      "letter": "A",
+      "id": "a",
+      "label": "A",
+      "entries": [
+        {
+          "id": "a-record",
+          "term": "A",
+          "expansion": "Address Record",
+          "meaning": "A DNS record that maps a host name to an IPv4 address.",
+          "domains": [
+            "4"
+          ],
+          "related": [
+            "AAAA",
+            "DNS"
+          ],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        },
+        {
+          "id": "aaa",
+          "term": "AAA",
+          "expansion": "Authentication, Authorization, and Accounting",
+          "meaning": "A framework that verifies identity, decides permitted actions, and records activity.",
+          "domains": [
+            "4"
+          ],
+          "related": [
+            "RADIUS",
+            "TACACS+"
+          ],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        },
+        {
+          "id": "aaaa",
+          "term": "AAAA",
+          "expansion": "IPv6 Address Record",
+          "meaning": "A DNS record that maps a host name to an IPv6 address.",
+          "domains": [
+            "4"
+          ],
+          "related": [
+            "A",
+            "DNS"
+          ],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        },
+        {
+          "id": "acl",
+          "term": "ACL",
+          "expansion": "Access Control List",
+          "meaning": "A set of rules that permits or denies access to a resource, network path, or object.",
+          "domains": [
+            "4"
+          ],
+          "related": [],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        },
+        {
+          "id": "aes",
+          "term": "AES",
+          "expansion": "Advanced Encryption Standard",
+          "meaning": "A symmetric encryption standard used by modern Wi-Fi security and many other security protocols.",
+          "domains": [
+            "1"
+          ],
+          "related": [
+            "WPA2",
+            "WPA3"
+          ],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        },
+        {
+          "id": "ah",
+          "term": "AH",
+          "expansion": "Authentication Header",
+          "meaning": "An IPsec protocol that provides integrity and source authentication without encrypting the payload.",
+          "domains": [
+            "4"
+          ],
+          "related": [
+            "ESP",
+            "IKE",
+            "IPsec"
+          ],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        },
+        {
+          "id": "ai",
+          "term": "AI",
+          "expansion": "Artificial Intelligence",
+          "meaning": "Computer systems that perform tasks such as analysis, recommendation, generation, or decision support; CCNA v2.0 includes AI-assisted network operations.",
+          "domains": [
+            "5"
+          ],
+          "related": [
+            "API",
+            "SNMP"
+          ],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        },
+        {
+          "id": "ap",
+          "term": "AP",
+          "expansion": "Access Point",
+          "meaning": "A wireless infrastructure device that connects Wi-Fi clients to the network.",
+          "domains": [
+            "1",
+            "2"
+          ],
+          "related": [
+            "SSID",
+            "WLAN"
+          ],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        },
+        {
+          "id": "api",
+          "term": "API",
+          "expansion": "Application Programming Interface",
+          "meaning": "A defined way for software components or services to exchange requests and data.",
+          "domains": [
+            "5"
+          ],
+          "related": [],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        },
+        {
+          "id": "arp",
+          "term": "ARP",
+          "expansion": "Address Resolution Protocol",
+          "meaning": "A protocol that maps an IPv4 address to a local network hardware address.",
+          "domains": [
+            "1",
+            "4"
+          ],
+          "related": [
+            "MAC"
+          ],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        }
+      ]
+    },
+    {
+      "letter": "B",
+      "id": "b",
+      "label": "B",
+      "entries": [
+        {
+          "id": "bdr",
+          "term": "BDR",
+          "expansion": "Backup Designated Router",
+          "meaning": "The backup to the designated router on an OSPF broadcast network segment.",
+          "domains": [
+            "3"
+          ],
+          "related": [
+            "DR",
+            "OSPF"
+          ],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        },
+        {
+          "id": "bootp",
+          "term": "BOOTP",
+          "expansion": "Bootstrap Protocol",
+          "meaning": "An older address-configuration protocol whose relay behavior is related to DHCP relay on IOS.",
+          "domains": [
+            "1"
+          ],
+          "related": [
+            "DHCP"
+          ],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        },
+        {
+          "id": "bpdu",
+          "term": "BPDU",
+          "expansion": "Bridge Protocol Data Unit",
+          "meaning": "A spanning-tree control frame used by switches to exchange topology information.",
+          "domains": [
+            "2"
+          ],
+          "related": [
+            "STP",
+            "PVST+"
+          ],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        }
+      ]
+    },
+    {
+      "letter": "C",
+      "id": "c",
+      "label": "C",
+      "entries": [
+        {
+          "id": "cdp",
+          "term": "CDP",
+          "expansion": "Cisco Discovery Protocol",
+          "meaning": "A Cisco discovery protocol that advertises neighboring device identity and interface information on the local link.",
+          "domains": [
+            "2"
+          ],
+          "related": [],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        },
+        {
+          "id": "cidr",
+          "term": "CIDR",
+          "expansion": "Classless Inter-Domain Routing",
+          "meaning": "Prefix-length notation and route aggregation that describe networks without relying on legacy address classes.",
+          "domains": [
+            "1",
+            "3"
+          ],
+          "related": [
+            "IPv4",
+            "VLSM"
+          ],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        },
+        {
+          "id": "cli",
+          "term": "CLI",
+          "expansion": "Command-line Interface",
+          "meaning": "A text-based interface used to enter commands and inspect device or operating-system output.",
+          "domains": [
+            "5"
+          ],
+          "related": [],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        },
+        {
+          "id": "cname",
+          "term": "CNAME",
+          "expansion": "Canonical Name",
+          "meaning": "A DNS record that makes one name an alias of another canonical name.",
+          "domains": [
+            "4"
+          ],
+          "related": [
+            "DNS"
+          ],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        },
+        {
+          "id": "cpu",
+          "term": "CPU",
+          "expansion": "Central Processing Unit",
+          "meaning": "The processor that executes instructions. High utilization can affect control-plane work, services, or device responsiveness.",
+          "domains": [
+            "1"
+          ],
+          "related": [],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        },
+        {
+          "id": "crc",
+          "term": "CRC",
+          "expansion": "Cyclic Redundancy Check",
+          "meaning": "An error-detection calculation used to identify corrupted frame data; increasing CRC errors can point to a physical-link problem.",
+          "domains": [
+            "1"
+          ],
+          "related": [
+            "MAC"
+          ],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        }
+      ]
+    },
+    {
+      "letter": "D",
+      "id": "d",
+      "label": "D",
+      "entries": [
+        {
+          "id": "dai",
+          "term": "DAI",
+          "expansion": "Dynamic ARP Inspection",
+          "meaning": "A Layer 2 security feature that validates ARP messages against trusted information such as DHCP snooping bindings.",
+          "domains": [
+            "4"
+          ],
+          "related": [
+            "ARP",
+            "DHCP"
+          ],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        },
+        {
+          "id": "dhcp",
+          "term": "DHCP",
+          "expansion": "Dynamic Host Configuration Protocol",
+          "meaning": "A protocol that automatically assigns IP configuration to network clients.",
+          "domains": [
+            "1",
+            "4"
+          ],
+          "related": [],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        },
+        {
+          "id": "dns",
+          "term": "DNS",
+          "expansion": "Domain Name System",
+          "meaning": "The distributed service that maps names to records such as IP addresses and mail servers.",
+          "domains": [
+            "1",
+            "4"
+          ],
+          "related": [],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        },
+        {
+          "id": "dr",
+          "term": "DR",
+          "expansion": "Designated Router",
+          "meaning": "The OSPF router elected on a multiaccess segment to reduce adjacency and flooding complexity.",
+          "domains": [
+            "3"
+          ],
+          "related": [
+            "BDR",
+            "OSPF"
+          ],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        }
+      ]
+    },
+    {
+      "letter": "E",
+      "id": "e",
+      "label": "E",
+      "entries": [
+        {
+          "id": "esp",
+          "term": "ESP",
+          "expansion": "Encapsulating Security Payload",
+          "meaning": "An IPsec protocol commonly used to provide encryption, integrity, and authentication for protected traffic.",
+          "domains": [
+            "4"
+          ],
+          "related": [
+            "AH",
+            "IKE",
+            "IPsec"
+          ],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        },
+        {
+          "id": "eui-64",
+          "term": "EUI-64",
+          "expansion": "Extended Unique Identifier, 64-bit",
+          "meaning": "A 64-bit identifier format; modified EUI-64 can derive an IPv6 interface identifier from a 48-bit MAC address.",
+          "domains": [
+            "1"
+          ],
+          "related": [
+            "IPv6",
+            "MAC"
+          ],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        }
+      ]
+    },
+    {
+      "letter": "F",
+      "id": "f",
+      "label": "F",
+      "entries": [
+        {
+          "id": "fhrp",
+          "term": "FHRP",
+          "expansion": "First Hop Redundancy Protocol",
+          "meaning": "A category of protocols that provide a resilient virtual default gateway for hosts.",
+          "domains": [
+            "3"
+          ],
+          "related": [],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        }
+      ]
+    },
+    {
+      "letter": "H",
+      "id": "h",
+      "label": "H",
+      "entries": [
+        {
+          "id": "hsrp",
+          "term": "HSRP",
+          "expansion": "Hot Standby Router Protocol",
+          "meaning": "A Cisco first-hop redundancy protocol that provides a virtual default gateway using Active and Standby roles.",
+          "domains": [
+            "3"
+          ],
+          "related": [
+            "FHRP",
+            "VRRP"
+          ],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        },
+        {
+          "id": "https",
+          "term": "HTTPS",
+          "expansion": "Hypertext Transfer Protocol Secure",
+          "meaning": "HTTP protected by Transport Layer Security for encrypted and authenticated web communication.",
+          "domains": [
+            "4"
+          ],
+          "related": [
+            "TCP"
+          ],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        }
+      ]
+    },
+    {
+      "letter": "I",
+      "id": "i",
+      "label": "I",
+      "entries": [
+        {
+          "id": "icmp",
+          "term": "ICMP",
+          "expansion": "Internet Control Message Protocol",
+          "meaning": "A network protocol used for diagnostics and control messages, including many ping and error responses.",
+          "domains": [
+            "2"
+          ],
+          "related": [],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        },
+        {
+          "id": "ike",
+          "term": "IKE",
+          "expansion": "Internet Key Exchange",
+          "meaning": "A protocol that negotiates IPsec parameters and establishes security associations between peers.",
+          "domains": [
+            "4"
+          ],
+          "related": [
+            "AH",
+            "ESP",
+            "IPsec",
+            "VPN"
+          ],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        },
+        {
+          "id": "iot",
+          "term": "IoT",
+          "expansion": "Internet of Things",
+          "meaning": "A broad category of connected sensors, appliances, controllers, and embedded devices that communicate over a network.",
+          "domains": [
+            "2"
+          ],
+          "related": [
+            "AP",
+            "PoE",
+            "VLAN"
+          ],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        },
+        {
+          "id": "ip",
+          "term": "IP",
+          "expansion": "Internet Protocol",
+          "meaning": "The network-layer protocol used to address and route packets between systems.",
+          "domains": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          "related": [],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        },
+        {
+          "id": "ipsec",
+          "term": "IPsec",
+          "expansion": "Internet Protocol Security",
+          "meaning": "A suite of protocols that protects IP traffic and is commonly used to build encrypted VPNs.",
+          "domains": [
+            "4"
+          ],
+          "related": [],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        }
+      ]
+    },
+    {
+      "letter": "L",
+      "id": "l",
+      "label": "L",
+      "entries": [
+        {
+          "id": "lacp",
+          "term": "LACP",
+          "expansion": "Link Aggregation Control Protocol",
+          "meaning": "The standards-based protocol used to negotiate and maintain compatible links inside an Ethernet link-aggregation group.",
+          "domains": [
+            "2"
+          ],
+          "related": [
+            "STP"
+          ],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        },
+        {
+          "id": "lan",
+          "term": "LAN",
+          "expansion": "Local Area Network",
+          "meaning": "A network covering a limited area such as an office, home, or campus segment.",
+          "domains": [
+            "1"
+          ],
+          "related": [
+            "VLAN"
+          ],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        },
+        {
+          "id": "lldp",
+          "term": "LLDP",
+          "expansion": "Link Layer Discovery Protocol",
+          "meaning": "A vendor-neutral local-link discovery protocol that advertises device, interface, VLAN, power, and other neighbor information.",
+          "domains": [
+            "2"
+          ],
+          "related": [
+            "CDP"
+          ],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        }
+      ]
+    },
+    {
+      "letter": "M",
+      "id": "m",
+      "label": "M",
+      "entries": [
+        {
+          "id": "mac",
+          "term": "MAC",
+          "expansion": "Media Access Control",
+          "meaning": "The data-link layer function and hardware addressing used on local networks.",
+          "domains": [
+            "1",
+            "2"
+          ],
+          "related": [
+            "ARP"
+          ],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        },
+        {
+          "id": "mdi-x",
+          "term": "MDI-X",
+          "expansion": "Medium-Dependent Interface Crossover",
+          "meaning": "An Ethernet interface wiring role; auto-MDI-X can automatically adapt transmit and receive pair usage.",
+          "domains": [
+            "1"
+          ],
+          "related": [
+            "LAN"
+          ],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        },
+        {
+          "id": "mtu",
+          "term": "MTU",
+          "expansion": "Maximum Transmission Unit",
+          "meaning": "The largest network-layer packet or link-layer payload an interface can carry without fragmentation or another accommodation.",
+          "domains": [
+            "1",
+            "3"
+          ],
+          "related": [
+            "IP",
+            "VLAN"
+          ],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        },
+        {
+          "id": "mx",
+          "term": "MX",
+          "expansion": "Mail Exchange",
+          "meaning": "A DNS record that identifies mail servers for a domain and includes a preference value.",
+          "domains": [
+            "4"
+          ],
+          "related": [
+            "DNS"
+          ],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        }
+      ]
+    },
+    {
+      "letter": "N",
+      "id": "n",
+      "label": "N",
+      "entries": [
+        {
+          "id": "nat",
+          "term": "NAT",
+          "expansion": "Network Address Translation",
+          "meaning": "A network function that rewrites IP address information between address spaces.",
+          "domains": [
+            "4"
+          ],
+          "related": [
+            "PAT"
+          ],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        },
+        {
+          "id": "nic",
+          "term": "NIC",
+          "expansion": "Network Interface Card",
+          "meaning": "The hardware or virtual adapter that connects a system to a network and supplies link-layer functions such as a MAC address.",
+          "domains": [
+            "1"
+          ],
+          "related": [],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        },
+        {
+          "id": "ns",
+          "term": "NS",
+          "expansion": "Name Server",
+          "meaning": "A DNS record that identifies an authoritative name server for a zone.",
+          "domains": [
+            "4"
+          ],
+          "related": [
+            "DNS"
+          ],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        }
+      ]
+    },
+    {
+      "letter": "O",
+      "id": "o",
+      "label": "O",
+      "entries": [
+        {
+          "id": "ospf",
+          "term": "OSPF",
+          "expansion": "Open Shortest Path First",
+          "meaning": "A link-state interior routing protocol that calculates shortest paths from exchanged topology information and uses areas for scale.",
+          "domains": [
+            "3"
+          ],
+          "related": [],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        }
+      ]
+    },
+    {
+      "letter": "P",
+      "id": "p",
+      "label": "P",
+      "entries": [
+        {
+          "id": "pat",
+          "term": "PAT",
+          "expansion": "Port Address Translation",
+          "meaning": "A form of NAT that maps many internal connections to one public address by tracking transport-layer ports.",
+          "domains": [
+            "4"
+          ],
+          "related": [
+            "NAT"
+          ],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        },
+        {
+          "id": "poe",
+          "term": "PoE",
+          "expansion": "Power over Ethernet",
+          "meaning": "Supplies electrical power and Ethernet data over compatible copper cabling to devices such as access points, phones, and cameras.",
+          "domains": [
+            "2"
+          ],
+          "related": [],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        },
+        {
+          "id": "ptr",
+          "term": "PTR",
+          "expansion": "Pointer",
+          "meaning": "A DNS record used for reverse lookup from an IP address to a name.",
+          "domains": [
+            "4"
+          ],
+          "related": [
+            "DNS"
+          ],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        },
+        {
+          "id": "pvst",
+          "term": "PVST+",
+          "expansion": "Per-VLAN Spanning Tree Plus",
+          "meaning": "Cisco spanning-tree behavior that maintains a separate spanning-tree instance for each VLAN; Rapid PVST+ uses rapid convergence behavior.",
+          "domains": [
+            "2"
+          ],
+          "related": [
+            "STP",
+            "BPDU",
+            "VLAN"
+          ],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        }
+      ]
+    },
+    {
+      "letter": "R",
+      "id": "r",
+      "label": "R",
+      "entries": [
+        {
+          "id": "ra",
+          "term": "RA",
+          "expansion": "Router Advertisement",
+          "meaning": "An IPv6 Neighbor Discovery message that advertises router and prefix information to hosts.",
+          "domains": [
+            "4"
+          ],
+          "related": [
+            "ICMP"
+          ],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        },
+        {
+          "id": "radius",
+          "term": "RADIUS",
+          "expansion": "Remote Authentication Dial-In User Service",
+          "meaning": "A protocol that centralizes authentication, authorization, and accounting for network access.",
+          "domains": [
+            "4"
+          ],
+          "related": [
+            "TACACS+"
+          ],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        },
+        {
+          "id": "rf",
+          "term": "RF",
+          "expansion": "Radio Frequency",
+          "meaning": "Electromagnetic radio energy used by wireless networks; channel selection, interference, signal level, and noise affect performance.",
+          "domains": [
+            "1"
+          ],
+          "related": [
+            "RSSI",
+            "SNR",
+            "WLAN"
+          ],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        },
+        {
+          "id": "rfc",
+          "term": "RFC",
+          "expansion": "Request for Comments",
+          "meaning": "A document in the Internet standards and technical publication series; RFC numbers are commonly used to identify protocol specifications and addressing guidance.",
+          "domains": [
+            "1"
+          ],
+          "related": [
+            "CIDR"
+          ],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        },
+        {
+          "id": "rssi",
+          "term": "RSSI",
+          "expansion": "Received Signal Strength Indicator",
+          "meaning": "A measurement of received wireless signal level.",
+          "domains": [
+            "1"
+          ],
+          "related": [
+            "RF",
+            "SNR"
+          ],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        }
+      ]
+    },
+    {
+      "letter": "S",
+      "id": "s",
+      "label": "S",
+      "entries": [
+        {
+          "id": "sae",
+          "term": "SAE",
+          "expansion": "Simultaneous Authentication of Equals",
+          "meaning": "The password-authentication exchange used by WPA3-Personal.",
+          "domains": [
+            "1"
+          ],
+          "related": [
+            "WPA3"
+          ],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        },
+        {
+          "id": "scp",
+          "term": "SCP",
+          "expansion": "Secure Copy Protocol",
+          "meaning": "A secure file-copy protocol that uses SSH to protect transfers.",
+          "domains": [
+            "4"
+          ],
+          "related": [
+            "SSH",
+            "SFTP"
+          ],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        },
+        {
+          "id": "sftp",
+          "term": "SFTP",
+          "expansion": "SSH File Transfer Protocol",
+          "meaning": "A secure file-transfer protocol carried over SSH and used for protected transfer of files such as configurations and images.",
+          "domains": [
+            "4"
+          ],
+          "related": [
+            "SSH"
+          ],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        },
+        {
+          "id": "snmp",
+          "term": "SNMP",
+          "expansion": "Simple Network Management Protocol",
+          "meaning": "A protocol used to monitor and manage network devices and report operational information.",
+          "domains": [
+            "5"
+          ],
+          "related": [],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        },
+        {
+          "id": "snr",
+          "term": "SNR",
+          "expansion": "Signal-to-Noise Ratio",
+          "meaning": "The difference between useful signal level and background noise; higher SNR generally provides a cleaner wireless signal.",
+          "domains": [
+            "1"
+          ],
+          "related": [
+            "RF",
+            "RSSI"
+          ],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        },
+        {
+          "id": "ssh",
+          "term": "SSH",
+          "expansion": "Secure Shell",
+          "meaning": "A protocol for encrypted remote administration, command execution, tunneling, and file transfer.",
+          "domains": [
+            "4"
+          ],
+          "related": [
+            "SFTP"
+          ],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        },
+        {
+          "id": "ssid",
+          "term": "SSID",
+          "expansion": "Service Set Identifier",
+          "meaning": "The human-readable wireless network name advertised or configured for a Wi-Fi service.",
+          "domains": [
+            "1"
+          ],
+          "related": [],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        },
+        {
+          "id": "stp",
+          "term": "STP",
+          "expansion": "Spanning Tree Protocol",
+          "meaning": "A Layer 2 loop-prevention protocol that selects a root bridge and blocks redundant paths until they are needed.",
+          "domains": [
+            "2"
+          ],
+          "related": [
+            "VLAN"
+          ],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        },
+        {
+          "id": "svi",
+          "term": "SVI",
+          "expansion": "Switch Virtual Interface",
+          "meaning": "A logical Layer 3 interface associated with a VLAN on a switch.",
+          "domains": [
+            "2"
+          ],
+          "related": [
+            "VLAN"
+          ],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        }
+      ]
+    },
+    {
+      "letter": "T",
+      "id": "t",
+      "label": "T",
+      "entries": [
+        {
+          "id": "tacacs",
+          "term": "TACACS+",
+          "expansion": "Terminal Access Controller Access-Control System Plus",
+          "meaning": "A protocol commonly used for centralized administration access to network devices, with separate authentication, authorization, and accounting functions.",
+          "domains": [
+            "4"
+          ],
+          "related": [
+            "RADIUS",
+            "AAA"
+          ],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        },
+        {
+          "id": "tcp",
+          "term": "TCP",
+          "expansion": "Transmission Control Protocol",
+          "meaning": "A connection-oriented transport protocol that provides ordered delivery, acknowledgments, retransmission, and flow control.",
+          "domains": [
+            "4"
+          ],
+          "related": [
+            "UDP",
+            "IP"
+          ],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        },
+        {
+          "id": "tkip",
+          "term": "TKIP",
+          "expansion": "Temporal Key Integrity Protocol",
+          "meaning": "A legacy Wi-Fi encryption mechanism associated with older WPA deployments and weaker than modern AES-based protection.",
+          "domains": [
+            "1"
+          ],
+          "related": [
+            "WEP",
+            "WPA2",
+            "AES"
+          ],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        }
+      ]
+    },
+    {
+      "letter": "U",
+      "id": "u",
+      "label": "U",
+      "entries": [
+        {
+          "id": "udp",
+          "term": "UDP",
+          "expansion": "User Datagram Protocol",
+          "meaning": "A connectionless transport protocol with low overhead and no built-in delivery guarantee.",
+          "domains": [
+            "4"
+          ],
+          "related": [],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        }
+      ]
+    },
+    {
+      "letter": "V",
+      "id": "v",
+      "label": "V",
+      "entries": [
+        {
+          "id": "vlan",
+          "term": "VLAN",
+          "expansion": "Virtual Local Area Network",
+          "meaning": "A logical Layer 2 network segment created on switching infrastructure.",
+          "domains": [
+            "2"
+          ],
+          "related": [
+            "LAN"
+          ],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        },
+        {
+          "id": "vlsm",
+          "term": "VLSM",
+          "expansion": "Variable Length Subnet Masking",
+          "meaning": "Using different prefix lengths within an address plan so subnets can be sized for different requirements.",
+          "domains": [
+            "1"
+          ],
+          "related": [
+            "CIDR",
+            "IPv4"
+          ],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        },
+        {
+          "id": "vm",
+          "term": "VM",
+          "expansion": "Virtual Machine",
+          "meaning": "A software-defined computer that runs a guest operating system with virtualized processor, memory, storage, and network interfaces.",
+          "domains": [
+            "1"
+          ],
+          "related": [
+            "NIC",
+            "VLAN"
+          ],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        },
+        {
+          "id": "voip",
+          "term": "VoIP",
+          "expansion": "Voice over Internet Protocol",
+          "meaning": "Voice communication carried over IP networks, often using switch features such as voice VLANs and Power over Ethernet for attached phones.",
+          "domains": [
+            "2"
+          ],
+          "related": [
+            "PoE",
+            "VLAN"
+          ],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        },
+        {
+          "id": "vpn",
+          "term": "VPN",
+          "expansion": "Virtual Private Network",
+          "meaning": "An encrypted tunnel that protects traffic across an untrusted network.",
+          "domains": [
+            "4"
+          ],
+          "related": [
+            "IPsec"
+          ],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        },
+        {
+          "id": "vrrp",
+          "term": "VRRP",
+          "expansion": "Virtual Router Redundancy Protocol",
+          "meaning": "A standards-based first-hop redundancy protocol that provides a virtual gateway using Master and Backup roles.",
+          "domains": [
+            "3"
+          ],
+          "related": [
+            "FHRP",
+            "HSRP"
+          ],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        },
+        {
+          "id": "vty",
+          "term": "VTY",
+          "expansion": "Virtual Teletype",
+          "meaning": "A logical terminal line used for remote command-line sessions on a Cisco device.",
+          "domains": [
+            "4"
+          ],
+          "related": [
+            "AAA",
+            "SSH"
+          ],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        }
+      ]
+    },
+    {
+      "letter": "W",
+      "id": "w",
+      "label": "W",
+      "entries": [
+        {
+          "id": "wep",
+          "term": "WEP",
+          "expansion": "Wired Equivalent Privacy",
+          "meaning": "An obsolete wireless security protocol with serious weaknesses; recognize it as an insecure legacy choice.",
+          "domains": [
+            "1"
+          ],
+          "related": [
+            "WPA2",
+            "WPA3",
+            "TKIP"
+          ],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        },
+        {
+          "id": "wlan",
+          "term": "WLAN",
+          "expansion": "Wireless Local Area Network",
+          "meaning": "A local network that uses Wi-Fi radio links instead of only wired Ethernet connections.",
+          "domains": [
+            "1"
+          ],
+          "related": [],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        },
+        {
+          "id": "wpa2",
+          "term": "WPA2",
+          "expansion": "Wi-Fi Protected Access 2",
+          "meaning": "A widely deployed Wi-Fi security generation commonly paired with AES-based protection.",
+          "domains": [
+            "1"
+          ],
+          "related": [
+            "AES",
+            "WPA3"
+          ],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        },
+        {
+          "id": "wpa3",
+          "term": "WPA3",
+          "expansion": "Wi-Fi Protected Access 3",
+          "meaning": "A newer Wi-Fi security generation that strengthens authentication and encryption compared with older personal-network designs.",
+          "domains": [
+            "1"
+          ],
+          "related": [
+            "SAE",
+            "WPA2"
+          ],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        }
+      ]
+    }
+  ]
+}
