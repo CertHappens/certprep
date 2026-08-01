@@ -168,6 +168,7 @@ const publicPageFiles = [
   "ccna/200-301-v2/study-guide/switching-network-access/index.html",
   "ccna/200-301-v2/study-guide/ip-routing/index.html",
   "ccna/200-301-v2/study-guide/network-services-security/index.html",
+  "ccna/200-301-v2/study-guide/ai-network-operations-management/index.html",
   "disclaimer/index.html",
   "network-plus/index.html",
   "network-plus/acronyms/index.html",
@@ -210,6 +211,7 @@ const articlePageFiles = [
   "ccna/200-301-v2/study-guide/switching-network-access/index.html",
   "ccna/200-301-v2/study-guide/ip-routing/index.html",
   "ccna/200-301-v2/study-guide/network-services-security/index.html",
+  "ccna/200-301-v2/study-guide/ai-network-operations-management/index.html",
   "network-plus/acronyms/index.html",
   "network-plus/n10-009/study-guide/index.html",
   "network-plus/n10-009/study-guide/ipv4-subnetting/index.html",
@@ -272,6 +274,7 @@ const wholeSitePageMarkers = new Map([
       "/ccna/200-301-v2/study-guide/switching-network-access/",
       "/ccna/200-301-v2/study-guide/ip-routing/",
       "/ccna/200-301-v2/study-guide/network-services-security/",
+      "/ccna/200-301-v2/study-guide/ai-network-operations-management/",
       "/ccna/acronyms/",
       "/ccna/commands/",
       "Use v1.1 through February 2, 2027 and v2.0 starting February 3, 2027",
@@ -345,6 +348,20 @@ const wholeSitePageMarkers = new Map([
       "show ip dhcp snooping binding",
       "show ip arp inspection",
       "show port-security interface",
+      "/ccna/acronyms/"
+    ]
+  ],
+  [
+    "ccna/200-301-v2/study-guide/ai-network-operations-management/index.html",
+    [
+      "CCNA 200-301 v2.0 Domain 5: AI, Network Operations, and Management",
+      "Domain 5 objective map",
+      "Agentic artificial intelligence",
+      "Infrastructure as Code (IaC)",
+      "Network management system (NMS)",
+      "cisco.ios.ios_command",
+      "%FACILITY-SEVERITY-MNEMONIC",
+      "Syslog severity levels",
       "/ccna/acronyms/"
     ]
   ],
@@ -852,6 +869,7 @@ for (const file of htmlFiles) {
     "/ccna/200-301-v2/study-guide/switching-network-access/",
     "/ccna/200-301-v2/study-guide/ip-routing/",
     "/ccna/200-301-v2/study-guide/network-services-security/",
+    "/ccna/200-301-v2/study-guide/ai-network-operations-management/",
     "/ccna/acronyms/",
     "/ccna/commands/",
     "/cissp/",
@@ -2086,6 +2104,7 @@ for (const file of htmlFiles) {
       "/ccna/200-301-v2/study-guide/switching-network-access/",
       "/ccna/200-301-v2/study-guide/ip-routing/",
       "/ccna/200-301-v2/study-guide/network-services-security/",
+      "/ccna/200-301-v2/study-guide/ai-network-operations-management/",
       "/ccna/acronyms/",
       "/ccna/commands/",
       "/network-plus/n10-009/study-guide/ipv4-subnetting/",
@@ -2125,7 +2144,8 @@ for (const file of htmlFiles) {
       ["/ccna/200-301-v2/study-guide/network-infrastructure-connectivity/", "Open Domain 1 guide"],
       ["/ccna/200-301-v2/study-guide/switching-network-access/", "Open Domain 2 guide"],
       ["/ccna/200-301-v2/study-guide/ip-routing/", "Open Domain 3 guide"],
-      ["/ccna/200-301-v2/study-guide/network-services-security/", "Open Domain 4 guide"]
+      ["/ccna/200-301-v2/study-guide/network-services-security/", "Open Domain 4 guide"],
+      ["/ccna/200-301-v2/study-guide/ai-network-operations-management/", "Open Domain 5 guide"]
     ];
     for (const [href, label] of publishedDomainGuideLinks) {
       if (!html.includes(`href="${href}"`) || !html.includes(label)) {
@@ -2221,6 +2241,57 @@ for (const file of htmlFiles) {
     }
   }
 
+  if (relative === "ccna/200-301-v2/study-guide/ai-network-operations-management/index.html") {
+    if (!/<h1>CCNA 200-301 v2\.0 Domain 5: AI, Network Operations, and Management<\/h1>/.test(html)) {
+      fail(`${relative}: expected CCNA Domain 5 h1 is missing`);
+    }
+
+    if (!html.includes('data-print-guide')) {
+      fail(`${relative}: CCNA Domain 5 guide is missing the shared Print | Save control`);
+    }
+
+    const requiredSectionIds = [
+      "domain-map",
+      "operations-model",
+      "agentic-ai",
+      "prompt-selection",
+      "management-approaches",
+      "snmp",
+      "ansible",
+      "syslog",
+      "integrated-scenario",
+      "common-traps",
+      "rapid-review",
+      "official-references"
+    ];
+
+    for (const id of requiredSectionIds) {
+      if (!html.includes(`id="${id}"`)) {
+        fail(`${relative}: CCNA Domain 5 guide is missing section #${id}`);
+      }
+    }
+
+    const requiredMarkers = [
+      "data classification, output format, persona, and instructions",
+      "Infrastructure as Code (IaC)",
+      "Simple Network Management Protocol (SNMP)",
+      "Network management system (NMS)",
+      "Management information base (MIB)",
+      "Object identifier (OID)",
+      "cisco.ios.ios_command",
+      "%FACILITY-SEVERITY-MNEMONIC",
+      "Emergencies",
+      "Debugging",
+      'href="/ccna/acronyms/"'
+    ];
+
+    for (const marker of requiredMarkers) {
+      if (!html.includes(marker)) {
+        fail(`${relative}: CCNA Domain 5 guide is missing ${marker}`);
+      }
+    }
+  }
+
   if (relative === "ccna/acronyms/index.html") {
     if (!html.includes("data-print-guide")) {
       fail(`${relative}: acronym reference is missing the shared Print | Save control`);
@@ -2231,8 +2302,8 @@ for (const file of htmlFiles) {
     }
 
     const acronymEntryCount = (html.match(/data-acronym-entry/g) || []).length;
-    if (acronymEntryCount < 75) {
-      fail(`${relative}: expected at least 75 acronym entries, found ${acronymEntryCount}`);
+    if (acronymEntryCount < 80) {
+      fail(`${relative}: expected at least 80 acronym entries, found ${acronymEntryCount}`);
     }
 
     const requiredAcronymMarkup = [
@@ -2251,7 +2322,12 @@ for (const file of htmlFiles) {
       "Terminal Access Controller Access-Control System Plus",
       "Encapsulating Security Payload",
       "Internet Key Exchange",
-      "Router Advertisement"
+      "Router Advertisement",
+      "Infrastructure as Code",
+      "Management Information Base",
+      "Network Management System",
+      "Object Identifier",
+      "YAML Ain't Markup Language"
     ];
 
     for (const marker of requiredAcronymMarkup) {
@@ -2269,8 +2345,8 @@ for (const file of htmlFiles) {
     }
 
     const acronymJumpLinkCount = (html.match(/href=["']#acronyms-[^"']+["']/g) || []).length;
-    if (acronymJumpLinkCount !== 19) {
-      fail(`${relative}: expected 19 sidebar acronym jump links, found ${acronymJumpLinkCount}`);
+    if (acronymJumpLinkCount !== 20) {
+      fail(`${relative}: expected 20 sidebar acronym jump links, found ${acronymJumpLinkCount}`);
     }
 
     if (html.includes("data-acronym-index")) {

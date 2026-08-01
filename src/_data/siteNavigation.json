@@ -167,6 +167,10 @@
             {
               "label": "Domain 4: Services & Security",
               "url": "/ccna/200-301-v2/study-guide/network-services-security/"
+            },
+            {
+              "label": "Domain 5: AI & Operations",
+              "url": "/ccna/200-301-v2/study-guide/ai-network-operations-management/"
             }
           ]
         },

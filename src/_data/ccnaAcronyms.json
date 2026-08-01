@@ -2,8 +2,8 @@
   "title": "CCNA Acronyms and Terms",
   "currentExamVersion": "200-301 v2.0",
   "datePublished": "2026-07-31",
-  "dateModified": "2026-07-31",
-  "entryCount": 77,
+  "dateModified": "2026-08-01",
+  "entryCount": 82,
   "groups": [
     {
       "letter": "A",
@@ -486,6 +486,22 @@
       "label": "I",
       "entries": [
         {
+          "id": "iac",
+          "term": "IaC",
+          "expansion": "Infrastructure as Code",
+          "meaning": "A method of managing infrastructure through machine-readable, version-controlled definitions rather than relying only on interactive changes.",
+          "domains": [
+            "5"
+          ],
+          "related": [
+            "API",
+            "YAML"
+          ],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        },
+        {
           "id": "icmp",
           "term": "ICMP",
           "expansion": "Internet Control Message Protocol",
@@ -653,6 +669,22 @@
           ]
         },
         {
+          "id": "mib",
+          "term": "MIB",
+          "expansion": "Management Information Base",
+          "meaning": "A structured description of management objects that an SNMP agent exposes to a manager.",
+          "domains": [
+            "5"
+          ],
+          "related": [
+            "OID",
+            "SNMP"
+          ],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        },
+        {
           "id": "mtu",
           "term": "MTU",
           "expansion": "Maximum Transmission Unit",
@@ -720,6 +752,23 @@
           ]
         },
         {
+          "id": "nms",
+          "term": "NMS",
+          "expansion": "Network Management System",
+          "meaning": "Software that monitors and manages network devices, often acting as the SNMP manager that polls agents and receives notifications.",
+          "domains": [
+            "5"
+          ],
+          "related": [
+            "MIB",
+            "OID",
+            "SNMP"
+          ],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        },
+        {
           "id": "ns",
           "term": "NS",
           "expansion": "Name Server",
@@ -741,6 +790,22 @@
       "id": "o",
       "label": "O",
       "entries": [
+        {
+          "id": "oid",
+          "term": "OID",
+          "expansion": "Object Identifier",
+          "meaning": "A hierarchical identifier for a specific management object that can be read or referenced through SNMP.",
+          "domains": [
+            "5"
+          ],
+          "related": [
+            "MIB",
+            "SNMP"
+          ],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        },
         {
           "id": "ospf",
           "term": "OSPF",
@@ -1303,6 +1368,28 @@
           "related": [
             "SAE",
             "WPA2"
+          ],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        }
+      ]
+    },
+    {
+      "letter": "Y",
+      "id": "y",
+      "label": "Y",
+      "entries": [
+        {
+          "id": "yaml",
+          "term": "YAML",
+          "expansion": "YAML Ain't Markup Language",
+          "meaning": "A human-readable data-serialization format commonly used for Ansible inventories, variables, and playbooks.",
+          "domains": [
+            "5"
+          ],
+          "related": [
+            "IaC"
           ],
           "examVersions": [
             "200-301 v2.0"
