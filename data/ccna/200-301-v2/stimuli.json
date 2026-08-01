@@ -402,6 +402,140 @@
       "variant": "configuration",
       "title": "Ansible IOS command-verification task",
       "content": "- name: Verify the routed uplink appears in interface output\n  cisco.ios.ios_command:\n    commands:\n      - show ip interface brief\n    wait_for:\n      - result[0] contains \"GigabitEthernet0/0\"\n    retries: 3\n    interval: 2\n  register: interface_check"
+    },
+    "CCNA301V2-0000091": {
+      "type": "table",
+      "title": "Fiber uplink evidence",
+      "caption": "The duplex LC fiber pair is approximately 80 meters long and is connected with the transmit and receive strands crossed correctly.",
+      "columns": [
+        {
+          "key": "endpoint",
+          "label": "Endpoint"
+        },
+        {
+          "key": "module",
+          "label": "Installed module"
+        },
+        {
+          "key": "standard",
+          "label": "Ethernet standard"
+        },
+        {
+          "key": "wavelength",
+          "label": "Nominal wavelength"
+        },
+        {
+          "key": "state",
+          "label": "Interface state"
+        }
+      ],
+      "rows": [
+        {
+          "endpoint": "SW1 TenGigabitEthernet1/1/1",
+          "module": "SFP-10G-SR",
+          "standard": "10GBASE-SR",
+          "wavelength": "850 nm",
+          "state": "down/down"
+        },
+        {
+          "endpoint": "SW2 TenGigabitEthernet1/1/1",
+          "module": "SFP-10G-LR",
+          "standard": "10GBASE-LR",
+          "wavelength": "1310 nm",
+          "state": "down/down"
+        }
+      ]
+    },
+    "CCNA301V2-0000094": {
+      "type": "preformatted",
+      "variant": "command_output",
+      "title": "IPv6 client configuration",
+      "content": "Ethernet adapter Ethernet:\n   IPv6 Address. . . . . . . . . . . : 2001:db8:44:10::25\n   Prefix Length . . . . . . . . . . : 64\n   Link-local IPv6 Address . . . . . . : fe80::25%12\n   Default Gateway . . . . . . . . . : fe80::1%12\n   DNS Servers . . . . . . . . . . . : 2001:db8:53::53"
+    },
+    "CCNA301V2-0000098": {
+      "type": "preformatted",
+      "variant": "command_output",
+      "title": "Routed-port configuration and status",
+      "content": "SW1# show running-config interface gigabitEthernet1/0/24\ninterface GigabitEthernet1/0/24\n description Routed-link-to-R2\n no switchport\n ip address 192.0.2.1 255.255.255.252\n shutdown\n\nSW1# show ip interface brief | include GigabitEthernet1/0/24\nGigabitEthernet1/0/24  192.0.2.1  YES manual  administratively down  down"
+    },
+    "CCNA301V2-0000099": {
+      "type": "preformatted",
+      "variant": "command_output",
+      "title": "Trunk and neighbor evidence",
+      "content": "SW1# show interfaces trunk\nPort      Mode  Encapsulation  Status  Native vlan\nGi1/0/48  on    802.1q         trunking 99\n\nSW2# show interfaces trunk\nPort      Mode  Encapsulation  Status  Native vlan\nGi1/0/48  on    802.1q         trunking 1\n\nSW1#\n%CDP-4-NATIVE_VLAN_MISMATCH: Native VLAN mismatch discovered on GigabitEthernet1/0/48 (99), with SW2 GigabitEthernet1/0/48 (1)"
+    },
+    "CCNA301V2-0000105": {
+      "type": "preformatted",
+      "variant": "command_output",
+      "title": "Rapid PVST+ VLAN 20 state",
+      "content": "SW1# show spanning-tree vlan 20\nVLAN0020\n  Spanning tree enabled protocol rstp\n  Root ID    Priority    24596\n             Address     0011.2233.4400\n             This bridge is the root\n  Bridge ID  Priority    24596  (priority 24576 sys-id-ext 20)\n             Address     0011.2233.4400\n\nSW2# show spanning-tree vlan 20 | include Root ID|Bridge ID|Priority|Address\n  Root ID    Priority    24596\n             Address     0011.2233.4400\n  Bridge ID  Priority    28692  (priority 28672 sys-id-ext 20)\n             Address     00aa.bbcc.dd00"
+    },
+    "CCNA301V2-0000106": {
+      "type": "preformatted",
+      "variant": "command_output",
+      "title": "IPv4 routing table",
+      "content": "R1# show ip route 10.10.20.140\nRouting entry for 10.10.20.128/25\n  Known via \"static\", distance 1, metric 0\n  Routing Descriptor Blocks:\n  * 192.0.2.10\n\nRelevant routes:\nC    10.10.20.0/26 is directly connected, GigabitEthernet0/0\nO    10.10.20.0/24 [110/20] via 192.0.2.6, GigabitEthernet0/1\nS    10.10.20.128/25 [1/0] via 192.0.2.10\nS    10.10.0.0/16 [1/0] via 192.0.2.2"
+    },
+    "CCNA301V2-0000109": {
+      "type": "preformatted",
+      "variant": "configuration",
+      "title": "OSPFv3 configuration",
+      "content": "ipv6 unicast-routing\n!\ninterface GigabitEthernet0/0\n description Link-to-R2\n ipv6 address 2001:db8:10::1/64\n no shutdown\n!\nrouter ospfv3 10\n router-id 1.1.1.1\n address-family ipv6 unicast\n exit-address-family\n!\nR1# show ospfv3 neighbor\n\nR1#"
+    },
+    "CCNA301V2-0000114": {
+      "type": "preformatted",
+      "variant": "command_output",
+      "title": "NAT translation table",
+      "content": "R1# show ip nat translations\nPro  Inside global         Inside local          Outside local        Outside global\ntcp  203.0.113.5:49152    10.10.10.11:49152    198.51.100.20:443   198.51.100.20:443\ntcp  203.0.113.5:49153    10.10.10.12:49153    198.51.100.20:443   198.51.100.20:443\ntcp  203.0.113.5:49154    10.10.10.13:49154    192.0.2.80:443      192.0.2.80:443"
+    },
+    "CCNA301V2-0000117": {
+      "type": "preformatted",
+      "variant": "command_output",
+      "title": "DHCP snooping and DAI evidence",
+      "content": "SW1# show ip dhcp snooping binding\nMacAddress          IpAddress       Lease(sec) Type           VLAN Interface\n00:11:22:33:44:55   10.20.30.25    84211      dhcp-snooping  30   GigabitEthernet1/0/10\n\nSW1# show logging | include DAI\n%SW_DAI-4-DHCP_SNOOPING_DENY: 2 Invalid ARPs (Req) on Gi1/0/11, vlan 30.([00aa.bbcc.ddee/10.20.30.25/0000.0000.0000/10.20.30.1/23:41:08 UTC Sat Aug 1 2026])\n\nConfiguration note: Gi1/0/48 is the trusted uplink toward the DHCP server. Client ports are untrusted."
+    },
+    "CCNA301V2-0000119": {
+      "type": "table",
+      "title": "Management approach comparison",
+      "caption": "The operations team is choosing a model for approximately 300 network devices.",
+      "columns": [
+        {
+          "key": "approach",
+          "label": "Approach"
+        },
+        {
+          "key": "policy_location",
+          "label": "Policy location"
+        },
+        {
+          "key": "change_method",
+          "label": "Typical change method"
+        },
+        {
+          "key": "network_context",
+          "label": "Shared topology and assurance context"
+        }
+      ],
+      "rows": [
+        {
+          "approach": "Per-device CLI",
+          "policy_location": "Repeated on individual devices",
+          "change_method": "Manual device sessions",
+          "network_context": "Limited"
+        },
+        {
+          "approach": "Controller-based platform",
+          "policy_location": "Centralized intent and policy",
+          "change_method": "Controller workflows and APIs",
+          "network_context": "Centralized"
+        },
+        {
+          "approach": "Unmanaged network",
+          "policy_location": "Defaults or ad hoc settings",
+          "change_method": "No coordinated method",
+          "network_context": "None"
+        }
+      ]
     }
   }
 }
