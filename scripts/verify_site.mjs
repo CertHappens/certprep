@@ -1229,7 +1229,7 @@ for (const file of htmlFiles) {
 
   const expectedCcnaNavigationGroups = [
     ["ccna-navigation-group-1", "Overview"],
-    ["ccna-navigation-group-2", "Subnetting"],
+    ["ccna-navigation-group-2", "Practice"],
     ["ccna-navigation-group-3", "Study"],
     ["ccna-navigation-group-4", "References"]
   ];
