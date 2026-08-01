@@ -268,6 +268,140 @@
       "variant": "configuration",
       "title": "SNMPv3 user and notification configuration",
       "content": "snmp-server group NMS v3 priv\nsnmp-server user netops NMS v3 auth sha AUTHKEY priv aes 128 PRIVKEY\nsnmp-server host 192.0.2.50 version 3 priv netops\nsnmp-server enable traps"
+    },
+    "CCNA301V2-0000061": {
+      "type": "table",
+      "title": "Uplink interface counters",
+      "caption": "Counters were cleared ten minutes before this capture. Both interfaces operate at 1 Gb/s full duplex.",
+      "columns": [
+        {
+          "key": "endpoint",
+          "label": "Endpoint"
+        },
+        {
+          "key": "state",
+          "label": "State"
+        },
+        {
+          "key": "input_errors",
+          "label": "Input errors"
+        },
+        {
+          "key": "crc",
+          "label": "CRC errors"
+        },
+        {
+          "key": "collisions",
+          "label": "Collisions"
+        }
+      ],
+      "rows": [
+        {
+          "endpoint": "SW1 Gi1/0/48",
+          "state": "up/up",
+          "input_errors": "18,442",
+          "crc": "18,437",
+          "collisions": "0"
+        },
+        {
+          "endpoint": "SW2 Gi1/0/48",
+          "state": "up/up",
+          "input_errors": "9",
+          "crc": "7",
+          "collisions": "0"
+        }
+      ]
+    },
+    "CCNA301V2-0000067": {
+      "type": "preformatted",
+      "variant": "command_output",
+      "title": "Workstation IPv4 configuration and tests",
+      "content": "C:\\> ipconfig\nIPv4 Address. . . . . . . . . . . : 10.50.20.25\nSubnet Mask . . . . . . . . . . . : 255.255.255.0\nDefault Gateway . . . . . . . . . : 10.50.30.1\nDNS Servers . . . . . . . . . . . : 192.0.2.53\n\nC:\\> ping 10.50.20.40\nReply from 10.50.20.40: bytes=32 time<1ms TTL=128\n\nC:\\> ping 10.50.30.1\nDestination host unreachable."
+    },
+    "CCNA301V2-0000069": {
+      "type": "preformatted",
+      "variant": "configuration",
+      "title": "Current switch-port configuration and design requirement",
+      "content": "Design requirement\n- Point-to-point routed link\n- SW1 address: 192.0.2.1/30\n- Peer address: 192.0.2.2/30\n\nCurrent SW1 configuration\ninterface GigabitEthernet1/0/24\n description Link-to-R2\n switchport\n switchport mode access\n switchport access vlan 20\n shutdown"
+    },
+    "CCNA301V2-0000070": {
+      "type": "preformatted",
+      "variant": "command_output",
+      "title": "SW1 trunk configuration and status",
+      "content": "SW1# show running-config interface GigabitEthernet1/0/48\ninterface GigabitEthernet1/0/48\n switchport trunk native vlan 99\n switchport trunk allowed vlan 10,20,99\n switchport mode trunk\n\nSW1# show interfaces trunk\nPort        Mode  Status    Native vlan\nGi1/0/48    on    trunking  99\n\nPort        Vlans allowed on trunk\nGi1/0/48    10,20,99\n\nRequired VLANs across link: 10,20,30,99"
+    },
+    "CCNA301V2-0000074": {
+      "type": "preformatted",
+      "variant": "command_output",
+      "title": "Rapid PVST+ output for VLAN 20",
+      "content": "SW2# show spanning-tree vlan 20\n\nRoot ID    Priority    24596\n           Address     0011.2233.4400\n           Cost        4\n           Port        24 (GigabitEthernet1/0/24)\n\nInterface           Role Sts Cost      Prio.Nbr Type\n------------------- ---- --- --------- -------- --------------------------------\nGi1/0/24            Root FWD 4         128.24   P2p\nGi1/0/23            Altn BLK 4         128.23   P2p\nGi1/0/10            Desg FWD 4         128.10   P2p Edge"
+    },
+    "CCNA301V2-0000076": {
+      "type": "preformatted",
+      "variant": "command_output",
+      "title": "R1 IPv4 routing table excerpt",
+      "content": "R1# show ip route\nC    172.16.0.0/16 is directly connected, GigabitEthernet0/0\nO    172.16.10.0/24 [110/20] via 192.0.2.2, GigabitEthernet0/1\nS    172.16.10.0/24 [5/0] via 192.0.2.3, GigabitEthernet0/2\nS*   0.0.0.0/0 [1/0] via 192.0.2.254, GigabitEthernet0/3"
+    },
+    "CCNA301V2-0000080": {
+      "type": "table",
+      "title": "OSPF interface parameters",
+      "caption": "The routers are directly connected on the same Ethernet subnet and both interfaces are assigned to area 0.",
+      "columns": [
+        {
+          "key": "router",
+          "label": "Router"
+        },
+        {
+          "key": "interface",
+          "label": "Interface"
+        },
+        {
+          "key": "hello",
+          "label": "Hello interval"
+        },
+        {
+          "key": "dead",
+          "label": "Dead interval"
+        },
+        {
+          "key": "process",
+          "label": "Local process ID"
+        }
+      ],
+      "rows": [
+        {
+          "router": "R1",
+          "interface": "GigabitEthernet0/0",
+          "hello": "10 seconds",
+          "dead": "40 seconds",
+          "process": "10"
+        },
+        {
+          "router": "R2",
+          "interface": "GigabitEthernet0/0",
+          "hello": "5 seconds",
+          "dead": "20 seconds",
+          "process": "20"
+        }
+      ]
+    },
+    "CCNA301V2-0000086": {
+      "type": "preformatted",
+      "variant": "configuration",
+      "title": "Extended ACL and interface application",
+      "content": "ip access-list extended SERVER-FILTER\n 10 deny ip 10.20.30.0 0.0.0.255 any\n 20 permit tcp host 10.20.30.50 host 192.0.2.10 eq 443\n!\ninterface GigabitEthernet0/0\n description Source LAN 10.20.30.0/24\n ip access-group SERVER-FILTER in"
+    },
+    "CCNA301V2-0000087": {
+      "type": "preformatted",
+      "variant": "command_output",
+      "title": "Port-security configuration and status",
+      "content": "interface GigabitEthernet1/0/18\n switchport mode access\n switchport port-security\n switchport port-security maximum 1\n switchport port-security violation restrict\n switchport port-security mac-address sticky\n\nSW1# show port-security interface GigabitEthernet1/0/18\nPort Security              : Enabled\nPort Status                : Secure-up\nViolation Mode             : Restrict\nMaximum MAC Addresses      : 1\nTotal MAC Addresses        : 1\nSticky MAC Addresses       : 1\nSecurity Violation Count   : 6"
+    },
+    "CCNA301V2-0000089": {
+      "type": "preformatted",
+      "variant": "configuration",
+      "title": "Ansible IOS command-verification task",
+      "content": "- name: Verify the routed uplink appears in interface output\n  cisco.ios.ios_command:\n    commands:\n      - show ip interface brief\n    wait_for:\n      - result[0] contains \"GigabitEthernet0/0\"\n    retries: 3\n    interval: 2\n  register: interface_check"
     }
   }
 }
