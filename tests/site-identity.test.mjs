@@ -51,3 +51,62 @@ test("repository and public usage notices are present", async () => {
   assert.match(publicPage, /Personal study and ordinary sharing are welcome/i);
   assert.match(readme, /\[COPYRIGHT\.md\]\(COPYRIGHT\.md\)/);
 });
+
+test("Security+ and Network+ study menus link directly to every domain guide", async () => {
+  const navigation = JSON.parse(await readSource("src/_data/siteNavigation.json"));
+  const studyLinksFor = (certification) => {
+    const menu = navigation.primary.find((item) => item.label === certification);
+    const study = menu.groups.find((group) => group.label === "Study");
+    return study.links;
+  };
+
+  assert.deepEqual(studyLinksFor("Security+"), [
+    { label: "Study guide", url: "/security-plus/sy0-701/study-guide/" },
+    { label: "Quick reviews", url: "/security-plus/quick-review/" },
+    {
+      label: "Domain 1: Concepts",
+      url: "/security-plus/sy0-701/study-guide/general-security-concepts/",
+    },
+    {
+      label: "Domain 2: Threats & Mitigations",
+      url: "/security-plus/sy0-701/study-guide/threats-vulnerabilities-mitigations/",
+    },
+    {
+      label: "Domain 3: Architecture",
+      url: "/security-plus/sy0-701/study-guide/security-architecture/",
+    },
+    {
+      label: "Domain 4: Operations",
+      url: "/security-plus/sy0-701/study-guide/security-operations/",
+    },
+    {
+      label: "Domain 5: Program Management",
+      url: "/security-plus/sy0-701/study-guide/security-program-management-oversight/",
+    },
+  ]);
+
+  assert.deepEqual(studyLinksFor("Network+"), [
+    { label: "Study guide", url: "/network-plus/n10-009/study-guide/" },
+    { label: "Quick reviews", url: "/network-plus/quick-review/" },
+    {
+      label: "Domain 1: Concepts",
+      url: "/network-plus/n10-009/study-guide/networking-concepts/",
+    },
+    {
+      label: "Domain 2: Implementation",
+      url: "/network-plus/n10-009/study-guide/network-implementation/",
+    },
+    {
+      label: "Domain 3: Operations",
+      url: "/network-plus/n10-009/study-guide/network-operations/",
+    },
+    {
+      label: "Domain 4: Security",
+      url: "/network-plus/n10-009/study-guide/network-security/",
+    },
+    {
+      label: "Domain 5: Troubleshooting",
+      url: "/network-plus/n10-009/study-guide/network-troubleshooting/",
+    },
+  ]);
+});

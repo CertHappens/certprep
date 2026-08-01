@@ -34,6 +34,26 @@
             {
               "label": "Quick reviews",
               "url": "/security-plus/quick-review/"
+            },
+            {
+              "label": "Domain 1: Concepts",
+              "url": "/security-plus/sy0-701/study-guide/general-security-concepts/"
+            },
+            {
+              "label": "Domain 2: Threats & Mitigations",
+              "url": "/security-plus/sy0-701/study-guide/threats-vulnerabilities-mitigations/"
+            },
+            {
+              "label": "Domain 3: Architecture",
+              "url": "/security-plus/sy0-701/study-guide/security-architecture/"
+            },
+            {
+              "label": "Domain 4: Operations",
+              "url": "/security-plus/sy0-701/study-guide/security-operations/"
+            },
+            {
+              "label": "Domain 5: Program Management",
+              "url": "/security-plus/sy0-701/study-guide/security-program-management-oversight/"
             }
           ]
         },
@@ -86,6 +106,26 @@
             {
               "label": "Quick reviews",
               "url": "/network-plus/quick-review/"
+            },
+            {
+              "label": "Domain 1: Concepts",
+              "url": "/network-plus/n10-009/study-guide/networking-concepts/"
+            },
+            {
+              "label": "Domain 2: Implementation",
+              "url": "/network-plus/n10-009/study-guide/network-implementation/"
+            },
+            {
+              "label": "Domain 3: Operations",
+              "url": "/network-plus/n10-009/study-guide/network-operations/"
+            },
+            {
+              "label": "Domain 4: Security",
+              "url": "/network-plus/n10-009/study-guide/network-security/"
+            },
+            {
+              "label": "Domain 5: Troubleshooting",
+              "url": "/network-plus/n10-009/study-guide/network-troubleshooting/"
             }
           ]
         },
