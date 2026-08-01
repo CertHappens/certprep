@@ -248,8 +248,8 @@
     "provider": "Cisco",
     "eyebrow": "CCNA study resources",
     "title": "CCNA 200-301 Study Resources",
-    "lede": "Study CCNA with the v2.0 guide, Domains 1 through 3 walkthroughs, IOS verification reference, subnetting tools, and supporting networking references. Exam-version details are included below so you can match the right blueprint to your test date.",
-    "sourceReviewed": "2026-07-31",
+    "lede": "Study CCNA with the v2.0 guide, all five domain walkthroughs, IOS verification reference, subnetting tools, and supporting networking references. Exam-version details are included below so you can match the right blueprint to your test date.",
+    "sourceReviewed": "2026-08-01",
     "resourcesFirst": true,
     "status": {
       "label": "Which blueprint should you study?",
@@ -389,13 +389,17 @@
         "number": "4.0",
         "name": "Network Services and Security",
         "weight": "20%",
-        "focus": "AAA management access, secure file transfer, NAT and PAT, DNS troubleshooting, IPsec VPN concepts, IPv4 access control lists, and Layer 2 protections such as DHCP snooping, Dynamic ARP Inspection, RA guard, and port security."
+        "focus": "AAA management access, secure file transfer, NAT and PAT, DNS troubleshooting, IPsec VPN concepts, IPv4 access control lists, and Layer 2 protections such as DHCP snooping, Dynamic ARP Inspection, RA guard, and port security.",
+        "url": "/ccna/200-301-v2/study-guide/network-services-security/",
+        "linkLabel": "Open Domain 4 guide"
       },
       {
         "number": "5.0",
         "name": "AI, and Network Operations and Management",
         "weight": "10%",
-        "focus": "Agentic AI, generative-AI prompt selection for network operations, network management models, SNMP, Ansible-based command execution, and syslog interpretation."
+        "focus": "Agentic AI, prompt selection for generative AI-assisted operations, device-, cloud-, controller-, automation-, and infrastructure-as-code management, Simple Network Management Protocol (SNMP), Ansible command execution, and syslog interpretation.",
+        "url": "/ccna/200-301-v2/study-guide/ai-network-operations-management/",
+        "linkLabel": "Open Domain 5 guide"
       }
     ],
     "experience": {
@@ -480,6 +484,16 @@
           "title": "Domain 3: IP Routing",
           "url": "/ccna/200-301-v2/study-guide/ip-routing/",
           "description": "Interpret routing tables, troubleshoot IPv4 and IPv6 static routes, configure single-area OSPFv2 and OSPFv3, and read HSRP and VRRP operational state."
+        },
+        {
+          "title": "Domain 4: Network Services and Security",
+          "url": "/ccna/200-301-v2/study-guide/network-services-security/",
+          "description": "Configure AAA management access, secure file transfer, NAT and PAT, IPv4 ACLs, and Layer 2 protections while diagnosing DNS and IPsec VPN behavior."
+        },
+        {
+          "title": "Domain 5: AI, Network Operations, and Management",
+          "url": "/ccna/200-301-v2/study-guide/ai-network-operations-management/",
+          "description": "Use AI prompts, management models, SNMP, Ansible, and syslog to collect and interpret network evidence without giving up access control or verification."
         },
         {
           "title": "Cisco IOS verification and troubleshooting commands",

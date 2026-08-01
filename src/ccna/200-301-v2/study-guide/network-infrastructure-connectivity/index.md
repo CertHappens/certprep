@@ -8,7 +8,7 @@ printable: true
 printTitle: "CCNA 200-301 v2.0 Domain 1: Network Infrastructure and Connectivity"
 author: certHappens
 datePublished: 2026-07-31
-dateModified: 2026-07-31
+dateModified: 2026-08-01
 articleSection: CCNA 200-301 v2.0 Domain 1
 eyebrow: CCNA v2.0 domain 1 guide
 lede: Start at the link, prove the address, follow the path, and separate wireless or Dynamic Host Configuration Protocol (DHCP) symptoms from the layer that actually failed.
@@ -63,6 +63,9 @@ relatedLinks:
   - title: CCNA 200-301 v2.0 Study Guide
     url: /ccna/200-301-v2/study-guide/
     description: Return to the complete five-domain v2.0 roadmap and practical study method.
+  - title: "Domain 2: Switching and Network Access"
+    url: /ccna/200-301-v2/study-guide/switching-network-access/
+    description: Continue from links and addressing into trunks, EtherChannel, switch virtual interfaces, edge ports, neighbor discovery, and spanning tree.
   - title: Cisco IOS Verification and Troubleshooting Commands
     url: /ccna/commands/
     description: Choose the show, routing, neighbor, DHCP, logging, or path command that exposes the state you need.

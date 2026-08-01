@@ -8,7 +8,7 @@ printable: true
 printTitle: "CCNA 200-301 v2.0 Domain 3: IP Routing"
 author: certHappens
 datePublished: 2026-07-31
-dateModified: 2026-07-31
+dateModified: 2026-08-01
 articleSection: CCNA 200-301 v2.0 Domain 3
 eyebrow: CCNA v2.0 domain 3 guide
 lede: Follow the packet. Read the routing table, prove the next hop, verify the routing relationship, and separate route-selection problems from forwarding and return-path problems.
@@ -69,6 +69,9 @@ relatedLinks:
   - title: "Domain 2: Switching and Network Access"
     url: /ccna/200-301-v2/study-guide/switching-network-access/
     description: Review trunks, SVIs, routed ports, EtherChannel, neighbor discovery, and spanning tree before troubleshooting routed paths.
+  - title: "Domain 4: Network Services and Security"
+    url: /ccna/200-301-v2/study-guide/network-services-security/
+    description: Continue from routed paths into AAA, secure file transfer, NAT and PAT, DNS, IPsec, ACLs, and Layer 2 protections.
   - title: Cisco IOS Verification and Troubleshooting Commands
     url: /ccna/commands/
     description: Choose routing, interface, neighbor, and path-testing commands based on the state you need to prove.

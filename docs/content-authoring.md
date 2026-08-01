@@ -194,3 +194,26 @@ Public acronym routes are version-stable, for example:
 Add later exam versions to the same certification reference unless the terminology changes enough to make a separate resource meaningfully better for learners. The visible page may describe current exam coverage, but the title and URL should not be tied to one exam number.
 
 Search and filter controls are screen-only. Printable output must restore and include the complete reference, remove search controls, and continue to suppress advertising.
+
+## Build-verifier assertions
+
+Post-build verification should protect behavior and assembled-site contracts without freezing ordinary editorial wording.
+
+Use strict structural checks for:
+
+- Required routes, internal link destinations, element IDs, data attributes, metadata, canonical URLs, robots directives, sitemap membership, analytics isolation, and accessibility landmarks
+- Counts or relationships generated from structured source data
+- Retired or prohibited implementation markers whose return would represent a regression
+
+When visible wording must be checked, normalize HTML entities, case, typographic punctuation, and whitespace before comparison. Prefer a short stable concept or the text of a specifically identified control over a complete sentence. Do not pin policy revision dates, introductory prose, or punctuation choices unless the exact wording is itself a legal or functional requirement.
+
+For data-driven pages, compare rendered entries with the structured source rather than maintaining a second hand-written list of sample terms in the verifier.
+
+## Canonical identity and permitted use
+
+- Keep the public canonical origin fixed at `https://certhappens.com`. Preview and Pages hostnames must never become canonical URLs, Open Graph URLs, sitemap URLs, or structured-data identities.
+- Google Analytics may be included only in `main` builds and must load at runtime only when the browser hostname is `certhappens.com` or `www.certhappens.com`. This prevents copied production HTML from sending another site's traffic into the Cert Happens property.
+- Keep the shared copyright notice, `/copyright/` footer link, source-build comment, `data-site-origin` marker, and copyright structured data intact.
+- The public repository is not an open-source release. Do not add a permissive repository license or language authorizing mirrors, competing deployments, bulk republication, or commercial reuse without an explicit owner decision.
+- Personal study, personal printouts, ordinary linking, brief attributed quotations, search-engine indexing, browser caching, and accessibility tools remain permitted.
+- Do not claim ownership of vendor trademarks, official exam objectives, standards, factual concepts, or third-party dependencies.

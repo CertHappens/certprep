@@ -8,7 +8,7 @@ printable: true
 printTitle: "CCNA 200-301 v2.0 Domain 2: Switching and Network Access"
 author: certHappens
 datePublished: 2026-07-31
-dateModified: 2026-07-31
+dateModified: 2026-08-01
 articleSection: CCNA 200-301 v2.0 Domain 2
 eyebrow: CCNA v2.0 domain 2 guide
 lede: Build the Layer 2 path deliberately, verify its operational state, and use spanning-tree, neighbor, and port-channel evidence before changing configuration.
@@ -68,6 +68,9 @@ relatedLinks:
   - title: "Domain 1: Network Infrastructure and Connectivity"
     url: /ccna/200-301-v2/study-guide/network-infrastructure-connectivity/
     description: Review interfaces, addressing, wireless clients, virtualization, IPv4, IPv6, and DHCPv4 troubleshooting.
+  - title: "Domain 3: IP Routing"
+    url: /ccna/200-301-v2/study-guide/ip-routing/
+    description: Continue from Layer 2 forwarding into route selection, static routing, OSPFv2, OSPFv3, HSRP, and VRRP.
   - title: Cisco IOS Verification and Troubleshooting Commands
     url: /ccna/commands/
     description: Choose the VLAN, trunk, EtherChannel, spanning-tree, neighbor, routing, logging, or path command that exposes the state you need.

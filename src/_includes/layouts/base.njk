@@ -1,15 +1,35 @@
+{% set currentCopyrightYear = "" | currentYear %}
+{% set copyrightYears = site.copyrightStartYear %}
+{% if currentCopyrightYear != site.copyrightStartYear %}
+  {% set copyrightYears = site.copyrightStartYear ~ "-" ~ currentCopyrightYear %}
+{% endif %}
+{% set copyrightNotice = "© " ~ copyrightYears ~ " " ~ site.name ~ ". All rights reserved." %}
 <!doctype html>
-<html lang="{{ site.language }}">
+<html lang="{{ site.language }}" data-site-origin="{{ site.canonicalHost }}">
 <head>
+  <!-- Original CertHappens.com site build. Usage: https://certhappens.com/copyright/ -->
   {% if environment.googleAnalyticsMeasurementId %}
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id={{ environment.googleAnalyticsMeasurementId }}"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+  <!-- Google Analytics is loaded only on the approved CertHappens.com hostnames. -->
+  <script data-production-analytics>
+    (() => {
+      const measurementId = {{ environment.googleAnalyticsMeasurementId | json | safe }};
+      const allowedHosts = {{ site.analyticsHosts | json | safe }};
+      const currentHost = window.location.hostname.toLowerCase();
 
-    gtag('config', '{{ environment.googleAnalyticsMeasurementId }}');
+      if (!allowedHosts.includes(currentHost)) {
+        return;
+      }
+
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = window.gtag || function gtag(){window.dataLayer.push(arguments);};
+      window.gtag("js", new Date());
+      window.gtag("config", measurementId);
+
+      const googleTag = document.createElement("script");
+      googleTag.async = true;
+      googleTag.src = "https://www.googletagmanager.com/gtag/js?id={{ environment.googleAnalyticsMeasurementId }}";
+      document.head.appendChild(googleTag);
+    })();
   </script>
   {% endif %}
   {% set pageDescription = description or site.description %}
@@ -22,6 +42,8 @@
 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="{{ site.name }}">
+  <meta name="copyright" content="{{ copyrightNotice }}">
   <meta name="color-scheme" content="dark light">
   <meta name="theme-color" content="#10141d">
 
@@ -87,6 +109,11 @@
         "publisher": {
           "@id": "{{ site.url }}/#organization"
         },
+        "copyrightHolder": {
+          "@id": "{{ site.url }}/#organization"
+        },
+        "copyrightNotice": {{ copyrightNotice | json | safe }},
+        "copyrightYear": {{ site.copyrightStartYear }},
         "inLanguage": {{ site.language | json | safe }}
       },
       {
@@ -98,6 +125,11 @@
         "isPartOf": {
           "@id": "{{ site.url }}/#website"
         },
+        "copyrightHolder": {
+          "@id": "{{ site.url }}/#organization"
+        },
+        "copyrightNotice": {{ copyrightNotice | json | safe }},
+        "copyrightYear": {{ site.copyrightStartYear }},
         "inLanguage": {{ site.language | json | safe }}
       }
       {% if breadcrumbs %},
@@ -216,7 +248,7 @@
         <a href="{{ item.url }}">{{ item.label }}</a>
         {% endfor %}
       </nav>
-      <p>&copy; {{ "" | currentYear }} {{ site.name }}.</p>
+      <p>{{ copyrightNotice }}</p>
       <p class="site-footer__disclaimer">
         This independent study resource is not affiliated with or endorsed by CompTIA, ISC2, or Cisco.
         CompTIA, Security+, and Network+ are trademarks of CompTIA, Inc. ISC2 and CISSP are registered marks of ISC2, Inc. Cisco, CCNA, and related marks belong to Cisco Systems, Inc. and/or its affiliates.

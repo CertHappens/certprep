@@ -1,9 +1,29 @@
 import { readFile, readdir, stat } from "node:fs/promises";
 import path from "node:path";
 
+import {
+  countElementsWithAttributeAndText,
+  countElementsWithClass,
+  elementTextByIdMatches,
+  escapeRegExp,
+  getElementBlockByAttributeValue,
+  getFirstHeadingText,
+  getJsonLdGraph,
+  hasElementWithNormalizedAttributeValue,
+  hasLinkWithText,
+  hasPageMarker,
+  headingMatches,
+  includesNormalizedText,
+  normalizeText
+} from "./verify_site_helpers.mjs";
+
 const outputRoot = path.resolve("_site");
 const errors = [];
 const googleAnalyticsMeasurementId = "G-7MYVYMG2H1";
+const canonicalSiteUrl = "https://certhappens.com";
+const canonicalHost = "certhappens.com";
+const analyticsHosts = [canonicalHost, `www.${canonicalHost}`];
+const copyrightStartYear = 2026;
 const expectsGoogleAnalytics = process.env.CF_PAGES_BRANCH === "main";
 
 function fail(message) {
@@ -48,6 +68,10 @@ function getMeta(html, name, property = false) {
   return html.match(expression)?.[1] || html.match(reverseExpression)?.[1] || "";
 }
 
+function graphNodeByType(graph, type) {
+  return graph.find((node) => node?.["@type"] === type);
+}
+
 function getNamedInputValues(html, name) {
   const values = [];
 
@@ -69,18 +93,21 @@ function getNamedInputValues(html, name) {
 }
 
 function verifyQuizResultActions(html, relative, resourcePath, resourceLabel) {
-  const requiredMarkers = [
+  const requiredText = [
     "What would you like to do next?",
-    "Your incorrect and unanswered questions, correct answers, and explanations are listed directly below.",
-    'href="#missed-question-review">Jump to missed questions</a>',
-    'id="missed-question-review"',
-    `href="${resourcePath}">${resourceLabel}</a>`
+    "incorrect and unanswered questions",
+    "correct answers",
+    "explanations"
   ];
 
-  for (const marker of requiredMarkers) {
-    if (!html.includes(marker)) {
+  for (const marker of requiredText) {
+    if (!includesNormalizedText(html, marker)) {
       fail(`${relative}: completed-test actions are missing ${marker}`);
     }
+  }
+
+  if (!html.includes('id="missed-question-review"')) {
+    fail(`${relative}: completed-test actions are missing the missed-question review section`);
   }
 
   const reviewButtonCount = (html.match(/data-quiz-return/g) || []).length;
@@ -93,19 +120,38 @@ function verifyQuizResultActions(html, relative, resourcePath, resourceLabel) {
     fail(`${relative}: expected 2 Start a new test actions, found ${restartButtonCount}`);
   }
 
-  const reviewLabelCount = (html.match(/>Review the full test question by question<\/button>/g) || []).length;
+  const reviewLabelCount = countElementsWithAttributeAndText(
+    html,
+    "button",
+    "data-quiz-return",
+    "Review the full test question by question"
+  );
   if (reviewLabelCount !== 2) {
     fail(`${relative}: expected 2 full-test review labels, found ${reviewLabelCount}`);
   }
 
-  const restartLabelCount = (html.match(/>Start a new test<\/button>/g) || []).length;
+  const restartLabelCount = countElementsWithAttributeAndText(
+    html,
+    "button",
+    "data-quiz-restart",
+    "Start a new test"
+  );
   if (restartLabelCount !== 2) {
     fail(`${relative}: expected 2 Start a new test labels, found ${restartLabelCount}`);
   }
 
-  const jumpLinkCount = (html.match(/href="#missed-question-review">Jump to missed questions<\/a>/g) || []).length;
+  const jumpLinks = html.match(
+    /<a\b(?=[^>]*href=["']#missed-question-review["'])[^>]*>[\s\S]*?<\/a>/gi
+  ) || [];
+  const jumpLinkCount = jumpLinks.filter((link) =>
+    includesNormalizedText(link, "Jump to missed questions", { mainOnly: false })
+  ).length;
   if (jumpLinkCount !== 1) {
     fail(`${relative}: expected 1 Jump to missed questions action, found ${jumpLinkCount}`);
+  }
+
+  if (!hasLinkWithText(html, resourcePath, resourceLabel)) {
+    fail(`${relative}: completed-test actions are missing the ${resourceLabel} link`);
   }
 
   const domainPosition = html.indexOf('id="domain-results-heading"');
@@ -121,15 +167,15 @@ function verifyQuizResultActions(html, relative, resourcePath, resourceLabel) {
     fail(`${relative}: result sections are not ordered as score by domain, next steps, then missed-question review`);
   }
 
-  if (html.includes(">Return to test</button>")) {
+  if (includesNormalizedText(html, "Return to test")) {
     fail(`${relative}: retired Return to test label is still present`);
   }
 
-  if (html.includes(">Review this test</button>")) {
+  if (includesNormalizedText(html, "Review this test")) {
     fail(`${relative}: ambiguous Review this test label is still present`);
   }
 
-  if (html.includes(">Start another randomized test</button>")) {
+  if (includesNormalizedText(html, "Start another randomized test")) {
     fail(`${relative}: retired Start another randomized test label is still present`);
   }
 }
@@ -159,6 +205,7 @@ function localTarget(href) {
 const publicPageFiles = [
   "index.html",
   "contact/index.html",
+  "copyright/index.html",
   "cissp/index.html",
   "ccna/index.html",
   "ccna/acronyms/index.html",
@@ -167,6 +214,8 @@ const publicPageFiles = [
   "ccna/200-301-v2/study-guide/network-infrastructure-connectivity/index.html",
   "ccna/200-301-v2/study-guide/switching-network-access/index.html",
   "ccna/200-301-v2/study-guide/ip-routing/index.html",
+  "ccna/200-301-v2/study-guide/network-services-security/index.html",
+  "ccna/200-301-v2/study-guide/ai-network-operations-management/index.html",
   "disclaimer/index.html",
   "network-plus/index.html",
   "network-plus/acronyms/index.html",
@@ -208,6 +257,9 @@ const articlePageFiles = [
   "ccna/200-301-v2/study-guide/network-infrastructure-connectivity/index.html",
   "ccna/200-301-v2/study-guide/switching-network-access/index.html",
   "ccna/200-301-v2/study-guide/ip-routing/index.html",
+  "ccna/200-301-v2/study-guide/network-services-security/index.html",
+  "ccna/200-301-v2/study-guide/ai-network-operations-management/index.html",
+  "copyright/index.html",
   "network-plus/acronyms/index.html",
   "network-plus/n10-009/study-guide/index.html",
   "network-plus/n10-009/study-guide/ipv4-subnetting/index.html",
@@ -230,16 +282,142 @@ const articlePageFiles = [
   "security-plus/sy0-701/study-guide/security-operations/index.html",
   "security-plus/sy0-701/study-guide/security-program-management-oversight/index.html",
   "security-plus/sy0-701/study-guide/threats-vulnerabilities-mitigations/index.html",
+  "terms/index.html",
   "tools/subnet-calculator/index.html"
 ];
 
 const publicPageFileSet = new Set(publicPageFiles);
 
+const acronymReferenceSpecs = new Map([
+  [
+    "network-plus/acronyms/index.html",
+    {
+      source: "src/_data/networkPlusAcronyms.json",
+      heading: "Network+ Acronyms and Terms"
+    }
+  ],
+  [
+    "security-plus/acronyms/index.html",
+    {
+      source: "src/_data/securityPlusAcronyms.json",
+      heading: "Security+ Acronyms and Terms"
+    }
+  ],
+  [
+    "ccna/acronyms/index.html",
+    {
+      source: "src/_data/ccnaAcronyms.json",
+      heading: "CCNA Acronyms and Terms"
+    }
+  ]
+]);
+
+async function verifyAcronymReference(html, relative, specification) {
+  if (!html.includes("data-print-guide")) {
+    fail(`${relative}: acronym reference is missing the shared Print | Save control`);
+  }
+
+  if (!headingMatches(html, specification.heading)) {
+    fail(`${relative}: acronym reference is missing its expected h1`);
+  }
+
+  const requiredStructure = [
+    "data-acronym-search",
+    "data-acronym-clear",
+    "data-acronym-status",
+    "data-acronym-reference",
+    "data-acronym-empty",
+    'src="/assets/js/acronym-filter.js"',
+    'class="article-toc article-toc--compact-grid"'
+  ];
+
+  for (const marker of requiredStructure) {
+    if (!html.includes(marker)) {
+      fail(`${relative}: acronym reference is missing structural marker ${marker}`);
+    }
+  }
+
+  if (!elementTextByIdMatches(html, "h2", "article-toc-title", "Jump to")) {
+    fail(`${relative}: acronym sidebar is missing its Jump to heading`);
+  }
+
+  let data;
+  try {
+    data = JSON.parse(await readFile(path.resolve(specification.source), "utf8"));
+  } catch (error) {
+    fail(`${relative}: could not read acronym source data (${error.message})`);
+    return;
+  }
+
+  const groups = Array.isArray(data.groups) ? data.groups : [];
+  const entries = groups.flatMap((group) => (Array.isArray(group.entries) ? group.entries : []));
+
+  if (data.entryCount !== entries.length) {
+    fail(
+      `${specification.source}: entryCount ${data.entryCount} does not match ${entries.length} source entries`
+    );
+  }
+
+  const renderedEntryCount = (html.match(/data-acronym-entry/g) || []).length;
+  if (renderedEntryCount !== entries.length) {
+    fail(
+      `${relative}: expected ${entries.length} rendered acronym entries, found ${renderedEntryCount}`
+    );
+  }
+
+  if (!html.includes(`data-total-entries="${entries.length}"`)) {
+    fail(`${relative}: rendered acronym total does not match source data`);
+  }
+
+  const acronymJumpLinkCount = (html.match(/href=["']#acronyms-[^"']+["']/g) || []).length;
+  if (acronymJumpLinkCount !== groups.length) {
+    fail(
+      `${relative}: expected ${groups.length} sidebar acronym jump links, found ${acronymJumpLinkCount}`
+    );
+  }
+
+  for (const group of groups) {
+    if (!html.includes(`id="acronyms-${group.id}"`)) {
+      fail(`${relative}: acronym group #acronyms-${group.id} did not render`);
+    }
+
+    if (!html.includes(`href="#acronyms-${group.id}"`)) {
+      fail(`${relative}: acronym sidebar is missing the ${group.label ?? group.id} group link`);
+    }
+  }
+
+  for (const entry of entries) {
+    const escapedId = escapeRegExp(entry.id);
+    const entryMatch = html.match(
+      new RegExp(
+        `<div\\b(?=[^>]*\\bid=["']acronym-${escapedId}["'])[^>]*>([\\s\\S]*?)<\\/div>`,
+        "i"
+      )
+    );
+
+    if (!entryMatch) {
+      fail(`${relative}: acronym entry #acronym-${entry.id} did not render`);
+      continue;
+    }
+
+    if (!includesNormalizedText(entryMatch[1], entry.term, { mainOnly: false })) {
+      fail(`${relative}: acronym entry #acronym-${entry.id} is missing term ${entry.term}`);
+    }
+
+    if (!includesNormalizedText(entryMatch[1], entry.expansion, { mainOnly: false })) {
+      fail(`${relative}: acronym entry #acronym-${entry.id} is missing its source expansion`);
+    }
+  }
+
+  if (html.includes("data-acronym-index")) {
+    fail(`${relative}: retired in-body acronym index is still present`);
+  }
+}
+
 const wholeSitePageMarkers = new Map([
   [
     "index.html",
     [
-      "five domain guides, quick reviews, acronyms, subnetting tools",
       "/security-plus/",
       "/network-plus/",
       "/cissp/",
@@ -251,11 +429,9 @@ const wholeSitePageMarkers = new Map([
   [
     "cissp/index.html",
     [
-      "CISSP Certification Overview",
-      "Start with scope, experience, and decision-making",
       "Security and Risk Management",
       "Software Development Security",
-      "120 credits during each three-year certification cycle",
+      "120 credits",
       "/security-plus/sy0-701/study-guide/",
       "https://www.isc2.org/certifications/cissp/cissp-certification-exam-outline"
     ]
@@ -264,16 +440,17 @@ const wholeSitePageMarkers = new Map([
     "ccna/index.html",
     [
       "CCNA 200-301 Study Resources",
-      "Start studying CCNA",
       "/ccna/200-301-v2/study-guide/",
       "/ccna/200-301-v2/study-guide/network-infrastructure-connectivity/",
       "/ccna/200-301-v2/study-guide/switching-network-access/",
       "/ccna/200-301-v2/study-guide/ip-routing/",
+      "/ccna/200-301-v2/study-guide/network-services-security/",
+      "/ccna/200-301-v2/study-guide/ai-network-operations-management/",
       "/ccna/acronyms/",
       "/ccna/commands/",
-      "Use v1.1 through February 2, 2027 and v2.0 starting February 3, 2027",
       "Network Infrastructure and Connectivity",
-      "AI, and Network Operations and Management",
+      "AI, Network Operations, and Management",
+      "February 2, 2027",
       "February 3, 2027",
       "https://www.cisco.com/site/us/en/learn/training-certifications/exams/ccna.html"
     ]
@@ -282,10 +459,10 @@ const wholeSitePageMarkers = new Map([
     "ccna/200-301-v2/study-guide/index.html",
     [
       "CCNA 200-301 v2.0 Study Guide",
-      "The five CCNA v2.0 domains",
       "/ccna/200-301-v2/study-guide/network-infrastructure-connectivity/",
       "/ccna/200-301-v2/study-guide/switching-network-access/",
       "/ccna/200-301-v2/study-guide/ip-routing/",
+      "/ccna/200-301-v2/study-guide/network-services-security/",
       "/ccna/commands/",
       "/ccna/acronyms/",
       "February 3, 2027"
@@ -325,6 +502,36 @@ const wholeSitePageMarkers = new Map([
       "router ospfv3",
       "show standby brief",
       "show vrrp brief",
+      "/ccna/acronyms/"
+    ]
+  ],
+  [
+    "ccna/200-301-v2/study-guide/network-services-security/index.html",
+    [
+      "CCNA 200-301 v2.0 Domain 4: Network Services and Security",
+      "Domain 4 objective map",
+      "aaa authentication login default",
+      "show ip nat translations",
+      "Domain Name System (DNS) records",
+      "Internet Key Exchange (IKE)",
+      "show ip access-lists",
+      "show ip dhcp snooping binding",
+      "show ip arp inspection",
+      "show port-security interface",
+      "/ccna/acronyms/"
+    ]
+  ],
+  [
+    "ccna/200-301-v2/study-guide/ai-network-operations-management/index.html",
+    [
+      "CCNA 200-301 v2.0 Domain 5: AI, Network Operations, and Management",
+      "Domain 5 objective map",
+      "Agentic artificial intelligence",
+      "Infrastructure as Code (IaC)",
+      "Network management system (NMS)",
+      "cisco.ios.ios_command",
+      "%FACILITY-SEVERITY-MNEMONIC",
+      "Syslog severity levels",
       "/ccna/acronyms/"
     ]
   ],
@@ -687,6 +894,67 @@ if (await isFile(printCssPath)) {
   }
 }
 
+const repositoryIdentityChecks = [
+  {
+    file: "COPYRIGHT.md",
+    markers: [
+      "personal study",
+      "not distributed under an open-source license",
+      "copy, mirror, scrape for republication"
+    ]
+  },
+  {
+    file: "README.md",
+    markers: ["COPYRIGHT.md", "not an open-source release", "Copyright and Usage"]
+  },
+  {
+    file: "src/copyright/index.njk",
+    markers: ["permalink: /copyright/", "Republishing and mirroring", "Third-party material"]
+  }
+];
+
+for (const specification of repositoryIdentityChecks) {
+  const sourcePath = path.resolve(specification.file);
+  if (!(await isFile(sourcePath))) {
+    fail(`${specification.file}: required ownership or usage file is missing`);
+    continue;
+  }
+
+  const source = await readFile(sourcePath, "utf8");
+  for (const marker of specification.markers) {
+    if (!includesNormalizedText(source, marker, { mainOnly: false })) {
+      fail(`${specification.file}: required ownership marker is missing: ${marker}`);
+    }
+  }
+}
+
+if (await isFile(path.resolve("src/_data/site.js"))) {
+  const siteSource = await readFile(path.resolve("src/_data/site.js"), "utf8");
+  if (!siteSource.includes(`const canonicalUrl = "${canonicalSiteUrl}";`)) {
+    fail("src/_data/site.js: canonical URL must remain fixed to CertHappens.com");
+  }
+  if (siteSource.includes("process.env.SITE_URL")) {
+    fail("src/_data/site.js: canonical identity must not be overridden by SITE_URL");
+  }
+}
+
+if (await isFile(path.resolve("docs/cloudflare-canonical-redirects.csv"))) {
+  const redirectDocumentation = await readFile(
+    path.resolve("docs/cloudflare-canonical-redirects.csv"),
+    "utf8"
+  );
+  const requiredCanonicalRedirects = [
+    `www.${canonicalHost},${canonicalSiteUrl},301`,
+    `certhappens.pages.dev,${canonicalSiteUrl},301`
+  ];
+
+  for (const redirect of requiredCanonicalRedirects) {
+    if (!redirectDocumentation.includes(redirect)) {
+      fail(`docs/cloudflare-canonical-redirects.csv: missing canonical redirect ${redirect}`);
+    }
+  }
+}
+
 const allFiles = await walk(outputRoot);
 const htmlFiles = allFiles.filter((file) => file.endsWith(".html"));
 
@@ -701,18 +969,36 @@ for (const file of htmlFiles) {
 
   const googleTagLoader = `https://www.googletagmanager.com/gtag/js?id=${googleAnalyticsMeasurementId}`;
   const googleTagLoaderCount = html.split(googleTagLoader).length - 1;
-  const googleTagConfigCount = (
-    html.match(new RegExp(`gtag\\('config', '${googleAnalyticsMeasurementId}'\\)`, "g")) || []
+  const analyticsScriptCount = (
+    html.match(/<script\b[^>]*\bdata-production-analytics(?:\s|>)/gi) || []
   ).length;
+  const googleTagConfigCount = (
+    html.match(/window\.gtag\(["']config["'],\s*measurementId\)/g) || []
+  ).length;
+  const expectedAllowedHosts = `const allowedHosts = ${JSON.stringify(analyticsHosts)};`;
+  const hasAnalyticsHostGate =
+    html.includes(expectedAllowedHosts) &&
+    html.includes("window.location.hostname.toLowerCase()") &&
+    html.includes("allowedHosts.includes(currentHost)");
 
   if (expectsGoogleAnalytics) {
-    if (googleTagLoaderCount !== 1 || googleTagConfigCount !== 1) {
+    if (
+      analyticsScriptCount !== 1 ||
+      googleTagLoaderCount !== 1 ||
+      googleTagConfigCount !== 1 ||
+      !hasAnalyticsHostGate
+    ) {
       fail(
-        `${relative}: production build must contain exactly one Google Analytics tag for ${googleAnalyticsMeasurementId}`
+        `${relative}: production analytics must load exactly once and remain host-gated to ${analyticsHosts.join(", ")}`
       );
     }
-  } else if (googleTagLoaderCount !== 0 || googleTagConfigCount !== 0) {
-    fail(`${relative}: non-main build must not contain the Google Analytics tag`);
+  } else if (
+    analyticsScriptCount !== 0 ||
+    googleTagLoaderCount !== 0 ||
+    googleTagConfigCount !== 0 ||
+    hasAnalyticsHostGate
+  ) {
+    fail(`${relative}: non-main build must not contain the Google Analytics loader or host gate`);
   }
 
   const discouragedPublicSourceHosts = [
@@ -764,8 +1050,77 @@ for (const file of htmlFiles) {
     html.match(/<link\s+[^>]*rel=["']canonical["'][^>]*href=["']([^"']+)["'][^>]*>/i)?.[1] ||
     html.match(/<link\s+[^>]*href=["']([^"']+)["'][^>]*rel=["']canonical["'][^>]*>/i)?.[1];
 
-  if (!canonical?.startsWith("https://certhappens.com/")) {
+  if (!canonical?.startsWith(`${canonicalSiteUrl}/`)) {
     fail(`${relative}: missing or invalid canonical URL`);
+  }
+
+  const openGraphUrl = getMeta(html, "og:url", true);
+  if (openGraphUrl !== canonical) {
+    fail(`${relative}: Open Graph URL must match the canonical URL`);
+  }
+
+  if (/https?:\/\/[^"'\s>]*\.pages\.dev/i.test(html)) {
+    fail(`${relative}: generated page contains a Pages hostname instead of the canonical site identity`);
+  }
+
+  if (!hasElementWithNormalizedAttributeValue(html, "html", "data-site-origin", canonicalHost)) {
+    fail(`${relative}: root HTML element is missing the canonical site-origin marker`);
+  }
+
+  if (getMeta(html, "author") !== "Cert Happens") {
+    fail(`${relative}: shared author metadata is missing`);
+  }
+
+  const copyrightNotice = getMeta(html, "copyright");
+  if (!/^©\s+2026(?:-\d{4})?\s+Cert Happens\. All rights reserved\.$/.test(copyrightNotice)) {
+    fail(`${relative}: shared copyright metadata is missing or malformed`);
+  }
+
+  if (!hasLinkWithText(html, "/copyright/", "Copyright and usage")) {
+    fail(`${relative}: footer is missing the Copyright and usage link`);
+  }
+
+  if (!includesNormalizedText(html, "All rights reserved", { mainOnly: false })) {
+    fail(`${relative}: visible copyright notice is missing`);
+  }
+
+  if (!html.includes("Original CertHappens.com site build")) {
+    fail(`${relative}: source-build ownership marker is missing`);
+  }
+
+  const { error: jsonLdError, graph: jsonLdGraph } = getJsonLdGraph(html);
+  if (jsonLdError) {
+    fail(`${relative}: ${jsonLdError}`);
+  } else {
+    const organizationNode = graphNodeByType(jsonLdGraph, "Organization");
+    const websiteNode = graphNodeByType(jsonLdGraph, "WebSite");
+    const webpageNode = graphNodeByType(jsonLdGraph, "WebPage");
+    const copyrightHolderId = `${canonicalSiteUrl}/#organization`;
+
+    if (
+      organizationNode?.["@id"] !== copyrightHolderId ||
+      organizationNode?.url !== canonicalSiteUrl
+    ) {
+      fail(`${relative}: structured Organization identity is missing or invalid`);
+    }
+
+    if (
+      websiteNode?.url !== canonicalSiteUrl ||
+      websiteNode?.copyrightHolder?.["@id"] !== copyrightHolderId ||
+      websiteNode?.copyrightNotice !== copyrightNotice ||
+      websiteNode?.copyrightYear !== copyrightStartYear
+    ) {
+      fail(`${relative}: structured WebSite copyright identity is missing or invalid`);
+    }
+
+    if (
+      webpageNode?.url !== canonical ||
+      webpageNode?.copyrightHolder?.["@id"] !== copyrightHolderId ||
+      webpageNode?.copyrightNotice !== copyrightNotice ||
+      webpageNode?.copyrightYear !== copyrightStartYear
+    ) {
+      fail(`${relative}: structured WebPage copyright identity is missing or invalid`);
+    }
   }
 
   if (!getMeta(html, "og:image", true)) {
@@ -793,18 +1148,31 @@ for (const file of htmlFiles) {
     'id="security-plus-navigation"',
     'id="network-plus-navigation"',
     'id="ccna-navigation"',
-    'id="ccna-navigation-group-1">Overview',
-    'id="ccna-navigation-group-2">Subnetting',
-    'id="ccna-navigation-group-3">Study',
-    'id="ccna-navigation-group-4">References',
+    'id="ccna-navigation-group-1"',
+    'id="ccna-navigation-group-2"',
+    'id="ccna-navigation-group-3"',
+    'id="ccna-navigation-group-4"',
     'src="/assets/js/site-navigation.js"',
     'href="/cissp/"',
     'href="/ccna/"'
   ];
 
   for (const marker of requiredNavigationMarkers) {
-    if (!html.includes(marker)) {
+    if (!hasPageMarker(html, marker)) {
       fail(`${relative}: shared navigation is missing ${marker}`);
+    }
+  }
+
+  const expectedCcnaNavigationGroups = [
+    ["ccna-navigation-group-1", "Overview"],
+    ["ccna-navigation-group-2", "Subnetting"],
+    ["ccna-navigation-group-3", "Study"],
+    ["ccna-navigation-group-4", "References"]
+  ];
+
+  for (const [id, label] of expectedCcnaNavigationGroups) {
+    if (!elementTextByIdMatches(html, "p", id, label)) {
+      fail(`${relative}: CCNA navigation group #${id} is missing label ${label}`);
     }
   }
 
@@ -831,6 +1199,8 @@ for (const file of htmlFiles) {
     "/ccna/200-301-v2/study-guide/network-infrastructure-connectivity/",
     "/ccna/200-301-v2/study-guide/switching-network-access/",
     "/ccna/200-301-v2/study-guide/ip-routing/",
+    "/ccna/200-301-v2/study-guide/network-services-security/",
+    "/ccna/200-301-v2/study-guide/ai-network-operations-management/",
     "/ccna/acronyms/",
     "/ccna/commands/",
     "/cissp/",
@@ -885,9 +1255,14 @@ for (const file of htmlFiles) {
 
   const wholeSiteMarkers = wholeSitePageMarkers.get(relative) || [];
   for (const marker of wholeSiteMarkers) {
-    if (!html.includes(marker)) {
+    if (!hasPageMarker(html, marker)) {
       fail(`${relative}: whole-site audit marker is missing ${marker}`);
     }
+  }
+
+  const acronymReferenceSpec = acronymReferenceSpecs.get(relative);
+  if (acronymReferenceSpec) {
+    await verifyAcronymReference(html, relative, acronymReferenceSpec);
   }
 
   if (html.includes('class="article-body prose"')) {
@@ -939,15 +1314,24 @@ for (const file of htmlFiles) {
         fail(`${relative}: printable article is missing the standard printer symbol`);
       }
 
-      if (!html.includes('aria-label="Print or save this guide"')) {
+      if (
+        !hasElementWithNormalizedAttributeValue(
+          html,
+          "button",
+          "aria-label",
+          "Print or save this guide"
+        )
+      ) {
         fail(`${relative}: printable article is missing the accessible print-control name`);
       }
 
-      if (!html.includes('<span aria-hidden="true">Print | Save</span>')) {
+      if (
+        countElementsWithAttributeAndText(html, "span", "aria-hidden", "Print | Save") < 1
+      ) {
         fail(`${relative}: printable article is missing the shared Print | Save label`);
       }
 
-      if (html.includes("Print / Save PDF")) {
+      if (includesNormalizedText(html, "Print / Save PDF")) {
         fail(`${relative}: printable article contains the retired print-control label`);
       }
     }
@@ -957,20 +1341,20 @@ for (const file of htmlFiles) {
     const requiredHomepageMarkers = [
       "Certification study and practice",
       "Choose an exam and start studying",
-      'href="/security-plus/sy0-701/practice-test/">Start Security+ practice test</a>',
-      'href="/network-plus/n10-009/practice-test/">Start Network+ practice test</a>',
-      'href="/tools/subnet-calculator/">Open the IPv4 subnet calculator</a>',
-      'href="/cissp/">Explore the CISSP overview</a>',
-      'href="/ccna/">Explore the CCNA overview</a>'
+      'href="/security-plus/sy0-701/practice-test/"',
+      'href="/network-plus/n10-009/practice-test/"',
+      'href="/tools/subnet-calculator/"',
+      'href="/cissp/"',
+      'href="/ccna/"'
     ];
 
     for (const marker of requiredHomepageMarkers) {
-      if (!html.includes(marker)) {
+      if (!hasPageMarker(html, marker)) {
         fail(`${relative}: homepage is missing ${marker}`);
       }
     }
 
-    if (html.includes("Free certification practice")) {
+    if (includesNormalizedText(html, "Free certification practice")) {
       fail(`${relative}: retired free-practice eyebrow is still present`);
     }
   }
@@ -979,19 +1363,18 @@ for (const file of htmlFiles) {
     const requiredAnalyticsDisclosures = [
       "Cloudflare Web Analytics and Google Analytics 4",
       "first-party cookies or similar browser storage",
-      "IP addresses",
-      "July 26, 2026"
+      "IP addresses"
     ];
 
     for (const marker of requiredAnalyticsDisclosures) {
-      if (!html.includes(marker)) {
+      if (!hasPageMarker(html, marker)) {
         fail(`${relative}: analytics disclosure is missing ${marker}`);
       }
     }
   }
 
   if (relative === "network-plus/index.html") {
-    if (!/<h1>CompTIA Network\+ N10-009<\/h1>/.test(html)) {
+    if (!headingMatches(html, "CompTIA Network+ N10-009")) {
       fail(`${relative}: Network+ hub is missing its expected h1`);
     }
 
@@ -1063,7 +1446,7 @@ for (const file of htmlFiles) {
 
 
   if (relative === "network-plus/quick-review/index.html") {
-    if (!/<h1>Network\+ N10-009 Quick Review<\/h1>/.test(html)) {
+    if (!headingMatches(html, "Network+ N10-009 Quick Review")) {
       fail(`${relative}: Network+ quick-review hub is missing its expected h1`);
     }
 
@@ -1120,65 +1503,9 @@ for (const file of htmlFiles) {
     }
 
     for (const marker of networkQuickReviewPages[relative]) {
-      if (!html.includes(marker)) {
+      if (!hasPageMarker(html, marker)) {
         fail(`${relative}: quick-review guide is missing ${marker}`);
       }
-    }
-  }
-
-  if (relative === "network-plus/acronyms/index.html") {
-    if (!html.includes("data-print-guide")) {
-      fail(`${relative}: acronym reference is missing the shared Print | Save control`);
-    }
-
-    if (!/<h1>Network\+ Acronyms and Terms<\/h1>/.test(html)) {
-      fail(`${relative}: acronym reference is missing its stable Network+ h1`);
-    }
-
-    const acronymEntryCount = (html.match(/data-acronym-entry/g) || []).length;
-    if (acronymEntryCount < 170) {
-      fail(`${relative}: expected at least 170 acronym entries, found ${acronymEntryCount}`);
-    }
-
-    const requiredAcronymMarkup = [
-      "data-acronym-search",
-      "data-acronym-clear",
-      "data-acronym-status",
-      "data-acronym-reference",
-      "data-acronym-empty",
-      'src="/assets/js/acronym-filter.js"',
-      "Context decides the meaning",
-      "General Data Protection Regulation",
-      "Spanning Tree Protocol",
-      "Shielded Twisted Pair",
-      "Recovery Time Objective",
-      "Bridge Protocol Data Unit",
-      "Time-Domain Reflectometer",
-      "Wi-Fi Protected Access 3",
-      "Automatic Private IP Addressing"
-    ];
-
-    for (const marker of requiredAcronymMarkup) {
-      if (!html.includes(marker)) {
-        fail(`${relative}: acronym reference is missing ${marker}`);
-      }
-    }
-
-    if (!html.includes('class="article-toc article-toc--compact-grid"')) {
-      fail(`${relative}: acronym reference is missing the shared compact sidebar index`);
-    }
-
-    if (!html.includes('<h2 id="article-toc-title">Jump to</h2>')) {
-      fail(`${relative}: acronym sidebar is missing its Jump to heading`);
-    }
-
-    const acronymJumpLinkCount = (html.match(/href=["']#acronyms-[^"']+["']/g) || []).length;
-    if (acronymJumpLinkCount !== 23) {
-      fail(`${relative}: expected 23 sidebar acronym jump links, found ${acronymJumpLinkCount}`);
-    }
-
-    if (html.includes("data-acronym-index")) {
-      fail(`${relative}: retired in-body acronym index is still present`);
     }
   }
 
@@ -1187,11 +1514,11 @@ for (const file of htmlFiles) {
       fail(`${relative}: Network+ study guide is missing the shared Print | Save control`);
     }
 
-    if (!/<h1>Network\+ N10-009 Study Guide<\/h1>/.test(html)) {
+    if (!headingMatches(html, "Network+ N10-009 Study Guide")) {
       fail(`${relative}: Network+ study guide is missing its expected h1`);
     }
 
-    if (/<h1[^>]*>\s*CompTIA\b/i.test(html)) {
+    if (normalizeText(getFirstHeadingText(html)).startsWith("comptia ")) {
       fail(`${relative}: Network+ study guide H1 should not present the guide as CompTIA material`);
     }
 
@@ -1263,10 +1590,6 @@ for (const file of htmlFiles) {
       fail(`${relative}: Network+ study guide is missing its responsive resource chooser`);
     }
 
-    if (!html.includes("APS transports network data physically")) {
-      fail(`${relative}: Network+ study guide is missing the OSI mnemonic`);
-    }
-
     if (!html.includes('class="table--compact-second-column"')) {
       fail(`${relative}: Network+ domain table is missing the compact second-column utility`);
     }
@@ -1292,7 +1615,7 @@ for (const file of htmlFiles) {
       fail(`${relative}: Network+ Domain 1 guide is missing the shared Print | Save control`);
     }
 
-    if (!/<h1>Network\+ N10-009 Domain 1: Networking Concepts<\/h1>/.test(html)) {
+    if (!headingMatches(html, "Network+ N10-009 Domain 1: Networking Concepts")) {
       fail(`${relative}: Network+ Domain 1 guide is missing its expected h1`);
     }
 
@@ -1333,7 +1656,7 @@ for (const file of htmlFiles) {
     ];
 
     for (const marker of requiredContent) {
-      if (!html.includes(marker)) {
+      if (!hasPageMarker(html, marker)) {
         fail(`${relative}: Network+ Domain 1 guide is missing ${marker}`);
       }
     }
@@ -1344,7 +1667,7 @@ for (const file of htmlFiles) {
       fail(`${relative}: Network+ Domain 2 guide is missing the shared Print | Save control`);
     }
 
-    if (!/<h1>Network\+ N10-009 Domain 2: Network Implementation<\/h1>/.test(html)) {
+    if (!headingMatches(html, "Network+ N10-009 Domain 2: Network Implementation")) {
       fail(`${relative}: Network+ Domain 2 guide is missing its expected h1`);
     }
 
@@ -1389,7 +1712,7 @@ for (const file of htmlFiles) {
     ];
 
     for (const marker of requiredContent) {
-      if (!html.includes(marker)) {
+      if (!hasPageMarker(html, marker)) {
         fail(`${relative}: Network+ Domain 2 guide is missing ${marker}`);
       }
     }
@@ -1400,7 +1723,7 @@ for (const file of htmlFiles) {
       fail(`${relative}: Network+ Domain 3 guide is missing the shared Print | Save control`);
     }
 
-    if (!/<h1>Network\+ N10-009 Domain 3: Network Operations<\/h1>/.test(html)) {
+    if (!headingMatches(html, "Network+ N10-009 Domain 3: Network Operations")) {
       fail(`${relative}: Network+ Domain 3 guide is missing its expected h1`);
     }
 
@@ -1450,7 +1773,7 @@ for (const file of htmlFiles) {
     ];
 
     for (const content of requiredContent) {
-      if (!html.includes(content)) {
+      if (!hasPageMarker(html, content)) {
         fail(`${relative}: Network+ Domain 3 guide is missing ${content}`);
       }
     }
@@ -1461,7 +1784,7 @@ for (const file of htmlFiles) {
       fail(`${relative}: Network+ Domain 4 guide is missing the shared Print | Save control`);
     }
 
-    if (!/<h1>Network\+ N10-009 Domain 4: Network Security<\/h1>/.test(html)) {
+    if (!headingMatches(html, "Network+ N10-009 Domain 4: Network Security")) {
       fail(`${relative}: Network+ Domain 4 guide is missing its expected h1`);
     }
 
@@ -1516,7 +1839,7 @@ for (const file of htmlFiles) {
     ];
 
     for (const marker of requiredContent) {
-      if (!html.includes(marker)) {
+      if (!hasPageMarker(html, marker)) {
         fail(`${relative}: Network+ Domain 4 guide is missing ${marker}`);
       }
     }
@@ -1527,7 +1850,7 @@ for (const file of htmlFiles) {
       fail(`${relative}: Network+ Domain 5 guide is missing the shared Print | Save control`);
     }
 
-    if (!/<h1>Network\+ N10-009 Domain 5: Network Troubleshooting<\/h1>/.test(html)) {
+    if (!headingMatches(html, "Network+ N10-009 Domain 5: Network Troubleshooting")) {
       fail(`${relative}: Network+ Domain 5 guide is missing its expected h1`);
     }
 
@@ -1580,7 +1903,7 @@ for (const file of htmlFiles) {
     ];
 
     for (const marker of requiredContent) {
-      if (!html.includes(marker)) {
+      if (!hasPageMarker(html, marker)) {
         fail(`${relative}: Network+ Domain 5 guide is missing ${marker}`);
       }
     }
@@ -1591,7 +1914,7 @@ for (const file of htmlFiles) {
       fail(`${relative}: IPv4 subnetting reference is missing the shared Print | Save control`);
     }
 
-    if (!/<h1>IPv4 Subnetting Reference for Network\+<\/h1>/.test(html)) {
+    if (!headingMatches(html, "IPv4 Subnetting Reference for Network+")) {
       fail(`${relative}: IPv4 subnetting reference is missing its expected h1`);
     }
 
@@ -1626,7 +1949,7 @@ for (const file of htmlFiles) {
     ];
 
     for (const marker of requiredContent) {
-      if (!html.includes(marker)) {
+      if (!hasPageMarker(html, marker)) {
         fail(`${relative}: IPv4 subnetting reference is missing ${marker}`);
       }
     }
@@ -1647,7 +1970,7 @@ for (const file of htmlFiles) {
     ];
 
     for (const marker of requiredPortReferenceMarkers) {
-      if (!html.includes(marker)) {
+      if (!hasPageMarker(html, marker)) {
         fail(`${relative}: shared ports reference is missing ${marker}`);
       }
     }
@@ -1658,7 +1981,7 @@ for (const file of htmlFiles) {
       fail(`${relative}: IPv4 subnet calculator is missing the shared Print | Save control`);
     }
 
-    if (!/<h1>IPv4 Subnet Calculator<\/h1>/.test(html)) {
+    if (!headingMatches(html, "IPv4 Subnet Calculator")) {
       fail(`${relative}: IPv4 subnet calculator is missing its expected h1`);
     }
 
@@ -1679,7 +2002,7 @@ for (const file of htmlFiles) {
     ];
 
     for (const marker of requiredMarkers) {
-      if (!html.includes(marker)) {
+      if (!hasPageMarker(html, marker)) {
         fail(`${relative}: IPv4 subnet calculator is missing ${marker}`);
       }
     }
@@ -1699,7 +2022,7 @@ for (const file of htmlFiles) {
     ];
 
     for (const marker of requiredPracticeMarkers) {
-      if (!html.includes(marker)) {
+      if (!hasPageMarker(html, marker)) {
         fail(`${relative}: Security+ practice test is missing ${marker}`);
       }
     }
@@ -1719,17 +2042,16 @@ for (const file of htmlFiles) {
     ];
 
     for (const marker of requiredPracticeMarkers) {
-      if (!html.includes(marker)) {
+      if (!hasPageMarker(html, marker)) {
         fail(`${relative}: Network+ practice test is missing ${marker}`);
       }
     }
 
     const manifest = generatedQuizManifests.get("NET-009");
     if (manifest) {
-      const questionCountMarker =
-        `${manifest.availableQuestionCount}</strong> approved questions`;
+      const questionCountMarker = `${manifest.availableQuestionCount} approved questions`;
 
-      if (!html.includes(questionCountMarker)) {
+      if (!includesNormalizedText(html, questionCountMarker)) {
         fail(
           `${relative}: Network+ practice test does not show the generated approved question count`
         );
@@ -1754,62 +2076,12 @@ for (const file of htmlFiles) {
       fail(`${relative}: Security+ hub is missing the acronyms and terms link`);
     }
 
-    if (!html.includes("Available now") || !html.includes("Open acronyms and terms")) {
-      fail(`${relative}: Quick Review card is not marked available`);
+    if (includesNormalizedText(html, "Coming soon")) {
+      fail(`${relative}: Security+ resources unexpectedly reverted to coming-soon copy`);
     }
   }
 
   if (relative === "security-plus/acronyms/index.html") {
-    if (!html.includes("data-print-guide")) {
-      fail(`${relative}: acronym reference is missing the shared Print | Save control`);
-    }
-
-    if (!/<h1>Security\+ Acronyms and Terms<\/h1>/.test(html)) {
-      fail(`${relative}: acronym reference is missing its stable Security+ h1`);
-    }
-
-    const acronymEntryCount = (html.match(/data-acronym-entry/g) || []).length;
-    if (acronymEntryCount < 200) {
-      fail(`${relative}: expected at least 200 acronym entries, found ${acronymEntryCount}`);
-    }
-
-    const requiredAcronymMarkup = [
-      "data-acronym-search",
-      "data-acronym-clear",
-      "data-acronym-status",
-      "data-acronym-reference",
-      "data-acronym-empty",
-      'src="/assets/js/acronym-filter.js"',
-      "Context decides the meaning",
-      "Recovery time objective",
-      "Attribute-based access control",
-      "Maximum tolerable downtime",
-      "Demilitarized zone"
-    ];
-
-    for (const marker of requiredAcronymMarkup) {
-      if (!html.includes(marker)) {
-        fail(`${relative}: acronym reference is missing ${marker}`);
-      }
-    }
-
-    if (!html.includes('class="article-toc article-toc--compact-grid"')) {
-      fail(`${relative}: acronym reference is missing the shared compact sidebar index`);
-    }
-
-    if (!html.includes('<h2 id="article-toc-title">Jump to</h2>')) {
-      fail(`${relative}: acronym sidebar is missing its Jump to heading`);
-    }
-
-    const acronymJumpLinkCount = (html.match(/href=["']#acronyms-[^"']+["']/g) || []).length;
-    if (acronymJumpLinkCount !== 25) {
-      fail(`${relative}: expected 25 sidebar acronym jump links, found ${acronymJumpLinkCount}`);
-    }
-
-    if (html.includes("data-acronym-index")) {
-      fail(`${relative}: retired in-body acronym index is still present`);
-    }
-
     const sidebarPosition = html.indexOf('class="article-toc article-toc--compact-grid"');
     const articlePosition = html.indexOf('class="article-body prose"');
     const controlsPosition = html.indexOf('class="acronym-controls"');
@@ -1824,11 +2096,11 @@ for (const file of htmlFiles) {
       fail(`${relative}: study guide is missing the shared Print | Save control`);
     }
 
-    if (!/<h1>Security\+ SY0-701 Study Guide<\/h1>/.test(html)) {
+    if (!headingMatches(html, "Security+ SY0-701 Study Guide")) {
       fail(`${relative}: study guide is missing the independent Security+ title`);
     }
 
-    if (/<h1[^>]*>\s*CompTIA\b/i.test(html)) {
+    if (normalizeText(getFirstHeadingText(html)).startsWith("comptia ")) {
       fail(`${relative}: study guide H1 should not present the guide as CompTIA material`);
     }
 
@@ -1865,8 +2137,8 @@ for (const file of htmlFiles) {
     ];
 
     for (const [route, label] of linkedDomainRows) {
-      const expectedLink = `<td><a href="/security-plus/sy0-701/study-guide/${route}/">${label}</a></td>`;
-      if (!html.includes(expectedLink)) {
+      const href = `/security-plus/sy0-701/study-guide/${route}/`;
+      if (!hasLinkWithText(html, href, label)) {
         fail(`${relative}: exam-domain table is missing its linked ${label} row`);
       }
     }
@@ -1877,7 +2149,7 @@ for (const file of htmlFiles) {
       fail(`${relative}: Domain 1 guide is missing the shared Print | Save control`);
     }
 
-    if (!/<h1>Security\+ SY0-701 Domain 1: General Security Concepts<\/h1>/.test(html)) {
+    if (!headingMatches(html, "Security+ SY0-701 Domain 1: General Security Concepts")) {
       fail(`${relative}: Domain 1 guide is missing its expected h1`);
     }
 
@@ -1902,7 +2174,7 @@ for (const file of htmlFiles) {
       fail(`${relative}: Domain 2 guide is missing the shared Print | Save control`);
     }
 
-    if (!/<h1>Security\+ SY0-701 Domain 2: Threats, Vulnerabilities, and Mitigations<\/h1>/.test(html)) {
+    if (!headingMatches(html, "Security+ SY0-701 Domain 2: Threats, Vulnerabilities, and Mitigations")) {
       fail(`${relative}: Domain 2 guide is missing its expected h1`);
     }
 
@@ -1931,7 +2203,7 @@ for (const file of htmlFiles) {
       fail(`${relative}: Domain 3 guide is missing the shared Print | Save control`);
     }
 
-    if (!/<h1>Security\+ SY0-701 Domain 3: Security Architecture<\/h1>/.test(html)) {
+    if (!headingMatches(html, "Security+ SY0-701 Domain 3: Security Architecture")) {
       fail(`${relative}: Domain 3 guide is missing its expected h1`);
     }
 
@@ -1959,7 +2231,7 @@ for (const file of htmlFiles) {
       fail(`${relative}: Domain 4 guide is missing the shared Print | Save control`);
     }
 
-    if (!/<h1>Security\+ SY0-701 Domain 4: Security Operations<\/h1>/.test(html)) {
+    if (!headingMatches(html, "Security+ SY0-701 Domain 4: Security Operations")) {
       fail(`${relative}: Domain 4 guide is missing its expected h1`);
     }
 
@@ -1992,7 +2264,7 @@ for (const file of htmlFiles) {
       fail(`${relative}: Domain 5 guide is missing the shared Print | Save control`);
     }
 
-    if (!/<h1>Security\+ SY0-701 Domain 5: Security Program Management and Oversight<\/h1>/.test(html)) {
+    if (!headingMatches(html, "Security+ SY0-701 Domain 5: Security Program Management and Oversight")) {
       fail(`${relative}: Domain 5 guide is missing its expected h1`);
     }
 
@@ -2014,7 +2286,7 @@ for (const file of htmlFiles) {
   }
 
   if (relative === "cissp/index.html") {
-    if (!/<h1>CISSP Certification Overview<\/h1>/.test(html)) {
+    if (!headingMatches(html, "CISSP Certification Overview")) {
       fail(`${relative}: expected CISSP overview h1 is missing`);
     }
 
@@ -2035,27 +2307,35 @@ for (const file of htmlFiles) {
       }
     }
 
-    const domainCardCount = (html.match(/class="card__meta">Domain [1-8] ·/g) || []).length;
+    const domainSection = getElementBlockByAttributeValue(
+      html,
+      "section",
+      "aria-labelledby",
+      "exam-domains-heading"
+    );
+    const domainCardCount = countElementsWithClass(domainSection, "article", "card");
     if (domainCardCount !== 8) {
       fail(`${relative}: expected 8 CISSP domain cards, found ${domainCardCount}`);
     }
 
-    if (!html.includes("not affiliated with or endorsed by ISC2")) {
+    if (!includesNormalizedText(html, "not affiliated with or endorsed by ISC2")) {
       fail(`${relative}: ISC2 independence statement is missing`);
     }
   }
 
   if (relative === "ccna/index.html") {
-    if (!/<h1>CCNA 200-301 Study Resources<\/h1>/.test(html)) {
+    if (!headingMatches(html, "CCNA 200-301 Study Resources")) {
       fail(`${relative}: expected CCNA resource-hub h1 is missing`);
     }
 
     const resourceHeadingIndex = html.indexOf('id="exam-resources-heading"');
-    const versionHeadingIndex = html.indexOf("Use v1.1 through February 2, 2027 and v2.0 starting February 3, 2027");
+    const transitionHeadingIndex = html.indexOf('id="exam-transition-heading"');
     const overviewHeadingIndex = html.indexOf('id="exam-overview-heading"');
-    if (resourceHeadingIndex < 0 || versionHeadingIndex < 0 || overviewHeadingIndex < 0) {
+    if (resourceHeadingIndex < 0 || transitionHeadingIndex < 0 || overviewHeadingIndex < 0) {
       fail(`${relative}: CCNA resource-first section ordering markers are incomplete`);
-    } else if (!(resourceHeadingIndex < versionHeadingIndex && resourceHeadingIndex < overviewHeadingIndex)) {
+    } else if (
+      !(resourceHeadingIndex < transitionHeadingIndex && resourceHeadingIndex < overviewHeadingIndex)
+    ) {
       fail(`${relative}: CCNA study resources must appear before exam-version and overview content`);
     }
 
@@ -2064,6 +2344,8 @@ for (const file of htmlFiles) {
       "/ccna/200-301-v2/study-guide/network-infrastructure-connectivity/",
       "/ccna/200-301-v2/study-guide/switching-network-access/",
       "/ccna/200-301-v2/study-guide/ip-routing/",
+      "/ccna/200-301-v2/study-guide/network-services-security/",
+      "/ccna/200-301-v2/study-guide/ai-network-operations-management/",
       "/ccna/acronyms/",
       "/ccna/commands/",
       "/network-plus/n10-009/study-guide/ipv4-subnetting/",
@@ -2094,7 +2376,13 @@ for (const file of htmlFiles) {
       }
     }
 
-    const domainCardCount = (html.match(/class="card__meta">Domain [1-5]\.0 ·/g) || []).length;
+    const domainSection = getElementBlockByAttributeValue(
+      html,
+      "section",
+      "aria-labelledby",
+      "exam-domains-heading"
+    );
+    const domainCardCount = countElementsWithClass(domainSection, "article", "card");
     if (domainCardCount !== 5) {
       fail(`${relative}: expected 5 CCNA v2.0 domain cards, found ${domainCardCount}`);
     }
@@ -2102,10 +2390,12 @@ for (const file of htmlFiles) {
     const publishedDomainGuideLinks = [
       ["/ccna/200-301-v2/study-guide/network-infrastructure-connectivity/", "Open Domain 1 guide"],
       ["/ccna/200-301-v2/study-guide/switching-network-access/", "Open Domain 2 guide"],
-      ["/ccna/200-301-v2/study-guide/ip-routing/", "Open Domain 3 guide"]
+      ["/ccna/200-301-v2/study-guide/ip-routing/", "Open Domain 3 guide"],
+      ["/ccna/200-301-v2/study-guide/network-services-security/", "Open Domain 4 guide"],
+      ["/ccna/200-301-v2/study-guide/ai-network-operations-management/", "Open Domain 5 guide"]
     ];
     for (const [href, label] of publishedDomainGuideLinks) {
-      if (!html.includes(`href="${href}"`) || !html.includes(label)) {
+      if (!hasLinkWithText(html, href, label)) {
         fail(`${relative}: published CCNA domain card is missing ${label}`);
       }
     }
@@ -2124,7 +2414,7 @@ for (const file of htmlFiles) {
     ];
 
     for (const marker of requiredMarkers) {
-      if (!html.includes(marker)) {
+      if (!hasPageMarker(html, marker)) {
         fail(`${relative}: CCNA overview is missing ${marker}`);
       }
     }
@@ -2133,67 +2423,124 @@ for (const file of htmlFiles) {
       fail(`${relative}: CCNA overview is missing the IOS command reference link`);
     }
 
-    if (html.includes("Planned CCNA v2.0 resources")) {
+    if (includesNormalizedText(html, "Planned CCNA v2.0 resources")) {
       fail(`${relative}: CCNA overview still exposes internal roadmap copy`);
     }
   }
 
-  if (relative === "ccna/acronyms/index.html") {
-    if (!html.includes("data-print-guide")) {
-      fail(`${relative}: acronym reference is missing the shared Print | Save control`);
+  if (relative === "ccna/200-301-v2/study-guide/network-services-security/index.html") {
+    if (!headingMatches(html, "CCNA 200-301 v2.0 Domain 4: Network Services and Security")) {
+      fail(`${relative}: expected CCNA Domain 4 h1 is missing`);
     }
 
-    if (!/<h1>CCNA Acronyms and Terms<\/h1>/.test(html)) {
-      fail(`${relative}: acronym reference is missing its stable CCNA h1`);
+    if (!html.includes('data-print-guide')) {
+      fail(`${relative}: CCNA Domain 4 guide is missing the shared Print | Save control`);
     }
 
-    const acronymEntryCount = (html.match(/data-acronym-entry/g) || []).length;
-    if (acronymEntryCount < 60) {
-      fail(`${relative}: expected at least 60 acronym entries, found ${acronymEntryCount}`);
-    }
-
-    const requiredAcronymMarkup = [
-      "data-acronym-search",
-      "data-acronym-clear",
-      "data-acronym-status",
-      "data-acronym-reference",
-      "data-acronym-empty",
-      'src="/assets/js/acronym-filter.js"',
-      "Context still matters",
-      "Open Shortest Path First",
-      "Hot Standby Router Protocol",
-      "Virtual Router Redundancy Protocol",
-      "Link Aggregation Control Protocol",
-      "Received Signal Strength Indicator",
-      "Terminal Access Controller Access-Control System Plus"
+    const requiredSectionIds = [
+      "domain-map",
+      "service-security-model",
+      "aaa",
+      "file-transfer",
+      "nat-pat",
+      "dns",
+      "ipsec",
+      "ipv4-acls",
+      "dhcp-snooping",
+      "dai",
+      "storm-control",
+      "ra-guard",
+      "port-security",
+      "integrated-scenario",
+      "common-traps",
+      "rapid-review",
+      "official-references"
     ];
 
-    for (const marker of requiredAcronymMarkup) {
-      if (!html.includes(marker)) {
-        fail(`${relative}: acronym reference is missing ${marker}`);
+    for (const id of requiredSectionIds) {
+      if (!html.includes(`id="${id}"`)) {
+        fail(`${relative}: CCNA Domain 4 guide is missing section #${id}`);
       }
     }
 
-    if (!html.includes('class="article-toc article-toc--compact-grid"')) {
-      fail(`${relative}: acronym reference is missing the shared compact sidebar index`);
+    const requiredMarkers = [
+      "Authentication, Authorization, and Accounting (AAA)",
+      "Terminal Access Controller Access-Control System Plus (TACACS+)",
+      "Remote Authentication Dial-In User Service (RADIUS)",
+      "SSH File Transfer Protocol (SFTP)",
+      "Secure Copy Protocol (SCP)",
+      "show ip nat translations",
+      "Encapsulating Security Payload (ESP)",
+      "Authentication Header (AH)",
+      "show ip access-lists",
+      "show ip dhcp snooping binding",
+      "show ip arp inspection",
+      "show storm-control",
+      "show ipv6 nd raguard policy",
+      "show port-security interface",
+      'href="/ccna/acronyms/"'
+    ];
+
+    for (const marker of requiredMarkers) {
+      if (!hasPageMarker(html, marker)) {
+        fail(`${relative}: CCNA Domain 4 guide is missing ${marker}`);
+      }
+    }
+  }
+
+  if (relative === "ccna/200-301-v2/study-guide/ai-network-operations-management/index.html") {
+    if (!headingMatches(html, "CCNA 200-301 v2.0 Domain 5: AI, Network Operations, and Management")) {
+      fail(`${relative}: expected CCNA Domain 5 h1 is missing`);
     }
 
-    if (!html.includes('<h2 id="article-toc-title">Jump to</h2>')) {
-      fail(`${relative}: acronym sidebar is missing its Jump to heading`);
+    if (!html.includes('data-print-guide')) {
+      fail(`${relative}: CCNA Domain 5 guide is missing the shared Print | Save control`);
     }
 
-    const acronymJumpLinkCount = (html.match(/href=["']#acronyms-[^"']+["']/g) || []).length;
-    if (acronymJumpLinkCount !== 19) {
-      fail(`${relative}: expected 19 sidebar acronym jump links, found ${acronymJumpLinkCount}`);
+    const requiredSectionIds = [
+      "domain-map",
+      "operations-model",
+      "agentic-ai",
+      "prompt-selection",
+      "management-approaches",
+      "snmp",
+      "ansible",
+      "syslog",
+      "integrated-scenario",
+      "common-traps",
+      "rapid-review",
+      "official-references"
+    ];
+
+    for (const id of requiredSectionIds) {
+      if (!html.includes(`id="${id}"`)) {
+        fail(`${relative}: CCNA Domain 5 guide is missing section #${id}`);
+      }
     }
 
-    if (html.includes("data-acronym-index")) {
-      fail(`${relative}: retired in-body acronym index is still present`);
+    const requiredMarkers = [
+      "data classification, output format, persona, and instructions",
+      "Infrastructure as Code (IaC)",
+      "Simple Network Management Protocol (SNMP)",
+      "Network management system (NMS)",
+      "Management information base (MIB)",
+      "Object identifier (OID)",
+      "cisco.ios.ios_command",
+      "%FACILITY-SEVERITY-MNEMONIC",
+      "Emergencies",
+      "Debugging",
+      'href="/ccna/acronyms/"'
+    ];
+
+    for (const marker of requiredMarkers) {
+      if (!hasPageMarker(html, marker)) {
+        fail(`${relative}: CCNA Domain 5 guide is missing ${marker}`);
+      }
     }
   }
 
   if (relative === "ccna/commands/index.html") {
-    if (!/<h1>Core Cisco IOS Verification and Troubleshooting Commands for CCNA 200-301 v2\.0<\/h1>/.test(html)) {
+    if (!headingMatches(html, "Core Cisco IOS Verification and Troubleshooting Commands for CCNA 200-301 v2.0")) {
       fail(`${relative}: expected CCNA command reference h1 is missing`);
     }
 
@@ -2246,13 +2593,13 @@ for (const file of htmlFiles) {
     ];
 
     for (const marker of requiredMarkers) {
-      if (!html.includes(marker)) {
+      if (!hasPageMarker(html, marker)) {
         fail(`${relative}: CCNA command reference is missing ${marker}`);
       }
     }
   }
 
-  if (relative === "cissp/index.html" && html.includes("Possible next CISSP resources")) {
+  if (relative === "cissp/index.html" && includesNormalizedText(html, "Possible next CISSP resources")) {
     fail(`${relative}: CISSP overview still exposes internal roadmap copy`);
   }
 

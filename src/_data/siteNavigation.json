@@ -163,6 +163,14 @@
             {
               "label": "Domain 3: Routing",
               "url": "/ccna/200-301-v2/study-guide/ip-routing/"
+            },
+            {
+              "label": "Domain 4: Services & Security",
+              "url": "/ccna/200-301-v2/study-guide/network-services-security/"
+            },
+            {
+              "label": "Domain 5: AI & Operations",
+              "url": "/ccna/200-301-v2/study-guide/ai-network-operations-management/"
             }
           ]
         },
@@ -194,6 +202,10 @@
     {
       "label": "Terms",
       "url": "/terms/"
+    },
+    {
+      "label": "Copyright and usage",
+      "url": "/copyright/"
     },
     {
       "label": "Disclaimer",

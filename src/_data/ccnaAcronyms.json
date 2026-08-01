@@ -2,14 +2,30 @@
   "title": "CCNA Acronyms and Terms",
   "currentExamVersion": "200-301 v2.0",
   "datePublished": "2026-07-31",
-  "dateModified": "2026-07-31",
-  "entryCount": 65,
+  "dateModified": "2026-08-01",
+  "entryCount": 82,
   "groups": [
     {
       "letter": "A",
       "id": "a",
       "label": "A",
       "entries": [
+        {
+          "id": "a-record",
+          "term": "A",
+          "expansion": "Address Record",
+          "meaning": "A DNS record that maps a host name to an IPv4 address.",
+          "domains": [
+            "4"
+          ],
+          "related": [
+            "AAAA",
+            "DNS"
+          ],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        },
         {
           "id": "aaa",
           "term": "AAA",
@@ -21,6 +37,22 @@
           "related": [
             "RADIUS",
             "TACACS+"
+          ],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        },
+        {
+          "id": "aaaa",
+          "term": "AAAA",
+          "expansion": "IPv6 Address Record",
+          "meaning": "A DNS record that maps a host name to an IPv6 address.",
+          "domains": [
+            "4"
+          ],
+          "related": [
+            "A",
+            "DNS"
           ],
           "examVersions": [
             "200-301 v2.0"
@@ -50,6 +82,23 @@
           "related": [
             "WPA2",
             "WPA3"
+          ],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        },
+        {
+          "id": "ah",
+          "term": "AH",
+          "expansion": "Authentication Header",
+          "meaning": "An IPsec protocol that provides integrity and source authentication without encrypting the payload.",
+          "domains": [
+            "4"
+          ],
+          "related": [
+            "ESP",
+            "IKE",
+            "IPsec"
           ],
           "examVersions": [
             "200-301 v2.0"
@@ -222,6 +271,21 @@
           ]
         },
         {
+          "id": "cname",
+          "term": "CNAME",
+          "expansion": "Canonical Name",
+          "meaning": "A DNS record that makes one name an alias of another canonical name.",
+          "domains": [
+            "4"
+          ],
+          "related": [
+            "DNS"
+          ],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        },
+        {
           "id": "cpu",
           "term": "CPU",
           "expansion": "Central Processing Unit",
@@ -324,6 +388,23 @@
       "label": "E",
       "entries": [
         {
+          "id": "esp",
+          "term": "ESP",
+          "expansion": "Encapsulating Security Payload",
+          "meaning": "An IPsec protocol commonly used to provide encryption, integrity, and authentication for protected traffic.",
+          "domains": [
+            "4"
+          ],
+          "related": [
+            "AH",
+            "IKE",
+            "IPsec"
+          ],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        },
+        {
           "id": "eui-64",
           "term": "EUI-64",
           "expansion": "Extended Unique Identifier, 64-bit",
@@ -381,6 +462,21 @@
           "examVersions": [
             "200-301 v2.0"
           ]
+        },
+        {
+          "id": "https",
+          "term": "HTTPS",
+          "expansion": "Hypertext Transfer Protocol Secure",
+          "meaning": "HTTP protected by Transport Layer Security for encrypted and authenticated web communication.",
+          "domains": [
+            "4"
+          ],
+          "related": [
+            "TCP"
+          ],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
         }
       ]
     },
@@ -390,6 +486,22 @@
       "label": "I",
       "entries": [
         {
+          "id": "iac",
+          "term": "IaC",
+          "expansion": "Infrastructure as Code",
+          "meaning": "A method of managing infrastructure through machine-readable, version-controlled definitions rather than relying only on interactive changes.",
+          "domains": [
+            "5"
+          ],
+          "related": [
+            "API",
+            "YAML"
+          ],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        },
+        {
           "id": "icmp",
           "term": "ICMP",
           "expansion": "Internet Control Message Protocol",
@@ -398,6 +510,24 @@
             "2"
           ],
           "related": [],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        },
+        {
+          "id": "ike",
+          "term": "IKE",
+          "expansion": "Internet Key Exchange",
+          "meaning": "A protocol that negotiates IPsec parameters and establishes security associations between peers.",
+          "domains": [
+            "4"
+          ],
+          "related": [
+            "AH",
+            "ESP",
+            "IPsec",
+            "VPN"
+          ],
           "examVersions": [
             "200-301 v2.0"
           ]
@@ -539,6 +669,22 @@
           ]
         },
         {
+          "id": "mib",
+          "term": "MIB",
+          "expansion": "Management Information Base",
+          "meaning": "A structured description of management objects that an SNMP agent exposes to a manager.",
+          "domains": [
+            "5"
+          ],
+          "related": [
+            "OID",
+            "SNMP"
+          ],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        },
+        {
           "id": "mtu",
           "term": "MTU",
           "expansion": "Maximum Transmission Unit",
@@ -550,6 +696,21 @@
           "related": [
             "IP",
             "VLAN"
+          ],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        },
+        {
+          "id": "mx",
+          "term": "MX",
+          "expansion": "Mail Exchange",
+          "meaning": "A DNS record that identifies mail servers for a domain and includes a preference value.",
+          "domains": [
+            "4"
+          ],
+          "related": [
+            "DNS"
           ],
           "examVersions": [
             "200-301 v2.0"
@@ -589,6 +750,38 @@
           "examVersions": [
             "200-301 v2.0"
           ]
+        },
+        {
+          "id": "nms",
+          "term": "NMS",
+          "expansion": "Network Management System",
+          "meaning": "Software that monitors and manages network devices, often acting as the SNMP manager that polls agents and receives notifications.",
+          "domains": [
+            "5"
+          ],
+          "related": [
+            "MIB",
+            "OID",
+            "SNMP"
+          ],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        },
+        {
+          "id": "ns",
+          "term": "NS",
+          "expansion": "Name Server",
+          "meaning": "A DNS record that identifies an authoritative name server for a zone.",
+          "domains": [
+            "4"
+          ],
+          "related": [
+            "DNS"
+          ],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
         }
       ]
     },
@@ -597,6 +790,22 @@
       "id": "o",
       "label": "O",
       "entries": [
+        {
+          "id": "oid",
+          "term": "OID",
+          "expansion": "Object Identifier",
+          "meaning": "A hierarchical identifier for a specific management object that can be read or referenced through SNMP.",
+          "domains": [
+            "5"
+          ],
+          "related": [
+            "MIB",
+            "SNMP"
+          ],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        },
         {
           "id": "ospf",
           "term": "OSPF",
@@ -646,6 +855,21 @@
           ]
         },
         {
+          "id": "ptr",
+          "term": "PTR",
+          "expansion": "Pointer",
+          "meaning": "A DNS record used for reverse lookup from an IP address to a name.",
+          "domains": [
+            "4"
+          ],
+          "related": [
+            "DNS"
+          ],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        },
+        {
           "id": "pvst",
           "term": "PVST+",
           "expansion": "Per-VLAN Spanning Tree Plus",
@@ -669,6 +893,21 @@
       "id": "r",
       "label": "R",
       "entries": [
+        {
+          "id": "ra",
+          "term": "RA",
+          "expansion": "Router Advertisement",
+          "meaning": "An IPv6 Neighbor Discovery message that advertises router and prefix information to hosts.",
+          "domains": [
+            "4"
+          ],
+          "related": [
+            "ICMP"
+          ],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        },
         {
           "id": "radius",
           "term": "RADIUS",
@@ -1048,6 +1287,22 @@
           "examVersions": [
             "200-301 v2.0"
           ]
+        },
+        {
+          "id": "vty",
+          "term": "VTY",
+          "expansion": "Virtual Teletype",
+          "meaning": "A logical terminal line used for remote command-line sessions on a Cisco device.",
+          "domains": [
+            "4"
+          ],
+          "related": [
+            "AAA",
+            "SSH"
+          ],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
         }
       ]
     },
@@ -1113,6 +1368,28 @@
           "related": [
             "SAE",
             "WPA2"
+          ],
+          "examVersions": [
+            "200-301 v2.0"
+          ]
+        }
+      ]
+    },
+    {
+      "letter": "Y",
+      "id": "y",
+      "label": "Y",
+      "entries": [
+        {
+          "id": "yaml",
+          "term": "YAML",
+          "expansion": "YAML Ain't Markup Language",
+          "meaning": "A human-readable data-serialization format commonly used for Ansible inventories, variables, and playbooks.",
+          "domains": [
+            "5"
+          ],
+          "related": [
+            "IaC"
           ],
           "examVersions": [
             "200-301 v2.0"

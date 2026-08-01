@@ -8,7 +8,7 @@ printable: true
 printTitle: CCNA 200-301 v2.0 Study Guide
 author: certHappens
 datePublished: 2026-07-31
-dateModified: 2026-07-31
+dateModified: 2026-08-01
 articleSection: CCNA 200-301 v2.0
 eyebrow: CCNA v2.0 study guide
 lede: Build the network, verify what it is doing, then troubleshoot from evidence. The v2.0 blueprint rewards that cycle across routing, switching, services, security, wireless, automation, and operations.
@@ -64,6 +64,12 @@ relatedLinks:
   - title: "Domain 3: IP Routing"
     url: /ccna/200-301-v2/study-guide/ip-routing/
     description: Interpret routing tables, troubleshoot static routes, configure single-area OSPFv2 and OSPFv3, and read HSRP and VRRP state.
+  - title: "Domain 4: Network Services and Security"
+    url: /ccna/200-301-v2/study-guide/network-services-security/
+    description: Configure AAA, secure file transfer, NAT and PAT, IPv4 ACLs, and Layer 2 security while diagnosing DNS and IPsec behavior.
+  - title: "Domain 5: AI, Network Operations, and Management"
+    url: /ccna/200-301-v2/study-guide/ai-network-operations-management/
+    description: Use AI prompts, management approaches, SNMP, Ansible, and syslog to collect and interpret operational evidence.
   - title: Cisco IOS Verification and Troubleshooting Commands
     url: /ccna/commands/
     description: Choose the command that exposes the state you need to verify before changing configuration.
@@ -135,12 +141,12 @@ The same approach applies to switching and routing. If you configure a trunk, in
         <td data-label="What the work looks like">Interpret route selection, troubleshoot IPv4 and IPv6 static routes, configure single-area OSPFv2 and OSPFv3, and interpret first-hop redundancy state.</td>
       </tr>
       <tr>
-        <td data-label="Domain"><strong>4.0 Network Services and Security</strong></td>
+        <td data-label="Domain"><strong><a href="/ccna/200-301-v2/study-guide/network-services-security/">4.0 Network Services and Security</a></strong></td>
         <td data-label="Weight">20%</td>
         <td data-label="What the work looks like">Configure management authentication, secure file transfer, Network Address Translation (NAT) and Port Address Translation (PAT), IPv4 access control lists (ACLs), and Layer 2 protections while diagnosing Domain Name System (DNS) and virtual private network (VPN) behavior.</td>
       </tr>
       <tr>
-        <td data-label="Domain"><strong>5.0 AI, and Network Operations and Management</strong></td>
+        <td data-label="Domain"><strong><a href="/ccna/200-301-v2/study-guide/ai-network-operations-management/">5.0 AI, and Network Operations and Management</a></strong></td>
         <td data-label="Weight">10%</td>
         <td data-label="What the work looks like">Use sound prompts and judgment with artificial intelligence (AI)-assisted operations, compare management approaches, understand Simple Network Management Protocol (SNMP), execute commands through Ansible, and interpret syslog.</td>
       </tr>
@@ -225,29 +231,24 @@ The v2.0 blueprint includes:
 
 Study these by following traffic. An ACL is an ordered decision applied to traffic at a specific interface and direction. NAT changes address representation at a translation boundary. DHCP snooping builds trust around address assignment. Dynamic ARP Inspection uses trusted information to reject invalid ARP behavior. The control makes more sense when you can describe the packet or frame it is evaluating.
 
+Read the full [Domain 4: Network Services and Security guide](/ccna/200-301-v2/study-guide/network-services-security/) for local and centralized AAA, secure file transfer, NAT/PAT, DNS record troubleshooting, IPsec VPN concepts, IPv4 ACLs, DHCP snooping, Dynamic ARP Inspection, storm control, RA Guard, and port security.
+
 The [Common Ports and Protocols Reference](/ports-protocols/) is useful for services such as DNS, TACACS+, RADIUS, SSH-based file transfer, and other management traffic.
 
 <h2 id="domain-5">Domain 5: AI, and Network Operations and Management</h2>
 
 The smallest weighted domain still affects how modern networks are operated. Cisco's v2.0 objectives include agentic artificial intelligence (AI), prompt selection for generative AI, device-, cloud-, controller-, automation-, and infrastructure-as-code management approaches, Simple Network Management Protocol (SNMP), Ansible, and syslog.
 
-The AI portion deserves the same evidence discipline as ordinary troubleshooting. A generated recommendation is input to an engineering decision, not proof that the proposed change is correct. A useful prompt should give the system enough context to answer the actual network question while respecting data classification and clearly requesting the needed output format.
+Keep the work evidence-based:
 
-For example, compare these two requests:
+- AI can organize or recommend, but device state and approved network information remain the source of truth.
+- A prompt should respect data classification and clearly define the persona, instructions, evidence, and output format.
+- Centralized management shows intended state, but direct verification proves realized state.
+- SNMP polling and notifications expose operational measurements and events.
+- Ansible can execute the same verification commands across an inventory of devices.
+- Syslog severity, facility, mnemonic, timestamp, and message text help explain what changed.
 
-```text
-Why is routing broken?
-```
-
-and:
-
-```text
-Analyze the sanitized routing table and interface summary below. Identify the most likely reason 192.0.2.0/24 is unreachable, list the evidence supporting that conclusion, and recommend one verification command before any configuration change.
-```
-
-The second request supplies scope, evidence, a task, and an output expectation. You still verify the recommendation against device state and authorized network information.
-
-For syslog, practice extracting the facility, severity, mnemonic, and message meaning rather than treating the entire line as one string to memorize.
+Read the full [Domain 5: AI, Network Operations, and Management guide](/ccna/200-301-v2/study-guide/ai-network-operations-management/) for agentic AI boundaries, prompt selection, management models, SNMP components, an Ansible command-collection example, syslog severity levels, and an integrated operations workflow.
 
 <h2 id="command-output">Treat command output as study material</h2>
 
