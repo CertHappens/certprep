@@ -187,6 +187,28 @@ export function countElementsWithAttributeAndText(html, tagName, attribute, expe
   return count;
 }
 
+export function hasHtmlAttribute(html, attribute) {
+  const name = String(attribute).trim();
+
+  if (!/^[a-z_:][\w:.-]*$/i.test(name)) {
+    return false;
+  }
+
+  const escapedAttribute = escapeRegExp(name);
+  const attributeExpression = new RegExp(
+    `\\s${escapedAttribute}(?=\\s|=|/\\s*>|>)`,
+    "i"
+  );
+
+  for (const match of String(html).matchAll(/<[a-z][^>]*>/gi)) {
+    if (attributeExpression.test(match[0])) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
 export function isStructuralMarker(marker = "") {
   const value = String(marker).trim();
   return (
@@ -194,15 +216,22 @@ export function isStructuralMarker(marker = "") {
     value.startsWith("/") ||
     value.startsWith("http://") ||
     value.startsWith("https://") ||
+    /^(?:data-[\w-]+|aria-[\w-]+)$/i.test(value) ||
     /^(?:href|src|id|class|data-[\w-]+|aria-[\w-]+|role|type)=/i.test(value) ||
     /\b(?:href|src|id|class|data-[\w-]+|aria-[\w-]+|role|type)=["']/.test(value)
   );
 }
 
 export function hasPageMarker(html, marker) {
-  return isStructuralMarker(marker)
-    ? String(html).includes(String(marker))
-    : includesNormalizedText(html, marker);
+  const value = String(marker).trim();
+
+  if (/^(?:data-[\w-]+|aria-[\w-]+)$/i.test(value)) {
+    return hasHtmlAttribute(html, value);
+  }
+
+  return isStructuralMarker(value)
+    ? String(html).includes(value)
+    : includesNormalizedText(html, value);
 }
 
 export function escapeRegExp(value = "") {

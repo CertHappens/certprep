@@ -52,6 +52,23 @@ test("keeps structural markers exact while normalizing prose markers", () => {
   assert.equal(hasPageMarker(html, "network operations and management"), true);
 });
 
+
+test("recognizes valueless and valued data attributes as structural markers", () => {
+  const html = `
+    <header data-site-header>
+      <button data-site-nav-toggle=""></button>
+    </header>
+    <div data-site-header-extra></div>
+    <p>data-visible-only</p>
+  `;
+
+  assert.equal(hasPageMarker(html, "data-site-header"), true);
+  assert.equal(hasPageMarker(html, "data-site-nav-toggle"), true);
+  assert.equal(hasPageMarker(html, "data-site-header-extra"), true);
+  assert.equal(hasPageMarker(html, "data-site"), false);
+  assert.equal(hasPageMarker(html, "data-visible-only"), false);
+});
+
 test("matches headings without depending on case or punctuation", () => {
   assert.equal(
     headingMatches("<main><h1>CCNA 200-301: Study Resources</h1></main>", "ccna 200 301 study resources"),
