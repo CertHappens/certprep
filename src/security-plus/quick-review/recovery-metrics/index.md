@@ -8,7 +8,7 @@ printable: true
 printTitle: Recovery Metrics Quick Reference for Security+ SY0-701
 author: certHappens
 datePublished: 2026-07-24
-dateModified: 2026-07-27
+dateModified: 2026-07-31
 articleSection: Security+ SY0-701 Quick Review
 eyebrow: Security+ quick review
 lede: Separate recovery targets from reliability averages, then use the wording of the scenario to choose the right metric.
@@ -69,8 +69,8 @@ relatedLinks:
 
 Recovery questions become much easier once you separate **objectives** from **averages**.
 
-- **RTO** and **RPO** are limits selected by the organization during planning.
-- **MTTR** and **MTBF** summarize repair and reliability performance.
+- **Recovery time objective (RTO)** and **recovery point objective (RPO)** are limits selected by the organization during planning.
+- **Mean time to repair (MTTR)** and **mean time between failures (MTBF)** summarize repair and reliability performance.
 
 <div class="article-callout">
   <p><strong>Fast split:</strong> RTO and RPO are business targets. MTTR and MTBF are means, which means they are averages.</p>
@@ -198,7 +198,7 @@ The **mean time to repair (MTTR)** is the average time required to repair a fail
 
 A lower MTTR suggests that failures are repaired more quickly. Better diagnostics, spare parts, practiced procedures, automation, and trained staff can help reduce it.
 
-CompTIA uses **mean time to repair** in the SY0-701 objectives. Other organizations may expand MTTR as recovery, restore, resolution, or remediation. Read the term as the question defines it.
+CompTIA uses **mean time to repair** in SY0-701 objective 5.2, while the exam objectives acronym appendix expands MTTR as **mean time to recover**. Other organizations also use restore, resolution, or remediation. Read the term as the question defines it.
 
 ### Mean time between failures
 
@@ -244,6 +244,8 @@ A repairable server records 1,200 operating hours and three failures.
 RTO and RPO are normally selected through business impact analysis and recovery planning. They are not calculated by averaging past incidents.
 
 <h2 id="scenario-comparisons">Scenario comparisons</h2>
+
+Related scenarios may also use maximum tolerable downtime (MTD) or mean time to failure (MTTF). The dedicated sections below explain how those terms fit beside the four core metrics.
 
 <div class="table-scroll" role="region" aria-label="Recovery metric scenario comparisons" tabindex="0">
 <table>
@@ -428,7 +430,7 @@ For the surrounding business impact analysis material, continue with the [Securi
 
 <h2 id="official-references">Official references</h2>
 
-The published Security+ SY0-701 objectives list RTO, RPO, MTTR, and MTBF under business impact analysis. NIST provides additional recovery-planning definitions and context.
+The published Security+ SY0-701 objectives list RTO, RPO, MTTR, and MTBF under business impact analysis. The National Institute of Standards and Technology (NIST) provides additional recovery-planning definitions and context.
 
 - [CompTIA Security+ certification page](https://www.comptia.org/certifications/security)
 - [NIST Recovery Time Objective glossary](https://csrc.nist.gov/glossary/term/recovery_time_objective)

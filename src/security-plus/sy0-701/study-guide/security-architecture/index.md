@@ -8,7 +8,7 @@ printable: true
 printTitle: "Security+ SY0-701 Domain 3: Security Architecture"
 author: certHappens
 datePublished: 2026-07-23
-dateModified: 2026-07-27
+dateModified: 2026-07-31
 articleSection: Security+ SY0-701 Domain 3
 eyebrow: Security+ Domain 3 guide
 lede: Connect architecture choices to security, availability, recovery, and the business constraints that shape a defensible design.
@@ -153,7 +153,7 @@ Cloud deployment models describe who uses the environment and how it is made ava
   </table>
 </div>
 
-Cloud service models describe how much of the technology stack the provider operates:
+Cloud service models describe how much of the technology stack the provider operates. The three common models are infrastructure as a service (IaaS), platform as a service (PaaS), and software as a service (SaaS):
 
 <div class="table-scroll" role="region" aria-label="Cloud service models and customer responsibilities" tabindex="0">
   <table>
@@ -258,7 +258,7 @@ A virtual machine includes a guest operating system and runs through a hyperviso
       <tr>
         <td>Virtual machine</td>
         <td>Guest operating system separated through a hypervisor.</td>
-        <td>Hypervisor security, guest patching, image control, management interfaces, virtual networking, and VM escape risk.</td>
+        <td>Hypervisor security, guest patching, image control, management interfaces, virtual networking, and virtual machine (VM) escape risk.</td>
       </tr>
       <tr>
         <td>Container</td>
@@ -271,14 +271,14 @@ A virtual machine includes a guest operating system and runs through a hyperviso
 
 Snapshots and reusable images accelerate deployment. They can also preserve vulnerable software, embedded secrets, or insecure defaults. Build from approved images, scan them, sign or verify trusted artifacts, and remove unnecessary packages and privileges.
 
-<h3>IoT, embedded, real-time, and operational technology</h3>
+<h3>Internet of Things (IoT), embedded, real-time, and operational technology</h3>
 
 Specialized systems often prioritize safety, reliability, timing, power use, or long service life. Standard enterprise assumptions may not apply.
 
-- **Internet of Things (IoT)** devices include connected sensors, cameras, appliances, controllers, and other purpose-built devices. Common concerns include default credentials, weak update mechanisms, exposed management services, and poor inventory visibility.
+- **IoT devices** include connected sensors, cameras, appliances, controllers, and other purpose-built devices. Common concerns include default credentials, weak update mechanisms, exposed management services, and poor inventory visibility.
 - **Embedded systems** perform dedicated functions inside larger products or equipment. They may have limited storage, processing power, and security features.
 - **Real-time operating systems (RTOS)** must complete tasks within defined timing constraints. Security controls that introduce unpredictable delay may interfere with the required function.
-- **Operational technology (OT)** monitors or changes physical processes. Industrial control systems and SCADA environments may include controllers, sensors, actuators, engineering workstations, and human-machine interfaces.
+- **Operational technology (OT)** monitors or changes physical processes. Industrial control systems (ICS) and supervisory control and data acquisition (SCADA) environments may include controllers, sensors, actuators, engineering workstations, and human-machine interfaces.
 
 Safety and availability can dominate OT decisions. A restart that is routine on an office workstation may interrupt production or create a physical hazard on a control system. Use segmentation, tightly controlled remote access, asset inventory, passive monitoring where appropriate, tested maintenance windows, and compensating controls for systems that cannot be patched promptly.
 
@@ -352,7 +352,7 @@ Secure infrastructure begins with placement and allowed communication. Put syste
 Common zones include:
 
 - **Internet or untrusted zone:** External networks with no assumed trust.
-- **Screened subnet or DMZ:** Public-facing services separated from internal systems.
+- **Screened subnet or demilitarized zone (DMZ):** Public-facing services separated from internal systems.
 - **Internal user zone:** Workstations and ordinary business services.
 - **Server or application zone:** Internal services with narrower access requirements.
 - **Management zone:** Administrative interfaces and tools restricted to authorized administrators and management paths.
@@ -380,12 +380,12 @@ Segmentation limits routine reachability and reduces lateral movement. Isolation
         <td>Between trust zones, at network boundaries, or on individual hosts.</td>
       </tr>
       <tr>
-        <td>Web application firewall</td>
-        <td>Inspects HTTP and HTTPS traffic for web-application attacks and policy violations.</td>
+        <td>Web application firewall (WAF)</td>
+        <td>Inspects Hypertext Transfer Protocol (HTTP) and Hypertext Transfer Protocol Secure (HTTPS) traffic for web-application attacks and policy violations.</td>
         <td>In front of public or sensitive web applications.</td>
       </tr>
       <tr>
-        <td>IDS or IPS</td>
+        <td>Intrusion detection system (IDS) or intrusion prevention system (IPS)</td>
         <td>Detects suspicious activity; an IPS can also block or disrupt matching traffic.</td>
         <td>At important network boundaries or near critical assets, with visibility into relevant traffic.</td>
       </tr>
@@ -395,7 +395,7 @@ Segmentation limits routine reachability and reduces lateral movement. Isolation
         <td>Forward proxy for outbound client access; reverse proxy in front of services.</td>
       </tr>
       <tr>
-        <td>VPN gateway</td>
+        <td>Virtual private network (VPN) gateway</td>
         <td>Creates an encrypted tunnel for site-to-site or remote access.</td>
         <td>At the network edge or cloud boundary, followed by authentication and authorization controls.</td>
       </tr>
@@ -437,7 +437,7 @@ Every enabled service, administrative interface, wireless connection, remote-acc
 - Default-deny rules followed by explicit business allowances
 - Separate management interfaces or management networks
 - Strong authentication and least-privilege authorization
-- Secure protocols such as SSH, TLS, and IPsec where appropriate
+- Secure protocols such as Secure Shell (SSH), Transport Layer Security (TLS), and Internet Protocol Security (IPsec) where appropriate
 - Network access control and switch port controls
 - Removal of unused services, routes, accounts, and interfaces
 - Encryption for untrusted or shared networks
@@ -642,7 +642,7 @@ These terms overlap but answer different questions:
       <tr>
         <td>Redundancy</td>
         <td>Provides additional components, paths, or copies.</td>
-        <td>Dual network links, redundant power supplies, or multiple DNS servers.</td>
+        <td>Dual network links, redundant power supplies, or multiple Domain Name System (DNS) servers.</td>
       </tr>
       <tr>
         <td>Fault tolerance</td>
@@ -666,6 +666,8 @@ These terms overlap but answer different questions:
 Redundancy only helps when the redundant components do not share the same failure. Two servers on one power circuit and one switch may still fail together. Separate failure domains can include power, network, hardware, location, provider region, account, and administrative control.
 
 <h3>Recovery measurements</h3>
+
+The four measurements are recovery time objective (RTO), recovery point objective (RPO), mean time to repair (MTTR), and mean time between failures (MTBF).
 
 <div class="table-scroll" role="region" aria-label="Recovery and reliability measurements" tabindex="0">
   <table>
@@ -906,7 +908,7 @@ Use the [randomized SY0-701 practice test](/security-plus/sy0-701/practice-test/
 
 <h2 id="official-references">Official references</h2>
 
-Domain coverage and weighting are based on CompTIA's published SY0-701 objectives. The supporting architecture and recovery references below come from NIST guidance.
+Domain coverage and weighting are based on CompTIA's published SY0-701 objectives. The supporting architecture and recovery references below come from National Institute of Standards and Technology (NIST) guidance.
 
 - [CompTIA Security+ certification page](https://www.comptia.org/en-us/certifications/security/)
 - [NIST SP 800-145, The NIST Definition of Cloud Computing](https://csrc.nist.gov/pubs/sp/800/145/final)

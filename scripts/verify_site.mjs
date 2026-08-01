@@ -1764,7 +1764,10 @@ for (const file of htmlFiles) {
       "data-acronym-empty",
       'src="/assets/js/acronym-filter.js"',
       "Context decides the meaning",
-      "Recovery time objective"
+      "Recovery time objective",
+      "Attribute-based access control",
+      "Maximum tolerable downtime",
+      "Demilitarized zone"
     ];
 
     for (const marker of requiredAcronymMarkup) {
@@ -1782,8 +1785,8 @@ for (const file of htmlFiles) {
     }
 
     const acronymJumpLinkCount = (html.match(/href=["']#acronyms-[^"']+["']/g) || []).length;
-    if (acronymJumpLinkCount !== 23) {
-      fail(`${relative}: expected 23 sidebar acronym jump links, found ${acronymJumpLinkCount}`);
+    if (acronymJumpLinkCount !== 25) {
+      fail(`${relative}: expected 25 sidebar acronym jump links, found ${acronymJumpLinkCount}`);
     }
 
     if (html.includes("data-acronym-index")) {

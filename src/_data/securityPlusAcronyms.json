@@ -2,7 +2,8 @@
   "title": "Security+ Acronyms and Terms",
   "currentExamVersion": "SY0-701",
   "datePublished": "2026-07-23",
-  "entryCount": 245,
+  "dateModified": "2026-07-31",
+  "entryCount": 252,
   "groups": [
     {
       "letter": "#",
@@ -58,6 +59,23 @@
           "related": [
             "RADIUS",
             "TACACS+"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "abac",
+          "term": "ABAC",
+          "expansion": "Attribute-based access control",
+          "meaning": "An access-control model that evaluates attributes such as user, device, resource, location, sensitivity, and risk when making a decision.",
+          "domains": [
+            "4"
+          ],
+          "related": [
+            "DAC",
+            "MAC",
+            "RBAC"
           ],
           "examVersions": [
             "SY0-701"
@@ -502,6 +520,21 @@
           ]
         },
         {
+          "id": "ci-cd",
+          "term": "CI/CD",
+          "expansion": "Continuous integration/continuous delivery",
+          "meaning": "An automated software delivery approach that integrates changes frequently and moves validated builds toward release or deployment. Security checks can be built into the pipeline.",
+          "domains": [
+            "4"
+          ],
+          "related": [
+            "API"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
           "id": "cia",
           "term": "CIA",
           "expansion": "Confidentiality, integrity, and availability",
@@ -847,6 +880,21 @@
           "related": [
             "DKIM",
             "SPF"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
+          "id": "dmz",
+          "term": "DMZ",
+          "expansion": "Demilitarized zone",
+          "meaning": "A network segment placed between less-trusted and more-trusted networks, commonly used to isolate public-facing services from internal systems.",
+          "domains": [
+            "3"
+          ],
+          "related": [
+            "Firewall"
           ],
           "examVersions": [
             "SY0-701"
@@ -1708,6 +1756,30 @@
       "label": "I"
     },
     {
+      "letter": "J",
+      "id": "j",
+      "entries": [
+        {
+          "id": "json",
+          "term": "JSON",
+          "expansion": "JavaScript Object Notation",
+          "meaning": "A text-based data format commonly used by applications and APIs to exchange structured data.",
+          "domains": [
+            "2",
+            "4"
+          ],
+          "related": [
+            "API",
+            "XML"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        }
+      ],
+      "label": "J"
+    },
+    {
       "letter": "K",
       "id": "k",
       "entries": [
@@ -1866,6 +1938,21 @@
           ]
         },
         {
+          "id": "md5",
+          "term": "MD5",
+          "expansion": "Message Digest 5",
+          "meaning": "A legacy cryptographic hash algorithm with known collision weaknesses. It may appear in older systems but should not be selected for modern collision-resistant security use.",
+          "domains": [
+            "1"
+          ],
+          "related": [
+            "SHA"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
           "id": "mdm",
           "term": "MDM",
           "expansion": "Mobile device management",
@@ -1998,6 +2085,23 @@
           ]
         },
         {
+          "id": "mtd",
+          "term": "MTD",
+          "expansion": "Maximum tolerable downtime",
+          "meaning": "The longest a business process can remain unavailable before the impact becomes unacceptable.",
+          "domains": [
+            "3",
+            "5"
+          ],
+          "related": [
+            "RTO",
+            "RPO"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        },
+        {
           "id": "mttf",
           "term": "MTTF",
           "expansion": "Mean time to failure",
@@ -2016,8 +2120,8 @@
         {
           "id": "mttr",
           "term": "MTTR",
-          "expansion": "Mean time to recover",
-          "meaning": "The average time required to restore a service after failure. Some organizations use the same initials for mean time to repair, so read the surrounding definition.",
+          "expansion": "Mean time to repair",
+          "meaning": "The average time required to repair a failed system or component and return it to operation. SY0-701 objective 5.2 uses “mean time to repair,” while the exam objectives acronym appendix expands MTTR as “mean time to recover,” so use the wording and context provided.",
           "domains": [
             "3",
             "5"
@@ -2594,6 +2698,28 @@
         }
       ],
       "label": "P"
+    },
+    {
+      "letter": "Q",
+      "id": "q",
+      "entries": [
+        {
+          "id": "qr",
+          "term": "QR",
+          "expansion": "Quick response",
+          "meaning": "A two-dimensional barcode format that can encode links or other data. Attackers can use malicious QR codes to hide destinations or redirect users.",
+          "domains": [
+            "2"
+          ],
+          "related": [
+            "SMS"
+          ],
+          "examVersions": [
+            "SY0-701"
+          ]
+        }
+      ],
+      "label": "Q"
     },
     {
       "letter": "R",

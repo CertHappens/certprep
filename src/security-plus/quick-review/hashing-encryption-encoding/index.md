@@ -8,7 +8,7 @@ printable: true
 printTitle: Hashing, Encryption, and Encoding Quick Reference for Security+ SY0-701
 author: certHappens
 datePublished: 2026-07-24
-dateModified: 2026-07-27
+dateModified: 2026-07-31
 articleSection: Security+ SY0-701 Quick Review
 eyebrow: Security+ quick review
 lede: Start with the security goal, then choose the transformation that actually provides it.
@@ -80,13 +80,15 @@ A cryptography question often becomes manageable as soon as you identify the req
 - **Authenticity:** verify the claimed source
 - **Compatibility:** represent data in a format another system can handle
 
-Hashing, encryption, and encoding solve different problems. Digital signatures and HMAC combine cryptographic operations to add source assurance.
+Hashing, encryption, and encoding solve different problems. Digital signatures and hash-based message authentication codes (HMACs) combine cryptographic operations to add source assurance.
 
 <div class="article-callout">
   <p><strong>Fast split:</strong> Encrypt to keep data secret. Hash to create a one-way digest. Encode to change representation without adding secrecy.</p>
 </div>
 
 <h2 id="three-methods">Three methods at a glance</h2>
+
+The examples below use Secure Hash Algorithm (SHA) variants for hashing, Advanced Encryption Standard (AES) for symmetric encryption, and Rivest-Shamir-Adleman (RSA) as an asymmetric example.
 
 <div class="table-scroll" role="region" aria-label="Hashing encryption and encoding comparison" tabindex="0">
 <table>
@@ -149,7 +151,7 @@ A match supports the conclusion that the file did not change between the publish
 
 Anyone who has a message can calculate its unkeyed hash. Matching digests show that the compared data is the same. They do not identify who produced it.
 
-Use a digital signature when public verification and signatory assurance are needed. Use HMAC when parties share a secret and need message authentication.
+Use a digital signature when public verification and signatory assurance are needed. Use a hash-based message authentication code (HMAC) when parties share a secret and need message authentication.
 
 ### Example digest
 
@@ -169,7 +171,7 @@ Changing even the final period changes the digest. Deleting the period does not 
 
 ### Recognize weak legacy choices
 
-MD5 and SHA-1 may still appear in old systems, file listings, or exam distractors. Their collision resistance is not suitable for modern security uses. Prefer current approved hash families such as SHA-2 or SHA-3 when the scenario requires a secure cryptographic hash.
+Message Digest 5 (MD5) and SHA-1 may still appear in old systems, file listings, or exam distractors. Their collision resistance is not suitable for modern security uses. Prefer current approved hash families such as SHA-2 or SHA-3 when the scenario requires a secure cryptographic hash.
 
 <h2 id="encryption">Encryption</h2>
 
@@ -265,13 +267,13 @@ Base64 is still only the representation layer. The encryption is what protects c
 
 Look for encoding when the scenario mentions:
 
-- Binary data inside email, JSON, XML, or another text format
+- Binary data inside email, JavaScript Object Notation (JSON), Extensible Markup Language (XML), or another text format
 - Printable representation
 - Character compatibility
 - Base64 or hexadecimal output
 - A value that anyone can decode without a key
 
-<h2 id="signatures-hmac">Digital signatures and HMAC</h2>
+<h2 id="signatures-hmac">Digital signatures and hash-based message authentication codes (HMACs)</h2>
 
 Hashing is often one part of a larger cryptographic process.
 
@@ -294,7 +296,7 @@ Digital-signature systems normally operate on a digest of the data rather than a
 
 ### HMAC
 
-A hash-based message authentication code combines a cryptographic hash function with a shared secret key.
+A hash-based message authentication code (HMAC) combines a cryptographic hash function with a shared secret key.
 
 HMAC supports:
 
@@ -407,7 +409,7 @@ Peppering is not a replacement for unique salts or an appropriate password-hashi
       <td>Customers need integrity and public verification of the claimed signer.</td>
     </tr>
     <tr>
-      <td>Two internal services share a secret and must authenticate API messages.</td>
+      <td>Two internal services share a secret and must authenticate application programming interface (API) messages.</td>
       <td><strong>HMAC</strong></td>
       <td>A shared secret can produce and verify message-authentication tags.</td>
     </tr>
@@ -442,7 +444,7 @@ Hashing can support integrity checks and password verification. It does not let 
 
 ### Assuming encryption supplies every security property
 
-Encryption protects confidentiality when implemented correctly. Integrity and authentication usually require an authenticated-encryption mode, MAC, signature, or protocol that supplies those protections.
+Encryption protects confidentiality when implemented correctly. Integrity and authentication usually require an authenticated-encryption mode, message authentication code (MAC), signature, or protocol that supplies those protections.
 
 ### Signing with the public key
 
@@ -550,11 +552,11 @@ Before moving on, confirm that you can:
 - Recognize Base64 and hexadecimal as encodings rather than confidentiality controls.
 - Identify whether a scenario requests confidentiality, integrity, authenticity, or compatibility.
 
-For the broader cryptography and PKI material, continue with the [General Security Concepts guide](/security-plus/sy0-701/study-guide/general-security-concepts/).
+For the broader cryptography and public-key infrastructure (PKI) material, continue with the [General Security Concepts guide](/security-plus/sy0-701/study-guide/general-security-concepts/).
 
 <h2 id="official-references">Official references</h2>
 
-The Security+ SY0-701 objectives include cryptographic solutions such as symmetric and asymmetric encryption, hashing, salting, key stretching, digital signatures, and public-key infrastructure. The following primary sources provide standards and definitions used in this guide.
+The Security+ SY0-701 objectives include cryptographic solutions such as symmetric and asymmetric encryption, hashing, salting, key stretching, digital signatures, and public-key infrastructure. The following sources include standards from the National Institute of Standards and Technology (NIST) and the Internet Engineering Task Force (IETF).
 
 - [CompTIA Security+ certification page](https://www.comptia.org/en-us/certifications/security/)
 - [CompTIA Security+ SY0-701 exam objectives PDF](https://www.comptia.jp/pdf/CompTIA%20Security%2B%20SY0-701%20Exam%20Objectives.pdf)

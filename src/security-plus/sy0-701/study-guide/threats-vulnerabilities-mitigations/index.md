@@ -8,7 +8,7 @@ printable: true
 printTitle: "Security+ SY0-701 Domain 2: Threats, Vulnerabilities, and Mitigations"
 author: certHappens
 datePublished: 2026-07-23
-dateModified: 2026-07-27
+dateModified: 2026-07-31
 articleSection: Security+ SY0-701 Domain 2
 eyebrow: Security+ Domain 2 guide
 lede: Follow an attack from the person or group behind it, through the path they use, to the weakness they exploit and the control that reduces the risk.
@@ -216,12 +216,12 @@ Reducing attack surface means removing or restricting unnecessary exposure. Clos
     <tbody>
       <tr>
         <td><strong>Message-based</strong></td>
-        <td>Email, SMS, and instant messaging carry links, requests, attachments, or false instructions</td>
+        <td>Email, Short Message Service (SMS), and instant messaging carry links, requests, attachments, or false instructions</td>
         <td>Urgency, credential requests, unexpected attachments, altered sender details</td>
       </tr>
       <tr>
         <td><strong>Image-based</strong></td>
-        <td>Images hide links, QR codes, tracking, malicious content, or text intended to evade filtering</td>
+        <td>Images hide links, quick response (QR) codes, tracking, malicious content, or text intended to evade filtering</td>
         <td>QR-code login prompts, image-only messages, mismatched destination addresses</td>
       </tr>
       <tr>
@@ -236,7 +236,7 @@ Reducing attack surface means removing or restricting unnecessary exposure. Clos
       </tr>
       <tr>
         <td><strong>Removable device</strong></td>
-        <td>USB storage or another portable device introduces files, malware, or unauthorized data movement</td>
+        <td>Universal Serial Bus (USB) storage or another portable device introduces files, malware, or unauthorized data movement</td>
         <td>Unknown media, newly mounted devices, execution from removable storage</td>
       </tr>
       <tr>
@@ -259,7 +259,7 @@ Unsupported systems and applications no longer receive normal security fixes. A 
 
 Open service ports expand the reachable attack surface. The question is whether the service is required, securely configured, patched, and limited to appropriate sources. Default credentials are especially dangerous because attackers can test them cheaply and at scale.
 
-A **client-based** path depends on software installed on the endpoint, such as a vulnerable application or management agent. An **agentless** path reaches a browser, API, service, or remote-management interface without requiring a resident agent. The label describes how the target is reached; either approach can expose a flaw when the reachable software or interface is vulnerable.
+A **client-based** path depends on software installed on the endpoint, such as a vulnerable application or management agent. An **agentless** path reaches a browser, application programming interface (API), service, or remote-management interface without requiring a resident agent. The label describes how the target is reached; either approach can expose a flaw when the reachable software or interface is vulnerable.
 
 <h3>Unsecure networks</h3>
 
@@ -306,7 +306,7 @@ A vulnerability is a weakness that can be exploited. A threat actor supplies int
       </tr>
       <tr>
         <td><strong>Web-based</strong></td>
-        <td>SQL injection and cross-site scripting</td>
+        <td>Structured Query Language (SQL) injection and cross-site scripting</td>
         <td>Untrusted input reaches a database command or browser output without safe handling</td>
       </tr>
       <tr>
@@ -316,7 +316,7 @@ A vulnerability is a weakness that can be exploited. A threat actor supplies int
       </tr>
       <tr>
         <td><strong>Virtualization</strong></td>
-        <td>VM escape and resource reuse</td>
+        <td>Virtual machine (VM) escape and resource reuse</td>
         <td>Isolation between guests, hosts, or previous tenants fails</td>
       </tr>
       <tr>
@@ -353,13 +353,13 @@ In virtualized or shared environments, **resource reuse** can expose data left b
 
 Input validation, memory-safe development practices, compiler protections, address-space randomization, data execution prevention, patching, and application isolation can reduce exposure. The best answer depends on whether the question asks for a coding fix, a platform defense, or an immediate operational mitigation.
 
-<h3>Race conditions and TOC/TOU</h3>
+<h3>Race conditions and time of check/time of use (TOC/TOU)</h3>
 
 A race condition occurs when the result depends on timing or the order of operations. A time-of-check/time-of-use problem appears when a system verifies a condition, then uses the resource after that condition may have changed.
 
 For example, an application checks that a file is safe and permitted. An attacker replaces or redirects the file before the application opens it. Atomic operations, locking, secure temporary-file handling, and designs that reduce the gap between checking and use help address the weakness.
 
-<h3>SQL injection and cross-site scripting</h3>
+<h3>Structured Query Language (SQL) injection and cross-site scripting</h3>
 
 **SQL injection** occurs when untrusted input changes the meaning of a database query. Parameterized queries, safe APIs, input handling, least-privileged database accounts, and defensive monitoring reduce risk.
 
@@ -447,10 +447,10 @@ Malware labels can overlap. A Trojan may install spyware or a rootkit. Ransomwar
 <h3>Physical, network, application, and cryptographic attacks</h3>
 
 - **Physical brute force:** Forcing a door, lock, enclosure, or other physical barrier. Context separates this from password brute force.
-- **RFID cloning:** Copying identifier data from a badge or tag to impersonate the original device.
+- **Radio-frequency identification (RFID) cloning:** Copying identifier data from a badge or tag to impersonate the original device.
 - **Environmental attack:** Using heat, water, smoke, power loss, or another environmental condition to damage or interrupt systems.
-- **Distributed denial-of-service:** Many sources overwhelm a target. Reflected attacks send replies toward the victim using a spoofed source; amplified attacks produce responses larger than the original requests.
-- **DNS attack:** Manipulating, poisoning, redirecting, tunneling through, or exhausting DNS services.
+- **Distributed denial-of-service (DDoS):** Many sources overwhelm a target. Reflected attacks send replies toward the victim using a spoofed source; amplified attacks produce responses larger than the original requests.
+- **Domain Name System (DNS) attack:** Manipulating, poisoning, redirecting, tunneling through, or exhausting DNS services.
 - **Wireless attack:** Rogue access points, evil twins, deauthentication, weak encryption, or unauthorized association.
 - **On-path attack:** Intercepting and possibly altering communications between parties.
 - **Credential replay:** Reusing captured authentication material or a valid session artifact.
@@ -494,7 +494,7 @@ The logs may reveal the difference. Many failures against one user suggest focus
       <tr>
         <td><strong>Impossible travel</strong></td>
         <td>Sign-ins from locations that cannot reasonably be reached in the elapsed time</td>
-        <td>VPN use, proxy services, device history, and authentication strength</td>
+        <td>Virtual private network (VPN) use, proxy services, device history, and authentication strength</td>
       </tr>
       <tr>
         <td><strong>Resource consumption</strong></td>
@@ -673,7 +673,7 @@ Before moving on, check whether you can do the following without relying on answ
 
 <h2 id="official-references">Official references</h2>
 
-This guide follows the Threats, Vulnerabilities, and Mitigations topics listed in the official SY0-701 objectives. Use the current objectives as the final exam checklist.
+This guide follows the Threats, Vulnerabilities, and Mitigations topics listed in the official SY0-701 objectives. Use the current objectives as the final exam checklist. Supporting references include guidance from the Cybersecurity and Infrastructure Security Agency (CISA), the Open Worldwide Application Security Project (OWASP), and the National Institute of Standards and Technology (NIST).
 
 - [CompTIA Security+ certification page](https://www.comptia.org/en-us/certifications/security/)
 - [CompTIA Security+ SY0-701 exam objectives PDF](https://www.comptia.jp/pdf/CompTIA%20Security%2B%20SY0-701%20Exam%20Objectives.pdf)
