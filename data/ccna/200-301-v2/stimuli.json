@@ -134,6 +134,140 @@
       "variant": "configuration",
       "title": "Ansible playbook",
       "content": "- name: Collect access-switch interface status\n  hosts: access_switches\n  gather_facts: false\n  tasks:\n    - name: Run interface status command\n      cisco.ios.ios_command:\n        commands:\n          - show interfaces status\n      register: interface_status\n\n    - name: Display returned lines\n      ansible.builtin.debug:\n        var: interface_status.stdout_lines"
+    },
+    "CCNA301V2-0000031": {
+      "type": "table",
+      "title": "10-Gigabit fiber uplink evidence",
+      "caption": "The installed cable is an OM4 multimode fiber pair and polarity has been verified.",
+      "columns": [
+        {
+          "key": "endpoint",
+          "label": "Endpoint"
+        },
+        {
+          "key": "optic",
+          "label": "Installed optic"
+        },
+        {
+          "key": "wavelength",
+          "label": "Nominal wavelength"
+        },
+        {
+          "key": "intended_fiber",
+          "label": "Intended fiber"
+        },
+        {
+          "key": "state",
+          "label": "Interface state"
+        }
+      ],
+      "rows": [
+        {
+          "endpoint": "SW1 Gi1/0/49",
+          "optic": "SFP-10G-SR",
+          "wavelength": "850 nm",
+          "intended_fiber": "Multimode",
+          "state": "down/down"
+        },
+        {
+          "endpoint": "SW2 Gi1/0/49",
+          "optic": "SFP-10G-LR",
+          "wavelength": "1310 nm",
+          "intended_fiber": "Single-mode",
+          "state": "down/down"
+        }
+      ]
+    },
+    "CCNA301V2-0000037": {
+      "type": "preformatted",
+      "variant": "configuration",
+      "title": "IOS DHCP server and VLAN 40 configuration",
+      "content": "ip dhcp excluded-address 10.30.40.1 10.30.40.20\nip dhcp pool USERS\n network 10.30.40.0 255.255.255.0\n default-router 10.30.50.1\n dns-server 192.0.2.53\n!\ninterface Vlan40\n ip address 10.30.40.1 255.255.255.0\n no shutdown"
+    },
+    "CCNA301V2-0000039": {
+      "type": "preformatted",
+      "variant": "configuration",
+      "title": "Layer 3 EtherChannel configuration and status",
+      "content": "SW1\ninterface range GigabitEthernet1/0/1-2\n no switchport\n channel-group 12 mode active\n!\ninterface Port-channel12\n no switchport\n ip address 10.0.12.1 255.255.255.252\n\nSW2\ninterface GigabitEthernet1/0/1\n no switchport\n channel-group 12 mode passive\n!\ninterface GigabitEthernet1/0/2\n switchport\n switchport mode trunk\n channel-group 12 mode passive\n!\ninterface Port-channel12\n no switchport\n ip address 10.0.12.2 255.255.255.252\n\nSW2# show etherchannel summary\nGroup  Port-channel  Protocol  Ports\n12     Po12(RU)      LACP      Gi1/0/1(P) Gi1/0/2(s)"
+    },
+    "CCNA301V2-0000042": {
+      "type": "preformatted",
+      "variant": "configuration",
+      "title": "Hypervisor uplink requirements and current switch configuration",
+      "content": "Hypervisor network design\n- Management: untagged VLAN 100\n- Application VM port group: tagged VLAN 110\n- Database VM port group: tagged VLAN 120\n\nSW1 current configuration\ninterface GigabitEthernet1/0/20\n description Hypervisor-01\n switchport mode access\n switchport access vlan 100\n spanning-tree portfast"
+    },
+    "CCNA301V2-0000044": {
+      "type": "preformatted",
+      "variant": "command_output",
+      "title": "Switch-port status and port-security output",
+      "content": "SW1# show interfaces status | include Gi1/0/18\nGi1/0/18  Authorized-Replacement  err-disabled  30  auto  auto 10/100/1000BaseTX\n\nSW1# show port-security interface GigabitEthernet1/0/18\nPort Security              : Enabled\nPort Status                : Secure-shutdown\nViolation Mode             : Shutdown\nMaximum MAC Addresses      : 1\nTotal MAC Addresses        : 1\nConfigured MAC Addresses   : 0\nSticky MAC Addresses       : 1\nLast Source Address:Vlan   : 00aa.bbcc.ddee:30\nSecurity Violation Count   : 1"
+    },
+    "CCNA301V2-0000046": {
+      "type": "preformatted",
+      "variant": "command_output",
+      "title": "R1 IPv6 routing table excerpt",
+      "content": "R1# show ipv6 route\nS   2001:DB8:100::/48 [1/0]\n     via FE80::2, GigabitEthernet0/0\nO   2001:DB8:100:20::/64 [110/20]\n     via FE80::3, GigabitEthernet0/1\nS   2001:DB8:100:20:1::/80 [1/0]\n     via FE80::4, GigabitEthernet0/2\nS   ::/0 [1/0]\n     via FE80::FFFF, GigabitEthernet0/3"
+    },
+    "CCNA301V2-0000050": {
+      "type": "table",
+      "title": "OSPF broadcast-segment state",
+      "caption": "R2 interface priority was increased from 1 to 100 after all adjacencies reached FULL state.",
+      "columns": [
+        {
+          "key": "router",
+          "label": "Router"
+        },
+        {
+          "key": "router_id",
+          "label": "Router ID"
+        },
+        {
+          "key": "priority",
+          "label": "Current priority"
+        },
+        {
+          "key": "current_role",
+          "label": "Current role"
+        }
+      ],
+      "rows": [
+        {
+          "router": "R1",
+          "router_id": "1.1.1.1",
+          "priority": "1",
+          "current_role": "DR"
+        },
+        {
+          "router": "R2",
+          "router_id": "2.2.2.2",
+          "priority": "100",
+          "current_role": "BDR"
+        },
+        {
+          "router": "R3",
+          "router_id": "3.3.3.3",
+          "priority": "0",
+          "current_role": "DROTHER"
+        }
+      ]
+    },
+    "CCNA301V2-0000053": {
+      "type": "preformatted",
+      "variant": "command_output",
+      "title": "R1 NAT translation table",
+      "content": "R1# show ip nat translations\nPro Inside global         Inside local          Outside local        Outside global\ntcp 203.0.113.5:30001    10.10.10.10:51520     198.51.100.20:443   198.51.100.20:443\ntcp 203.0.113.5:30002    10.10.10.11:51521     198.51.100.30:443   198.51.100.30:443"
+    },
+    "CCNA301V2-0000056": {
+      "type": "preformatted",
+      "variant": "command_output",
+      "title": "Storm-control configuration and current state",
+      "content": "interface GigabitEthernet1/0/12\n storm-control broadcast level 5.00 3.00\n storm-control action shutdown\n\nSW1# show storm-control interface GigabitEthernet1/0/12\nPort        Filter State   Upper   Lower   Current\nGi1/0/12    Shutdown       5.00%   3.00%   8.00%"
+    },
+    "CCNA301V2-0000059": {
+      "type": "preformatted",
+      "variant": "configuration",
+      "title": "SNMPv3 user and notification configuration",
+      "content": "snmp-server group NMS v3 priv\nsnmp-server user netops NMS v3 auth sha AUTHKEY priv aes 128 PRIVKEY\nsnmp-server host 192.0.2.50 version 3 priv netops\nsnmp-server enable traps"
     }
   }
 }
