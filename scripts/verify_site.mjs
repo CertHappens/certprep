@@ -167,6 +167,7 @@ const publicPageFiles = [
   "ccna/200-301-v2/study-guide/network-infrastructure-connectivity/index.html",
   "ccna/200-301-v2/study-guide/switching-network-access/index.html",
   "ccna/200-301-v2/study-guide/ip-routing/index.html",
+  "ccna/200-301-v2/study-guide/network-services-security/index.html",
   "disclaimer/index.html",
   "network-plus/index.html",
   "network-plus/acronyms/index.html",
@@ -208,6 +209,7 @@ const articlePageFiles = [
   "ccna/200-301-v2/study-guide/network-infrastructure-connectivity/index.html",
   "ccna/200-301-v2/study-guide/switching-network-access/index.html",
   "ccna/200-301-v2/study-guide/ip-routing/index.html",
+  "ccna/200-301-v2/study-guide/network-services-security/index.html",
   "network-plus/acronyms/index.html",
   "network-plus/n10-009/study-guide/index.html",
   "network-plus/n10-009/study-guide/ipv4-subnetting/index.html",
@@ -269,6 +271,7 @@ const wholeSitePageMarkers = new Map([
       "/ccna/200-301-v2/study-guide/network-infrastructure-connectivity/",
       "/ccna/200-301-v2/study-guide/switching-network-access/",
       "/ccna/200-301-v2/study-guide/ip-routing/",
+      "/ccna/200-301-v2/study-guide/network-services-security/",
       "/ccna/acronyms/",
       "/ccna/commands/",
       "Use v1.1 through February 2, 2027 and v2.0 starting February 3, 2027",
@@ -286,6 +289,7 @@ const wholeSitePageMarkers = new Map([
       "/ccna/200-301-v2/study-guide/network-infrastructure-connectivity/",
       "/ccna/200-301-v2/study-guide/switching-network-access/",
       "/ccna/200-301-v2/study-guide/ip-routing/",
+      "/ccna/200-301-v2/study-guide/network-services-security/",
       "/ccna/commands/",
       "/ccna/acronyms/",
       "February 3, 2027"
@@ -325,6 +329,22 @@ const wholeSitePageMarkers = new Map([
       "router ospfv3",
       "show standby brief",
       "show vrrp brief",
+      "/ccna/acronyms/"
+    ]
+  ],
+  [
+    "ccna/200-301-v2/study-guide/network-services-security/index.html",
+    [
+      "CCNA 200-301 v2.0 Domain 4: Network Services and Security",
+      "Domain 4 objective map",
+      "aaa authentication login default",
+      "show ip nat translations",
+      "Domain Name System (DNS) records",
+      "Internet Key Exchange (IKE)",
+      "show ip access-lists",
+      "show ip dhcp snooping binding",
+      "show ip arp inspection",
+      "show port-security interface",
       "/ccna/acronyms/"
     ]
   ],
@@ -831,6 +851,7 @@ for (const file of htmlFiles) {
     "/ccna/200-301-v2/study-guide/network-infrastructure-connectivity/",
     "/ccna/200-301-v2/study-guide/switching-network-access/",
     "/ccna/200-301-v2/study-guide/ip-routing/",
+    "/ccna/200-301-v2/study-guide/network-services-security/",
     "/ccna/acronyms/",
     "/ccna/commands/",
     "/cissp/",
@@ -2064,6 +2085,7 @@ for (const file of htmlFiles) {
       "/ccna/200-301-v2/study-guide/network-infrastructure-connectivity/",
       "/ccna/200-301-v2/study-guide/switching-network-access/",
       "/ccna/200-301-v2/study-guide/ip-routing/",
+      "/ccna/200-301-v2/study-guide/network-services-security/",
       "/ccna/acronyms/",
       "/ccna/commands/",
       "/network-plus/n10-009/study-guide/ipv4-subnetting/",
@@ -2102,7 +2124,8 @@ for (const file of htmlFiles) {
     const publishedDomainGuideLinks = [
       ["/ccna/200-301-v2/study-guide/network-infrastructure-connectivity/", "Open Domain 1 guide"],
       ["/ccna/200-301-v2/study-guide/switching-network-access/", "Open Domain 2 guide"],
-      ["/ccna/200-301-v2/study-guide/ip-routing/", "Open Domain 3 guide"]
+      ["/ccna/200-301-v2/study-guide/ip-routing/", "Open Domain 3 guide"],
+      ["/ccna/200-301-v2/study-guide/network-services-security/", "Open Domain 4 guide"]
     ];
     for (const [href, label] of publishedDomainGuideLinks) {
       if (!html.includes(`href="${href}"`) || !html.includes(label)) {
@@ -2138,6 +2161,66 @@ for (const file of htmlFiles) {
     }
   }
 
+  if (relative === "ccna/200-301-v2/study-guide/network-services-security/index.html") {
+    if (!/<h1>CCNA 200-301 v2\.0 Domain 4: Network Services and Security<\/h1>/.test(html)) {
+      fail(`${relative}: expected CCNA Domain 4 h1 is missing`);
+    }
+
+    if (!html.includes('data-print-guide')) {
+      fail(`${relative}: CCNA Domain 4 guide is missing the shared Print | Save control`);
+    }
+
+    const requiredSectionIds = [
+      "domain-map",
+      "service-security-model",
+      "aaa",
+      "file-transfer",
+      "nat-pat",
+      "dns",
+      "ipsec",
+      "ipv4-acls",
+      "dhcp-snooping",
+      "dai",
+      "storm-control",
+      "ra-guard",
+      "port-security",
+      "integrated-scenario",
+      "common-traps",
+      "rapid-review",
+      "official-references"
+    ];
+
+    for (const id of requiredSectionIds) {
+      if (!html.includes(`id="${id}"`)) {
+        fail(`${relative}: CCNA Domain 4 guide is missing section #${id}`);
+      }
+    }
+
+    const requiredMarkers = [
+      "Authentication, Authorization, and Accounting (AAA)",
+      "Terminal Access Controller Access-Control System Plus (TACACS+)",
+      "Remote Authentication Dial-In User Service (RADIUS)",
+      "SSH File Transfer Protocol (SFTP)",
+      "Secure Copy Protocol (SCP)",
+      "show ip nat translations",
+      "Encapsulating Security Payload (ESP)",
+      "Authentication Header (AH)",
+      "show ip access-lists",
+      "show ip dhcp snooping binding",
+      "show ip arp inspection",
+      "show storm-control",
+      "show ipv6 nd raguard policy",
+      "show port-security interface",
+      'href="/ccna/acronyms/"'
+    ];
+
+    for (const marker of requiredMarkers) {
+      if (!html.includes(marker)) {
+        fail(`${relative}: CCNA Domain 4 guide is missing ${marker}`);
+      }
+    }
+  }
+
   if (relative === "ccna/acronyms/index.html") {
     if (!html.includes("data-print-guide")) {
       fail(`${relative}: acronym reference is missing the shared Print | Save control`);
@@ -2148,8 +2231,8 @@ for (const file of htmlFiles) {
     }
 
     const acronymEntryCount = (html.match(/data-acronym-entry/g) || []).length;
-    if (acronymEntryCount < 60) {
-      fail(`${relative}: expected at least 60 acronym entries, found ${acronymEntryCount}`);
+    if (acronymEntryCount < 75) {
+      fail(`${relative}: expected at least 75 acronym entries, found ${acronymEntryCount}`);
     }
 
     const requiredAcronymMarkup = [
@@ -2165,7 +2248,10 @@ for (const file of htmlFiles) {
       "Virtual Router Redundancy Protocol",
       "Link Aggregation Control Protocol",
       "Received Signal Strength Indicator",
-      "Terminal Access Controller Access-Control System Plus"
+      "Terminal Access Controller Access-Control System Plus",
+      "Encapsulating Security Payload",
+      "Internet Key Exchange",
+      "Router Advertisement"
     ];
 
     for (const marker of requiredAcronymMarkup) {

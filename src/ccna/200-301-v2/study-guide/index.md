@@ -64,6 +64,9 @@ relatedLinks:
   - title: "Domain 3: IP Routing"
     url: /ccna/200-301-v2/study-guide/ip-routing/
     description: Interpret routing tables, troubleshoot static routes, configure single-area OSPFv2 and OSPFv3, and read HSRP and VRRP state.
+  - title: "Domain 4: Network Services and Security"
+    url: /ccna/200-301-v2/study-guide/network-services-security/
+    description: Configure AAA, secure file transfer, NAT and PAT, IPv4 ACLs, and Layer 2 security while diagnosing DNS and IPsec behavior.
   - title: Cisco IOS Verification and Troubleshooting Commands
     url: /ccna/commands/
     description: Choose the command that exposes the state you need to verify before changing configuration.
@@ -135,7 +138,7 @@ The same approach applies to switching and routing. If you configure a trunk, in
         <td data-label="What the work looks like">Interpret route selection, troubleshoot IPv4 and IPv6 static routes, configure single-area OSPFv2 and OSPFv3, and interpret first-hop redundancy state.</td>
       </tr>
       <tr>
-        <td data-label="Domain"><strong>4.0 Network Services and Security</strong></td>
+        <td data-label="Domain"><strong><a href="/ccna/200-301-v2/study-guide/network-services-security/">4.0 Network Services and Security</a></strong></td>
         <td data-label="Weight">20%</td>
         <td data-label="What the work looks like">Configure management authentication, secure file transfer, Network Address Translation (NAT) and Port Address Translation (PAT), IPv4 access control lists (ACLs), and Layer 2 protections while diagnosing Domain Name System (DNS) and virtual private network (VPN) behavior.</td>
       </tr>
@@ -224,6 +227,8 @@ The v2.0 blueprint includes:
 - Dynamic Host Configuration Protocol (DHCP) snooping; Address Resolution Protocol (ARP) validation through Dynamic ARP Inspection (DAI); storm control; Router Advertisement guard; and port security
 
 Study these by following traffic. An ACL is an ordered decision applied to traffic at a specific interface and direction. NAT changes address representation at a translation boundary. DHCP snooping builds trust around address assignment. Dynamic ARP Inspection uses trusted information to reject invalid ARP behavior. The control makes more sense when you can describe the packet or frame it is evaluating.
+
+Read the full [Domain 4: Network Services and Security guide](/ccna/200-301-v2/study-guide/network-services-security/) for local and centralized AAA, secure file transfer, NAT/PAT, DNS record troubleshooting, IPsec VPN concepts, IPv4 ACLs, DHCP snooping, Dynamic ARP Inspection, storm control, RA Guard, and port security.
 
 The [Common Ports and Protocols Reference](/ports-protocols/) is useful for services such as DNS, TACACS+, RADIUS, SSH-based file transfer, and other management traffic.
 

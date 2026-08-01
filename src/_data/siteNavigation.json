@@ -163,6 +163,10 @@
             {
               "label": "Domain 3: Routing",
               "url": "/ccna/200-301-v2/study-guide/ip-routing/"
+            },
+            {
+              "label": "Domain 4: Services & Security",
+              "url": "/ccna/200-301-v2/study-guide/network-services-security/"
             }
           ]
         },
