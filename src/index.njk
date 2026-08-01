@@ -6,6 +6,7 @@ permalink: /
 ---
 {% set securityQuiz = quizCatalog.byTestId["SEC-701"] %}
 {% set networkQuiz = quizCatalog.byTestId["NET-009"] %}
+{% set ccnaQuiz = quizCatalog.byTestId["CCNA-301-V2"] %}
 
 <section class="hero">
   <div class="page-shell hero__inner">
@@ -18,6 +19,7 @@ permalink: /
     <div class="button-row">
       <a class="button" href="/security-plus/sy0-701/practice-test/">Start Security+ practice test</a>
       <a class="button button--secondary" href="/network-plus/n10-009/practice-test/">Start Network+ practice test</a>
+      <a class="button button--secondary" href="/ccna/200-301-v2/practice-test/">Start CCNA v2.0 practice test</a>
     </div>
   </div>
 </section>
@@ -28,7 +30,7 @@ permalink: /
       <p class="eyebrow">Certification resources</p>
       <h2>Choose an exam and start studying</h2>
       <p>
-        Security+ and Network+ both include version-specific study resources and randomized practice tests. Shared references connect topics that appear across both exams.
+        Security+, Network+, and CCNA include version-specific study resources and randomized practice tests. Shared references connect networking and security topics that appear across the exams.
       </p>
     </div>
 
@@ -48,6 +50,13 @@ permalink: /
       </article>
 
       <article class="card">
+        <p class="card__meta">Practice and study</p>
+        <h3>Cisco CCNA 200-301 v2.0</h3>
+        <p>Use the {{ ccnaQuiz.availableQuestionCount }}-question bank, five domain guides, an IOS command reference, acronyms, subnetting tools, and detailed answer explanations.</p>
+        <a class="card__link" href="/ccna/">Explore CCNA resources</a>
+      </article>
+
+      <article class="card">
         <p class="card__meta">Shared references</p>
         <h3>Networking references</h3>
         <p>Search common ports and protocols, or calculate IPv4 subnet boundaries, host ranges, masks, and address status.</p>
@@ -62,9 +71,9 @@ permalink: /
   <div class="page-shell">
     <div class="section-heading">
       <p class="eyebrow">Explore another certification path</p>
-      <h2 id="additional-certification-paths-heading">See what comes after the foundation</h2>
+      <h2 id="additional-certification-paths-heading">Explore the CISSP path</h2>
       <p>
-        These overviews explain the scope and study transition before dedicated Cert Happens practice banks are available.
+        See how CISSP broadens the perspective from individual controls and systems to organization-wide security, governance, and risk decisions.
       </p>
     </div>
 
@@ -76,12 +85,6 @@ permalink: /
         <a class="card__link" href="/cissp/">Explore the CISSP overview</a>
       </article>
 
-      <article class="card">
-        <p class="card__meta">CCNA v2.0 planning</p>
-        <h3>CCNA 200-301</h3>
-        <p>Compare CCNA with Network+, understand the February 2027 refresh, and see why configuration and verification practice matter.</p>
-        <a class="card__link" href="/ccna/">Explore the CCNA overview</a>
-      </article>
     </div>
   </div>
 </section>

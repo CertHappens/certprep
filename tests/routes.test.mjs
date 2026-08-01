@@ -49,6 +49,23 @@ test("question paths support another certification route", () => {
   );
 });
 
+test("question paths support the CCNA v2.0 route", () => {
+  const ccnaPath = "/ccna/200-301-v2/practice-test";
+
+  assert.equal(
+    buildQuestionPath(1, 50, ccnaPath),
+    "/ccna/200-301-v2/practice-test/question/1/",
+  );
+  assert.equal(
+    parseQuestionPosition(
+      "/ccna/200-301-v2/practice-test/question/50/",
+      50,
+      ccnaPath,
+    ),
+    50,
+  );
+});
+
 test("practice-test paths are normalized and reject URL extras", () => {
   assert.equal(
     normalizePracticeTestPath("network-plus/n10-009/practice-test/"),

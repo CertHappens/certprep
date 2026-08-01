@@ -105,13 +105,22 @@ class CcnaPreBatchFoundationTests(unittest.TestCase):
             self.assertEqual(len(errors), 1)
             self.assertIn("unknown question IDs", errors[0])
 
-    def test_ccna_is_not_registered_in_the_public_quiz_catalog(self) -> None:
+    def test_ccna_is_registered_in_the_public_quiz_catalog(self) -> None:
         catalog = json.loads(
             (PROJECT_ROOT / "config" / "quiz-catalog.json").read_text(encoding="utf-8")
         )
-        registered = {quiz["slug"] for quiz in catalog["quizzes"]}
-        self.assertNotIn("ccna/200-301-v2", registered)
-        self.assertEqual(len(registered), 2)
+        registered = {quiz["slug"]: quiz for quiz in catalog["quizzes"]}
+        self.assertIn("ccna/200-301-v2", registered)
+        self.assertEqual(len(registered), 3)
+
+        ccna = registered["ccna/200-301-v2"]
+        self.assertEqual(ccna["questions_csv"], "data/ccna/200-301-v2/questions.csv")
+        self.assertEqual(ccna["objective_map_csv"], "data/ccna/200-301-v2/objective-map.csv")
+        self.assertEqual(ccna["stimuli_json"], "data/ccna/200-301-v2/stimuli.json")
+        self.assertEqual(ccna["public_base_path"], "/quiz-data/ccna/200-301-v2")
+        self.assertEqual(ccna["practice_test_path"], "/ccna/200-301-v2/practice-test")
+        self.assertEqual(ccna["question_count_options"], [10, 20, 30, 50])
+        self.assertEqual(ccna["preferred_default_question_count"], 30)
 
 
 if __name__ == "__main__":

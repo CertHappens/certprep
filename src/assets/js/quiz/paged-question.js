@@ -107,8 +107,8 @@ function updatePagedRouteIdentity(root, position) {
   }
 
   document.title = document.title.replace(
-    /Security\+ SY0-701 Practice Test Question \d+/,
-    `Security+ SY0-701 Practice Test Question ${position}`,
+    /Practice Test Question \d+/,
+    `Practice Test Question ${position}`,
   );
 }
 

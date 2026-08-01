@@ -133,8 +133,12 @@
           ]
         },
         {
-          "label": "Subnetting",
+          "label": "Practice",
           "links": [
+            {
+              "label": "200-301 v2.0 practice test",
+              "url": "/ccna/200-301-v2/practice-test/"
+            },
             {
               "label": "IPv4 subnetting reference",
               "url": "/network-plus/n10-009/study-guide/ipv4-subnetting/"

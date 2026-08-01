@@ -30,6 +30,22 @@
         50
       ],
       "preferred_default_question_count": 20
+    },
+    {
+      "slug": "ccna/200-301-v2",
+      "questions_csv": "data/ccna/200-301-v2/questions.csv",
+      "objective_map_csv": "data/ccna/200-301-v2/objective-map.csv",
+      "stimuli_json": "data/ccna/200-301-v2/stimuli.json",
+      "output_directory": "src/quiz-data/ccna/200-301-v2",
+      "public_base_path": "/quiz-data/ccna/200-301-v2",
+      "practice_test_path": "/ccna/200-301-v2/practice-test",
+      "question_count_options": [
+        10,
+        20,
+        30,
+        50
+      ],
+      "preferred_default_question_count": 30
     }
   ]
 }

@@ -246,9 +246,9 @@
     "name": "CCNA",
     "fullName": "Cisco Certified Network Associate",
     "provider": "Cisco",
-    "eyebrow": "CCNA study resources",
+    "eyebrow": "CCNA practice and study resources",
     "title": "CCNA 200-301 Study Resources",
-    "lede": "Study CCNA with the v2.0 guide, all five domain walkthroughs, IOS verification reference, subnetting tools, and supporting networking references. Exam-version details are included below so you can match the right blueprint to your test date.",
+    "lede": "Practice with randomized v2.0 questions, work through all five domain guides, review Cisco IOS verification commands, and reinforce subnetting and protocol knowledge. Check the exam-version guidance below so your preparation matches your test date.",
     "sourceReviewed": "2026-08-01",
     "resourcesFirst": true,
     "status": {
@@ -456,10 +456,15 @@
       ]
     },
     "currentResources": {
-      "eyebrow": "Study resources",
+      "eyebrow": "Practice and study",
       "heading": "Start studying CCNA",
-      "intro": "Use the CCNA-specific guides first, then reinforce subnetting and protocol knowledge with the shared networking references. These are published resources you can use now.",
+      "intro": "Start with a randomized practice session or the five-domain guide, then use the command, acronym, subnetting, and protocol references to investigate weak areas.",
       "links": [
+        {
+          "title": "CCNA 200-301 v2.0 practice test",
+          "url": "/ccna/200-301-v2/practice-test/",
+          "description": "Choose a randomized 10-, 20-, 30-, or 50-question session from the approved v2.0 bank, including practical command output, configuration, log, and table-based questions."
+        },
         {
           "title": "CCNA 200-301 v2.0 study guide",
           "url": "/ccna/200-301-v2/study-guide/",
