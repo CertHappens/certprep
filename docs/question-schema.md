@@ -1,57 +1,47 @@
-# CompTIA Network+ NET-009 Question Schema
+# Cert Happens Question Bank Schema
 
 ## Authority and scope
 
-- Certification: `CompTIA Network+`
-- Project test ID: `NET-009`
-- Exam version: `N10-009`
-- Objectives source: CompTIA Network+ N10-009 V9 Certification Exam Objectives
-- Objectives document version: `6.0`
-- Numbered objectives: `25`
-- Domain weights: Networking Concepts 23%, Network Implementation 20%, Network Operations 19%, Network Security 14%, Network Troubleshooting 24%.
+This document is the shared authoring and lifecycle contract for every Cert Happens question bank. Exam-specific identifiers, objectives, and source registers live in each bank directory, but the CSV columns, review states, answer-key rules, stimulus contract, and retirement behavior are shared.
 
-The cover's `V9` label is retained in the source title. The bank stores `N10-009` in `exam_version` because that is the required exam code, and stores `6.0` in `objectives_version`.
+Question content must be original. Do not copy, closely paraphrase, reconstruct, or adapt actual exam questions, vendor course questions, commercial practice questions, recalled exam content, or dumps. Official objectives and primary technical sources define scope and facts, not question wording.
 
-Question content must be original. Do not copy, closely paraphrase, reconstruct, or adapt actual exam questions, CertMaster questions, CompTIA social-media questions, commercial practice questions, recalled exam content, or dumps.
+## Registered authoring authorities
 
-## Repository paths
+| Project test ID | Certification | Exam version | Objectives version | Data directory | Question ID | Batch ID | Runtime status |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| `SEC-701` | CompTIA Security+ | `SY0-701` | `6.0` | `data/security-plus/sec-701/` | `SEC701-0000001` | `SEC701-BATCH-001` | Registered in the quiz catalog |
+| `NET-009` | CompTIA Network+ | `N10-009` | `6.0` | `data/network-plus/n10-009/` | `NET009-0000001` | `NET009-BATCH-001` | Registered in the quiz catalog |
+| `CCNA-301-V2` | Cisco CCNA | `200-301 v2.0` | `2.0` | `data/ccna/200-301-v2/` | `CCNA301V2-0000001` | `CCNA301V2-BATCH-001` | Authoring-ready; not yet registered |
+
+A later major exam version receives a new namespace so question history, reports, routes, and analytics remain unambiguous. Permanent question IDs do not encode domains or objectives because mappings can be corrected without changing the ID. Sequence numbers are never reused.
+
+## Repository structure
+
+Each bank uses:
 
 ```text
-data/
-  network-plus/
-    n10-009/
-      draft-questions.csv
-      objective-map.csv
-      questions.csv
-      retired-questions.csv
-      source-register.csv
-
-docs/
-  blank-question-template.csv
-  question-schema.md
-  validation-report.md
-
-samples/
-  batch-###-review.md
-  batch-###-coverage-report.csv
-  cumulative-coverage-report.csv
-  approval-summary.md
-
-scripts/
-  validate_question_bank.py
+data/<certification>/<exam-version>/
+  draft-questions.csv
+  objective-map.csv
+  questions.csv
+  retired-questions.csv
+  source-register.csv
+  stimuli.json              # present when the bank uses or pre-registers stimuli
 ```
 
-Production reads only approved rows from `data/network-plus/n10-009/questions.csv`.
+Shared authority and tools:
 
-## Permanent identifiers
+```text
+docs/blank-question-template.csv
+docs/blank-stimuli-template.json
+docs/question-schema.md
+docs/question-stimulus-schema.md
+scripts/validate_question_bank.py
+scripts/build_quiz_data.py
+```
 
-- Project test ID: `NET-009`
-- Question ID example: `NET009-0000001`
-- Regex: `^NET009-\d{7}$`
-- Batch ID example: `NET009-BATCH-001`
-- Sequence numbers are globally unique within the N10-009 bank and are never reused.
-- IDs do not encode a domain or objective because mappings can be corrected without changing permanent links or analytics history.
-- A future exam receives a new namespace, even when an older concept is independently rewritten.
+Only catalog-registered banks are converted into public runtime JSON. Validation may recognize an authoring-only bank before public quiz registration.
 
 ## CSV rules
 
@@ -60,7 +50,7 @@ Production reads only approved rows from `data/network-plus/n10-009/questions.cs
 - Dates use `YYYY-MM-DD`.
 - Multi-value fields use a pipe with no surrounding spaces.
 - Store plain text rather than HTML or Markdown in question and explanation fields.
-- Stable answer keys are `A`, `B`, `C`, and `D`. Display shuffling must preserve the stored key, text, and explanation.
+- Stable answer keys are `A`, `B`, `C`, and `D`. Display shuffling must preserve the stored key, answer text, and explanation.
 - Do not use answer-position wording such as `both A and C`, `the choice above`, or `the previous answer`.
 
 ## Question columns
@@ -123,32 +113,42 @@ replacement_question_id
 
 `single_choice` and `best_available` require exactly one correct stored key. `multi_select` requires two or more sorted, unique pipe-delimited keys and an instruction stating exactly how many answers to select. `best_available` requires an instruction identifying the stated decision criterion.
 
-## Temporary accelerated staging phase
+## Objective and source authority
 
-Beginning with Batch 001, the repository owner authorized an accelerated early-build workflow for staging. New questions may be internally reviewed, validated, marked `approved`, and written directly to `questions.csv`. The normal draft, review, approval, and retirement structure remains in place and can be reactivated when the bank grows or when the owner ends the accelerated phase. Reported issues are corrected through normal versioning or retirement rules.
+- Every question maps to one objective ID present in that bank's `objective-map.csv`.
+- `domain_id`, `domain_name`, and `objective_text` must exactly match the selected objective-map row.
+- Prefer the most specific published objective or subobjective that fits the tested task.
+- `source_ids` must resolve to rows in that bank's `source-register.csv`.
+- Use official vendor documentation, standards bodies, and other primary sources wherever practical.
+- `reference_notes` should identify the precise fact, command behavior, table, section, or constraint used to review the item.
 
-## Review workflow
+## Lifecycle workflow
 
-1. Write new records in `draft-questions.csv`.
-2. Set completed records to `review`, populate `date_reviewed` and `reviewer`, and run validation.
-3. Perform technical, objective-mapping, ambiguity, editorial, answer-choice, source, and duplication reviews.
-4. Resolve all quality flags.
-5. After owner approval, set rows to `approved` and move them atomically to `questions.csv`.
+1. Author new records in `draft-questions.csv`, unless the repository owner has authorized accelerated staging approval for that bank.
+2. Set completed draft records to `review`, populate `date_reviewed` and `reviewer`, and run validation.
+3. Perform technical, objective-mapping, ambiguity, editorial, answer-choice, source, duplication, and stimulus reviews.
+4. Resolve every quality flag.
+5. After approval, set the row to `approved` and move it atomically to `questions.csv`.
 6. Move withdrawn public questions to `retired-questions.csv` with retirement metadata.
 7. Never reuse a retired ID. A replacement receives a new ID.
 8. Minor wording or explanation corrections may retain the ID and increment `question_version`. A material change to the tested concept, correct answer, scenario facts, or objective mapping normally receives a new ID.
 
-## First 24-question batch target
+Approved rows must have a review date and reviewer and must not retain quality flags. Production runtime data is built only from approved rows in catalog-registered `questions.csv` files.
 
-- Domain allocation: 1.0 = 6, 2.0 = 5, 3.0 = 4, 4.0 = 3, 5.0 = 6.
-- Difficulty: 6 easy, 12 medium, 6 hard.
-- Correct stored answers: A = 6, B = 6, C = 6, D = 6, when correctness permits.
-- Initial type target: 20 single choice, 2 multi-select, 2 best available.
-- Initial style target: 6 direct, 12 scenario, 4 comparison, 2 calculation.
-- New rows remain in review status until explicitly approved.
-- Subnetting and other arithmetic must be checked programmatically and explained step by step.
+## CCNA 200-301 v2.0 authoring authority
 
+The CCNA map contains all 29 published numbered objectives plus all 30 lettered subobjectives, for 59 objective IDs across the five official weighted domains. Questions should use the most specific applicable ID. A parent objective may be used when it has no lettered children or when one question genuinely evaluates the umbrella task across multiple children.
+
+CCNA identifiers are enforced as:
+
+- Test ID: `CCNA-301-V2`
+- Exam version: `200-301 v2.0`
+- Objectives version: `2.0`
+- Question regex: `^CCNA301V2-\d{7}$`
+- Batch regex: `^CCNA301V2-BATCH-\d{3}$`
+
+The CCNA directory is intentionally valid with header-only lifecycle CSVs and an empty stimulus registry before Batch 001. Do not add CCNA to `config/quiz-catalog.json`, publish a practice-test route, or claim that a public bank exists until approved rows are present and the full staging workflow passes.
 
 ## Optional read-only stimuli
 
-Command output, configuration fragments, logs, and evidence tables are stored outside the CSV in an optional per-exam stimulus JSON sidecar. This keeps the existing lifecycle columns stable and prevents multiline or nested evidence from being compressed into spreadsheet cells. See `docs/question-stimulus-schema.md`.
+Command output, configuration fragments, logs, and evidence tables live in the optional per-exam JSON sidecar rather than multiline CSV cells. The normal validator checks configured authoring sidecars even before a bank is added to the public quiz catalog. Catalog-registered banks are validated again while runtime JSON is built. See `docs/question-stimulus-schema.md`.

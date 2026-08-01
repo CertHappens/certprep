@@ -17,7 +17,7 @@ Add an optional `stimuli_json` path to an exam entry in `config/quiz-catalog.jso
 }
 ```
 
-If `stimuli_json` is omitted, the quiz builds exactly as it does today.
+If `stimuli_json` is omitted, the quiz builds exactly as it does today. An authoring-only bank may still declare its sidecar in the validator configuration so `npm run validate:data` checks it before public quiz registration.
 
 ## Registry shape
 
