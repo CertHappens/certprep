@@ -2330,8 +2330,12 @@ for (const file of htmlFiles) {
       "YAML Ain't Markup Language"
     ];
 
+    const normalizedAcronymHtml = html
+      .replaceAll("&#39;", "'")
+      .replaceAll("&apos;", "'");
+
     for (const marker of requiredAcronymMarkup) {
-      if (!html.includes(marker)) {
+      if (!normalizedAcronymHtml.includes(marker)) {
         fail(`${relative}: acronym reference is missing ${marker}`);
       }
     }
