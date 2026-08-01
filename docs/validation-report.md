@@ -1,40 +1,34 @@
 # Validation Report
 
-- Run date: 2026-07-27
-- Question rows validated: 225
-- Revised question rows: 37
+- Run date: 2026-08-01
+- Approved question rows validated: 250
+- Batch 011 question rows: 25
+- Batch 011 stimulus entries: 25
 - Errors: 0
 - Warnings: 0
-- Information: 1
 
-## Information
+## Batch 011 checks
 
-- `data/security-plus/sec-701/questions.csv`: stored correct-key inclusion: A=58, B=58, C=58, D=58
-
-## Revision checks
-
-- Revised IDs retain their permanent question IDs: yes
-- Revised rows increment `question_version`: yes
-- Revised rows retain original `date_added`: yes
-- Revised rows use `date_modified = 2026-07-27`: yes
-- Revised rows use `date_reviewed = 2026-07-27`: yes
-- Revised rows remain approved: yes
-- Correct-answer keys changed: none
-- Domain or objective assignments changed: none
+- Permanent IDs: `SEC701-0000226` through `SEC701-0000250`
+- Every Batch 011 question has one stimulus: yes
+- Unknown stimulus question IDs: none
+- Stimulus schema version: 1
+- Supported stimulus forms only: yes
+- Table column and row contracts valid: yes
+- Preformatted variants and content limits valid: yes
+- Domain allocation: 3 / 5 / 5 / 7 / 5
+- Final cumulative domain distribution: 30 / 55 / 45 / 70 / 50
+- Final cumulative domain percentages: 12% / 22% / 18% / 28% / 20%
+- Difficulty distribution: easy 5, medium 14, hard 6
+- Question-type distribution: single_choice 9, multi_select 7, best_available 9
+- Batch correct-key inclusion: A 8, B 8, C 8, D 8
+- Final correct-key inclusion: A 66, B 66, C 66, D 66
 - Duplicate question IDs: none
 - Exact duplicate stems: none
 - Duplicate concept keys: none
 - Exact duplicate answer choices: none
 - Reordered-clause duplicate answer choices: none
-- High-similarity near-duplicate stems: none
+- High-similarity stem conflicts: none
+- Severe correct-answer length clues in Batch 011: none
 
-## Answer-length audit
-
-- Correct answer uniquely longest before: 123
-- Correct answer uniquely longest after: 115
-- Severe length flags before: 82
-- Severe length flags after: 48
-- Severe length flags remaining among revised questions: 0
-
-Automated validation does not replace staging tests, learner feedback, or
-periodic technical review.
+The overlay adds `stimuli_json` to the Security+ quiz-catalog entry so the public data builder validates and publishes the sidecar. Automated validation does not replace staging tests, learner feedback, or periodic technical review.
