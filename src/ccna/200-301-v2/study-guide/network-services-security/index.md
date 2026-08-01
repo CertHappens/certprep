@@ -8,7 +8,7 @@ printable: true
 printTitle: "CCNA 200-301 v2.0 Domain 4: Network Services and Security"
 author: certHappens
 datePublished: 2026-07-31
-dateModified: 2026-07-31
+dateModified: 2026-08-01
 articleSection: CCNA 200-301 v2.0 Domain 4
 eyebrow: CCNA v2.0 domain 4 guide
 lede: Secure management first, follow traffic through services and policy, and verify every control from the state it is supposed to create.
@@ -75,6 +75,9 @@ relatedLinks:
   - title: "Domain 3: IP Routing"
     url: /ccna/200-301-v2/study-guide/ip-routing/
     description: Review route selection, static routing, OSPF, and first-hop redundancy before tracing service and security behavior across the path.
+  - title: "Domain 5: AI, Network Operations, and Management"
+    url: /ccna/200-301-v2/study-guide/ai-network-operations-management/
+    description: Continue from secure device management into AI-assisted operations, management approaches, SNMP, Ansible, and syslog evidence.
   - title: Cisco IOS Verification and Troubleshooting Commands
     url: /ccna/commands/
     description: Choose ACL, NAT, interface, logging, and path-testing commands based on the state you need to prove.
