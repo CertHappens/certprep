@@ -38,12 +38,24 @@ test("CCNA practice is discoverable from navigation, homepage, and hub", async (
   const navigation = JSON.parse(await readSource("src/_data/siteNavigation.json"));
   const ccnaNavigation = navigation.primary.find((item) => item.label === "CCNA");
   const practice = ccnaNavigation.groups.find((group) => group.label === "Practice");
+  const referencesAndTools = ccnaNavigation.groups.find(
+    (group) => group.label === "References and tools",
+  );
   const homepage = await readSource("src/index.njk");
   const hubs = JSON.parse(await readSource("src/_data/examHubs.json"));
 
-  assert.equal(
-    practice.links[0].url,
-    "/ccna/200-301-v2/practice-test/",
+  assert.deepEqual(practice.links, [
+    {
+      label: "200-301 v2.0 practice test",
+      url: "/ccna/200-301-v2/practice-test/",
+    },
+  ]);
+  assert.deepEqual(
+    referencesAndTools.links.slice(-2).map((link) => link.url),
+    [
+      "/network-plus/n10-009/study-guide/ipv4-subnetting/",
+      "/tools/subnet-calculator/",
+    ],
   );
   assert.match(homepage, /quizCatalog\.byTestId\["CCNA-301-V2"\]/);
   assert.match(homepage, /Start CCNA v2\.0 practice test/);

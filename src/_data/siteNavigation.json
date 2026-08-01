@@ -138,14 +138,6 @@
             {
               "label": "200-301 v2.0 practice test",
               "url": "/ccna/200-301-v2/practice-test/"
-            },
-            {
-              "label": "IPv4 subnetting reference",
-              "url": "/network-plus/n10-009/study-guide/ipv4-subnetting/"
-            },
-            {
-              "label": "IPv4 subnet calculator",
-              "url": "/tools/subnet-calculator/"
             }
           ]
         },
@@ -179,7 +171,7 @@
           ]
         },
         {
-          "label": "References",
+          "label": "References and tools",
           "links": [
             {
               "label": "Acronyms and terms",
@@ -192,6 +184,14 @@
             {
               "label": "Ports and protocols",
               "url": "/ports-protocols/"
+            },
+            {
+              "label": "IPv4 subnetting reference",
+              "url": "/network-plus/n10-009/study-guide/ipv4-subnetting/"
+            },
+            {
+              "label": "IPv4 subnet calculator",
+              "url": "/tools/subnet-calculator/"
             }
           ]
         }

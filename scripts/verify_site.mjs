@@ -1231,7 +1231,7 @@ for (const file of htmlFiles) {
     ["ccna-navigation-group-1", "Overview"],
     ["ccna-navigation-group-2", "Practice"],
     ["ccna-navigation-group-3", "Study"],
-    ["ccna-navigation-group-4", "References"]
+    ["ccna-navigation-group-4", "References and tools"]
   ];
 
   for (const [id, label] of expectedCcnaNavigationGroups) {
