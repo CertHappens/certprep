@@ -8,6 +8,7 @@ printable: true
 printTitle: IPv4 Subnetting Reference for Network+
 author: certHappens
 datePublished: 2026-07-26
+dateModified: 2026-07-31
 articleSection: Network+ N10-009 IPv4 Subnetting
 eyebrow: Network+ subnetting reference
 lede: Build subnetting answers from a repeatable process, then use the shortcuts that make network boundaries and host counts faster to recognize.
@@ -84,7 +85,7 @@ That process works for unfamiliar addresses because it does not depend on recogn
 
 <h2 id="core-model">The 32-bit subnetting model</h2>
 
-An IPv4 address contains 32 bits arranged as four 8-bit octets. CIDR notation places a slash and prefix length after the address. The prefix length tells you how many leading bits identify the network.
+An IPv4 address contains 32 bits arranged as four 8-bit octets. Classless Inter-Domain Routing (CIDR) notation places a slash and prefix length after the address. The prefix length tells you how many leading bits identify the network.
 
 For `192.168.40.77/26`:
 
@@ -137,7 +138,7 @@ The table combines masks, address counts, and familiar uses. Large blocks are in
       <tr><td>/28</td><td>255.255.255.240</td><td>16</td><td>14</td><td>Fourth-octet block size 16</td></tr>
       <tr><td>/29</td><td>255.255.255.248</td><td>8</td><td>6</td><td>Fourth-octet block size 8</td></tr>
       <tr><td>/30</td><td>255.255.255.252</td><td>4</td><td>2</td><td>Traditional small point-to-point subnet</td></tr>
-      <tr><td>/31</td><td>255.255.255.254</td><td>2</td><td>2 on supported point-to-point links</td><td>RFC 3021 endpoint pair, no directed broadcast</td></tr>
+      <tr><td>/31</td><td>255.255.255.254</td><td>2</td><td>2 on supported point-to-point links</td><td>Request for Comments (RFC) 3021 endpoint pair, no directed broadcast</td></tr>
       <tr><td>/32</td><td>255.255.255.255</td><td>1</td><td>1</td><td>One host address or host route</td></tr>
     </tbody>
   </table>
@@ -265,9 +266,9 @@ Subnet math still works inside special ranges, but the address category changes 
       <tr><td>10.0.0.0/8</td><td>Private</td><td>RFC 1918 private-use space</td></tr>
       <tr><td>172.16.0.0/12</td><td>Private</td><td>Private range ends at 172.31.255.255</td></tr>
       <tr><td>192.168.0.0/16</td><td>Private</td><td>Common home and small-office private space</td></tr>
-      <tr><td>100.64.0.0/10</td><td>Shared address space</td><td>Commonly associated with carrier-grade NAT, not RFC 1918</td></tr>
+      <tr><td>100.64.0.0/10</td><td>Shared address space</td><td>Commonly associated with carrier-grade Network Address Translation (NAT), not Request for Comments (RFC) 1918</td></tr>
       <tr><td>127.0.0.0/8</td><td>Loopback</td><td>Traffic remains on the local host</td></tr>
-      <tr><td>169.254.0.0/16</td><td>IPv4 link-local</td><td>Often called APIPA in Windows; DHCP failure is a common clue</td></tr>
+      <tr><td>169.254.0.0/16</td><td>IPv4 link-local</td><td>Often called Automatic Private IP Addressing (APIPA) in Windows; Dynamic Host Configuration Protocol (DHCP) failure is a common clue</td></tr>
       <tr><td>192.0.2.0/24</td><td>Documentation</td><td>TEST-NET-1 for examples</td></tr>
       <tr><td>198.51.100.0/24</td><td>Documentation</td><td>TEST-NET-2 for examples</td></tr>
       <tr><td>203.0.113.0/24</td><td>Documentation</td><td>TEST-NET-3 for examples</td></tr>
@@ -296,7 +297,7 @@ For `203.0.113.10/31`:
 - Total endpoint addresses: 2
 - Directed broadcast: none for the RFC 3021 point-to-point design
 
-Use `/31` only when the scenario and devices support point-to-point behavior. A normal Ethernet LAN with several hosts still needs an appropriate multi-access subnet.
+Use `/31` only when the scenario and devices support point-to-point behavior. A normal Ethernet local area network (LAN) with several hosts still needs an appropriate multi-access subnet.
 
 <h3>/32 host routes</h3>
 
@@ -355,7 +356,7 @@ A segment requires 120 usable addresses.
 
 The smallest suitable answer is `/25`, assuming the stated 120 includes every address the design needs.
 
-<h2 id="vlsm">VLSM allocation example</h2>
+<h2 id="vlsm">Variable-length subnet masking (VLSM) allocation example</h2>
 
 Variable-length subnet masking lets one parent block use several prefix sizes. Allocate the largest requirement first so small early choices do not fragment the remaining space.
 

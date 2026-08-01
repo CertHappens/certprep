@@ -8,7 +8,7 @@ printable: true
 printTitle: "Network+ N10-009 Domain 1: Networking Concepts"
 author: certHappens
 datePublished: 2026-07-25
-dateModified: 2026-07-27
+dateModified: 2026-07-31
 articleSection: Network+ N10-009 Domain 1
 eyebrow: Network+ domain 1 guide
 lede: Build the mental model that lets you trace traffic, choose the right device or service, and recognize where a network problem begins.
@@ -87,7 +87,7 @@ relatedLinks:
 ---
 Domain 1 accounts for 23% of the N10-009 exam, but its real importance is larger than the percentage suggests. Addressing, devices, protocols, media, and traffic flow also appear inside implementation, security, operations, and troubleshooting questions.
 
-A scenario may begin with an application symptom and end with a Layer 1 cause. A user cannot reach a cloud service. The client has an address, but the prefix is wrong. The default gateway is therefore treated as local, ARP never finds it, and the session never reaches the router. Solving that question requires more than naming a subnet mask. You must follow the traffic and identify the first decision that fails.
+A scenario may begin with an application symptom and end with a Layer 1 cause. A user cannot reach a cloud service. The client has an address, but the prefix is wrong. The default gateway is therefore treated as local, Address Resolution Protocol (ARP) never finds it, and the session never reaches the router. Solving that question requires more than naming a subnet mask. You must follow the traffic and identify the first decision that fails.
 
 Use this guide to build that kind of reasoning. The official objectives remain the coverage checklist. The explanations, examples, and comparisons below are designed to help you distinguish answers that look similar at first glance.
 
@@ -121,7 +121,7 @@ Use this guide to build that kind of reasoning. The official objectives remain t
 
 These objectives overlap. A cloud subnet still uses addressing and routing. An SD-WAN edge still forwards packets. A VXLAN overlay still depends on a working underlay. Keep connecting each new term to the same traffic-flow model.
 
-<h2 id="osi-model">OSI model and traffic flow</h2>
+<h2 id="osi-model">Open Systems Interconnection (OSI) model and traffic flow</h2>
 
 The OSI model gives you seven places to organize a network function or symptom. Real implementations may cross layer boundaries, yet the model remains useful for troubleshooting.
 
@@ -141,12 +141,12 @@ It maps to Application, Presentation, Session, Transport, Network, Data Link, an
       </tr>
     </thead>
     <tbody>
-      <tr><td><strong>7 Application</strong></td><td>Network services used by applications, such as DNS, HTTP, email, and file sharing</td><td>Service-specific error, wrong DNS answer, failed authentication, or unavailable application</td></tr>
+      <tr><td><strong>7 Application</strong></td><td>Network services used by applications, such as Domain Name System (DNS), Hypertext Transfer Protocol (HTTP), email, and file sharing</td><td>Service-specific error, wrong DNS answer, failed authentication, or unavailable application</td></tr>
       <tr><td><strong>6 Presentation</strong></td><td>Representation, encoding, compression, encryption, and format translation</td><td>Certificate, encryption, character encoding, compression, or incompatible format issue</td></tr>
       <tr><td><strong>5 Session</strong></td><td>Establishing, maintaining, and ending exchanges between applications</td><td>Session setup, persistence, timeout, or reconnection behavior</td></tr>
-      <tr><td><strong>4 Transport</strong></td><td>TCP and UDP delivery, ports, segmentation, reliability, and flow behavior</td><td>Failed TCP handshake, blocked destination port, retransmissions, or UDP loss</td></tr>
+      <tr><td><strong>4 Transport</strong></td><td>Transmission Control Protocol (TCP) and User Datagram Protocol (UDP) delivery, ports, segmentation, reliability, and flow behavior</td><td>Failed TCP handshake, blocked destination port, retransmissions, or UDP loss</td></tr>
       <tr><td><strong>3 Network</strong></td><td>Logical addressing and forwarding between IP networks</td><td>Incorrect prefix, gateway, route, TTL, hop limit, or address translation</td></tr>
-      <tr><td><strong>2 Data Link</strong></td><td>Frames, MAC addresses, switching, VLANs, and local-link delivery</td><td>Wrong VLAN, loop, MAC-table issue, frame error, or duplex problem</td></tr>
+      <tr><td><strong>2 Data Link</strong></td><td>Frames, Media Access Control (MAC) addresses, switching, virtual local area networks (VLANs), and local-link delivery</td><td>Wrong VLAN, loop, MAC-table issue, frame error, or duplex problem</td></tr>
       <tr><td><strong>1 Physical</strong></td><td>Signals, bits, media, connectors, transceivers, and radio energy</td><td>No link light, damaged cable, attenuation, interference, or mismatched optic</td></tr>
     </tbody>
   </table>
@@ -189,15 +189,15 @@ Physical and virtual appliances can perform the same network role. The implement
       <tr><td><strong>Router</strong></td><td>Selects a path between IP networks</td><td>Routing table, next hop, prefix, metric, or WAN connection</td></tr>
       <tr><td><strong>Switch</strong></td><td>Forwards frames inside a Layer 2 domain</td><td>MAC address table, access port, trunk, VLAN, or local switching</td></tr>
       <tr><td><strong>Firewall</strong></td><td>Permits or denies traffic according to security policy</td><td>Source, destination, service, application, state, zone, or inspection rule</td></tr>
-      <tr><td><strong>IDS</strong></td><td>Detects and reports suspicious activity</td><td>Alerting without being placed inline to block the traffic</td></tr>
-      <tr><td><strong>IPS</strong></td><td>Detects and can stop suspicious traffic inline</td><td>Prevention, reset, drop, or active blocking requirement</td></tr>
+      <tr><td><strong>Intrusion detection system (IDS)</strong></td><td>Detects and reports suspicious activity</td><td>Alerting without being placed inline to block the traffic</td></tr>
+      <tr><td><strong>Intrusion prevention system (IPS)</strong></td><td>Detects and can stop suspicious traffic inline</td><td>Prevention, reset, drop, or active blocking requirement</td></tr>
       <tr><td><strong>Load balancer</strong></td><td>Distributes connections across available service instances</td><td>Health checks, virtual service address, session distribution, or high availability</td></tr>
       <tr><td><strong>Proxy</strong></td><td>Creates a connection on behalf of a client or server</td><td>Application-aware intermediary, caching, filtering, or hiding an endpoint</td></tr>
-      <tr><td><strong>NAS</strong></td><td>Presents shared files over the network</td><td>Users or systems access files through SMB, NFS, or another file protocol</td></tr>
-      <tr><td><strong>SAN</strong></td><td>Presents block storage to servers</td><td>Storage appears to the host as a disk or logical unit rather than a shared folder</td></tr>
-      <tr><td><strong>Wireless AP</strong></td><td>Bridges wireless clients into the network</td><td>Radio coverage, SSID, association, and local client access</td></tr>
+      <tr><td><strong>Network-attached storage (NAS)</strong></td><td>Presents shared files over the network</td><td>Users or systems access files through Server Message Block (SMB), Network File System (NFS), or another file protocol</td></tr>
+      <tr><td><strong>Storage area network (SAN)</strong></td><td>Presents block storage to servers</td><td>Storage appears to the host as a disk or logical unit rather than a shared folder</td></tr>
+      <tr><td><strong>Wireless access point (AP)</strong></td><td>Bridges wireless clients into the network</td><td>Radio coverage, Service Set Identifier (SSID), association, and local client access</td></tr>
       <tr><td><strong>Wireless controller</strong></td><td>Coordinates managed access points</td><td>Central policy, radio management, roaming, and lightweight AP control</td></tr>
-      <tr><td><strong>CDN</strong></td><td>Serves content from distributed locations near users</td><td>Reduced latency, offloaded origin traffic, and geographically distributed caching</td></tr>
+      <tr><td><strong>Content delivery network (CDN)</strong></td><td>Serves content from distributed locations near users</td><td>Reduced latency, offloaded origin traffic, and geographically distributed caching</td></tr>
     </tbody>
   </table>
 </div>
@@ -206,9 +206,9 @@ Physical and virtual appliances can perform the same network role. The implement
 
 A function is not always a separate appliance:
 
-- A **VPN** creates a protected logical connection across an untrusted or shared network.
-- **QoS** classifies and treats traffic according to business importance, delay sensitivity, or bandwidth policy.
-- **TTL** in IPv4 and the IPv6 hop limit prevent packets from circulating forever. Each router reduces the value before forwarding.
+- A **virtual private network (VPN)** creates a protected logical connection across an untrusted or shared network.
+- **Quality of service (QoS)** classifies and treats traffic according to business importance, delay sensitivity, or bandwidth policy.
+- **Time to live (TTL)** in IPv4 and the IPv6 hop limit prevent packets from circulating forever. Each router reduces the value before forwarding.
 
 A router, firewall, cloud gateway, or dedicated concentrator may terminate a VPN. QoS may be applied on switches, routers, wireless infrastructure, or provider links. Read the requested outcome before choosing the box.
 
@@ -232,11 +232,11 @@ Cloud networking uses familiar components expressed through provider-managed ser
       </tr>
     </thead>
     <tbody>
-      <tr><td><strong>NFV</strong></td><td>Runs network functions as software rather than requiring a dedicated physical appliance</td><td>Rapid deployment of virtual routers, firewalls, or load balancers</td></tr>
-      <tr><td><strong>VPC or virtual network</strong></td><td>Creates a logically isolated cloud network</td><td>Cloud subnets, route tables, security policy, and gateways</td></tr>
+      <tr><td><strong>Network functions virtualization (NFV)</strong></td><td>Runs network functions as software rather than requiring a dedicated physical appliance</td><td>Rapid deployment of virtual routers, firewalls, or load balancers</td></tr>
+      <tr><td><strong>Virtual private cloud (VPC) or virtual network</strong></td><td>Creates a logically isolated cloud network</td><td>Cloud subnets, route tables, security policy, and gateways</td></tr>
       <tr><td><strong>Security group or security list</strong></td><td>Applies cloud traffic policy to resources or network boundaries</td><td>Allow or deny rules around instances, interfaces, or subnets; exact behavior varies by provider</td></tr>
       <tr><td><strong>Internet gateway</strong></td><td>Provides a path between a cloud network and the public internet</td><td>Publicly reachable resources with appropriate addressing, routes, and policy</td></tr>
-      <tr><td><strong>NAT gateway</strong></td><td>Allows private resources to initiate outbound IPv4 connections without becoming directly reachable inbound</td><td>Private subnet needs updates or external APIs but should not accept unsolicited internet sessions</td></tr>
+      <tr><td><strong>Network Address Translation (NAT) gateway</strong></td><td>Allows private resources to initiate outbound IPv4 connections without becoming directly reachable inbound</td><td>Private subnet needs updates or external APIs but should not accept unsolicited internet sessions</td></tr>
       <tr><td><strong>VPN connectivity</strong></td><td>Builds an encrypted connection over an existing network</td><td>Faster or lower-cost site connection that depends on internet transport</td></tr>
       <tr><td><strong>Dedicated cloud connection</strong></td><td>Provides private provider connectivity separate from ordinary internet paths</td><td>Predictable performance, private routing, or consistent enterprise connectivity</td></tr>
     </tbody>
@@ -251,9 +251,9 @@ Cloud networking uses familiar components expressed through provider-managed ser
 
 The service model changes who manages each layer:
 
-- **SaaS** delivers the finished application. The customer mainly manages users, data, and application settings.
-- **PaaS** delivers a managed application platform. The customer deploys code and data without managing the full server stack.
-- **IaaS** delivers compute, storage, and networking building blocks. The customer manages more of the operating system and application environment.
+- **Software as a service (SaaS)** delivers the finished application. The customer mainly manages users, data, and application settings.
+- **Platform as a service (PaaS)** delivers a managed application platform. The customer deploys code and data without managing the full server stack.
+- **Infrastructure as a service (IaaS)** delivers compute, storage, and networking building blocks. The customer manages more of the operating system and application environment.
 
 <h3>Scalability, elasticity, and multitenancy</h3>
 
@@ -277,39 +277,39 @@ Use the full [Common Ports and Protocols Reference](/ports-protocols/) for searc
       </tr>
     </thead>
     <tbody>
-      <tr><td>FTP</td><td>TCP 20/21</td><td>Separate data and control behavior; plaintext unless protected</td></tr>
-      <tr><td>SFTP and SSH</td><td>TCP 22</td><td>SSH-based secure administration or file transfer</td></tr>
+      <tr><td>File Transfer Protocol (FTP)</td><td>TCP 20/21</td><td>Separate data and control behavior; plaintext unless protected</td></tr>
+      <tr><td>Secure File Transfer Protocol (SFTP) and Secure Shell (SSH)</td><td>TCP 22</td><td>SSH-based secure administration or file transfer</td></tr>
       <tr><td>Telnet</td><td>TCP 23</td><td>Legacy plaintext remote terminal</td></tr>
-      <tr><td>SMTP</td><td>TCP 25 or 587</td><td>Server relay on 25; authenticated message submission commonly on 587</td></tr>
-      <tr><td>DNS</td><td>UDP/TCP 53</td><td>Name resolution; TCP also supports exchanges such as traditional zone transfers</td></tr>
-      <tr><td>DHCPv4</td><td>UDP 67/68</td><td>Server and client ports for dynamic IPv4 configuration</td></tr>
-      <tr><td>TFTP</td><td>UDP 69</td><td>Simple unauthenticated transfer, often for boot or device files</td></tr>
-      <tr><td>HTTP</td><td>TCP 80</td><td>Unencrypted web traffic</td></tr>
-      <tr><td>NTP</td><td>UDP 123</td><td>Time synchronization for systems, logs, and authentication</td></tr>
-      <tr><td>SNMP</td><td>UDP 161/162</td><td>Queries on 161; traps and informs commonly received on 162</td></tr>
-      <tr><td>LDAP</td><td>TCP/UDP 389</td><td>Directory access; protect credentials and sensitive directory traffic</td></tr>
-      <tr><td>HTTPS</td><td>TCP/UDP 443</td><td>TLS-protected web traffic; HTTP/3 uses QUIC over UDP</td></tr>
-      <tr><td>SMB</td><td>TCP 445</td><td>Windows file, printer, and named-pipe sharing</td></tr>
+      <tr><td>Simple Mail Transfer Protocol (SMTP)</td><td>TCP 25 or 587</td><td>Server relay on 25; authenticated message submission commonly on 587</td></tr>
+      <tr><td>Domain Name System (DNS)</td><td>UDP/TCP 53</td><td>Name resolution; TCP also supports exchanges such as traditional zone transfers</td></tr>
+      <tr><td>Dynamic Host Configuration Protocol for IPv4 (DHCPv4)</td><td>UDP 67/68</td><td>Server and client ports for dynamic IPv4 configuration</td></tr>
+      <tr><td>Trivial File Transfer Protocol (TFTP)</td><td>UDP 69</td><td>Simple unauthenticated transfer, often for boot or device files</td></tr>
+      <tr><td>Hypertext Transfer Protocol (HTTP)</td><td>TCP 80</td><td>Unencrypted web traffic</td></tr>
+      <tr><td>Network Time Protocol (NTP)</td><td>UDP 123</td><td>Time synchronization for systems, logs, and authentication</td></tr>
+      <tr><td>Simple Network Management Protocol (SNMP)</td><td>UDP 161/162</td><td>Queries on 161; traps and informs commonly received on 162</td></tr>
+      <tr><td>Lightweight Directory Access Protocol (LDAP)</td><td>TCP/UDP 389</td><td>Directory access; protect credentials and sensitive directory traffic</td></tr>
+      <tr><td>Hypertext Transfer Protocol Secure (HTTPS)</td><td>TCP/UDP 443</td><td>TLS-protected web traffic; HTTP/3 uses QUIC over UDP</td></tr>
+      <tr><td>Server Message Block (SMB)</td><td>TCP 445</td><td>Windows file, printer, and named-pipe sharing</td></tr>
       <tr><td>Syslog</td><td>UDP 514</td><td>Traditional log transport without confidentiality or delivery assurance</td></tr>
-      <tr><td>LDAPS</td><td>TCP 636</td><td>LDAP using implicit TLS</td></tr>
-      <tr><td>SQL Server</td><td>TCP 1433</td><td>Common default database service port</td></tr>
-      <tr><td>RDP</td><td>TCP/UDP 3389</td><td>Microsoft remote desktop</td></tr>
-      <tr><td>SIP</td><td>5060/5061</td><td>Voice and video signaling; media normally uses separately negotiated ports</td></tr>
+      <tr><td>Lightweight Directory Access Protocol over TLS (LDAPS)</td><td>TCP 636</td><td>LDAP using implicit Transport Layer Security (TLS)</td></tr>
+      <tr><td>Structured Query Language (SQL) Server</td><td>TCP 1433</td><td>Common default database service port</td></tr>
+      <tr><td>Remote Desktop Protocol (RDP)</td><td>TCP/UDP 3389</td><td>Microsoft remote desktop</td></tr>
+      <tr><td>Session Initiation Protocol (SIP)</td><td>5060/5061</td><td>Voice and video signaling; media normally uses separately negotiated ports</td></tr>
     </tbody>
   </table>
 </div>
 
-<h3>TCP, UDP, and protocols that do not use ports</h3>
+<h3>Transmission Control Protocol (TCP), User Datagram Protocol (UDP), and protocols that do not use ports</h3>
 
 TCP establishes a connection and provides ordered delivery, acknowledgments, retransmission, and flow behavior. UDP sends independent datagrams without establishing the same reliable transport session. Applications choose the tradeoff that fits their needs.
 
 Some protocols operate directly over IP and do not use TCP or UDP ports:
 
-- **ICMP** carries control, error, and diagnostic messages.
-- **GRE** encapsulates packets inside another IP packet.
-- **IPsec AH** provides integrity and authentication without encrypting the payload.
-- **IPsec ESP** can provide confidentiality, integrity, and authentication services.
-- **IKE** negotiates the security associations and keys used by IPsec.
+- **Internet Control Message Protocol (ICMP)** carries control, error, and diagnostic messages.
+- **Generic Routing Encapsulation (GRE)** encapsulates packets inside another IP packet.
+- **Internet Protocol Security (IPsec) Authentication Header (AH)** provides integrity and authentication without encrypting the payload.
+- **IPsec Encapsulating Security Payload (ESP)** can provide confidentiality, integrity, and authentication services.
+- **Internet Key Exchange (IKE)** negotiates the security associations and keys used by IPsec.
 
 Do not turn an IP protocol number into a fake port. ESP is IP protocol 50, not TCP or UDP port 50.
 
@@ -354,7 +354,7 @@ Choose media by distance, bandwidth, interference, installation environment, cos
       <tr><td><strong>Twisted-pair copper</strong></td><td>Horizontal office cabling and Ethernet access links</td><td>Affordable and supports power delivery, but distance and interference matter</td></tr>
       <tr><td><strong>Single-mode fiber</strong></td><td>Long-distance, campus, provider, and high-capacity links</td><td>Long reach with a small core; optics and installation cost more</td></tr>
       <tr><td><strong>Multimode fiber</strong></td><td>Shorter building and data-center links</td><td>Useful at high speed over shorter distances than single-mode fiber</td></tr>
-      <tr><td><strong>DAC or twinax</strong></td><td>Very short switch-to-server or switch-to-switch links</td><td>Low cost and power for short runs, but limited reach</td></tr>
+      <tr><td><strong>Direct Attach Copper (DAC) or twinax</strong></td><td>Very short switch-to-server or switch-to-switch links</td><td>Low cost and power for short runs, but limited reach</td></tr>
       <tr><td><strong>Coaxial cable</strong></td><td>Cable broadband, antennas, and legacy applications</td><td>Connector and impedance must match the application</td></tr>
       <tr><td><strong>Wireless LAN</strong></td><td>Mobile access inside homes, offices, and public spaces</td><td>Shared radio medium affected by channel use, interference, distance, and obstacles</td></tr>
       <tr><td><strong>Cellular</strong></td><td>Mobile WAN, backup links, and locations without wired service</td><td>Coverage, provider policy, latency, and recurring cost vary</td></tr>
@@ -371,18 +371,18 @@ Plenum-rated cable uses materials intended for spaces that move environmental ai
 
 <h3>Transceivers and connectors</h3>
 
-A transceiver must match the device slot, protocol, speed, wavelength, fiber type, and distance. **SFP** and **QSFP** describe pluggable form-factor families, not one fixed speed or medium. Modules may carry Ethernet or Fibre Channel depending on their design and the equipment.
+A transceiver must match the device slot, protocol, speed, wavelength, fiber type, and distance. **Small Form-factor Pluggable (SFP)** and **Quad Small Form-factor Pluggable (QSFP)** describe pluggable transceiver families, not one fixed speed or medium. Modules may carry Ethernet or Fibre Channel depending on their design and the equipment.
 
 Common connector clues include:
 
-- **LC:** small fiber connector frequently used with modern pluggable optics
-- **SC:** larger square push-pull fiber connector
-- **ST:** round bayonet-style fiber connector often seen in older installations
-- **MPO:** multi-fiber connector used for parallel optical links and dense cabling
-- **RJ45:** common twisted-pair Ethernet connector
+- **Local Connector (LC):** small fiber connector frequently used with modern pluggable optics
+- **Subscriber Connector (SC):** larger square push-pull fiber connector
+- **Straight Tip (ST):** round bayonet-style fiber connector often seen in older installations
+- **Multifiber Push On (MPO):** multi-fiber connector used for parallel optical links and dense cabling
+- **Registered Jack (RJ45):** common twisted-pair Ethernet connector
 - **RJ11:** smaller connector associated with telephone wiring
 - **F-type:** threaded coaxial connector common in cable broadband
-- **BNC:** bayonet coaxial connector used in selected video, radio, and legacy networking applications
+- **Bayonet Neill-Concelman (BNC):** bayonet coaxial connector used in selected video, radio, and legacy networking applications
 
 A clean-looking fiber connector can still be contaminated. Inspect and clean fiber properly before assuming the optic or cable must be replaced.
 
@@ -433,7 +433,7 @@ An IPv4 address has 32 bits. The prefix length identifies the network portion, a
       <tr><td><strong>10.0.0.0/8</strong></td><td>Private IPv4 addressing</td><td>Large private address block; requires translation or another routed design for ordinary internet access</td></tr>
       <tr><td><strong>172.16.0.0/12</strong></td><td>Private IPv4 addressing</td><td>Private range ends at 172.31.255.255, not every 172 address</td></tr>
       <tr><td><strong>192.168.0.0/16</strong></td><td>Private IPv4 addressing</td><td>Common home and small-office addressing</td></tr>
-      <tr><td><strong>169.254.0.0/16</strong></td><td>APIPA link-local addressing</td><td>Windows client could not obtain normal DHCP configuration; local-link communication may still work</td></tr>
+      <tr><td><strong>169.254.0.0/16</strong></td><td>Automatic Private IP Addressing (APIPA) link-local addressing</td><td>Windows client could not obtain normal DHCP configuration; local-link communication may still work</td></tr>
       <tr><td><strong>127.0.0.0/8</strong></td><td>Loopback</td><td>Tests the local host's IP stack without leaving the system</td></tr>
       <tr><td><strong>224.0.0.0/4</strong></td><td>Class D multicast space</td><td>Group delivery rather than ordinary host addressing</td></tr>
     </tbody>
@@ -442,7 +442,7 @@ An IPv4 address has 32 bits. The prefix length identifies the network portion, a
 
 A public address is globally routable when assigned and advertised appropriately. A private address is not automatically more secure. Firewall policy, segmentation, authentication, and exposure still determine risk.
 
-<h3>Classful labels and modern CIDR</h3>
+<h3>Classful labels and modern Classless Inter-Domain Routing (CIDR)</h3>
 
 Class A, B, and C historically implied default network sizes. Class D is multicast, and Class E is reserved or experimental. Modern networks use CIDR prefix lengths rather than class boundaries, but classful labels may still appear in questions and documentation.
 
@@ -467,7 +467,7 @@ Class A, B, and C historically implied default network sizes. Class D is multica
 
 The ranges above describe the historical class system. Special-use ranges and reservations still take precedence. For example, 127.0.0.0/8 is loopback even though its first octet falls near the Class A range.
 
-<h2 id="subnetting">Subnetting and VLSM</h2>
+<h2 id="subnetting">Subnetting and variable-length subnet masking (VLSM)</h2>
 
 Subnetting divides an address block into smaller networks. The prefix controls how many bits identify the network and how many remain for addresses inside each subnet.
 
@@ -524,7 +524,7 @@ Two hosts can communicate directly only when their local addressing decisions pl
 
 A segment needs 50 usable IPv4 addresses. A /27 provides 30, so it is too small. A /26 provides 62, which fits. Choosing /25 would also fit, but it consumes twice as many addresses and may not be the best answer when conservation matters.
 
-**VLSM** assigns different prefix lengths according to each subnet's need. A server segment may receive a /27, a user segment a /24, and a point-to-point link a much smaller prefix. Start with the largest requirement so smaller allocations do not fragment the remaining space.
+**Variable-length subnet masking (VLSM)** assigns different prefix lengths according to each subnet's need. A server segment may receive a /27, a user segment a /24, and a point-to-point link a much smaller prefix. Start with the largest requirement so smaller allocations do not fragment the remaining space.
 
 <div class="article-callout">
   <p><strong>Exam clue:</strong> When two addresses look close, do not guess from the first three octets. Apply the prefix. Hosts ending in .63 and .64 are adjacent numbers, but they fall on opposite sides of a /26 boundary.</p>
@@ -572,13 +572,13 @@ can be written as:
   </table>
 </div>
 
-ICMPv6 supports essential functions such as neighbor discovery and path information. Blocking all ICMPv6 can break normal IPv6 behavior.
+Internet Control Message Protocol for IPv6 (ICMPv6) supports essential functions such as neighbor discovery and path information. Blocking all ICMPv6 can break normal IPv6 behavior.
 
 <h3>Transition approaches</h3>
 
 - **Dual stack:** Systems run IPv4 and IPv6 together and choose the appropriate path.
 - **Tunneling:** One protocol is carried across a network built for the other protocol.
-- **NAT64:** IPv6 clients communicate with IPv4 services through translation, normally with supporting DNS behavior.
+- **Network Address Translation 64 (NAT64):** IPv6 clients communicate with IPv4 services through translation, normally with supporting DNS behavior.
 
 IPv6 reduces pressure from IPv4 address exhaustion, but migration still depends on application compatibility, provider support, security policy, monitoring, and operational knowledge.
 
@@ -596,12 +596,12 @@ Modern designs change how networks are controlled and extended. They do not remo
       </tr>
     </thead>
     <tbody>
-      <tr><td><strong>SDN</strong></td><td>Separates centralized control logic from distributed forwarding</td><td>Programmable policy, controller-driven behavior, and consistent changes</td></tr>
-      <tr><td><strong>SD-WAN</strong></td><td>Manages WAN paths and policy across different transports</td><td>Application-aware path selection, zero-touch deployment, and transport independence</td></tr>
-      <tr><td><strong>VXLAN</strong></td><td>Extends large numbers of logical Layer 2 segments across a Layer 3 underlay</td><td>Overlay encapsulation, data-center interconnect, and scalable segment identifiers</td></tr>
+      <tr><td><strong>Software-defined networking (SDN)</strong></td><td>Separates centralized control logic from distributed forwarding</td><td>Programmable policy, controller-driven behavior, and consistent changes</td></tr>
+      <tr><td><strong>Software-defined wide area networking (SD-WAN)</strong></td><td>Manages wide area network (WAN) paths and policy across different transports</td><td>Application-aware path selection, zero-touch deployment, and transport independence</td></tr>
+      <tr><td><strong>Virtual Extensible LAN (VXLAN)</strong></td><td>Extends large numbers of logical Layer 2 segments across a Layer 3 underlay</td><td>Overlay encapsulation, data-center interconnect, and scalable segment identifiers</td></tr>
       <tr><td><strong>Zero trust architecture</strong></td><td>Reduces implicit trust based on network location</td><td>Policy-based authentication, authorization, and least-privilege access</td></tr>
-      <tr><td><strong>SASE</strong></td><td>Combines wide-area networking and cloud-delivered security functions</td><td>Distributed users and branches need consistent access and security policy</td></tr>
-      <tr><td><strong>SSE</strong></td><td>Provides the security-service portion without defining the WAN transport function</td><td>Cloud-delivered access and security controls are emphasized</td></tr>
+      <tr><td><strong>Secure access service edge (SASE)</strong></td><td>Combines wide-area networking and cloud-delivered security functions</td><td>Distributed users and branches need consistent access and security policy</td></tr>
+      <tr><td><strong>Security service edge (SSE)</strong></td><td>Provides the security-service portion without defining the WAN transport function</td><td>Cloud-delivered access and security controls are emphasized</td></tr>
       <tr><td><strong>Infrastructure as code</strong></td><td>Makes infrastructure repeatable, reviewable, and less dependent on manual changes</td><td>Templates, playbooks, reusable tasks, version control, and drift detection</td></tr>
     </tbody>
   </table>
@@ -648,7 +648,7 @@ A modern firewall may route, terminate VPNs, proxy applications, and inspect tra
 
 <h3>Treating a default port as proof</h3>
 
-TCP 22 suggests SSH-based activity, but the action determines whether the best answer is SSH, SFTP, or SCP. Confirm the protocol behavior, not only the number.
+TCP 22 suggests Secure Shell (SSH)-based activity, but the action determines whether the best answer is SSH, Secure File Transfer Protocol (SFTP), or Secure Copy Protocol (SCP). Confirm the protocol behavior, not only the number.
 
 <h3>Using classful assumptions when a prefix is given</h3>
 
@@ -695,7 +695,6 @@ After reviewing, take a [Network+ N10-009 practice test](/network-plus/n10-009/p
 <h2 id="official-references">Official references</h2>
 
 - [CompTIA Network+ certification page](https://www.comptia.org/en-us/certifications/network/)
-- [CompTIA Network+ N10-009 exam objectives](https://assets.ctfassets.net/82ripq7fjls2/113XqW3JHT7AlIU33M63I0/af42da2af7383a38f318bad10aa9afbd/Network_Plus_N10-009_Exam_Objectives.pdf)
 - [IANA Service Name and Transport Protocol Port Number Registry](https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xhtml)
 - [RFC 1918: Address Allocation for Private Internets](https://www.rfc-editor.org/rfc/rfc1918)
 - [RFC 4632: Classless Inter-domain Routing](https://www.rfc-editor.org/rfc/rfc4632)

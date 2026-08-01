@@ -715,6 +715,19 @@ for (const file of htmlFiles) {
     fail(`${relative}: non-main build must not contain the Google Analytics tag`);
   }
 
+  const discouragedPublicSourceHosts = [
+    "assets.ctfassets.net",
+    "comptiacdn.azureedge.net",
+    "files.cmp.optimizely.com",
+    "examcompass.com"
+  ];
+
+  for (const host of discouragedPublicSourceHosts) {
+    if (html.includes(host)) {
+      fail(`${relative}: public page still links to a non-canonical exam source host: ${host}`);
+    }
+  }
+
   const description = getMeta(html, "description");
   if (!description) {
     fail(`${relative}: missing meta description`);
@@ -1138,7 +1151,11 @@ for (const file of htmlFiles) {
       "General Data Protection Regulation",
       "Spanning Tree Protocol",
       "Shielded Twisted Pair",
-      "Recovery Time Objective"
+      "Recovery Time Objective",
+      "Bridge Protocol Data Unit",
+      "Time-Domain Reflectometer",
+      "Wi-Fi Protected Access 3",
+      "Automatic Private IP Addressing"
     ];
 
     for (const marker of requiredAcronymMarkup) {

@@ -8,6 +8,7 @@ printable: true
 printTitle: VLANs, Trunks, STP, and Link Aggregation Quick Reference for Network+ N10-009
 author: certHappens
 datePublished: 2026-07-27
+dateModified: 2026-07-31
 articleSection: Network+ N10-009 Quick Review
 eyebrow: Network+ quick review
 lede: Separate traffic membership, link transport, loop prevention, and bandwidth aggregation before choosing a switch setting.
@@ -77,7 +78,7 @@ relatedLinks:
     url: /network-plus/n10-009/practice-test/
     description: Apply switching decisions in randomized questions.
 ---
-A VLAN, trunk, spanning-tree decision, and aggregated link can all involve the same switch ports. They still solve different problems.
+A virtual local area network (VLAN), trunk, spanning-tree decision, and aggregated link can all involve the same switch ports. They still solve different problems.
 
 - A **VLAN** defines Layer 2 membership and broadcast scope.
 - A **trunk** carries traffic for multiple VLANs across one link.
@@ -85,7 +86,7 @@ A VLAN, trunk, spanning-tree decision, and aggregated link can all involve the s
 - **Link aggregation** combines compatible physical links into one logical link.
 
 <div class="article-callout">
-  <p><strong>Fast split:</strong> VLANs separate traffic. Trunks carry multiple VLANs. STP controls redundant paths. LACP negotiates a link bundle.</p>
+  <p><strong>Fast split:</strong> VLANs separate traffic. Trunks carry multiple VLANs. Spanning Tree Protocol (STP) controls redundant paths. Link Aggregation Control Protocol (LACP) negotiates a link bundle.</p>
 </div>
 
 <h2 id="four-jobs">Four jobs at a glance</h2>
@@ -113,13 +114,13 @@ Common access-port scenarios include:
 - A camera in a surveillance VLAN
 - An unused port placed in an unused VLAN and disabled
 
-A switchport in the wrong access VLAN can still show link up. The host may receive an address from the wrong scope, reach the wrong services, or fail because no DHCP service exists in that VLAN.
+A switchport in the wrong access VLAN can still show link up. The host may receive an address from the wrong scope, reach the wrong services, or fail because no Dynamic Host Configuration Protocol (DHCP) service exists in that VLAN.
 
 Some phone deployments use a data VLAN for the attached workstation and a tagged voice VLAN for the phone. That is a special edge-port design, not a reason to treat every endpoint link as a general switch trunk.
 
 <h2 id="trunks-tagging">Trunks and 802.1Q tagging</h2>
 
-A trunk carries multiple VLANs. IEEE 802.1Q inserts a tag that identifies the VLAN for tagged frames. Both ends must agree on the trunk and on which VLANs are permitted.
+A trunk carries multiple VLANs. The Institute of Electrical and Electronics Engineers (IEEE) 802.1Q standard inserts a tag that identifies the VLAN for tagged frames. Both ends must agree on the trunk and on which VLANs are permitted.
 
 Use a trunk when multiple VLANs must cross the same physical link, such as:
 
@@ -152,7 +153,7 @@ When two hosts in the same VLAN communicate, the default gateway may not partici
 
 <h2 id="spanning-tree">Spanning tree: prevent Layer 2 loops</h2>
 
-Redundant Ethernet paths can create loops because ordinary frames do not have a hop limit at Layer 2. Broadcast and unknown-unicast frames may circulate, multiply, and consume the switching fabric. MAC address tables can become unstable as the same source appears on different ports.
+Redundant Ethernet paths can create loops because ordinary frames identified by Media Access Control (MAC) addresses do not have a hop limit at Layer 2. Broadcast and unknown-unicast frames may circulate, multiply, and consume the switching fabric. MAC address tables can become unstable as the same source appears on different ports.
 
 STP builds a loop-free logical topology. It elects a root bridge, calculates preferred paths, and places redundant paths into a non-forwarding role until needed.
 
@@ -168,7 +169,7 @@ Each non-root switch selects its best path toward the root based on path cost an
 
 Poor root placement can cause traffic to take an inefficient path. Changing root priority can improve the logical topology, but it should be planned because the change can trigger reconvergence.
 
-Edge protections such as BPDU guard help protect access ports from an unexpected switch. They are not substitutes for correct trunk and spanning-tree design.
+Edge protections such as Bridge Protocol Data Unit (BPDU) guard help protect access ports from an unexpected switch. They are not substitutes for correct trunk and spanning-tree design.
 
 <h2 id="link-aggregation">Link aggregation and LACP</h2>
 
@@ -176,7 +177,7 @@ Link aggregation combines multiple compatible physical links into one logical ch
 
 The member links generally need compatible speed, duplex, VLAN, trunk, and channel settings. A mismatch can leave one member suspended or create inconsistent forwarding.
 
-Traffic is commonly distributed using a hash of fields such as source and destination addresses or ports. One large conversation may remain on one member link, while many conversations spread across the bundle. Four 1-Gbps members do not guarantee that one TCP flow reaches 4 Gbps.
+Traffic is commonly distributed using a hash of fields such as source and destination addresses or Transmission Control Protocol (TCP) or User Datagram Protocol (UDP) ports. One large conversation may remain on one member link, while many conversations spread across the bundle. Four 1-Gbps members do not guarantee that one TCP flow reaches 4 Gbps.
 
 A properly formed bundle appears to STP as one logical link. Simply connecting several independent links between switches without STP or aggregation creates a loop risk.
 
@@ -243,6 +244,5 @@ Check STP role and state before replacing the cable. The link may be intentional
 <h2 id="official-references">Official references</h2>
 
 - [CompTIA Network+ certification page](https://www.comptia.org/en-us/certifications/network/)
-- [CompTIA Network+ N10-009 exam objectives](https://assets.ctfassets.net/82ripq7fjls2/113XqW3JHT7AlIU33M63I0/af42da2af7383a38f318bad10aa9afbd/Network_Plus_N10-009_Exam_Objectives.pdf)
 - [IEEE 802.1Q: Bridges and Bridged Networks](https://standards.ieee.org/ieee/802.1Q/10323/)
 - [IEEE 802.1AX: Link Aggregation](https://standards.ieee.org/ieee/802.1AX/6761/)

@@ -149,6 +149,7 @@ Apply this check during the human-writing review and update `dateModified` when 
 ## Sources and maintenance
 
 - Use primary sources whenever possible for exam rules, objectives, standards, laws, protocols, and product behavior.
+- Prefer durable pages on the official vendor-owned domain for certification scope and exam information. Do not use competitor sites, mirrors, or third-party CDN/file-host URLs as the public canonical exam source when an official vendor page is available.
 - Link to the source most directly supporting the factual claim.
 - Verify time-sensitive exam details before publishing or updating them.
 - Distinguish official facts from Cert Happens recommendations.

@@ -550,7 +550,6 @@ Use the [randomized SY0-701 practice test](/security-plus/sy0-701/practice-test/
 The domain scope and weighting are based on the published SY0-701 objectives. The supporting sources below include guidance from the National Institute of Standards and Technology (NIST) and the Cybersecurity and Infrastructure Security Agency (CISA) for governance, risk, supply-chain management, privacy, and learning programs:
 
 - [CompTIA Security+ certification page](https://www.comptia.org/en-us/certifications/security/)
-- [CompTIA Security+ SY0-701 exam objectives PDF](https://assets.ctfassets.net/82ripq7fjls2/6TYWUym0Nudqa8nGEnegjG/0f9b974d3b1837fe85ab8e6553f4d623/CompTIA-Security-Plus-SY0-701-Exam-Objectives.pdf)
 - [NIST Cybersecurity Framework 2.0](https://www.nist.gov/cyberframework)
 - [NIST SP 800-30 Rev. 1: Guide for Conducting Risk Assessments](https://csrc.nist.gov/pubs/sp/800/30/r1/final)
 - [NIST SP 800-161 Rev. 1: Cybersecurity Supply Chain Risk Management Practices](https://csrc.nist.gov/pubs/sp/800/161/r1/final)
