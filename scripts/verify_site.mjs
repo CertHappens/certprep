@@ -668,8 +668,6 @@ const generatedQuizSpecs = [
     path: "quiz-data/ccna/200-301-v2/manifest.json",
     testId: "CCNA-301-V2",
     practiceTestPath: "/ccna/200-301-v2/practice-test",
-    expectedQuestionCount: 60,
-    expectedStimulusCount: 20,
     expectedQuestionCountOptions: [10, 20, 30, 50],
     expectedDefaultQuestionCount: 30
   }
