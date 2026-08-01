@@ -2,7 +2,7 @@
   "title": "Network+ Acronyms and Terms",
   "currentExamVersion": "N10-009",
   "datePublished": "2026-07-26",
-  "entryCount": 177,
+  "entryCount": 192,
   "groups": [
     {
       "letter": "#",
@@ -167,7 +167,7 @@
         {
           "id": "apipa",
           "term": "APIPA",
-          "expansion": "Automatic Private Internet Protocol Addressing",
+          "expansion": "Automatic Private IP Addressing",
           "meaning": "Windows terminology for automatic IPv4 link-local addressing in 169.254.0.0/16 when a client cannot obtain a normal DHCP lease.",
           "domains": [
             "1",
@@ -242,6 +242,24 @@
             "1"
           ],
           "related": [],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "bpdu",
+          "term": "BPDU",
+          "expansion": "Bridge Protocol Data Unit",
+          "meaning": "A Spanning Tree Protocol message that switches exchange to elect a root bridge, calculate topology information, and detect changes.",
+          "domains": [
+            "2",
+            "5"
+          ],
+          "related": [
+            "STP",
+            "RSTP",
+            "MSTP"
+          ],
           "examVersions": [
             "N10-009"
           ]
@@ -501,6 +519,21 @@
             "4"
           ],
           "related": [],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "dmz",
+          "term": "DMZ",
+          "expansion": "Demilitarized Zone",
+          "meaning": "A traditional term for an isolated network segment used for systems that need controlled exposure to less-trusted networks. Modern materials may call this a screened subnet.",
+          "domains": [
+            "4"
+          ],
+          "related": [
+            "VLAN"
+          ],
           "examVersions": [
             "N10-009"
           ]
@@ -980,6 +1013,24 @@
           ]
         },
         {
+          "id": "ieee",
+          "term": "IEEE",
+          "expansion": "Institute of Electrical and Electronics Engineers",
+          "meaning": "A professional standards organization responsible for many networking standards, including the IEEE 802 family used by Ethernet and wireless LAN technologies.",
+          "domains": [
+            "1",
+            "2"
+          ],
+          "related": [
+            "802.1Q",
+            "802.1X",
+            "WLAN"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
           "id": "iiot",
           "term": "IIoT",
           "expansion": "Industrial Internet of Things",
@@ -1050,6 +1101,21 @@
           "related": [
             "DHCP",
             "DNS"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "ipfix",
+          "term": "IPFIX",
+          "expansion": "IP Flow Information Export",
+          "meaning": "A standardized method for exporting metadata about network flows so collectors can analyze conversations, volume, endpoints, and timing without storing full packet payloads.",
+          "domains": [
+            "3"
+          ],
+          "related": [
+            "SNMP"
           ],
           "examVersions": [
             "N10-009"
@@ -1333,6 +1399,23 @@
           ]
         },
         {
+          "id": "mstp",
+          "term": "MSTP",
+          "expansion": "Multiple Spanning Tree Protocol",
+          "meaning": "A spanning-tree approach that can map groups of VLANs to different spanning-tree instances, reducing the need for a separate tree for every VLAN.",
+          "domains": [
+            "2"
+          ],
+          "related": [
+            "STP",
+            "RSTP",
+            "VLAN"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
           "id": "mtbf",
           "term": "MTBF",
           "expansion": "Mean Time Between Failures",
@@ -1462,6 +1545,22 @@
           ]
         },
         {
+          "id": "nfs",
+          "term": "NFS",
+          "expansion": "Network File System",
+          "meaning": "A network file-sharing protocol commonly associated with Unix-like systems and network-attached storage.",
+          "domains": [
+            "1"
+          ],
+          "related": [
+            "NAS",
+            "SMB"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
           "id": "nfv",
           "term": "NFV",
           "expansion": "Network Functions Virtualization",
@@ -1530,6 +1629,21 @@
           "examVersions": [
             "N10-009"
           ]
+        },
+        {
+          "id": "nxdomain",
+          "term": "NXDOMAIN",
+          "expansion": "Non-Existent Domain",
+          "meaning": "A DNS response indicating that the queried domain name does not exist. It is useful evidence when troubleshooting name resolution.",
+          "domains": [
+            "5"
+          ],
+          "related": [
+            "DNS"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
         }
       ],
       "label": "N"
@@ -1538,6 +1652,22 @@
       "letter": "O",
       "id": "o",
       "entries": [
+        {
+          "id": "oid",
+          "term": "OID",
+          "expansion": "Object Identifier",
+          "meaning": "A hierarchical identifier for a managed object, commonly used with SNMP and management information bases to identify a specific value or counter.",
+          "domains": [
+            "3"
+          ],
+          "related": [
+            "MIB",
+            "SNMP"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
         {
           "id": "os",
           "term": "OS",
@@ -1593,6 +1723,21 @@
           "related": [
             "ICS",
             "SCADA"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "otdr",
+          "term": "OTDR",
+          "expansion": "Optical Time-Domain Reflectometer",
+          "meaning": "A fiber troubleshooting instrument that sends light pulses and analyzes reflections to estimate the distance to breaks, bends, splices, connectors, and other optical events.",
+          "domains": [
+            "5"
+          ],
+          "related": [
+            "VFL"
           ],
           "examVersions": [
             "N10-009"
@@ -2063,6 +2208,22 @@
           ]
         },
         {
+          "id": "scp",
+          "term": "SCP",
+          "expansion": "Secure Copy Protocol",
+          "meaning": "A secure file-copy method that uses SSH for protected transport and authentication.",
+          "domains": [
+            "1"
+          ],
+          "related": [
+            "SSH",
+            "SFTP"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
           "id": "sd-wan",
           "term": "SD-WAN",
           "expansion": "Software-defined Wide Area Network",
@@ -2400,6 +2561,21 @@
           "examVersions": [
             "N10-009"
           ]
+        },
+        {
+          "id": "syn",
+          "term": "SYN",
+          "expansion": "Synchronize",
+          "meaning": "A TCP control flag used when establishing a connection. A client normally begins the handshake with SYN and expects a SYN-ACK response.",
+          "domains": [
+            "5"
+          ],
+          "related": [
+            "TCP"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
         }
       ],
       "label": "S"
@@ -2455,6 +2631,21 @@
             "IP",
             "TCP",
             "UDP"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "tdr",
+          "term": "TDR",
+          "expansion": "Time-Domain Reflectometer",
+          "meaning": "A copper-cabling troubleshooting instrument that measures reflected electrical signals to estimate the distance to an open, short, or impedance change.",
+          "domains": [
+            "5"
+          ],
+          "related": [
+            "OTDR"
           ],
           "examVersions": [
             "N10-009"
@@ -2638,6 +2829,21 @@
       "id": "v",
       "entries": [
         {
+          "id": "vfl",
+          "term": "VFL",
+          "expansion": "Visual Fault Locator",
+          "meaning": "A fiber tool that sends visible light through a strand to help identify fibers and reveal some nearby breaks or severe bends.",
+          "domains": [
+            "5"
+          ],
+          "related": [
+            "OTDR"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
           "id": "vip",
           "term": "VIP",
           "expansion": "Virtual IP",
@@ -2672,7 +2878,7 @@
         {
           "id": "vlsm",
           "term": "VLSM",
-          "expansion": "Variable Length Subnet Mask",
+          "expansion": "Variable Length Subnet Masking",
           "meaning": "Using different prefix lengths within an address plan so each subnet receives an appropriately sized block.",
           "domains": [
             "1",
@@ -2808,6 +3014,42 @@
           ]
         },
         {
+          "id": "wpa2",
+          "term": "WPA2",
+          "expansion": "Wi-Fi Protected Access 2",
+          "meaning": "A Wi-Fi security generation that commonly uses AES-based protection and supports personal or enterprise authentication.",
+          "domains": [
+            "2",
+            "4"
+          ],
+          "related": [
+            "WPA",
+            "WPA3",
+            "PSK"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
+          "id": "wpa3",
+          "term": "WPA3",
+          "expansion": "Wi-Fi Protected Access 3",
+          "meaning": "A newer Wi-Fi security generation with stronger modern protections than WPA2, including improved personal-mode authentication when supported.",
+          "domains": [
+            "2",
+            "4"
+          ],
+          "related": [
+            "WPA",
+            "WPA2",
+            "802.1X"
+          ],
+          "examVersions": [
+            "N10-009"
+          ]
+        },
+        {
           "id": "wps",
           "term": "WPS",
           "expansion": "Wi-Fi Protected Setup",
@@ -2850,5 +3092,6 @@
       ],
       "label": "Z"
     }
-  ]
+  ],
+  "dateModified": "2026-07-31"
 }

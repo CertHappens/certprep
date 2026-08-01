@@ -161,6 +161,12 @@ const publicPageFiles = [
   "contact/index.html",
   "cissp/index.html",
   "ccna/index.html",
+  "ccna/acronyms/index.html",
+  "ccna/commands/index.html",
+  "ccna/200-301-v2/study-guide/index.html",
+  "ccna/200-301-v2/study-guide/network-infrastructure-connectivity/index.html",
+  "ccna/200-301-v2/study-guide/switching-network-access/index.html",
+  "ccna/200-301-v2/study-guide/ip-routing/index.html",
   "disclaimer/index.html",
   "network-plus/index.html",
   "network-plus/acronyms/index.html",
@@ -196,6 +202,12 @@ const publicPageFiles = [
 ];
 
 const articlePageFiles = [
+  "ccna/acronyms/index.html",
+  "ccna/commands/index.html",
+  "ccna/200-301-v2/study-guide/index.html",
+  "ccna/200-301-v2/study-guide/network-infrastructure-connectivity/index.html",
+  "ccna/200-301-v2/study-guide/switching-network-access/index.html",
+  "ccna/200-301-v2/study-guide/ip-routing/index.html",
   "network-plus/acronyms/index.html",
   "network-plus/n10-009/study-guide/index.html",
   "network-plus/n10-009/study-guide/ipv4-subnetting/index.html",
@@ -240,7 +252,7 @@ const wholeSitePageMarkers = new Map([
     "cissp/index.html",
     [
       "CISSP Certification Overview",
-      "A useful starting point, not a full CISSP course",
+      "Start with scope, experience, and decision-making",
       "Security and Risk Management",
       "Software Development Security",
       "120 credits during each three-year certification cycle",
@@ -251,14 +263,69 @@ const wholeSitePageMarkers = new Map([
   [
     "ccna/index.html",
     [
-      "CCNA 200-301 Exam Overview",
-      "Planning for the 200-301 v2.0 exam",
-      "Study now without building toward an obsolete target",
-      "Network Fundamentals",
-      "Automation and Programmability",
+      "CCNA 200-301 Study Resources",
+      "Start studying CCNA",
+      "/ccna/200-301-v2/study-guide/",
+      "/ccna/200-301-v2/study-guide/network-infrastructure-connectivity/",
+      "/ccna/200-301-v2/study-guide/switching-network-access/",
+      "/ccna/200-301-v2/study-guide/ip-routing/",
+      "/ccna/acronyms/",
+      "/ccna/commands/",
+      "Use v1.1 through February 2, 2027 and v2.0 starting February 3, 2027",
+      "Network Infrastructure and Connectivity",
+      "AI, and Network Operations and Management",
       "February 3, 2027",
-      "/network-plus/n10-009/study-guide/",
       "https://www.cisco.com/site/us/en/learn/training-certifications/exams/ccna.html"
+    ]
+  ],
+  [
+    "ccna/200-301-v2/study-guide/index.html",
+    [
+      "CCNA 200-301 v2.0 Study Guide",
+      "The five CCNA v2.0 domains",
+      "/ccna/200-301-v2/study-guide/network-infrastructure-connectivity/",
+      "/ccna/200-301-v2/study-guide/switching-network-access/",
+      "/ccna/200-301-v2/study-guide/ip-routing/",
+      "/ccna/commands/",
+      "/ccna/acronyms/",
+      "February 3, 2027"
+    ]
+  ],
+  [
+    "ccna/200-301-v2/study-guide/network-infrastructure-connectivity/index.html",
+    [
+      "CCNA 200-301 v2.0 Domain 1: Network Infrastructure and Connectivity",
+      "Domain 1 objective map",
+      "Modified EUI-64",
+      "ip helper-address",
+      "/tools/subnet-calculator/",
+      "/ccna/acronyms/"
+    ]
+  ],
+  [
+    "ccna/200-301-v2/study-guide/switching-network-access/index.html",
+    [
+      "CCNA 200-301 v2.0 Domain 2: Switching and Network Access",
+      "Domain 2 objective map",
+      "show interfaces trunk",
+      "show etherchannel summary",
+      "Rapid PVST+",
+      "spanning-tree guard root",
+      "/ccna/commands/",
+      "/ccna/acronyms/"
+    ]
+  ],
+  [
+    "ccna/200-301-v2/study-guide/ip-routing/index.html",
+    [
+      "CCNA 200-301 v2.0 Domain 3: IP Routing",
+      "Domain 3 objective map",
+      "show ip route",
+      "show ip ospf neighbor",
+      "router ospfv3",
+      "show standby brief",
+      "show vrrp brief",
+      "/ccna/acronyms/"
     ]
   ],
   [
@@ -648,6 +715,19 @@ for (const file of htmlFiles) {
     fail(`${relative}: non-main build must not contain the Google Analytics tag`);
   }
 
+  const discouragedPublicSourceHosts = [
+    "assets.ctfassets.net",
+    "comptiacdn.azureedge.net",
+    "files.cmp.optimizely.com",
+    "examcompass.com"
+  ];
+
+  for (const host of discouragedPublicSourceHosts) {
+    if (html.includes(host)) {
+      fail(`${relative}: public page still links to a non-canonical exam source host: ${host}`);
+    }
+  }
+
   const description = getMeta(html, "description");
   if (!description) {
     fail(`${relative}: missing meta description`);
@@ -712,6 +792,11 @@ for (const file of htmlFiles) {
     'data-primary-navigation',
     'id="security-plus-navigation"',
     'id="network-plus-navigation"',
+    'id="ccna-navigation"',
+    'id="ccna-navigation-group-1">Overview',
+    'id="ccna-navigation-group-2">Subnetting',
+    'id="ccna-navigation-group-3">Study',
+    'id="ccna-navigation-group-4">References',
     'src="/assets/js/site-navigation.js"',
     'href="/cissp/"',
     'href="/ccna/"'
@@ -724,8 +809,8 @@ for (const file of htmlFiles) {
   }
 
   const navigationSubmenuCount = (html.match(/data-nav-submenu/g) || []).length;
-  if (navigationSubmenuCount !== 2) {
-    fail(`${relative}: expected 2 certification navigation submenus, found ${navigationSubmenuCount}`);
+  if (navigationSubmenuCount !== 3) {
+    fail(`${relative}: expected 3 certification navigation submenus, found ${navigationSubmenuCount}`);
   }
 
   const requiredNavigationLinks = [
@@ -742,6 +827,12 @@ for (const file of htmlFiles) {
     "/ports-protocols/",
     "/network-plus/n10-009/study-guide/ipv4-subnetting/",
     "/tools/subnet-calculator/",
+    "/ccna/200-301-v2/study-guide/",
+    "/ccna/200-301-v2/study-guide/network-infrastructure-connectivity/",
+    "/ccna/200-301-v2/study-guide/switching-network-access/",
+    "/ccna/200-301-v2/study-guide/ip-routing/",
+    "/ccna/acronyms/",
+    "/ccna/commands/",
     "/cissp/",
     "/ccna/"
   ];
@@ -1060,7 +1151,11 @@ for (const file of htmlFiles) {
       "General Data Protection Regulation",
       "Spanning Tree Protocol",
       "Shielded Twisted Pair",
-      "Recovery Time Objective"
+      "Recovery Time Objective",
+      "Bridge Protocol Data Unit",
+      "Time-Domain Reflectometer",
+      "Wi-Fi Protected Access 3",
+      "Automatic Private IP Addressing"
     ];
 
     for (const marker of requiredAcronymMarkup) {
@@ -1597,6 +1692,17 @@ for (const file of htmlFiles) {
       "/security-plus/",
       "Return to Security+ resources"
     );
+    const requiredPracticeMarkers = [
+      "Security+ SY0-701 practice test",
+      'data-test-id="SEC-701"',
+      'data-questions-url="/quiz-data/security-plus/sec-701/questions.json"'
+    ];
+
+    for (const marker of requiredPracticeMarkers) {
+      if (!html.includes(marker)) {
+        fail(`${relative}: Security+ practice test is missing ${marker}`);
+      }
+    }
   }
 
   if (relative === "network-plus/n10-009/practice-test/index.html") {
@@ -1675,7 +1781,10 @@ for (const file of htmlFiles) {
       "data-acronym-empty",
       'src="/assets/js/acronym-filter.js"',
       "Context decides the meaning",
-      "Recovery time objective"
+      "Recovery time objective",
+      "Attribute-based access control",
+      "Maximum tolerable downtime",
+      "Demilitarized zone"
     ];
 
     for (const marker of requiredAcronymMarkup) {
@@ -1693,8 +1802,8 @@ for (const file of htmlFiles) {
     }
 
     const acronymJumpLinkCount = (html.match(/href=["']#acronyms-[^"']+["']/g) || []).length;
-    if (acronymJumpLinkCount !== 23) {
-      fail(`${relative}: expected 23 sidebar acronym jump links, found ${acronymJumpLinkCount}`);
+    if (acronymJumpLinkCount !== 25) {
+      fail(`${relative}: expected 25 sidebar acronym jump links, found ${acronymJumpLinkCount}`);
     }
 
     if (html.includes("data-acronym-index")) {
@@ -1937,8 +2046,34 @@ for (const file of htmlFiles) {
   }
 
   if (relative === "ccna/index.html") {
-    if (!/<h1>CCNA 200-301 Exam Overview<\/h1>/.test(html)) {
-      fail(`${relative}: expected CCNA overview h1 is missing`);
+    if (!/<h1>CCNA 200-301 Study Resources<\/h1>/.test(html)) {
+      fail(`${relative}: expected CCNA resource-hub h1 is missing`);
+    }
+
+    const resourceHeadingIndex = html.indexOf('id="exam-resources-heading"');
+    const versionHeadingIndex = html.indexOf("Use v1.1 through February 2, 2027 and v2.0 starting February 3, 2027");
+    const overviewHeadingIndex = html.indexOf('id="exam-overview-heading"');
+    if (resourceHeadingIndex < 0 || versionHeadingIndex < 0 || overviewHeadingIndex < 0) {
+      fail(`${relative}: CCNA resource-first section ordering markers are incomplete`);
+    } else if (!(resourceHeadingIndex < versionHeadingIndex && resourceHeadingIndex < overviewHeadingIndex)) {
+      fail(`${relative}: CCNA study resources must appear before exam-version and overview content`);
+    }
+
+    const requiredResourceLinks = [
+      "/ccna/200-301-v2/study-guide/",
+      "/ccna/200-301-v2/study-guide/network-infrastructure-connectivity/",
+      "/ccna/200-301-v2/study-guide/switching-network-access/",
+      "/ccna/200-301-v2/study-guide/ip-routing/",
+      "/ccna/acronyms/",
+      "/ccna/commands/",
+      "/network-plus/n10-009/study-guide/ipv4-subnetting/",
+      "/tools/subnet-calculator/",
+      "/ports-protocols/"
+    ];
+    for (const href of requiredResourceLinks) {
+      if (!html.includes(`href="${href}"`)) {
+        fail(`${relative}: CCNA resource hub is missing ${href}`);
+      }
     }
 
     const requiredSectionIds = [
@@ -1959,15 +2094,30 @@ for (const file of htmlFiles) {
       }
     }
 
-    const domainCardCount = (html.match(/class="card__meta">Domain [1-6]\.0 ·/g) || []).length;
-    if (domainCardCount !== 6) {
-      fail(`${relative}: expected 6 CCNA domain cards, found ${domainCardCount}`);
+    const domainCardCount = (html.match(/class="card__meta">Domain [1-5]\.0 ·/g) || []).length;
+    if (domainCardCount !== 5) {
+      fail(`${relative}: expected 5 CCNA v2.0 domain cards, found ${domainCardCount}`);
+    }
+
+    const publishedDomainGuideLinks = [
+      ["/ccna/200-301-v2/study-guide/network-infrastructure-connectivity/", "Open Domain 1 guide"],
+      ["/ccna/200-301-v2/study-guide/switching-network-access/", "Open Domain 2 guide"],
+      ["/ccna/200-301-v2/study-guide/ip-routing/", "Open Domain 3 guide"]
+    ];
+    for (const [href, label] of publishedDomainGuideLinks) {
+      if (!html.includes(`href="${href}"`) || !html.includes(label)) {
+        fail(`${relative}: published CCNA domain card is missing ${label}`);
+      }
     }
 
     const requiredMarkers = [
       "Last day for v1.1",
       "First day for v2.0",
       "Network+ foundation",
+      "25%",
+      "20%",
+      "10%",
+      "Official 200-301 CCNA v2.0 exam topics",
       "One 200-301 exam",
       "30 credits",
       "not affiliated with or endorsed by Cisco"
@@ -1978,6 +2128,132 @@ for (const file of htmlFiles) {
         fail(`${relative}: CCNA overview is missing ${marker}`);
       }
     }
+
+    if (!html.includes('href="/ccna/commands/"')) {
+      fail(`${relative}: CCNA overview is missing the IOS command reference link`);
+    }
+
+    if (html.includes("Planned CCNA v2.0 resources")) {
+      fail(`${relative}: CCNA overview still exposes internal roadmap copy`);
+    }
+  }
+
+  if (relative === "ccna/acronyms/index.html") {
+    if (!html.includes("data-print-guide")) {
+      fail(`${relative}: acronym reference is missing the shared Print | Save control`);
+    }
+
+    if (!/<h1>CCNA Acronyms and Terms<\/h1>/.test(html)) {
+      fail(`${relative}: acronym reference is missing its stable CCNA h1`);
+    }
+
+    const acronymEntryCount = (html.match(/data-acronym-entry/g) || []).length;
+    if (acronymEntryCount < 60) {
+      fail(`${relative}: expected at least 60 acronym entries, found ${acronymEntryCount}`);
+    }
+
+    const requiredAcronymMarkup = [
+      "data-acronym-search",
+      "data-acronym-clear",
+      "data-acronym-status",
+      "data-acronym-reference",
+      "data-acronym-empty",
+      'src="/assets/js/acronym-filter.js"',
+      "Context still matters",
+      "Open Shortest Path First",
+      "Hot Standby Router Protocol",
+      "Virtual Router Redundancy Protocol",
+      "Link Aggregation Control Protocol",
+      "Received Signal Strength Indicator",
+      "Terminal Access Controller Access-Control System Plus"
+    ];
+
+    for (const marker of requiredAcronymMarkup) {
+      if (!html.includes(marker)) {
+        fail(`${relative}: acronym reference is missing ${marker}`);
+      }
+    }
+
+    if (!html.includes('class="article-toc article-toc--compact-grid"')) {
+      fail(`${relative}: acronym reference is missing the shared compact sidebar index`);
+    }
+
+    if (!html.includes('<h2 id="article-toc-title">Jump to</h2>')) {
+      fail(`${relative}: acronym sidebar is missing its Jump to heading`);
+    }
+
+    const acronymJumpLinkCount = (html.match(/href=["']#acronyms-[^"']+["']/g) || []).length;
+    if (acronymJumpLinkCount !== 19) {
+      fail(`${relative}: expected 19 sidebar acronym jump links, found ${acronymJumpLinkCount}`);
+    }
+
+    if (html.includes("data-acronym-index")) {
+      fail(`${relative}: retired in-body acronym index is still present`);
+    }
+  }
+
+  if (relative === "ccna/commands/index.html") {
+    if (!/<h1>Core Cisco IOS Verification and Troubleshooting Commands for CCNA 200-301 v2\.0<\/h1>/.test(html)) {
+      fail(`${relative}: expected CCNA command reference h1 is missing`);
+    }
+
+    if (!html.includes('data-print-guide')) {
+      fail(`${relative}: CCNA command reference is missing the shared Print | Save control`);
+    }
+
+    const requiredSectionIds = [
+      "workflow",
+      "command-map",
+      "interfaces",
+      "vlans-trunks",
+      "etherchannel",
+      "spanning-tree",
+      "neighbors",
+      "routing",
+      "ospf",
+      "dhcp-fhrp",
+      "acl-nat",
+      "logs-path",
+      "sequence",
+      "official-references"
+    ];
+
+    for (const id of requiredSectionIds) {
+      if (!html.includes(`id="${id}"`)) {
+        fail(`${relative}: CCNA command reference is missing section #${id}`);
+      }
+    }
+
+    const requiredMarkers = [
+      "show ip interface brief",
+      "show interfaces trunk",
+      "show etherchannel summary",
+      "show spanning-tree",
+      "show ip route",
+      "show ipv6 route",
+      "show ip ospf neighbor",
+      "show ospfv3 neighbor",
+      "show ip dhcp pool",
+      "show ip dhcp binding",
+      "show standby brief",
+      "show vrrp brief",
+      "show ip access-lists",
+      "show ip nat translations",
+      "show logging",
+      'href="/ccna/"',
+      'href="/ccna/acronyms/"',
+      'href="/network-plus/n10-009/study-guide/ipv4-subnetting/"'
+    ];
+
+    for (const marker of requiredMarkers) {
+      if (!html.includes(marker)) {
+        fail(`${relative}: CCNA command reference is missing ${marker}`);
+      }
+    }
+  }
+
+  if (relative === "cissp/index.html" && html.includes("Possible next CISSP resources")) {
+    fail(`${relative}: CISSP overview still exposes internal roadmap copy`);
   }
 
   const isSecurityPagedQuestion = relative.startsWith(

@@ -8,7 +8,7 @@ printable: true
 printTitle: "Security+ SY0-701 Domain 1: General Security Concepts"
 author: certHappens
 datePublished: 2026-07-23
-dateModified: 2026-07-27
+dateModified: 2026-07-31
 articleSection: Security+ SY0-701 Domain 1
 eyebrow: Security+ Domain 1 guide
 lede: Learn how the core security ideas fit together, where exam questions draw the line, and which clues point to the strongest answer.
@@ -231,7 +231,7 @@ Reliable non-repudiation depends on the surrounding process. Private keys must b
 
 <h3>Authentication, authorization, and accounting</h3>
 
-AAA separates three access-control activities:
+Authentication, authorization, and accounting (AAA) separates three access-control activities:
 
 <div class="table-scroll" role="region" aria-label="Authentication authorization and accounting comparison" tabindex="0">
   <table>
@@ -355,7 +355,7 @@ Deception resources attract or expose suspicious activity without offering real 
 - A **honeypot** imitates a system or service.
 - A **honeynet** provides a group or network of decoy systems.
 - A **honeyfile** is a decoy file that should not be accessed during normal work.
-- A **honeytoken** is a decoy credential, record, API key, or other data element whose use creates a high-confidence alert.
+- A **honeytoken** is a decoy credential, record, application programming interface (API) key, or other data element whose use creates a high-confidence alert.
 
 These controls can improve detection and reveal attacker behavior. They require isolation, monitoring, and careful design so the decoy cannot become a useful path into production.
 
@@ -401,7 +401,7 @@ Version control records who changed a configuration or document, what changed, a
   <p><strong>Exam clue:</strong> When a question asks what should happen before implementation, look for approval, impact analysis, testing, stakeholder coordination, and a backout plan. When it asks what prevents future confusion, documentation and version control become stronger choices.</p>
 </div>
 
-<h2 id="cryptography-pki">Cryptography, keys, and PKI</h2>
+<h2 id="cryptography-pki">Cryptography, keys, and public-key infrastructure (PKI)</h2>
 
 Cryptographic questions become easier when you identify the security result first. Confidentiality, integrity, authenticity, and trust validation use related tools, but they are not interchangeable.
 
@@ -483,9 +483,9 @@ Protecting the algorithm while exposing private keys would defeat the design. Co
 
 Choose based on the scenario. A TPM commonly protects device-bound keys. An HSM is suited to high-value centralized signing or certificate-authority operations. A KMS coordinates lifecycle and access across applications and services.
 
-<h3>PKI and certificate trust</h3>
+<h3>Public-key infrastructure (PKI) and certificate trust</h3>
 
-Public key infrastructure connects identities with public keys through certificates and trust relationships.
+Public-key infrastructure (PKI) connects identities with public keys through certificates and trust relationships.
 
 A typical certificate process includes:
 

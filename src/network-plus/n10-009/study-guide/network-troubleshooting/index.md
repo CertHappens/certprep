@@ -8,7 +8,7 @@ printable: true
 printTitle: "Network+ N10-009 Domain 5: Network Troubleshooting"
 author: certHappens
 datePublished: 2026-07-26
-dateModified: 2026-07-27
+dateModified: 2026-07-31
 articleSection: Network+ N10-009 Domain 5
 eyebrow: Network+ domain 5 guide
 lede: Isolate the fault with evidence, change one thing for a reason, and verify the whole service after the fix.
@@ -185,7 +185,7 @@ Choose an approach that fits the symptom:
 - **Bottom to top:** Start at the physical layer when link, signal, cable, or interface evidence is suspicious.
 - **Divide and conquer:** Start at a middle layer, often IP connectivity, then move up or down according to the result.
 
-A theory should predict an observable result. “The network is broken” is not a theory. “The client received no DHCP lease and assigned itself an Automatic Private IP Addressing address” predicts a 169.254.0.0/16 address, missing normal scope options, and failure to reach routed destinations.
+A theory should predict an observable result. “The network is broken” is not a theory. “The client received no Dynamic Host Configuration Protocol (DHCP) lease and assigned itself an Automatic Private IP Addressing (APIPA) address” predicts a 169.254.0.0/16 address, missing normal scope options, and failure to reach routed destinations.
 
 <h3>3. Test the theory</h3>
 
@@ -224,7 +224,7 @@ Scope is one of the fastest ways to reduce the possible causes.
     </thead>
     <tbody>
       <tr><td data-label="Observed scope">One application on one host</td><td data-label="Likely place to look">Local application, host firewall, name resolution, proxy, credentials, or service port</td><td data-label="Useful comparison">Try another application on the same host and the same application from another host.</td></tr>
-      <tr><td data-label="Observed scope">All applications on one host</td><td data-label="Likely place to look">Link, interface, address, mask, gateway, DNS settings, VLAN access, or endpoint condition</td><td data-label="Useful comparison">Test a nearby host using the same switch or access point.</td></tr>
+      <tr><td data-label="Observed scope">All applications on one host</td><td data-label="Likely place to look">Link, interface, address, mask, gateway, Domain Name System (DNS) settings, virtual local area network (VLAN) access, or endpoint condition</td><td data-label="Useful comparison">Test a nearby host using the same switch or access point.</td></tr>
       <tr><td data-label="Observed scope">One VLAN or floor</td><td data-label="Likely place to look">Access switch, trunk, VLAN assignment, gateway interface, Dynamic Host Configuration Protocol scope, or local uplink</td><td data-label="Useful comparison">Compare an unaffected VLAN on the same switch and the same VLAN on another switch.</td></tr>
       <tr><td data-label="Observed scope">One site</td><td data-label="Likely place to look">Site edge, wide area network path, local routing, site services, power, or provider circuit</td><td data-label="Useful comparison">Test another site reaching the same destination.</td></tr>
       <tr><td data-label="Observed scope">One hosted service from every site</td><td data-label="Likely place to look">Service availability, Domain Name System, load balancer, firewall, certificate, server route, or upstream provider</td><td data-label="Useful comparison">Test another service across the same wide area paths.</td></tr>
@@ -446,7 +446,7 @@ Compare the service set identifier, security configuration, VLAN mapping, radio 
       <tr><td data-label="Tool or command"><code>tcpdump</code></td><td data-label="Best question">What packet-level traffic is visible from a command-line capture point?</td><td data-label="Important limit">Filters and interface selection matter; a capture on the wrong interface may look like no traffic exists.</td></tr>
       <tr><td data-label="Tool or command"><code>netstat</code> or platform equivalent</td><td data-label="Best question">Which local connections, listening sockets, and protocol statistics exist?</td><td data-label="Important limit">Output describes the local system and does not replace packet or path evidence.</td></tr>
       <tr><td data-label="Tool or command"><code>ipconfig</code>, <code>ifconfig</code>, or <code>ip</code></td><td data-label="Best question">What address, prefix, gateway, interface state, and related local configuration does the host have?</td><td data-label="Important limit">A plausible configuration still needs reachability and service validation.</td></tr>
-      <tr><td data-label="Tool or command"><code>arp</code> or neighbor-table command</td><td data-label="Best question">Which local protocol address maps to which Media Access Control address?</td><td data-label="Important limit">Entries age and can be incomplete, stale, or affected by duplicate addresses or spoofing.</td></tr>
+      <tr><td data-label="Tool or command"><code>arp</code> or Address Resolution Protocol (ARP) neighbor-table command</td><td data-label="Best question">Which local protocol address maps to which Media Access Control (MAC) address?</td><td data-label="Important limit">Entries age and can be incomplete, stale, or affected by duplicate addresses or spoofing.</td></tr>
       <tr><td data-label="Tool or command">Nmap</td><td data-label="Best question">Which hosts, ports, services, or response patterns are visible from the scanner’s position?</td><td data-label="Important limit">Use only with authorization. Filtering and host defenses affect results.</td></tr>
       <tr><td data-label="Tool or command">Link Layer Discovery Protocol (LLDP) or Cisco Discovery Protocol (CDP)</td><td data-label="Best question">Which neighboring device and port advertise a direct Layer 2 relationship?</td><td data-label="Important limit">Discovery may be disabled, filtered, unsupported, or reveal only directly connected neighbors.</td></tr>
       <tr><td data-label="Tool or command">Speed tester</td><td data-label="Best question">What throughput and sometimes latency or loss does this test achieve between its endpoints?</td><td data-label="Important limit">The result includes endpoint, path, server, protocol, and timing effects and may not represent every application.</td></tr>
@@ -616,7 +616,7 @@ Interference, channel overlap, authentication, controller events, client drivers
 
 The protective condition may immediately return, or the original risk may remain. Identify why the port was disabled first.
 
-<h3>Assuming APIPA proves the DHCP server is down</h3>
+<h3>Assuming Automatic Private IP Addressing (APIPA) proves the DHCP server is down</h3>
 
 The failure may be the client, VLAN, relay, access control, pool, server, or return path. APIPA shows that normal configuration was not obtained.
 
@@ -667,7 +667,6 @@ After reviewing, take a [Network+ N10-009 practice test](/network-plus/n10-009/p
 <h2 id="official-references">Official references</h2>
 
 - [CompTIA Network+ certification page](https://www.comptia.org/en-us/certifications/network/)
-- [CompTIA Network+ N10-009 exam objectives](https://assets.ctfassets.net/82ripq7fjls2/113XqW3JHT7AlIU33M63I0/af42da2af7383a38f318bad10aa9afbd/Network_Plus_N10-009_Exam_Objectives.pdf)
 - [RFC 792: Internet Control Message Protocol](https://www.rfc-editor.org/rfc/rfc792)
 - [RFC 826: An Ethernet Address Resolution Protocol](https://www.rfc-editor.org/rfc/rfc826)
 - [RFC 2131: Dynamic Host Configuration Protocol](https://www.rfc-editor.org/rfc/rfc2131)

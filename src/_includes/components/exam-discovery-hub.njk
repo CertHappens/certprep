@@ -17,6 +17,29 @@
   </div>
 </header>
 
+{% if examHub.resourcesFirst %}
+<section class="section section--bordered" aria-labelledby="exam-resources-heading">
+  <div class="page-shell">
+    <div class="section-heading">
+      <p class="eyebrow">{{ examHub.currentResources.eyebrow }}</p>
+      <h2 id="exam-resources-heading">{{ examHub.currentResources.heading }}</h2>
+      <p>{{ examHub.currentResources.intro }}</p>
+    </div>
+
+    <div class="card-grid">
+      {% for link in examHub.currentResources.links %}
+      <article class="card">
+        <h3>{{ link.title }}</h3>
+        <p>{{ link.description }}</p>
+        <a class="card__link" href="{{ link.url }}">Open {{ link.title | lower }}</a>
+      </article>
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
+{% endif %}
+
 <section class="section">
   <div class="page-shell">
     <div class="callout">
@@ -117,6 +140,7 @@
         <p class="card__meta">{{ examHub.scope.itemLabel }} {{ domain.number }} · {{ domain.weight }}</p>
         <h3>{{ domain.name }}</h3>
         <p>{{ domain.focus }}</p>
+        {% if domain.url %}<a class="card__link" href="{{ domain.url }}">{% if domain.linkLabel %}{{ domain.linkLabel }}{% else %}Open domain guide{% endif %}</a>{% endif %}
       </article>
       {% endfor %}
     </div>
@@ -161,6 +185,7 @@
   </div>
 </section>
 
+{% if not examHub.resourcesFirst %}
 <section class="section section--bordered" aria-labelledby="exam-resources-heading">
   <div class="page-shell">
     <div class="section-heading">
@@ -179,14 +204,9 @@
       {% endfor %}
     </div>
 
-    <div class="callout">
-      <strong>{{ examHub.currentResources.plannedHeading }}</strong>
-      <ul>
-        {% for item in examHub.currentResources.planned %}<li>{{ item }}</li>{% endfor %}
-      </ul>
-    </div>
   </div>
 </section>
+{% endif %}
 
 <section class="section" aria-labelledby="exam-sources-heading">
   <div class="page-shell prose">

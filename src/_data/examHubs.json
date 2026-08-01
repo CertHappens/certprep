@@ -9,9 +9,9 @@
     "lede": "Understand the exam's scope, experience path, and management-level perspective before deciding how CISSP fits your security career.",
     "sourceReviewed": "2026-07-29",
     "status": {
-      "label": "Overview available",
-      "heading": "A useful starting point, not a full CISSP course",
-      "body": "Cert Happens does not yet offer a dedicated CISSP practice-test bank or eight-domain study guide. This overview explains the current certification structure and connects familiar Security+ and Network+ topics to the broader decisions CISSP candidates must prepare to make."
+      "label": "How to use this overview",
+      "heading": "Start with scope, experience, and decision-making",
+      "body": "Use this page to understand the current CISSP exam structure, experience path, and the broader management and risk perspective expected from candidates. The linked Security+ and Network+ material is best used as a technical refresher, not as a substitute for CISSP-specific preparation."
     },
     "summary": [
       "CISSP covers security across an entire organization. Technical knowledge still matters, but candidates also need to connect controls to business objectives, legal duties, architecture, risk, operations, and program leadership.",
@@ -204,13 +204,7 @@
           "description": "Refresh common services, transports, secure alternatives, and operational clues."
         }
       ],
-      "planned": [
-        "A Security+ to CISSP transition guide",
-        "A deeper guide to CISSP decision-making and organizational context",
-        "Dedicated CISSP practice questions only after the content and review process can support them"
-      ],
-      "eyebrow": "Current resources",
-      "plannedHeading": "Possible next CISSP resources"
+      "eyebrow": "Current resources"
     },
     "officialSources": [
       {
@@ -252,18 +246,19 @@
     "name": "CCNA",
     "fullName": "Cisco Certified Network Associate",
     "provider": "Cisco",
-    "eyebrow": "Certification overview",
-    "title": "CCNA 200-301 Exam Overview",
-    "lede": "Understand the current exam, the February 2027 refresh, and the hands-on skills that separate CCNA preparation from a vendor-neutral networking review.",
-    "sourceReviewed": "2026-07-29",
+    "eyebrow": "CCNA study resources",
+    "title": "CCNA 200-301 Study Resources",
+    "lede": "Study CCNA with the v2.0 guide, Domains 1 through 3 walkthroughs, IOS verification reference, subnetting tools, and supporting networking references. Exam-version details are included below so you can match the right blueprint to your test date.",
+    "sourceReviewed": "2026-07-31",
+    "resourcesFirst": true,
     "status": {
-      "label": "CCNA foundation available",
-      "heading": "Planning for the 200-301 v2.0 exam",
-      "body": "Cert Happens does not yet offer a dedicated CCNA practice-test bank or Cisco IOS study guide. This overview explains the version transition, maps the current skill areas, and shows which existing Network+ resources can support the foundation while the v2.0 objective map and review workflow are built."
+      "label": "Which blueprint should you study?",
+      "heading": "Use v1.1 through February 2, 2027 and v2.0 starting February 3, 2027",
+      "body": "If your exam is scheduled by February 2, prepare against the active v1.1 blueprint. For an exam on or after February 3, use the published v2.0 scope. The technical core overlaps heavily, so work on addressing, switching, routing, services, security, automation, and troubleshooting remains useful across the transition."
     },
     "summary": [
-      "CCNA measures whether a candidate can understand, configure, verify, and troubleshoot a small to medium network. Addressing, switching, routing, wireless, security, services, and automation are connected through practical operational decisions rather than treated as isolated definitions.",
-      "The current 200-301 v1.1 exam remains available through February 2, 2027. Cisco says the v2.0 exam launches February 3, 2027 with more practical assessment, troubleshooting, security-first thinking, and AI in network management and operations."
+      "CCNA measures whether a candidate can understand, configure, verify, and troubleshoot a small to medium network. Addressing, switching, routing, security, services, and network operations are connected through practical decisions rather than treated as isolated definitions.",
+      "The current 200-301 v1.1 exam remains available through February 2, 2027. Cisco's published v2.0 blueprint takes effect February 3, 2027 and consolidates the exam into five domains with heavier emphasis on troubleshooting, practical configuration, security, and AI-assisted network operations."
     ],
     "quickFacts": [
       {
@@ -293,10 +288,10 @@
     ],
     "transition": {
       "eyebrow": "Version transition",
-      "heading": "Study now without building toward an obsolete target",
+      "heading": "What carries forward to CCNA v2.0",
       "paragraphs": [
         "Candidates planning to test by February 2, 2027 should continue using the current v1.1 blueprint. Cisco has said the refresh keeps the technical core, so current study in subnetting, switching, routing, services, security, and automation still carries forward.",
-        "Cert Happens will target its first dedicated CCNA question bank at v2.0. That avoids launching a short-lived bank while still giving current candidates a useful map of the skills that remain central to the certification."
+        "For v2.0, put extra attention on practical verification and troubleshooting. Be ready to connect configuration intent with interface state, switching and routing tables, neighbor relationships, logs, packet evidence, security controls, and AI-assisted network operations."
       ],
       "facts": [
         {
@@ -360,55 +355,55 @@
       ]
     },
     "scope": {
-      "eyebrow": "Current official scope",
-      "heading": "Six current CCNA v1.1 domains",
-      "intro": "These weights describe the current v1.1 exam. Cisco has published a v2.0 refresh for February 2027, so the dedicated Cert Happens bank will be mapped separately before launch.",
+      "eyebrow": "200-301 v2.0 blueprint",
+      "heading": "Five CCNA v2.0 domains",
+      "intro": "Cisco has published the v2.0 blueprint for exams beginning February 3, 2027. Candidates testing through February 2, 2027 should continue using the active v1.1 blueprint for their exam-specific preparation.",
       "itemLabel": "Domain"
     },
     "domains": [
       {
         "number": "1.0",
-        "name": "Network Fundamentals",
-        "weight": "20%",
-        "focus": "Network components, topologies, cabling, TCP/IP, IPv4 and IPv6 addressing, wireless principles, virtualization, and switching concepts."
+        "name": "Network Infrastructure and Connectivity",
+        "weight": "25%",
+        "focus": "Interface and cabling faults, virtualization, IPv4 and IPv6 addressing, wireless principles, wired and wireless client connectivity, and Dynamic Host Configuration Protocol version 4 (DHCPv4) troubleshooting on IOS devices.",
+        "url": "/ccna/200-301-v2/study-guide/network-infrastructure-connectivity/",
+        "linkLabel": "Open Domain 1 guide"
       },
       {
         "number": "2.0",
-        "name": "Network Access",
-        "weight": "20%",
-        "focus": "VLANs, trunks, discovery protocols, EtherChannel, spanning tree, wireless architecture, management access, and Layer 2 security."
+        "name": "Switching and Network Access",
+        "weight": "25%",
+        "focus": "Layer 2 and Layer 3 interfaces, 802.1Q trunks, Link Aggregation Control Protocol (LACP) EtherChannel, switch virtual interfaces (SVIs), edge-port configuration, Cisco Discovery Protocol (CDP) and Link Layer Discovery Protocol (LLDP) validation, troubleshooting output, and Rapid Per-VLAN Spanning Tree Plus (Rapid PVST+).",
+        "url": "/ccna/200-301-v2/study-guide/switching-network-access/",
+        "linkLabel": "Open Domain 2 guide"
       },
       {
         "number": "3.0",
-        "name": "IP Connectivity",
-        "weight": "25%",
-        "focus": "Routing tables, forwarding decisions, static routing, single-area OSPF, first-hop redundancy, and verification of IPv4 and IPv6 paths."
+        "name": "IP Routing",
+        "weight": "20%",
+        "focus": "Routing-table interpretation, IPv4 and IPv6 static routing, single-area Open Shortest Path First (OSPFv2 and OSPFv3), and operational status of first-hop redundancy protocols.",
+        "url": "/ccna/200-301-v2/study-guide/ip-routing/",
+        "linkLabel": "Open Domain 3 guide"
       },
       {
         "number": "4.0",
-        "name": "IP Services",
-        "weight": "10%",
-        "focus": "NAT, NTP, DHCP, DNS, SNMP, syslog, QoS, secure remote access, and device management services."
+        "name": "Network Services and Security",
+        "weight": "20%",
+        "focus": "AAA management access, secure file transfer, NAT and PAT, DNS troubleshooting, IPsec VPN concepts, IPv4 access control lists, and Layer 2 protections such as DHCP snooping, Dynamic ARP Inspection, RA guard, and port security."
       },
       {
         "number": "5.0",
-        "name": "Security Fundamentals",
-        "weight": "15%",
-        "focus": "Threats, vulnerabilities, access control, Layer 2 protections, device hardening, wireless security, VPN concepts, and security program elements."
-      },
-      {
-        "number": "6.0",
-        "name": "Automation and Programmability",
+        "name": "AI, and Network Operations and Management",
         "weight": "10%",
-        "focus": "Controllers, software-defined architectures, APIs, data formats, configuration management, automation tools, and AI or machine learning in network operations."
+        "focus": "Agentic AI, generative-AI prompt selection for network operations, network management models, SNMP, Ansible-based command execution, and syslog interpretation."
       }
     ],
     "experience": {
       "eyebrow": "Exam and certification path",
       "heading": "One exam, then an active certification cycle",
       "paragraphs": [
-        "CCNA has no formal degree or prior-certification prerequisite. Earning it requires passing the current 200-301 exam version available on the candidate’s test date.",
-        "Most Cisco certifications, including CCNA, remain active for three years. Associate-level recertification can be completed through qualifying exams, 30 Continuing Education credits, or another current option listed in Cisco’s recertification policy.",
+        "CCNA has no formal degree or prior-certification prerequisite. Earning it requires passing the current 200-301 exam version available on the candidate\u2019s test date.",
+        "Most Cisco certifications, including CCNA, remain active for three years. Associate-level recertification can be completed through qualifying exams, 30 Continuing Education credits, or another current option listed in Cisco\u2019s recertification policy.",
         "Because the exam version changes in February 2027, candidates should verify the active blueprint before scheduling and make sure their preparation materials match their intended test date."
       ],
       "maintenance": [
@@ -457,47 +452,55 @@
       ]
     },
     "currentResources": {
-      "eyebrow": "Current resources",
-      "heading": "Useful Cert Happens networking resources available now",
-      "intro": "These resources are written for Network+, so they do not replace Cisco IOS labs or CCNA-specific preparation. They can strengthen the vendor-neutral foundation needed before configuration and verification practice.",
+      "eyebrow": "Study resources",
+      "heading": "Start studying CCNA",
+      "intro": "Use the CCNA-specific guides first, then reinforce subnetting and protocol knowledge with the shared networking references. These are published resources you can use now.",
       "links": [
         {
-          "title": "Network+ study guide",
-          "url": "/network-plus/n10-009/study-guide/",
-          "description": "Review networking concepts, implementation, operations, security, and troubleshooting across all five N10-009 domains."
+          "title": "CCNA 200-301 v2.0 study guide",
+          "url": "/ccna/200-301-v2/study-guide/",
+          "description": "Work through the published five-domain v2.0 scope with configuration, verification, troubleshooting, and lab-oriented study guidance."
+        },
+        {
+          "title": "CCNA acronyms and terms",
+          "url": "/ccna/acronyms/",
+          "description": "Search networking and Cisco abbreviations by initials, full expansion, practical meaning, related terms, and v2.0 domain."
+        },
+        {
+          "title": "Domain 1: Network Infrastructure and Connectivity",
+          "url": "/ccna/200-301-v2/study-guide/network-infrastructure-connectivity/",
+          "description": "Study link and cabling faults, IPv4 and IPv6, virtualization, wireless clients, and DHCPv4 with practical verification and troubleshooting."
+        },
+        {
+          "title": "Domain 2: Switching and Network Access",
+          "url": "/ccna/200-301-v2/study-guide/switching-network-access/",
+          "description": "Configure and troubleshoot switch-to-switch and switch-to-router links, trunks, LACP EtherChannel, SVIs, edge ports, neighbor discovery, and Rapid PVST+."
+        },
+        {
+          "title": "Domain 3: IP Routing",
+          "url": "/ccna/200-301-v2/study-guide/ip-routing/",
+          "description": "Interpret routing tables, troubleshoot IPv4 and IPv6 static routes, configure single-area OSPFv2 and OSPFv3, and read HSRP and VRRP operational state."
+        },
+        {
+          "title": "Cisco IOS verification and troubleshooting commands",
+          "url": "/ccna/commands/",
+          "description": "Choose show, routing, neighbor, ACL, NAT, logging, and path-testing commands based on the state you need to verify."
         },
         {
           "title": "IPv4 subnetting reference",
           "url": "/network-plus/n10-009/study-guide/ipv4-subnetting/",
-          "description": "Review masks, prefixes, boundaries, host capacity, and special-use addresses before applying them to interfaces and routes."
+          "description": "Review masks, prefixes, boundaries, host capacity, wildcard masks, and special-use addresses before applying them to interfaces and routes."
         },
         {
           "title": "IPv4 subnet calculator",
           "url": "/tools/subnet-calculator/",
-          "description": "Check network and broadcast boundaries, usable ranges, masks, and address status while practicing calculations manually."
-        },
-        {
-          "title": "VLANs, trunks, STP, and LACP",
-          "url": "/network-plus/quick-review/vlans-trunks-stp-lacp/",
-          "description": "Separate the Layer 2 features that later need Cisco-specific configuration and verification."
-        },
-        {
-          "title": "Troubleshooting tools",
-          "url": "/network-plus/quick-review/troubleshooting-tools/",
-          "description": "Match host commands, packet tools, cable testers, and wireless tools to the evidence each one provides."
+          "description": "Check network and broadcast boundaries, usable ranges, masks, and address status after working the calculation manually."
         },
         {
           "title": "Ports and protocols",
           "url": "/ports-protocols/",
-          "description": "Refresh common services, transports, secure alternatives, and protocol behavior."
+          "description": "Refresh common services, transports, secure alternatives, and protocol behavior used throughout network configuration and troubleshooting."
         }
-      ],
-      "plannedHeading": "Planned CCNA v2.0 resources",
-      "planned": [
-        "A complete v2.0 objective map and source register",
-        "Cisco IOS command, configuration, and show-output presentation patterns",
-        "Original questions built around routing tables, configurations, verification output, and troubleshooting decisions",
-        "A weighted practice-test bank and domain guides after the review process is ready"
       ]
     },
     "sources": {
@@ -509,6 +512,10 @@
       {
         "label": "Current 200-301 CCNA exam page",
         "url": "https://www.cisco.com/site/us/en/learn/training-certifications/exams/ccna.html"
+      },
+      {
+        "label": "Official 200-301 CCNA v2.0 exam topics",
+        "url": "https://learningcontent.cisco.com/documents/marketing/exam-topics/200-301_CCNA_v2.0_Exam_Topics_PDF.pdf"
       },
       {
         "label": "Current CCNA exam topics",

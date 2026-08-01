@@ -120,7 +120,70 @@
     {
       "label": "CCNA",
       "url": "/ccna/",
-      "matchPrefix": "/ccna/"
+      "matchPrefix": "/ccna/",
+      "menuId": "ccna-navigation",
+      "groups": [
+        {
+          "label": "Overview",
+          "links": [
+            {
+              "label": "CCNA hub",
+              "url": "/ccna/"
+            }
+          ]
+        },
+        {
+          "label": "Subnetting",
+          "links": [
+            {
+              "label": "IPv4 subnetting reference",
+              "url": "/network-plus/n10-009/study-guide/ipv4-subnetting/"
+            },
+            {
+              "label": "IPv4 subnet calculator",
+              "url": "/tools/subnet-calculator/"
+            }
+          ]
+        },
+        {
+          "label": "Study",
+          "links": [
+            {
+              "label": "200-301 v2.0 study guide",
+              "url": "/ccna/200-301-v2/study-guide/"
+            },
+            {
+              "label": "Domain 1: Infrastructure",
+              "url": "/ccna/200-301-v2/study-guide/network-infrastructure-connectivity/"
+            },
+            {
+              "label": "Domain 2: Switching",
+              "url": "/ccna/200-301-v2/study-guide/switching-network-access/"
+            },
+            {
+              "label": "Domain 3: Routing",
+              "url": "/ccna/200-301-v2/study-guide/ip-routing/"
+            }
+          ]
+        },
+        {
+          "label": "References",
+          "links": [
+            {
+              "label": "Acronyms and terms",
+              "url": "/ccna/acronyms/"
+            },
+            {
+              "label": "IOS verification commands",
+              "url": "/ccna/commands/"
+            },
+            {
+              "label": "Ports and protocols",
+              "url": "/ports-protocols/"
+            }
+          ]
+        }
+      ]
     }
   ],
   "footer": [

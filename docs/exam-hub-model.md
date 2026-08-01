@@ -42,21 +42,16 @@ The component reads certification-specific labels from the data record rather th
 - `scope.eyebrow`, `scope.heading`, `scope.intro`, and `scope.itemLabel`
 - `experience.eyebrow`
 - `preparation.eyebrow`
-- `currentResources.eyebrow` and `currentResources.plannedHeading`
+- `currentResources.eyebrow`
 - `sources.heading`, `sources.intro`, and `sources.independence`
 
 ## Publishing standard
 
 A discovery hub must solve a real learner problem. Do not publish a thin placeholder whose main message is that content is coming later.
 
-Status language must distinguish among:
+If a top callout is used, it should answer a learner-facing question such as which exam version applies, how to use the overview, or what prerequisite context matters. Do not use it as an implementation-status badge.
 
-- Overview available
-- Foundation resources available
-- Diagnostic questions available
-- Full practice tests and study guides available
-
-Do not label a certification as fully supported until its practice tests, review workflow, and core study resources are ready.
+Do not imply that a certification has practice tests, study guides, or other resources until those resources are actually published and usable.
 
 ## Adding another hub
 
@@ -72,3 +67,23 @@ Do not label a certification as fully supported until its practice tests, review
 The `sourceReviewed` field is internal and should be updated when official requirements are checked. It is not displayed as an article date.
 
 Before changing exam format, fees, experience requirements, domain weights, transition dates, or maintenance obligations, confirm them against official vendor sources.
+
+## Public-page rules
+
+Discovery hubs are learner-facing pages, not project dashboards. Public copy should explain current exam choices, scope, requirements, and resources that visitors can use now. Roadmaps, implementation status, planned features, question-bank progress, and internal sequencing belong in repository documentation or GitHub unless the information materially changes what a learner should study today.
+
+Exam-version transition dates and availability warnings are appropriate on public pages when they affect which blueprint a visitor should use.
+
+
+## Discovery-first and resource-first hubs
+
+A certification hub can change emphasis as Cert Happens publishes useful material for that exam.
+
+- Discovery-first hubs lead with exam scope, audience, and requirements when few certification-specific resources exist.
+- Resource-first hubs set `resourcesFirst: true` and place published study resources immediately after the page header. Exam scope, version transitions, and certification details remain available as supporting information farther down the page.
+
+Promote a hub to resource-first when visitors can immediately do meaningful study work on Cert Happens. Do not wait for a full question bank if substantive guides, references, or tools already exist.
+
+### Linking published domain guides
+
+Domain cards may expose a learner-facing guide as soon as that guide exists. Add `url` and `linkLabel` to the domain entry in `src/_data/examHubs.json`. The shared hub component renders the link only when `url` is present, so unpublished domains remain informational instead of advertising unfinished work.

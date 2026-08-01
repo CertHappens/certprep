@@ -8,6 +8,7 @@ printable: true
 printTitle: Network+ N10-009 Study Guide
 author: certHappens
 datePublished: 2026-07-25
+dateModified: 2026-07-31
 articleSection: Network+ N10-009
 eyebrow: Network+ study guide
 lede: A practical roadmap for understanding how networks work, applying the right configuration, and troubleshooting from evidence instead of guesswork.
@@ -92,7 +93,7 @@ relatedLinks:
     url: /security-plus/
     description: Review overlapping security, identity, resilience, monitoring, and incident-response topics.
 ---
-Network+ asks you to follow traffic from one system to another and explain what happens at each step. A correct answer may depend on a cable, VLAN, route, address lease, DNS record, authentication service, firewall rule, wireless channel, or failed interface. The hard part is often deciding which clue matters first.
+Network+ asks you to follow traffic from one system to another and explain what happens at each step. A correct answer may depend on a cable, virtual local area network (VLAN), route, address lease, Domain Name System (DNS) record, authentication service, firewall rule, wireless channel, or failed interface. The hard part is often deciding which clue matters first.
 
 For example, a user may report that a website is down. The server could be unreachable, DNS could return the wrong address, the client could lack a valid gateway, a firewall could block the session, or the application could be listening on a different port. A useful troubleshooting process separates those possibilities with evidence instead of changing several settings at once.
 
@@ -138,7 +139,7 @@ Build each topic through four kinds of understanding:
 3. **Evidence.** Recognize the configuration, command output, packet behavior, log entry, or symptom that reveals it.
 4. **Decision.** Choose the appropriate design, control, or troubleshooting action for the stated constraints.
 
-Suppose you are studying DHCP. Memorizing UDP 67 and 68 helps, but it is only the beginning. You should also recognize a client with an APIPA address, explain why a relay is needed across routed boundaries, distinguish a reservation from an exclusion, and identify which scope option supplies the default gateway.
+Suppose you are studying Dynamic Host Configuration Protocol (DHCP). Memorizing User Datagram Protocol (UDP) ports 67 and 68 helps, but it is only the beginning. You should also recognize a client with an Automatic Private IP Addressing (APIPA) address, explain why a relay is needed across routed boundaries, distinguish a reservation from an exclusion, and identify which scope option supplies the default gateway.
 
 Use the [Common Ports and Protocols Reference](/ports-protocols/) when a service name, transport, or secure alternative is unfamiliar. Return to the surrounding topic afterward so the number remains attached to a real network function.
 
@@ -241,7 +242,7 @@ The percentages guide your study time, but the domains overlap. A troubleshootin
 
 This domain supplies the vocabulary and mental model used throughout the rest of the exam. The [detailed Domain 1 guide](/network-plus/n10-009/study-guide/networking-concepts/) expands the roadmap with worked subnetting, device comparisons, cloud decisions, media choices, IPv6 examples, and a complete traffic-flow walkthrough.
 
-<h3>Follow traffic through the OSI model</h3>
+<h3>Follow traffic through the Open Systems Interconnection (OSI) model</h3>
 
 A useful top-to-bottom mnemonic is **APS transports network data physically**:
 
@@ -253,7 +254,7 @@ A useful top-to-bottom mnemonic is **APS transports network data physically**:
 - **Data** Link
 - **Physical**
 
-The wording stays close to what the stack does, which makes it easier to rebuild than an unrelated sentence. After writing the seven layers, attach a familiar clue to each one. Damaged fiber belongs at Physical. MAC addresses and switching belong at Data Link. IP addressing and routing belong at Network. TCP and UDP belong at Transport.
+The wording stays close to what the stack does, which makes it easier to rebuild than an unrelated sentence. After writing the seven layers, attach a familiar clue to each one. Damaged fiber belongs at Physical. Media Access Control (MAC) addresses and switching belong at Data Link. IP addressing and routing belong at Network. Transmission Control Protocol (TCP) and User Datagram Protocol (UDP) belong at Transport.
 
 The OSI model is most useful when it helps you locate a responsibility or fault:
 
@@ -273,7 +274,7 @@ The OSI model is most useful when it helps you locate a responsibility or fault:
       <tr><td>4 Transport</td><td>TCP and UDP conversations, ports, reliability, and flow behavior</td><td>Blocked service port, failed handshake, retransmissions, or UDP loss</td></tr>
       <tr><td>5 Session</td><td>Establishing, maintaining, and ending application sessions</td><td>Session setup or persistence fails while lower-layer connectivity works</td></tr>
       <tr><td>6 Presentation</td><td>Data representation, encryption, and format translation</td><td>Encoding, compression, certificate, or format mismatch</td></tr>
-      <tr><td>7 Application</td><td>User-facing network services and application protocols</td><td>DNS, HTTP, email, authentication, or application-specific error</td></tr>
+      <tr><td>7 Application</td><td>User-facing network services and application protocols</td><td>DNS, Hypertext Transfer Protocol (HTTP), email, authentication, or application-specific error</td></tr>
     </tbody>
   </table>
 </div>
@@ -282,7 +283,7 @@ The model does not require every real protocol to fit neatly into one box. Use i
 
 <h3>Know what each device changes</h3>
 
-A router chooses paths between IP networks. A switch forwards frames within a Layer 2 domain. A firewall applies security policy. An IDS reports suspicious activity, while an IPS can act inline to block it. A load balancer distributes sessions. A proxy communicates on behalf of a client or service. Wireless controllers coordinate managed access points. NAS and SAN technologies provide different forms of networked storage.
+A router chooses paths between IP networks. A switch forwards frames within a Layer 2 domain. A firewall applies security policy. An intrusion detection system (IDS) reports suspicious activity, while an intrusion prevention system (IPS) can act inline to block it. A load balancer distributes sessions. A proxy communicates on behalf of a client or service. Wireless controllers coordinate managed access points. Network-attached storage (NAS) and storage area network (SAN) technologies provide different forms of networked storage.
 
 When a scenario names several devices, ask what information each one examines and what outcome is required. Segmentation between IP networks points toward routing or firewalling. Distributing incoming connections across healthy servers points toward load balancing. Storing files for users differs from presenting block storage to servers.
 
@@ -296,9 +297,9 @@ Study a service as a group of facts:
 - Its protected or modern alternative
 - The symptom produced when it fails
 
-DNS commonly uses UDP and TCP 53. SSH, SFTP, and SCP can all involve TCP 22, so the requested activity determines the best answer. SIP controls voice sessions while media commonly uses separate negotiated RTP ports. ICMP, GRE, ESP, AH, and OSPF do not use TCP or UDP ports.
+DNS commonly uses UDP and TCP 53. Secure Shell (SSH), Secure File Transfer Protocol (SFTP), and Secure Copy Protocol (SCP) can all involve TCP 22, so the requested activity determines the best answer. Session Initiation Protocol (SIP) controls voice sessions while media commonly uses separate negotiated Real-time Transport Protocol (RTP) ports. Internet Control Message Protocol (ICMP), Generic Routing Encapsulation (GRE), Encapsulating Security Payload (ESP), Authentication Header (AH), and OSPF do not use TCP or UDP ports.
 
-Traffic can also be unicast, multicast, broadcast, or anycast. Learn who receives each transmission and where network boundaries limit it. Broadcast behavior matters when analyzing DHCP, ARP, VLAN scope, and unnecessary traffic.
+Traffic can also be unicast, multicast, broadcast, or anycast. Learn who receives each transmission and where network boundaries limit it. Broadcast behavior matters when analyzing DHCP, Address Resolution Protocol (ARP), VLAN scope, and unnecessary traffic.
 
 <h3>Addressing and subnetting</h3>
 
@@ -312,7 +313,7 @@ A reliable subnetting process is more valuable than a memorized chart you cannot
 4. Determine the broadcast address and usable range.
 5. Confirm whether the available host count fits the requirement.
 
-For IPv6, recognize the address types and operational choices rather than trying to force IPv4 habits onto a larger address space. Know why dual stack, tunneling, and NAT64 may appear during transition. Understand that neighbor discovery and essential ICMPv6 functions affect normal operation.
+For IPv6, recognize the address types and operational choices rather than trying to force IPv4 habits onto a larger address space. Know why dual stack, tunneling, and Network Address Translation 64 (NAT64) may appear during transition. Understand that neighbor discovery and essential Internet Control Message Protocol for IPv6 (ICMPv6) functions affect normal operation.
 
 <h3>Media, transceivers, and topology</h3>
 
@@ -324,7 +325,7 @@ Topology questions often describe traffic direction and failure impact. A star c
 
 Cloud questions still depend on networking fundamentals. Virtual networks, subnets, security groups, gateways, VPNs, direct connectivity, routing, and name resolution remain necessary. Know the difference between scalability, which expands capacity, and elasticity, which adjusts capacity with demand.
 
-Modern objectives also include SDN, SD-WAN, VXLAN, zero trust architecture, SASE or SSE, infrastructure as code, and IPv6 transition. Focus on the operational problem each approach addresses. Central policy management and zero-touch provisioning reduce inconsistent manual changes. Overlay networks carry logical segments across an underlay. Infrastructure as code makes configurations reviewable, repeatable, and easier to compare for drift.
+Modern objectives also include software-defined networking (SDN), software-defined wide area networking (SD-WAN), Virtual Extensible LAN (VXLAN), zero trust architecture, secure access service edge (SASE), security service edge (SSE), infrastructure as code, and IPv6 transition. Focus on the operational problem each approach addresses. Central policy management and zero-touch provisioning reduce inconsistent manual changes. Overlay networks carry logical segments across an underlay. Infrastructure as code makes configurations reviewable, repeatable, and easier to compare for drift.
 
 <h2 id="network-implementation">Domain 2: Network Implementation</h2>
 
@@ -336,15 +337,15 @@ Use the [Domain 2: Network Implementation guide](/network-plus/n10-009/study-gui
 
 Static routes are predictable and require manual maintenance. Dynamic routing protocols exchange reachability information and adapt to change. Route selection considers prefix length, administrative distance, and metric. The most specific matching prefix is evaluated before a broader route.
 
-Know the general roles of BGP, OSPF, and EIGRP without treating them as interchangeable. BGP exchanges routes between autonomous systems and supports policy-driven path decisions. OSPF is a link-state interior routing protocol. EIGRP uses its own metric and operational model. The scenario usually provides scale, ownership, convergence, or policy clues.
+Know the general roles of Border Gateway Protocol (BGP), Open Shortest Path First (OSPF), and Enhanced Interior Gateway Routing Protocol (EIGRP) without treating them as interchangeable. BGP exchanges routes between autonomous systems and supports policy-driven path decisions. OSPF is a link-state interior routing protocol. EIGRP uses its own metric and operational model. The scenario usually provides scale, ownership, convergence, or policy clues.
 
-NAT changes address information. PAT allows many internal sessions to share one public address by also tracking transport ports. First-hop redundancy provides a resilient default gateway through a virtual address. Subinterfaces can support multiple logical networks over one physical interface.
+Network Address Translation (NAT) changes address information. Port Address Translation (PAT) allows many internal sessions to share one public address by also tracking transport ports. First-hop redundancy provides a resilient default gateway through a virtual address. Subinterfaces can support multiple logical networks over one physical interface.
 
 <h3>Switching configuration</h3>
 
-VLANs create separate Layer 2 broadcast domains. An access port normally carries one endpoint VLAN. An 802.1Q trunk carries tagged traffic for multiple VLANs, with a native VLAN handled according to the configuration. A switch virtual interface provides a Layer 3 presence for management or inter-VLAN routing.
+Virtual local area networks (VLANs) create separate Layer 2 broadcast domains. An access port normally carries one endpoint VLAN. An Institute of Electrical and Electronics Engineers (IEEE) 802.1Q trunk carries tagged traffic for multiple VLANs, with a native VLAN handled according to the configuration. A switch virtual interface (SVI) provides a Layer 3 presence for management or inter-VLAN routing.
 
-Link aggregation combines compatible physical links into one logical connection for capacity and resilience. Spanning tree prevents Layer 2 loops by controlling redundant paths. Speed and duplex settings must agree. MTU differences can produce failures that appear selective because small packets work while larger packets do not.
+Link aggregation combines compatible physical links into one logical connection for capacity and resilience. Spanning tree prevents Layer 2 loops by controlling redundant paths. Speed and duplex settings must agree. Maximum Transmission Unit (MTU) differences can produce failures that appear selective because small packets work while larger packets do not.
 
 <div class="article-callout">
   <p><strong>Scenario clue:</strong> A trunk can carry several VLANs, but that does not automatically provide routing between them. Look for a router, multilayer switch, or appropriate Layer 3 interface when traffic must cross VLAN boundaries.</p>
@@ -354,21 +355,21 @@ Link aggregation combines compatible physical links into one logical connection 
 
 Wireless performance depends on frequency, channel width, interference, client support, distance, obstacles, and access-point placement. Wider channels can increase throughput but consume more spectrum and may increase contention. Non-overlapping channel planning matters, especially in the 2.4 GHz band.
 
-Distinguish SSID, BSSID, and ESSID. The SSID identifies the wireless network name. A BSSID identifies a particular radio or basic service set. Multiple access points can provide one extended service set for roaming.
+Distinguish the Service Set Identifier (SSID), Basic Service Set Identifier (BSSID), and Extended Service Set Identifier (ESSID). The SSID identifies the wireless network name. A BSSID identifies a particular radio or basic service set. Multiple access points can provide one extended service set for roaming.
 
-Choose security and authentication based on the environment. WPA3 offers stronger protections where supported. Enterprise authentication uses individual identities and a backend service rather than one shared pre-shared key. Guest networks and captive portals should keep untrusted devices away from internal resources.
+Choose security and authentication based on the environment. Wi-Fi Protected Access 3 (WPA3) offers stronger protections where supported. Enterprise authentication uses individual identities and a backend service rather than one shared pre-shared key. Guest networks and captive portals should keep untrusted devices away from internal resources.
 
 Directional antennas focus energy toward a target area. Omnidirectional antennas distribute coverage around the antenna. Autonomous access points operate independently, while lightweight access points depend more heavily on centralized control.
 
 <h3>Physical installation</h3>
 
-An installation plan should account for MDF and IDF placement, rack dimensions, airflow direction, patch panels, fiber distribution, physical locks, power capacity, UPS runtime, PDU limits, grounding, humidity, temperature, and fire suppression.
+An installation plan should account for main distribution frame (MDF) and intermediate distribution frame (IDF) placement, rack dimensions, airflow direction, patch panels, fiber distribution, physical locks, power capacity, uninterruptible power supply (UPS) runtime, power distribution unit (PDU) limits, grounding, humidity, temperature, and fire suppression.
 
 A technically correct network device can still fail in a poor environment. Overloaded power, blocked airflow, unsupported rack depth, excessive cable bend, dirty fiber connectors, and weak physical access controls create problems that configuration changes cannot fix.
 
 <h2 id="network-operations">Domain 3: Network Operations</h2>
 
-Operations keeps the network understandable and supportable after installation. The [detailed Domain 3 guide](/network-plus/n10-009/study-guide/network-operations/) expands this roadmap with documentation, lifecycle and change control, configuration management, monitoring evidence, disaster recovery, DHCP, SLAAC, DNS, time services, VPN access, and management paths.
+Operations keeps the network understandable and supportable after installation. The [detailed Domain 3 guide](/network-plus/n10-009/study-guide/network-operations/) expands this roadmap with documentation, lifecycle and change control, configuration management, monitoring evidence, disaster recovery, Dynamic Host Configuration Protocol (DHCP), Stateless Address Autoconfiguration (SLAAC), Domain Name System (DNS), time services, virtual private network (VPN) access, and management paths.
 
 <h3>Documentation and controlled change</h3>
 
@@ -392,7 +393,7 @@ Monitoring tools answer different questions:
       </tr>
     </thead>
     <tbody>
-      <tr><td>SNMP</td><td>Device status, counters, and management information</td><td>Polling requests data; traps report events without waiting for a poll.</td></tr>
+      <tr><td>Simple Network Management Protocol (SNMP)</td><td>Device status, counters, and management information</td><td>Polling requests data; traps report events without waiting for a poll.</td></tr>
       <tr><td>Flow data</td><td>Who communicated, where, when, and how much</td><td>It summarizes conversations without preserving every packet payload.</td></tr>
       <tr><td>Packet capture</td><td>Detailed frame and packet contents</td><td>It provides depth but can require more storage and analysis.</td></tr>
       <tr><td>Syslog and log aggregation</td><td>Events reported by devices and applications</td><td>Central collection improves correlation and retention.</td></tr>
@@ -406,15 +407,15 @@ Availability monitoring asks whether a service responds. Performance monitoring 
 
 <h3>Recovery and high availability</h3>
 
-RTO describes the targeted time to restore a service. RPO describes the acceptable amount of data loss measured in time. MTTR describes repair or recovery time. MTBF describes expected operating time between failures. Read the scenario carefully because all four may appear beside a system outage.
+Recovery time objective (RTO) describes the targeted time to restore a service. Recovery point objective (RPO) describes the acceptable amount of data loss measured in time. Mean time to repair (MTTR) describes repair time. Mean time between failures (MTBF) describes expected operating time between failures. Read the scenario carefully because all four may appear beside a system outage.
 
 Cold, warm, and hot sites differ in readiness, cost, equipment, data, and activation time. Active-active designs serve work from multiple systems at the same time. Active-passive designs keep standby capacity ready to take over. Tabletop exercises test decisions and communication, while validation tests confirm whether systems and procedures work as expected.
 
 <h3>Network services and management access</h3>
 
-For DHCP, know scopes, lease time, reservations, exclusions, options, and relay behavior. For DNS, recognize common record types, forward and reverse zones, authoritative and recursive roles, primary and secondary service, DNSSEC, DoH, and DoT. For time services, understand why consistent time supports authentication, logs, monitoring, and incident analysis.
+For DHCP, know scopes, lease time, reservations, exclusions, options, and relay behavior. For DNS, recognize common record types, forward and reverse zones, authoritative and recursive roles, primary and secondary service, Domain Name System Security Extensions (DNSSEC), DNS over HTTPS (DoH), and DNS over TLS (DoT). Hypertext Transfer Protocol Secure (HTTPS) and Transport Layer Security (TLS) are the protected transports named in those last two abbreviations. For time services, understand why consistent time supports authentication, logs, monitoring, and incident analysis.
 
-Administrative access can be in-band through the production network or out-of-band through a separate management path. SSH, graphical interfaces, APIs, console access, jump hosts, site-to-site VPNs, client VPNs, split tunnels, and full tunnels serve different operational needs and risk levels.
+Administrative access can be in-band through the production network or out-of-band through a separate management path. SSH, graphical interfaces, application programming interfaces (APIs), console access, jump hosts, site-to-site virtual private networks (VPNs), client VPNs, split tunnels, and full tunnels serve different operational needs and risk levels.
 
 <h2 id="network-security">Domain 4: Network Security</h2>
 
@@ -424,13 +425,13 @@ Network security questions combine identity, encryption, segmentation, hardening
 
 Authentication verifies an identity. Authorization determines allowed actions. Accounting records activity. Multifactor authentication combines different factor types. Single sign-on reduces repeated authentication across connected services.
 
-RADIUS commonly supports centralized network access. LDAP provides directory access. SAML and other federation technologies can carry identity assertions between systems. Certificates and PKI support identity and protected communication. Encryption can protect data in transit and at rest, but the keys, trust process, protocol, and endpoint configuration determine whether the protection is effective.
+Remote Authentication Dial-In User Service (RADIUS) commonly supports centralized network access. Lightweight Directory Access Protocol (LDAP) provides directory access. Security Assertion Markup Language (SAML) and other federation technologies can carry identity assertions between systems. Certificates and public key infrastructure (PKI) support identity and protected communication. Encryption can protect data in transit and at rest, but the keys, trust process, protocol, and endpoint configuration determine whether the protection is effective.
 
 <h3>Segmentation and access control</h3>
 
-Segmentation limits broadcast scope, separates trust levels, contains faults, and reduces unnecessary access. VLANs provide logical Layer 2 separation. Firewalls, ACLs, security groups, and routed boundaries can enforce communication policy between segments. A screened subnet places public-facing services in a controlled area between trust zones.
+Segmentation limits broadcast scope, separates trust levels, contains faults, and reduces unnecessary access. VLANs provide logical Layer 2 separation. Firewalls, access control lists (ACLs), security groups, and routed boundaries can enforce communication policy between segments. A screened subnet places public-facing services in a controlled area between trust zones.
 
-Network access control can evaluate identity, device posture, or policy before granting access. 802.1X provides port-based network access control. Port security and MAC filtering can restrict endpoints, but MAC addresses can be copied and should not be treated as strong identity by themselves.
+Network access control can evaluate identity, device posture, or policy before granting access. Institute of Electrical and Electronics Engineers (IEEE) 802.1X provides port-based network access control. Port security and MAC filtering can restrict endpoints, but MAC addresses can be copied and should not be treated as strong identity by themselves.
 
 <h3>Recognize network attacks</h3>
 
@@ -443,13 +444,13 @@ Learn what changes in the network when an attack succeeds:
 - **Rogue DHCP** supplies unauthorized network settings.
 - **Rogue access points and evil twins** create unauthorized or deceptive wireless access.
 - **On-path attacks** place an attacker in the communication path.
-- **DoS and DDoS** exhaust capacity or service availability.
+- **Denial-of-service (DoS) and distributed denial-of-service (DDoS)** attacks exhaust capacity or service availability.
 
 The strongest answer addresses the described layer and control point. DHCP snooping helps with unauthorized DHCP behavior. Dynamic ARP inspection can validate ARP messages using trusted information. Port security addresses endpoint behavior on switch ports. A wireless survey will not correct a poisoned DNS response.
 
 <h3>Hardening and defensive controls</h3>
 
-Disable unused services and ports, replace default credentials, restrict administrative access, protect management protocols, maintain current software, back up configurations, and log important activity. Apply ACLs, URL or content filtering, security zones, key management, NAC, 802.1X, and monitoring according to the network's risk and operational needs.
+Disable unused services and ports, replace default credentials, restrict administrative access, protect management protocols, maintain current software, back up configurations, and log important activity. Apply ACLs, Uniform Resource Locator (URL) or content filtering, security zones, key management, NAC, 802.1X, and monitoring according to the network's risk and operational needs.
 
 A broad block can create a new outage. Before applying a rule, identify source, destination, service, transport, direction, state, and business purpose. After the change, verify that the intended protection works and required traffic still passes.
 
@@ -483,13 +484,13 @@ Scope reduces the number of plausible causes. One failed workstation points towa
 
 <h3>Physical and interface symptoms</h3>
 
-Cabling faults include incorrect type, excessive distance, crosstalk, interference, attenuation, poor termination, and reversed transmit or receive paths. Interface counters reveal CRC errors, runts, giants, drops, and other symptoms. Port states can be administratively down, suspended, or error-disabled. PoE failures can come from budget limits or incompatible standards. Transceiver type, wavelength, media, and signal strength must match.
+Cabling faults include incorrect type, excessive distance, crosstalk, interference, attenuation, poor termination, and reversed transmit or receive paths. Interface counters reveal cyclic redundancy check (CRC) errors, runts, giants, drops, and other symptoms. Port states can be administratively down, suspended, or error-disabled. Power over Ethernet (PoE) failures can come from budget limits or incompatible standards. Transceiver type, wavelength, media, and signal strength must match.
 
 Use a cable tester for wiring and continuity, a toner to trace copper, a visual fault locator for certain fiber faults, an optical power meter for signal strength, and interface statistics for error patterns. Replacing a switch before testing the cable is expensive troubleshooting theater.
 
 <h3>Service, routing, switching, and performance faults</h3>
 
-An APIPA address suggests DHCP failed and no static configuration was available. A wrong default gateway prevents traffic from leaving the local subnet. A missing or less-specific route can send traffic toward the wrong next hop. An incorrect VLAN, native VLAN mismatch, blocked spanning-tree path, or trunk configuration can isolate endpoints even when interfaces show link.
+An Automatic Private IP Addressing (APIPA) address suggests Dynamic Host Configuration Protocol (DHCP) failed and no static configuration was available. A wrong default gateway prevents traffic from leaving the local subnet. A missing or less-specific route can send traffic toward the wrong next hop. An incorrect VLAN, native VLAN mismatch, blocked spanning-tree path, or trunk configuration can isolate endpoints even when interfaces show link.
 
 Performance symptoms include latency, jitter, packet loss, congestion, bottlenecks, oversubscription, wireless interference, weak signal, channel overlap, and duplex mismatch. Measure before changing capacity. High utilization does not identify which conversation caused it, and a fast speed test does not prove low jitter for voice traffic.
 
@@ -592,7 +593,7 @@ Before scheduling the exam, confirm that you can:
 - Configure or interpret common wireless channels, security, authentication, and deployment choices.
 - Read physical, logical, rack, cable, and wireless documentation.
 - Distinguish SNMP, flow records, packet captures, logs, baselines, and port mirroring.
-- Explain DHCP, DNS, NTP, VPN, and management-access behavior.
+- Explain DHCP, DNS, Network Time Protocol (NTP), VPN, and management-access behavior.
 - Recognize common network attacks and select a control that addresses the stated mechanism.
 - Apply the troubleshooting methodology without skipping evidence gathering and verification.
 - Interpret basic endpoint and network-device command output.
@@ -605,8 +606,7 @@ A weak item should become a specific task. “Review routing” is vague. “Exp
 Use the official objectives to confirm scope and exam details. Use protocol registries, RFCs, and vendor documentation to verify how the underlying technologies behave.
 
 <ul>
-  <li><a href="https://assets.ctfassets.net/82ripq7fjls2/113XqW3JHT7AlIU33M63I0/af42da2af7383a38f318bad10aa9afbd/Network_Plus_N10-009_Exam_Objectives.pdf">CompTIA Network+ N10-009 Certification Exam Objectives</a></li>
-  <li><a href="https://www.comptia.org/en-us/certifications/network/">CompTIA Network+ certification page</a></li>
+  <li><a href="https://www.comptia.org/en-us/certifications/network/">CompTIA Network+ certification page and current exam resources</a></li>
   <li><a href="https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xhtml">IANA Service Name and Transport Protocol Port Number Registry</a></li>
   <li><a href="https://www.rfc-editor.org/">RFC Editor</a></li>
 </ul>

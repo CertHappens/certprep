@@ -8,6 +8,7 @@ printable: true
 printTitle: Network Monitoring Evidence Quick Reference for Network+ N10-009
 author: certHappens
 datePublished: 2026-07-27
+dateModified: 2026-07-31
 articleSection: Network+ N10-009 Quick Review
 eyebrow: Network+ quick review
 lede: Start with the question you need answered, then choose the smallest evidence source that can answer it.
@@ -94,9 +95,9 @@ An interface counter can show drops without showing the application conversation
   </thead>
   <tbody>
     <tr>
-      <td data-label="Source"><strong>SNMP</strong></td>
+      <td data-label="Source"><strong>Simple Network Management Protocol (SNMP)</strong></td>
       <td data-label="Best question">What is the device or interface state, value, or counter?</td>
-      <td data-label="Typical evidence">Interface status, utilization, errors, temperature, CPU, memory</td>
+      <td data-label="Typical evidence">Interface status, utilization, errors, temperature, central processing unit (CPU), memory</td>
       <td data-label="Main limitation">Usually does not preserve full application events or packet contents</td>
     </tr>
     <tr>
@@ -171,10 +172,10 @@ Flow data is a strong choice when the question asks:
 - Which hosts are the largest talkers?
 - Which destination received unusual traffic volume?
 - Did a host begin communicating with many external systems?
-- Which application or port consumed a WAN link?
+- Which application or port consumed a wide area network (WAN) link?
 - When did a conversation begin and end?
 
-Flow records are more compact than packet captures because they summarize traffic. That makes them practical for longer retention and network-wide visibility. The tradeoff is detail. A flow record may show a large HTTPS conversation but not the page request, certificate exchange, or application error inside it.
+Flow records are more compact than packet captures because they summarize traffic. That makes them practical for longer retention and network-wide visibility. The tradeoff is detail. A flow record may show a large Hypertext Transfer Protocol Secure (HTTPS) conversation but not the page request, certificate exchange, or application error inside it.
 
 <h2 id="packet-capture">Packet capture: packet-level proof</h2>
 
@@ -182,11 +183,11 @@ A packet capture records packets observed at the capture point. It is appropriat
 
 Examples include:
 
-- Confirming whether a DNS query received a response
-- Distinguishing a TCP reset from a timeout
+- Confirming whether a Domain Name System (DNS) query received a response
+- Distinguishing a Transmission Control Protocol (TCP) reset from a timeout
 - Seeing retransmissions or duplicate acknowledgments
-- Confirming a DHCP discover, offer, request, and acknowledgment sequence
-- Checking whether a VLAN tag or protocol field is present
+- Confirming a Dynamic Host Configuration Protocol (DHCP) discover, offer, request, and acknowledgment sequence
+- Checking whether a virtual local area network (VLAN) tag or protocol field is present
 
 Capture placement decides what you can see. A capture on the client side of a firewall may show the request leaving but not prove that the server received it. A capture after the firewall can answer a different question. Encrypted traffic still exposes some metadata, but application content may remain unreadable.
 
@@ -216,7 +217,7 @@ A fixed threshold is useful when a limit is known, such as storage above 90%. A 
 
 An alert should identify the condition, affected object, time, and useful context. Too many low-value alerts create alert fatigue. Operators begin ignoring messages, including the one that matters.
 
-<h2 id="apis-dashboards">APIs, dashboards, and automation</h2>
+<h2 id="apis-dashboards">Application programming interfaces (APIs), dashboards, and automation</h2>
 
 An application programming interface (API) lets software request monitoring data or trigger an action without relying on a person clicking through a graphical interface. APIs are useful for collecting inventory, opening tickets, enriching alerts, or applying a repeatable response.
 
@@ -270,7 +271,6 @@ Compare current measurements with a valid baseline. A latency value without hist
 <h2 id="official-references">Official references</h2>
 
 - [CompTIA Network+ certification page](https://www.comptia.org/en-us/certifications/network/)
-- [CompTIA Network+ N10-009 exam objectives](https://assets.ctfassets.net/82ripq7fjls2/113XqW3JHT7AlIU33M63I0/af42da2af7383a38f318bad10aa9afbd/Network_Plus_N10-009_Exam_Objectives.pdf)
 - [RFC 3411: Architecture for SNMP Management Frameworks](https://www.rfc-editor.org/rfc/rfc3411)
 - [RFC 5424: The Syslog Protocol](https://www.rfc-editor.org/rfc/rfc5424)
 - [RFC 7011: IP Flow Information Export Protocol](https://www.rfc-editor.org/rfc/rfc7011)

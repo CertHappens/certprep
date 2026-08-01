@@ -8,7 +8,7 @@ printable: true
 printTitle: "Security+ SY0-701 Domain 5: Security Program Management and Oversight"
 author: certHappens
 datePublished: 2026-07-23
-dateModified: 2026-07-27
+dateModified: 2026-07-31
 articleSection: Security+ SY0-701 Domain 5
 eyebrow: Security+ Domain 5 guide
 lede: Connect policies, risk decisions, vendor oversight, compliance work, and security awareness to the people responsible for each outcome.
@@ -273,7 +273,7 @@ An **exception** authorizes a documented deviation from a requirement, often for
 
 Reports should match the audience. Engineers may need affected systems and remediation detail. Executives need business exposure, trend, ownership, cost, and decisions requiring approval.
 
-A business impact analysis identifies critical activities, dependencies, and the effects of disruption. Key measurements include:
+A business impact analysis identifies critical activities, dependencies, and the effects of disruption. Key measurements include recovery time objective (RTO), recovery point objective (RPO), mean time to repair (MTTR), and mean time between failures (MTBF):
 
 <div class="table-scroll" role="region" aria-label="Business impact and reliability measurements" tabindex="0">
   <table>
@@ -312,6 +312,8 @@ Vendor due diligence may review:
 A right-to-audit clause preserves the customer's ability to inspect or obtain evidence under defined conditions. It does not replace normal monitoring. An annual report can become outdated after a major platform, ownership, or control change.
 
 <h3>Agreement types</h3>
+
+Common agreements include a service-level agreement (SLA), memorandum of agreement (MOA), memorandum of understanding (MOU), master service agreement (MSA), statement of work (SOW), non-disclosure agreement (NDA), and business partners agreement (BPA).
 
 <div class="table-scroll" role="region" aria-label="Common third-party agreement types" tabindex="0">
   <table>
@@ -545,10 +547,9 @@ Use the [randomized SY0-701 practice test](/security-plus/sy0-701/practice-test/
 
 <h2 id="official-references">Official references</h2>
 
-The domain scope and weighting are based on the published SY0-701 objectives. The supporting sources below provide primary guidance for governance, risk, supply-chain management, privacy, and learning programs:
+The domain scope and weighting are based on the published SY0-701 objectives. The supporting sources below include guidance from the National Institute of Standards and Technology (NIST) and the Cybersecurity and Infrastructure Security Agency (CISA) for governance, risk, supply-chain management, privacy, and learning programs:
 
 - [CompTIA Security+ certification page](https://www.comptia.org/en-us/certifications/security/)
-- [CompTIA Security+ SY0-701 exam objectives PDF](https://www.examcompass.com/comptia-certifications/security-plus/comptia-security-plus-sy0-701-exam-objectives.pdf)
 - [NIST Cybersecurity Framework 2.0](https://www.nist.gov/cyberframework)
 - [NIST SP 800-30 Rev. 1: Guide for Conducting Risk Assessments](https://csrc.nist.gov/pubs/sp/800/30/r1/final)
 - [NIST SP 800-161 Rev. 1: Cybersecurity Supply Chain Risk Management Practices](https://csrc.nist.gov/pubs/sp/800/161/r1/final)

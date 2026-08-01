@@ -8,7 +8,7 @@ printable: true
 printTitle: Security Controls Quick Reference for Security+ SY0-701
 author: certHappens
 datePublished: 2026-07-24
-dateModified: 2026-07-27
+dateModified: 2026-07-31
 articleSection: Security+ SY0-701 Quick Review
 eyebrow: Security+ quick review
 lede: Classify a control by how it is implemented and by the job it performs, then use the scenario to decide which label matters.
@@ -191,7 +191,7 @@ A single security program often uses all four categories. A written visitor poli
       <td><strong>Preventive</strong></td>
       <td>Stops or blocks an unwanted action</td>
       <td>Does it keep the event from succeeding?</td>
-      <td>Firewall deny rule, least privilege, multifactor authentication, locked door</td>
+      <td>Firewall deny rule, least privilege, multifactor authentication (MFA), locked door</td>
     </tr>
     <tr>
       <td><strong>Deterrent</strong></td>
@@ -203,7 +203,7 @@ A single security program often uses all four categories. A written visitor poli
       <td><strong>Detective</strong></td>
       <td>Finds, records, or reports activity</td>
       <td>Does it reveal that something occurred or is occurring?</td>
-      <td>IDS alert, log review, audit trail, camera recording</td>
+      <td>Intrusion detection system (IDS) alert, log review, audit trail, camera recording</td>
     </tr>
     <tr>
       <td><strong>Corrective</strong></td>
@@ -276,7 +276,7 @@ The wording around a control often matters more than the name of the control.
       <td>The service enforces the requirement before access is granted.</td>
     </tr>
     <tr>
-      <td>A SIEM alerts on repeated failed logins from many locations.</td>
+      <td>A security information and event management (SIEM) platform alerts on repeated failed logins from many locations.</td>
       <td>Technical</td>
       <td>Detective</td>
       <td>The platform identifies and reports suspicious activity.</td>
@@ -376,7 +376,7 @@ A compensating control is an alternate safeguard selected because the preferred 
 
 ### Assuming detection also stops the event
 
-An IDS can identify suspicious traffic without blocking it. An IPS can detect and take preventive action. Pay attention to whether the control only alerts or also enforces.
+An intrusion detection system (IDS) can identify suspicious traffic without blocking it. An intrusion prevention system (IPS) can detect and take preventive action. Pay attention to whether the control only alerts or also enforces.
 
 ### Confusing a required rule with a warning
 
