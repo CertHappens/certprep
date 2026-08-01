@@ -7,6 +7,7 @@ import {
   decodeHtmlEntities,
   elementTextByIdMatches,
   getElementBlockByAttributeValue,
+  getJsonLdGraph,
   hasElementWithNormalizedAttributeValue,
   hasLinkWithText,
   hasPageMarker,
@@ -128,3 +129,37 @@ test("counts structural cards inside a labelled section", () => {
   );
   assert.equal(countElementsWithClass(section, "article", "card"), 2);
 });
+
+test("finds one ownership graph while allowing additional valid JSON-LD blocks", () => {
+  const html = `
+    <script type="application/ld+json">
+      {"@context":"https://schema.org","@graph":[{"@type":"Organization","name":"Cert Happens"}]}
+    </script>
+    <script type="application/ld+json">
+      {"@context":"https://schema.org","@type":"Article","headline":"Study guide"}
+    </script>
+  `;
+
+  assert.deepEqual(getJsonLdGraph(html), {
+    error: "",
+    graph: [{ "@type": "Organization", name: "Cert Happens" }]
+  });
+});
+
+test("rejects duplicate ownership graph blocks", () => {
+  const graph = `<script type="application/ld+json">{"@graph":[]}</script>`;
+  assert.equal(
+    getJsonLdGraph(`${graph}${graph}`).error,
+    "expected one JSON-LD @graph block, found 2"
+  );
+});
+
+test("rejects malformed supplemental JSON-LD", () => {
+  const html = `
+    <script type="application/ld+json">{"@graph":[]}</script>
+    <script type="application/ld+json">{"@type":"Article",}</script>
+  `;
+
+  assert.match(getJsonLdGraph(html).error, /^invalid JSON-LD block 2 /);
+});
+

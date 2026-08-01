@@ -77,6 +77,43 @@ export function textEquals(actual, expected) {
   return normalizeText(actual) === normalizeText(expected);
 }
 
+export function getJsonLdGraph(html = "") {
+  const scripts = [
+    ...String(html).matchAll(
+      /<script\b(?=[^>]*\btype=["']application\/ld\+json["'])[^>]*>([\s\S]*?)<\/script>/gi
+    )
+  ];
+
+  if (scripts.length === 0) {
+    return { error: "missing JSON-LD", graph: [] };
+  }
+
+  const graphBlocks = [];
+
+  for (const [index, script] of scripts.entries()) {
+    try {
+      const data = JSON.parse(script[1]);
+      if (Array.isArray(data?.["@graph"])) {
+        graphBlocks.push(data["@graph"]);
+      }
+    } catch (error) {
+      return {
+        error: `invalid JSON-LD block ${index + 1} (${error.message})`,
+        graph: []
+      };
+    }
+  }
+
+  if (graphBlocks.length !== 1) {
+    return {
+      error: `expected one JSON-LD @graph block, found ${graphBlocks.length}`,
+      graph: []
+    };
+  }
+
+  return { error: "", graph: graphBlocks[0] };
+}
+
 export function getFirstHeadingText(html, level = 1) {
   const match = String(html).match(
     new RegExp(`<h${level}\\b[^>]*>([\\s\\S]*?)<\\/h${level}>`, "i")

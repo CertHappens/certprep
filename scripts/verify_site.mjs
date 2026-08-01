@@ -8,6 +8,7 @@ import {
   escapeRegExp,
   getElementBlockByAttributeValue,
   getFirstHeadingText,
+  getJsonLdGraph,
   hasElementWithNormalizedAttributeValue,
   hasLinkWithText,
   hasPageMarker,
@@ -65,26 +66,6 @@ function getMeta(html, name, property = false) {
   );
 
   return html.match(expression)?.[1] || html.match(reverseExpression)?.[1] || "";
-}
-
-function getJsonLdGraph(html) {
-  const scripts = [
-    ...html.matchAll(
-      /<script\b(?=[^>]*\btype=["']application\/ld\+json["'])[^>]*>([\s\S]*?)<\/script>/gi
-    )
-  ];
-
-  if (scripts.length !== 1) {
-    return { error: `expected one JSON-LD block, found ${scripts.length}`, graph: [] };
-  }
-
-  try {
-    const data = JSON.parse(scripts[0][1]);
-    const graph = Array.isArray(data?.["@graph"]) ? data["@graph"] : [];
-    return { error: "", graph };
-  } catch (error) {
-    return { error: `invalid JSON-LD (${error.message})`, graph: [] };
-  }
 }
 
 function graphNodeByType(graph, type) {
