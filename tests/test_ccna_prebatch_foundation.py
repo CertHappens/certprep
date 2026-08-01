@@ -48,20 +48,39 @@ class CcnaPreBatchFoundationTests(unittest.TestCase):
             weights.setdefault(row["domain_id"], int(row["domain_weight_percent"]))
         self.assertEqual(weights, {"1.0": 25, "2.0": 25, "3.0": 20, "4.0": 20, "5.0": 10})
 
-    def test_ccna_lifecycle_files_are_header_only(self) -> None:
-        for filename in ("draft-questions.csv", "questions.csv", "retired-questions.csv"):
+    def test_ccna_lifecycle_files_support_approved_batches(self) -> None:
+        for filename in ("draft-questions.csv", "retired-questions.csv"):
             with (self.bank / filename).open(encoding="utf-8", newline="") as handle:
                 rows = list(csv.reader(handle))
             self.assertEqual(len(rows), 1, filename)
 
-    def test_empty_ccna_bank_passes_normal_validation(self) -> None:
+        with (self.bank / "questions.csv").open(encoding="utf-8", newline="") as handle:
+            questions = list(csv.DictReader(handle))
+
+        self.assertGreater(len(questions), 0)
+        question_ids = [row["question_id"] for row in questions]
+        self.assertEqual(len(question_ids), len(set(question_ids)))
+        self.assertTrue(all(row["review_status"] == "approved" for row in questions))
+
+    def test_current_ccna_bank_passes_normal_validation(self) -> None:
+        with (self.bank / "questions.csv").open(encoding="utf-8", newline="") as handle:
+            question_count = sum(1 for _ in csv.DictReader(handle))
+
+        stimulus_document = json.loads(
+            (self.bank / "stimuli.json").read_text(encoding="utf-8")
+        )
+        stimulus_count = len(stimulus_document["stimuli"])
+
+        self.assertGreater(question_count, 0)
+        self.assertGreater(stimulus_count, 0)
+
         validator.configure_bank(self.config)
         errors, warnings, info = validator.validate()
         self.assertEqual(errors, [])
         self.assertEqual(warnings, [])
         self.assertIn("Objectives: 59", info)
-        self.assertIn("Question rows: 0", info)
-        self.assertIn("Stimuli: 0", info)
+        self.assertIn(f"Question rows: {question_count}", info)
+        self.assertIn(f"Stimuli: {stimulus_count}", info)
 
     def test_unknown_ccna_stimulus_id_is_rejected(self) -> None:
         with tempfile.TemporaryDirectory() as temporary_directory:
