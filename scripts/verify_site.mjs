@@ -19,6 +19,10 @@ import {
 const outputRoot = path.resolve("_site");
 const errors = [];
 const googleAnalyticsMeasurementId = "G-7MYVYMG2H1";
+const canonicalSiteUrl = "https://certhappens.com";
+const canonicalHost = "certhappens.com";
+const analyticsHosts = [canonicalHost, `www.${canonicalHost}`];
+const copyrightStartYear = 2026;
 const expectsGoogleAnalytics = process.env.CF_PAGES_BRANCH === "main";
 
 function fail(message) {
@@ -61,6 +65,30 @@ function getMeta(html, name, property = false) {
   );
 
   return html.match(expression)?.[1] || html.match(reverseExpression)?.[1] || "";
+}
+
+function getJsonLdGraph(html) {
+  const scripts = [
+    ...html.matchAll(
+      /<script\b(?=[^>]*\btype=["']application\/ld\+json["'])[^>]*>([\s\S]*?)<\/script>/gi
+    )
+  ];
+
+  if (scripts.length !== 1) {
+    return { error: `expected one JSON-LD block, found ${scripts.length}`, graph: [] };
+  }
+
+  try {
+    const data = JSON.parse(scripts[0][1]);
+    const graph = Array.isArray(data?.["@graph"]) ? data["@graph"] : [];
+    return { error: "", graph };
+  } catch (error) {
+    return { error: `invalid JSON-LD (${error.message})`, graph: [] };
+  }
+}
+
+function graphNodeByType(graph, type) {
+  return graph.find((node) => node?.["@type"] === type);
 }
 
 function getNamedInputValues(html, name) {
@@ -196,6 +224,7 @@ function localTarget(href) {
 const publicPageFiles = [
   "index.html",
   "contact/index.html",
+  "copyright/index.html",
   "cissp/index.html",
   "ccna/index.html",
   "ccna/acronyms/index.html",
@@ -249,6 +278,7 @@ const articlePageFiles = [
   "ccna/200-301-v2/study-guide/ip-routing/index.html",
   "ccna/200-301-v2/study-guide/network-services-security/index.html",
   "ccna/200-301-v2/study-guide/ai-network-operations-management/index.html",
+  "copyright/index.html",
   "network-plus/acronyms/index.html",
   "network-plus/n10-009/study-guide/index.html",
   "network-plus/n10-009/study-guide/ipv4-subnetting/index.html",
@@ -271,6 +301,7 @@ const articlePageFiles = [
   "security-plus/sy0-701/study-guide/security-operations/index.html",
   "security-plus/sy0-701/study-guide/security-program-management-oversight/index.html",
   "security-plus/sy0-701/study-guide/threats-vulnerabilities-mitigations/index.html",
+  "terms/index.html",
   "tools/subnet-calculator/index.html"
 ];
 
@@ -882,6 +913,67 @@ if (await isFile(printCssPath)) {
   }
 }
 
+const repositoryIdentityChecks = [
+  {
+    file: "COPYRIGHT.md",
+    markers: [
+      "personal study",
+      "not distributed under an open-source license",
+      "copy, mirror, scrape for republication"
+    ]
+  },
+  {
+    file: "README.md",
+    markers: ["COPYRIGHT.md", "not an open-source release", "Copyright and Usage"]
+  },
+  {
+    file: "src/copyright/index.njk",
+    markers: ["permalink: /copyright/", "Republishing and mirroring", "Third-party material"]
+  }
+];
+
+for (const specification of repositoryIdentityChecks) {
+  const sourcePath = path.resolve(specification.file);
+  if (!(await isFile(sourcePath))) {
+    fail(`${specification.file}: required ownership or usage file is missing`);
+    continue;
+  }
+
+  const source = await readFile(sourcePath, "utf8");
+  for (const marker of specification.markers) {
+    if (!includesNormalizedText(source, marker, { mainOnly: false })) {
+      fail(`${specification.file}: required ownership marker is missing: ${marker}`);
+    }
+  }
+}
+
+if (await isFile(path.resolve("src/_data/site.js"))) {
+  const siteSource = await readFile(path.resolve("src/_data/site.js"), "utf8");
+  if (!siteSource.includes(`const canonicalUrl = "${canonicalSiteUrl}";`)) {
+    fail("src/_data/site.js: canonical URL must remain fixed to CertHappens.com");
+  }
+  if (siteSource.includes("process.env.SITE_URL")) {
+    fail("src/_data/site.js: canonical identity must not be overridden by SITE_URL");
+  }
+}
+
+if (await isFile(path.resolve("docs/cloudflare-canonical-redirects.csv"))) {
+  const redirectDocumentation = await readFile(
+    path.resolve("docs/cloudflare-canonical-redirects.csv"),
+    "utf8"
+  );
+  const requiredCanonicalRedirects = [
+    `www.${canonicalHost},${canonicalSiteUrl},301`,
+    `certhappens.pages.dev,${canonicalSiteUrl},301`
+  ];
+
+  for (const redirect of requiredCanonicalRedirects) {
+    if (!redirectDocumentation.includes(redirect)) {
+      fail(`docs/cloudflare-canonical-redirects.csv: missing canonical redirect ${redirect}`);
+    }
+  }
+}
+
 const allFiles = await walk(outputRoot);
 const htmlFiles = allFiles.filter((file) => file.endsWith(".html"));
 
@@ -896,18 +988,36 @@ for (const file of htmlFiles) {
 
   const googleTagLoader = `https://www.googletagmanager.com/gtag/js?id=${googleAnalyticsMeasurementId}`;
   const googleTagLoaderCount = html.split(googleTagLoader).length - 1;
-  const googleTagConfigCount = (
-    html.match(new RegExp(`gtag\\('config', '${googleAnalyticsMeasurementId}'\\)`, "g")) || []
+  const analyticsScriptCount = (
+    html.match(/<script\b[^>]*\bdata-production-analytics(?:\s|>)/gi) || []
   ).length;
+  const googleTagConfigCount = (
+    html.match(/window\.gtag\(["']config["'],\s*measurementId\)/g) || []
+  ).length;
+  const expectedAllowedHosts = `const allowedHosts = ${JSON.stringify(analyticsHosts)};`;
+  const hasAnalyticsHostGate =
+    html.includes(expectedAllowedHosts) &&
+    html.includes("window.location.hostname.toLowerCase()") &&
+    html.includes("allowedHosts.includes(currentHost)");
 
   if (expectsGoogleAnalytics) {
-    if (googleTagLoaderCount !== 1 || googleTagConfigCount !== 1) {
+    if (
+      analyticsScriptCount !== 1 ||
+      googleTagLoaderCount !== 1 ||
+      googleTagConfigCount !== 1 ||
+      !hasAnalyticsHostGate
+    ) {
       fail(
-        `${relative}: production build must contain exactly one Google Analytics tag for ${googleAnalyticsMeasurementId}`
+        `${relative}: production analytics must load exactly once and remain host-gated to ${analyticsHosts.join(", ")}`
       );
     }
-  } else if (googleTagLoaderCount !== 0 || googleTagConfigCount !== 0) {
-    fail(`${relative}: non-main build must not contain the Google Analytics tag`);
+  } else if (
+    analyticsScriptCount !== 0 ||
+    googleTagLoaderCount !== 0 ||
+    googleTagConfigCount !== 0 ||
+    hasAnalyticsHostGate
+  ) {
+    fail(`${relative}: non-main build must not contain the Google Analytics loader or host gate`);
   }
 
   const discouragedPublicSourceHosts = [
@@ -959,8 +1069,77 @@ for (const file of htmlFiles) {
     html.match(/<link\s+[^>]*rel=["']canonical["'][^>]*href=["']([^"']+)["'][^>]*>/i)?.[1] ||
     html.match(/<link\s+[^>]*href=["']([^"']+)["'][^>]*rel=["']canonical["'][^>]*>/i)?.[1];
 
-  if (!canonical?.startsWith("https://certhappens.com/")) {
+  if (!canonical?.startsWith(`${canonicalSiteUrl}/`)) {
     fail(`${relative}: missing or invalid canonical URL`);
+  }
+
+  const openGraphUrl = getMeta(html, "og:url", true);
+  if (openGraphUrl !== canonical) {
+    fail(`${relative}: Open Graph URL must match the canonical URL`);
+  }
+
+  if (/https?:\/\/[^"'\s>]*\.pages\.dev/i.test(html)) {
+    fail(`${relative}: generated page contains a Pages hostname instead of the canonical site identity`);
+  }
+
+  if (!hasElementWithNormalizedAttributeValue(html, "html", "data-site-origin", canonicalHost)) {
+    fail(`${relative}: root HTML element is missing the canonical site-origin marker`);
+  }
+
+  if (getMeta(html, "author") !== "Cert Happens") {
+    fail(`${relative}: shared author metadata is missing`);
+  }
+
+  const copyrightNotice = getMeta(html, "copyright");
+  if (!/^©\s+2026(?:-\d{4})?\s+Cert Happens\. All rights reserved\.$/.test(copyrightNotice)) {
+    fail(`${relative}: shared copyright metadata is missing or malformed`);
+  }
+
+  if (!hasLinkWithText(html, "/copyright/", "Copyright and usage")) {
+    fail(`${relative}: footer is missing the Copyright and usage link`);
+  }
+
+  if (!includesNormalizedText(html, "All rights reserved", { mainOnly: false })) {
+    fail(`${relative}: visible copyright notice is missing`);
+  }
+
+  if (!html.includes("Original CertHappens.com site build")) {
+    fail(`${relative}: source-build ownership marker is missing`);
+  }
+
+  const { error: jsonLdError, graph: jsonLdGraph } = getJsonLdGraph(html);
+  if (jsonLdError) {
+    fail(`${relative}: ${jsonLdError}`);
+  } else {
+    const organizationNode = graphNodeByType(jsonLdGraph, "Organization");
+    const websiteNode = graphNodeByType(jsonLdGraph, "WebSite");
+    const webpageNode = graphNodeByType(jsonLdGraph, "WebPage");
+    const copyrightHolderId = `${canonicalSiteUrl}/#organization`;
+
+    if (
+      organizationNode?.["@id"] !== copyrightHolderId ||
+      organizationNode?.url !== canonicalSiteUrl
+    ) {
+      fail(`${relative}: structured Organization identity is missing or invalid`);
+    }
+
+    if (
+      websiteNode?.url !== canonicalSiteUrl ||
+      websiteNode?.copyrightHolder?.["@id"] !== copyrightHolderId ||
+      websiteNode?.copyrightNotice !== copyrightNotice ||
+      websiteNode?.copyrightYear !== copyrightStartYear
+    ) {
+      fail(`${relative}: structured WebSite copyright identity is missing or invalid`);
+    }
+
+    if (
+      webpageNode?.url !== canonical ||
+      webpageNode?.copyrightHolder?.["@id"] !== copyrightHolderId ||
+      webpageNode?.copyrightNotice !== copyrightNotice ||
+      webpageNode?.copyrightYear !== copyrightStartYear
+    ) {
+      fail(`${relative}: structured WebPage copyright identity is missing or invalid`);
+    }
   }
 
   if (!getMeta(html, "og:image", true)) {

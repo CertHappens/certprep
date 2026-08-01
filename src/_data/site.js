@@ -1,5 +1,5 @@
-
-const siteUrl = (process.env.SITE_URL || "https://certhappens.com").replace(/\/+$/, "");
+const canonicalUrl = "https://certhappens.com";
+const canonicalHost = "certhappens.com";
 
 export default {
   name: "Cert Happens",
@@ -8,8 +8,10 @@ export default {
   tagline: "Practice. Review. Cert happens.",
   description:
     "Certification practice tests with randomized sessions, detailed answer explanations, and focused study resources.",
-  url: siteUrl,
-  canonicalHost: "certhappens.com",
+  url: canonicalUrl,
+  canonicalHost,
+  analyticsHosts: [canonicalHost, `www.${canonicalHost}`],
+  copyrightStartYear: 2026,
   language: "en",
   locale: "en_US",
   contactAddress: "contact [at] certhappens [dot] com",
