@@ -1,0 +1,678 @@
+{
+  "schemaVersion": 1,
+  "stimuli": {
+    "NET009-0000181": {
+      "type": "table",
+      "title": "Observed network actions",
+      "columns": [
+        {
+          "key": "device",
+          "label": "Device or process"
+        },
+        {
+          "key": "observation",
+          "label": "Observed action"
+        }
+      ],
+      "rows": [
+        {
+          "device": "Access switch",
+          "observation": "Looks up destination MAC address and selects an egress port"
+        },
+        {
+          "device": "Router",
+          "observation": "Matches destination IPv4 prefix and selects a next hop"
+        },
+        {
+          "device": "Client operating system",
+          "observation": "Uses TCP destination port 443 to deliver data to a browser process"
+        },
+        {
+          "device": "Wireless access point radio",
+          "observation": "Converts a bit stream into radio signals"
+        }
+      ]
+    },
+    "NET009-0000182": {
+      "type": "preformatted",
+      "variant": "log",
+      "title": "Packet capture summary",
+      "content": "10:00:01.114 UDP 10.20.5.44:53120 -> 10.20.0.53:53  DNS query A portal.example.net\n10:00:01.162 UDP 10.20.0.53:53 -> 10.20.5.44:53120  DNS response\n10:00:02.004 TCP 10.20.5.44:53121 -> 203.0.113.20:443  SYN\n10:00:02.031 TCP 203.0.113.20:443 -> 10.20.5.44:53121  SYN,ACK\n10:00:05.500 UDP 10.20.5.44:50118 -> 10.20.0.123:123  NTP request"
+    },
+    "NET009-0000183": {
+      "type": "table",
+      "title": "Proposed 10 GbE links",
+      "columns": [
+        {
+          "key": "link",
+          "label": "Link"
+        },
+        {
+          "key": "media",
+          "label": "Installed media"
+        },
+        {
+          "key": "endpoint_a",
+          "label": "Endpoint A optic"
+        },
+        {
+          "key": "endpoint_b",
+          "label": "Endpoint B optic"
+        },
+        {
+          "key": "distance",
+          "label": "Distance"
+        }
+      ],
+      "rows": [
+        {
+          "link": "A",
+          "media": "OS2 single-mode",
+          "endpoint_a": "10GBASE-LR",
+          "endpoint_b": "10GBASE-LR",
+          "distance": "6 km"
+        },
+        {
+          "link": "B",
+          "media": "OM4 multimode",
+          "endpoint_a": "10GBASE-SR",
+          "endpoint_b": "10GBASE-SR",
+          "distance": "100 m"
+        },
+        {
+          "link": "C",
+          "media": "OS2 single-mode",
+          "endpoint_a": "10GBASE-SR",
+          "endpoint_b": "10GBASE-LR",
+          "distance": "2 km"
+        },
+        {
+          "link": "D",
+          "media": "Category 6A",
+          "endpoint_a": "10GBASE-T",
+          "endpoint_b": "10GBASE-T",
+          "distance": "80 m"
+        }
+      ]
+    },
+    "NET009-0000184": {
+      "type": "table",
+      "title": "Campus device roles",
+      "columns": [
+        {
+          "key": "role",
+          "label": "Role"
+        },
+        {
+          "key": "function",
+          "label": "Function"
+        }
+      ],
+      "rows": [
+        {
+          "role": "Access",
+          "function": "Connects user devices, phones, and access points"
+        },
+        {
+          "role": "Distribution",
+          "function": "Aggregates access switches and applies routing and policy"
+        },
+        {
+          "role": "Core",
+          "function": "Provides high-speed resilient transport between distribution blocks"
+        }
+      ]
+    },
+    "NET009-0000185": {
+      "type": "preformatted",
+      "variant": "command_output",
+      "title": "Windows IPv4 configuration",
+      "content": "Ethernet adapter CorpLAN:\n   IPv4 Address. . . . . . . . . . . : 10.44.18.206\n   Subnet Mask . . . . . . . . . . . : 255.255.255.224\n   Default Gateway . . . . . . . . . : 10.44.18.193"
+    },
+    "NET009-0000186": {
+      "type": "preformatted",
+      "variant": "configuration",
+      "title": "Overlay interface configuration",
+      "content": "interface nve1\n  source-interface loopback0\n  member vni 50100\n    ingress-replication protocol bgp\n\nshow interface nve1\n  state: up\n  encapsulation: UDP\n  destination port: 4789"
+    },
+    "NET009-0000187": {
+      "type": "preformatted",
+      "variant": "command_output",
+      "title": "Router forwarding table",
+      "content": "S*  0.0.0.0/0 [1/0] via 192.0.2.1\nO   10.60.0.0/16 [110/20] via 10.0.0.2\nO   10.60.40.0/24 [110/30] via 10.0.0.6\nB   10.60.40.0/24 [20/0] via 203.0.113.9"
+    },
+    "NET009-0000188": {
+      "type": "table",
+      "title": "Active translation entries",
+      "columns": [
+        {
+          "key": "inside_local",
+          "label": "Inside local"
+        },
+        {
+          "key": "inside_global",
+          "label": "Inside global"
+        },
+        {
+          "key": "destination",
+          "label": "Destination"
+        }
+      ],
+      "rows": [
+        {
+          "inside_local": "10.0.1.10:51544",
+          "inside_global": "198.51.100.20:40001",
+          "destination": "203.0.113.40:443"
+        },
+        {
+          "inside_local": "10.0.1.11:51544",
+          "inside_global": "198.51.100.20:40002",
+          "destination": "203.0.113.40:443"
+        },
+        {
+          "inside_local": "10.0.1.12:53000",
+          "inside_global": "198.51.100.20:40003",
+          "destination": "192.0.2.80:80"
+        }
+      ]
+    },
+    "NET009-0000189": {
+      "type": "preformatted",
+      "variant": "configuration",
+      "title": "User-facing switch interface",
+      "content": "interface GigabitEthernet1/0/18\n switchport mode access\n switchport access vlan 20\n switchport voice vlan 30\n spanning-tree portfast\n spanning-tree bpduguard enable"
+    },
+    "NET009-0000190": {
+      "type": "table",
+      "title": "2.4 GHz survey summary",
+      "caption": "AP1 and AP2 provide overlapping coverage in the same open office.",
+      "columns": [
+        {
+          "key": "ap",
+          "label": "Access point"
+        },
+        {
+          "key": "channel",
+          "label": "Channel"
+        },
+        {
+          "key": "rssi",
+          "label": "Median RSSI"
+        },
+        {
+          "key": "noise",
+          "label": "Noise floor"
+        },
+        {
+          "key": "clients",
+          "label": "Clients"
+        }
+      ],
+      "rows": [
+        {
+          "ap": "AP1",
+          "channel": "1",
+          "rssi": "-50 dBm",
+          "noise": "-92 dBm",
+          "clients": "18"
+        },
+        {
+          "ap": "AP2",
+          "channel": "1",
+          "rssi": "-48 dBm",
+          "noise": "-89 dBm",
+          "clients": "20"
+        },
+        {
+          "ap": "AP3",
+          "channel": "6",
+          "rssi": "-62 dBm",
+          "noise": "-93 dBm",
+          "clients": "9"
+        },
+        {
+          "ap": "AP4",
+          "channel": "11",
+          "rssi": "-65 dBm",
+          "noise": "-91 dBm",
+          "clients": "8"
+        }
+      ]
+    },
+    "NET009-0000191": {
+      "type": "table",
+      "title": "UPS usable capacity",
+      "caption": "The UPS usable continuous capacity is 1,800 W.",
+      "columns": [
+        {
+          "key": "equipment",
+          "label": "Equipment"
+        },
+        {
+          "key": "quantity",
+          "label": "Quantity"
+        },
+        {
+          "key": "watts_each",
+          "label": "Watts each"
+        },
+        {
+          "key": "total",
+          "label": "Total load"
+        }
+      ],
+      "rows": [
+        {
+          "equipment": "Core switches",
+          "quantity": "2",
+          "watts_each": "300 W",
+          "total": "600 W"
+        },
+        {
+          "equipment": "Firewalls",
+          "quantity": "2",
+          "watts_each": "200 W",
+          "total": "400 W"
+        },
+        {
+          "equipment": "Servers",
+          "quantity": "2",
+          "watts_each": "350 W",
+          "total": "700 W"
+        }
+      ]
+    },
+    "NET009-0000192": {
+      "type": "table",
+      "title": "Change record CHG-NET-318",
+      "caption": "The first router was changed during the approved window.",
+      "columns": [
+        {
+          "key": "field",
+          "label": "Field"
+        },
+        {
+          "key": "value",
+          "label": "Value"
+        }
+      ],
+      "rows": [
+        {
+          "field": "Change",
+          "value": "Apply revised branch egress ACL"
+        },
+        {
+          "field": "Validation",
+          "value": "Branch DNS queries fail after implementation"
+        },
+        {
+          "field": "Service impact",
+          "value": "Name-based applications unavailable"
+        },
+        {
+          "field": "Rollback condition",
+          "value": "Any loss of approved branch service"
+        },
+        {
+          "field": "Backout package",
+          "value": "Pre-change configuration saved and tested"
+        }
+      ]
+    },
+    "NET009-0000193": {
+      "type": "table",
+      "title": "Current monitoring values",
+      "columns": [
+        {
+          "key": "metric",
+          "label": "Metric"
+        },
+        {
+          "key": "normal_baseline",
+          "label": "Normal baseline"
+        },
+        {
+          "key": "current",
+          "label": "Current"
+        }
+      ],
+      "rows": [
+        {
+          "metric": "WAN utilization",
+          "normal_baseline": "35% to 55%",
+          "current": "92%"
+        },
+        {
+          "metric": "Packet loss",
+          "normal_baseline": "Below 0.5%",
+          "current": "3.2%"
+        },
+        {
+          "metric": "Router CPU",
+          "normal_baseline": "20% to 45%",
+          "current": "38%"
+        },
+        {
+          "metric": "Device temperature",
+          "normal_baseline": "40 C to 55 C",
+          "current": "50 C"
+        }
+      ]
+    },
+    "NET009-0000194": {
+      "type": "table",
+      "title": "Recovery plans",
+      "columns": [
+        {
+          "key": "plan",
+          "label": "Plan"
+        },
+        {
+          "key": "design",
+          "label": "Design"
+        },
+        {
+          "key": "estimated_rto",
+          "label": "Estimated RTO"
+        },
+        {
+          "key": "estimated_rpo",
+          "label": "Estimated RPO"
+        }
+      ],
+      "rows": [
+        {
+          "plan": "A",
+          "design": "Warm site with nightly backup",
+          "estimated_rto": "4 hours",
+          "estimated_rpo": "24 hours"
+        },
+        {
+          "plan": "B",
+          "design": "Active-passive with frequent replication",
+          "estimated_rto": "30 minutes",
+          "estimated_rpo": "15 minutes"
+        },
+        {
+          "plan": "C",
+          "design": "Warm site with hourly replication",
+          "estimated_rto": "3 hours",
+          "estimated_rpo": "60 minutes"
+        },
+        {
+          "plan": "D",
+          "design": "Cold site with weekly media shipment",
+          "estimated_rto": "72 hours",
+          "estimated_rpo": "7 days"
+        }
+      ]
+    },
+    "NET009-0000195": {
+      "type": "preformatted",
+      "variant": "configuration",
+      "title": "Router VLAN interfaces",
+      "content": "DHCP server: 10.50.0.20\n\ninterface vlan 10\n ip address 10.10.10.1/24\n ip helper-address 10.50.0.20\n\ninterface vlan 20\n ip address 10.10.20.1/24\n ip helper-address 10.50.0.20\n\ninterface vlan 30\n ip address 10.10.30.1/24\n ! no helper configured"
+    },
+    "NET009-0000196": {
+      "type": "table",
+      "title": "Available management paths",
+      "columns": [
+        {
+          "key": "method",
+          "label": "Management method"
+        },
+        {
+          "key": "dependency",
+          "label": "Network dependency"
+        }
+      ],
+      "rows": [
+        {
+          "method": "Direct serial console at the device",
+          "dependency": "No production IP network required"
+        },
+        {
+          "method": "Console server through independent cellular uplink",
+          "dependency": "Separate out-of-band path"
+        },
+        {
+          "method": "SSH to management IP through production LAN",
+          "dependency": "Requires production routing and switching"
+        },
+        {
+          "method": "HTTPS to controller through production WAN",
+          "dependency": "Requires production WAN reachability"
+        }
+      ]
+    },
+    "NET009-0000197": {
+      "type": "table",
+      "title": "Access-control events",
+      "columns": [
+        {
+          "key": "time",
+          "label": "Time"
+        },
+        {
+          "key": "event",
+          "label": "Event"
+        }
+      ],
+      "rows": [
+        {
+          "time": "08:00:01",
+          "event": "Username and password accepted for operator jrivera"
+        },
+        {
+          "time": "08:00:03",
+          "event": "Role netops-readonly assigned after login"
+        },
+        {
+          "time": "08:01:14",
+          "event": "Command configure terminal denied because role lacks permission"
+        },
+        {
+          "time": "08:15:42",
+          "event": "Session stopped; commands, duration, and transferred bytes recorded"
+        },
+        {
+          "time": "08:15:43",
+          "event": "TLS session closed"
+        }
+      ]
+    },
+    "NET009-0000198": {
+      "type": "preformatted",
+      "variant": "log",
+      "title": "Captured trunk frame behavior",
+      "content": "Ingress frame:\n  Outer 802.1Q tag: VLAN 10\n  Inner 802.1Q tag: VLAN 30\n  VLAN 10 is configured as the native VLAN on the first trunk\n\nFirst switch action:\n  Removes outer VLAN 10 tag\n  Forwards frame toward next trunk with inner VLAN 30 tag still present"
+    },
+    "NET009-0000199": {
+      "type": "table",
+      "title": "Firewall rules for management network",
+      "columns": [
+        {
+          "key": "priority",
+          "label": "Priority"
+        },
+        {
+          "key": "source",
+          "label": "Source"
+        },
+        {
+          "key": "destination",
+          "label": "Destination"
+        },
+        {
+          "key": "service",
+          "label": "Service"
+        },
+        {
+          "key": "action",
+          "label": "Action"
+        }
+      ],
+      "rows": [
+        {
+          "priority": "10",
+          "source": "Any Internet",
+          "destination": "10.60.0.0/24 management",
+          "service": "TCP 22",
+          "action": "Allow"
+        },
+        {
+          "priority": "20",
+          "source": "10.10.50.0/24 admin subnet",
+          "destination": "10.60.0.0/24 management",
+          "service": "TCP 22, 443",
+          "action": "Allow"
+        },
+        {
+          "priority": "30",
+          "source": "Any",
+          "destination": "10.60.0.0/24 management",
+          "service": "Any",
+          "action": "Deny and log"
+        }
+      ]
+    },
+    "NET009-0000200": {
+      "type": "table",
+      "title": "Troubleshooting worksheet",
+      "columns": [
+        {
+          "key": "step",
+          "label": "Step"
+        },
+        {
+          "key": "recorded_result",
+          "label": "Recorded result"
+        }
+      ],
+      "rows": [
+        {
+          "step": "Identify problem",
+          "recorded_result": "One user loses connectivity intermittently; nearby users remain connected"
+        },
+        {
+          "step": "Initial theory",
+          "recorded_result": "Damaged patch cable"
+        },
+        {
+          "step": "Test theory",
+          "recorded_result": "Certified replacement cable produces the same symptom; link error counters remain zero"
+        },
+        {
+          "step": "Current status",
+          "recorded_result": "Initial theory not confirmed"
+        }
+      ]
+    },
+    "NET009-0000201": {
+      "type": "table",
+      "title": "Fiber receive measurements",
+      "columns": [
+        {
+          "key": "link",
+          "label": "Link"
+        },
+        {
+          "key": "received_power",
+          "label": "Received power"
+        },
+        {
+          "key": "receiver_sensitivity",
+          "label": "Receiver sensitivity"
+        },
+        {
+          "key": "margin",
+          "label": "Calculated margin"
+        }
+      ],
+      "rows": [
+        {
+          "link": "A",
+          "received_power": "-3 dBm",
+          "receiver_sensitivity": "-9 dBm",
+          "margin": "+6 dB"
+        },
+        {
+          "link": "B",
+          "received_power": "-8 dBm",
+          "receiver_sensitivity": "-10 dBm",
+          "margin": "+2 dB"
+        },
+        {
+          "link": "C",
+          "received_power": "-6 dBm",
+          "receiver_sensitivity": "-11 dBm",
+          "margin": "+5 dB"
+        },
+        {
+          "link": "D",
+          "received_power": "-12 dBm",
+          "receiver_sensitivity": "-10 dBm",
+          "margin": "-2 dB"
+        }
+      ]
+    },
+    "NET009-0000202": {
+      "type": "preformatted",
+      "variant": "command_output",
+      "title": "Name-resolution tests",
+      "content": "C:\\> nslookup app.corp.example\nServer:  dns-primary.corp.example\nAddress: 10.20.0.10\n*** dns-primary.corp.example cannot find app.corp.example: SERVFAIL\n\nC:\\> nslookup app.corp.example 10.20.0.11\nName:    app.corp.example\nAddress: 10.40.5.20\n\nC:\\> ping 10.40.5.20\nReply from 10.40.5.20: bytes=32 time=12ms TTL=61"
+    },
+    "NET009-0000203": {
+      "type": "table",
+      "title": "WAN service measurements",
+      "columns": [
+        {
+          "key": "metric",
+          "label": "Metric"
+        },
+        {
+          "key": "target",
+          "label": "Target"
+        },
+        {
+          "key": "current",
+          "label": "Current"
+        }
+      ],
+      "rows": [
+        {
+          "metric": "WAN utilization",
+          "target": "Below 80%",
+          "current": "96%"
+        },
+        {
+          "metric": "Packet loss",
+          "target": "Below 1%",
+          "current": "0.2%"
+        },
+        {
+          "metric": "Voice jitter",
+          "target": "Below 30 ms",
+          "current": "45 ms"
+        },
+        {
+          "metric": "DNS response time",
+          "target": "Below 100 ms",
+          "current": "18 ms"
+        }
+      ]
+    },
+    "NET009-0000204": {
+      "type": "preformatted",
+      "variant": "command_output",
+      "title": "Traceroute result",
+      "content": "Tracing route to 203.0.113.80 over a maximum of 30 hops\n\n  1     1 ms     1 ms     1 ms  10.20.5.1\n  2     4 ms     4 ms     5 ms  10.0.1.1\n  3    15 ms    14 ms    16 ms  198.51.100.1\n  4     *        *        *     Request timed out.\n  5     *        *        *     Request timed out."
+    },
+    "NET009-0000205": {
+      "type": "preformatted",
+      "variant": "command_output",
+      "title": "Listening sockets",
+      "content": "State   Recv-Q Send-Q Local Address:Port   Process\nLISTEN  0      128    127.0.0.1:5432     postgres\nLISTEN  0      128    0.0.0.0:22         sshd\nLISTEN  0      128    10.20.5.15:443     web-gateway"
+    }
+  }
+}
