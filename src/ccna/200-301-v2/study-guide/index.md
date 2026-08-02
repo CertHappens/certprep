@@ -52,6 +52,9 @@ keywords:
   - CCNA troubleshooting
   - CCNA v2.0 domains
 relatedLinks:
+  - title: CCNA 200-301 v2.0 Practice Test
+    url: /ccna/200-301-v2/practice-test/
+    description: Apply the published v2.0 objectives in randomized sessions with detailed explanations and practical network evidence.
   - title: CCNA Acronyms and Terms
     url: /ccna/acronyms/
     description: Look up the full expansion and practical meaning of CCNA networking abbreviations used throughout the guides.

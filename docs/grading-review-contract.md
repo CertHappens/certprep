@@ -75,3 +75,8 @@ Correct questions use the same review format inside an expandable section.
 Completed results are calculated from the saved question snapshot in session storage. A later data deployment does not change a completed or unfinished test already stored in the browser tab.
 
 Returning to the test clears `completedAt`, permits answer changes, and requires the user to finish again before updated results are shown.
+
+
+## Stimulus review
+
+If a question includes a stimulus, completed-test review displays the same stored stimulus before the answer analysis. Stimulus content is evidence for the question and does not change grading.

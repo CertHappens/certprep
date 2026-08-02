@@ -79,3 +79,8 @@ Review statuses are:
 - `dismissed`
 
 A private administrative review interface is intentionally deferred. Reports can initially be inspected and updated through the D1 console.
+
+
+## Stimulus context
+
+Question reports continue to store the question ID, question version, and data version. These values identify the exact question snapshot and any associated stimulus without transmitting command output, log content, configuration text, or evidence-table cells in the report payload. No D1 schema change is required for the read-only stimulus foundation.

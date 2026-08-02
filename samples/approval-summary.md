@@ -1,32 +1,27 @@
-# SEC-701 Approval and Revision Summary
+# NET-009 Approval Summary
 
-- Revision date: `2026-07-27`
-- Active approved questions: 225
-- Draft questions: 0
-- Existing questions revised: 37
-- New questions added: 0
-- Questions retired: 0
-- Correct-answer keys changed: 0
+## Current status
 
-## Correct-key inclusion
+- Exam: CompTIA Network+ N10-009
+- Objectives document: Version 6.0
+- Project test ID: `NET-009`
+- Latest batch: `NET009-BATCH-008`
+- Approved question rows: 205
+- Stimulus-backed approved rows: 25
+- Review rows: 0
+- Draft rows: 0
+- Retired rows: 0
+- Registered sources: 61
+- Numbered objectives with approved coverage: 25 of 25
 
-- A: 58
-- B: 58
-- C: 58
-- D: 58
+## Batch 008 decision
 
-## Domain distribution
+Batch 008 contains only stimulus-backed questions. It was internally reviewed, validated, marked `approved`, and appended directly to `questions.csv` under the accelerated staging authorization.
 
-- 1.0: 27
-- 2.0: 50
-- 3.0: 40
-- 4.0: 63
-- 5.0: 45
+The overlay adds `data/network-plus/n10-009/stimuli.json` and registers that sidecar in `config/quiz-catalog.json` so the existing public-data builder validates and publishes Network+ stimuli.
 
-## Question types
+## Permanent range
 
-- single_choice: 209
-- multi_select: 6
-- best_available: 10
-
-The revision preserved the active question count, domain assignments, objective assignments, and correct-answer keys.
+- First ID: `NET009-0000001`
+- Last ID: `NET009-0000205`
+- Next available ID: `NET009-0000206`

@@ -528,3 +528,43 @@
     min-width: 0 !important;
   }
 }
+
+@media print {
+  .quiz-stimulus {
+    margin: 0.1in 0 0.15in;
+    padding: 0.1in;
+    border: 1px solid #999 !important;
+    background: #fff !important;
+    break-inside: auto;
+    page-break-inside: auto;
+  }
+
+  .quiz-stimulus__title,
+  .quiz-stimulus__pre,
+  .quiz-stimulus__table,
+  .quiz-stimulus__table caption,
+  .quiz-stimulus__table th,
+  .quiz-stimulus__table td {
+    color: #111 !important;
+  }
+
+  .quiz-stimulus__pre {
+    max-height: none;
+    padding: 0.08in;
+    overflow: visible;
+    border: 1px solid #aaa !important;
+    background: #f7f7f7 !important;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    font-size: 8pt;
+  }
+
+  .quiz-stimulus__table-scroll {
+    overflow: visible;
+  }
+
+  .quiz-stimulus__table {
+    min-width: 0;
+    font-size: 8pt;
+  }
+}

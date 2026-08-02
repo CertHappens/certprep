@@ -11,6 +11,8 @@ from collections import Counter
 from datetime import date
 from pathlib import Path
 
+from build_quiz_data import BuildError, load_question_stimuli
+
 BANK_CONFIGS = [
     {
         "label": "SEC-701",
@@ -26,6 +28,28 @@ BANK_CONFIGS = [
             "2.1", "2.2", "2.3", "2.4", "2.5",
             "3.1", "3.2", "3.3", "3.4",
             "4.1", "4.2", "4.3", "4.4", "4.5", "4.6", "4.7", "4.8", "4.9",
+            "5.1", "5.2", "5.3", "5.4", "5.5", "5.6",
+        },
+    },
+    {
+        "label": "CCNA-301-V2",
+        "path": ("data", "ccna", "200-301-v2"),
+        "test_id": "CCNA-301-V2",
+        "certification": "Cisco CCNA",
+        "exam_version": "200-301 v2.0",
+        "objectives_version": "2.0",
+        "id_pattern": r"^CCNA301V2-(\d{7})$",
+        "batch_pattern": r"^CCNA301V2-BATCH-\d{3}$",
+        "stimuli_file": "stimuli.json",
+        "expected_objectives": {
+            "1.1", "1.2", "1.3", "1.4", "1.5", "1.5.a", "1.5.b", "1.5.c", "1.5.d", "1.6", "1.7",
+            "2.1", "2.1.a", "2.1.b", "2.1.c", "2.1.d",
+            "2.2", "2.2.a", "2.2.b", "2.2.c", "2.2.d", "2.2.e",
+            "2.3", "2.4", "2.5", "2.5.a", "2.5.b", "2.5.c", "2.5.d",
+            "3.1", "3.2", "3.2.a", "3.2.b", "3.2.c", "3.2.d",
+            "3.3", "3.3.a", "3.3.b", "3.3.c", "3.3.d", "3.4",
+            "4.1", "4.2", "4.3", "4.4", "4.5", "4.6", "4.7",
+            "4.7.a", "4.7.b", "4.7.c", "4.7.d", "4.7.e",
             "5.1", "5.2", "5.3", "5.4", "5.5", "5.6",
         },
     },
@@ -56,13 +80,14 @@ BANK_PATH: tuple[str, ...] = ()
 EXPECTED_OBJECTIVES: set[str] = set()
 ID_RE = re.compile(r"$^")
 BATCH_RE = re.compile(r"$^")
+STIMULI_FILE = ""
 DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 CONCEPT_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 
 
 def configure_bank(config: dict[str, object]) -> None:
     global TEST_ID, CERTIFICATION, EXAM_VERSION, OBJECTIVES_VERSION
-    global BANK_PATH, EXPECTED_OBJECTIVES, ID_RE, BATCH_RE
+    global BANK_PATH, EXPECTED_OBJECTIVES, ID_RE, BATCH_RE, STIMULI_FILE
 
     TEST_ID = str(config["test_id"])
     CERTIFICATION = str(config["certification"])
@@ -72,6 +97,7 @@ def configure_bank(config: dict[str, object]) -> None:
     EXPECTED_OBJECTIVES = set(config["expected_objectives"])
     ID_RE = re.compile(str(config["id_pattern"]))
     BATCH_RE = re.compile(str(config["batch_pattern"]))
+    STIMULI_FILE = str(config.get("stimuli_file", ""))
 
 
 ABSOLUTE_RE = re.compile(r"\b(always|never|guarantees?|completely|impossible)\b", re.I)
@@ -144,6 +170,20 @@ def read_csv(path: Path, expected_headers: list[str], errors: list[str]) -> list
             )
         return list(reader)
 
+
+def validate_stimulus_sidecar(
+    path: Path,
+    approved_question_ids: set[str],
+    errors: list[str],
+) -> int:
+    try:
+        stimuli = load_question_stimuli(path, approved_question_ids)
+    except BuildError as exc:
+        errors.append(f"{path.name}: {exc}")
+        return 0
+    return len(stimuli)
+
+
 def validate() -> tuple[list[str], list[str], list[str]]:
     root = Path(__file__).resolve().parents[1]
     bank = root.joinpath(*BANK_PATH)
@@ -161,6 +201,19 @@ def validate() -> tuple[list[str], list[str], list[str]]:
         )
         for name in FILE_STATUS
     }
+
+    stimulus_count = 0
+    if STIMULI_FILE:
+        approved_question_ids = {
+            row.get("question_id", "").strip()
+            for row in question_sets["questions.csv"]
+            if row.get("question_id", "").strip()
+        }
+        stimulus_count = validate_stimulus_sidecar(
+            bank / STIMULI_FILE,
+            approved_question_ids,
+            errors,
+        )
 
     objective_by_id: dict[str, dict[str, str]] = {}
     for index, row in enumerate(objectives, start=2):
@@ -409,6 +462,8 @@ def validate() -> tuple[list[str], list[str], list[str]]:
     info.append(f"Objectives: {len(objectives)}")
     info.append(f"Registered sources: {len(sources)}")
     info.append(f"Question rows: {len(stored_rows)}")
+    if STIMULI_FILE:
+        info.append(f"Stimuli: {stimulus_count}")
     info.append(f"Approved answer-key counts: {dict(sorted(answer_counts.items()))}")
     info.append(f"Approved domain counts: {dict(sorted(domain_counts.items()))}")
     info.append(f"Approved difficulty counts: {dict(sorted(difficulty_counts.items()))}")

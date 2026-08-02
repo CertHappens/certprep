@@ -26,9 +26,9 @@ Primary blueprint:
 
 - `https://learningcontent.cisco.com/documents/marketing/exam-topics/200-301_CCNA_v2.0_Exam_Topics_PDF.pdf`
 
-## Proposed identifiers
+## Confirmed authoring identifiers
 
-These identifiers remain provisional until the v2.0 objective map and validator configuration are created.
+The v2.0 objective map, validator configuration, and authoring directory now enforce these identifiers. Public quiz registration remains deferred until approved question data exists and the complete staging workflow passes.
 
 - Project test ID: `CCNA-301-V2`
 - Exam version: `200-301 v2.0`
@@ -89,15 +89,7 @@ CCNA needs more than ordinary paragraph questions. The bank should support reada
 - Text-based topology descriptions
 - Side-by-side evidence when multiple outputs must be compared
 
-Before changing the stable quiz engine, prototype an additive data contract with optional fields such as:
-
-```text
-stimulus_type
-stimulus_text
-stimulus_alt
-```
-
-`stimulus_text` should remain plain text with preserved line breaks and render inside an accessible `<pre><code>` block. The default value should be empty so Security+ and Network+ remain unaffected.
+The shared engine now uses the certification-neutral sidecar contract in `docs/question-stimulus-schema.md`. Command output, configuration fragments, logs, and evidence tables remain plain text, preserve meaningful formatting, and are inserted with `textContent`. Exams without configured stimuli remain unaffected.
 
 Do not require an image to answer a question. A future diagram component must include an equivalent text description and work in print and mobile layouts.
 

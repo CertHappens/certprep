@@ -6,3 +6,7 @@
 # Stable generic Network+ practice-test routes point to the current exam.
 /network-plus/practice-test /network-plus/n10-009/practice-test/ 302
 /network-plus/practice-test/ /network-plus/n10-009/practice-test/ 302
+
+# Stable generic CCNA practice-test routes point to the published v2.0 bank.
+/ccna/practice-test /ccna/200-301-v2/practice-test/ 302
+/ccna/practice-test/ /ccna/200-301-v2/practice-test/ 302

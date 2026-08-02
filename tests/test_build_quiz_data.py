@@ -19,6 +19,7 @@ from build_quiz_data import (  # noqa: E402
     build_quiz,
     calculate_question_count_settings,
     canonical_hash,
+    normalize_question_stimulus,
     read_csv,
     stable_answer_id,
 )
@@ -119,6 +120,75 @@ class QuizDataBuilderTests(unittest.TestCase):
 
         with self.assertRaises(BuildError):
             build_public_question(row)
+
+    def test_normalizes_supported_question_stimuli(self) -> None:
+        preformatted = normalize_question_stimulus(
+            "SEC701-0000001",
+            {
+                "type": "preformatted",
+                "variant": "configuration",
+                "title": "Firewall configuration",
+                "content": "  line 1\r\n    line 2\n",
+            },
+        )
+        self.assertEqual(preformatted["content"], "  line 1\n    line 2")
+
+        table = normalize_question_stimulus(
+            "SEC701-0000001",
+            {
+                "type": "table",
+                "title": "Evidence",
+                "columns": [{"key": "host", "label": "Host"}],
+                "rows": [{"host": "server-1"}],
+            },
+        )
+        self.assertEqual(table["rows"][0]["host"], "server-1")
+
+    def test_rejects_invalid_question_stimulus(self) -> None:
+        with self.assertRaises(BuildError):
+            normalize_question_stimulus(
+                "SEC701-0000001",
+                {
+                    "type": "table",
+                    "title": "Evidence",
+                    "columns": [{"key": "host", "label": "Host"}],
+                    "rows": [{"different": "server-1"}],
+                },
+            )
+
+    def test_optional_stimulus_sidecar_is_added_to_public_snapshot(self) -> None:
+        question_id = self.rows[0]["question_id"]
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            temporary = Path(temporary_directory)
+            stimuli_path = temporary / "stimuli.json"
+            stimuli_path.write_text(
+                json.dumps({
+                    "schemaVersion": 1,
+                    "stimuli": {
+                        question_id: {
+                            "type": "preformatted",
+                            "variant": "log",
+                            "title": "Event log",
+                            "content": "event one\nevent two",
+                        }
+                    },
+                }),
+                encoding="utf-8",
+            )
+            config = deepcopy(self.quiz_config)
+            config["stimuli_json"] = str(stimuli_path)
+            output_directory = temporary / "output"
+            build_quiz(
+                config,
+                project_root=PROJECT_ROOT,
+                output_directory_override=output_directory,
+                generated_at="2026-08-01T12:00:00Z",
+            )
+            payload = json.loads((output_directory / "questions.json").read_text(encoding="utf-8"))
+            built = next(question for question in payload["questions"] if question["id"] == question_id)
+            self.assertEqual(built["stimulus"]["variant"], "log")
+            unstimulated = next(question for question in payload["questions"] if question["id"] != question_id)
+            self.assertNotIn("stimulus", unstimulated)
 
     def test_current_bank_builds_all_public_questions(self) -> None:
         expected_question_count = len(self.rows)

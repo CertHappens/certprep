@@ -1,0 +1,283 @@
+---
+layout: layouts/base.njk
+title: CCNA 200-301 v2.0 Practice Test
+description: Start a randomized CCNA 200-301 v2.0 practice test, save progress in the current browser session, and review detailed answer explanations.
+permalink: /ccna/200-301-v2/practice-test/
+breadcrumbs:
+  - label: Home
+    url: /
+  - label: CCNA
+    url: /ccna/
+  - label: 200-301 v2.0 Practice Test
+    url: /ccna/200-301-v2/practice-test/
+---
+{% set quiz = quizCatalog.byTestId["CCNA-301-V2"] %}
+<header class="page-header page-header--compact page-header--quiz">
+  <div class="page-shell">
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="/">Home</a></li>
+        <li><a href="/ccna/">CCNA</a></li>
+        <li aria-current="page">200-301 v2.0 practice test</li>
+      </ol>
+    </nav>
+    <p class="eyebrow">{{ quiz.test.testId }} question bank</p>
+    <h1>CCNA 200-301 v2.0 practice test</h1>
+  </div>
+</header>
+
+<section class="section section--quiz">
+  <div class="page-shell">
+    <div class="callout">
+      <strong>Check your exam date.</strong>
+      <p>This practice bank follows the published CCNA 200-301 v2.0 blueprint for exams beginning February 3, 2027. Candidates testing through February 2, 2027 should use the active v1.1 blueprint for exam-specific preparation.</p>
+    </div>
+
+    <div
+      class="quiz-app"
+      data-quiz-app
+      data-test-id="{{ quiz.test.testId }}"
+      data-current-version="{{ quiz.dataVersion }}"
+      data-questions-url="{{ quiz.questionsFile }}"
+      data-turnstile-site-key="{{ environment.turnstileSiteKey }}"
+    >
+      <section class="quiz-panel" data-quiz-view="loading">
+        <p class="quiz-loading">Loading the approved question bank…</p>
+      </section>
+
+      <section class="quiz-panel quiz-panel--error" data-quiz-view="error" hidden>
+        <p class="eyebrow">Unable to load test</p>
+        <h2>Something interrupted the question data request.</h2>
+        <p data-quiz-error-message>Please refresh the page and try again.</p>
+      </section>
+
+      <section class="quiz-panel quiz-setup" data-quiz-view="setup" hidden>
+        <div class="quiz-panel__heading">
+          <p class="eyebrow">Randomized practice session</p>
+          <h2 tabindex="-1" data-quiz-setup-heading>Choose your test length</h2>
+          <p>
+            Questions are selected without duplicates. Answer choices are shuffled separately for every new session.
+          </p>
+        </div>
+
+        <div class="callout" data-quiz-resume-panel hidden>
+          <strong>An unfinished test is saved in this browser tab.</strong>
+          <p>Starting another test will replace the saved session.</p>
+        </div>
+
+        <form class="quiz-setup__form" data-quiz-setup-form>
+          <fieldset class="quiz-count-options">
+            <legend>Number of questions</legend>
+            {% for option in quiz.questionCountOptions %}
+              <label class="quiz-count-option">
+                <input
+                  type="radio"
+                  name="question-count"
+                  value="{{ option }}"
+                  {% if option == quiz.defaultQuestionCount %}checked{% endif %}
+                >
+                <span>{{ option }} questions</span>
+              </label>
+            {% endfor %}
+          </fieldset>
+
+          <button class="button" type="submit">Start randomized test</button>
+        </form>
+
+        <div class="quiz-setup__notes">
+          <p><strong>{{ quiz.availableQuestionCount }}</strong> approved questions are currently available for {{ quiz.test.examVersion }}.</p>
+          <p>After finishing, you will receive a score, domain counts, and a detailed explanation for every answer choice.</p>
+        </div>
+      </section>
+
+      <section class="quiz-workspace" data-quiz-view="active" hidden>
+        <div class="quiz-toolbar" aria-label="Test progress">
+          <div class="quiz-toolbar__progress">
+            <div class="quiz-toolbar__labels">
+              <strong data-quiz-position>Question 1 of 10</strong>
+              <span data-quiz-progress-text>0 answered, 10 unanswered, 0 flagged</span>
+            </div>
+            <progress data-quiz-progress value="1" max="10">1 of 10</progress>
+          </div>
+
+          <div class="quiz-toolbar__actions">
+            <button class="button button--secondary quiz-flag-button" type="button" aria-pressed="false" data-quiz-flag>
+              Flag for review
+            </button>
+            <button class="button button--secondary" type="button" data-quiz-report>
+              Report question
+            </button>
+          </div>
+        </div>
+
+        <div class="quiz-layout">
+          <aside class="quiz-sidebar" aria-label="Question navigation">
+            <details class="quiz-navigator" open>
+              <summary>Question navigator</summary>
+              <p class="quiz-navigator__help">Answered questions have a filled marker. Flagged questions have a gold marker.</p>
+              <ol class="quiz-navigator__grid" data-quiz-navigator></ol>
+            </details>
+          </aside>
+
+          <article class="quiz-question-card">
+            <div class="quiz-question-card__meta">
+              <span data-quiz-domain>Domain</span>
+              <span aria-hidden="true">•</span>
+              <span data-quiz-topic>Topic</span>
+            </div>
+
+            <h2 class="quiz-question-card__heading" tabindex="-1" data-quiz-question-heading>
+              Practice question
+            </h2>
+
+            <p class="quiz-question-card__instruction" data-quiz-instruction hidden></p>
+            <div data-quiz-stimulus hidden></div>
+
+            <form class="quiz-answer-form">
+              <fieldset>
+                <legend class="visually-hidden">Select your answer</legend>
+                <div class="quiz-answers" data-quiz-answers></div>
+              </fieldset>
+            </form>
+
+            <div class="quiz-controls">
+              <button class="button button--secondary" type="button" data-quiz-previous>Previous</button>
+              <button class="button button--secondary" type="button" data-quiz-next>Next</button>
+              <button class="button quiz-controls__finish" type="button" data-quiz-finish>Finish test</button>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="quiz-results" data-quiz-view="results" hidden>
+        <header class="quiz-results__header">
+          <p class="eyebrow">Test complete</p>
+          <h2 tabindex="-1" data-results-heading>Your practice test results</h2>
+          <p data-results-summary>Your score is ready.</p>
+          <p class="quiz-results__scoring-note">Unanswered questions count toward the total score as incorrect. This percentage is a practice score, not an official vendor-scaled exam score.</p>
+        </header>
+
+        <div class="quiz-results__overview" aria-label="Practice test score summary">
+          <div class="quiz-score-card">
+            <span>Overall score</span>
+            <strong data-results-percentage>0%</strong>
+          </div>
+          <div class="quiz-result-stat quiz-result-stat--correct">
+            <span>Correct</span>
+            <strong data-results-correct>0</strong>
+          </div>
+          <div class="quiz-result-stat quiz-result-stat--incorrect">
+            <span>Incorrect</span>
+            <strong data-results-incorrect>0</strong>
+          </div>
+          <div class="quiz-result-stat quiz-result-stat--unanswered">
+            <span>Unanswered</span>
+            <strong data-results-unanswered>0</strong>
+          </div>
+          <div class="quiz-result-stat">
+            <span>Time spent</span>
+            <strong class="quiz-result-stat__time" data-results-time>Not available</strong>
+          </div>
+        </div>
+
+        <section class="quiz-results__section" aria-labelledby="domain-results-heading">
+          <div class="quiz-results__section-heading">
+            <h2 id="domain-results-heading">Score by domain</h2>
+            <p>Domain counts describe this randomized test only. Small samples should not be treated as mastery ratings.</p>
+          </div>
+          <div class="quiz-domain-results" data-results-domains></div>
+        </section>
+
+        <section class="quiz-results__section" aria-labelledby="quiz-next-steps-heading">
+          <div class="callout">
+            <h2 id="quiz-next-steps-heading">What would you like to do next?</h2>
+            <p>Your incorrect and unanswered questions, correct answers, and explanations are listed directly below. You can also reopen the full test question by question or start a fresh randomized test.</p>
+            <div class="button-row">
+              <a class="button button--secondary" href="#missed-question-review">Jump to missed questions</a>
+              <button class="button button--secondary" type="button" data-quiz-return>Review the full test question by question</button>
+              <button class="button" type="button" data-quiz-restart>Start a new test</button>
+            </div>
+            <p><a href="/ccna/">Return to CCNA resources</a></p>
+          </div>
+        </section>
+
+        <section class="quiz-results__section" id="missed-question-review" aria-labelledby="review-results-heading">
+          <div class="quiz-results__section-heading">
+            <h2 id="review-results-heading">Incorrect and unanswered review</h2>
+            <p>Your incorrect and unanswered questions are listed below with the correct answer and explanation. Answer letters match the order you saw during this test.</p>
+          </div>
+
+          <div class="quiz-review-list" data-review-primary></div>
+          <div class="callout" data-review-primary-empty hidden>
+            <strong>No incorrect or unanswered questions.</strong>
+            <p>Open the correct-answer section below to review the explanations.</p>
+          </div>
+
+          <details class="quiz-correct-review" data-review-correct-details>
+            <summary data-review-correct-summary>Review correct answers</summary>
+            <div class="quiz-review-list" data-review-correct></div>
+          </details>
+        </section>
+
+        <div class="quiz-results__actions">
+          <button class="button button--secondary" type="button" data-quiz-return>Review the full test question by question</button>
+          <button class="button" type="button" data-quiz-restart>Start a new test</button>
+          <a href="/ccna/">Return to CCNA resources</a>
+        </div>
+      </section>
+
+
+      <dialog class="question-report-dialog" aria-labelledby="question-report-heading" data-report-dialog>
+        <form class="question-report-form" data-report-form>
+          <header class="question-report-dialog__header">
+            <div>
+              <p class="eyebrow">Question correction</p>
+              <h2 id="question-report-heading">Report a questionable item</h2>
+              <p>Question ID: <code data-report-question-id></code></p>
+            </div>
+            <button class="question-report-dialog__close" type="button" aria-label="Close report form" data-report-close>×</button>
+          </header>
+
+          <fieldset class="question-report-categories">
+            <legend>What seems wrong?</legend>
+            <label><input type="radio" name="report-category" value="possible_typo"> <span>Possible typo</span></label>
+            <label><input type="radio" name="report-category" value="correct_answer_may_be_wrong"> <span>Correct answer may be wrong</span></label>
+            <label><input type="radio" name="report-category" value="explanation_unclear"> <span>Explanation is unclear</span></label>
+            <label><input type="radio" name="report-category" value="question_outdated"> <span>Question may be outdated</span></label>
+            <label><input type="radio" name="report-category" value="duplicate_question"> <span>Duplicate question</span></label>
+            <label><input type="radio" name="report-category" value="other"> <span>Other</span></label>
+          </fieldset>
+
+          <label class="question-report-note">
+            <span>Optional note</span>
+            <textarea name="report-note" rows="4" maxlength="1000" placeholder="Describe the issue or suggest a correction."></textarea>
+          </label>
+
+          <label class="question-report-honeypot" aria-hidden="true">
+            Website
+            <input type="text" name="website" tabindex="-1" autocomplete="off">
+          </label>
+
+          <div class="question-report-turnstile" data-report-turnstile></div>
+          <p class="question-report-status" role="status" aria-live="polite" data-report-status></p>
+
+          <div class="question-report-dialog__actions">
+            <button class="button button--secondary" type="button" data-report-close>Cancel</button>
+            <button class="button" type="submit" data-report-submit>Submit report</button>
+          </div>
+        </form>
+      </dialog>
+
+      <p class="visually-hidden" aria-live="polite" aria-atomic="true" data-quiz-live></p>
+
+      <noscript>
+        <div class="callout">
+          <strong>JavaScript is required for the interactive practice test.</strong>
+          <p>The study pages and reference material remain available without it.</p>
+        </div>
+      </noscript>
+    </div>
+  </div>
+</section>
+
+<script type="module" src="/assets/js/quiz/app.js"></script>

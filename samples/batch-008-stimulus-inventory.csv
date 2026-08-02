@@ -1,0 +1,26 @@
+question_id,objective_id,topic,difficulty,question_type,stimulus_type,stimulus_variant,stimulus_title,correct_answers
+NET009-0000181,1.1,OSI forwarding evidence,medium,multi_select,table,,Observed network actions,A|C
+NET009-0000182,1.4,Packet-capture ports,easy,multi_select,preformatted,log,Packet capture summary,B|D
+NET009-0000183,1.5,Optical link compatibility,hard,best_available,table,,Proposed 10 GbE links,C
+NET009-0000184,1.6,Campus architecture,easy,single_choice,table,,Campus device roles,A
+NET009-0000185,1.7,IPv4 host range,hard,best_available,preformatted,command_output,Windows IPv4 configuration,D
+NET009-0000186,1.8,Network overlays,medium,single_choice,preformatted,configuration,Overlay interface configuration,B
+NET009-0000187,2.1,Route-source selection,medium,best_available,preformatted,command_output,Router forwarding table,A
+NET009-0000188,2.1,Address translation evidence,medium,single_choice,table,,Active translation entries,C
+NET009-0000189,2.2,Access-port behavior,medium,multi_select,preformatted,configuration,User-facing switch interface,B|D
+NET009-0000190,2.3,Wireless channel remediation,hard,best_available,table,,2.4 GHz survey summary,C
+NET009-0000191,2.4,UPS capacity,medium,single_choice,table,,UPS usable capacity,A
+NET009-0000192,3.1,Failed network change,medium,best_available,table,,Change record CHG-NET-318,D
+NET009-0000193,3.2,Performance monitoring,medium,multi_select,table,,Current monitoring values,A|C
+NET009-0000194,3.3,Recovery-option selection,medium,single_choice,table,,Recovery plans,B
+NET009-0000195,3.4,DHCP relay configuration,hard,best_available,preformatted,configuration,Router VLAN interfaces,D
+NET009-0000196,3.5,Out-of-band management,easy,multi_select,table,,Available management paths,A|B
+NET009-0000197,4.1,AAA evidence,medium,multi_select,table,,Access-control events,C|D
+NET009-0000198,4.2,VLAN hopping,hard,single_choice,preformatted,log,Captured trunk frame behavior,B
+NET009-0000199,4.3,Management-plane firewall policy,hard,best_available,table,,Firewall rules for management network,A
+NET009-0000200,5.1,Troubleshooting theory revision,easy,single_choice,table,,Troubleshooting worksheet,C
+NET009-0000201,5.2,Optical receive levels,medium,best_available,table,,Fiber receive measurements,D
+NET009-0000202,5.3,DNS resolver failure,medium,single_choice,preformatted,command_output,Name-resolution tests,B
+NET009-0000203,5.4,WAN congestion evidence,medium,multi_select,table,,WAN service measurements,A|C
+NET009-0000204,5.5,Traceroute interpretation,easy,single_choice,preformatted,command_output,Traceroute result,D
+NET009-0000205,5.5,Listening socket exposure,medium,best_available,preformatted,command_output,Listening sockets,B

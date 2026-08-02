@@ -210,6 +210,7 @@ const publicPageFiles = [
   "ccna/index.html",
   "ccna/acronyms/index.html",
   "ccna/commands/index.html",
+  "ccna/200-301-v2/practice-test/index.html",
   "ccna/200-301-v2/study-guide/index.html",
   "ccna/200-301-v2/study-guide/network-infrastructure-connectivity/index.html",
   "ccna/200-301-v2/study-guide/switching-network-access/index.html",
@@ -420,6 +421,7 @@ const wholeSitePageMarkers = new Map([
     [
       "/security-plus/",
       "/network-plus/",
+      "/ccna/200-301-v2/practice-test/",
       "/cissp/",
       "/ccna/",
       "/ports-protocols/",
@@ -440,6 +442,7 @@ const wholeSitePageMarkers = new Map([
     "ccna/index.html",
     [
       "CCNA 200-301 Study Resources",
+      "/ccna/200-301-v2/practice-test/",
       "/ccna/200-301-v2/study-guide/",
       "/ccna/200-301-v2/study-guide/network-infrastructure-connectivity/",
       "/ccna/200-301-v2/study-guide/switching-network-access/",
@@ -615,6 +618,8 @@ const requiredFiles = [
   "robots.txt",
   "sitemap.xml",
   "site.webmanifest",
+  "ccna/200-301-v2/practice-test/question/1/index.html",
+  "ccna/200-301-v2/practice-test/question/50/index.html",
   "network-plus/n10-009/practice-test/question/1/index.html",
   "network-plus/n10-009/practice-test/question/50/index.html",
   "security-plus/sy0-701/practice-test/question/1/index.html",
@@ -632,11 +637,14 @@ const requiredFiles = [
   "assets/js/quiz/app.js",
   "assets/js/quiz/results-actions.js",
   "assets/js/quiz/paged-question.js",
+  "assets/js/quiz/stimulus.js",
   "quiz-data/catalog.json",
   "quiz-data/security-plus/sec-701/manifest.json",
   "quiz-data/security-plus/sec-701/questions.json",
   "quiz-data/network-plus/n10-009/manifest.json",
-  "quiz-data/network-plus/n10-009/questions.json"
+  "quiz-data/network-plus/n10-009/questions.json",
+  "quiz-data/ccna/200-301-v2/manifest.json",
+  "quiz-data/ccna/200-301-v2/questions.json"
 ];
 
 for (const relative of requiredFiles) {
@@ -655,6 +663,13 @@ const generatedQuizSpecs = [
     path: "quiz-data/network-plus/n10-009/manifest.json",
     testId: "NET-009",
     practiceTestPath: "/network-plus/n10-009/practice-test"
+  },
+  {
+    path: "quiz-data/ccna/200-301-v2/manifest.json",
+    testId: "CCNA-301-V2",
+    practiceTestPath: "/ccna/200-301-v2/practice-test",
+    expectedQuestionCountOptions: [10, 20, 30, 50],
+    expectedDefaultQuestionCount: 30
   }
 ];
 
@@ -705,6 +720,30 @@ for (const expected of generatedQuizSpecs) {
       fail(`${expected.path}: default question count is not an available option`);
     }
 
+    if (
+      Number.isInteger(expected.expectedQuestionCount) &&
+      manifest.availableQuestionCount !== expected.expectedQuestionCount
+    ) {
+      fail(
+        `${expected.path}: expected ${expected.expectedQuestionCount} approved questions, found ${manifest.availableQuestionCount}`
+      );
+    }
+
+    if (
+      Array.isArray(expected.expectedQuestionCountOptions) &&
+      JSON.stringify(manifest.questionCountOptions) !==
+        JSON.stringify(expected.expectedQuestionCountOptions)
+    ) {
+      fail(`${expected.path}: question-count options do not match the CCNA runtime contract`);
+    }
+
+    if (
+      Number.isInteger(expected.expectedDefaultQuestionCount) &&
+      manifest.defaultQuestionCount !== expected.expectedDefaultQuestionCount
+    ) {
+      fail(`${expected.path}: unexpected default question count`);
+    }
+
     const questionsRelative = String(manifest.questionsFile || "").replace(/^\/+/, "");
     const questionsPath = path.join(outputRoot, questionsRelative);
 
@@ -719,6 +758,17 @@ for (const expected of generatedQuizSpecs) {
       questions.questions?.length !== manifest.availableQuestionCount
     ) {
       fail(`${expected.path}: manifest and questions file counts do not match`);
+    }
+
+    if (Number.isInteger(expected.expectedStimulusCount)) {
+      const stimulusCount = questions.questions.filter(
+        (question) => question.stimulus
+      ).length;
+      if (stimulusCount !== expected.expectedStimulusCount) {
+        fail(
+          `${expected.path}: expected ${expected.expectedStimulusCount} stimulus questions, found ${stimulusCount}`
+        );
+      }
     }
   } catch (error) {
     fail(`${expected.path}: invalid generated quiz data (${error.message})`);
@@ -739,6 +789,18 @@ if (await isFile(siteCssPath)) {
 
   if (!siteCss.includes("table-layout: auto") || !siteCss.includes("overflow-wrap: anywhere")) {
     fail("site.css: shared article tables are missing flexible wrapping rules");
+  }
+
+  const requiredStimulusRules = [
+    ".quiz-stimulus",
+    ".quiz-stimulus__pre",
+    ".quiz-stimulus__table-scroll",
+    ".quiz-stimulus__table"
+  ];
+  for (const rule of requiredStimulusRules) {
+    if (!siteCss.includes(rule)) {
+      fail(`site.css: shared question-stimulus rule is missing: ${rule}`);
+    }
   }
 
   const requiredFirstColumnRules = [
@@ -1165,9 +1227,9 @@ for (const file of htmlFiles) {
 
   const expectedCcnaNavigationGroups = [
     ["ccna-navigation-group-1", "Overview"],
-    ["ccna-navigation-group-2", "Subnetting"],
+    ["ccna-navigation-group-2", "Practice"],
     ["ccna-navigation-group-3", "Study"],
-    ["ccna-navigation-group-4", "References"]
+    ["ccna-navigation-group-4", "References and tools"]
   ];
 
   for (const [id, label] of expectedCcnaNavigationGroups) {
@@ -1186,11 +1248,21 @@ for (const file of htmlFiles) {
     "/security-plus/sy0-701/practice-test/",
     "/security-plus/sy0-701/study-guide/",
     "/security-plus/quick-review/",
+    "/security-plus/sy0-701/study-guide/general-security-concepts/",
+    "/security-plus/sy0-701/study-guide/threats-vulnerabilities-mitigations/",
+    "/security-plus/sy0-701/study-guide/security-architecture/",
+    "/security-plus/sy0-701/study-guide/security-operations/",
+    "/security-plus/sy0-701/study-guide/security-program-management-oversight/",
     "/security-plus/acronyms/",
     "/network-plus/",
     "/network-plus/n10-009/practice-test/",
     "/network-plus/n10-009/study-guide/",
     "/network-plus/quick-review/",
+    "/network-plus/n10-009/study-guide/networking-concepts/",
+    "/network-plus/n10-009/study-guide/network-implementation/",
+    "/network-plus/n10-009/study-guide/network-operations/",
+    "/network-plus/n10-009/study-guide/network-security/",
+    "/network-plus/n10-009/study-guide/network-troubleshooting/",
     "/network-plus/acronyms/",
     "/ports-protocols/",
     "/network-plus/n10-009/study-guide/ipv4-subnetting/",
@@ -2018,7 +2090,8 @@ for (const file of htmlFiles) {
     const requiredPracticeMarkers = [
       "Security+ SY0-701 practice test",
       'data-test-id="SEC-701"',
-      'data-questions-url="/quiz-data/security-plus/sec-701/questions.json"'
+      'data-questions-url="/quiz-data/security-plus/sec-701/questions.json"',
+      'data-quiz-stimulus'
     ];
 
     for (const marker of requiredPracticeMarkers) {
@@ -2038,7 +2111,8 @@ for (const file of htmlFiles) {
     const requiredPracticeMarkers = [
       "Network+ N10-009 practice test",
       'data-test-id="NET-009"',
-      'data-questions-url="/quiz-data/network-plus/n10-009/questions.json"'
+      'data-questions-url="/quiz-data/network-plus/n10-009/questions.json"',
+      'data-quiz-stimulus'
     ];
 
     for (const marker of requiredPracticeMarkers) {
@@ -2067,6 +2141,62 @@ for (const file of htmlFiles) {
         fail(
           `${relative}: Network+ practice-test lengths do not match the generated manifest`
         );
+      }
+    }
+  }
+
+  if (relative === "ccna/200-301-v2/practice-test/index.html") {
+    verifyQuizResultActions(
+      html,
+      relative,
+      "/ccna/",
+      "Return to CCNA resources"
+    );
+    const requiredPracticeMarkers = [
+      "CCNA 200-301 v2.0 practice test",
+      'data-test-id="CCNA-301-V2"',
+      'data-questions-url="/quiz-data/ccna/200-301-v2/questions.json"',
+      'data-quiz-stimulus',
+      "February 3, 2027",
+      "February 2, 2027"
+    ];
+
+    for (const marker of requiredPracticeMarkers) {
+      if (!hasPageMarker(html, marker)) {
+        fail(`${relative}: CCNA practice test is missing ${marker}`);
+      }
+    }
+
+    const manifest = generatedQuizManifests.get("CCNA-301-V2");
+    if (manifest) {
+      const questionCountMarker = `${manifest.availableQuestionCount} approved questions`;
+
+      if (!includesNormalizedText(html, questionCountMarker)) {
+        fail(
+          `${relative}: CCNA practice test does not show the generated approved question count`
+        );
+      }
+
+      const renderedOptions = getNamedInputValues(html, "question-count").map(Number);
+      if (
+        renderedOptions.length !== manifest.questionCountOptions.length ||
+        renderedOptions.some(
+          (option, index) => option !== manifest.questionCountOptions[index]
+        )
+      ) {
+        fail(
+          `${relative}: CCNA practice-test lengths do not match the generated manifest`
+        );
+      }
+
+      const checkedDefault = html.match(
+        /<input\b(?=[^>]*name=["']question-count["'])(?=[^>]*checked)[^>]*>/i
+      )?.[0];
+      const checkedValue = Number(
+        checkedDefault?.match(/\bvalue=["'](\d+)["']/i)?.[1]
+      );
+      if (checkedValue !== manifest.defaultQuestionCount) {
+        fail(`${relative}: CCNA default test length does not match the generated manifest`);
       }
     }
   }
@@ -2609,8 +2739,11 @@ for (const file of htmlFiles) {
   const isNetworkPagedQuestion = relative.startsWith(
     "network-plus/n10-009/practice-test/question/"
   );
+  const isCcnaPagedQuestion = relative.startsWith(
+    "ccna/200-301-v2/practice-test/question/"
+  );
 
-  if (isSecurityPagedQuestion || isNetworkPagedQuestion) {
+  if (isSecurityPagedQuestion || isNetworkPagedQuestion || isCcnaPagedQuestion) {
     if (!/<h1\b[^>]*data-paged-position[^>]*>/i.test(html)) {
       fail(`${relative}: paged question heading is missing its dynamic position marker`);
     }
@@ -2623,9 +2756,17 @@ for (const file of htmlFiles) {
       fail(`${relative}: paged question must remain noindex`);
     }
 
-    const expectedTestId = isNetworkPagedQuestion ? "NET-009" : "SEC-701";
+    const expectedTestId = isCcnaPagedQuestion
+      ? "CCNA-301-V2"
+      : isNetworkPagedQuestion
+        ? "NET-009"
+        : "SEC-701";
     if (!html.includes(`data-test-id="${expectedTestId}"`)) {
       fail(`${relative}: paged question is missing data-test-id ${expectedTestId}`);
+    }
+
+    if (!hasPageMarker(html, "data-paged-stimulus")) {
+      fail(`${relative}: paged question is missing the shared stimulus container`);
     }
   }
 }
@@ -2635,8 +2776,8 @@ if (await isFile(path.join(outputRoot, "quiz-data/catalog.json"))) {
     const catalog = JSON.parse(
       await readFile(path.join(outputRoot, "quiz-data/catalog.json"), "utf8")
     );
-    if (catalog.quizzes?.length !== 2) {
-      fail("quiz-data/catalog.json: expected two configured quizzes");
+    if (catalog.quizzes?.length !== 3) {
+      fail("quiz-data/catalog.json: expected three configured quizzes");
     }
   } catch (error) {
     fail(`quiz-data/catalog.json: invalid JSON (${error.message})`);
@@ -2664,7 +2805,9 @@ if (await isFile(path.join(outputRoot, "_redirects"))) {
     "/security-plus/practice-test /security-plus/sy0-701/practice-test/ 302",
     "/security-plus/practice-test/ /security-plus/sy0-701/practice-test/ 302",
     "/network-plus/practice-test /network-plus/n10-009/practice-test/ 302",
-    "/network-plus/practice-test/ /network-plus/n10-009/practice-test/ 302"
+    "/network-plus/practice-test/ /network-plus/n10-009/practice-test/ 302",
+    "/ccna/practice-test /ccna/200-301-v2/practice-test/ 302",
+    "/ccna/practice-test/ /ccna/200-301-v2/practice-test/ 302"
   ];
 
   for (const rule of expectedRedirects) {
@@ -2693,7 +2836,8 @@ if (await isFile(path.join(outputRoot, "sitemap.xml"))) {
 
   const excludedQuestionPrefixes = [
     "https://certhappens.com/security-plus/sy0-701/practice-test/question/",
-    "https://certhappens.com/network-plus/n10-009/practice-test/question/"
+    "https://certhappens.com/network-plus/n10-009/practice-test/question/",
+    "https://certhappens.com/ccna/200-301-v2/practice-test/question/"
   ];
 
   for (const prefix of excludedQuestionPrefixes) {

@@ -1,0 +1,786 @@
+{
+  "schemaVersion": 1,
+  "stimuli": {
+    "SEC701-0000226": {
+      "type": "table",
+      "title": "Control evidence",
+      "caption": "The review records each control's observed action.",
+      "columns": [
+        {
+          "key": "control",
+          "label": "Control"
+        },
+        {
+          "key": "observed_action",
+          "label": "Observed action"
+        }
+      ],
+      "rows": [
+        {
+          "control": "Application allowlisting",
+          "observed_action": "Blocks an unsigned executable before it starts"
+        },
+        {
+          "control": "SIEM correlation rule",
+          "observed_action": "Creates an alert after an unusual sign-in pattern"
+        },
+        {
+          "control": "Entrance cameras",
+          "observed_action": "Records entry activity for live and later review"
+        },
+        {
+          "control": "Protected backups",
+          "observed_action": "Restores files after a ransomware event"
+        }
+      ]
+    },
+    "SEC701-0000227": {
+      "type": "table",
+      "title": "Change record CHG-2047",
+      "caption": "The first production group was updated during the approved window.",
+      "columns": [
+        {
+          "key": "field",
+          "label": "Field"
+        },
+        {
+          "key": "value",
+          "label": "Value"
+        }
+      ],
+      "rows": [
+        {
+          "field": "Implementation status",
+          "value": "First group completed; remaining groups paused"
+        },
+        {
+          "field": "Validation",
+          "value": "Configuration hash does not match the approved baseline"
+        },
+        {
+          "field": "Service health",
+          "value": "Authentication errors increased from 0.2% to 18%"
+        },
+        {
+          "field": "Rollback condition",
+          "value": "Validation failure or authentication errors above 2%"
+        },
+        {
+          "field": "Rollback package",
+          "value": "Available and tested before the window"
+        }
+      ]
+    },
+    "SEC701-0000228": {
+      "type": "preformatted",
+      "variant": "command_output",
+      "title": "TLS certificate diagnostic",
+      "content": "Requested host: portal.example.com\nCurrent time:   2026-08-01 18:40:00 UTC\n\nsubject=CN=portal.example.com\nX509v3 Subject Alternative Name:\n    DNS:portal.example.com\nnotBefore=Jul  1 00:00:00 2026 GMT\nnotAfter=Jul 31 23:59:59 2026 GMT\nPublic Key Algorithm: rsaEncryption\nVerify return code: 10 (certificate has expired)"
+    },
+    "SEC701-0000229": {
+      "type": "table",
+      "title": "Investigation summary",
+      "columns": [
+        {
+          "key": "evidence",
+          "label": "Evidence"
+        },
+        {
+          "key": "finding",
+          "label": "Finding"
+        }
+      ],
+      "rows": [
+        {
+          "evidence": "Authentication",
+          "finding": "Valid developer account; no failed sign-ins"
+        },
+        {
+          "evidence": "Network path",
+          "finding": "Corporate VPN from the employee's assigned laptop"
+        },
+        {
+          "evidence": "Files accessed",
+          "finding": "Unreleased prototype files from the employee's project"
+        },
+        {
+          "evidence": "Recent event",
+          "finding": "Employee received a termination notice that morning"
+        },
+        {
+          "evidence": "Data movement",
+          "finding": "Archive uploaded to a personal cloud account"
+        },
+        {
+          "evidence": "Malware review",
+          "finding": "No malware or remote-control tools found"
+        }
+      ]
+    },
+    "SEC701-0000230": {
+      "type": "preformatted",
+      "variant": "plain_text",
+      "title": "Received email",
+      "content": "From: Benefits Team <benefits@corp-beneflts.com>\nReply-To: enrollment@external-mail.example\nSubject: Action required: annual benefits confirmation\n\nYour enrollment will be suspended unless you confirm today.\nSign in: https://benefits.corp-beneflts.com/login\n\nLegitimate company domain: corp-benefits.com"
+    },
+    "SEC701-0000231": {
+      "type": "preformatted",
+      "variant": "log",
+      "title": "Web application log",
+      "content": "2026-08-01T14:22:08Z client=198.51.100.44 method=GET\npath=/search?q=%27%20UNION%20SELECT%20username,password%20FROM%20users--\nstatus=500 response_time_ms=84\napplication_error=\"database syntax error near UNION SELECT\""
+    },
+    "SEC701-0000232": {
+      "type": "table",
+      "title": "Authentication summary",
+      "caption": "Events were grouped over a four-minute interval.",
+      "columns": [
+        {
+          "key": "source",
+          "label": "Source"
+        },
+        {
+          "key": "accounts_targeted",
+          "label": "Accounts targeted"
+        },
+        {
+          "key": "max_attempts_per_account",
+          "label": "Max attempts per account"
+        },
+        {
+          "key": "successes",
+          "label": "Successes"
+        }
+      ],
+      "rows": [
+        {
+          "source": "203.0.113.77",
+          "accounts_targeted": "42",
+          "max_attempts_per_account": "2",
+          "successes": "1"
+        },
+        {
+          "source": "198.51.100.18",
+          "accounts_targeted": "1",
+          "max_attempts_per_account": "186",
+          "successes": "0"
+        },
+        {
+          "source": "192.0.2.45",
+          "accounts_targeted": "3",
+          "max_attempts_per_account": "3",
+          "successes": "3; known corporate VPN"
+        }
+      ]
+    },
+    "SEC701-0000233": {
+      "type": "preformatted",
+      "variant": "log",
+      "title": "DNS and firewall evidence",
+      "content": "Internal host: 10.24.8.19\nApproved DNS resolvers: 10.24.0.10, 10.24.0.11\n\n18:02:11 ALLOW udp 10.24.8.19:53144 -> 8.8.8.8:53\n18:02:11 QUERY jh4k2m9q7v1x0a.data-sync.example TXT\n18:02:12 ALLOW udp 10.24.8.19:53145 -> 8.8.8.8:53\n18:02:12 QUERY p8z3n6c1r5t9w2.data-sync.example TXT\n18:02:13 ALLOW udp 10.24.8.19:53146 -> 8.8.8.8:53\n18:02:13 QUERY y7b4q0m2d8s6k1.data-sync.example TXT"
+    },
+    "SEC701-0000234": {
+      "type": "table",
+      "title": "Cloud service responsibility summary",
+      "columns": [
+        {
+          "key": "layer",
+          "label": "Layer or activity"
+        },
+        {
+          "key": "managed_by",
+          "label": "Managed by"
+        }
+      ],
+      "rows": [
+        {
+          "layer": "Physical facilities and hardware",
+          "managed_by": "Cloud provider"
+        },
+        {
+          "layer": "Virtualization platform",
+          "managed_by": "Cloud provider"
+        },
+        {
+          "layer": "Guest operating systems",
+          "managed_by": "Customer"
+        },
+        {
+          "layer": "Workload network rules",
+          "managed_by": "Customer"
+        },
+        {
+          "layer": "Application data and identities",
+          "managed_by": "Customer"
+        }
+      ]
+    },
+    "SEC701-0000235": {
+      "type": "table",
+      "title": "Firewall rules for the management subnet",
+      "columns": [
+        {
+          "key": "priority",
+          "label": "Priority"
+        },
+        {
+          "key": "source",
+          "label": "Source"
+        },
+        {
+          "key": "destination",
+          "label": "Destination"
+        },
+        {
+          "key": "service",
+          "label": "Service"
+        },
+        {
+          "key": "action",
+          "label": "Action"
+        }
+      ],
+      "rows": [
+        {
+          "priority": "10",
+          "source": "Any Internet",
+          "destination": "10.60.0.0/24 management",
+          "service": "TCP 3389",
+          "action": "Allow"
+        },
+        {
+          "priority": "20",
+          "source": "10.10.50.0/24 admin network",
+          "destination": "10.60.0.0/24 management",
+          "service": "TCP 443",
+          "action": "Allow"
+        },
+        {
+          "priority": "30",
+          "source": "Any",
+          "destination": "10.60.0.0/24 management",
+          "service": "Any",
+          "action": "Deny and log"
+        }
+      ]
+    },
+    "SEC701-0000236": {
+      "type": "table",
+      "title": "Data protection event",
+      "columns": [
+        {
+          "key": "field",
+          "label": "Field"
+        },
+        {
+          "key": "value",
+          "label": "Value"
+        }
+      ],
+      "rows": [
+        {
+          "field": "File",
+          "value": "customer-export.csv"
+        },
+        {
+          "field": "Classification",
+          "value": "Restricted"
+        },
+        {
+          "field": "Detected content",
+          "value": "Customer identifiers and account numbers"
+        },
+        {
+          "field": "Destination",
+          "value": "Personal cloud-storage tenant"
+        },
+        {
+          "field": "Policy",
+          "value": "Restricted data may use approved corporate repositories only"
+        },
+        {
+          "field": "Action",
+          "value": "Upload blocked"
+        }
+      ]
+    },
+    "SEC701-0000237": {
+      "type": "table",
+      "title": "Recovery options",
+      "columns": [
+        {
+          "key": "option",
+          "label": "Option"
+        },
+        {
+          "key": "design",
+          "label": "Design"
+        },
+        {
+          "key": "estimated_rto",
+          "label": "Estimated RTO"
+        },
+        {
+          "key": "estimated_rpo",
+          "label": "Estimated RPO"
+        }
+      ],
+      "rows": [
+        {
+          "option": "A",
+          "design": "Cold site plus nightly backup",
+          "estimated_rto": "48 hours",
+          "estimated_rpo": "24 hours"
+        },
+        {
+          "option": "B",
+          "design": "Warm site plus hourly replication",
+          "estimated_rto": "4 hours",
+          "estimated_rpo": "60 minutes"
+        },
+        {
+          "option": "C",
+          "design": "Active-passive with asynchronous replication",
+          "estimated_rto": "45 minutes",
+          "estimated_rpo": "30 minutes"
+        },
+        {
+          "option": "D",
+          "design": "Active-active with synchronous replication",
+          "estimated_rto": "5 minutes",
+          "estimated_rpo": "0 minutes"
+        }
+      ]
+    },
+    "SEC701-0000238": {
+      "type": "preformatted",
+      "variant": "log",
+      "title": "Conditional access decision",
+      "content": "user=alex.chen\napplication=finance-portal\npassword=valid\nmfa=passed\nrole=finance-analyst\ndevice_managed=false\ndisk_encryption=false\npolicy_requires=managed_device,disk_encryption\ndecision=deny\nreason=device posture requirements not met"
+    },
+    "SEC701-0000239": {
+      "type": "preformatted",
+      "variant": "configuration",
+      "title": "Current SSH server settings",
+      "content": "PermitRootLogin no\nPasswordAuthentication yes\nPubkeyAuthentication yes\nMaxAuthTries 6\nAllowGroups server-admins"
+    },
+    "SEC701-0000240": {
+      "type": "table",
+      "title": "Asset inventory extract",
+      "columns": [
+        {
+          "key": "asset",
+          "label": "Asset"
+        },
+        {
+          "key": "owner",
+          "label": "Owner"
+        },
+        {
+          "key": "platform",
+          "label": "Platform"
+        },
+        {
+          "key": "support_status",
+          "label": "Support status"
+        },
+        {
+          "key": "last_seen",
+          "label": "Last seen"
+        }
+      ],
+      "rows": [
+        {
+          "asset": "LAP-1044",
+          "owner": "Morgan Lee",
+          "platform": "Windows 11",
+          "support_status": "Supported",
+          "last_seen": "2026-08-01"
+        },
+        {
+          "asset": "DB-02",
+          "owner": "Not assigned",
+          "platform": "Linux LTS",
+          "support_status": "Supported",
+          "last_seen": "2026-08-01"
+        },
+        {
+          "asset": "FILE-OLD",
+          "owner": "Infrastructure",
+          "platform": "Windows Server 2012 R2",
+          "support_status": "Unsupported",
+          "last_seen": "2026-08-01"
+        },
+        {
+          "asset": "MON-SPARE-7",
+          "owner": "Facilities",
+          "platform": "Display hardware",
+          "support_status": "In storage",
+          "last_seen": "2026-07-28"
+        }
+      ]
+    },
+    "SEC701-0000241": {
+      "type": "table",
+      "title": "Vulnerability findings",
+      "columns": [
+        {
+          "key": "asset",
+          "label": "Asset"
+        },
+        {
+          "key": "exposure",
+          "label": "Exposure"
+        },
+        {
+          "key": "business_role",
+          "label": "Business role"
+        },
+        {
+          "key": "cvss",
+          "label": "CVSS"
+        },
+        {
+          "key": "active_exploitation",
+          "label": "Active exploitation"
+        },
+        {
+          "key": "compensating_control",
+          "label": "Compensating control"
+        }
+      ],
+      "rows": [
+        {
+          "asset": "Identity gateway",
+          "exposure": "Public",
+          "business_role": "Critical authentication",
+          "cvss": "7.5",
+          "active_exploitation": "Confirmed",
+          "compensating_control": "None"
+        },
+        {
+          "asset": "Development server",
+          "exposure": "Isolated lab",
+          "business_role": "Nonproduction",
+          "cvss": "9.8",
+          "active_exploitation": "Not observed",
+          "compensating_control": "Network isolation"
+        },
+        {
+          "asset": "User laptop",
+          "exposure": "Internal and remote",
+          "business_role": "General workforce",
+          "cvss": "8.8",
+          "active_exploitation": "Phishing prerequisite",
+          "compensating_control": "EDR"
+        },
+        {
+          "asset": "Office printer",
+          "exposure": "Internal",
+          "business_role": "Low criticality",
+          "cvss": "6.5",
+          "active_exploitation": "Not observed",
+          "compensating_control": "Restricted VLAN"
+        }
+      ]
+    },
+    "SEC701-0000242": {
+      "type": "table",
+      "title": "User sign-in events",
+      "columns": [
+        {
+          "key": "time_utc",
+          "label": "Time UTC"
+        },
+        {
+          "key": "user",
+          "label": "User"
+        },
+        {
+          "key": "location",
+          "label": "Location"
+        },
+        {
+          "key": "device",
+          "label": "Device"
+        },
+        {
+          "key": "result",
+          "label": "Result"
+        }
+      ],
+      "rows": [
+        {
+          "time_utc": "14:02",
+          "user": "rpatel",
+          "location": "Orlando, US",
+          "device": "Managed laptop",
+          "result": "Success; MFA passed"
+        },
+        {
+          "time_utc": "14:08",
+          "user": "rpatel",
+          "location": "Frankfurt, DE",
+          "device": "Unknown browser",
+          "result": "Success; existing session"
+        },
+        {
+          "time_utc": "14:10",
+          "user": "rpatel",
+          "location": "Frankfurt, DE",
+          "device": "Unknown browser",
+          "result": "Mailbox export started"
+        }
+      ]
+    },
+    "SEC701-0000243": {
+      "type": "table",
+      "title": "Current controls and observed gap",
+      "columns": [
+        {
+          "key": "capability",
+          "label": "Capability"
+        },
+        {
+          "key": "current_state",
+          "label": "Current state"
+        }
+      ],
+      "rows": [
+        {
+          "capability": "Secure web proxy",
+          "current_state": "Records user and destination; encrypted upload content is not classified"
+        },
+        {
+          "capability": "Cloud access security broker",
+          "current_state": "Not deployed"
+        },
+        {
+          "capability": "Endpoint DLP",
+          "current_state": "Not deployed"
+        },
+        {
+          "capability": "Full-disk encryption",
+          "current_state": "Enabled on managed workstations"
+        },
+        {
+          "capability": "Observed event",
+          "current_state": "Restricted archive uploaded to an employee's personal SaaS account"
+        }
+      ]
+    },
+    "SEC701-0000244": {
+      "type": "preformatted",
+      "variant": "log",
+      "title": "Cloud account incident timeline",
+      "content": "02:10:04 user approved OAuth application: MailSync-Tools\n02:10:07 application granted scopes: Mail.Read, Mail.ReadWrite, offline_access\n02:12:18 mailbox rule created: forward all messages to archive@external.example\n02:13:02 sign-in from unfamiliar cloud-hosting address\n02:15:40 user contacted help desk and denied approving the application\n02:16:05 account remains enabled; active sessions remain valid"
+    },
+    "SEC701-0000245": {
+      "type": "table",
+      "title": "Available investigation data",
+      "columns": [
+        {
+          "key": "source",
+          "label": "Data source"
+        },
+        {
+          "key": "available_details",
+          "label": "Available details"
+        }
+      ],
+      "rows": [
+        {
+          "source": "DHCP",
+          "available_details": "IP address, device identifier, lease times"
+        },
+        {
+          "source": "Badge system",
+          "available_details": "Door, badge holder, entry time"
+        },
+        {
+          "source": "DNS resolver",
+          "available_details": "Client, query name, response"
+        },
+        {
+          "source": "EDR",
+          "available_details": "Parent process, child process, command line, file hash"
+        }
+      ]
+    },
+    "SEC701-0000246": {
+      "type": "table",
+      "title": "Governance documents",
+      "columns": [
+        {
+          "key": "document",
+          "label": "Document"
+        },
+        {
+          "key": "excerpt",
+          "label": "Excerpt"
+        }
+      ],
+      "rows": [
+        {
+          "document": "Information security policy",
+          "excerpt": "Sensitive information must be protected according to classification."
+        },
+        {
+          "document": "Encryption standard",
+          "excerpt": "Restricted data must use approved algorithms and centrally managed keys."
+        },
+        {
+          "document": "Server-build procedure",
+          "excerpt": "Create the service account, apply the image, patch, scan, and record validation."
+        },
+        {
+          "document": "Risk-scoring guideline",
+          "excerpt": "Teams should normally use the provided likelihood examples when evidence is limited."
+        }
+      ]
+    },
+    "SEC701-0000247": {
+      "type": "table",
+      "title": "Risk estimate",
+      "columns": [
+        {
+          "key": "input",
+          "label": "Input"
+        },
+        {
+          "key": "current",
+          "label": "Current state"
+        },
+        {
+          "key": "after_control",
+          "label": "After control"
+        }
+      ],
+      "rows": [
+        {
+          "input": "Asset value",
+          "current": "$400,000",
+          "after_control": "$400,000"
+        },
+        {
+          "input": "Exposure factor",
+          "current": "25%",
+          "after_control": "10%"
+        },
+        {
+          "input": "Annualized rate of occurrence",
+          "current": "0.5",
+          "after_control": "0.5"
+        },
+        {
+          "input": "Annual control cost",
+          "current": "$0",
+          "after_control": "$30,000"
+        }
+      ]
+    },
+    "SEC701-0000248": {
+      "type": "table",
+      "title": "Vendor due diligence responses",
+      "columns": [
+        {
+          "key": "requirement",
+          "label": "Requirement"
+        },
+        {
+          "key": "vendor_response",
+          "label": "Vendor response"
+        }
+      ],
+      "rows": [
+        {
+          "requirement": "Incident notification",
+          "vendor_response": "Customer will be notified as soon as practical"
+        },
+        {
+          "requirement": "Subprocessors",
+          "vendor_response": "List and processing locations not provided"
+        },
+        {
+          "requirement": "Encryption",
+          "vendor_response": "AES-256 at rest and TLS for data in transit; configuration evidence attached"
+        },
+        {
+          "requirement": "Continuity testing",
+          "vendor_response": "Annual exercise completed; executive summary attached"
+        }
+      ]
+    },
+    "SEC701-0000249": {
+      "type": "table",
+      "title": "Available audit evidence",
+      "columns": [
+        {
+          "key": "item",
+          "label": "Item"
+        },
+        {
+          "key": "description",
+          "label": "Description"
+        }
+      ],
+      "rows": [
+        {
+          "item": "Policy",
+          "description": "Requires quarterly privileged-access reviews"
+        },
+        {
+          "item": "Architecture diagram",
+          "description": "Shows identity platform components and connections"
+        },
+        {
+          "item": "Vendor document",
+          "description": "Describes access-review features supported by the platform"
+        },
+        {
+          "item": "Review records",
+          "description": "Samples from all four quarters with approvals, exceptions, and remediation follow-up"
+        }
+      ]
+    },
+    "SEC701-0000250": {
+      "type": "table",
+      "title": "Phishing simulation results",
+      "columns": [
+        {
+          "key": "department",
+          "label": "Department"
+        },
+        {
+          "key": "clicked",
+          "label": "Clicked simulation"
+        },
+        {
+          "key": "reported",
+          "label": "Reported simulation"
+        }
+      ],
+      "rows": [
+        {
+          "department": "Finance",
+          "clicked": "22%",
+          "reported": "8%"
+        },
+        {
+          "department": "Sales",
+          "clicked": "18%",
+          "reported": "5%"
+        },
+        {
+          "department": "Information technology",
+          "clicked": "4%",
+          "reported": "60%"
+        },
+        {
+          "department": "Human resources",
+          "clicked": "12%",
+          "reported": "14%"
+        }
+      ]
+    }
+  }
+}
