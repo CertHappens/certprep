@@ -45,7 +45,7 @@
       "columns": [
         {
           "key": "link",
-          "label": "Link"
+          "label": "Proposed link"
         },
         {
           "key": "media",
@@ -66,28 +66,28 @@
       ],
       "rows": [
         {
-          "link": "A",
+          "link": "Link 1",
           "media": "OS2 single-mode",
           "endpoint_a": "10GBASE-LR",
           "endpoint_b": "10GBASE-LR",
           "distance": "6 km"
         },
         {
-          "link": "B",
+          "link": "Link 2",
           "media": "OM4 multimode",
           "endpoint_a": "10GBASE-SR",
           "endpoint_b": "10GBASE-SR",
           "distance": "100 m"
         },
         {
-          "link": "C",
+          "link": "Link 3",
           "media": "OS2 single-mode",
           "endpoint_a": "10GBASE-SR",
           "endpoint_b": "10GBASE-LR",
           "distance": "2 km"
         },
         {
-          "link": "D",
+          "link": "Link 4",
           "media": "Category 6A",
           "endpoint_a": "10GBASE-T",
           "endpoint_b": "10GBASE-T",
