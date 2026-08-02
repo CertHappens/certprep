@@ -68,12 +68,16 @@ test("Explore feed renders published collection items without visible dates", as
 test("assessment component provides sequential controls and top-two results without lead capture", async () => {
   const component = await readSource("src/_includes/components/explore-assessment.njk");
   const controller = await readSource("src/assets/js/explore/career-assessment.js");
+  assert.match(component, /data-career-assessment-jump/);
+  assert.match(component, /Assessment question navigation/);
   assert.match(component, /Previous question/);
   assert.match(component, /Next question/);
   assert.match(component, /See my top two paths/);
   assert.match(component, /Your answers suggest that you may enjoy\.\.\./);
   assert.match(component, /data-career-assessment-results/);
   assert.match(controller, /currentQuestionIndex/);
+  assert.match(controller, /question\.style\.display = current \? "" : "none"/);
+  assert.match(controller, /aria-current/);
   assert.match(controller, /form\.hidden = true/);
   assert.doesNotMatch(component, /type=["']email["']/i);
   assert.doesNotMatch(component, /mailto:/i);
@@ -139,8 +143,9 @@ test("Explore navigation, landing page, and first article activate together for 
   assert.match(article, /permalink: \/explore\/career\/paths\//);
   assert.match(article, /What career is right for me\?/);
   assert.match(article, /assessmentPlacement: inline/);
+  assert.match(article, /toc:[\s\S]*id: career-quiz[\s\S]*id: related-resources-title/);
   assert.match(article, /career self-assessment below returns your two strongest matches/);
-  assert.match(article, /\{% include "components\/explore-assessment\.njk" %\}[\s\S]*## IT Operations and Infrastructure/);
+  assert.match(article, /\{% include "components\/explore-assessment\.njk" %\}[\s\S]*<h2 id="it-operations">IT Operations and Infrastructure<\/h2>/);
   assert.match(article, /Security Technical Implementation Guides/);
   assert.match(landing, /robots: noindex,nofollow,nosnippet/);
   assert.match(article, /robots: noindex,nofollow,nosnippet/);

@@ -24,6 +24,29 @@ breadcrumbs:
   - label: Explore
     url: /explore/
   - label: Which Technology Career Path Fits You?
+toc:
+  - id: intro
+    label: Intro
+  - id: career-quiz
+    label: Career quiz
+  - id: it-operations
+    label: IT operations and infrastructure
+  - id: software-development
+    label: Software development and automation
+  - id: technology-management
+    label: Technology management and coordination
+  - id: cybersecurity
+    label: Cybersecurity
+  - id: quality-testing
+    label: Quality, testing, and improvement
+  - id: audit-assurance
+    label: Audit, compliance, and technical assurance
+  - id: results-work-together
+    label: How your results may work together
+  - id: test-interests
+    label: Test your interests
+  - id: related-resources-title
+    label: Related resources
 stylesheets:
   - /assets/css/explore.css
 keywords:
@@ -43,7 +66,7 @@ relatedLinks:
     url: /ccna/
     description: Develop deeper networking and infrastructure skills with Cisco-focused study resources.
 ---
-Trying to answer “What career is right for me?” can be difficult when job titles reveal so little about the work.
+<p id="intro">Trying to answer “What career is right for me?” can be difficult when job titles reveal so little about the work.</p>
 
 One technology professional may spend the day restoring network access. Another writes code, tests an application, coordinates a system rollout, investigates suspicious activity, or checks whether a configuration meets an established standard.
 
@@ -62,7 +85,7 @@ Many jobs combine two or more of these areas. The career self-assessment below r
 
 {% include "components/explore-assessment.njk" %}
 
-## IT Operations and Infrastructure
+<h2 id="it-operations">IT Operations and Infrastructure</h2>
 
 People in IT operations keep technology available, connected, and supportable. They configure systems, manage accounts, maintain networks, investigate failures, monitor performance, and restore services when something goes wrong.
 
@@ -85,7 +108,7 @@ Create two virtual machines or use two computers on the same network. Configure 
 
 Notice what interests you most. You may enjoy configuring the environment, tracing connection problems, improving reliability, or writing the instructions.
 
-## Software Development and Automation
+<h2 id="software-development">Software Development and Automation</h2>
 
 Developers turn requirements and ideas into working software. That may involve a large application, a website, an integration, a small internal tool, or a script that removes repetitive work.
 
@@ -108,7 +131,7 @@ Choose one beginner-friendly language and build a program that accepts informati
 
 The project does not need to be original. Pay attention to whether you enjoy designing the steps, writing the code, and finding the reason an incorrect result occurred.
 
-## Technology Management and Coordination
+<h2 id="technology-management">Technology Management and Coordination</h2>
 
 Technology work often crosses several teams. Developers, infrastructure specialists, security staff, vendors, business leaders, and end users may all depend on the same decisions. Someone must organize the work and keep the larger result visible.
 
@@ -133,7 +156,7 @@ Plan a modest technology effort, such as setting up a home lab or launching a sm
 
 You may find that organizing the effort is as interesting as completing the technical tasks.
 
-## Cybersecurity
+<h2 id="cybersecurity">Cybersecurity</h2>
 
 Cybersecurity work focuses on technology risk, misuse, weaknesses, suspicious activity, and the controls used to protect systems and information.
 
@@ -155,7 +178,7 @@ Draw a diagram of your home network. Include computers, phones, smart devices, t
 
 Identify the information that matters, who or what can access each device, which failure would cause the most disruption, and how you might notice suspicious activity. This is a simple form of threat modeling and requires no specialized equipment.
 
-## Quality, Testing, and Improvement
+<h2 id="quality-testing">Quality, Testing, and Improvement</h2>
 
 Quality assurance professionals examine whether technology behaves as expected. They design tests, reproduce defects, document unexpected behavior, verify corrections, and check whether a change caused a problem somewhere else.
 
@@ -178,7 +201,7 @@ Choose a website form or a small application. Test normal information, missing i
 
 Write a short defect report for anything that behaves incorrectly. Include the steps, expected result, actual result, and enough detail for another person to repeat the test.
 
-## Audit, Compliance, and Technical Assurance
+<h2 id="audit-assurance">Audit, Compliance, and Technical Assurance</h2>
 
 Audit and technical assurance professionals evaluate whether systems and processes meet defined requirements. Those requirements may come from internal policies, contracts, laws, industry standards, configuration baselines, or security frameworks.
 
@@ -204,7 +227,7 @@ Create a short security checklist for one device. Include user accounts, authent
 
 Review the device against each requirement. Record the evidence, identify gaps, and describe what would correct them.
 
-## Your Two Results May Work Together
+<h2 id="results-work-together">How Your Two Results May Work Together</h2>
 
 Technology careers often form at the intersection of two interests.
 
@@ -222,7 +245,7 @@ Technology careers often form at the intersection of two interests.
 
 Job titles vary between employers. Read the responsibilities and repeated tasks rather than relying on the title alone.
 
-## Test Your Interest Before Choosing a Path
+<h2 id="test-interests">Test Your Interests Before Choosing a Path</h2>
 
 Read several job descriptions related to each of your two results. Ignore the experience requirements during the first review and focus on the work itself.
 

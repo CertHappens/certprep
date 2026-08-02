@@ -1,10 +1,32 @@
-<section class="career-assessment" data-career-assessment aria-labelledby="career-assessment-title">
+<section
+  class="career-assessment"
+  id="{{ assessment.anchorId or 'career-assessment' }}"
+  data-career-assessment
+  aria-labelledby="career-assessment-title"
+>
   <div class="career-assessment__intro">
     <p class="eyebrow">Practical self-assessment</p>
     <h2 id="career-assessment-title">{{ assessment.title }}</h2>
     {% if assessment.introduction %}<p>{{ assessment.introduction }}</p>{% endif %}
   </div>
   <form class="career-assessment__form" data-career-assessment-form novalidate>
+    <nav class="career-assessment__navigator" aria-label="Assessment question navigation">
+      <p class="career-assessment__navigator-label">Questions</p>
+      <ol>
+        {% for question in assessment.questions %}
+        <li>
+          <button
+            class="career-assessment__navigator-button"
+            type="button"
+            data-career-assessment-jump
+            data-question-index="{{ loop.index0 }}"
+            aria-label="Go to question {{ loop.index }}"
+          >{{ loop.index }}</button>
+        </li>
+        {% endfor %}
+      </ol>
+    </nav>
+    <div class="career-assessment__questions">
     {% for question in assessment.questions %}
     <fieldset
       class="career-assessment__question"
@@ -25,6 +47,7 @@
       </div>
     </fieldset>
     {% endfor %}
+    </div>
     <p class="career-assessment__status" data-career-assessment-status aria-live="polite"></p>
     <div class="career-assessment__actions">
       <button class="button button--secondary" type="button" data-career-assessment-previous hidden>Previous question</button>

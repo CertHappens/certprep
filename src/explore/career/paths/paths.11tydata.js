@@ -1,5 +1,6 @@
 export default {
   "assessment": {
+    "anchorId": "career-quiz",
     "title": "Find your strongest technology career directions",
     "introduction": "Choose the work that sounds most interesting, even when you have not learned the skill yet. The assessment returns your two strongest matches.",
     "paths": [

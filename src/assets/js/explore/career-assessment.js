@@ -67,6 +67,7 @@ function initializeCareerAssessment(root) {
   const nextButton = root.querySelector("[data-career-assessment-next]");
   const submitButton = root.querySelector("[data-career-assessment-submit]");
   const questionElements = [...root.querySelectorAll("[data-assessment-question]")];
+  const jumpButtons = [...root.querySelectorAll("[data-career-assessment-jump]")];
 
   if (
     !form ||
@@ -77,7 +78,8 @@ function initializeCareerAssessment(root) {
     !previousButton ||
     !nextButton ||
     !submitButton ||
-    questionElements.length === 0
+    questionElements.length === 0 ||
+    jumpButtons.length !== questionElements.length
   ) {
     return;
   }
@@ -99,12 +101,43 @@ function initializeCareerAssessment(root) {
     current?.querySelector("input:checked, input")?.focus();
   };
 
+  const updateQuestionNavigator = () => {
+    jumpButtons.forEach((button, index) => {
+      const question = assessment.questions[index];
+      const answered = Boolean(
+        form.querySelector(`input[name="${CSS.escape(question.id)}"]:checked`)
+      );
+      const current = index === currentQuestionIndex;
+
+      button.classList.toggle("is-answered", answered);
+      button.classList.toggle("is-current", current);
+      button.setAttribute(
+        "aria-label",
+        `Go to question ${index + 1}${answered ? ", answered" : ", unanswered"}${current ? ", current question" : ""}`
+      );
+
+      if (current) {
+        button.setAttribute("aria-current", "step");
+      } else {
+        button.removeAttribute("aria-current");
+      }
+    });
+  };
+
   const renderQuestion = ({ focus = false } = {}) => {
     questionElements.forEach((question, index) => {
-      question.hidden = index !== currentQuestionIndex;
+      const current = index === currentQuestionIndex;
+      question.hidden = !current;
+      question.style.display = current ? "" : "none";
+      if (current) {
+        question.removeAttribute("aria-hidden");
+      } else {
+        question.setAttribute("aria-hidden", "true");
+      }
       question.removeAttribute("data-incomplete");
     });
 
+    updateQuestionNavigator();
     previousButton.hidden = currentQuestionIndex === 0;
     nextButton.hidden = currentQuestionIndex === questionElements.length - 1;
     submitButton.hidden = currentQuestionIndex !== questionElements.length - 1;
@@ -140,10 +173,23 @@ function initializeCareerAssessment(root) {
     renderQuestion({ focus: true });
   });
 
+  for (const button of jumpButtons) {
+    button.addEventListener("click", () => {
+      const requestedIndex = Number.parseInt(button.dataset.questionIndex || "", 10);
+      if (!Number.isInteger(requestedIndex) || !questionElements[requestedIndex]) {
+        return;
+      }
+
+      currentQuestionIndex = requestedIndex;
+      renderQuestion({ focus: true });
+    });
+  }
+
   form.addEventListener("change", (event) => {
     if (event.target.matches('input[type="radio"]')) {
       questionElements[currentQuestionIndex]?.removeAttribute("data-incomplete");
       status.textContent = "";
+      updateQuestionNavigator();
     }
   });
 

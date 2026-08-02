@@ -28,6 +28,7 @@
 }
 
 .career-assessment {
+  scroll-margin-top: 6.5rem;
   margin-top: 2.5rem;
   padding: clamp(1.1rem, 3vw, 2rem);
   border: 1px solid var(--border);
@@ -46,8 +47,81 @@
 
 .career-assessment__form {
   display: grid;
-  gap: 1.15rem;
-  margin-top: 1.5rem;
+  gap: 1rem;
+  margin-top: 1.35rem;
+}
+
+.career-assessment__navigator {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem 0.9rem;
+  align-items: center;
+}
+
+.career-assessment__navigator-label {
+  margin: 0;
+  color: var(--text);
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.career-assessment__navigator ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.career-assessment__navigator li,
+.career-assessment__navigator li + li {
+  margin: 0;
+}
+
+.career-assessment__navigator-button {
+  display: grid;
+  width: 2.35rem;
+  min-height: 2.35rem;
+  place-items: center;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 0.55rem;
+  background: var(--surface);
+  color: var(--text-muted);
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.career-assessment__navigator-button:hover {
+  border-color: #50647d;
+  background: var(--surface-raised);
+  color: var(--text);
+}
+
+.career-assessment__navigator-button.is-answered {
+  border-color: color-mix(in srgb, var(--success) 58%, var(--border));
+  color: var(--text);
+}
+
+.career-assessment__navigator-button.is-current {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: var(--accent-contrast);
+}
+
+.career-assessment__navigator-button:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+}
+
+.career-assessment__questions {
+  min-width: 0;
+}
+
+.career-assessment__question[hidden] {
+  display: none !important;
 }
 
 .career-assessment__question {
@@ -196,6 +270,11 @@
 @media screen and (max-width: 42rem) {
   .career-assessment__result-grid {
     grid-template-columns: 1fr;
+  }
+
+  .career-assessment__navigator {
+    display: grid;
+    gap: 0.55rem;
   }
 
   .career-assessment__question {
