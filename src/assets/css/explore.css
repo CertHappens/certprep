@@ -132,6 +132,18 @@
   font-weight: 700;
 }
 
+.career-assessment__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: space-between;
+}
+
+[data-career-assessment-next],
+[data-career-assessment-submit] {
+  margin-left: auto;
+}
+
 .career-assessment__results {
   margin-top: 1.5rem;
   padding-top: 1.5rem;
@@ -188,5 +200,15 @@
 
   .career-assessment__question {
     padding-inline: 0.75rem;
+  }
+
+  .career-assessment__actions {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .career-assessment__actions .button {
+    width: 100%;
+    margin-left: 0;
   }
 }

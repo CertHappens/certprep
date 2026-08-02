@@ -236,6 +236,11 @@
           ]
         }
       ]
+    },
+    {
+      "label": "Explore",
+      "url": "/explore/",
+      "matchPrefix": "/explore/"
     }
   ],
   "footer": [

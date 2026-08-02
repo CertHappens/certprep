@@ -4,7 +4,6 @@
     <h2 id="career-assessment-title">{{ assessment.title }}</h2>
     {% if assessment.introduction %}<p>{{ assessment.introduction }}</p>{% endif %}
   </div>
-
   <form class="career-assessment__form" data-career-assessment-form novalidate>
     {% for question in assessment.questions %}
     <fieldset
@@ -26,11 +25,13 @@
       </div>
     </fieldset>
     {% endfor %}
-
     <p class="career-assessment__status" data-career-assessment-status aria-live="polite"></p>
-    <button class="button" type="submit">See my top two paths</button>
+    <div class="career-assessment__actions">
+      <button class="button button--secondary" type="button" data-career-assessment-previous hidden>Previous question</button>
+      <button class="button" type="button" data-career-assessment-next hidden>Next question</button>
+      <button class="button" type="submit" data-career-assessment-submit>See my top two paths</button>
+    </div>
   </form>
-
   <section
     class="career-assessment__results"
     data-career-assessment-results
@@ -47,7 +48,6 @@
     </p>
     <button class="button button--secondary" type="button" data-career-assessment-reset>Retake the assessment</button>
   </section>
-
   <noscript>
     <p class="callout">JavaScript is required to score this self-assessment in your browser.</p>
   </noscript>

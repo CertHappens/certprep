@@ -1,7 +1,7 @@
 export default {
   label: "Explore",
   url: "/explore/",
-  launchStatus: "draft",
+  launchStatus: "published",
   firstArticle: {
     title: "Which Technology Career Path Fits You?",
     url: "/explore/career/paths/",

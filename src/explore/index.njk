@@ -1,0 +1,43 @@
+---
+layout: layouts/base.njk
+title: Explore Technology Careers and Certifications
+description: Explore technology careers, cybersecurity paths, certification choices, and practical skills with clear guidance from Cert Happens.
+permalink: /explore/
+robots: noindex,nofollow,nosnippet
+sitemap: false
+stylesheets:
+  - /assets/css/explore.css
+breadcrumbs:
+  - label: Home
+    url: /
+  - label: Explore
+    url: /explore/
+---
+<header class="page-header page-header--compact">
+  <div class="page-shell">
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="/">Home</a></li>
+        <li aria-current="page">Explore</li>
+      </ol>
+    </nav>
+    <p class="eyebrow">Explore</p>
+    <h1>Explore technology careers, certifications, and skills</h1>
+    <p class="lede">
+      Start with the work you may enjoy, then build toward the skills and certifications that support that direction.
+    </p>
+  </div>
+</header>
+<section class="section">
+  <div class="page-shell">
+    <div class="section-heading">
+      <p class="eyebrow">Career guidance</p>
+      <h2>Start with your career direction</h2>
+      <p>
+        Technology careers can involve keeping systems running, writing code, coordinating teams, testing products,
+        reviewing controls, or protecting organizations. Begin with the kind of problems you would like to solve.
+      </p>
+    </div>
+    {% include "components/explore-feed.njk" %}
+  </div>
+</section>

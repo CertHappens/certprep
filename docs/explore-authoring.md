@@ -2,7 +2,7 @@
 
 Explore is a learner-focused article section for career guidance, certification comparisons, study strategies, and beginner-friendly technology topics.
 
-The public section remains inactive until the first article's approved copy and self-assessment data are ready. Do not add an empty Explore navigation item, landing page, category page, or category menu.
+Explore activates with the first approved article. Keep the landing route and top-level navigation synchronized, and do not create empty category pages or category menu items before useful content exists.
 
 ## First article contract
 
@@ -100,7 +100,7 @@ The page must provide an `assessment` object:
           id: "option-a",
           label: "Approved answer text",
           scores: {
-            "it-operations": 2,
+            "it-operations": 3,
             "cybersecurity": 1
           }
         }
@@ -110,6 +110,8 @@ The page must provide an `assessment` object:
 }
 ```
 
-Every question must have one selected answer before scoring. Scoring occurs entirely in the browser and returns the top two paths. Ties are resolved by the configured path order, so content authors should order paths deliberately and avoid relying on ties for meaningful distinctions.
+Every question must have one selected answer before the learner can continue. The enhanced assessment shows one question at a time, scores entirely in the browser, and replaces the form with the top two results. Without JavaScript, all questions remain visible and the existing submit flow remains available.
+
+Ties are resolved by the configured path order, so content authors should order paths deliberately and avoid relying on ties for meaningful distinctions. Keep total scoring opportunities balanced across the available paths.
 
 The assessment must deliver results without an account, email address, employer classification, or lead-capture step. A future newsletter invitation may appear after the useful result has already been shown.

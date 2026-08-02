@@ -21,7 +21,6 @@ function collectAnswers(form, assessment) {
 function createResultCard(match, rank) {
   const article = document.createElement("article");
   article.className = "career-assessment__result-card";
-
   const rankLabel = document.createElement("p");
   rankLabel.className = "career-assessment__result-rank";
   rankLabel.textContent = rank === 1 ? "Strongest match" : "Second match";
@@ -64,8 +63,22 @@ function initializeCareerAssessment(root) {
   const results = root.querySelector("[data-career-assessment-results]");
   const resultCards = root.querySelector("[data-career-assessment-result-cards]");
   const resetButton = root.querySelector("[data-career-assessment-reset]");
+  const previousButton = root.querySelector("[data-career-assessment-previous]");
+  const nextButton = root.querySelector("[data-career-assessment-next]");
+  const submitButton = root.querySelector("[data-career-assessment-submit]");
+  const questionElements = [...root.querySelectorAll("[data-assessment-question]")];
 
-  if (!form || !status || !results || !resultCards || !resetButton) {
+  if (
+    !form ||
+    !status ||
+    !results ||
+    !resultCards ||
+    !resetButton ||
+    !previousButton ||
+    !nextButton ||
+    !submitButton ||
+    questionElements.length === 0
+  ) {
     return;
   }
 
@@ -78,6 +91,62 @@ function initializeCareerAssessment(root) {
     return;
   }
 
+  let currentQuestionIndex = 0;
+  root.dataset.enhanced = "true";
+
+  const focusCurrentQuestion = () => {
+    const current = questionElements[currentQuestionIndex];
+    current?.querySelector("input:checked, input")?.focus();
+  };
+
+  const renderQuestion = ({ focus = false } = {}) => {
+    questionElements.forEach((question, index) => {
+      question.hidden = index !== currentQuestionIndex;
+      question.removeAttribute("data-incomplete");
+    });
+
+    previousButton.hidden = currentQuestionIndex === 0;
+    nextButton.hidden = currentQuestionIndex === questionElements.length - 1;
+    submitButton.hidden = currentQuestionIndex !== questionElements.length - 1;
+    status.textContent = "";
+
+    if (focus) {
+      focusCurrentQuestion();
+    }
+  };
+
+  const currentQuestionIsAnswered = () => {
+    const question = assessment.questions[currentQuestionIndex];
+    return Boolean(
+      form.querySelector(`input[name="${CSS.escape(question.id)}"]:checked`)
+    );
+  };
+
+  nextButton.addEventListener("click", () => {
+    if (!currentQuestionIsAnswered()) {
+      const current = questionElements[currentQuestionIndex];
+      current.setAttribute("data-incomplete", "true");
+      status.textContent = "Choose an answer before continuing.";
+      current.querySelector("input")?.focus();
+      return;
+    }
+
+    currentQuestionIndex += 1;
+    renderQuestion({ focus: true });
+  });
+
+  previousButton.addEventListener("click", () => {
+    currentQuestionIndex = Math.max(0, currentQuestionIndex - 1);
+    renderQuestion({ focus: true });
+  });
+
+  form.addEventListener("change", (event) => {
+    if (event.target.matches('input[type="radio"]')) {
+      questionElements[currentQuestionIndex]?.removeAttribute("data-incomplete");
+      status.textContent = "";
+    }
+  });
+
   form.addEventListener("submit", (event) => {
     event.preventDefault();
 
@@ -85,21 +154,18 @@ function initializeCareerAssessment(root) {
       resultCount: 2,
     });
 
-    root.querySelectorAll("[data-assessment-question]").forEach((question) => {
-      question.removeAttribute("data-incomplete");
-    });
+    questionElements.forEach((question) => question.removeAttribute("data-incomplete"));
 
     if (!outcome.complete) {
       const firstMissingId = outcome.missingQuestionIds[0];
-      const firstMissing = root.querySelector(`[data-question-id="${CSS.escape(firstMissingId)}"]`);
-
-      for (const questionId of outcome.missingQuestionIds) {
-        root
-          .querySelector(`[data-question-id="${CSS.escape(questionId)}"]`)
-          ?.setAttribute("data-incomplete", "true");
-      }
-
-      status.textContent = `Answer ${outcome.missingQuestionIds.length === 1 ? "the remaining question" : `the remaining ${outcome.missingQuestionIds.length} questions`} to see your results.`;
+      const missingIndex = assessment.questions.findIndex(
+        (question) => question.id === firstMissingId
+      );
+      currentQuestionIndex = Math.max(0, missingIndex);
+      renderQuestion();
+      const firstMissing = questionElements[currentQuestionIndex];
+      firstMissing?.setAttribute("data-incomplete", "true");
+      status.textContent = "Choose an answer before continuing.";
       firstMissing?.querySelector("input")?.focus();
       return;
     }
@@ -108,6 +174,7 @@ function initializeCareerAssessment(root) {
       ...outcome.topMatches.map((match, index) => createResultCard(match, index + 1))
     );
     status.textContent = "Assessment complete. Your two strongest matches are shown below.";
+    form.hidden = true;
     results.hidden = false;
     results.focus();
   });
@@ -116,12 +183,13 @@ function initializeCareerAssessment(root) {
     form.reset();
     resultCards.replaceChildren();
     results.hidden = true;
-    status.textContent = "";
-    root.querySelectorAll("[data-assessment-question]").forEach((question) => {
-      question.removeAttribute("data-incomplete");
-    });
-    form.querySelector("input")?.focus();
+    form.hidden = false;
+    currentQuestionIndex = 0;
+    renderQuestion();
+    focusCurrentQuestion();
   });
+
+  renderQuestion();
 }
 
 for (const root of document.querySelectorAll("[data-career-assessment]")) {
