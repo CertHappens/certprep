@@ -29,15 +29,17 @@
     </nav>
     <div class="career-assessment__questions">
     {% for question in assessment.questions %}
-    <fieldset
+    <div
       class="career-assessment__question"
       data-assessment-question
       data-question-id="{{ question.id }}"
+      role="radiogroup"
+      aria-labelledby="career-assessment-question-{{ loop.index }}"
     >
-      <legend>
+      <div class="career-assessment__question-heading">
         <span class="career-assessment__question-number">Question {{ loop.index }} of {{ assessment.questions | length }}</span>
-        {{ question.prompt }}
-      </legend>
+        <h3 id="career-assessment-question-{{ loop.index }}">{{ question.prompt }}</h3>
+      </div>
       <div class="career-assessment__options">
         {% for option in question.options %}
         <label class="career-assessment__option">
@@ -46,14 +48,16 @@
         </label>
         {% endfor %}
       </div>
-    </fieldset>
+    </div>
     {% endfor %}
     </div>
     <p class="career-assessment__status" data-career-assessment-status aria-live="polite"></p>
     <div class="career-assessment__actions">
-      <button class="button button--secondary" type="button" data-career-assessment-restart>Restart quiz</button>
-      <div class="career-assessment__step-actions">
+      <div class="career-assessment__actions-start">
         <button class="button button--secondary" type="button" data-career-assessment-previous hidden>Previous question</button>
+      </div>
+      <button class="button button--secondary career-assessment__restart" type="button" data-career-assessment-restart>Restart quiz</button>
+      <div class="career-assessment__actions-end">
         <button class="button" type="button" data-career-assessment-next hidden>Next question</button>
         <button class="button" type="submit" data-career-assessment-submit>See my top two paths</button>
       </div>
