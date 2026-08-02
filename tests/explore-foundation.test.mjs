@@ -77,6 +77,8 @@ test("assessment component provides sequential controls and top-two results with
   assert.match(component, /career-assessment__restart[\s\S]*Restart quiz/);
   assert.match(component, /career-assessment__actions-end[\s\S]*Next question/);
   assert.match(component, /Retake the quiz/);
+  assert.match(component, /Explore all six career paths below/);
+  assert.match(component, /career-assessment__retake/);
   assert.match(component, /Progress and results are saved in this browser tab/);
   assert.match(component, /Your answers suggest that you may enjoy\.\.\./);
   assert.match(component, /data-career-assessment-results/);
@@ -107,6 +109,7 @@ test("career assessment uses compact rows, a prominent question heading, and exa
   assert.match(exploreCss, /\.career-assessment__option\s*\{[\s\S]*font-size:\s*1\.04rem/);
   assert.match(exploreCss, /\.career-assessment__actions\s*\{[\s\S]*grid-template-columns:\s*minmax\(0, 1fr\) auto minmax\(0, 1fr\)/);
   assert.match(exploreCss, /\.career-assessment__restart\s*\{[\s\S]*justify-self:\s*center/);
+  assert.match(exploreCss, /\.career-assessment__retake\s*\{[\s\S]*margin-inline:\s*auto/);
   assert.match(exploreCss, /@media screen and \(max-width: 42rem\)[\s\S]*\.career-assessment__option\s*\{[\s\S]*padding:\s*0\.45rem 0\.45rem/);
   assert.match(exploreCss, /\.career-assessment__status:empty\s*\{[\s\S]*display:\s*none/);
 });
@@ -171,8 +174,10 @@ test("Explore navigation, landing page, and first article activate together for 
   assert.match(article, /permalink: \/explore\/career\/paths\//);
   assert.match(article, /What career is right for me\?/);
   assert.match(article, /assessmentPlacement: inline/);
-  assert.match(article, /toc:[\s\S]*id: career-quiz[\s\S]*id: related-resources-title/);
+  assert.match(article, /toc:[\s\S]*id: career-quiz[\s\S]*id: explore-work[\s\S]*id: related-resources-title/);
   assert.match(article, /career self-assessment below returns your two strongest matches/);
+  assert.match(article, /No email address or account is required/);
+  assert.match(article, /Explore the Work Before Choosing a Path/);
   assert.match(article, /\{% include "components\/explore-assessment\.njk" %\}[\s\S]*<h2 id="it-operations">IT Operations and Infrastructure<\/h2>/);
   assert.match(article, /Security Technical Implementation Guides/);
   assert.match(landing, /robots: noindex,nofollow,nosnippet/);

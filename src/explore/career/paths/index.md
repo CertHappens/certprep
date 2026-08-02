@@ -43,8 +43,8 @@ toc:
     label: Audit, compliance, and technical assurance
   - id: results-work-together
     label: How your results may work together
-  - id: test-interests
-    label: Test your interests
+  - id: explore-work
+    label: Explore the work
   - id: related-resources-title
     label: Related resources
 stylesheets:
@@ -81,7 +81,7 @@ This guide compares six broad technology directions:
 - Quality, testing, and improvement
 - Audit, compliance, and technical assurance
 
-Many jobs combine two or more of these areas. The career self-assessment below returns your two strongest matches rather than forcing every interest into one category.
+Many jobs combine two or more of these areas. The career self-assessment below returns your two strongest matches rather than forcing every interest into one category. Your results appear as soon as you answer all eight questions. No email address or account is required, and the quiz does not ask for your name or contact information.
 
 {% include "components/explore-assessment.njk" %}
 
@@ -245,13 +245,13 @@ Technology careers often form at the intersection of two interests.
 
 Job titles vary between employers. Read the responsibilities and repeated tasks rather than relying on the title alone.
 
-<h2 id="test-interests">Test Your Interests Before Choosing a Path</h2>
+<h2 id="explore-work">Explore the Work Before Choosing a Path</h2>
 
-Read several job descriptions related to each of your two results. Ignore the experience requirements during the first review and focus on the work itself.
+Choose one or two small projects from the career sections above and spend some time with each. Pay attention to which tasks hold your interest, which problems you want to keep solving, and which results feel satisfying.
 
-Look for responsibilities that appear repeatedly. Would you enjoy performing them several times each week? Which tasks sound satisfying? Which ones would you accept only because they are part of the job?
+A short hands-on project can reveal more than another list of job titles. You may discover that you enjoy troubleshooting but not extended coding, or that reviewing evidence appeals to you more than responding to a live technical incident.
 
-Then try one small project from each result. A few hours of hands-on work can reveal more than a list of titles. You may discover that you enjoy troubleshooting but dislike extended coding, or that reviewing evidence is more interesting than managing a live incident.
+Read several job descriptions related to each of your two results. Ignore the experience requirements during the first review and focus on the responsibilities that appear repeatedly. Consider whether you would enjoy performing those tasks several times each week.
 
 Your first role does not need to define your entire career. Experience in support, networking, development, testing, project coordination, or audit can become useful in another technology specialty later.
 
