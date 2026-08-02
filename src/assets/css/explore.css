@@ -1,0 +1,192 @@
+/* Explore articles and interactive self-assessments */
+
+.explore-feed {
+  display: grid;
+  gap: 1rem;
+}
+
+.explore-feed__item {
+  display: grid;
+  gap: 0.45rem;
+  padding: 1.25rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-medium);
+  background: var(--surface);
+}
+
+.explore-feed__item h2,
+.explore-feed__item p {
+  margin: 0;
+}
+
+.explore-feed__category {
+  color: var(--accent-strong);
+  font-size: 0.76rem;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.career-assessment {
+  margin-top: 2.5rem;
+  padding: clamp(1.1rem, 3vw, 2rem);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-large);
+  background: var(--surface-soft);
+}
+
+.career-assessment__intro {
+  max-width: 48rem;
+}
+
+.career-assessment__intro h2,
+.career-assessment__results h2 {
+  margin-top: 0.35rem;
+}
+
+.career-assessment__form {
+  display: grid;
+  gap: 1.15rem;
+  margin-top: 1.5rem;
+}
+
+.career-assessment__question {
+  min-width: 0;
+  margin: 0;
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-medium);
+  background: var(--surface);
+}
+
+.career-assessment__question[data-incomplete="true"] {
+  border-color: var(--warning);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--warning) 20%, transparent);
+}
+
+.career-assessment__question legend {
+  max-width: 100%;
+  padding: 0 0.35rem;
+  color: var(--text);
+  font-size: 1rem;
+  font-weight: 800;
+  line-height: 1.45;
+}
+
+.career-assessment__question-number {
+  display: block;
+  margin-bottom: 0.2rem;
+  color: var(--accent-strong);
+  font-size: 0.72rem;
+  font-weight: 850;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.career-assessment__options {
+  display: grid;
+  gap: 0.55rem;
+  margin-top: 0.7rem;
+}
+
+.career-assessment__option {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: start;
+  gap: 0.65rem;
+  padding: 0.75rem;
+  border: 1px solid transparent;
+  border-radius: var(--radius-small);
+  color: var(--text-muted);
+  cursor: pointer;
+}
+
+.career-assessment__option:hover {
+  border-color: var(--border);
+  background: var(--surface-raised);
+  color: var(--text);
+}
+
+.career-assessment__option:has(input:checked) {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 12%, var(--surface));
+  color: var(--text);
+}
+
+.career-assessment__option input {
+  width: 1.1rem;
+  height: 1.1rem;
+  margin-top: 0.15rem;
+  accent-color: var(--accent);
+}
+
+.career-assessment__option input:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+}
+
+.career-assessment__status {
+  min-height: 1.5rem;
+  margin: 0;
+  color: var(--warning);
+  font-weight: 700;
+}
+
+.career-assessment__results {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+  outline: none;
+}
+
+.career-assessment__results:focus-visible {
+  border-radius: var(--radius-small);
+  box-shadow: 0 0 0 3px var(--focus);
+}
+
+.career-assessment__result-lead {
+  font-size: 1.05rem;
+  font-weight: 750;
+}
+
+.career-assessment__result-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin-block: 1rem;
+}
+
+.career-assessment__result-card {
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-medium);
+  background: var(--surface);
+}
+
+.career-assessment__result-card h3 {
+  margin: 0.2rem 0 0.65rem;
+}
+
+.career-assessment__result-rank {
+  margin: 0;
+  color: var(--accent-strong);
+  font-size: 0.72rem;
+  font-weight: 850;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.career-assessment__result-note {
+  color: var(--text-muted);
+  font-size: 0.92rem;
+}
+
+@media screen and (max-width: 42rem) {
+  .career-assessment__result-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .career-assessment__question {
+    padding-inline: 0.75rem;
+  }
+}

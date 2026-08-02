@@ -82,6 +82,11 @@
   <link rel="stylesheet" href="/assets/css/brand.css">
   <link rel="stylesheet" href="/assets/css/phase6.css">
   <link rel="stylesheet" href="/assets/css/navigation.css">
+  {% if stylesheets %}
+  {% for stylesheet in stylesheets %}
+  <link rel="stylesheet" href="{{ stylesheet }}">
+  {% endfor %}
+  {% endif %}
   {% if printable %}
   <link rel="stylesheet" href="/assets/css/print.css" media="print">
   {% endif %}

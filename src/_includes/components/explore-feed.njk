@@ -1,0 +1,10 @@
+<div class="explore-feed" data-explore-feed>
+  {% for article in collections.exploreArticles %}
+  <article class="explore-feed__item">
+    <p class="explore-feed__category">{{ article.data.category }}</p>
+    <h2><a href="{{ article.url }}">{{ article.data.title }}</a></h2>
+    <p>{{ article.data.description }}</p>
+    <a class="card__link" href="{{ article.url }}">Read article</a>
+  </article>
+  {% endfor %}
+</div>

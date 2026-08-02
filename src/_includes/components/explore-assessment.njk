@@ -1,0 +1,57 @@
+<section class="career-assessment" data-career-assessment aria-labelledby="career-assessment-title">
+  <div class="career-assessment__intro">
+    <p class="eyebrow">Practical self-assessment</p>
+    <h2 id="career-assessment-title">{{ assessment.title }}</h2>
+    {% if assessment.introduction %}<p>{{ assessment.introduction }}</p>{% endif %}
+  </div>
+
+  <form class="career-assessment__form" data-career-assessment-form novalidate>
+    {% for question in assessment.questions %}
+    <fieldset
+      class="career-assessment__question"
+      data-assessment-question
+      data-question-id="{{ question.id }}"
+    >
+      <legend>
+        <span class="career-assessment__question-number">Question {{ loop.index }} of {{ assessment.questions | length }}</span>
+        {{ question.prompt }}
+      </legend>
+      <div class="career-assessment__options">
+        {% for option in question.options %}
+        <label class="career-assessment__option">
+          <input type="radio" name="{{ question.id }}" value="{{ option.id }}">
+          <span>{{ option.label }}</span>
+        </label>
+        {% endfor %}
+      </div>
+    </fieldset>
+    {% endfor %}
+
+    <p class="career-assessment__status" data-career-assessment-status aria-live="polite"></p>
+    <button class="button" type="submit">See my top two paths</button>
+  </form>
+
+  <section
+    class="career-assessment__results"
+    data-career-assessment-results
+    aria-labelledby="career-assessment-results-title"
+    tabindex="-1"
+    hidden
+  >
+    <p class="eyebrow">Your results</p>
+    <h2 id="career-assessment-results-title">Your strongest technology career matches</h2>
+    <p class="career-assessment__result-lead">Your answers suggest that you may enjoy...</p>
+    <div class="career-assessment__result-grid" data-career-assessment-result-cards></div>
+    <p class="career-assessment__result-note">
+      These results are a starting point for exploration. Skills and interests can overlap across several paths.
+    </p>
+    <button class="button button--secondary" type="button" data-career-assessment-reset>Retake the assessment</button>
+  </section>
+
+  <noscript>
+    <p class="callout">JavaScript is required to score this self-assessment in your browser.</p>
+  </noscript>
+
+  <script type="application/json" data-career-assessment-data>{{ assessment | json | safe }}</script>
+</section>
+<script type="module" src="/assets/js/explore/career-assessment.js"></script>
