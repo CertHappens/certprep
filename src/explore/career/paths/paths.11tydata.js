@@ -13,8 +13,8 @@ export default {
           "Build a Windows or Linux lab and practice account, service, and permission changes.",
           "Document one troubleshooting problem from symptoms through resolution."
         ],
-        "url": "/network-plus/",
-        "linkLabel": "Explore Network+ resources"
+        "url": "#it-operations",
+        "linkLabel": "Read about IT Operations and Infrastructure"
       },
       {
         "id": "development",
@@ -24,7 +24,9 @@ export default {
           "Choose one beginner-friendly language and complete a small working program.",
           "Use version control to track changes and explain why each change was made.",
           "Practice debugging by reproducing and fixing a problem you introduced."
-        ]
+        ],
+        "url": "#software-development",
+        "linkLabel": "Read about Software Development and Automation"
       },
       {
         "id": "management",
@@ -34,7 +36,9 @@ export default {
           "Plan a small technology project with scope, dependencies, risks, and owners.",
           "Practice writing concise status updates for technical and nontechnical readers.",
           "Notice which blockers require a decision, more information, or better coordination."
-        ]
+        ],
+        "url": "#technology-management",
+        "linkLabel": "Read about Technology Management and Coordination"
       },
       {
         "id": "cybersecurity",
@@ -45,8 +49,8 @@ export default {
           "Learn what normal network, account, and system activity looks like before studying attacks.",
           "Compare defensive, offensive, purple-team, engineering, incident response, and risk roles."
         ],
-        "url": "/security-plus/",
-        "linkLabel": "Explore Security+ resources"
+        "url": "#cybersecurity",
+        "linkLabel": "Read about Cybersecurity"
       },
       {
         "id": "quality-assurance",
@@ -56,7 +60,9 @@ export default {
           "Test a small application with normal, missing, invalid, and unusually large inputs.",
           "Write a defect report with exact steps, expected behavior, and actual behavior.",
           "Try a basic automated test after you understand the manual test."
-        ]
+        ],
+        "url": "#quality-testing",
+        "linkLabel": "Read about Quality, Testing, and Improvement"
       },
       {
         "id": "technical-assurance",
@@ -67,8 +73,8 @@ export default {
           "Compare a device or virtual machine with a published security baseline.",
           "Practice explaining why a finding matters and what evidence would close it."
         ],
-        "url": "/security-plus/",
-        "linkLabel": "Explore security and governance foundations"
+        "url": "#audit-assurance",
+        "linkLabel": "Read about Audit, Compliance, and Technical Assurance"
       }
     ],
     "questions": [

@@ -77,7 +77,7 @@ test("assessment component provides sequential controls and top-two results with
   assert.match(component, /career-assessment__restart[\s\S]*Restart quiz/);
   assert.match(component, /career-assessment__actions-end[\s\S]*Next question/);
   assert.match(component, /Retake the quiz/);
-  assert.match(component, /Explore all six career paths below/);
+  assert.doesNotMatch(component, /Explore all six career paths below/);
   assert.match(component, /career-assessment__retake/);
   assert.match(component, /Progress and results are saved in this browser tab/);
   assert.match(component, /Your answers suggest that you may enjoy\.\.\./);
@@ -120,6 +120,19 @@ test("published career assessment contains six paths and eight balanced question
   assert.equal(assessment.paths.length, 6);
   assert.equal(assessment.questions.length, 8);
   assert.equal(assessment.questions.every((question) => question.options.length === 6), true);
+  assert.deepEqual(
+    Object.fromEntries(assessment.paths.map((path) => [path.id, path.url])),
+    {
+      "it-operations": "#it-operations",
+      development: "#software-development",
+      management: "#technology-management",
+      cybersecurity: "#cybersecurity",
+      "quality-assurance": "#quality-testing",
+      "technical-assurance": "#audit-assurance",
+    }
+  );
+  assert.equal(assessment.paths.every((path) => path.linkLabel.startsWith("Read about ")), true);
+  assert.equal(assessment.paths.some((path) => /Security\+|Network\+|CCNA/.test(path.linkLabel)), false);
 
   const primaryTotals = Object.fromEntries(assessment.paths.map((path) => [path.id, 0]));
   for (const question of assessment.questions) {
