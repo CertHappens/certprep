@@ -93,7 +93,7 @@ layout: layouts/base.njk
   </div>
 </header>
 
-<div class="article-layout page-shell">
+<div class="article-layout page-shell{% if not toc %} article-layout--single{% endif %}">
   {% if toc %}
   <aside class="article-toc{% if tocVariant %} article-toc--{{ tocVariant }}{% endif %}">
     <nav aria-labelledby="article-toc-title">
@@ -113,7 +113,7 @@ layout: layouts/base.njk
   >
     {{ content | safe }}
 
-    {% if assessment %}
+    {% if assessment and assessmentPlacement != "inline" %}
     {% include "components/explore-assessment.njk" %}
     {% endif %}
 

@@ -13,6 +13,7 @@ dateModified: "2026-08-02"
 articleSection: Explore
 ogType: article
 author: certHappens
+assessmentPlacement: inline
 eyebrow: Career paths
 lede: Explore six broad technology directions, then answer eight practical questions to find the two kinds of work that may fit you best.
 robots: noindex,nofollow,nosnippet
@@ -57,7 +58,9 @@ This guide compares six broad technology directions:
 - Quality, testing, and improvement
 - Audit, compliance, and technical assurance
 
-Many jobs combine two or more of these areas. The [career self-assessment](#career-assessment-title) at the end of the article returns your two strongest matches rather than forcing every interest into one category.
+Many jobs combine two or more of these areas. The career self-assessment below returns your two strongest matches rather than forcing every interest into one category.
+
+{% include "components/explore-assessment.njk" %}
 
 ## IT Operations and Infrastructure
 
@@ -229,4 +232,3 @@ Then try one small project from each result. A few hours of hands-on work can re
 
 Your first role does not need to define your entire career. Experience in support, networking, development, testing, project coordination, or audit can become useful in another technology specialty later.
 
-The assessment below uses practical situations rather than asking whether you consider yourself “technical” or “analytical.” Choose what you would most enjoy doing today. Current skill level does not affect the result.

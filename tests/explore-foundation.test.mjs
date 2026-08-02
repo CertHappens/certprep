@@ -42,10 +42,14 @@ test("Eleventy registers a validated newest-first Explore collection", async () 
   assert.match(config, /getFilteredByTag\("exploreArticle"\)/);
 });
 
-test("shared layouts support Explore styling, assessment, and optional relationships", async () => {
+test("shared layouts support full-width articles, inline assessments, and optional relationships", async () => {
   const base = await readSource("src/_includes/layouts/base.njk");
   const article = await readSource("src/_includes/layouts/article.njk");
+  const siteCss = await readSource("src/assets/css/site.css");
   assert.match(base, /for stylesheet in stylesheets/);
+  assert.match(article, /article-layout--single/);
+  assert.match(siteCss, /\.article-layout--single\s*\{[\s\S]*grid-template-columns: minmax\(0, var\(--reading-width\)\)/);
+  assert.match(article, /assessmentPlacement != "inline"/);
   assert.match(article, /components\/explore-assessment\.njk/);
   assert.match(article, /relatedArticles and relatedArticles \| length/);
   assert.match(article, />Related articles</);
@@ -134,6 +138,9 @@ test("Explore navigation, landing page, and first article activate together for 
   assert.match(landing, /permalink: \/explore\//);
   assert.match(article, /permalink: \/explore\/career\/paths\//);
   assert.match(article, /What career is right for me\?/);
+  assert.match(article, /assessmentPlacement: inline/);
+  assert.match(article, /career self-assessment below returns your two strongest matches/);
+  assert.match(article, /\{% include "components\/explore-assessment\.njk" %\}[\s\S]*## IT Operations and Infrastructure/);
   assert.match(article, /Security Technical Implementation Guides/);
   assert.match(landing, /robots: noindex,nofollow,nosnippet/);
   assert.match(article, /robots: noindex,nofollow,nosnippet/);
