@@ -83,6 +83,16 @@ test("assessment component provides sequential controls and top-two results with
   assert.doesNotMatch(component, /mailto:/i);
 });
 
+
+
+test("career assessment keeps answer rows compact without shrinking readable text", async () => {
+  const exploreCss = await readSource("src/assets/css/explore.css");
+  assert.match(exploreCss, /\.career-assessment__options\s*\{[\s\S]*gap:\s*0\.12rem/);
+  assert.match(exploreCss, /\.career-assessment__option\s*\{[\s\S]*padding:\s*0\.42rem 0\.55rem/);
+  assert.match(exploreCss, /\.career-assessment__option\s*\{[\s\S]*font-size:\s*1\.02rem/);
+  assert.match(exploreCss, /\.career-assessment__status:empty\s*\{[\s\S]*display:\s*none/);
+});
+
 test("published career assessment contains six paths and eight balanced questions", () => {
   const { assessment } = articleData;
   validateCareerAssessment(assessment);
