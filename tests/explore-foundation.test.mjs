@@ -73,23 +73,33 @@ test("assessment component provides sequential controls and top-two results with
   assert.match(component, /Previous question/);
   assert.match(component, /Next question/);
   assert.match(component, /See my top two paths/);
+  assert.match(component, /Restart quiz/);
+  assert.match(component, /Retake the quiz/);
+  assert.match(component, /Progress and results are saved in this browser tab/);
   assert.match(component, /Your answers suggest that you may enjoy\.\.\./);
   assert.match(component, /data-career-assessment-results/);
   assert.match(controller, /currentQuestionIndex/);
   assert.match(controller, /question\.style\.display = current \? "" : "none"/);
   assert.match(controller, /aria-current/);
   assert.match(controller, /form\.hidden = true/);
+  assert.match(controller, /window\.sessionStorage/);
+  assert.match(controller, /certprep\.explore\./);
+  assert.match(controller, /completedAt/);
+  assert.match(controller, /Restart the quiz and clear all saved answers and results\?/);
+  assert.doesNotMatch(controller, /window\.localStorage/);
   assert.doesNotMatch(component, /type=["']email["']/i);
   assert.doesNotMatch(component, /mailto:/i);
 });
 
 
 
-test("career assessment keeps answer rows compact without shrinking readable text", async () => {
+test("career assessment uses compact desktop rows and a more prominent question heading", async () => {
   const exploreCss = await readSource("src/assets/css/explore.css");
-  assert.match(exploreCss, /\.career-assessment__options\s*\{[\s\S]*gap:\s*0\.12rem/);
-  assert.match(exploreCss, /\.career-assessment__option\s*\{[\s\S]*padding:\s*0\.42rem 0\.55rem/);
-  assert.match(exploreCss, /\.career-assessment__option\s*\{[\s\S]*font-size:\s*1\.02rem/);
+  assert.match(exploreCss, /\.career-assessment__question legend\s*\{[\s\S]*font-size:\s*clamp\(1\.2rem, 1\.7vw, 1\.42rem\)/);
+  assert.match(exploreCss, /\.career-assessment__options\s*\{[\s\S]*gap:\s*0/);
+  assert.match(exploreCss, /\.career-assessment__option\s*\{[\s\S]*padding:\s*0\.22rem 0\.35rem/);
+  assert.match(exploreCss, /\.career-assessment__option\s*\{[\s\S]*font-size:\s*1\.04rem/);
+  assert.match(exploreCss, /@media screen and \(max-width: 42rem\)[\s\S]*\.career-assessment__option\s*\{[\s\S]*padding:\s*0\.5rem 0\.45rem/);
   assert.match(exploreCss, /\.career-assessment__status:empty\s*\{[\s\S]*display:\s*none/);
 });
 

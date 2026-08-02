@@ -8,6 +8,7 @@
     <p class="eyebrow">Practical self-assessment</p>
     <h2 id="career-assessment-title">{{ assessment.title }}</h2>
     {% if assessment.introduction %}<p>{{ assessment.introduction }}</p>{% endif %}
+    <p class="career-assessment__session-note">Progress and results are saved in this browser tab.</p>
   </div>
   <form class="career-assessment__form" data-career-assessment-form novalidate>
     <nav class="career-assessment__navigator" aria-label="Assessment question navigation">
@@ -50,9 +51,12 @@
     </div>
     <p class="career-assessment__status" data-career-assessment-status aria-live="polite"></p>
     <div class="career-assessment__actions">
-      <button class="button button--secondary" type="button" data-career-assessment-previous hidden>Previous question</button>
-      <button class="button" type="button" data-career-assessment-next hidden>Next question</button>
-      <button class="button" type="submit" data-career-assessment-submit>See my top two paths</button>
+      <button class="button button--secondary" type="button" data-career-assessment-restart>Restart quiz</button>
+      <div class="career-assessment__step-actions">
+        <button class="button button--secondary" type="button" data-career-assessment-previous hidden>Previous question</button>
+        <button class="button" type="button" data-career-assessment-next hidden>Next question</button>
+        <button class="button" type="submit" data-career-assessment-submit>See my top two paths</button>
+      </div>
     </div>
   </form>
   <section
@@ -69,7 +73,7 @@
     <p class="career-assessment__result-note">
       These results are a starting point for exploration. Skills and interests can overlap across several paths.
     </p>
-    <button class="button button--secondary" type="button" data-career-assessment-reset>Retake the assessment</button>
+    <button class="button" type="button" data-career-assessment-reset>Retake the quiz</button>
   </section>
   <noscript>
     <p class="callout">JavaScript is required to score this self-assessment in your browser.</p>

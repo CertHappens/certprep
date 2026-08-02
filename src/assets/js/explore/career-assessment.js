@@ -1,5 +1,7 @@
 import { scoreCareerAssessment, validateCareerAssessment } from "./career-assessment-core.js";
 
+const SESSION_VERSION = 1;
+
 function parseAssessmentData(root) {
   const source = root.querySelector("[data-career-assessment-data]");
   if (!source) {
@@ -16,6 +18,66 @@ function collectAnswers(form, assessment) {
   return Object.fromEntries(
     assessment.questions.map((question) => [question.id, formData.get(question.id) || ""])
   );
+}
+
+function buildAssessmentVersion(assessment) {
+  return assessment.questions
+    .map((question) => `${question.id}:${question.options.map((option) => `${option.id}:${JSON.stringify(option.scores)}`).join(",")}`)
+    .join("|");
+}
+
+function createStorageKey(root) {
+  const assessmentId = root.id || "career-assessment";
+  const pagePath = window.location.pathname
+    .replace(/^\/|\/$/g, "")
+    .replaceAll("/", ".") || "home";
+  return `certprep.explore.${pagePath}.${assessmentId}.session.v${SESSION_VERSION}`;
+}
+
+function readStoredSession(storage, key) {
+  try {
+    const raw = storage.getItem(key);
+    return raw ? JSON.parse(raw) : null;
+  } catch (error) {
+    console.warn("Career assessment progress could not be read.", error);
+    return null;
+  }
+}
+
+function writeStoredSession(storage, key, session) {
+  try {
+    storage.setItem(key, JSON.stringify(session));
+  } catch (error) {
+    console.warn("Career assessment progress could not be saved.", error);
+  }
+}
+
+function removeStoredSession(storage, key) {
+  try {
+    storage.removeItem(key);
+  } catch (error) {
+    console.warn("Career assessment progress could not be cleared.", error);
+  }
+}
+
+function restoreAnswers(form, assessment, savedAnswers) {
+  if (!savedAnswers || typeof savedAnswers !== "object") {
+    return;
+  }
+
+  for (const question of assessment.questions) {
+    const savedOptionId = savedAnswers[question.id];
+    if (!savedOptionId || !question.options.some((option) => option.id === savedOptionId)) {
+      continue;
+    }
+
+    const input = form.querySelector(
+      `input[name="${CSS.escape(question.id)}"][value="${CSS.escape(savedOptionId)}"]`
+    );
+    if (input) {
+      input.checked = true;
+    }
+  }
 }
 
 function createResultCard(match, rank) {
@@ -62,7 +124,8 @@ function initializeCareerAssessment(root) {
   const status = root.querySelector("[data-career-assessment-status]");
   const results = root.querySelector("[data-career-assessment-results]");
   const resultCards = root.querySelector("[data-career-assessment-result-cards]");
-  const resetButton = root.querySelector("[data-career-assessment-reset]");
+  const retakeButton = root.querySelector("[data-career-assessment-reset]");
+  const restartButton = root.querySelector("[data-career-assessment-restart]");
   const previousButton = root.querySelector("[data-career-assessment-previous]");
   const nextButton = root.querySelector("[data-career-assessment-next]");
   const submitButton = root.querySelector("[data-career-assessment-submit]");
@@ -74,7 +137,8 @@ function initializeCareerAssessment(root) {
     !status ||
     !results ||
     !resultCards ||
-    !resetButton ||
+    !retakeButton ||
+    !restartButton ||
     !previousButton ||
     !nextButton ||
     !submitButton ||
@@ -93,12 +157,30 @@ function initializeCareerAssessment(root) {
     return;
   }
 
+  const storage = window.sessionStorage;
+  const storageKey = createStorageKey(root);
+  const assessmentVersion = buildAssessmentVersion(assessment);
   let currentQuestionIndex = 0;
+  let completedAt = null;
+  let startedAt = new Date().toISOString();
   root.dataset.enhanced = "true";
 
   const focusCurrentQuestion = () => {
     const current = questionElements[currentQuestionIndex];
     current?.querySelector("input:checked, input")?.focus();
+  };
+
+  const saveSession = () => {
+    writeStoredSession(storage, storageKey, {
+      sessionVersion: SESSION_VERSION,
+      assessmentId: root.id || "career-assessment",
+      assessmentVersion,
+      startedAt,
+      updatedAt: new Date().toISOString(),
+      completedAt,
+      currentQuestionIndex,
+      answers: collectAnswers(form, assessment),
+    });
   };
 
   const updateQuestionNavigator = () => {
@@ -124,7 +206,7 @@ function initializeCareerAssessment(root) {
     });
   };
 
-  const renderQuestion = ({ focus = false } = {}) => {
+  const renderQuestion = ({ focus = false, save = false } = {}) => {
     questionElements.forEach((question, index) => {
       const current = index === currentQuestionIndex;
       question.hidden = !current;
@@ -143,8 +225,26 @@ function initializeCareerAssessment(root) {
     submitButton.hidden = currentQuestionIndex !== questionElements.length - 1;
     status.textContent = "";
 
+    if (save) {
+      saveSession();
+    }
+
     if (focus) {
       focusCurrentQuestion();
+    }
+  };
+
+  const renderResults = (outcome, { focus = false, announce = false } = {}) => {
+    resultCards.replaceChildren(
+      ...outcome.topMatches.map((match, index) => createResultCard(match, index + 1))
+    );
+    if (announce) {
+      status.textContent = "Assessment complete. Your two strongest matches are shown below.";
+    }
+    form.hidden = true;
+    results.hidden = false;
+    if (focus) {
+      results.focus();
     }
   };
 
@@ -153,6 +253,30 @@ function initializeCareerAssessment(root) {
     return Boolean(
       form.querySelector(`input[name="${CSS.escape(question.id)}"]:checked`)
     );
+  };
+
+  const resetAssessment = ({ confirmRestart = false, focus = true } = {}) => {
+    const hasProgress = Object.values(collectAnswers(form, assessment)).some(Boolean) || completedAt;
+    if (
+      confirmRestart &&
+      hasProgress &&
+      !window.confirm("Restart the quiz and clear all saved answers and results?")
+    ) {
+      return;
+    }
+
+    form.reset();
+    resultCards.replaceChildren();
+    results.hidden = true;
+    form.hidden = false;
+    currentQuestionIndex = 0;
+    completedAt = null;
+    startedAt = new Date().toISOString();
+    removeStoredSession(storage, storageKey);
+    renderQuestion();
+    if (focus) {
+      focusCurrentQuestion();
+    }
   };
 
   nextButton.addEventListener("click", () => {
@@ -165,12 +289,12 @@ function initializeCareerAssessment(root) {
     }
 
     currentQuestionIndex += 1;
-    renderQuestion({ focus: true });
+    renderQuestion({ focus: true, save: true });
   });
 
   previousButton.addEventListener("click", () => {
     currentQuestionIndex = Math.max(0, currentQuestionIndex - 1);
-    renderQuestion({ focus: true });
+    renderQuestion({ focus: true, save: true });
   });
 
   for (const button of jumpButtons) {
@@ -181,7 +305,7 @@ function initializeCareerAssessment(root) {
       }
 
       currentQuestionIndex = requestedIndex;
-      renderQuestion({ focus: true });
+      renderQuestion({ focus: true, save: true });
     });
   }
 
@@ -190,6 +314,7 @@ function initializeCareerAssessment(root) {
       questionElements[currentQuestionIndex]?.removeAttribute("data-incomplete");
       status.textContent = "";
       updateQuestionNavigator();
+      saveSession();
     }
   });
 
@@ -208,7 +333,7 @@ function initializeCareerAssessment(root) {
         (question) => question.id === firstMissingId
       );
       currentQuestionIndex = Math.max(0, missingIndex);
-      renderQuestion();
+      renderQuestion({ save: true });
       const firstMissing = questionElements[currentQuestionIndex];
       firstMissing?.setAttribute("data-incomplete", "true");
       status.textContent = "Choose an answer before continuing.";
@@ -216,24 +341,50 @@ function initializeCareerAssessment(root) {
       return;
     }
 
-    resultCards.replaceChildren(
-      ...outcome.topMatches.map((match, index) => createResultCard(match, index + 1))
-    );
-    status.textContent = "Assessment complete. Your two strongest matches are shown below.";
-    form.hidden = true;
-    results.hidden = false;
-    results.focus();
+    completedAt = new Date().toISOString();
+    saveSession();
+    renderResults(outcome, { focus: true, announce: true });
   });
 
-  resetButton.addEventListener("click", () => {
-    form.reset();
-    resultCards.replaceChildren();
-    results.hidden = true;
-    form.hidden = false;
-    currentQuestionIndex = 0;
-    renderQuestion();
-    focusCurrentQuestion();
+  restartButton.addEventListener("click", () => {
+    resetAssessment({ confirmRestart: true });
   });
+
+  retakeButton.addEventListener("click", () => {
+    resetAssessment();
+  });
+
+  const savedSession = readStoredSession(storage, storageKey);
+  const canRestore =
+    savedSession &&
+    savedSession.sessionVersion === SESSION_VERSION &&
+    savedSession.assessmentVersion === assessmentVersion &&
+    savedSession.answers &&
+    typeof savedSession.answers === "object";
+
+  if (canRestore) {
+    restoreAnswers(form, assessment, savedSession.answers);
+    startedAt = typeof savedSession.startedAt === "string" ? savedSession.startedAt : startedAt;
+    currentQuestionIndex = Number.isInteger(savedSession.currentQuestionIndex)
+      ? Math.min(Math.max(savedSession.currentQuestionIndex, 0), questionElements.length - 1)
+      : 0;
+    completedAt = typeof savedSession.completedAt === "string" ? savedSession.completedAt : null;
+
+    const restoredOutcome = scoreCareerAssessment(assessment, collectAnswers(form, assessment), {
+      resultCount: 2,
+    });
+
+    if (completedAt && restoredOutcome.complete) {
+      renderResults(restoredOutcome);
+      return;
+    }
+
+    if (!restoredOutcome.complete) {
+      completedAt = null;
+    }
+  } else if (savedSession) {
+    removeStoredSession(storage, storageKey);
+  }
 
   renderQuestion();
 }
