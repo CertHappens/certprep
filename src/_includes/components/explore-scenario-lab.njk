@@ -13,7 +13,7 @@
   </div>
 
   <div
-    class="scenario-lab__sizes"
+    class="scenario-lab__company-choice"
     role="radiogroup"
     aria-labelledby="scenario-size-label"
     data-scenario-size-selector
@@ -30,8 +30,9 @@
       </label>
       {% endfor %}
     </div>
+  </div>
 
-    <nav class="scenario-lab__navigator" aria-label="Workplace scenario navigation">
+  <nav class="scenario-lab__navigator" aria-label="Workplace scenario navigation">
       <p>Scenarios</p>
       <ol>
         {% for scenario in scenarioLab.scenarios %}
@@ -46,8 +47,7 @@
         </li>
         {% endfor %}
       </ol>
-    </nav>
-  </div>
+  </nav>
 
   <section
     class="scenario-lab__scenario"
