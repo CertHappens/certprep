@@ -47,7 +47,7 @@ toc:
   - id: related-resources-title
     label: Related resources
 stylesheets:
-  - /assets/css/explore.css?v=20260803-7
+  - /assets/css/explore.css?v=20260803-8
 keywords:
   - IT support or cybersecurity
   - start a cybersecurity career

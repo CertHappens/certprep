@@ -884,13 +884,17 @@
 }
 
 .scenario-lab__sizes {
-  display: block;
+  display: grid;
+  grid-template-rows: repeat(3, max-content);
+  align-content: start;
+  gap: 0.65rem;
+  height: auto;
   min-height: 0;
   margin-top: 1.25rem;
 }
 
 .scenario-lab__sizes-label {
-  margin-bottom: 0.65rem;
+  margin: 0;
 }
 
 .scenario-lab__size-grid {
@@ -898,8 +902,8 @@
 }
 
 .scenario-lab__navigator {
-  margin-top: 0 !important;
-  padding-top: 0;
+  margin: 0 !important;
+  padding: 0;
 }
 
 .scenario-lab__scenario {

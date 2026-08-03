@@ -86,8 +86,8 @@ test("second Explore article uses a compact single-panel scenario lab", async ()
 
   assert.match(css, /\/\* Single-panel workplace scenario flow \*\//);
   assert.match(css, /\.scenario-lab\s*\{[\s\S]*display:\s*block/);
-  assert.match(css, /\.scenario-lab__sizes\s*\{[\s\S]*display:\s*block[\s\S]*margin-top:\s*1\.25rem/);
-  assert.match(css, /\.scenario-lab__navigator\s*\{[\s\S]*margin-top:\s*0 !important/);
+  assert.match(css, /\.scenario-lab__sizes\s*\{[\s\S]*display:\s*grid[\s\S]*grid-template-rows:\s*repeat\(3, max-content\)[\s\S]*gap:\s*0\.65rem[\s\S]*margin-top:\s*1\.25rem/);
+  assert.match(css, /\.scenario-lab__navigator\s*\{[\s\S]*margin:\s*0 !important[\s\S]*padding:\s*0/);
   assert.match(css, /\.scenario-lab__scenario\s*\{[\s\S]*display:\s*block[\s\S]*height:\s*auto/);
   assert.match(css, /\.scenario-lab__prompt\s*\{[\s\S]*margin:\s*0 0 0\.3rem/);
   assert.match(css, /\.scenario-lab__options\s*\{[\s\S]*flex-direction:\s*column[\s\S]*gap:\s*0\.3rem/);
