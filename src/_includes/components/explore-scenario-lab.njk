@@ -11,42 +11,44 @@
     <p class="scenario-lab__session-note">Your place and choices are saved in this browser tab.</p>
   </div>
 
-  <div
-    class="scenario-lab__sizes"
-    role="radiogroup"
-    aria-labelledby="scenario-size-label"
-    data-scenario-size-selector
-  >
-    <p class="scenario-lab__sizes-label" id="scenario-size-label">Choose the organization you want to explore</p>
-    <div class="scenario-lab__size-grid">
-      {% for size in scenarioLab.sizes %}
-      <label class="scenario-lab__size-option">
-        <input type="radio" name="scenario-company-size" value="{{ size.id }}"{% if loop.first %} checked{% endif %}>
-        <span>
-          <strong>{{ size.label }}</strong>
-          <small>{{ size.description }}</small>
-        </span>
-      </label>
-      {% endfor %}
+  <div class="scenario-lab__setup">
+    <div
+      class="scenario-lab__sizes"
+      role="radiogroup"
+      aria-labelledby="scenario-size-label"
+      data-scenario-size-selector
+    >
+      <p class="scenario-lab__sizes-label" id="scenario-size-label">Choose the organization you want to explore</p>
+      <div class="scenario-lab__size-grid">
+        {% for size in scenarioLab.sizes %}
+        <label class="scenario-lab__size-option">
+          <input type="radio" name="scenario-company-size" value="{{ size.id }}"{% if loop.first %} checked{% endif %}>
+          <span>
+            <strong>{{ size.label }}</strong>
+            <small>{{ size.description }}</small>
+          </span>
+        </label>
+        {% endfor %}
+      </div>
     </div>
-  </div>
 
-  <nav class="scenario-lab__navigator" aria-label="Workplace scenario navigation">
-    <p>Scenarios</p>
-    <ol>
-      {% for scenario in scenarioLab.scenarios %}
-      <li>
-        <button
-          type="button"
-          class="scenario-lab__navigator-button"
-          data-scenario-jump
-          data-scenario-index="{{ loop.index0 }}"
-          aria-label="Go to scenario {{ loop.index }}"
-        >{{ loop.index }}</button>
-      </li>
-      {% endfor %}
-    </ol>
-  </nav>
+    <nav class="scenario-lab__navigator" aria-label="Workplace scenario navigation">
+      <p>Scenarios</p>
+      <ol>
+        {% for scenario in scenarioLab.scenarios %}
+        <li>
+          <button
+            type="button"
+            class="scenario-lab__navigator-button"
+            data-scenario-jump
+            data-scenario-index="{{ loop.index0 }}"
+            aria-label="Go to scenario {{ loop.index }}"
+          >{{ loop.index }}</button>
+        </li>
+        {% endfor %}
+      </ol>
+    </nav>
+  </div>
 
   <div class="scenario-lab__scenarios">
     {% for scenario in scenarioLab.scenarios %}
@@ -58,15 +60,16 @@
     >
       <p class="scenario-lab__counter">Scenario {{ loop.index }} of {{ scenarioLab.scenarios | length }}</p>
       <h3 id="scenario-heading-{{ loop.index }}">{{ scenario.title }}</h3>
-      <p class="scenario-lab__prompt">{{ scenario.prompt }}</p>
-
-      <div class="scenario-lab__options" role="radiogroup" aria-label="Choose your first response">
-        {% for option in scenario.options %}
-        <label class="scenario-lab__option">
-          <input type="radio" name="scenario-{{ scenario.id }}" value="{{ option.id }}">
-          <span>{{ option.label }}</span>
-        </label>
-        {% endfor %}
+      <div class="scenario-lab__response-block">
+        <p class="scenario-lab__prompt">{{ scenario.prompt }}</p>
+        <div class="scenario-lab__options" role="radiogroup" aria-label="Choose your first response">
+          {% for option in scenario.options %}
+          <label class="scenario-lab__option">
+            <input type="radio" name="scenario-{{ scenario.id }}" value="{{ option.id }}">
+            <span>{{ option.label }}</span>
+          </label>
+          {% endfor %}
+        </div>
       </div>
 
       <div class="scenario-lab__reveal" data-scenario-reveal hidden aria-live="polite">
