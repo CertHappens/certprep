@@ -249,3 +249,18 @@
     padding: 0.55rem 0.65rem;
   }
 }
+
+
+/* Keep compact, single-group dropdowns aligned with their full link hit area. */
+@media screen and (min-width: 48.0625rem) {
+  #explore-navigation {
+    width: min(15rem, calc(100vw - 2rem));
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  #explore-navigation .primary-nav__group,
+  #explore-navigation .primary-nav__group-links,
+  #explore-navigation .primary-nav__submenu-link {
+    width: 100%;
+  }
+}
