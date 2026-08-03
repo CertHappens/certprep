@@ -1,0 +1,954 @@
+/* Explore articles and interactive self-assessments */
+
+.explore-feed {
+  display: grid;
+  gap: 1rem;
+}
+
+.explore-feed__item {
+  display: grid;
+  gap: 0.45rem;
+  padding: 1.25rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-medium);
+  background: var(--surface);
+}
+
+.explore-feed__item h2,
+.explore-feed__item p {
+  margin: 0;
+}
+
+.explore-feed__category {
+  color: var(--accent-strong);
+  font-size: 0.76rem;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.career-assessment {
+  scroll-margin-top: 6.5rem;
+  margin-top: 2.5rem;
+  padding: clamp(1rem, 2.4vw, 1.6rem);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-large);
+  background: var(--surface-soft);
+}
+
+.career-assessment__intro {
+  max-width: 48rem;
+}
+
+.career-assessment__intro h2,
+.career-assessment__results h2 {
+  margin-top: 0.35rem;
+}
+
+.career-assessment__session-note {
+  margin-top: 0.65rem;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.career-assessment__form {
+  display: grid;
+  gap: 0.65rem;
+  margin-top: 0.9rem;
+}
+
+.career-assessment__navigator {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem 0.9rem;
+  align-items: center;
+}
+
+.career-assessment__navigator-label {
+  margin: 0;
+  color: var(--text);
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.career-assessment__navigator ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.career-assessment__navigator li,
+.career-assessment__navigator li + li {
+  margin: 0;
+}
+
+.career-assessment__navigator-button {
+  display: grid;
+  width: 2.35rem;
+  min-height: 2.35rem;
+  place-items: center;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 0.55rem;
+  background: var(--surface);
+  color: var(--text-muted);
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.career-assessment__navigator-button:hover {
+  border-color: #50647d;
+  background: var(--surface-raised);
+  color: var(--text);
+}
+
+.career-assessment__navigator-button.is-answered {
+  border-color: color-mix(in srgb, var(--success) 58%, var(--border));
+  color: var(--text);
+}
+
+.career-assessment__navigator-button.is-current {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: var(--accent-contrast);
+}
+
+.career-assessment__navigator-button:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+}
+
+.career-assessment__questions {
+  min-width: 0;
+}
+
+.career-assessment__question[hidden] {
+  display: none !important;
+}
+
+.career-assessment__question {
+  min-width: 0;
+  margin: 0;
+  padding: 0.5rem 0.7rem 0.55rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-medium);
+  background: var(--surface);
+}
+
+.career-assessment__question[data-incomplete="true"] {
+  border-color: var(--warning);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--warning) 20%, transparent);
+}
+
+.career-assessment__question-heading {
+  margin: 0 0 0.2rem;
+}
+
+.career-assessment__question-heading h3 {
+  margin: 0;
+  color: var(--text);
+  font-size: clamp(1.2rem, 1.7vw, 1.42rem);
+  font-weight: 800;
+  line-height: 1.24;
+  text-wrap: pretty;
+}
+
+.career-assessment__question-number {
+  display: block;
+  margin-bottom: 0.12rem;
+  color: var(--accent-strong);
+  font-size: 0.72rem;
+  font-weight: 850;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.career-assessment__options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.08rem;
+  margin-top: 0;
+}
+
+.career-assessment__option {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  min-height: 0;
+  align-items: start;
+  gap: 0.55rem;
+  margin: 0 !important;
+  padding: 0.1rem 0.35rem;
+  border: 1px solid transparent;
+  border-radius: var(--radius-small);
+  color: var(--text-muted);
+  font-size: 1.04rem;
+  line-height: 1.27;
+  cursor: pointer;
+}
+
+.career-assessment__option:hover {
+  border-color: var(--border);
+  background: var(--surface-raised);
+  color: var(--text);
+}
+
+.career-assessment__option:has(input:checked) {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 12%, var(--surface));
+  color: var(--text);
+}
+
+.career-assessment__option input {
+  width: 1.1rem;
+  height: 1.1rem;
+  margin-top: 0.06rem;
+  accent-color: var(--accent);
+}
+
+.career-assessment__option input:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+}
+
+.career-assessment__status {
+  margin: 0;
+  color: var(--warning);
+  font-weight: 700;
+}
+
+.career-assessment__status:empty {
+  display: none;
+}
+
+.career-assessment__actions {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  gap: 0.65rem;
+  align-items: center;
+}
+
+.career-assessment__actions-start {
+  justify-self: start;
+}
+
+.career-assessment__restart {
+  justify-self: center;
+}
+
+.career-assessment__actions-end {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  justify-self: end;
+}
+
+.career-assessment__results {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+  outline: none;
+}
+
+.career-assessment__results:focus-visible {
+  border-radius: var(--radius-small);
+  box-shadow: 0 0 0 3px var(--focus);
+}
+
+.career-assessment__result-lead {
+  font-size: 1.05rem;
+  font-weight: 750;
+}
+
+.career-assessment__result-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin-block: 1rem;
+}
+
+.career-assessment__result-card {
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-medium);
+  background: var(--surface);
+}
+
+.career-assessment__result-card h3 {
+  margin: 0.2rem 0 0.65rem;
+}
+
+.career-assessment__result-rank {
+  margin: 0;
+  color: var(--accent-strong);
+  font-size: 0.72rem;
+  font-weight: 850;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.career-assessment__result-note {
+  color: var(--text-muted);
+  font-size: 0.92rem;
+}
+
+.career-assessment__result-next {
+  margin-top: 0.8rem;
+}
+
+.career-assessment__result-browse {
+  margin: 0.65rem 0 1rem;
+  font-weight: 750;
+}
+
+.career-assessment__retake {
+  display: block;
+  margin-inline: auto;
+}
+
+@media screen and (max-width: 42rem) {
+  .career-assessment__result-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .career-assessment__navigator {
+    display: grid;
+    gap: 0.55rem;
+  }
+
+  .career-assessment__question {
+    padding-inline: 0.7rem;
+  }
+
+  .career-assessment__option {
+    padding: 0.45rem 0.45rem;
+  }
+
+  .career-assessment__actions {
+    grid-template-columns: 1fr;
+    width: 100%;
+  }
+
+  .career-assessment__actions-start,
+  .career-assessment__restart,
+  .career-assessment__actions-end {
+    width: 100%;
+    justify-self: stretch;
+  }
+
+  .career-assessment__actions-end {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .career-assessment__actions .button {
+    width: 100%;
+    margin-left: 0;
+  }
+}
+
+/* Interactive workplace scenarios */
+.scenario-lab {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-content: start;
+  row-gap: 0;
+  scroll-margin-top: 6.5rem;
+  margin-top: 2.5rem;
+  padding: clamp(1rem, 2.4vw, 1.6rem);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-large);
+  background: var(--surface-soft);
+}
+
+.scenario-lab__intro {
+  max-width: 50rem;
+}
+
+.scenario-lab__intro h2,
+.scenario-lab__summary h3 {
+  margin-top: 0.35rem;
+}
+
+.scenario-lab__session-note {
+  margin-top: 0.65rem;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.scenario-lab__setup {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-auto-rows: max-content;
+  align-content: start;
+  align-self: start;
+  gap: 0;
+  min-height: 0;
+  margin-top: 1.25rem;
+}
+
+.scenario-lab__sizes {
+  display: grid;
+  grid-auto-rows: max-content;
+  align-content: start;
+  gap: 0.65rem;
+  margin: 0;
+  padding: 0;
+}
+
+.scenario-lab__sizes-label {
+  margin: 0;
+  color: var(--text);
+  font-size: 0.86rem;
+  font-weight: 850;
+}
+
+.scenario-lab__size-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-content: start;
+  gap: 0.65rem;
+}
+
+.scenario-lab__size-option {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 0.6rem;
+  align-items: start;
+  margin: 0 !important;
+  padding: 0.8rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-small);
+  background: var(--surface);
+  color: var(--text-muted);
+  cursor: pointer;
+}
+
+.scenario-lab__size-option:hover {
+  border-color: color-mix(in srgb, var(--accent) 55%, var(--border));
+  background: var(--surface-raised);
+}
+
+.scenario-lab__size-option:has(input:checked) {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 11%, var(--surface));
+}
+
+.scenario-lab__size-option input {
+  width: 1.05rem;
+  height: 1.05rem;
+  margin-top: 0.2rem;
+  accent-color: var(--accent);
+}
+
+.scenario-lab__size-option strong,
+.scenario-lab__size-option small {
+  display: block;
+}
+
+.scenario-lab__size-option strong {
+  color: var(--text);
+}
+
+.scenario-lab__size-option small {
+  margin-top: 0.25rem;
+  color: var(--text-muted);
+  font-size: 0.86rem;
+  line-height: 1.35;
+}
+
+.scenario-lab__navigator {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem 0.9rem;
+  align-items: center;
+  align-self: start;
+  margin: 0 !important;
+  padding: 0;
+}
+
+.scenario-lab__navigator p {
+  margin: 0;
+  color: var(--text);
+  font-size: 0.82rem;
+  font-weight: 850;
+}
+
+.scenario-lab__navigator ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.scenario-lab__navigator li,
+.scenario-lab__navigator li + li {
+  margin: 0;
+}
+
+.scenario-lab__navigator-button {
+  display: grid;
+  width: 2.35rem;
+  min-height: 2.35rem;
+  place-items: center;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 0.55rem;
+  background: var(--surface);
+  color: var(--text-muted);
+  font: inherit;
+  font-weight: 850;
+  cursor: pointer;
+}
+
+.scenario-lab__navigator-button:hover {
+  border-color: color-mix(in srgb, var(--accent) 55%, var(--border));
+  background: var(--surface-raised);
+  color: var(--text);
+}
+
+.scenario-lab__navigator-button.is-answered {
+  border-color: color-mix(in srgb, var(--success) 58%, var(--border));
+  color: var(--text);
+}
+
+.scenario-lab__navigator-button.is-current {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: var(--accent-contrast);
+}
+
+.scenario-lab__scenario[hidden] {
+  display: none !important;
+}
+
+.scenario-lab__scenarios {
+  align-self: start;
+  min-height: 0;
+}
+
+.scenario-lab__scenario {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-auto-rows: max-content;
+  align-content: start;
+  align-self: start;
+  justify-content: stretch;
+  row-gap: 0;
+  min-height: 0;
+  margin-top: 0.8rem;
+  padding: clamp(0.9rem, 2vw, 1.2rem);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-medium);
+  background: var(--surface);
+}
+
+.scenario-lab__counter {
+  margin: 0;
+  color: var(--accent-strong);
+  font-size: 0.74rem;
+  font-weight: 850;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.scenario-lab__scenario h3 {
+  margin: 0.2rem 0 0.4rem;
+  color: var(--text);
+  font-size: clamp(1.28rem, 2vw, 1.62rem);
+  line-height: 1.22;
+}
+
+.scenario-lab__response-block {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-auto-rows: max-content;
+  align-content: start;
+  align-self: start;
+  gap: 0.3rem;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.scenario-lab__prompt {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 1.04rem;
+}
+
+.scenario-lab__options {
+  display: grid;
+  grid-auto-rows: max-content;
+  align-content: start;
+  gap: 0.3rem;
+  margin: 0;
+}
+
+.scenario-lab__option {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 0.65rem;
+  align-items: start;
+  margin: 0 !important;
+  padding: 0.34rem 0.65rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-small);
+  background: var(--surface-soft);
+  color: var(--text-muted);
+  line-height: 1.35;
+  cursor: pointer;
+}
+
+.scenario-lab__option:hover {
+  border-color: color-mix(in srgb, var(--accent) 55%, var(--border));
+  background: var(--surface-raised);
+  color: var(--text);
+}
+
+.scenario-lab__option:has(input:checked) {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 11%, var(--surface));
+  color: var(--text);
+}
+
+.scenario-lab__option input {
+  width: 1.1rem;
+  height: 1.1rem;
+  margin-top: 0.1rem;
+  accent-color: var(--accent);
+}
+
+.scenario-lab__reveal {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+}
+
+.scenario-lab__feedback {
+  padding: 0.85rem 1rem;
+  border-left: 0.3rem solid var(--accent);
+  border-radius: 0 var(--radius-small) var(--radius-small) 0;
+  background: color-mix(in srgb, var(--accent) 8%, var(--surface-soft));
+}
+
+.scenario-lab__feedback[data-tone="strong"] {
+  border-left-color: var(--success);
+}
+
+.scenario-lab__feedback[data-tone="weak"] {
+  border-left-color: var(--warning);
+}
+
+.scenario-lab__feedback p {
+  margin: 0;
+}
+
+.scenario-lab__feedback-title {
+  color: var(--text) !important;
+  font-weight: 850;
+}
+
+.scenario-lab__feedback-title + p {
+  margin-top: 0.3rem;
+}
+
+.scenario-lab__reveal-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.scenario-lab__reveal-grid > div,
+.scenario-lab__lesson {
+  padding: 0.85rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-small);
+  background: var(--surface-soft);
+}
+
+.scenario-lab__reveal h4 {
+  margin: 0 0 0.35rem;
+  color: var(--text);
+  font-size: 1rem;
+}
+
+.scenario-lab__reveal p {
+  margin: 0;
+}
+
+.scenario-lab__lesson {
+  margin-top: 1rem;
+}
+
+.scenario-lab__hats {
+  margin-top: 0.9rem;
+}
+
+.scenario-lab__hats > p {
+  margin: 0 0 0.45rem;
+  color: var(--text);
+  font-size: 0.82rem;
+  font-weight: 850;
+}
+
+.scenario-lab__hats ul,
+.scenario-lab__summary-hats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.scenario-lab__hats li,
+.scenario-lab__hats li + li,
+.scenario-lab__summary-hats li,
+.scenario-lab__summary-hats li + li {
+  margin: 0;
+  padding: 0.35rem 0.55rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface-raised);
+  color: var(--text);
+  font-size: 0.82rem;
+  font-weight: 750;
+}
+
+.scenario-lab__status {
+  margin: 0.65rem 0 0;
+  color: var(--warning);
+  font-weight: 750;
+}
+
+.scenario-lab__status:empty {
+  display: none;
+}
+
+.scenario-lab__actions {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  gap: 0.65rem;
+  align-items: center;
+  margin-top: 0.8rem;
+}
+
+
+.scenario-lab.is-complete .scenario-lab__actions {
+  display: none;
+}
+
+.scenario-lab__actions-start {
+  justify-self: start;
+}
+
+.scenario-lab__restart {
+  justify-self: center;
+}
+
+.scenario-lab__actions-end {
+  justify-self: end;
+}
+
+.scenario-lab__summary {
+  margin-top: 1.4rem;
+  padding-top: 1.4rem;
+  border-top: 1px solid var(--border);
+  outline: none;
+}
+
+.scenario-lab__summary:focus-visible {
+  border-radius: var(--radius-small);
+  box-shadow: 0 0 0 3px var(--focus);
+}
+
+.scenario-lab__summary-hats {
+  margin-block: 0.85rem;
+}
+
+.scenario-lab__completion-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.career-comparison-grid,
+.career-bridge-grid,
+.career-route-grid {
+  display: grid;
+  gap: 1rem;
+  margin-block: 1.3rem 2rem;
+}
+
+.career-comparison-grid,
+.career-route-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.career-bridge-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.career-comparison-card,
+.career-bridge-card,
+.career-route-card {
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-medium);
+  background: var(--surface-soft);
+}
+
+.article-body .career-comparison-card h3,
+.article-body .career-bridge-card h3,
+.article-body .career-route-card h3 {
+  margin: 0 0 0.55rem;
+  color: var(--text);
+  font-size: 1.12rem;
+}
+
+.career-comparison-card ul {
+  margin-bottom: 0;
+}
+
+.career-bridge-card p,
+.career-route-card p {
+  margin-bottom: 0;
+}
+
+.career-route-card .eyebrow {
+  margin-bottom: 0.35rem;
+}
+
+@media screen and (max-width: 56rem) {
+  .scenario-lab__size-grid,
+  .career-bridge-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media screen and (max-width: 42rem) {
+  .scenario-lab__reveal-grid,
+  .career-comparison-grid,
+  .career-route-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .scenario-lab__actions {
+    grid-template-columns: 1fr;
+  }
+
+  .scenario-lab__actions-start,
+  .scenario-lab__restart,
+  .scenario-lab__actions-end {
+    width: 100%;
+    justify-self: stretch;
+  }
+
+  .scenario-lab__actions .button {
+    width: 100%;
+  }
+
+  .scenario-lab__response-block,
+  .scenario-lab__options {
+    gap: 0.42rem;
+  }
+
+  .scenario-lab__option {
+    padding: 0.65rem 0.7rem;
+  }
+
+  .scenario-lab__completion-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .scenario-lab__completion-actions .button {
+    width: 100%;
+  }
+}
+
+/* Single-panel workplace scenario flow */
+.scenario-lab {
+  display: block;
+}
+
+.scenario-lab__company-choice {
+  display: block;
+  height: auto;
+  min-height: 0;
+  margin-top: 1.25rem;
+  padding: 0;
+}
+
+.scenario-lab__company-choice .scenario-lab__sizes-label {
+  margin: 0 0 0.65rem;
+}
+
+.scenario-lab__company-choice .scenario-lab__size-grid {
+  margin: 0;
+}
+
+.scenario-lab__navigator {
+  margin: 0.65rem 0 0 !important;
+  padding: 0;
+}
+
+.scenario-lab__scenario {
+  display: block;
+  min-height: 0;
+  height: auto;
+  margin-top: 0.65rem;
+  padding-bottom: 0.75rem;
+}
+
+.scenario-lab__response-block {
+  display: block;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.scenario-lab__prompt {
+  margin: 0 0 0.3rem;
+}
+
+.scenario-lab__options {
+  display: flex;
+  min-height: 0;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin: 0;
+  padding: 0;
+}
+
+.scenario-lab__option {
+  flex: 0 0 auto;
+}
+
+.scenario-lab__actions {
+  margin-top: 0.55rem;
+}
+
+@media screen and (max-width: 42rem) {
+  .scenario-lab__prompt {
+    margin-bottom: 0.42rem;
+  }
+}
+
+/* Keep desktop scenario navigation close to the company-size cards. */
+@media screen and (min-width: 56.01rem) {
+  .scenario-lab__navigator {
+    margin-top: -4rem !important;
+  }
+}

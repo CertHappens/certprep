@@ -1,0 +1,133 @@
+{% set initialScenario = scenarioLab.scenarios[0] %}
+<section
+  class="scenario-lab"
+  id="{{ scenarioLab.anchorId or 'scenario-lab' }}"
+  data-scenario-lab
+  aria-labelledby="scenario-lab-title"
+>
+  <div class="scenario-lab__intro">
+    <p class="eyebrow">Interactive workplace scenarios</p>
+    <h2 id="scenario-lab-title">{{ scenarioLab.title }}</h2>
+    <p>{{ scenarioLab.introduction }}</p>
+    <p class="scenario-lab__session-note">Your place and choices are saved in this browser tab.</p>
+  </div>
+
+  <div
+    class="scenario-lab__company-choice"
+    role="radiogroup"
+    aria-labelledby="scenario-size-label"
+    data-scenario-size-selector
+  >
+    <p class="scenario-lab__sizes-label" id="scenario-size-label">Choose the organization you want to explore</p>
+    <div class="scenario-lab__size-grid">
+      {% for size in scenarioLab.sizes %}
+      <label class="scenario-lab__size-option">
+        <input type="radio" name="scenario-company-size" value="{{ size.id }}"{% if loop.first %} checked{% endif %}>
+        <span>
+          <strong>{{ size.label }}</strong>
+          <small>{{ size.description }}</small>
+        </span>
+      </label>
+      {% endfor %}
+    </div>
+  </div>
+
+  <nav class="scenario-lab__navigator" aria-label="Workplace scenario navigation">
+      <p>Scenarios</p>
+      <ol>
+        {% for scenario in scenarioLab.scenarios %}
+        <li>
+          <button
+            type="button"
+            class="scenario-lab__navigator-button"
+            data-scenario-jump
+            data-scenario-index="{{ loop.index0 }}"
+            aria-label="Go to scenario {{ loop.index }}"
+          >{{ loop.index }}</button>
+        </li>
+        {% endfor %}
+      </ol>
+  </nav>
+
+  <section
+    class="scenario-lab__scenario"
+    data-scenario-panel
+    data-scenario-id="{{ initialScenario.id }}"
+    aria-labelledby="scenario-current-heading"
+  >
+    <p class="scenario-lab__counter" data-scenario-counter>Scenario 1 of {{ scenarioLab.scenarios | length }}</p>
+    <h3 id="scenario-current-heading" data-scenario-heading>{{ initialScenario.title }}</h3>
+    <div class="scenario-lab__response-block">
+      <p class="scenario-lab__prompt" data-scenario-prompt>{{ initialScenario.prompt }}</p>
+      <div
+        class="scenario-lab__options"
+        role="radiogroup"
+        aria-label="Choose your first response"
+        data-scenario-options
+      >
+        {% for option in initialScenario.options %}
+        <label class="scenario-lab__option">
+          <input type="radio" name="scenario-current-response" value="{{ option.id }}">
+          <span>{{ option.label }}</span>
+        </label>
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="scenario-lab__reveal" data-scenario-reveal hidden aria-live="polite">
+      <div class="scenario-lab__feedback" data-scenario-feedback>
+        <p class="scenario-lab__feedback-title" data-scenario-feedback-title></p>
+        <p data-scenario-feedback-text></p>
+      </div>
+      <div class="scenario-lab__reveal-grid">
+        <div>
+          <h4>What happened</h4>
+          <p data-scenario-happened></p>
+        </div>
+        <div>
+          <h4 data-scenario-ownership-heading>Who may own the response</h4>
+          <p data-scenario-ownership></p>
+        </div>
+      </div>
+      <div class="scenario-lab__lesson">
+        <h4>What this teaches</h4>
+        <p data-scenario-lesson></p>
+      </div>
+      <div class="scenario-lab__hats" aria-label="Areas of technology work involved">
+        <p>Areas involved</p>
+        <ul data-scenario-hats></ul>
+      </div>
+    </div>
+  </section>
+
+  <p class="scenario-lab__status" data-scenario-status aria-live="polite"></p>
+  <div class="scenario-lab__actions">
+    <div class="scenario-lab__actions-start">
+      <button class="button button--secondary" type="button" data-scenario-previous hidden>Previous scenario</button>
+    </div>
+    <button class="button button--secondary scenario-lab__restart" type="button" data-scenario-restart>Restart scenarios</button>
+    <div class="scenario-lab__actions-end">
+      <button class="button" type="button" data-scenario-next>Next scenario</button>
+    </div>
+  </div>
+
+  <section class="scenario-lab__summary" data-scenario-summary-panel tabindex="-1" hidden>
+    <p class="eyebrow">Your day on the technology team</p>
+    <h3>One job title can touch many areas</h3>
+    <p data-scenario-summary-text></p>
+    <ul class="scenario-lab__summary-hats" data-scenario-summary-hats></ul>
+    <p>
+      In a smaller organization, one person may carry most of these responsibilities. In a larger company, the same situations may pass through several specialized teams.
+    </p>
+    <div class="scenario-lab__completion-actions">
+      <button class="button button--secondary" type="button" data-scenario-reset>Restart scenarios</button>
+      <a class="button" href="#company-size" data-scenario-continue>Continue reading the article</a>
+    </div>
+  </section>
+
+  <noscript>
+    <p class="callout">JavaScript is required to use the interactive workplace scenarios.</p>
+  </noscript>
+  <script type="application/json" data-scenario-lab-data>{{ scenarioLab | json | safe }}</script>
+</section>
+<script type="module" src="/assets/js/explore/scenario-lab.js"></script>

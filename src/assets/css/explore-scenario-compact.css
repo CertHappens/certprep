@@ -1,0 +1,91 @@
+/*
+ * Workplace scenario layout reset.
+ * Loaded after explore.css so the scenario experience keeps natural content
+ * height on desktop, regardless of older cached or competing layout rules.
+ */
+@media screen and (min-width: 42.01rem) {
+  .article-body .scenario-lab,
+  .article-body .scenario-lab__setup,
+  .article-body .scenario-lab__sizes,
+  .article-body .scenario-lab__size-grid,
+  .article-body .scenario-lab__scenarios,
+  .article-body .scenario-lab__scenario,
+  .article-body .scenario-lab__response-block,
+  .article-body .scenario-lab__options {
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    align-content: normal !important;
+  }
+
+  .article-body .scenario-lab {
+    display: block !important;
+  }
+
+  .article-body .scenario-lab__setup {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+    gap: 0 !important;
+    margin-top: 1.25rem !important;
+    padding: 0 !important;
+  }
+
+  .article-body .scenario-lab__sizes {
+    display: block !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .article-body .scenario-lab__size-grid {
+    margin: 0 !important;
+  }
+
+  .article-body .scenario-lab__navigator {
+    display: flex !important;
+    flex: 0 0 auto !important;
+    justify-content: flex-start !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .article-body .scenario-lab__scenarios {
+    display: block !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .article-body .scenario-lab__scenario {
+    display: block !important;
+    margin-top: 0.65rem !important;
+    padding-bottom: 0.65rem !important;
+  }
+
+  .article-body .scenario-lab__response-block {
+    display: block !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .article-body .scenario-lab__prompt {
+    margin: 0 0 0.3rem !important;
+  }
+
+  .article-body .scenario-lab__options {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+    gap: 0.3rem !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .article-body .scenario-lab__option {
+    flex: 0 0 auto !important;
+    margin: 0 !important;
+  }
+
+  .article-body .scenario-lab__actions {
+    margin-top: 0.55rem !important;
+  }
+}

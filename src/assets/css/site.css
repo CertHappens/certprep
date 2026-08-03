@@ -2223,6 +2223,10 @@ h3 {
   padding-block: 1.25rem clamp(3rem, 8vw, 6rem);
 }
 
+.article-layout--single {
+  grid-template-columns: minmax(0, var(--reading-width));
+}
+
 .article-toc {
   position: sticky;
   top: 6rem;

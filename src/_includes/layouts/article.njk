@@ -93,7 +93,7 @@ layout: layouts/base.njk
   </div>
 </header>
 
-<div class="article-layout page-shell">
+<div class="article-layout page-shell{% if not toc %} article-layout--single{% endif %}">
   {% if toc %}
   <aside class="article-toc{% if tocVariant %} article-toc--{{ tocVariant }}{% endif %}">
     <nav aria-labelledby="article-toc-title">
@@ -113,7 +113,25 @@ layout: layouts/base.njk
   >
     {{ content | safe }}
 
-    {% if relatedLinks %}
+    {% if assessment and assessmentPlacement != "inline" %}
+    {% include "components/explore-assessment.njk" %}
+    {% endif %}
+
+    {% if relatedArticles and relatedArticles | length %}
+    <section class="article-related" aria-labelledby="related-articles-title">
+      <h2 id="related-articles-title">Related articles</h2>
+      <div class="article-related__grid">
+        {% for link in relatedArticles %}
+        <a class="article-related__item" href="{{ link.url }}">
+          <strong>{{ link.title }}</strong>
+          {% if link.description %}<span>{{ link.description }}</span>{% endif %}
+        </a>
+        {% endfor %}
+      </div>
+    </section>
+    {% endif %}
+
+    {% if relatedLinks and relatedLinks | length %}
     <section class="article-related" aria-labelledby="related-resources-title">
       <h2 id="related-resources-title">Related resources</h2>
       <div class="article-related__grid">

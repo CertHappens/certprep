@@ -1,3 +1,5 @@
+import { buildExploreArticleCollection } from "./scripts/explore_content.mjs";
+
 function escapeXml(value) {
   return String(value)
     .replaceAll("&", "&amp;")
@@ -61,6 +63,10 @@ export default function (eleventyConfig) {
 
   eleventyConfig.addFilter("readableDate", (value) =>
     readableDateFormatter.format(normalizeDate(value))
+  );
+
+  eleventyConfig.addCollection("exploreArticles", (collectionApi) =>
+    buildExploreArticleCollection(collectionApi.getFilteredByTag("exploreArticle"))
   );
 
   eleventyConfig.addCollection("sitemapPages", (collectionApi) =>

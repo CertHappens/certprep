@@ -236,6 +236,31 @@
           ]
         }
       ]
+    },
+    {
+      "label": "Explore",
+      "url": "/explore/",
+      "matchPrefix": "/explore/",
+      "menuId": "explore-navigation",
+      "groups": [
+        {
+          "label": "Explore",
+          "links": [
+            {
+              "label": "Home",
+              "url": "/explore/"
+            },
+            {
+              "label": "Which Tech Career",
+              "url": "/explore/career/paths/"
+            },
+            {
+              "label": "IT or Cybersecurity",
+              "url": "/explore/career/it-support-or-cybersecurity/"
+            }
+          ]
+        }
+      ]
     }
   ],
   "footer": [

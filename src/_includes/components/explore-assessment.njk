@@ -1,0 +1,91 @@
+<section
+  class="career-assessment"
+  id="{{ assessment.anchorId or 'career-assessment' }}"
+  data-career-assessment
+  aria-labelledby="career-assessment-title"
+>
+  <div class="career-assessment__intro">
+    <p class="eyebrow">Practical self-assessment</p>
+    <h2 id="career-assessment-title">{{ assessment.title }}</h2>
+    {% if assessment.introduction %}<p>{{ assessment.introduction }}</p>{% endif %}
+    <p class="career-assessment__session-note">Progress and results are saved in this browser tab.</p>
+  </div>
+  <form class="career-assessment__form" data-career-assessment-form novalidate>
+    <nav class="career-assessment__navigator" aria-label="Assessment question navigation">
+      <p class="career-assessment__navigator-label">Questions</p>
+      <ol>
+        {% for question in assessment.questions %}
+        <li>
+          <button
+            class="career-assessment__navigator-button"
+            type="button"
+            data-career-assessment-jump
+            data-question-index="{{ loop.index0 }}"
+            aria-label="Go to question {{ loop.index }}"
+          >{{ loop.index }}</button>
+        </li>
+        {% endfor %}
+      </ol>
+    </nav>
+    <div class="career-assessment__questions">
+    {% for question in assessment.questions %}
+    <div
+      class="career-assessment__question"
+      data-assessment-question
+      data-question-id="{{ question.id }}"
+      role="radiogroup"
+      aria-labelledby="career-assessment-question-{{ loop.index }}"
+    >
+      <div class="career-assessment__question-heading">
+        <span class="career-assessment__question-number">Question {{ loop.index }} of {{ assessment.questions | length }}</span>
+        <h3 id="career-assessment-question-{{ loop.index }}">{{ question.prompt }}</h3>
+      </div>
+      <div class="career-assessment__options">
+        {% for option in question.options %}
+        <label class="career-assessment__option">
+          <input type="radio" name="{{ question.id }}" value="{{ option.id }}">
+          <span>{{ option.label }}</span>
+        </label>
+        {% endfor %}
+      </div>
+    </div>
+    {% endfor %}
+    </div>
+    <p class="career-assessment__status" data-career-assessment-status aria-live="polite"></p>
+    <div class="career-assessment__actions">
+      <div class="career-assessment__actions-start">
+        <button class="button button--secondary" type="button" data-career-assessment-previous hidden>Previous question</button>
+      </div>
+      <button class="button button--secondary career-assessment__restart" type="button" data-career-assessment-restart>Restart quiz</button>
+      <div class="career-assessment__actions-end">
+        <button class="button" type="button" data-career-assessment-next hidden>Next question</button>
+        <button class="button" type="submit" data-career-assessment-submit>See my top two paths</button>
+      </div>
+    </div>
+  </form>
+  <section
+    class="career-assessment__results"
+    data-career-assessment-results
+    aria-labelledby="career-assessment-results-title"
+    tabindex="-1"
+    hidden
+  >
+    <p class="eyebrow">Your results</p>
+    <h2 id="career-assessment-results-title">Your strongest technology career matches</h2>
+    <p class="career-assessment__result-lead">Your answers suggest that you may enjoy...</p>
+    <div class="career-assessment__result-grid" data-career-assessment-result-cards></div>
+    <p class="career-assessment__result-note">
+      These results are a starting point for exploration. Skills and interests can overlap across several paths.
+    </p>
+    <p class="career-assessment__result-next">
+      Continue below to compare all six paths in more detail. Each section includes common roles, the kinds of problems you may handle, and a small project that can help you explore the work.
+    </p>
+    <button class="button career-assessment__retake" type="button" data-career-assessment-reset>Retake the quiz</button>
+  </section>
+  <noscript>
+    <p class="callout">JavaScript is required to score this self-assessment in your browser.</p>
+  </noscript>
+
+  <script type="application/json" data-career-assessment-data>{{ assessment | json | safe }}</script>
+</section>
+<script type="module" src="/assets/js/explore/career-assessment.js"></script>

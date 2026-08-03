@@ -1,0 +1,33 @@
+/* Explore landing-page width and reading balance */
+
+.explore-landing__shell {
+  width: min(calc(100% - 2rem), 80rem);
+}
+
+.explore-landing__hero .lede {
+  max-width: 58rem;
+}
+
+.explore-landing__heading {
+  max-width: 62rem;
+}
+
+.explore-landing__heading > p:last-child {
+  max-width: 72ch;
+}
+
+.explore-landing__section .explore-feed {
+  width: 100%;
+}
+
+@media screen and (max-width: 48rem) {
+  .explore-landing__shell {
+    width: min(calc(100% - 2rem), var(--content-width));
+  }
+
+  .explore-landing__hero .lede,
+  .explore-landing__heading,
+  .explore-landing__heading > p:last-child {
+    max-width: 100%;
+  }
+}

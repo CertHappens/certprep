@@ -638,6 +638,9 @@ const requiredFiles = [
   "assets/js/quiz/results-actions.js",
   "assets/js/quiz/paged-question.js",
   "assets/js/quiz/stimulus.js",
+  "assets/css/explore.css",
+  "assets/js/explore/career-assessment-core.js",
+  "assets/js/explore/career-assessment.js",
   "quiz-data/catalog.json",
   "quiz-data/security-plus/sec-701/manifest.json",
   "quiz-data/security-plus/sec-701/questions.json",
@@ -871,6 +874,43 @@ if (await isFile(navigationScriptPath)) {
   for (const marker of requiredNavigationScriptMarkers) {
     if (!navigationScript.includes(marker)) {
       fail(`site-navigation.js: navigation behavior is missing: ${marker}`);
+    }
+  }
+}
+
+const exploreCssPath = path.join(outputRoot, "assets/css/explore.css");
+if (await isFile(exploreCssPath)) {
+  const exploreCss = await readFile(exploreCssPath, "utf8");
+  const requiredExploreCssRules = [
+    ".career-assessment",
+    ".career-assessment__question",
+    ".career-assessment__result-grid",
+    "[data-incomplete=\"true\"]"
+  ];
+
+  for (const rule of requiredExploreCssRules) {
+    if (!exploreCss.includes(rule)) {
+      fail(`explore.css: assessment styling is missing: ${rule}`);
+    }
+  }
+}
+
+const exploreAssessmentScriptPath = path.join(
+  outputRoot,
+  "assets/js/explore/career-assessment.js"
+);
+if (await isFile(exploreAssessmentScriptPath)) {
+  const exploreAssessmentScript = await readFile(exploreAssessmentScriptPath, "utf8");
+  const requiredAssessmentMarkers = [
+    "scoreCareerAssessment",
+    "resultCount: 2",
+    "data-career-assessment-results",
+    "Assessment complete. Your two strongest matches"
+  ];
+
+  for (const marker of requiredAssessmentMarkers) {
+    if (!exploreAssessmentScript.includes(marker)) {
+      fail(`career-assessment.js: assessment behavior is missing: ${marker}`);
     }
   }
 }
@@ -1210,6 +1250,7 @@ for (const file of htmlFiles) {
     'id="security-plus-navigation"',
     'id="network-plus-navigation"',
     'id="ccna-navigation"',
+    'id="explore-navigation"',
     'id="ccna-navigation-group-1"',
     'id="ccna-navigation-group-2"',
     'id="ccna-navigation-group-3"',
@@ -1239,8 +1280,8 @@ for (const file of htmlFiles) {
   }
 
   const navigationSubmenuCount = (html.match(/data-nav-submenu/g) || []).length;
-  if (navigationSubmenuCount !== 3) {
-    fail(`${relative}: expected 3 certification navigation submenus, found ${navigationSubmenuCount}`);
+  if (navigationSubmenuCount !== 4) {
+    fail(`${relative}: expected 4 shared navigation submenus, found ${navigationSubmenuCount}`);
   }
 
   const requiredNavigationLinks = [
@@ -1276,7 +1317,10 @@ for (const file of htmlFiles) {
     "/ccna/acronyms/",
     "/ccna/commands/",
     "/cissp/",
-    "/ccna/"
+    "/ccna/",
+    "/explore/",
+    "/explore/career/paths/",
+    "/explore/career/it-support-or-cybersecurity/"
   ];
 
   for (const href of requiredNavigationLinks) {
