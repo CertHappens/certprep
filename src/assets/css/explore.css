@@ -877,3 +877,73 @@
     width: 100%;
   }
 }
+
+/* Single-panel workplace scenario flow */
+.scenario-lab {
+  display: block;
+}
+
+.scenario-lab__sizes {
+  display: block;
+  min-height: 0;
+  margin-top: 1.25rem;
+}
+
+.scenario-lab__sizes-label {
+  margin-bottom: 0.65rem;
+}
+
+.scenario-lab__size-grid {
+  margin: 0;
+}
+
+.scenario-lab__navigator {
+  margin-top: 0 !important;
+  padding-top: 0;
+}
+
+.scenario-lab__scenario {
+  display: block;
+  min-height: 0;
+  height: auto;
+  margin-top: 0.65rem;
+  padding-bottom: 0.75rem;
+}
+
+.scenario-lab__response-block {
+  display: block;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.scenario-lab__prompt {
+  margin: 0 0 0.3rem;
+}
+
+.scenario-lab__options {
+  display: flex;
+  min-height: 0;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin: 0;
+  padding: 0;
+}
+
+.scenario-lab__option {
+  flex: 0 0 auto;
+}
+
+.scenario-lab__actions {
+  margin-top: 0.55rem;
+}
+
+@media screen and (max-width: 42rem) {
+  .scenario-lab__navigator {
+    margin-top: 0.45rem !important;
+  }
+
+  .scenario-lab__prompt {
+    margin-bottom: 0.42rem;
+  }
+}

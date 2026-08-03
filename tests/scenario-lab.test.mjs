@@ -9,9 +9,9 @@ import {
 } from "../src/assets/js/explore/scenario-lab-core.js";
 
 const readSource = (path) => readFile(new URL(`../${path}`, import.meta.url), "utf8");
+
 test("IT support and cybersecurity scenario lab has six balanced workplace situations", () => {
   const lab = validateScenarioLab(articleData.scenarioLab);
-
   assert.equal(lab.sizes.length, 3);
   assert.equal(lab.scenarios.length, 6);
   assert.equal(lab.hats.length, 8);
@@ -25,6 +25,7 @@ test("IT support and cybersecurity scenario lab has six balanced workplace situa
     assert.deepEqual(Object.keys(scenario.reveal.ownership).sort(), ["large", "midsize", "small"]);
   }
 });
+
 test("scenario summary tracks breadth without grading the visitor", () => {
   const lab = articleData.scenarioLab;
   const answers = Object.fromEntries(
@@ -39,11 +40,13 @@ test("scenario summary tracks breadth without grading the visitor", () => {
   assert.ok(summary.workAreas.some((area) => area.id === "continuity"));
   assert.ok(summary.workAreas.some((area) => area.id === "assets"));
 });
-test("second Explore article uses the scenario lab and current staging review protections", async () => {
+
+test("second Explore article uses a compact single-panel scenario lab", async () => {
   const article = await readSource("src/explore/career/it-support-or-cybersecurity/index.md");
   const component = await readSource("src/_includes/components/explore-scenario-lab.njk");
   const controller = await readSource("src/assets/js/explore/scenario-lab.js");
   const css = await readSource("src/assets/css/explore.css");
+
   assert.match(article, /title: "IT Support or Cybersecurity: Where Should You Start\?"/);
   assert.match(article, /permalink: \/explore\/career\/it-support-or-cybersecurity\//);
   assert.match(article, /everything with a power cable/);
@@ -52,34 +55,46 @@ test("second Explore article uses the scenario lab and current staging review pr
   assert.match(JSON.stringify(articleData.scenarioLab), /The budget is cut, but the expectations are not/);
   assert.match(article, /robots: noindex,nofollow,nosnippet/);
   assert.match(article, /\/assets\/css\/explore\.css\?v=\d{8}-\d+/);
+  assert.doesNotMatch(article, /explore-scenario-compact\.css/);
   assert.match(article, /sitemap: false/);
+
   assert.match(component, /data-scenario-lab-data/);
   assert.match(component, /Choose the organization you want to explore/);
   assert.match(component, /role="radiogroup"/);
   assert.match(component, /scenario-lab__sizes-label/);
-  assert.match(component, /scenario-lab__setup/);
+  assert.match(component, /data-scenario-counter/);
+  assert.match(component, /data-scenario-heading/);
+  assert.match(component, /data-scenario-prompt/);
+  assert.match(component, /data-scenario-options/);
   assert.match(component, /scenario-lab__response-block/);
-  assert.doesNotMatch(component, /<fieldset class="scenario-lab__sizes"/);
+  assert.doesNotMatch(component, /scenario-lab__setup/);
+  assert.doesNotMatch(component, /scenario-lab__scenarios/);
+  assert.equal((component.match(/data-scenario-panel/g) || []).length, 1);
+
   assert.match(controller, /window\.sessionStorage/);
   assert.match(controller, /Restart the scenarios\? Your saved choices will be cleared\./);
   assert.match(controller, /buildScenarioSummary\(lab, answers\)/);
   assert.match(controller, /root\.classList\.toggle\("is-complete", complete\)/);
   assert.match(controller, /summaryPanel\.scrollIntoView/);
+  assert.match(controller, /options\.replaceChildren/);
+  assert.doesNotMatch(controller, /panels\.forEach/);
   assert.doesNotMatch(component, /See what the day covered/);
   assert.match(component, /Restart scenarios/);
   assert.match(component, /Continue reading the article/);
   assert.match(component, /href="#company-size"/);
   assert.match(article, /<h2 id="choose-route">A Practical Way to Start<\/h2>/);
-  assert.match(css, /\.scenario-lab__size-grid/);
-  assert.match(css, /\.scenario-lab__setup\s*\{[\s\S]*display:\s*grid[\s\S]*gap:\s*0/);
-  assert.match(css, /\.scenario-lab__sizes\s*\{[\s\S]*display:\s*grid[\s\S]*gap:\s*0\.65rem[\s\S]*margin:\s*0/);
-  assert.match(css, /\.scenario-lab__navigator\s*\{[\s\S]*margin:\s*0 !important/);
-  assert.match(css, /\.scenario-lab__scenario\s*\{[\s\S]*display:\s*grid[\s\S]*align-content:\s*start/);
-  assert.match(css, /\.scenario-lab__response-block\s*\{[\s\S]*gap:\s*0\.3rem/);
-  assert.match(css, /\.scenario-lab__options\s*\{[\s\S]*gap:\s*0\.3rem[\s\S]*margin:\s*0/);
-  assert.match(css, /\.scenario-lab__option\s*\{[\s\S]*padding:\s*0\.34rem 0\.65rem/);
+
+  assert.match(css, /\/\* Single-panel workplace scenario flow \*\//);
+  assert.match(css, /\.scenario-lab\s*\{[\s\S]*display:\s*block/);
+  assert.match(css, /\.scenario-lab__sizes\s*\{[\s\S]*display:\s*block[\s\S]*margin-top:\s*1\.25rem/);
+  assert.match(css, /\.scenario-lab__navigator\s*\{[\s\S]*margin-top:\s*0 !important/);
+  assert.match(css, /\.scenario-lab__scenario\s*\{[\s\S]*display:\s*block[\s\S]*height:\s*auto/);
+  assert.match(css, /\.scenario-lab__prompt\s*\{[\s\S]*margin:\s*0 0 0\.3rem/);
+  assert.match(css, /\.scenario-lab__options\s*\{[\s\S]*flex-direction:\s*column[\s\S]*gap:\s*0\.3rem/);
+  assert.match(css, /\.scenario-lab__actions\s*\{[\s\S]*margin-top:\s*0\.55rem/);
   assert.match(css, /\.career-comparison-grid/);
 });
+
 test("first career article links forward to the second article", async () => {
   const article = await readSource("src/explore/career/paths/index.md");
   assert.match(article, /relatedArticles:[\s\S]*IT Support or Cybersecurity: Where Should You Start\?/);

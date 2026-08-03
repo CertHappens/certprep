@@ -4,9 +4,7 @@ const SESSION_VERSION = 1;
 
 function parseLabData(root) {
   const source = root.querySelector("[data-scenario-lab-data]");
-  if (!source) {
-    throw new Error("Scenario lab data is missing.");
-  }
+  if (!source) throw new Error("Scenario lab data is missing.");
   return validateScenarioLab(JSON.parse(source.textContent));
 }
 
@@ -63,7 +61,11 @@ function initializeScenarioLab(root) {
     return;
   }
 
-  const panels = [...root.querySelectorAll("[data-scenario-panel]")];
+  const panel = root.querySelector("[data-scenario-panel]");
+  const counter = root.querySelector("[data-scenario-counter]");
+  const heading = root.querySelector("[data-scenario-heading]");
+  const prompt = root.querySelector("[data-scenario-prompt]");
+  const options = root.querySelector("[data-scenario-options]");
   const jumpButtons = [...root.querySelectorAll("[data-scenario-jump]")];
   const sizeInputs = [...root.querySelectorAll('input[name="scenario-company-size"]')];
   const previousButton = root.querySelector("[data-scenario-previous]");
@@ -76,7 +78,11 @@ function initializeScenarioLab(root) {
   const summaryHats = root.querySelector("[data-scenario-summary-hats]");
 
   if (
-    panels.length !== lab.scenarios.length ||
+    !panel ||
+    !counter ||
+    !heading ||
+    !prompt ||
+    !options ||
     jumpButtons.length !== lab.scenarios.length ||
     sizeInputs.length !== lab.sizes.length ||
     !previousButton ||
@@ -115,15 +121,28 @@ function initializeScenarioLab(root) {
 
   const currentScenario = () => lab.scenarios[currentIndex];
 
-  const renderReveal = (panel, scenario) => {
+  const makeOption = (scenario, option, selectedId) => {
+    const label = document.createElement("label");
+    label.className = "scenario-lab__option";
+
+    const input = document.createElement("input");
+    input.type = "radio";
+    input.name = "scenario-current-response";
+    input.value = option.id;
+    input.checked = option.id === selectedId;
+    input.dataset.scenarioId = scenario.id;
+
+    const text = document.createElement("span");
+    text.textContent = option.label;
+
+    label.append(input, text);
+    return label;
+  };
+
+  const renderReveal = (scenario) => {
     const selectedId = answers[scenario.id];
     const reveal = panel.querySelector("[data-scenario-reveal]");
     if (!reveal) return;
-
-    if (!selectedId) {
-      reveal.hidden = true;
-      return;
-    }
 
     const option = scenario.options.find((candidate) => candidate.id === selectedId);
     if (!option) {
@@ -169,9 +188,7 @@ function initializeScenarioLab(root) {
       })
     );
     summaryPanel.hidden = false;
-    if (focus) {
-      summaryPanel.focus();
-    }
+    if (focus) summaryPanel.focus();
   };
 
   const updateNavigator = () => {
@@ -191,20 +208,17 @@ function initializeScenarioLab(root) {
   };
 
   const render = ({ focus = false, persist = false } = {}) => {
-    panels.forEach((panel, index) => {
-      const current = index === currentIndex;
-      panel.hidden = !current;
-      panel.style.display = current ? "" : "none";
-      panel.setAttribute("aria-hidden", current ? "false" : "true");
-      if (current) {
-        const scenario = lab.scenarios[index];
-        const selectedId = answers[scenario.id];
-        panel.querySelectorAll('input[type="radio"]').forEach((input) => {
-          input.checked = input.value === selectedId;
-        });
-        renderReveal(panel, scenario);
-      }
-    });
+    const scenario = currentScenario();
+    const selectedId = answers[scenario.id];
+
+    panel.dataset.scenarioId = scenario.id;
+    counter.textContent = `Scenario ${currentIndex + 1} of ${lab.scenarios.length}`;
+    heading.textContent = scenario.title;
+    prompt.textContent = scenario.prompt;
+    options.replaceChildren(
+      ...scenario.options.map((option) => makeOption(scenario, option, selectedId))
+    );
+    renderReveal(scenario);
 
     sizeInputs.forEach((input) => {
       input.checked = input.value === sizeId;
@@ -221,7 +235,7 @@ function initializeScenarioLab(root) {
     renderSummary();
 
     if (persist) save();
-    if (focus) panels[currentIndex]?.querySelector('input:checked, input[type="radio"]')?.focus();
+    if (focus) options.querySelector('input:checked, input[type="radio"]')?.focus();
   };
 
   const moveTo = (index, { focus = true } = {}) => {
@@ -232,7 +246,7 @@ function initializeScenarioLab(root) {
   const requireCurrentAnswer = () => {
     if (answers[currentScenario().id]) return true;
     status.textContent = "Choose a first response before continuing.";
-    panels[currentIndex]?.querySelector('input[type="radio"]')?.focus();
+    options.querySelector('input[type="radio"]')?.focus();
     return false;
   };
 
@@ -261,14 +275,14 @@ function initializeScenarioLab(root) {
       return;
     }
 
-    const panel = input.closest("[data-scenario-panel]");
-    if (!panel) return;
-    const scenarioId = panel.dataset.scenarioId;
-    answers = { ...answers, [scenarioId]: input.value };
+    if (input.name !== "scenario-current-response") return;
+    const scenario = currentScenario();
+    answers = { ...answers, [scenario.id]: input.value };
     const summary = buildScenarioSummary(lab, answers);
     const justCompleted = summary.complete && !completedAt;
     if (justCompleted) completedAt = new Date().toISOString();
     render({ persist: true });
+
     if (justCompleted) {
       window.requestAnimationFrame(() => {
         renderSummary({ focus: true });
