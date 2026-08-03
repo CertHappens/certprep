@@ -60,6 +60,9 @@ test("second Explore article uses the scenario lab and current staging review pr
   assert.match(article, /sitemap: false/);
   assert.match(component, /data-scenario-lab-data/);
   assert.match(component, /Choose the organization you want to explore/);
+  assert.match(component, /role="radiogroup"/);
+  assert.match(component, /scenario-lab__sizes-label/);
+  assert.doesNotMatch(component, /<fieldset class="scenario-lab__sizes"/);
   assert.match(controller, /window\.sessionStorage/);
   assert.match(controller, /Restart the scenarios\? Your saved choices will be cleared\./);
   assert.match(controller, /buildScenarioSummary\(lab, answers\)/);
@@ -71,6 +74,11 @@ test("second Explore article uses the scenario lab and current staging review pr
   assert.match(component, /href="#company-size"/);
   assert.match(article, /<h2 id="choose-route">A Practical Way to Start<\/h2>/);
   assert.match(css, /\.scenario-lab__size-grid/);
+  assert.match(css, /\.scenario-lab__sizes\s*\{[\s\S]*display:\s*grid[\s\S]*gap:\s*0\.65rem/);
+  assert.match(css, /\.scenario-lab__navigator\s*\{[\s\S]*margin:\s*0 !important/);
+  assert.match(css, /\.scenario-lab__scenario\s*\{[\s\S]*display:\s*flex[\s\S]*flex-direction:\s*column/);
+  assert.match(css, /\.scenario-lab__options\s*\{[\s\S]*gap:\s*0\.12rem[\s\S]*margin-top:\s*0\.12rem/);
+  assert.match(css, /\.scenario-lab__option\s*\{[\s\S]*padding:\s*0\.4rem 0\.65rem/);
   assert.match(css, /\.career-comparison-grid/);
 });
 

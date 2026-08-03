@@ -11,8 +11,13 @@
     <p class="scenario-lab__session-note">Your place and choices are saved in this browser tab.</p>
   </div>
 
-  <fieldset class="scenario-lab__sizes" data-scenario-size-selector>
-    <legend>Choose the organization you want to explore</legend>
+  <div
+    class="scenario-lab__sizes"
+    role="radiogroup"
+    aria-labelledby="scenario-size-label"
+    data-scenario-size-selector
+  >
+    <p class="scenario-lab__sizes-label" id="scenario-size-label">Choose the organization you want to explore</p>
     <div class="scenario-lab__size-grid">
       {% for size in scenarioLab.sizes %}
       <label class="scenario-lab__size-option">
@@ -24,7 +29,7 @@
       </label>
       {% endfor %}
     </div>
-  </fieldset>
+  </div>
 
   <nav class="scenario-lab__navigator" aria-label="Workplace scenario navigation">
     <p>Scenarios</p>
