@@ -17,6 +17,6 @@ export default {
       { id: "quality-assurance", label: "Quality assurance" },
       { id: "technical-assurance", label: "Audit and technical assurance" }
     ],
-    nextArticleTitle: "Which Cybersecurity Career Path Fits You?"
+    nextArticleTitle: "IT Support or Cybersecurity: Where Should You Start?"
   }
 };

@@ -45,6 +45,8 @@ toc:
     label: How your results may work together
   - id: explore-work
     label: Explore the work
+  - id: related-articles-title
+    label: Related articles
   - id: related-resources-title
     label: Related resources
 stylesheets:
@@ -55,6 +57,10 @@ keywords:
   - cybersecurity careers
   - software development careers
   - technology management
+relatedArticles:
+  - title: "IT Support or Cybersecurity: Where Should You Start?"
+    url: /explore/career/it-support-or-cybersecurity/
+    description: Work through realistic technology problems and see how support and security responsibilities change with company size.
 relatedLinks:
   - title: Network+ resources
     url: /network-plus/

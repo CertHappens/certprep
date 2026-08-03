@@ -31,7 +31,7 @@ test("Explore launches with the approved first-article contract", () => {
   );
   assert.equal(
     explore.firstArticle.nextArticleTitle,
-    "Which Cybersecurity Career Path Fits You?"
+    "IT Support or Cybersecurity: Where Should You Start?"
   );
 });
 
