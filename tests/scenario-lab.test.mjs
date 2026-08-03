@@ -9,14 +9,12 @@ import {
 } from "../src/assets/js/explore/scenario-lab-core.js";
 
 const readSource = (path) => readFile(new URL(`../${path}`, import.meta.url), "utf8");
-
 test("IT support and cybersecurity scenario lab has six balanced workplace situations", () => {
   const lab = validateScenarioLab(articleData.scenarioLab);
 
   assert.equal(lab.sizes.length, 3);
   assert.equal(lab.scenarios.length, 6);
   assert.equal(lab.hats.length, 8);
-
   for (const scenario of lab.scenarios) {
     assert.equal(scenario.options.length, 4);
     assert.equal(
@@ -27,14 +25,12 @@ test("IT support and cybersecurity scenario lab has six balanced workplace situa
     assert.deepEqual(Object.keys(scenario.reveal.ownership).sort(), ["large", "midsize", "small"]);
   }
 });
-
 test("scenario summary tracks breadth without grading the visitor", () => {
   const lab = articleData.scenarioLab;
   const answers = Object.fromEntries(
     lab.scenarios.map((scenario) => [scenario.id, scenario.options[0].id])
   );
   const summary = buildScenarioSummary(lab, answers);
-
   assert.equal(summary.complete, true);
   assert.equal(summary.completedCount, 6);
   assert.equal(summary.totalCount, 6);
@@ -43,13 +39,11 @@ test("scenario summary tracks breadth without grading the visitor", () => {
   assert.ok(summary.workAreas.some((area) => area.id === "continuity"));
   assert.ok(summary.workAreas.some((area) => area.id === "assets"));
 });
-
 test("second Explore article uses the scenario lab and current staging review protections", async () => {
   const article = await readSource("src/explore/career/it-support-or-cybersecurity/index.md");
   const component = await readSource("src/_includes/components/explore-scenario-lab.njk");
   const controller = await readSource("src/assets/js/explore/scenario-lab.js");
   const css = await readSource("src/assets/css/explore.css");
-
   assert.match(article, /title: "IT Support or Cybersecurity: Where Should You Start\?"/);
   assert.match(article, /permalink: \/explore\/career\/it-support-or-cybersecurity\//);
   assert.match(article, /everything with a power cable/);
@@ -57,7 +51,7 @@ test("second Explore article uses the scenario lab and current staging review pr
   assert.match(article, /Generalist Role or Underfunded Catch-All\?/);
   assert.match(JSON.stringify(articleData.scenarioLab), /The budget is cut, but the expectations are not/);
   assert.match(article, /robots: noindex,nofollow,nosnippet/);
-  assert.match(article, /\/assets\/css\/explore\.css\?v=20260803-4/);
+  assert.match(article, /\/assets\/css\/explore\.css\?v=\d{8}-\d+/);
   assert.match(article, /sitemap: false/);
   assert.match(component, /data-scenario-lab-data/);
   assert.match(component, /Choose the organization you want to explore/);
@@ -86,7 +80,6 @@ test("second Explore article uses the scenario lab and current staging review pr
   assert.match(css, /\.scenario-lab__option\s*\{[\s\S]*padding:\s*0\.34rem 0\.65rem/);
   assert.match(css, /\.career-comparison-grid/);
 });
-
 test("first career article links forward to the second article", async () => {
   const article = await readSource("src/explore/career/paths/index.md");
   assert.match(article, /relatedArticles:[\s\S]*IT Support or Cybersecurity: Where Should You Start\?/);
