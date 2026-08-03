@@ -68,7 +68,6 @@ function initializeScenarioLab(root) {
   const sizeInputs = [...root.querySelectorAll('input[name="scenario-company-size"]')];
   const previousButton = root.querySelector("[data-scenario-previous]");
   const nextButton = root.querySelector("[data-scenario-next]");
-  const summaryButton = root.querySelector("[data-scenario-summary]");
   const restartButton = root.querySelector("[data-scenario-restart]");
   const resetButton = root.querySelector("[data-scenario-reset]");
   const status = root.querySelector("[data-scenario-status]");
@@ -82,7 +81,6 @@ function initializeScenarioLab(root) {
     sizeInputs.length !== lab.sizes.length ||
     !previousButton ||
     !nextButton ||
-    !summaryButton ||
     !restartButton ||
     !resetButton ||
     !status ||
@@ -213,9 +211,12 @@ function initializeScenarioLab(root) {
     });
 
     updateNavigator();
-    previousButton.hidden = currentIndex === 0;
-    nextButton.hidden = currentIndex === lab.scenarios.length - 1;
-    summaryButton.hidden = currentIndex !== lab.scenarios.length - 1;
+    const summary = buildScenarioSummary(lab, answers);
+    const complete = summary.complete;
+    root.classList.toggle("is-complete", complete);
+    previousButton.hidden = complete || currentIndex === 0;
+    nextButton.hidden = complete || currentIndex === lab.scenarios.length - 1;
+    restartButton.hidden = complete;
     status.textContent = "";
     renderSummary();
 
@@ -265,8 +266,15 @@ function initializeScenarioLab(root) {
     const scenarioId = panel.dataset.scenarioId;
     answers = { ...answers, [scenarioId]: input.value };
     const summary = buildScenarioSummary(lab, answers);
-    if (summary.complete && !completedAt) completedAt = new Date().toISOString();
+    const justCompleted = summary.complete && !completedAt;
+    if (justCompleted) completedAt = new Date().toISOString();
     render({ persist: true });
+    if (justCompleted) {
+      window.requestAnimationFrame(() => {
+        renderSummary({ focus: true });
+        summaryPanel.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    }
   });
 
   jumpButtons.forEach((button) => {
@@ -275,19 +283,6 @@ function initializeScenarioLab(root) {
   previousButton.addEventListener("click", () => moveTo(currentIndex - 1));
   nextButton.addEventListener("click", () => {
     if (requireCurrentAnswer()) moveTo(currentIndex + 1);
-  });
-  summaryButton.addEventListener("click", () => {
-    if (!requireCurrentAnswer()) return;
-    const summary = buildScenarioSummary(lab, answers);
-    if (!summary.complete) {
-      const firstMissingIndex = lab.scenarios.findIndex((scenario) => !answers[scenario.id]);
-      moveTo(firstMissingIndex);
-      status.textContent = "Complete each scenario to see the full summary.";
-      return;
-    }
-    completedAt ||= new Date().toISOString();
-    save();
-    renderSummary({ focus: true });
   });
   restartButton.addEventListener("click", () => reset({ confirmReset: true }));
   resetButton.addEventListener("click", () => reset());

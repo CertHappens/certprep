@@ -100,7 +100,6 @@
     <button class="button button--secondary scenario-lab__restart" type="button" data-scenario-restart>Restart scenarios</button>
     <div class="scenario-lab__actions-end">
       <button class="button" type="button" data-scenario-next>Next scenario</button>
-      <button class="button" type="button" data-scenario-summary hidden>See what the day covered</button>
     </div>
   </div>
 
@@ -112,7 +111,10 @@
     <p>
       In a smaller organization, one person may carry most of these responsibilities. In a larger company, the same situations may pass through several specialized teams.
     </p>
-    <button class="button scenario-lab__retake" type="button" data-scenario-reset>Run the scenarios again</button>
+    <div class="scenario-lab__completion-actions">
+      <button class="button button--secondary" type="button" data-scenario-reset>Restart scenarios</button>
+      <a class="button" href="#company-size" data-scenario-continue>Continue reading the article</a>
+    </div>
   </section>
 
   <noscript>

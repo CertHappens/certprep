@@ -1,6 +1,6 @@
 ---
 title: "IT Support or Cybersecurity: Where Should You Start?"
-description: Compare IT support and cybersecurity through realistic workplace scenarios, see how company size changes the work, and choose a practical starting route.
+description: Compare IT support and cybersecurity through realistic workplace scenarios, see how company size changes the work, and find a practical way to start.
 layout: layouts/article.njk
 permalink: /explore/career/it-support-or-cybersecurity/
 tags:
@@ -41,7 +41,7 @@ toc:
   - id: transferable-skills
     label: Skills that transfer into security
   - id: choose-route
-    label: Choose a practical starting route
+    label: A practical way to start
   - id: related-articles-title
     label: Related articles
   - id: related-resources-title
@@ -214,7 +214,7 @@ The connection between support and security becomes clearer when ordinary tasks 
   </section>
 </div>
 
-<h2 id="choose-route">Choose a Practical Starting Route</h2>
+<h2 id="choose-route">A Practical Way to Start</h2>
 
 Use your current experience rather than an idealized job title to choose the next move.
 

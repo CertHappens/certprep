@@ -62,7 +62,14 @@ test("second Explore article uses the scenario lab and current staging review pr
   assert.match(component, /Choose the organization you want to explore/);
   assert.match(controller, /window\.sessionStorage/);
   assert.match(controller, /Restart the scenarios\? Your saved choices will be cleared\./);
-  assert.match(controller, /There is no grade|Scenario progress/);
+  assert.match(controller, /buildScenarioSummary\(lab, answers\)/);
+  assert.match(controller, /root\.classList\.toggle\("is-complete", complete\)/);
+  assert.match(controller, /summaryPanel\.scrollIntoView/);
+  assert.doesNotMatch(component, /See what the day covered/);
+  assert.match(component, /Restart scenarios/);
+  assert.match(component, /Continue reading the article/);
+  assert.match(component, /href="#company-size"/);
+  assert.match(article, /<h2 id="choose-route">A Practical Way to Start<\/h2>/);
   assert.match(css, /\.scenario-lab__size-grid/);
   assert.match(css, /\.career-comparison-grid/);
 });

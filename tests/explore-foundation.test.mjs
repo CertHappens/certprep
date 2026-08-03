@@ -182,6 +182,17 @@ test("Explore navigation, landing page, and first article activate together for 
     label: "Explore",
     url: "/explore/",
     matchPrefix: "/explore/",
+    menuId: "explore-navigation",
+    groups: [
+      {
+        label: "Explore",
+        links: [
+          { label: "Home", url: "/explore/" },
+          { label: "Which Tech Career", url: "/explore/career/paths/" },
+          { label: "IT or Cybersecurity", url: "/explore/career/it-support-or-cybersecurity/" },
+        ],
+      },
+    ],
   });
   assert.match(landing, /permalink: \/explore\//);
   assert.match(article, /permalink: \/explore\/career\/paths\//);
