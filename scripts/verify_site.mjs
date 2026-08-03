@@ -1250,6 +1250,7 @@ for (const file of htmlFiles) {
     'id="security-plus-navigation"',
     'id="network-plus-navigation"',
     'id="ccna-navigation"',
+    'id="explore-navigation"',
     'id="ccna-navigation-group-1"',
     'id="ccna-navigation-group-2"',
     'id="ccna-navigation-group-3"',
@@ -1279,8 +1280,8 @@ for (const file of htmlFiles) {
   }
 
   const navigationSubmenuCount = (html.match(/data-nav-submenu/g) || []).length;
-  if (navigationSubmenuCount !== 3) {
-    fail(`${relative}: expected 3 certification navigation submenus, found ${navigationSubmenuCount}`);
+  if (navigationSubmenuCount !== 4) {
+    fail(`${relative}: expected 4 shared navigation submenus, found ${navigationSubmenuCount}`);
   }
 
   const requiredNavigationLinks = [
@@ -1316,7 +1317,10 @@ for (const file of htmlFiles) {
     "/ccna/acronyms/",
     "/ccna/commands/",
     "/cissp/",
-    "/ccna/"
+    "/ccna/",
+    "/explore/",
+    "/explore/career/paths/",
+    "/explore/career/it-support-or-cybersecurity/"
   ];
 
   for (const href of requiredNavigationLinks) {
