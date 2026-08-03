@@ -945,3 +945,10 @@
     margin-bottom: 0.42rem;
   }
 }
+
+/* Keep desktop scenario navigation close to the company-size cards. */
+@media screen and (min-width: 56.01rem) {
+  .scenario-lab__navigator {
+    margin-top: -4rem !important;
+  }
+}
