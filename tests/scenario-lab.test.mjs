@@ -53,10 +53,10 @@ test("second Explore article uses a compact single-panel scenario lab", async ()
   assert.match(article, /\{% include "components\/explore-scenario-lab\.njk" %\}/);
   assert.match(article, /Generalist Role or Underfunded Catch-All\?/);
   assert.match(JSON.stringify(articleData.scenarioLab), /The budget is cut, but the expectations are not/);
-  assert.match(article, /robots: noindex,nofollow,nosnippet/);
+  assert.doesNotMatch(article, /robots: noindex,nofollow,nosnippet/);
   assert.match(article, /\/assets\/css\/explore\.css\?v=\d{8}-\d+/);
   assert.doesNotMatch(article, /explore-scenario-compact\.css/);
-  assert.match(article, /sitemap: false/);
+  assert.doesNotMatch(article, /sitemap: false/);
 
   assert.match(component, /data-scenario-lab-data/);
   assert.match(component, /Choose the organization you want to explore/);

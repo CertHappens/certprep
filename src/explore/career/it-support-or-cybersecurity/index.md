@@ -15,8 +15,6 @@ ogType: article
 author: certHappens
 eyebrow: Career paths
 lede: Step through realistic technology problems, compare how support and security responsibilities overlap, and decide which starting route fits your current experience.
-robots: noindex,nofollow,nosnippet
-sitemap: false
 breadcrumbs:
   - label: Home
     url: /

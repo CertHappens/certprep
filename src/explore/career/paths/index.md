@@ -16,8 +16,6 @@ author: certHappens
 assessmentPlacement: inline
 eyebrow: Career paths
 lede: Explore six broad technology directions, then answer eight practical questions to find the two kinds of work that may fit you best.
-robots: noindex,nofollow,nosnippet
-sitemap: false
 breadcrumbs:
   - label: Home
     url: /
