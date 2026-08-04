@@ -221,6 +221,7 @@ const publicPageFiles = [
   "explore/index.html",
   "explore/career/paths/index.html",
   "explore/career/it-support-or-cybersecurity/index.html",
+  "explore/career/cybersecurity-paths/index.html",
   "network-plus/index.html",
   "network-plus/acronyms/index.html",
   "network-plus/n10-009/practice-test/index.html",
@@ -266,6 +267,7 @@ const articlePageFiles = [
   "copyright/index.html",
   "explore/career/paths/index.html",
   "explore/career/it-support-or-cybersecurity/index.html",
+  "explore/career/cybersecurity-paths/index.html",
   "network-plus/acronyms/index.html",
   "network-plus/n10-009/study-guide/index.html",
   "network-plus/n10-009/study-guide/ipv4-subnetting/index.html",
@@ -1325,7 +1327,8 @@ for (const file of htmlFiles) {
     "/ccna/",
     "/explore/",
     "/explore/career/paths/",
-    "/explore/career/it-support-or-cybersecurity/"
+    "/explore/career/it-support-or-cybersecurity/",
+    "/explore/career/cybersecurity-paths/"
   ];
 
   for (const href of requiredNavigationLinks) {
