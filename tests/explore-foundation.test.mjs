@@ -95,8 +95,6 @@ test("assessment component provides sequential controls and top-two results with
   assert.doesNotMatch(component, /mailto:/i);
 });
 
-
-
 test("career assessment uses compact rows, a prominent question heading, and exam-style actions", async () => {
   const component = await readSource("src/_includes/components/explore-assessment.njk");
   const exploreCss = await readSource("src/assets/css/explore.css");
@@ -133,7 +131,6 @@ test("published career assessment contains six paths and eight balanced question
   );
   assert.equal(assessment.paths.every((path) => path.linkLabel.startsWith("Read about ")), true);
   assert.equal(assessment.paths.some((path) => /Security\+|Network\+|CCNA/.test(path.linkLabel)), false);
-
   const primaryTotals = Object.fromEntries(assessment.paths.map((path) => [path.id, 0]));
   for (const question of assessment.questions) {
     for (const option of question.options) {
@@ -177,7 +174,6 @@ test("Explore navigation, landing page, and first article activate together as p
   const exploreNavigation = navigation.primary.find((item) => item.label === "Explore");
   const landing = await readSource("src/explore/index.njk");
   const article = await readSource("src/explore/career/paths/index.md");
-
   assert.deepEqual(exploreNavigation, {
     label: "Explore",
     url: "/explore/",
@@ -190,6 +186,7 @@ test("Explore navigation, landing page, and first article activate together as p
           { label: "Home", url: "/explore/" },
           { label: "Which Tech Career", url: "/explore/career/paths/" },
           { label: "IT or Cybersecurity", url: "/explore/career/it-support-or-cybersecurity/" },
+          { label: "Which Cyber Career", url: "/explore/career/cybersecurity-paths/" },
         ],
       },
     ],
