@@ -172,7 +172,7 @@ test("authoring contract keeps dates hidden and categories content-led", async (
   assert.match(documentation, /without an account, email address, employer classification, or lead-capture step/);
 });
 
-test("Explore navigation, landing page, and first article activate together for staging review", async () => {
+test("Explore navigation, landing page, and first article activate together as public content", async () => {
   const navigation = JSON.parse(await readSource("src/_data/siteNavigation.json"));
   const exploreNavigation = navigation.primary.find((item) => item.label === "Explore");
   const landing = await readSource("src/explore/index.njk");
@@ -204,8 +204,8 @@ test("Explore navigation, landing page, and first article activate together for 
   assert.match(article, /Explore the Work Before Choosing a Path/);
   assert.match(article, /\{% include "components\/explore-assessment\.njk" %\}[\s\S]*<h2 id="it-operations">IT Operations and Infrastructure<\/h2>/);
   assert.match(article, /Security Technical Implementation Guides/);
-  assert.match(landing, /robots: noindex,nofollow,nosnippet/);
-  assert.match(article, /robots: noindex,nofollow,nosnippet/);
-  assert.match(landing, /sitemap: false/);
-  assert.match(article, /sitemap: false/);
+  assert.doesNotMatch(landing, /robots: noindex,nofollow,nosnippet/);
+  assert.doesNotMatch(article, /robots: noindex,nofollow,nosnippet/);
+  assert.doesNotMatch(landing, /sitemap: false/);
+  assert.doesNotMatch(article, /sitemap: false/);
 });
