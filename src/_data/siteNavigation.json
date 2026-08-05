@@ -155,7 +155,32 @@
     {
       "label": "CISSP",
       "url": "/cissp/",
-      "matchPrefix": "/cissp/"
+      "matchPrefix": "/cissp/",
+      "menuId": "cissp-navigation",
+      "groups": [
+        {
+          "label": "Overview",
+          "links": [
+            {
+              "label": "CISSP hub",
+              "url": "/cissp/"
+            }
+          ]
+        },
+        {
+          "label": "Study",
+          "links": [
+            {
+              "label": "Study guide",
+              "url": "/cissp/study-guide/"
+            },
+            {
+              "label": "Domain 1: Risk Management",
+              "url": "/cissp/study-guide/security-risk-management/"
+            }
+          ]
+        }
+      ]
     },
     {
       "label": "CCNA",

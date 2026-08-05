@@ -207,6 +207,8 @@ const publicPageFiles = [
   "contact/index.html",
   "copyright/index.html",
   "cissp/index.html",
+  "cissp/study-guide/index.html",
+  "cissp/study-guide/security-risk-management/index.html",
   "ccna/index.html",
   "ccna/acronyms/index.html",
   "ccna/commands/index.html",
@@ -266,6 +268,8 @@ const articlePageFiles = [
   "ccna/200-301-v2/study-guide/network-services-security/index.html",
   "ccna/200-301-v2/study-guide/ai-network-operations-management/index.html",
   "copyright/index.html",
+  "cissp/study-guide/index.html",
+  "cissp/study-guide/security-risk-management/index.html",
   "explore/career/paths/index.html",
   "explore/career/it-support-or-cybersecurity/index.html",
   "explore/career/cybersecurity-paths/index.html",
@@ -1276,8 +1280,11 @@ for (const file of htmlFiles) {
     'data-primary-navigation',
     'id="security-plus-navigation"',
     'id="network-plus-navigation"',
+    'id="cissp-navigation"',
     'id="ccna-navigation"',
     'id="explore-navigation"',
+    'id="cissp-navigation-group-1"',
+    'id="cissp-navigation-group-2"',
     'id="ccna-navigation-group-1"',
     'id="ccna-navigation-group-2"',
     'id="ccna-navigation-group-3"',
@@ -1290,6 +1297,17 @@ for (const file of htmlFiles) {
   for (const marker of requiredNavigationMarkers) {
     if (!hasPageMarker(html, marker)) {
       fail(`${relative}: shared navigation is missing ${marker}`);
+    }
+  }
+
+  const expectedCisspNavigationGroups = [
+    ["cissp-navigation-group-1", "Overview"],
+    ["cissp-navigation-group-2", "Study"]
+  ];
+
+  for (const [id, label] of expectedCisspNavigationGroups) {
+    if (!elementTextByIdMatches(html, "p", id, label)) {
+      fail(`${relative}: CISSP navigation group #${id} is missing label ${label}`);
     }
   }
 
@@ -1307,8 +1325,8 @@ for (const file of htmlFiles) {
   }
 
   const navigationSubmenuCount = (html.match(/data-nav-submenu/g) || []).length;
-  if (navigationSubmenuCount !== 4) {
-    fail(`${relative}: expected 4 shared navigation submenus, found ${navigationSubmenuCount}`);
+  if (navigationSubmenuCount !== 5) {
+    fail(`${relative}: expected 5 shared navigation submenus, found ${navigationSubmenuCount}`);
   }
 
   const requiredNavigationLinks = [
@@ -1344,6 +1362,8 @@ for (const file of htmlFiles) {
     "/ccna/acronyms/",
     "/ccna/commands/",
     "/cissp/",
+    "/cissp/study-guide/",
+    "/cissp/study-guide/security-risk-management/",
     "/ccna/",
     "/explore/",
     "/explore/career/paths/",
@@ -2488,8 +2508,25 @@ for (const file of htmlFiles) {
   }
 
   if (relative === "cissp/index.html") {
-    if (!headingMatches(html, "CISSP Certification Overview")) {
-      fail(`${relative}: expected CISSP overview h1 is missing`);
+    if (!headingMatches(html, "CISSP Study Resources and Certification Overview")) {
+      fail(`${relative}: expected CISSP resource-hub h1 is missing`);
+    }
+
+    const resourceHeadingIndex = html.indexOf('id="exam-resources-heading"');
+    const overviewHeadingIndex = html.indexOf('id="exam-overview-heading"');
+    if (resourceHeadingIndex < 0 || overviewHeadingIndex < 0) {
+      fail(`${relative}: CISSP resource-first ordering markers are incomplete`);
+    } else if (resourceHeadingIndex > overviewHeadingIndex) {
+      fail(`${relative}: CISSP study resources must appear before exam overview content`);
+    }
+
+    for (const href of [
+      "/cissp/study-guide/",
+      "/cissp/study-guide/security-risk-management/"
+    ]) {
+      if (!html.includes(`href="${href}"`)) {
+        fail(`${relative}: CISSP resource hub is missing ${href}`);
+      }
     }
 
     const requiredSectionIds = [
@@ -2522,6 +2559,107 @@ for (const file of htmlFiles) {
 
     if (!includesNormalizedText(html, "not affiliated with or endorsed by ISC2")) {
       fail(`${relative}: ISC2 independence statement is missing`);
+    }
+  }
+
+  if (relative === "cissp/study-guide/index.html") {
+    if (!headingMatches(html, "CISSP Study Guide")) {
+      fail(`${relative}: expected CISSP study-guide h1 is missing`);
+    }
+
+    if (!html.includes("data-print-guide")) {
+      fail(`${relative}: CISSP study guide is missing the shared Print | Save control`);
+    }
+
+    const requiredSectionIds = [
+      "exam-snapshot",
+      "how-to-use",
+      "decision-lens",
+      "domains",
+      "study-plan",
+      "review-habits",
+      "official-references"
+    ];
+
+    for (const id of requiredSectionIds) {
+      if (!html.includes(`id="${id}"`)) {
+        fail(`${relative}: CISSP study guide is missing section #${id}`);
+      }
+    }
+
+    const requiredMarkers = [
+      "Security and Risk Management",
+      "Asset Security",
+      "Security Architecture and Engineering",
+      "Communication and Network Security",
+      "Identity and Access Management",
+      "Security Assessment and Testing",
+      "Security Operations",
+      "Software Development Security",
+      'href="/cissp/study-guide/security-risk-management/"'
+    ];
+
+    for (const marker of requiredMarkers) {
+      if (!hasPageMarker(html, marker)) {
+        fail(`${relative}: CISSP study guide is missing ${marker}`);
+      }
+    }
+  }
+
+  if (relative === "cissp/study-guide/security-risk-management/index.html") {
+    if (!headingMatches(html, "CISSP Domain 1: Security and Risk Management")) {
+      fail(`${relative}: expected CISSP Domain 1 h1 is missing`);
+    }
+
+    if (!html.includes("data-print-guide")) {
+      fail(`${relative}: CISSP Domain 1 guide is missing the shared Print | Save control`);
+    }
+
+    const requiredSectionIds = [
+      "domain-map",
+      "decision-order",
+      "ethics-principles",
+      "governance",
+      "legal-investigations",
+      "policy",
+      "business-continuity",
+      "personnel-security",
+      "risk-management",
+      "threat-modeling",
+      "supply-chain",
+      "awareness",
+      "exam-traps",
+      "review-checklist",
+      "official-references"
+    ];
+
+    for (const id of requiredSectionIds) {
+      if (!html.includes(`id="${id}"`)) {
+        fail(`${relative}: CISSP Domain 1 guide is missing section #${id}`);
+      }
+    }
+
+    const requiredMarkers = [
+      "Due care",
+      "Due diligence",
+      "Business Impact Analysis",
+      "Maximum tolerable downtime",
+      "Recovery Time Objective",
+      "Recovery Point Objective",
+      "Single Loss Expectancy",
+      "Annualized Loss Expectancy",
+      "Supply Chain Risk Management",
+      "Software Bill of Materials",
+      "Awareness",
+      "Training",
+      "Education",
+      'href="/cissp/study-guide/"'
+    ];
+
+    for (const marker of requiredMarkers) {
+      if (!hasPageMarker(html, marker)) {
+        fail(`${relative}: CISSP Domain 1 guide is missing ${marker}`);
+      }
     }
   }
 

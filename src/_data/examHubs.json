@@ -5,13 +5,13 @@
     "fullName": "Certified Information Systems Security Professional",
     "provider": "ISC2",
     "eyebrow": "Certification overview",
-    "title": "CISSP Certification Overview",
-    "lede": "Understand the exam's scope, experience path, and management-level perspective before deciding how CISSP fits your security career.",
-    "sourceReviewed": "2026-07-29",
+    "title": "CISSP Study Resources and Certification Overview",
+    "lede": "Use CISSP-specific study guidance to connect the eight exam domains to risk, governance, architecture, operations, and organizational decision-making.",
+    "sourceReviewed": "2026-08-05",
     "status": {
-      "label": "How to use this overview",
-      "heading": "Start with scope, experience, and decision-making",
-      "body": "Use this page to understand the current CISSP exam structure, experience path, and the broader management and risk perspective expected from candidates. The linked Security+ and Network+ material is best used as a technical refresher, not as a substitute for CISSP-specific preparation."
+      "label": "How to use this hub",
+      "heading": "Start with the study guide, then map the scope to your experience",
+      "body": "Use the CISSP study guide to organize all eight domains and the Domain 1 guide to build the governance and risk foundation that influences decisions throughout the exam. Security+ and Network+ resources remain useful for targeted technical refreshers."
     },
     "summary": [
       "CISSP covers security across an entire organization. Technical knowledge still matters, but candidates also need to connect controls to business objectives, legal duties, architecture, risk, operations, and program leadership.",
@@ -85,7 +85,9 @@
         "number": "1",
         "name": "Security and Risk Management",
         "weight": "16%",
-        "focus": "Ethics, governance, law, policy, risk, supply chains, awareness, and business continuity foundations."
+        "focus": "Ethics, governance, law, policy, risk, supply chains, awareness, and business continuity foundations.",
+        "url": "/cissp/study-guide/security-risk-management/",
+        "linkLabel": "Open Domain 1 guide"
       },
       {
         "number": "2",
@@ -180,28 +182,28 @@
       "eyebrow": "Study approach"
     },
     "currentResources": {
-      "heading": "Useful Cert Happens resources available now",
-      "intro": "These resources are written for Security+ or Network+, so they do not replace CISSP-specific preparation. They can still help refresh technical foundations that appear inside the broader CISSP scope.",
+      "heading": "CISSP study resources available now",
+      "intro": "Begin with the full study roadmap, then use the Domain 1 guide for ethics, governance, law, business continuity, personnel security, risk, supply chains, and awareness programs.",
       "links": [
+        {
+          "title": "CISSP study guide",
+          "url": "/cissp/study-guide/",
+          "description": "Organize the eight domains, exam perspective, study priorities, and a practical preparation sequence."
+        },
+        {
+          "title": "Domain 1: Security and Risk Management",
+          "url": "/cissp/study-guide/security-risk-management/",
+          "description": "Study ethics, governance, legal duties, policy, continuity, personnel security, risk, threat modeling, supply chains, and security learning programs."
+        },
         {
           "title": "Security+ study guide",
           "url": "/security-plus/sy0-701/study-guide/",
-          "description": "Refresh controls, architecture, operations, threats, governance, and risk concepts."
-        },
-        {
-          "title": "Security+ quick reviews",
-          "url": "/security-plus/quick-review/",
-          "description": "Compare controls, recovery metrics, and cryptographic concepts that are easy to blur together."
+          "description": "Refresh controls, architecture, operations, threats, governance, and risk concepts at the foundational level."
         },
         {
           "title": "Network+ study guide",
           "url": "/network-plus/n10-009/study-guide/",
-          "description": "Review network architecture, operations, security, and troubleshooting foundations."
-        },
-        {
-          "title": "Ports and protocols",
-          "url": "/ports-protocols/",
-          "description": "Refresh common services, transports, secure alternatives, and operational clues."
+          "description": "Review network architecture, operations, security, and troubleshooting foundations used across several CISSP domains."
         }
       ],
       "eyebrow": "Current resources"
@@ -210,6 +212,10 @@
       {
         "label": "CISSP certification exam outline",
         "url": "https://www.isc2.org/certifications/cissp/cissp-certification-exam-outline"
+      },
+      {
+        "label": "ISC2 computerized adaptive testing guidance",
+        "url": "https://www.isc2.org/certifications/computerized-adaptive-testing"
       },
       {
         "label": "CISSP experience requirements",
@@ -237,9 +243,10 @@
     "sources": {
       "heading": "Confirm current requirements with ISC2",
       "intro": "Exam policies, fees, and certification requirements can change. Check the official sources before making registration or maintenance decisions.",
-      "independence": "Cert Happens is an independent study resource and is not affiliated with or endorsed by ISC2."
+      "independence": "CertHappens is an independent study resource and is not affiliated with or endorsed by ISC2."
     },
-    "transition": null
+    "transition": null,
+    "resourcesFirst": true
   },
   "ccna": {
     "slug": "ccna",
