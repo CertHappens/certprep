@@ -89,6 +89,9 @@ relatedLinks:
     url: /security-plus/quick-review/hashing-encryption-encoding/
     description: Compare foundational cryptographic and data-transformation methods before reviewing CISSP-level design decisions.
 
+  - title: "CISSP Domain 7: Security Operations"
+    url: /cissp/study-guide/security-operations/
+    description: Apply investigations, logging, monitoring, incident response, configuration, patching, recovery, continuity, physical safeguards, and personnel safety.
 ---
 Domain 3 accounts for 13 percent of the current CISSP exam outline. It asks how trustworthy systems are designed, built, operated, and retired. The domain ranges from abstract security models to cryptography, cloud and industrial architectures, physical facilities, environmental protections, and the information-system lifecycle.
 

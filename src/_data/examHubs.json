@@ -11,7 +11,7 @@
     "status": {
       "label": "How to use this hub",
       "heading": "Start with the study guide, then map the scope to your experience",
-      "body": "Use the CISSP study guide to organize all eight domains. The available domain guides build from governance and risk through asset protection, secure architecture, protected communications, identity and access management, and security assessment and testing."
+      "body": "Use the CISSP study guide to organize all eight domains. The available domain guides build from governance and risk through asset protection, secure architecture, protected communications, identity and access management, assessment and testing, and security operations."
     },
     "summary": [
       "CISSP covers security across an entire organization. Technical knowledge still matters, but candidates also need to connect controls to business objectives, legal duties, architecture, risk, operations, and program leadership.",
@@ -133,7 +133,9 @@
         "number": "7",
         "name": "Security Operations",
         "weight": "13%",
-        "focus": "Investigations, incident management, monitoring, resilience, recovery, change, patching, and operational security."
+        "focus": "Investigations, incident management, monitoring, resilience, recovery, change, patching, and operational security.",
+        "url": "/cissp/study-guide/security-operations/",
+        "linkLabel": "Open Domain 7 guide"
       },
       {
         "number": "8",
@@ -193,7 +195,7 @@
     },
     "currentResources": {
       "heading": "CISSP study resources available now",
-      "intro": "Begin with the full study roadmap, then use the available domain guides for governance, risk, asset protection, secure architecture, protected communications, identity and access decisions, and assessment evidence.",
+      "intro": "Begin with the full study roadmap, then use the available domain guides for governance, risk, asset protection, secure architecture, protected communications, identity and access decisions, assessment evidence, and security operations.",
       "links": [
         {
           "title": "CISSP study guide",
@@ -229,6 +231,11 @@
           "title": "Domain 6: Security Assessment and Testing",
           "url": "/cissp/study-guide/security-assessment-testing/",
           "description": "Study assessment strategy, control testing, vulnerability assessment, penetration testing, process evidence, metrics, reporting, remediation, exceptions, audits, and AI red teaming."
+        },
+        {
+          "title": "Domain 7: Security Operations",
+          "url": "/cissp/study-guide/security-operations/",
+          "description": "Study investigations, logging and monitoring, configuration and change management, incident response, detection, patching, recovery, continuity, physical security, personnel safety, and AI-assisted operations."
         },
         {
           "title": "Security+ study guide",

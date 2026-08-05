@@ -86,6 +86,9 @@ relatedLinks:
   - title: IPv4 Subnetting Reference
     url: /network-plus/n10-009/study-guide/ipv4-subnetting/
     description: Refresh subnet boundaries, prefixes, address ranges, and host calculations used in network design.
+  - title: "CISSP Domain 7: Security Operations"
+    url: /cissp/study-guide/security-operations/
+    description: Apply investigations, logging, monitoring, incident response, configuration, patching, recovery, continuity, physical safeguards, and personnel safety.
 ---
 Domain 4 accounts for 13 percent of the current CISSP exam outline. It asks how an organization moves information between people, systems, sites, cloud services, devices, and external partners without losing confidentiality, integrity, availability, or control.
 

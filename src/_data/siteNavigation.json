@@ -197,6 +197,10 @@
             {
               "label": "Domain 6: Assessment & Testing",
               "url": "/cissp/study-guide/security-assessment-testing/"
+            },
+            {
+              "label": "Domain 7: Security Operations",
+              "url": "/cissp/study-guide/security-operations/"
             }
           ]
         }

@@ -85,6 +85,9 @@ relatedLinks:
     url: /security-plus/quick-review/hashing-encryption-encoding/
     description: Compare common methods used to protect confidentiality and integrity across different data states.
 
+  - title: "CISSP Domain 7: Security Operations"
+    url: /cissp/study-guide/security-operations/
+    description: Apply investigations, logging, monitoring, incident response, configuration, patching, recovery, continuity, physical safeguards, and personnel safety.
 ---
 Domain 2 accounts for 10 percent of the current CISSP exam outline. Its central question is simple to state and difficult to answer well: what does the organization have, why does it matter, who is accountable for it, and what must happen to it throughout its useful life?
 

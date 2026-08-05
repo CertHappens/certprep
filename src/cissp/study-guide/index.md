@@ -63,6 +63,9 @@ relatedLinks:
   - title: "Domain 6: Security Assessment and Testing"
     url: /cissp/study-guide/security-assessment-testing/
     description: Plan assessments, test controls, evaluate evidence, report findings, and follow remediation, exceptions, and audits.
+  - title: "Domain 7: Security Operations"
+    url: /cissp/study-guide/security-operations/
+    description: Operate investigations, monitoring, incident response, configuration, patching, recovery, continuity, physical safeguards, and personnel safety.
   - title: Security+ SY0-701 Study Guide
     url: /security-plus/sy0-701/study-guide/
     description: Refresh security controls, architecture, operations, threats, and governance concepts at the foundational level.
@@ -159,6 +162,11 @@ Do not study each domain as an isolated container. Security and Risk Management 
         <td data-label="Need">Assessment evidence and control testing</td>
         <td data-label="Best starting point"><a href="/cissp/study-guide/security-assessment-testing/">Domain 6 guide</a></td>
         <td data-label="Use it for">Assessment strategy, vulnerability and penetration testing, process data, metrics, reporting, remediation, exceptions, and audits.</td>
+      </tr>
+      <tr>
+        <td data-label="Need">Security operations, incident response, and recovery</td>
+        <td data-label="Best starting point"><a href="/cissp/study-guide/security-operations/">Domain 7 guide</a></td>
+        <td data-label="Use it for">Investigations, logging, monitoring, configuration, incidents, detection, patching, recovery, continuity, physical security, and personnel safety.</td>
       </tr>
       <tr>
         <td data-label="Need">Security controls and operations refresher</td>
@@ -312,6 +320,8 @@ Use the detailed [Security Assessment and Testing guide](/cissp/study-guide/secu
 Security Operations covers investigations, evidence, logging, monitoring, configuration, privileged access, incident management, protective technologies, vulnerability management, change, backup, recovery, disaster recovery, business continuity, physical security, and personnel safety.
 
 Sequence matters. Preserve life and safety, follow approved response procedures, protect evidence, contain harm, communicate appropriately, recover services, and use lessons learned to improve controls.
+
+Use the detailed [Security Operations guide](/cissp/study-guide/security-operations/) to connect investigations, monitoring, configuration, incident management, patching, recovery, continuity, physical safeguards, personnel safety, and AI-assisted operations.
 
 <h3 id="domain-8">Domain 8: Software Development Security</h3>
 

@@ -88,6 +88,9 @@ relatedLinks:
   - title: "CISSP Domain 5: Identity and Access Management"
     url: /cissp/study-guide/identity-access-management/
     description: Test identity proofing, authentication, authorization, privileged access, account reviews, and service-account controls.
+  - title: "CISSP Domain 7: Security Operations"
+    url: /cissp/study-guide/security-operations/
+    description: Apply investigations, logging, monitoring, incident response, configuration, patching, recovery, continuity, physical safeguards, and personnel safety.
   - title: Security+ Security Operations Guide
     url: /security-plus/sy0-701/study-guide/security-operations/
     description: Refresh vulnerability management, monitoring, incident response, and operational evidence before applying the CISSP perspective.

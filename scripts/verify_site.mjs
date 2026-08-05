@@ -214,6 +214,7 @@ const publicPageFiles = [
   "cissp/study-guide/communication-network-security/index.html",
   "cissp/study-guide/identity-access-management/index.html",
   "cissp/study-guide/security-assessment-testing/index.html",
+  "cissp/study-guide/security-operations/index.html",
   "ccna/index.html",
   "ccna/acronyms/index.html",
   "ccna/commands/index.html",
@@ -280,6 +281,7 @@ const articlePageFiles = [
   "cissp/study-guide/communication-network-security/index.html",
   "cissp/study-guide/identity-access-management/index.html",
   "cissp/study-guide/security-assessment-testing/index.html",
+  "cissp/study-guide/security-operations/index.html",
   "explore/career/paths/index.html",
   "explore/career/it-support-or-cybersecurity/index.html",
   "explore/career/cybersecurity-paths/index.html",
@@ -461,6 +463,7 @@ const wholeSitePageMarkers = new Map([
       "/cissp/study-guide/communication-network-security/",
       "/cissp/study-guide/identity-access-management/",
       "/cissp/study-guide/security-assessment-testing/",
+      "/cissp/study-guide/security-operations/",
       "https://www.isc2.org/certifications/cissp/cissp-certification-exam-outline"
     ]
   ],
@@ -1383,6 +1386,7 @@ for (const file of htmlFiles) {
     "/cissp/study-guide/communication-network-security/",
     "/cissp/study-guide/identity-access-management/",
     "/cissp/study-guide/security-assessment-testing/",
+    "/cissp/study-guide/security-operations/",
     "/ccna/",
     "/explore/",
     "/explore/career/paths/",
@@ -2625,7 +2629,8 @@ for (const file of htmlFiles) {
       'href="/cissp/study-guide/security-architecture-engineering/"',
       'href="/cissp/study-guide/communication-network-security/"',
       'href="/cissp/study-guide/identity-access-management/"',
-      'href="/cissp/study-guide/security-assessment-testing/"'
+      'href="/cissp/study-guide/security-assessment-testing/"',
+      'href="/cissp/study-guide/security-operations/"'
     ];
 
     for (const marker of requiredMarkers) {
@@ -2921,6 +2926,65 @@ for (const file of htmlFiles) {
     for (const marker of requiredMarkers) {
       if (!hasPageMarker(html, marker)) {
         fail(`${relative}: CISSP Domain 6 guide is missing ${marker}`);
+      }
+    }
+  }
+
+  if (relative === "cissp/study-guide/security-operations/index.html") {
+    if (!headingMatches(html, "CISSP Domain 7: Security Operations")) {
+      fail(`${relative}: expected CISSP Domain 7 h1 is missing`);
+    }
+
+    if (!html.includes("data-print-guide")) {
+      fail(`${relative}: CISSP Domain 7 guide is missing the shared Print | Save control`);
+    }
+
+    const requiredSectionIds = [
+      "domain-map",
+      "decision-order",
+      "investigations",
+      "logging-monitoring",
+      "intelligence-hunting",
+      "configuration-management",
+      "operations-foundations",
+      "resource-protection",
+      "incident-management",
+      "detection-prevention",
+      "patch-vulnerability",
+      "change-management",
+      "recovery-strategies",
+      "disaster-recovery",
+      "recovery-testing",
+      "business-continuity",
+      "physical-security",
+      "personnel-safety",
+      "ai-operations",
+      "exam-traps",
+      "review-checklist",
+      "official-references"
+    ];
+
+    for (const id of requiredSectionIds) {
+      if (!html.includes(`id="${id}"`)) {
+        fail(`${relative}: CISSP Domain 7 guide is missing section #${id}`);
+      }
+    }
+
+    const requiredMarkers = [
+      "Chain of custody",
+      "Security Information and Event Management",
+      "Configuration drift",
+      "Incident management",
+      "Known Exploited Vulnerabilities",
+      "Disaster recovery",
+      "Business continuity",
+      "Model drift",
+      'href="/cissp/study-guide/"'
+    ];
+
+    for (const marker of requiredMarkers) {
+      if (!hasPageMarker(html, marker)) {
+        fail(`${relative}: CISSP Domain 7 guide is missing ${marker}`);
       }
     }
   }

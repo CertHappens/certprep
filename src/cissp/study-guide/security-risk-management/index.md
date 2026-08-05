@@ -89,6 +89,9 @@ relatedLinks:
     url: /security-plus/quick-review/recovery-metrics/
     description: Compare recovery time, recovery point, repair, and failure measurements used in continuity decisions.
 
+  - title: "CISSP Domain 7: Security Operations"
+    url: /cissp/study-guide/security-operations/
+    description: Apply investigations, logging, monitoring, incident response, configuration, patching, recovery, continuity, physical safeguards, and personnel safety.
 ---
 Domain 1 accounts for 16 percent of the current CISSP exam outline, the largest average weight of the eight domains. It establishes how an organization decides what security should accomplish, who is accountable, which obligations apply, how risk is evaluated, and how people are prepared to follow the program.
 

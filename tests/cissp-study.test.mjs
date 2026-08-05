@@ -51,6 +51,10 @@ test("CISSP navigation exposes overview and available study guides without an em
           label: "Domain 6: Assessment & Testing",
           url: "/cissp/study-guide/security-assessment-testing/",
         },
+        {
+          label: "Domain 7: Security Operations",
+          url: "/cissp/study-guide/security-operations/",
+        },
       ],
     },
   ]);
@@ -64,7 +68,7 @@ test("CISSP hub promotes the study roadmap and all available domain guides", asy
   assert.equal(cissp.resourcesFirst, true);
   assert.equal(cissp.sourceReviewed, "2026-08-05");
   assert.deepEqual(
-    cissp.currentResources.links.slice(0, 7).map((link) => link.url),
+    cissp.currentResources.links.slice(0, 8).map((link) => link.url),
     [
       "/cissp/study-guide/",
       "/cissp/study-guide/security-risk-management/",
@@ -73,6 +77,7 @@ test("CISSP hub promotes the study roadmap and all available domain guides", asy
       "/cissp/study-guide/communication-network-security/",
       "/cissp/study-guide/identity-access-management/",
       "/cissp/study-guide/security-assessment-testing/",
+      "/cissp/study-guide/security-operations/",
     ]
   );
 
@@ -109,6 +114,11 @@ test("CISSP hub promotes the study roadmap and all available domain guides", asy
         number: "6",
         url: "/cissp/study-guide/security-assessment-testing/",
         linkLabel: "Open Domain 6 guide",
+      },
+      {
+        number: "7",
+        url: "/cissp/study-guide/security-operations/",
+        linkLabel: "Open Domain 7 guide",
       },
     ]
   );
@@ -153,6 +163,12 @@ test("CISSP study pages use the shared printable article contract and current ro
         "src/cissp/study-guide/security-assessment-testing/index.md"
       ),
       route: "/cissp/study-guide/security-assessment-testing/",
+    },
+    {
+      source: await readSource(
+        "src/cissp/study-guide/security-operations/index.md"
+      ),
+      route: "/cissp/study-guide/security-operations/",
     },
   ];
 
@@ -622,6 +638,7 @@ test("CISSP domain-guide body headings use the ToC section numbers while preserv
     "src/cissp/study-guide/communication-network-security/index.md",
     "src/cissp/study-guide/identity-access-management/index.md",
     "src/cissp/study-guide/security-assessment-testing/index.md",
+    "src/cissp/study-guide/security-operations/index.md",
   ];
 
   for (const file of files) {
@@ -646,6 +663,119 @@ test("CISSP domain-guide body headings use the ToC section numbers while preserv
       `${file} body heading numbers must match ToC positions`
     );
   }
+});
+
+
+test("CISSP Domain 7 covers all official objectives, operational areas, and primary references", async () => {
+  const domain = await readSource(
+    "src/cissp/study-guide/security-operations/index.md"
+  );
+
+  const requiredSections = [
+    "domain-map",
+    "decision-order",
+    "investigations",
+    "logging-monitoring",
+    "intelligence-hunting",
+    "configuration-management",
+    "operations-foundations",
+    "resource-protection",
+    "incident-management",
+    "detection-prevention",
+    "patch-vulnerability",
+    "change-management",
+    "recovery-strategies",
+    "disaster-recovery",
+    "recovery-testing",
+    "business-continuity",
+    "physical-security",
+    "personnel-safety",
+    "ai-operations",
+    "exam-traps",
+    "review-checklist",
+    "official-references",
+  ];
+
+  for (const id of requiredSections) {
+    assert.match(domain, new RegExp(`id=["']${id}["']`));
+  }
+
+  for (let objective = 1; objective <= 15; objective += 1) {
+    assert.match(domain, new RegExp(`<td>7\.${objective}<\/td>`));
+  }
+
+  const requiredMarkers = [
+    "Chain of custody",
+    "order of volatility",
+    "digital forensic",
+    "Security Information and Event Management",
+    "Security Orchestration, Automation and Response",
+    "Egress monitoring",
+    "User and Entity Behavior Analytics",
+    "Threat hunting",
+    "Configuration drift",
+    "Separation of Duties",
+    "Privileged accounts",
+    "Service-Level Agreement",
+    "Incident",
+    "Containment",
+    "Eradication",
+    "Recovery",
+    "Web Application Firewall",
+    "Intrusion Detection System",
+    "Intrusion Prevention System",
+    "allowlist",
+    "sandbox",
+    "honeypot",
+    "Vulnerability management",
+    "Patch management",
+    "Known Exploited Vulnerabilities",
+    "Emergency change",
+    "Cold site",
+    "Warm site",
+    "Hot site",
+    "High availability",
+    "Fault tolerance",
+    "Disaster recovery",
+    "Business continuity",
+    "Full interruption",
+    "tailgating",
+    "Multi-factor authentication fatigue",
+    "Duress",
+    "Model drift",
+  ];
+
+  for (const marker of requiredMarkers) {
+    assert.match(domain, new RegExp(escapeRegExp(marker), "i"));
+  }
+
+  const requiredReferences = [
+    "https://www.isc2.org/certifications/cissp/cissp-certification-exam-outline",
+    "https://csrc.nist.gov/pubs/sp/800/61/r3/final",
+    "https://csrc.nist.gov/pubs/sp/800/86/final",
+    "https://csrc.nist.gov/pubs/sp/800/92/final",
+    "https://csrc.nist.gov/pubs/sp/800/137/final",
+    "https://csrc.nist.gov/pubs/sp/800/128/upd1/final",
+    "https://csrc.nist.gov/pubs/sp/800/40/r4/final",
+    "https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final",
+    "https://csrc.nist.gov/pubs/sp/800/34/r1/upd1/final",
+    "https://csrc.nist.gov/pubs/sp/800/84/final",
+    "https://csrc.nist.gov/pubs/sp/800/94/final",
+    "https://csrc.nist.gov/pubs/sp/800/88/r2/final",
+    "https://www.cisa.gov/known-exploited-vulnerabilities-catalog",
+    "https://www.nist.gov/cyberframework",
+    "https://www.nist.gov/itl/ai-risk-management-framework",
+  ];
+
+  for (const url of requiredReferences) {
+    assert.match(domain, new RegExp(escapeRegExp(url)));
+  }
+
+  assert.match(domain, /People come before data, equipment, and evidence/);
+  assert.match(domain, /Disaster recovery\*\* restores information systems and technology services/);
+  assert.match(domain, /Business continuity\*\* keeps priority business activities operating/);
+  assert.doesNotMatch(domain, /coming soon|possible next|in development/i);
+  assert.doesNotMatch(domain, /\u2014/);
 });
 
 test("CISSP Domain 6 covers all official objectives, assessment areas, and primary references", async () => {
