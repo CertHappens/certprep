@@ -74,6 +74,9 @@ relatedLinks:
   - title: "CISSP Domain 5: Identity and Access Management"
     url: /cissp/study-guide/identity-access-management/
     description: Connect network admission, remote access, protected administration, federation, and third-party connectivity to identity controls.
+  - title: "CISSP Domain 6: Security Assessment and Testing"
+    url: /cissp/study-guide/security-assessment-testing/
+    description: Assess network architecture, secure channels, segmentation, components, monitoring, remote access, and third-party connections.
   - title: Network+ N10-009 Study Guide
     url: /network-plus/n10-009/study-guide/
     description: Refresh networking concepts, implementation, operations, security, and troubleshooting at the foundational level.
@@ -90,7 +93,7 @@ The domain includes many technologies, but it is not a memorization contest abou
 
 A network can carry traffic successfully and still be poorly designed. Secure communication requires more than reachability. It requires appropriate trust boundaries, protected management paths, controlled data flows, resilient components, useful monitoring, and clear responsibility for every connection.
 
-<h2 id="domain-map">Domain 4 map</h2>
+<h2 id="domain-map">1. Domain 4 map</h2>
 
 The official outline divides Communication and Network Security into three objectives:
 
@@ -109,7 +112,7 @@ The official outline divides Communication and Network Security into three objec
 
 The three objectives work together. Architecture determines the paths and trust boundaries. Components enforce those decisions. Secure channels protect the information while it crosses the chosen paths.
 
-<h2 id="decision-order">Use the right decision order</h2>
+<h2 id="decision-order">2. Use the right decision order</h2>
 
 A firewall, virtual private network, wireless standard, or monitoring platform is not a complete network strategy. Choose the design only after the communication need and protection requirements are understood.
 
@@ -128,7 +131,7 @@ A practical decision sequence is:
 
 A question that asks for the **best design** usually starts with requirements and segmentation. A question that asks for the **most secure protocol** still depends on what is being protected, where the connection terminates, and how identities and keys are managed.
 
-<h2 id="models-addressing">Use models and addressing to locate the control</h2>
+<h2 id="models-addressing">3. Use models and addressing to locate the control</h2>
 
 Network models provide a shared way to describe where communication functions occur. They are maps, not physical devices. Their value is helping a team identify where a protocol operates, where a control can be applied, and where a failure may be occurring.
 
@@ -202,7 +205,7 @@ IPv6 should not be treated as automatically secure. It changes addressing, disco
 
 Temporary tunnels and translation mechanisms can help during migration, but they also create additional paths and headers that monitoring and filtering tools must inspect.
 
-<h2 id="secure-protocols">Choose secure protocols for the communication need</h2>
+<h2 id="secure-protocols">4. Choose secure protocols for the communication need</h2>
 
 A secure protocol protects a communication function such as remote administration, web traffic, or site-to-site connectivity. The protocol name alone does not make the channel safe. Security depends on current versions, strong configuration, trusted identities, protected keys, and correct endpoint behavior.
 
@@ -253,7 +256,7 @@ A **converged network** carries services that once used separate infrastructure.
 
 Convergence can reduce cost and simplify infrastructure, but it also joins failure domains. A shared switch failure, denial-of-service event, routing error, or congestion problem may affect voice, storage, applications, and administration at the same time. Use segmentation, quality of service, capacity planning, resilience, and monitoring to prevent one workload from overwhelming the others.
 
-<h2 id="transport-performance">Design transport paths for security and service quality</h2>
+<h2 id="transport-performance">5. Design transport paths for security and service quality</h2>
 
 A transport architecture describes how traffic moves through the network and which devices make forwarding decisions. Security choices must fit the topology, traffic direction, failure modes, and performance requirements.
 
@@ -290,7 +293,7 @@ Security and availability depend on understanding what the network can actually 
 
 A security control that creates unacceptable delay or packet loss may cause people to bypass it or may make a critical service unusable. Capacity and performance testing should include encryption, inspection, logging, failover, and peak traffic rather than only normal unprotected traffic.
 
-<h2 id="segmentation-flows">Control traffic flows with segmentation</h2>
+<h2 id="segmentation-flows">6. Control traffic flows with segmentation</h2>
 
 **Segmentation** divides a network into smaller areas so communication can be limited and monitored. The goal is not to create more diagrams. The goal is to reduce unnecessary access, contain failures, and make allowed traffic easier to understand.
 
@@ -332,7 +335,7 @@ A **network overlay** creates a logical network on top of another network. Encap
 
 **Zero trust** does not mean that no communication is allowed. It means access is not granted merely because a user or device is on an internal network. Each request should be evaluated using identity, device state, policy, resource sensitivity, and current context.
 
-<h2 id="edge-wireless">Protect edge, wireless, cellular, and distribution networks</h2>
+<h2 id="edge-wireless">7. Protect edge, wireless, cellular, and distribution networks</h2>
 
 The network edge is where an organization connects to users, providers, partners, cloud services, and the public Internet. It is both a service boundary and a common attack point.
 
@@ -377,7 +380,7 @@ A **content delivery network (CDN)** places copies or delivery points closer to 
 
 It also changes the trust path. The organization must manage certificates, origin access, cache rules, logging, purge procedures, provider administration, and protection against exposing the origin directly.
 
-<h2 id="software-defined-cloud">Secure software-defined and cloud networks</h2>
+<h2 id="software-defined-cloud">8. Secure software-defined and cloud networks</h2>
 
 Modern networks are increasingly controlled through software, application programming interfaces, and cloud policy. This can improve consistency and automation, but a mistake or stolen administrative credential can change many systems at once.
 
@@ -397,7 +400,7 @@ A VPC is not private merely because it has “private” in the name. Public add
 
 Treat cloud network policy as code where practical. Review changes, test them, limit who can approve them, and monitor for drift from the approved design.
 
-<h2 id="monitoring-management">Make the network observable and manageable</h2>
+<h2 id="monitoring-management">9. Make the network observable and manageable</h2>
 
 **Network observability** means having enough evidence to understand what the network is doing and investigate why. It combines data such as logs, metrics, flows, packet samples, traces, configurations, routes, and device health.
 
@@ -425,7 +428,7 @@ Fault management detects, isolates, reports, and helps correct failures. Good mo
 
 Management systems also need protection. Use strong authentication, least privilege, secure protocols, restricted administration paths, configuration backups, change control, time synchronization, and monitored administrative activity.
 
-<h2 id="network-components">Secure network components and transmission media</h2>
+<h2 id="network-components">10. Secure network components and transmission media</h2>
 
 Network architecture depends on physical and virtual components that must remain supported, configured, powered, and protected.
 
@@ -468,7 +471,7 @@ An **endpoint** is a device that connects to and uses the network, such as a wor
 
 The network and endpoint should reinforce one another. Network controls can limit exposure and detect unusual traffic. Endpoint controls can see local processes and behavior that the network cannot. A remote device with a valid VPN connection can still be dangerous if it is compromised.
 
-<h2 id="communication-channels">Implement secure communication channels according to design</h2>
+<h2 id="communication-channels">11. Implement secure communication channels according to design</h2>
 
 A secure channel must match the users, devices, data, service, and operating environment. Encryption is important, but so are authentication, authorization, endpoint security, availability, monitoring, and lifecycle management.
 
@@ -530,7 +533,7 @@ Before connecting a third party:
 
 A support tunnel left open for convenience can become a permanent uncontrolled path. Temporary access should expire automatically when possible.
 
-<h2 id="ai-networking">Protect AI workloads and use AI carefully in network defense</h2>
+<h2 id="ai-networking">12. Protect AI workloads and use AI carefully in network defense</h2>
 
 AI workloads can move large training datasets between storage, accelerators, cloud services, and distributed compute nodes. Inference may also occur at branch, mobile, or edge locations.
 
@@ -548,7 +551,7 @@ Network Detection and Response (NDR) tools may use machine learning to identify 
 
 AI-based detection still requires validation and human oversight. A model can produce false alarms, miss new behavior, inherit biased training data, or become less useful as network patterns change. Protect the detection platform, document how alerts are used, and measure whether it improves investigation and response.
 
-<h2 id="exam-traps">Common Domain 4 exam traps</h2>
+<h2 id="exam-traps">13. Common Domain 4 exam traps</h2>
 
 <h3>Choosing encryption before defining the connection</h3>
 
@@ -586,7 +589,7 @@ Third-party access should be limited to the required systems, time, actions, and
 
 Logs and flows are useful only when the organization can retain, search, correlate, protect, and act on them. Begin with questions the monitoring program needs to answer.
 
-<h2 id="review-checklist">Domain 4 review checklist</h2>
+<h2 id="review-checklist">14. Domain 4 review checklist</h2>
 
 You should be able to:
 
@@ -617,7 +620,7 @@ You should be able to:
 - Design narrow, monitored, and revocable third-party connections.
 - Apply segmentation and monitoring to AI training, inference, and network-defense systems.
 
-<h2 id="official-references">Official references</h2>
+<h2 id="official-references">15. Official references</h2>
 
 Use the current ISC2 outline as the authoritative scope for Domain 4. The other sources provide primary guidance for major network-security topics:
 

@@ -78,6 +78,9 @@ relatedLinks:
   - title: "CISSP Domain 4: Communication and Network Security"
     url: /cissp/study-guide/communication-network-security/
     description: Connect identity decisions to remote access, network admission, protected administration, and third-party connections.
+  - title: "CISSP Domain 6: Security Assessment and Testing"
+    url: /cissp/study-guide/security-assessment-testing/
+    description: Test identity proofing, authentication, authorization, privileged access, account reviews, and service-account controls.
   - title: Security+ SY0-701 Study Guide
     url: /security-plus/sy0-701/study-guide/
     description: Refresh identity, authentication, authorization, and access-control foundations before applying the broader CISSP perspective.
@@ -88,7 +91,7 @@ Identity and Access Management (IAM) applies to more than employees signing in t
 
 The strongest answer usually follows the complete identity lifecycle. An account that was approved correctly can still become dangerous if it is not reviewed after a transfer, disabled after termination, protected during privileged use, or removed when a service is retired.
 
-<h2 id="domain-map">Domain 5 map</h2>
+<h2 id="domain-map">1. Domain 5 map</h2>
 
 The official outline divides Identity and Access Management into six objectives:
 
@@ -110,7 +113,7 @@ The official outline divides Identity and Access Management into six objectives:
 
 These objectives work as one process. Identity proofing connects an account to a person or entity. Authentication checks that the claimant controls an approved authenticator. Authorization applies policy to the requested action. Accounting records what happened. Lifecycle management keeps the identity, privileges, and evidence current.
 
-<h2 id="decision-order">Use the right decision order</h2>
+<h2 id="decision-order">2. Use the right decision order</h2>
 
 A password, biometric reader, role, or federation protocol is not an IAM strategy by itself. Begin with the asset and business need.
 
@@ -129,7 +132,7 @@ A practical decision sequence is:
 
 When a question asks for the **first action**, identify the owner, requirement, and subject before choosing technology. When it asks for the **best control**, consider the complete lifecycle rather than only the login screen.
 
-<h2 id="identity-access-basics">Separate identity, authentication, authorization, and accounting</h2>
+<h2 id="identity-access-basics">3. Separate identity, authentication, authorization, and accounting</h2>
 
 These terms describe different steps:
 
@@ -151,7 +154,7 @@ These terms describe different steps:
 
 A **subject** requests access. A subject may be a person, process, device, or service. An **object** is the information or resource being accessed. The requested **operation** may be read, write, approve, execute, enter, configure, or another defined action.
 
-<h2 id="access-assets">Control physical and logical access to assets</h2>
+<h2 id="access-assets">4. Control physical and logical access to assets</h2>
 
 Access should be tied to the asset's owner, classification, business purpose, and approved method of use.
 
@@ -172,7 +175,7 @@ Useful physical controls include badges, guards, locks, turnstiles, visitor proc
 
 Access paths matter. A user may be blocked by the application but still reach the database directly. An administrator may use a protected management portal but retain an unmonitored local account. Review every path to the asset, including recovery, vendor, service, and emergency access.
 
-<h2 id="identity-proofing">Register and prove an identity before relying on it</h2>
+<h2 id="identity-proofing">5. Register and prove an identity before relying on it</h2>
 
 **Registration** creates an identity record. **Identity proofing** checks evidence that the applicant is the person or entity claimed. **Enrollment** connects approved authenticators and attributes to that identity.
 
@@ -194,7 +197,7 @@ People, devices, and services require different evidence. A person may present d
 
 Do not collect stronger identity evidence than the use case requires. Extra identity data increases privacy impact, storage obligations, and the damage caused by a breach.
 
-<h2 id="authentication">Design authentication for the possible harm</h2>
+<h2 id="authentication">6. Design authentication for the possible harm</h2>
 
 **Authentication** checks whether the claimant controls one or more approved authenticators linked to an identity.
 
@@ -238,7 +241,7 @@ Biometric systems need liveness detection, protected templates, fallback procedu
 
 The decision should use reliable signals, explainable policy, and tested thresholds. A model that silently blocks legitimate users or learns from manipulated data can create security and operational problems.
 
-<h2 id="sessions-credentials">Protect sessions, credentials, and recovery</h2>
+<h2 id="sessions-credentials">7. Protect sessions, credentials, and recovery</h2>
 
 Authentication creates or strengthens a session. The session then carries the identity between requests so the user does not repeat the full login for every action.
 
@@ -261,7 +264,7 @@ A **password vault** stores secrets in a protected system and controls who or wh
 
 Recovery requires special attention. Help-desk resets, backup codes, alternate email, and device replacement can bypass strong normal authentication. The recovery path should provide assurance appropriate to the account and should produce useful alerts and records.
 
-<h2 id="federation-sso">Use federation and single sign-on without confusing their purposes</h2>
+<h2 id="federation-sso">8. Use federation and single sign-on without confusing their purposes</h2>
 
 **Single sign-on (SSO)** is the user experience of authenticating once and then reaching several authorized services without entering credentials again.
 
@@ -303,7 +306,7 @@ The deployment location does not determine trust by itself. Review key protectio
 
 Federation can reduce password sprawl and centralize policy, but it also increases the effect of identity-provider failure or compromise. Strong protection and resilience are needed because one identity system may open many services.
 
-<h2 id="authorization-models">Choose an authorization model that matches the policy</h2>
+<h2 id="authorization-models">9. Choose an authorization model that matches the policy</h2>
 
 Authentication answers **who or what is making the request**. Authorization answers **whether that identity may perform this action on this resource under these conditions**.
 
@@ -327,7 +330,7 @@ Authentication answers **who or what is making the request**. Authorization answ
 
 **Separation of duties** divides a sensitive process among different people or roles so one person cannot complete every critical step alone. **Dual control** requires two authorized parties to act together. These controls reduce fraud, error, and misuse but need tested emergency procedures.
 
-<h2 id="policy-enforcement">Separate policy decisions from policy enforcement</h2>
+<h2 id="policy-enforcement">10. Separate policy decisions from policy enforcement</h2>
 
 A policy must be translated into a decision and enforced at the point where the action occurs.
 
@@ -342,7 +345,7 @@ Do not assume enforcement is complete because a central engine made the correct 
 
 Authorization should default to denial when no rule clearly permits the action. Policies should resolve conflicts predictably, record important decisions, and fail in a way that matches safety and business requirements.
 
-<h2 id="identity-lifecycle">Manage the complete identity and access lifecycle</h2>
+<h2 id="identity-lifecycle">11. Manage the complete identity and access lifecycle</h2>
 
 The identity lifecycle is often described as **joiner, mover, and leaver**:
 
@@ -382,7 +385,7 @@ A review that asks an approver to confirm hundreds of unexplained codes is not m
 
 **Just-in-time provisioning** creates or activates an account when the user first reaches a service, often based on a federation assertion. It reduces advance account creation, but it can also create unmanaged accounts if ownership, role mapping, and deprovisioning are not defined.
 
-<h2 id="privileged-service-accounts">Control privileged access and non-human accounts</h2>
+<h2 id="privileged-service-accounts">12. Control privileged access and non-human accounts</h2>
 
 A **privileged account** can make high-impact changes, reach sensitive data, alter security controls, or manage other identities. Privileged work should use separate administrative identities rather than an everyday account.
 
@@ -419,7 +422,7 @@ Service accounts need:
 
 Shared service accounts can make accountability difficult. Prefer workload identities, certificates, managed identities, or other mechanisms that identify the specific system or instance.
 
-<h2 id="authentication-systems">Implement authentication systems as protected infrastructure</h2>
+<h2 id="authentication-systems">13. Implement authentication systems as protected infrastructure</h2>
 
 Authentication systems are high-value targets because compromise can open many other systems. Protect directories, identity providers, certificate authorities, domain controllers, token services, federation keys, recovery systems, and administrative consoles as critical infrastructure.
 
@@ -444,7 +447,7 @@ Authentication infrastructure needs resilience. If the only identity provider fa
 
 Log successful and failed authentication, enrollment, recovery, factor changes, federation changes, privilege elevation, token issuance, and administrative actions. Protect logs from alteration and send important events to independent monitoring.
 
-<h2 id="ai-identities">Treat AI agents and automation as identities</h2>
+<h2 id="ai-identities">14. Treat AI agents and automation as identities</h2>
 
 An AI agent, robotic process, orchestration tool, or automated service can request data, call tools, change systems, and act on behalf of a user or application. It needs the same identity discipline as other non-human subjects.
 
@@ -464,7 +467,7 @@ AI can also support adaptive authentication by identifying unusual behavior. Tha
 
 Do not allow a human user's broad session token to become a permanent agent credential. Delegated authority should be narrow, short-lived, auditable, and revocable.
 
-<h2 id="exam-traps">Common CISSP exam traps</h2>
+<h2 id="exam-traps">15. Common CISSP exam traps</h2>
 
 ### Choosing authentication before identity proofing
 
@@ -506,7 +509,7 @@ The relying service still decides which issuer and claims to trust, maps claims 
 
 An attacker will choose the easiest path. Help-desk resets, backup channels, and lost-device recovery need controls appropriate to the account's impact.
 
-<h2 id="review-checklist">Domain 5 review checklist</h2>
+<h2 id="review-checklist">16. Domain 5 review checklist</h2>
 
 You should be able to explain:
 
@@ -531,7 +534,7 @@ You should be able to explain:
 - [ ] The purposes and main concerns of Kerberos, LDAP, RADIUS, TACACS+, and certificate authentication
 - [ ] How identity controls apply to AI agents and delegated automation
 
-<h2 id="official-references">Official references</h2>
+<h2 id="official-references">17. Official references</h2>
 
 - [ISC2 CISSP Certification Exam Outline](https://www.isc2.org/certifications/cissp/cissp-certification-exam-outline)
 - [NIST SP 800-63-4: Digital Identity Guidelines](https://csrc.nist.gov/pubs/sp/800/63/4/final)

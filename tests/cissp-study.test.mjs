@@ -47,6 +47,10 @@ test("CISSP navigation exposes overview and available study guides without an em
           label: "Domain 5: Identity & Access",
           url: "/cissp/study-guide/identity-access-management/",
         },
+        {
+          label: "Domain 6: Assessment & Testing",
+          url: "/cissp/study-guide/security-assessment-testing/",
+        },
       ],
     },
   ]);
@@ -60,7 +64,7 @@ test("CISSP hub promotes the study roadmap and all available domain guides", asy
   assert.equal(cissp.resourcesFirst, true);
   assert.equal(cissp.sourceReviewed, "2026-08-05");
   assert.deepEqual(
-    cissp.currentResources.links.slice(0, 6).map((link) => link.url),
+    cissp.currentResources.links.slice(0, 7).map((link) => link.url),
     [
       "/cissp/study-guide/",
       "/cissp/study-guide/security-risk-management/",
@@ -68,6 +72,7 @@ test("CISSP hub promotes the study roadmap and all available domain guides", asy
       "/cissp/study-guide/security-architecture-engineering/",
       "/cissp/study-guide/communication-network-security/",
       "/cissp/study-guide/identity-access-management/",
+      "/cissp/study-guide/security-assessment-testing/",
     ]
   );
 
@@ -99,6 +104,11 @@ test("CISSP hub promotes the study roadmap and all available domain guides", asy
         number: "5",
         url: "/cissp/study-guide/identity-access-management/",
         linkLabel: "Open Domain 5 guide",
+      },
+      {
+        number: "6",
+        url: "/cissp/study-guide/security-assessment-testing/",
+        linkLabel: "Open Domain 6 guide",
       },
     ]
   );
@@ -137,6 +147,12 @@ test("CISSP study pages use the shared printable article contract and current ro
         "src/cissp/study-guide/identity-access-management/index.md"
       ),
       route: "/cissp/study-guide/identity-access-management/",
+    },
+    {
+      source: await readSource(
+        "src/cissp/study-guide/security-assessment-testing/index.md"
+      ),
+      route: "/cissp/study-guide/security-assessment-testing/",
     },
   ];
 
@@ -594,5 +610,135 @@ test("CISSP Domain 5 covers all official objectives, identity areas, and primary
   assert.match(domain, /OAuth is an authorization framework, not a complete user-authentication protocol/);
   assert.match(domain, /A password and two security questions are still one factor/);
   assert.match(domain, /Just-in-time provisioning.*creates or activates an account/s);
+  assert.doesNotMatch(domain, /\u2014/);
+});
+
+
+test("CISSP domain-guide body headings use the ToC section numbers while preserving abbreviated labels", async () => {
+  const files = [
+    "src/cissp/study-guide/security-risk-management/index.md",
+    "src/cissp/study-guide/asset-security/index.md",
+    "src/cissp/study-guide/security-architecture-engineering/index.md",
+    "src/cissp/study-guide/communication-network-security/index.md",
+    "src/cissp/study-guide/identity-access-management/index.md",
+    "src/cissp/study-guide/security-assessment-testing/index.md",
+  ];
+
+  for (const file of files) {
+    const source = await readSource(file);
+    const frontMatter = source.match(/^---\n([\s\S]*?)\n---\n/)?.[1] ?? "";
+    const tocBlock = frontMatter.split(/^toc:\n/m)[1]?.split(/^[A-Za-z][A-Za-z0-9_-]*:/m)[0] ?? "";
+    const tocIds = [...tocBlock.matchAll(/^  - id:\s*(.+)$/gm)].map((match) => match[1].trim());
+    const headings = [...source.matchAll(/<h2 id="([^"]+)">(\d+)\.\s+([^<]+)<\/h2>/g)].map(
+      (match) => ({ id: match[1], number: Number(match[2]), title: match[3] })
+    );
+
+    assert.ok(tocIds.length > 0, `${file} must define ToC entries`);
+    assert.equal(headings.length, tocIds.length, `${file} must number every main body jump point`);
+    assert.deepEqual(
+      headings.map((heading) => heading.id),
+      tocIds,
+      `${file} body heading IDs must follow the ToC order`
+    );
+    assert.deepEqual(
+      headings.map((heading) => heading.number),
+      tocIds.map((_, index) => index + 1),
+      `${file} body heading numbers must match ToC positions`
+    );
+  }
+});
+
+test("CISSP Domain 6 covers all official objectives, assessment areas, and primary references", async () => {
+  const domain = await readSource(
+    "src/cissp/study-guide/security-assessment-testing/index.md"
+  );
+
+  const requiredSections = [
+    "domain-map",
+    "decision-order",
+    "strategy-scope",
+    "independence-evidence",
+    "vulnerability-assessment",
+    "penetration-teams",
+    "logs-synthetic-benchmarks",
+    "code-misuse-interfaces",
+    "breach-compliance",
+    "process-data",
+    "metrics-indicators",
+    "analyze-output",
+    "reporting",
+    "remediation-exceptions",
+    "audits",
+    "ai-testing",
+    "exam-traps",
+    "review-checklist",
+    "official-references",
+  ];
+
+  for (const id of requiredSections) {
+    assert.match(domain, new RegExp(`id=["']${id}["']`));
+  }
+
+  for (let objective = 1; objective <= 5; objective += 1) {
+    assert.match(domain, new RegExp(`<td>6\\.${objective}<\\/td>`));
+  }
+
+  const requiredMarkers = [
+    "Vulnerability assessment",
+    "Penetration test",
+    "red team",
+    "blue team",
+    "purple team",
+    "Black-box testing",
+    "Gray-box testing",
+    "White-box testing",
+    "Log review",
+    "synthetic transaction",
+    "benchmark",
+    "Code review",
+    "misuse case",
+    "Coverage analysis",
+    "Application programming interface",
+    "breach and attack simulation",
+    "compliance check",
+    "Account management",
+    "Management review and approval",
+    "Key Performance Indicator",
+    "Key Risk Indicator",
+    "Backup verification",
+    "Disaster recovery",
+    "Business continuity",
+    "Severity",
+    "Priority",
+    "Remediation",
+    "Mitigation",
+    "exception",
+    "Ethical disclosure",
+    "AI red teaming",
+  ];
+
+  for (const marker of requiredMarkers) {
+    assert.match(domain, new RegExp(escapeRegExp(marker), "i"));
+  }
+
+  const requiredReferences = [
+    "https://www.isc2.org/certifications/cissp/cissp-certification-exam-outline",
+    "https://csrc.nist.gov/pubs/sp/800/115/final",
+    "https://csrc.nist.gov/pubs/sp/800/53/a/r5/final",
+    "https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final",
+    "https://csrc.nist.gov/pubs/sp/800/137/final",
+    "https://csrc.nist.gov/pubs/sp/800/92/final",
+    "https://csrc.nist.gov/pubs/sp/800/84/final",
+    "https://csrc.nist.gov/pubs/sp/800/37/r2/final",
+    "https://csrc.nist.gov/pubs/ai/100/2/e2025/final",
+  ];
+
+  for (const url of requiredReferences) {
+    assert.match(domain, new RegExp(escapeRegExp(url)));
+  }
+
+  assert.match(domain, /KPIs show whether the work is meeting its target/);
+  assert.match(domain, /KRIs warn that exposure to harm may be increasing/);
+  assert.doesNotMatch(domain, /coming soon|possible next|in development/i);
   assert.doesNotMatch(domain, /\u2014/);
 });

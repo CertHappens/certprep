@@ -75,12 +75,16 @@ relatedLinks:
   - title: "CISSP Domain 5: Identity and Access Management"
     url: /cissp/study-guide/identity-access-management/
     description: Connect classification, ownership, and handling rules to who may access each asset and under which conditions.
+  - title: "CISSP Domain 6: Security Assessment and Testing"
+    url: /cissp/study-guide/security-assessment-testing/
+    description: Test classification, handling, retention, sanitization, and data-protection controls with evidence that supports asset-owner decisions.
   - title: "Security+ Domain 3: Security Architecture"
     url: /security-plus/sy0-701/study-guide/security-architecture/
     description: Refresh data protection, resilience, cloud, virtualization, and architecture concepts at the foundational level.
   - title: Hashing, Encryption, and Encoding Quick Reference
     url: /security-plus/quick-review/hashing-encryption-encoding/
     description: Compare common methods used to protect confidentiality and integrity across different data states.
+
 ---
 Domain 2 accounts for 10 percent of the current CISSP exam outline. Its central question is simple to state and difficult to answer well: what does the organization have, why does it matter, who is accountable for it, and what must happen to it throughout its useful life?
 
@@ -88,7 +92,7 @@ Asset Security is not limited to files stored on servers. Assets include informa
 
 A good answer connects business value and potential harm to specific handling requirements. A classification label without an owner, inventory, retention rule, or enforceable control is decoration rather than protection.
 
-<h2 id="domain-map">Domain 2 map</h2>
+<h2 id="domain-map">1. Domain 2 map</h2>
 
 The official outline divides Asset Security into six objectives:
 
@@ -110,7 +114,7 @@ The official outline divides Asset Security into six objectives:
 
 These objectives form one lifecycle. Classification drives handling. Handling depends on ownership and location. Retention affects storage, backup, legal discovery, cost, and exposure. Destruction must address every copy, including replicas and third-party holdings. Controls must follow the asset wherever it goes.
 
-<h2 id="decision-order">Use the right decision order</h2>
+<h2 id="decision-order">2. Use the right decision order</h2>
 
 CISSP questions often present a control before the organization has established the requirement. Encryption, Data Loss Prevention, or a Cloud Access Security Broker may be useful, but a product is not the first answer when the asset, owner, classification, or obligation is still unknown.
 
@@ -128,7 +132,7 @@ A practical sequence is:
 
 If a scenario says the data owner has already approved the classification and handling standard, do not restart the process. Look for the next missing action. If no owner or inventory exists, deploying a control may only hide the governance gap.
 
-<h2 id="classification">Identify and classify information and assets</h2>
+<h2 id="classification">3. Identify and classify information and assets</h2>
 
 Classification groups assets according to value, sensitivity, criticality, obligations, or the harm that could result from compromise. It helps the organization apply stronger controls where they are justified and avoid wasting the same effort on everything.
 
@@ -173,7 +177,7 @@ A mature process defines:
 - Who approves downgrading or declassification
 - How exceptions are documented
 
-<h2 id="handling">Establish handling requirements</h2>
+<h2 id="handling">4. Establish handling requirements</h2>
 
 Handling requirements translate a classification into actions. They should be specific enough that users, administrators, suppliers, and automated systems can follow them.
 
@@ -203,7 +207,7 @@ Collecting or copying information creates continuing responsibilities. Before ac
 
 Data minimization reduces breach impact, privacy risk, discovery burden, storage cost, and the number of systems that need controls. It also makes destruction more achievable because fewer copies exist.
 
-<h2 id="provisioning">Provision information and assets securely</h2>
+<h2 id="provisioning">5. Provision information and assets securely</h2>
 
 Provisioning begins before an asset enters service. The organization should approve the need, assign ownership, record the asset, establish configuration and handling requirements, and define how it will be transferred or retired.
 
@@ -251,7 +255,7 @@ A business unit may create a cloud service with a credit card, copy data into a 
 
 Provide an approval path that is usable, discover activity through technical and financial records, and bring legitimate services into inventory and governance. When ownership changes, transfer access, records, keys, contracts, recovery duties, and risk decisions rather than changing only a name in a database.
 
-<h2 id="data-roles">Understand data roles</h2>
+<h2 id="data-roles">6. Understand data roles</h2>
 
 The official outline names owners, controllers, custodians, processors, users, and data subjects. Terminology varies among laws and organizations, so focus on authority and responsibility.
 
@@ -271,7 +275,7 @@ The official outline names owners, controllers, custodians, processors, users, a
 
 One organization can hold several roles. A service provider may process customer data for a client and act as controller for its own employee records. Contracts should state roles, instructions, permitted use, security requirements, incident duties, return or destruction, audit rights, and subprocessor conditions.
 
-<h2 id="lifecycle">Manage the data lifecycle</h2>
+<h2 id="lifecycle">7. Manage the data lifecycle</h2>
 
 Data moves through collection, use, maintenance, sharing, retention, and destruction. It may be transformed, replicated, combined, summarized, or used to create new assets. Lifecycle management must follow those changes.
 
@@ -310,7 +314,7 @@ Masking, aggregation, pseudonymization, tokenization, analytics, and model train
 
 Classify the result according to its own content and risk, while preserving lineage to the source. Lineage helps explain origin, transformations, quality, ownership, and downstream obligations.
 
-<h2 id="retention">Ensure appropriate asset retention</h2>
+<h2 id="retention">8. Ensure appropriate asset retention</h2>
 
 Retention balances legitimate need against cost and exposure. Keeping everything forever is not a neutral choice. It increases breach impact, privacy risk, legal discovery, storage cost, recovery complexity, and the number of copies that must eventually be destroyed.
 
@@ -344,7 +348,7 @@ The exact vendor terminology varies. Focus on the risk: unsupported assets may r
 
 The appropriate response may be replacement, migration, isolation, compensating controls, reduced functionality, contract extension, or documented risk acceptance. Inventory should identify approaching dates early enough for funding, testing, data transfer, and secure disposal.
 
-<h2 id="remanence">Address data remanence and destruction</h2>
+<h2 id="remanence">9. Address data remanence and destruction</h2>
 
 **Data remanence** means deleted data can still remain on a storage device and may be recoverable. Deleting a file, formatting a drive, or removing a directory entry does not always erase the underlying information.
 
@@ -373,7 +377,7 @@ A sound sanitization program defines approved methods, authorized tools or provi
 
 Do not confuse completion with effectiveness. Verification confirms that the expected process occurred. Validation assesses whether the result meets the required sanitization outcome. Highly sensitive assets may require independent checks or witnessed destruction.
 
-<h2 id="controls">Determine data security controls and compliance requirements</h2>
+<h2 id="controls">10. Determine data security controls and compliance requirements</h2>
 
 Controls should follow the asset across data states and locations. A solution that protects storage but exposes data during processing or transfer leaves a gap.
 
@@ -419,7 +423,7 @@ Tailoring adjusts a baseline to the organization's risk, environment, and obliga
 
 A standard or framework can provide structure, but it cannot decide business ownership, classification, retention, or acceptable residual risk for the organization.
 
-<h2 id="ai-assets">Protect artificial intelligence assets</h2>
+<h2 id="ai-assets">11. Protect artificial intelligence assets</h2>
 
 The current ISC2 guidance integrates artificial intelligence throughout the CISSP domains. In Domain 2, treat AI data and models as assets with their own classification, ownership, lineage, lifecycle, and destruction requirements.
 
@@ -443,7 +447,7 @@ Privacy controls may include purpose limitation, minimization, masking, tokeniza
 
 AI assets also create derived-data questions. An embedding, summary, or model output may remain sensitive even when it no longer resembles the source record. Evaluate the result instead of assuming transformation removed the obligation.
 
-<h2 id="exam-traps">Common CISSP exam traps</h2>
+<h2 id="exam-traps">12. Common CISSP exam traps</h2>
 
 <h3>Letting the custodian make the business decision</h3>
 
@@ -481,7 +485,7 @@ A processor or service provider performs work, but the organization may retain o
 
 A functioning asset can still be unacceptable when patches, parts, expertise, or vendor support are no longer available. Plan migration before the deadline becomes an emergency.
 
-<h2 id="review-checklist">Domain 2 review checklist</h2>
+<h2 id="review-checklist">13. Domain 2 review checklist</h2>
 
 You should be able to explain or apply each of the following:
 
@@ -503,7 +507,7 @@ You should be able to explain or apply each of the following:
 - Treat training data, models, weights, embeddings, prompts, outputs, and AI logs as governed assets.
 - Choose the correct next action based on what the scenario has already completed.
 
-<h2 id="official-references">Official references</h2>
+<h2 id="official-references">14. Official references</h2>
 
 Use these primary sources to confirm scope and study the underlying practices:
 

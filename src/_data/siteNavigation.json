@@ -193,6 +193,10 @@
             {
               "label": "Domain 5: Identity & Access",
               "url": "/cissp/study-guide/identity-access-management/"
+            },
+            {
+              "label": "Domain 6: Assessment & Testing",
+              "url": "/cissp/study-guide/security-assessment-testing/"
             }
           ]
         }

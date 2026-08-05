@@ -11,7 +11,7 @@
     "status": {
       "label": "How to use this hub",
       "heading": "Start with the study guide, then map the scope to your experience",
-      "body": "Use the CISSP study guide to organize all eight domains. The available domain guides build from governance and risk through asset protection, secure architecture, communication and network security, and identity and access management."
+      "body": "Use the CISSP study guide to organize all eight domains. The available domain guides build from governance and risk through asset protection, secure architecture, protected communications, identity and access management, and security assessment and testing."
     },
     "summary": [
       "CISSP covers security across an entire organization. Technical knowledge still matters, but candidates also need to connect controls to business objectives, legal duties, architecture, risk, operations, and program leadership.",
@@ -125,7 +125,9 @@
         "number": "6",
         "name": "Security Assessment and Testing",
         "weight": "12%",
-        "focus": "Assessment strategies, testing, audits, control validation, reporting, and analysis of security results."
+        "focus": "Assessment strategies, testing, audits, control validation, reporting, and analysis of security results.",
+        "url": "/cissp/study-guide/security-assessment-testing/",
+        "linkLabel": "Open Domain 6 guide"
       },
       {
         "number": "7",
@@ -191,7 +193,7 @@
     },
     "currentResources": {
       "heading": "CISSP study resources available now",
-      "intro": "Begin with the full study roadmap, then use the available domain guides for governance, risk, asset protection, secure architecture, protected communications, and identity and access decisions.",
+      "intro": "Begin with the full study roadmap, then use the available domain guides for governance, risk, asset protection, secure architecture, protected communications, identity and access decisions, and assessment evidence.",
       "links": [
         {
           "title": "CISSP study guide",
@@ -222,6 +224,11 @@
           "title": "Domain 5: Identity and Access Management",
           "url": "/cissp/study-guide/identity-access-management/",
           "description": "Study identity proofing, authentication, federation, authorization models, provisioning, privileged access, service accounts, and authentication systems."
+        },
+        {
+          "title": "Domain 6: Security Assessment and Testing",
+          "url": "/cissp/study-guide/security-assessment-testing/",
+          "description": "Study assessment strategy, control testing, vulnerability assessment, penetration testing, process evidence, metrics, reporting, remediation, exceptions, audits, and AI red teaming."
         },
         {
           "title": "Security+ study guide",

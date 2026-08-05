@@ -79,12 +79,16 @@ relatedLinks:
   - title: "CISSP Domain 5: Identity and Access Management"
     url: /cissp/study-guide/identity-access-management/
     description: Connect trusted system design, cryptography, and architecture to identity, authentication, authorization, and privileged access.
+  - title: "CISSP Domain 6: Security Assessment and Testing"
+    url: /cissp/study-guide/security-assessment-testing/
+    description: Verify architecture assumptions, control implementation, cryptography, facilities, and lifecycle requirements through planned assessment and testing.
   - title: "Security+ Domain 3: Security Architecture"
     url: /security-plus/sy0-701/study-guide/security-architecture/
     description: Refresh resilience, cloud, virtualization, data protection, and architecture concepts at the foundational level.
   - title: Hashing, Encryption, and Encoding Quick Reference
     url: /security-plus/quick-review/hashing-encryption-encoding/
     description: Compare foundational cryptographic and data-transformation methods before reviewing CISSP-level design decisions.
+
 ---
 Domain 3 accounts for 13 percent of the current CISSP exam outline. It asks how trustworthy systems are designed, built, operated, and retired. The domain ranges from abstract security models to cryptography, cloud and industrial architectures, physical facilities, environmental protections, and the information-system lifecycle.
 
@@ -92,7 +96,7 @@ The breadth can make Domain 3 feel like a collection of unrelated facts. A bette
 
 Architecture is not a diagram created after products are chosen. It is the set of structures, interfaces, trust boundaries, responsibilities, constraints, and design decisions that allow a system to meet business and security requirements over time.
 
-<h2 id="domain-map">Domain 3 map</h2>
+<h2 id="domain-map">1. Domain 3 map</h2>
 
 The official outline divides Security Architecture and Engineering into ten objectives:
 
@@ -118,7 +122,7 @@ The official outline divides Security Architecture and Engineering into ten obje
 
 These objectives reinforce one another. Security models describe desired properties. Requirements translate business and risk decisions into outcomes the system must achieve. Architecture allocates those outcomes to people, processes, hardware, software, facilities, and suppliers. Engineering verifies that the implemented system still satisfies them.
 
-<h2 id="decision-order">Use the right decision order</h2>
+<h2 id="decision-order">2. Use the right decision order</h2>
 
 CISSP questions often name a technology before the scenario has established what the system must protect. A Trusted Platform Module, Hardware Security Module, firewall, encryption algorithm, or biometric reader can be useful, but none is automatically the right starting point.
 
@@ -137,7 +141,7 @@ A practical architecture sequence is:
 
 A question asking for the **best architecture** usually requires a requirement and risk analysis before product selection. A question asking for the **next action** depends on what the scenario has already completed.
 
-<h2 id="secure-design">Apply secure design principles</h2>
+<h2 id="secure-design">3. Apply secure design principles</h2>
 
 Secure design principles reduce the number of ways a system can fail and limit the damage when failure occurs. They should influence architecture before implementation, then remain visible in code, configuration, operations, monitoring, and retirement.
 
@@ -208,7 +212,7 @@ The organization should document who configures identities, protects data, patch
 
 The architectural question is not whether every named component is present. It is whether identity, traffic, policy, enforcement, availability, logging, privacy, and provider dependencies are addressed consistently.
 
-<h2 id="security-models">Understand security models</h2>
+<h2 id="security-models">4. Understand security models</h2>
 
 Security models provide a formal or conceptual way to describe allowable states and information flows. They help architects reason about policy, but a model protects only the property it was designed to address.
 
@@ -252,7 +256,7 @@ The Brewer-Nash model, also called the Chinese Wall model, addresses conflicts o
 
 The model is dynamic because prior access influences future permissions.
 
-<h2 id="control-selection">Select controls from system requirements</h2>
+<h2 id="control-selection">5. Select controls from system requirements</h2>
 
 Controls should trace to requirements, threats, risks, obligations, and architecture decisions. Selecting a familiar control first and inventing a requirement later reverses the process.
 
@@ -281,7 +285,7 @@ Architecture should identify dependencies and common failure modes. Two controls
 
 For example, instead of “encrypt sensitive data,” define which classifications require encryption, where the data exists, which interfaces and backups are included, who controls keys, what algorithms and modes are approved, how rotation and recovery work, and how compliance is verified.
 
-<h2 id="system-capabilities">Understand system security capabilities</h2>
+<h2 id="system-capabilities">6. Understand system security capabilities</h2>
 
 Security capabilities create boundaries, protect secrets, establish platform integrity, and provide evidence. They must be enabled, configured, maintained, and integrated into the architecture.
 
@@ -317,7 +321,7 @@ Encryption capabilities may exist in processors, storage devices, operating syst
 
 Data can be decrypted at an endpoint, application, proxy, gateway, database, or service provider. The location determines which components can see plaintext and which logs, caches, backups, or administrative tools may create additional copies.
 
-<h2 id="architecture-vulnerabilities">Assess architecture vulnerabilities</h2>
+<h2 id="architecture-vulnerabilities">7. Assess architecture vulnerabilities</h2>
 
 Different architectures expose different trust boundaries, dependencies, update paths, failure modes, and concentrations of privilege. The same control does not fit every system.
 
@@ -360,7 +364,7 @@ Provider-managed does not mean risk-free. The organization still evaluates servi
 
 Cloud consoles, hypervisor managers, container orchestrators, image registries, automation pipelines, remote-management platforms, and certificate authorities can change many systems at once. Protect them with dedicated administration, strong authentication, least privilege, network restrictions, monitoring, recovery plans, and independent evidence.
 
-<h2 id="cryptography">Select cryptographic solutions</h2>
+<h2 id="cryptography">8. Select cryptographic solutions</h2>
 
 Cryptography can protect confidentiality, integrity, authenticity, and nonrepudiation, but only when the complete system handles algorithms, protocols, keys, identities, endpoints, and lifecycle decisions correctly.
 
@@ -414,7 +418,7 @@ Quantum computing creates different concerns for symmetric and public-key system
 
 NIST has standardized post-quantum mechanisms for key establishment and digital signatures. Adoption still requires implementation review, interoperability testing, key and certificate lifecycle changes, performance analysis, and cryptographic agility. **Quantum Key Distribution (QKD)** is a specialized method for establishing keys over supported physical channels. It does not replace authentication, endpoint security, access control, or ordinary key governance.
 
-<h2 id="cryptanalysis">Understand cryptanalytic attacks</h2>
+<h2 id="cryptanalysis">9. Understand cryptanalytic attacks</h2>
 
 A cryptographic failure may come from the algorithm, protocol, implementation, key process, endpoint, or surrounding identity system. Attack names are less useful than identifying which layer is being exploited.
 
@@ -448,7 +452,7 @@ When a scenario presents a cryptographic weakness, ask whether changing the algo
 
 Ransomware often uses legitimate encryption against the victim's data. The defense is not “use stronger encryption.” It includes identity protection, segmentation, endpoint controls, monitoring, protected backups, restoration testing, incident response, and business resilience.
 
-<h2 id="facility-design">Apply security principles to facility design</h2>
+<h2 id="facility-design">10. Apply security principles to facility design</h2>
 
 Facility security begins before selecting locks, cameras, or guards. Location and layout decisions can either reduce exposure or make every later control more difficult.
 
@@ -477,7 +481,7 @@ Security controls must allow safe evacuation, emergency access, fire response, a
 
 A physical control that traps occupants or blocks responders is not an acceptable security improvement.
 
-<h2 id="facility-controls">Design site and facility controls</h2>
+<h2 id="facility-controls">11. Design site and facility controls</h2>
 
 Physical and environmental controls protect people first, then equipment, information, evidence, and operations. The correct design depends on threats, mission, occupancy, location, safety requirements, and recovery objectives.
 
@@ -532,7 +536,7 @@ Power design can include surge protection, grounding, Uninterruptible Power Supp
 
 A UPS provides short-term power and power conditioning. A generator supports longer outages but takes time to start and depends on fuel, maintenance, ventilation, transfer equipment, and load capacity. Test the complete chain rather than assuming each component works because it exists.
 
-<h2 id="system-lifecycle">Manage the information-system lifecycle</h2>
+<h2 id="system-lifecycle">12. Manage the information-system lifecycle</h2>
 
 Security engineering continues from initial stakeholder need through retirement. Decisions made early often determine whether later controls are practical, affordable, and effective.
 
@@ -571,7 +575,7 @@ Retirement includes more than shutting down a server. Identify data, backups, lo
 
 A forgotten Application Programming Interface (API) key, certificate, cloud snapshot, Domain Name System (DNS) record, or support account can leave a retired system connected to the organization.
 
-<h2 id="ai-architecture">Apply architecture principles to AI systems</h2>
+<h2 id="ai-architecture">13. Apply architecture principles to AI systems</h2>
 
 AI systems add high-value models, large datasets, specialized compute, complex supply chains, probabilistic behavior, and new input and output risks. They still require ordinary security engineering fundamentals.
 
@@ -593,7 +597,7 @@ Cloud AI services divide responsibility across model provider, platform provider
 
 Secure enclaves and confidential-computing features may reduce exposure during processing, but they do not correct unnecessary data collection, weak authorization, unsafe outputs, or vulnerable application logic.
 
-<h2 id="exam-traps">Avoid common Domain 3 exam traps</h2>
+<h2 id="exam-traps">14. Avoid common Domain 3 exam traps</h2>
 
 <h3>Choosing a product before requirements</h3>
 
@@ -627,7 +631,7 @@ A side channel, exposed key, reused nonce, certificate error, weak random number
 
 Cloud and managed services shift responsibilities. They do not eliminate the customer's duties for data, identity, configuration, access, integration, monitoring, and risk acceptance.
 
-<h2 id="review-checklist">Domain 3 review checklist</h2>
+<h2 id="review-checklist">15. Domain 3 review checklist</h2>
 
 Before moving on, make sure you can:
 
@@ -648,7 +652,7 @@ Before moving on, make sure you can:
 - Apply ordinary secure design, least privilege, isolation, input validation, shared responsibility, and lifecycle controls to AI systems.
 - Choose the correct next action based on what the scenario has already completed.
 
-<h2 id="official-references">Official references</h2>
+<h2 id="official-references">16. Official references</h2>
 
 Use these primary sources to confirm scope and study the underlying practices:
 

@@ -79,18 +79,22 @@ relatedLinks:
   - title: "CISSP Domain 5: Identity and Access Management"
     url: /cissp/study-guide/identity-access-management/
     description: Apply governance, personnel security, policy, and risk decisions to identity proofing, authentication, authorization, and access reviews.
+  - title: "CISSP Domain 6: Security Assessment and Testing"
+    url: /cissp/study-guide/security-assessment-testing/
+    description: Use assessments, control testing, metrics, reports, remediation, and audits to verify that governance requirements are working.
   - title: "Security+ Domain 5: Program Management and Oversight"
     url: /security-plus/sy0-701/study-guide/security-program-management-oversight/
     description: Refresh foundational governance, risk, third-party, compliance, audit, and awareness concepts.
   - title: Recovery Metrics Quick Reference
     url: /security-plus/quick-review/recovery-metrics/
     description: Compare recovery time, recovery point, repair, and failure measurements used in continuity decisions.
+
 ---
 Domain 1 accounts for 16 percent of the current CISSP exam outline, the largest average weight of the eight domains. It establishes how an organization decides what security should accomplish, who is accountable, which obligations apply, how risk is evaluated, and how people are prepared to follow the program.
 
 The domain reaches far beyond a risk register. A scenario may begin with a supplier, employee, policy, investigation, privacy requirement, business process, or artificial intelligence service. Follow the chain of authority and evidence: identify the requirement, determine ownership, assess the risk, choose a treatment, document the decision, implement controls, and monitor the result.
 
-<h2 id="domain-map">Domain 1 map</h2>
+<h2 id="domain-map">1. Domain 1 map</h2>
 
 The official outline divides Security and Risk Management into twelve objectives:
 
@@ -118,7 +122,7 @@ The official outline divides Security and Risk Management into twelve objectives
 
 One scenario can touch several objectives. Acquiring an artificial intelligence service may involve ethics, privacy, contracts, supplier due diligence, risk assessment, data governance, continuity planning, security requirements, and role-based learning. The objective numbers help organize study, but the real decision crosses organizational boundaries.
 
-<h2 id="decision-order">Use the right decision order</h2>
+<h2 id="decision-order">2. Use the right decision order</h2>
 
 CISSP questions often reward process and authority. A technical control may be useful, but it can still be the wrong first action.
 
@@ -135,7 +139,7 @@ A practical decision sequence is:
 
 A question may begin at any point in this sequence. Read for what has already happened. If requirements and risk have been assessed, returning to the first step may be unnecessary. If the organization has not identified the affected data or owner, selecting a product is premature.
 
-<h2 id="ethics-principles">Professional ethics and security principles</h2>
+<h2 id="ethics-principles">3. Professional ethics and security principles</h2>
 
 <h3>Ethical duties guide technical authority</h3>
 
@@ -169,7 +173,7 @@ The current outline names five pillars of information security:
 
 A control can support several properties. A digital signature can provide integrity, authenticity, and evidence useful for nonrepudiation. It does not provide confidentiality unless the content is also encrypted.
 
-<h2 id="governance">Security governance</h2>
+<h2 id="governance">4. Security governance</h2>
 
 Governance establishes direction, accountability, oversight, and alignment with organizational objectives. Management plans and executes work within that direction. The terms overlap in conversation, but the distinction matters on the exam.
 
@@ -240,7 +244,7 @@ Do not assume that selecting a framework completes governance. The organization 
 
 Buying a security tool can demonstrate neither by itself. The organization must select an appropriate control, configure it, operate it, monitor it, respond to findings, and adjust it as conditions change.
 
-<h2 id="legal-investigations">Legal, regulatory, compliance, and investigation requirements</h2>
+<h2 id="legal-investigations">5. Legal, regulatory, compliance, and investigation requirements</h2>
 
 CISSP is global, and legal requirements vary by jurisdiction. The exam expects candidates to recognize the type of obligation and the need for qualified legal guidance, not to practice law from memory.
 
@@ -280,7 +284,7 @@ The appropriate response is usually to identify the issue early, preserve facts,
 
 Do not begin an investigation by collecting everything available. Confirm authority, scope, purpose, preservation requirements, privacy limits, and the people who should direct the work. Excessive collection can create legal, privacy, operational, and evidence-handling problems.
 
-<h2 id="policy">Policy, standards, procedures, guidelines, and baselines</h2>
+<h2 id="policy">6. Policy, standards, procedures, guidelines, and baselines</h2>
 
 Governance documents differ by purpose and authority:
 
@@ -314,7 +318,7 @@ A useful document lifecycle includes:
 
 An exception should identify the requirement, scope, business reason, risk, compensating controls, owner, approver, expiration date, and review conditions. A permanent undocumented exception is a control failure disguised as flexibility.
 
-<h2 id="business-continuity">Business continuity requirements</h2>
+<h2 id="business-continuity">7. Business continuity requirements</h2>
 
 Business Continuity (BC) keeps priority business functions operating through disruption. Disaster Recovery (DR) restores technology and facilities needed to support those functions. Disaster recovery is part of the broader continuity effort.
 
@@ -355,7 +359,7 @@ A recovery plan fails when it restores the application but ignores identity serv
 
 Document dependencies and recovery assumptions. Confirm that a supplier's commitment supports the organization's objective. A four-hour internal RTO is not credible when the only provider contract promises restoration within two business days.
 
-<h2 id="personnel-security">Personnel security</h2>
+<h2 id="personnel-security">8. Personnel security</h2>
 
 Personnel security manages risk before access is granted, while responsibilities change, and when the relationship ends. It applies to employees, contractors, consultants, vendors, temporary workers, and other third parties.
 
@@ -392,7 +396,7 @@ Termination planning should be coordinated and timed according to risk. Common a
 
 Friendly departures still require complete offboarding. Hostile departures may require tighter timing, monitoring, escort, and coordination, but actions should remain lawful and approved.
 
-<h2 id="risk-management">Risk management</h2>
+<h2 id="risk-management">9. Risk management</h2>
 
 Risk management gives decision-makers a structured way to compare uncertainty, potential harm, business value, and available treatments.
 
@@ -478,7 +482,7 @@ A risk process should continue after the initial decision:
 
 Executives need concise exposure, trend, decision, and accountability information. Control operators need detailed failures, thresholds, and corrective actions. Sending the same dashboard to every audience usually serves none of them well.
 
-<h2 id="threat-modeling">Threat modeling</h2>
+<h2 id="threat-modeling">10. Threat modeling</h2>
 
 Threat modeling examines how a system or process could be harmed before or during its lifecycle. It turns vague concern into structured analysis.
 
@@ -498,7 +502,7 @@ Methods such as STRIDE, attack trees, misuse cases, and process-focused approach
 
 Threat modeling belongs early in design, but it should not stop there. New integrations, cloud services, artificial intelligence features, privilege changes, and supplier components can create new trust boundaries and attack paths.
 
-<h2 id="supply-chain">Supply Chain Risk Management</h2>
+<h2 id="supply-chain">11. Supply Chain Risk Management</h2>
 
 Supply Chain Risk Management (SCRM) addresses risks introduced through suppliers, products, services, components, development processes, support channels, and dependencies.
 
@@ -549,7 +553,7 @@ Ask:
 - Can the organization export data and continue the process if the provider fails?
 - Which employees need guidance on acceptable use, sensitive data, verification, and accountability?
 
-<h2 id="awareness">Security awareness, education, and training</h2>
+<h2 id="awareness">12. Security awareness, education, and training</h2>
 
 A learning program should change behavior and improve capability. Completion rates alone show that people clicked through material. They do not show that employees recognize, avoid, report, or recover from security events.
 
@@ -580,7 +584,7 @@ Methods may include phishing simulations, social-engineering exercises, tabletop
 
 Emerging topics require periodic review. Cryptocurrency, blockchain, cloud services, artificial intelligence, deepfakes, collaboration tools, and changing social-engineering methods can create new behaviors and responsibilities. Update the program when the work changes, not only when the annual training date arrives.
 
-<h2 id="exam-traps">Common Domain 1 exam traps</h2>
+<h2 id="exam-traps">13. Common Domain 1 exam traps</h2>
 
 ### Choosing implementation before requirements
 
@@ -614,7 +618,7 @@ A server can be online while the business remains unable to operate. Account for
 
 Completion is an administrative measure. Evaluate behavior, capability, reporting, incidents, and operational outcomes.
 
-<h2 id="review-checklist">Domain 1 review checklist</h2>
+<h2 id="review-checklist">14. Domain 1 review checklist</h2>
 
 You should be able to:
 
@@ -641,7 +645,7 @@ You should be able to:
 - Distinguish awareness, training, and education.
 - Choose measures that show behavior and capability rather than attendance alone.
 
-<h2 id="official-references">Official references</h2>
+<h2 id="official-references">15. Official references</h2>
 
 - [ISC2 CISSP Certification Exam Outline](https://www.isc2.org/certifications/cissp/cissp-certification-exam-outline)
 - [ISC2 ethics guidance](https://www.isc2.org/Ethics)

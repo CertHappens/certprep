@@ -60,6 +60,9 @@ relatedLinks:
   - title: "Domain 5: Identity and Access Management"
     url: /cissp/study-guide/identity-access-management/
     description: Follow identity proofing, authentication, authorization, federation, provisioning, privileged access, and account removal.
+  - title: "Domain 6: Security Assessment and Testing"
+    url: /cissp/study-guide/security-assessment-testing/
+    description: Plan assessments, test controls, evaluate evidence, report findings, and follow remediation, exceptions, and audits.
   - title: Security+ SY0-701 Study Guide
     url: /security-plus/sy0-701/study-guide/
     description: Refresh security controls, architecture, operations, threats, and governance concepts at the foundational level.
@@ -151,6 +154,11 @@ Do not study each domain as an isolated container. Security and Risk Management 
         <td data-label="Need">Identity, authentication, and access decisions</td>
         <td data-label="Best starting point"><a href="/cissp/study-guide/identity-access-management/">Domain 5 guide</a></td>
         <td data-label="Use it for">Identity proofing, authentication, federation, authorization models, provisioning, privileged access, and service accounts.</td>
+      </tr>
+      <tr>
+        <td data-label="Need">Assessment evidence and control testing</td>
+        <td data-label="Best starting point"><a href="/cissp/study-guide/security-assessment-testing/">Domain 6 guide</a></td>
+        <td data-label="Use it for">Assessment strategy, vulnerability and penetration testing, process data, metrics, reporting, remediation, exceptions, and audits.</td>
       </tr>
       <tr>
         <td data-label="Need">Security controls and operations refresher</td>
@@ -296,6 +304,8 @@ Separate identification, authentication, authorization, and accounting. Then con
 This domain asks how an organization selects, performs, and evaluates assessments. Study testing strategies, vulnerability assessments, penetration testing, code review, control testing, process data, audits, analysis, remediation, exceptions, and reporting.
 
 The method should match the purpose and authority. An audit, vulnerability assessment, penetration test, and red-team exercise can all reveal weaknesses, but they differ in scope, independence, depth, rules of engagement, and expected output.
+
+Use the detailed [Security Assessment and Testing guide](/cissp/study-guide/security-assessment-testing/) to connect the five official objectives to planning, evidence, control testing, reporting, remediation, exceptions, and audits.
 
 <h3 id="domain-7">Domain 7: Security Operations</h3>
 

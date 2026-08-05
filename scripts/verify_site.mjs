@@ -213,6 +213,7 @@ const publicPageFiles = [
   "cissp/study-guide/security-architecture-engineering/index.html",
   "cissp/study-guide/communication-network-security/index.html",
   "cissp/study-guide/identity-access-management/index.html",
+  "cissp/study-guide/security-assessment-testing/index.html",
   "ccna/index.html",
   "ccna/acronyms/index.html",
   "ccna/commands/index.html",
@@ -278,6 +279,7 @@ const articlePageFiles = [
   "cissp/study-guide/security-architecture-engineering/index.html",
   "cissp/study-guide/communication-network-security/index.html",
   "cissp/study-guide/identity-access-management/index.html",
+  "cissp/study-guide/security-assessment-testing/index.html",
   "explore/career/paths/index.html",
   "explore/career/it-support-or-cybersecurity/index.html",
   "explore/career/cybersecurity-paths/index.html",
@@ -458,6 +460,7 @@ const wholeSitePageMarkers = new Map([
       "/cissp/study-guide/security-architecture-engineering/",
       "/cissp/study-guide/communication-network-security/",
       "/cissp/study-guide/identity-access-management/",
+      "/cissp/study-guide/security-assessment-testing/",
       "https://www.isc2.org/certifications/cissp/cissp-certification-exam-outline"
     ]
   ],
@@ -1379,6 +1382,7 @@ for (const file of htmlFiles) {
     "/cissp/study-guide/security-architecture-engineering/",
     "/cissp/study-guide/communication-network-security/",
     "/cissp/study-guide/identity-access-management/",
+    "/cissp/study-guide/security-assessment-testing/",
     "/ccna/",
     "/explore/",
     "/explore/career/paths/",
@@ -2541,7 +2545,8 @@ for (const file of htmlFiles) {
       "/cissp/study-guide/asset-security/",
       "/cissp/study-guide/security-architecture-engineering/",
       "/cissp/study-guide/communication-network-security/",
-      "/cissp/study-guide/identity-access-management/"
+      "/cissp/study-guide/identity-access-management/",
+      "/cissp/study-guide/security-assessment-testing/"
     ]) {
       if (!html.includes(`href="${href}"`)) {
         fail(`${relative}: CISSP resource hub is missing ${href}`);
@@ -2619,7 +2624,8 @@ for (const file of htmlFiles) {
       'href="/cissp/study-guide/asset-security/"',
       'href="/cissp/study-guide/security-architecture-engineering/"',
       'href="/cissp/study-guide/communication-network-security/"',
-      'href="/cissp/study-guide/identity-access-management/"'
+      'href="/cissp/study-guide/identity-access-management/"',
+      'href="/cissp/study-guide/security-assessment-testing/"'
     ];
 
     for (const marker of requiredMarkers) {
@@ -2855,6 +2861,66 @@ for (const file of htmlFiles) {
     for (const marker of requiredMarkers) {
       if (!hasPageMarker(html, marker)) {
         fail(`${relative}: CISSP Domain 5 guide is missing ${marker}`);
+      }
+    }
+  }
+
+  if (relative === "cissp/study-guide/security-assessment-testing/index.html") {
+    if (!headingMatches(html, "CISSP Domain 6: Security Assessment and Testing")) {
+      fail(`${relative}: expected CISSP Domain 6 h1 is missing`);
+    }
+
+    if (!html.includes("data-print-guide")) {
+      fail(`${relative}: CISSP Domain 6 guide is missing the shared Print | Save control`);
+    }
+
+    const requiredSectionIds = [
+      "domain-map",
+      "decision-order",
+      "strategy-scope",
+      "independence-evidence",
+      "vulnerability-assessment",
+      "penetration-teams",
+      "logs-synthetic-benchmarks",
+      "code-misuse-interfaces",
+      "breach-compliance",
+      "process-data",
+      "metrics-indicators",
+      "analyze-output",
+      "reporting",
+      "remediation-exceptions",
+      "audits",
+      "ai-testing",
+      "exam-traps",
+      "review-checklist",
+      "official-references"
+    ];
+
+    for (const id of requiredSectionIds) {
+      if (!html.includes(`id="${id}"`)) {
+        fail(`${relative}: CISSP Domain 6 guide is missing section #${id}`);
+      }
+    }
+
+    const requiredMarkers = [
+      "Vulnerability assessment",
+      "Penetration test",
+      "red team",
+      "blue team",
+      "purple team",
+      "synthetic transaction",
+      "Coverage analysis",
+      "breach and attack simulation",
+      "Key Performance Indicator",
+      "Key Risk Indicator",
+      "Ethical disclosure",
+      "AI red teaming",
+      'href="/cissp/study-guide/"'
+    ];
+
+    for (const marker of requiredMarkers) {
+      if (!hasPageMarker(html, marker)) {
+        fail(`${relative}: CISSP Domain 6 guide is missing ${marker}`);
       }
     }
   }
