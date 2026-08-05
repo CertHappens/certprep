@@ -287,6 +287,10 @@
     {
       "label": "Contact and corrections",
       "url": "/contact/"
+    },
+    {
+      "label": "Site Map",
+      "url": "/sitemap/"
     }
   ]
 }

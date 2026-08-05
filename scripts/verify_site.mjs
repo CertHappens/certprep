@@ -238,6 +238,7 @@ const publicPageFiles = [
   "network-plus/quick-review/vlans-trunks-stp-lacp/index.html",
   "ports-protocols/index.html",
   "privacy/index.html",
+  "sitemap/index.html",
   "security-plus/index.html",
   "security-plus/acronyms/index.html",
   "security-plus/quick-review/index.html",
@@ -558,6 +559,20 @@ const wholeSitePageMarkers = new Map([
     ]
   ],
   [
+    "sitemap/index.html",
+    [
+      "Site Map",
+      "/security-plus/",
+      "/network-plus/",
+      "/ccna/",
+      "/cissp/",
+      "/explore/",
+      "/ports-protocols/",
+      "/tools/subnet-calculator/",
+      "/privacy/"
+    ]
+  ],
+  [
     "security-plus/index.html",
     ["/cissp/", "See how CISSP widens the security perspective"]
   ],
@@ -646,6 +661,7 @@ const requiredFiles = [
   "assets/js/quiz/paged-question.js",
   "assets/js/quiz/stimulus.js",
   "assets/css/explore.css",
+  "assets/css/site-map.css",
   "assets/js/explore/career-assessment-core.js",
   "assets/js/explore/career-assessment.js",
   "quiz-data/catalog.json",
@@ -1187,6 +1203,10 @@ for (const file of htmlFiles) {
 
   if (!hasLinkWithText(html, "/copyright/", "Copyright and usage")) {
     fail(`${relative}: footer is missing the Copyright and usage link`);
+  }
+
+  if (!hasLinkWithText(html, "/sitemap/", "Site Map")) {
+    fail(`${relative}: footer is missing the Site Map link`);
   }
 
   if (!includesNormalizedText(html, "All rights reserved", { mainOnly: false })) {
@@ -2909,6 +2929,41 @@ if (await isFile(path.join(outputRoot, "sitemap.xml"))) {
     if (!entry || !/<lastmod>\d{4}-\d{2}-\d{2}<\/lastmod>/.test(entry)) {
       fail(`sitemap.xml: publication or modification date is missing for ${url}`);
     }
+  }
+}
+
+if (await isFile(path.join(outputRoot, "sitemap/index.html"))) {
+  const humanSitemap = await readFile(
+    path.join(outputRoot, "sitemap/index.html"),
+    "utf8"
+  );
+  const omittedFromHumanSitemap = new Set(["index.html", "sitemap/index.html"]);
+
+  for (const relative of publicPageFiles) {
+    if (omittedFromHumanSitemap.has(relative)) {
+      continue;
+    }
+
+    const href = `/${relative.replace(/index\.html$/, "")}`;
+    if (!humanSitemap.includes(`href="${href}"`)) {
+      fail(`sitemap/index.html: missing public page link ${href}`);
+    }
+  }
+
+  const excludedQuestionPrefixes = [
+    "/security-plus/sy0-701/practice-test/question/",
+    "/network-plus/n10-009/practice-test/question/",
+    "/ccna/200-301-v2/practice-test/question/"
+  ];
+
+  for (const prefix of excludedQuestionPrefixes) {
+    if (humanSitemap.includes(`href="${prefix}`)) {
+      fail(`sitemap/index.html: paged question route must remain excluded (${prefix})`);
+    }
+  }
+
+  if (humanSitemap.includes('href="/sitemap.xml"')) {
+    fail("sitemap/index.html: human Site Map should not link to the XML sitemap");
   }
 }
 

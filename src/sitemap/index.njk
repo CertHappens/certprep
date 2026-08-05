@@ -1,0 +1,46 @@
+---
+layout: layouts/base.njk
+title: Site Map
+description: Browse Cert Happens practice tests, study guides, references, tools, Explore articles, and site information.
+permalink: /sitemap/
+dateCreated: "2026-08-05"
+datePublished: "2026-08-05"
+dateModified: "2026-08-05"
+stylesheets:
+  - /assets/css/site-map.css?v=20260805-1
+breadcrumbs:
+  - label: Home
+    url: /
+  - label: Site Map
+    url: /sitemap/
+---
+<header class="page-header page-header--compact">
+  <div class="page-shell">
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="/">Home</a></li>
+        <li aria-current="page">Site Map</li>
+      </ol>
+    </nav>
+    <p class="eyebrow">Find a page</p>
+    <h1>Site Map</h1>
+    <p class="lede">
+      Browse practice tests, study guides, references, tools, career guidance, and site information.
+    </p>
+  </div>
+</header>
+
+<section class="section">
+  <div class="page-shell site-map" aria-label="Site pages">
+    {% for section in collections.humanSitemapSections %}
+    <section class="site-map__section" aria-labelledby="site-map-{{ section.id }}">
+      <h2 id="site-map-{{ section.id }}">{{ section.label }}</h2>
+      <ul class="site-map__links">
+        {% for item in section.pages %}
+        <li><a href="{{ item.url }}">{{ item.label }}</a></li>
+        {% endfor %}
+      </ul>
+    </section>
+    {% endfor %}
+  </div>
+</section>
