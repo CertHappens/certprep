@@ -51,6 +51,9 @@ relatedLinks:
   - title: "Domain 2: Asset Security"
     url: /cissp/study-guide/asset-security/
     description: Follow information and other assets through classification, handling, ownership, retention, protection, and destruction.
+  - title: "Domain 3: Security Architecture and Engineering"
+    url: /cissp/study-guide/security-architecture-engineering/
+    description: Connect secure design principles, models, system capabilities, cryptography, facilities, and lifecycle engineering.
   - title: Security+ SY0-701 Study Guide
     url: /security-plus/sy0-701/study-guide/
     description: Refresh security controls, architecture, operations, threats, and governance concepts at the foundational level.
@@ -258,7 +261,7 @@ A classification label matters because it drives handling requirements. Those re
 
 This domain combines abstract security models with practical engineering decisions. Topics include secure design principles, system security capabilities, architecture weaknesses, cryptography, physical security, and the information-system lifecycle.
 
-Learn what a model or principle protects, which assumption it makes, and where it fits. A name alone is rarely enough. For cryptography, connect algorithm selection to confidentiality, integrity, authentication, nonrepudiation, key management, performance, and lifecycle risk.
+Learn what a model or principle protects, which assumption it makes, and where it fits. A name alone is rarely enough. For cryptography, connect algorithm selection to confidentiality, integrity, authentication, nonrepudiation, key management, performance, and lifecycle risk. Use the detailed [Security Architecture and Engineering guide](/cissp/study-guide/security-architecture-engineering/) to connect all ten official objectives.
 
 <h3 id="domain-4">Domain 4: Communication and Network Security</h3>
 

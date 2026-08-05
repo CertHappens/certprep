@@ -101,7 +101,9 @@
         "number": "3",
         "name": "Security Architecture and Engineering",
         "weight": "13%",
-        "focus": "Security models, engineering principles, cryptography, physical design, and architecture weaknesses across modern systems."
+        "focus": "Security models, engineering principles, cryptography, physical design, and architecture weaknesses across modern systems.",
+        "url": "/cissp/study-guide/security-architecture-engineering/",
+        "linkLabel": "Open Domain 3 guide"
       },
       {
         "number": "4",
@@ -185,7 +187,7 @@
     },
     "currentResources": {
       "heading": "CISSP study resources available now",
-      "intro": "Begin with the full study roadmap, then use the Domain 1 and Domain 2 guides for governance, risk, asset ownership, classification, handling, retention, and protection decisions.",
+      "intro": "Begin with the full study roadmap, then use the available domain guides for governance, risk, asset protection, secure architecture, engineering, cryptography, and lifecycle decisions.",
       "links": [
         {
           "title": "CISSP study guide",
@@ -201,6 +203,11 @@
           "title": "Domain 2: Asset Security",
           "url": "/cissp/study-guide/asset-security/",
           "description": "Study classification, handling, ownership, inventories, data roles, lifecycle decisions, retention, sanitization, and data protection controls."
+        },
+        {
+          "title": "Domain 3: Security Architecture and Engineering",
+          "url": "/cissp/study-guide/security-architecture-engineering/",
+          "description": "Study secure design principles, security models, system capabilities, architecture weaknesses, cryptography, facilities, and lifecycle engineering."
         },
         {
           "title": "Security+ study guide",
@@ -420,8 +427,8 @@
       "eyebrow": "Exam and certification path",
       "heading": "One exam, then an active certification cycle",
       "paragraphs": [
-        "CCNA has no formal degree or prior-certification prerequisite. Earning it requires passing the current 200-301 exam version available on the candidate\u2019s test date.",
-        "Most Cisco certifications, including CCNA, remain active for three years. Associate-level recertification can be completed through qualifying exams, 30 Continuing Education credits, or another current option listed in Cisco\u2019s recertification policy.",
+        "CCNA has no formal degree or prior-certification prerequisite. Earning it requires passing the current 200-301 exam version available on the candidate’s test date.",
+        "Most Cisco certifications, including CCNA, remain active for three years. Associate-level recertification can be completed through qualifying exams, 30 Continuing Education credits, or another current option listed in Cisco’s recertification policy.",
         "Because the exam version changes in February 2027, candidates should verify the active blueprint before scheduling and make sure their preparation materials match their intended test date."
       ],
       "maintenance": [

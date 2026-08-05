@@ -210,6 +210,7 @@ const publicPageFiles = [
   "cissp/study-guide/index.html",
   "cissp/study-guide/security-risk-management/index.html",
   "cissp/study-guide/asset-security/index.html",
+  "cissp/study-guide/security-architecture-engineering/index.html",
   "ccna/index.html",
   "ccna/acronyms/index.html",
   "ccna/commands/index.html",
@@ -272,6 +273,7 @@ const articlePageFiles = [
   "cissp/study-guide/index.html",
   "cissp/study-guide/security-risk-management/index.html",
   "cissp/study-guide/asset-security/index.html",
+  "cissp/study-guide/security-architecture-engineering/index.html",
   "explore/career/paths/index.html",
   "explore/career/it-support-or-cybersecurity/index.html",
   "explore/career/cybersecurity-paths/index.html",
@@ -449,6 +451,7 @@ const wholeSitePageMarkers = new Map([
       "Software Development Security",
       "120 credits",
       "/security-plus/sy0-701/study-guide/",
+      "/cissp/study-guide/security-architecture-engineering/",
       "https://www.isc2.org/certifications/cissp/cissp-certification-exam-outline"
     ]
   ],

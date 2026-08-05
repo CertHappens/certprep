@@ -70,6 +70,9 @@ relatedLinks:
   - title: "CISSP Domain 2: Asset Security"
     url: /cissp/study-guide/asset-security/
     description: Follow information and other assets through classification, handling, ownership, retention, protection, and destruction.
+  - title: "CISSP Domain 3: Security Architecture and Engineering"
+    url: /cissp/study-guide/security-architecture-engineering/
+    description: Apply governance, risk, privacy, threat-modeling, and supplier requirements to secure system and facility design.
   - title: "Security+ Domain 5: Program Management and Oversight"
     url: /security-plus/sy0-701/study-guide/security-program-management-oversight/
     description: Refresh foundational governance, risk, third-party, compliance, audit, and awareness concepts.

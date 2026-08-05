@@ -66,6 +66,9 @@ relatedLinks:
   - title: "CISSP Domain 1: Security and Risk Management"
     url: /cissp/study-guide/security-risk-management/
     description: Review governance, risk ownership, legal duties, policy, continuity, and supplier decisions that shape asset requirements.
+  - title: "CISSP Domain 3: Security Architecture and Engineering"
+    url: /cissp/study-guide/security-architecture-engineering/
+    description: Connect asset requirements to secure design, system capabilities, architecture, cryptography, facilities, and lifecycle engineering.
   - title: "Security+ Domain 3: Security Architecture"
     url: /security-plus/sy0-701/study-guide/security-architecture/
     description: Refresh data protection, resilience, cloud, virtualization, and architecture concepts at the foundational level.
@@ -327,7 +330,9 @@ Backup design should reflect retention requirements, but the two processes have 
 
 <h3>End of life and end of support</h3>
 
-**End of Life (EOL)** generally means a product or asset has reached the end of its planned lifecycle or commercial availability. **End of Support (EOS)** means the provider no longer supplies some or all updates, fixes, assistance, or replacement services.
+**End of Life (EOL)** generally means a product or asset has reached the end of its planned lifecycle or commercial availability. In practical terms, the product is no longer sold.
+
+**End of Support (EOS)** means the provider no longer supplies official patches, updates, or technical help. If replacement parts are still available, they may become harder to find and more expensive.
 
 The exact vendor terminology varies. Focus on the risk: unsupported assets may retain known vulnerabilities, incompatible dependencies, unavailable parts, expired licenses, or staff knowledge that is disappearing.
 

@@ -181,6 +181,10 @@
             {
               "label": "Domain 2: Asset Security",
               "url": "/cissp/study-guide/asset-security/"
+            },
+            {
+              "label": "Domain 3: Architecture",
+              "url": "/cissp/study-guide/security-architecture-engineering/"
             }
           ]
         }

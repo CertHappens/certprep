@@ -35,24 +35,29 @@ test("CISSP navigation exposes overview and available study guides without an em
           label: "Domain 2: Asset Security",
           url: "/cissp/study-guide/asset-security/",
         },
+        {
+          label: "Domain 3: Architecture",
+          url: "/cissp/study-guide/security-architecture-engineering/",
+        },
       ],
     },
   ]);
   assert.equal(menu.groups.some((group) => group.label === "Practice"), false);
 });
 
-test("CISSP hub promotes the study roadmap and both available domain guides", async () => {
+test("CISSP hub promotes the study roadmap and all available domain guides", async () => {
   const hubs = JSON.parse(await readSource("src/_data/examHubs.json"));
   const cissp = hubs.cissp;
 
   assert.equal(cissp.resourcesFirst, true);
   assert.equal(cissp.sourceReviewed, "2026-08-05");
   assert.deepEqual(
-    cissp.currentResources.links.slice(0, 3).map((link) => link.url),
+    cissp.currentResources.links.slice(0, 4).map((link) => link.url),
     [
       "/cissp/study-guide/",
       "/cissp/study-guide/security-risk-management/",
       "/cissp/study-guide/asset-security/",
+      "/cissp/study-guide/security-architecture-engineering/",
     ]
   );
 
@@ -69,6 +74,11 @@ test("CISSP hub promotes the study roadmap and both available domain guides", as
         number: "2",
         url: "/cissp/study-guide/asset-security/",
         linkLabel: "Open Domain 2 guide",
+      },
+      {
+        number: "3",
+        url: "/cissp/study-guide/security-architecture-engineering/",
+        linkLabel: "Open Domain 3 guide",
       },
     ]
   );
@@ -89,6 +99,12 @@ test("CISSP study pages use the shared printable article contract and current ro
     {
       source: await readSource("src/cissp/study-guide/asset-security/index.md"),
       route: "/cissp/study-guide/asset-security/",
+    },
+    {
+      source: await readSource(
+        "src/cissp/study-guide/security-architecture-engineering/index.md"
+      ),
+      route: "/cissp/study-guide/security-architecture-engineering/",
     },
   ];
 
@@ -224,6 +240,12 @@ test("CISSP Domain 2 covers all official objectives, decision areas, and primary
     assert.match(domain, new RegExp(escapeRegExp(marker), "i"));
   }
 
+  assert.match(domain, /In practical terms, the product is no longer sold\./);
+  assert.match(
+    domain,
+    /If replacement parts are still available, they may become harder to find and more expensive\./
+  );
+
   const requiredReferences = [
     "https://www.isc2.org/certifications/cissp/cissp-certification-exam-outline",
     "https://csrc.nist.gov/pubs/fips/199/final",
@@ -238,4 +260,91 @@ test("CISSP Domain 2 covers all official objectives, decision areas, and primary
   for (const url of requiredReferences) {
     assert.match(domain, new RegExp(escapeRegExp(url)));
   }
+});
+
+
+test("CISSP Domain 3 covers all official objectives, architecture areas, and primary references", async () => {
+  const domain = await readSource(
+    "src/cissp/study-guide/security-architecture-engineering/index.md"
+  );
+
+  const requiredSections = [
+    "domain-map",
+    "decision-order",
+    "secure-design",
+    "security-models",
+    "control-selection",
+    "system-capabilities",
+    "architecture-vulnerabilities",
+    "cryptography",
+    "cryptanalysis",
+    "facility-design",
+    "facility-controls",
+    "system-lifecycle",
+    "ai-architecture",
+    "exam-traps",
+    "review-checklist",
+    "official-references",
+  ];
+
+  for (const id of requiredSections) {
+    assert.match(domain, new RegExp(`id=["']${id}["']`));
+  }
+
+  for (let objective = 1; objective <= 10; objective += 1) {
+    assert.match(domain, new RegExp(`<td>3\\.${objective}<\\/td>`));
+  }
+
+  const requiredMarkers = [
+    "Bell-LaPadula",
+    "Biba",
+    "Clark-Wilson",
+    "Brewer-Nash",
+    "Trusted Platform Module",
+    "Hardware Security Module",
+    "Trusted Execution Environment",
+    "Industrial Control System",
+    "Internet of Things",
+    "Microservices",
+    "Container",
+    "Serverless",
+    "High-Performance Computing",
+    "Edge computing",
+    "Public Key Infrastructure",
+    "Cryptographic agility",
+    "Quantum Key Distribution",
+    "Side-channel",
+    "Heating, Ventilation, and Air Conditioning",
+    "Uninterruptible Power Supplies",
+    "Verification",
+    "Validation",
+    "prompt injection",
+  ];
+
+  for (const marker of requiredMarkers) {
+    assert.match(domain, new RegExp(escapeRegExp(marker), "i"));
+  }
+
+  const requiredReferences = [
+    "https://www.isc2.org/certifications/cissp/cissp-certification-exam-outline",
+    "https://csrc.nist.gov/pubs/sp/800/160/v1/upd2/final",
+    "https://csrc.nist.gov/pubs/sp/800/160/v2/r1/final",
+    "https://csrc.nist.gov/pubs/sp/800/207/final",
+    "https://csrc.nist.gov/pubs/sp/800/57/pt1/r5/final",
+    "https://csrc.nist.gov/pubs/fips/140-3/final",
+    "https://csrc.nist.gov/pubs/fips/203/final",
+    "https://csrc.nist.gov/pubs/fips/204/final",
+    "https://csrc.nist.gov/pubs/fips/205/final",
+    "https://csrc.nist.gov/pubs/sp/800/82/r3/final",
+    "https://csrc.nist.gov/pubs/sp/800/190/final",
+    "https://csrc.nist.gov/pubs/sp/800/204/a/final",
+    "https://csrc.nist.gov/pubs/sp/800/125/a/r1/final",
+    "https://www.nist.gov/itl/ai-risk-management-framework",
+  ];
+
+  for (const url of requiredReferences) {
+    assert.match(domain, new RegExp(escapeRegExp(url)));
+  }
+
+  assert.doesNotMatch(domain, /\u2014/);
 });
