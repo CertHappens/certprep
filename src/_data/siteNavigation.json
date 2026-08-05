@@ -185,6 +185,10 @@
             {
               "label": "Domain 3: Architecture",
               "url": "/cissp/study-guide/security-architecture-engineering/"
+            },
+            {
+              "label": "Domain 4: Network Security",
+              "url": "/cissp/study-guide/communication-network-security/"
             }
           ]
         }

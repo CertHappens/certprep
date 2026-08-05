@@ -11,7 +11,7 @@
     "status": {
       "label": "How to use this hub",
       "heading": "Start with the study guide, then map the scope to your experience",
-      "body": "Use the CISSP study guide to organize all eight domains. The Domain 1 guide builds the governance and risk foundation, while Domain 2 follows information and other assets through classification, handling, ownership, retention, protection, and destruction."
+      "body": "Use the CISSP study guide to organize all eight domains. The available domain guides build from governance and risk through asset protection, secure architecture, and communication and network security."
     },
     "summary": [
       "CISSP covers security across an entire organization. Technical knowledge still matters, but candidates also need to connect controls to business objectives, legal duties, architecture, risk, operations, and program leadership.",
@@ -109,7 +109,9 @@
         "number": "4",
         "name": "Communication and Network Security",
         "weight": "13%",
-        "focus": "Secure network architecture, communications technologies, transmission methods, and protected network operations."
+        "focus": "Secure network architecture, communications technologies, transmission methods, and protected network operations.",
+        "url": "/cissp/study-guide/communication-network-security/",
+        "linkLabel": "Open Domain 4 guide"
       },
       {
         "number": "5",
@@ -187,7 +189,7 @@
     },
     "currentResources": {
       "heading": "CISSP study resources available now",
-      "intro": "Begin with the full study roadmap, then use the available domain guides for governance, risk, asset protection, secure architecture, engineering, cryptography, and lifecycle decisions.",
+      "intro": "Begin with the full study roadmap, then use the available domain guides for governance, risk, asset protection, secure architecture, cryptography, network design, segmentation, and protected communications.",
       "links": [
         {
           "title": "CISSP study guide",
@@ -208,6 +210,11 @@
           "title": "Domain 3: Security Architecture and Engineering",
           "url": "/cissp/study-guide/security-architecture-engineering/",
           "description": "Study secure design principles, security models, system capabilities, architecture weaknesses, cryptography, facilities, and lifecycle engineering."
+        },
+        {
+          "title": "Domain 4: Communication and Network Security",
+          "url": "/cissp/study-guide/communication-network-security/",
+          "description": "Study network models, secure protocols, segmentation, wireless and cloud networking, infrastructure, monitoring, remote access, and third-party connectivity."
         },
         {
           "title": "Security+ study guide",
@@ -427,8 +434,8 @@
       "eyebrow": "Exam and certification path",
       "heading": "One exam, then an active certification cycle",
       "paragraphs": [
-        "CCNA has no formal degree or prior-certification prerequisite. Earning it requires passing the current 200-301 exam version available on the candidate’s test date.",
-        "Most Cisco certifications, including CCNA, remain active for three years. Associate-level recertification can be completed through qualifying exams, 30 Continuing Education credits, or another current option listed in Cisco’s recertification policy.",
+        "CCNA has no formal degree or prior-certification prerequisite. Earning it requires passing the current 200-301 exam version available on the candidate\u2019s test date.",
+        "Most Cisco certifications, including CCNA, remain active for three years. Associate-level recertification can be completed through qualifying exams, 30 Continuing Education credits, or another current option listed in Cisco\u2019s recertification policy.",
         "Because the exam version changes in February 2027, candidates should verify the active blueprint before scheduling and make sure their preparation materials match their intended test date."
       ],
       "maintenance": [

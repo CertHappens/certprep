@@ -54,6 +54,9 @@ relatedLinks:
   - title: "Domain 3: Security Architecture and Engineering"
     url: /cissp/study-guide/security-architecture-engineering/
     description: Connect secure design principles, models, system capabilities, cryptography, facilities, and lifecycle engineering.
+  - title: "Domain 4: Communication and Network Security"
+    url: /cissp/study-guide/communication-network-security/
+    description: Connect network models, segmentation, secure protocols, infrastructure, monitoring, and protected communication channels.
   - title: Security+ SY0-701 Study Guide
     url: /security-plus/sy0-701/study-guide/
     description: Refresh security controls, architecture, operations, threats, and governance concepts at the foundational level.
@@ -135,6 +138,11 @@ Do not study each domain as an isolated container. Security and Risk Management 
         <td data-label="Need">Classification and data lifecycle</td>
         <td data-label="Best starting point"><a href="/cissp/study-guide/asset-security/">Domain 2 guide</a></td>
         <td data-label="Use it for">Classification, ownership, handling, data roles, retention, sanitization, and protection controls.</td>
+      </tr>
+      <tr>
+        <td data-label="Need">Network architecture and protected communications</td>
+        <td data-label="Best starting point"><a href="/cissp/study-guide/communication-network-security/">Domain 4 guide</a></td>
+        <td data-label="Use it for">Models, secure protocols, segmentation, network components, monitoring, remote access, and third-party connectivity.</td>
       </tr>
       <tr>
         <td data-label="Need">Security controls and operations refresher</td>
@@ -267,7 +275,7 @@ Learn what a model or principle protects, which assumption it makes, and where i
 
 Communication and Network Security covers secure network design, traffic flow, segmentation, protocols, transmission media, wireless and mobile networking, remote access, network components, and third-party connectivity.
 
-Technical recognition remains important, but CISSP adds architecture and governance questions. A secure connection must fit the trust boundary, performance need, availability requirement, management model, and monitoring strategy.
+Technical recognition remains important, but CISSP adds architecture and governance questions. A secure connection must fit the trust boundary, performance need, availability requirement, management model, and monitoring strategy. Use the detailed [Communication and Network Security guide](/cissp/study-guide/communication-network-security/) to connect all three official objectives.
 
 <h3 id="domain-5">Domain 5: Identity and Access Management</h3>
 

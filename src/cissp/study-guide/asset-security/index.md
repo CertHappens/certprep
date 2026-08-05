@@ -69,6 +69,9 @@ relatedLinks:
   - title: "CISSP Domain 3: Security Architecture and Engineering"
     url: /cissp/study-guide/security-architecture-engineering/
     description: Connect asset requirements to secure design, system capabilities, architecture, cryptography, facilities, and lifecycle engineering.
+  - title: "CISSP Domain 4: Communication and Network Security"
+    url: /cissp/study-guide/communication-network-security/
+    description: Connect governance, asset requirements, architecture, and cryptography to network design, segmentation, infrastructure, and secure channels.
   - title: "Security+ Domain 3: Security Architecture"
     url: /security-plus/sy0-701/study-guide/security-architecture/
     description: Refresh data protection, resilience, cloud, virtualization, and architecture concepts at the foundational level.

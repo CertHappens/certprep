@@ -211,6 +211,7 @@ const publicPageFiles = [
   "cissp/study-guide/security-risk-management/index.html",
   "cissp/study-guide/asset-security/index.html",
   "cissp/study-guide/security-architecture-engineering/index.html",
+  "cissp/study-guide/communication-network-security/index.html",
   "ccna/index.html",
   "ccna/acronyms/index.html",
   "ccna/commands/index.html",
@@ -274,6 +275,7 @@ const articlePageFiles = [
   "cissp/study-guide/security-risk-management/index.html",
   "cissp/study-guide/asset-security/index.html",
   "cissp/study-guide/security-architecture-engineering/index.html",
+  "cissp/study-guide/communication-network-security/index.html",
   "explore/career/paths/index.html",
   "explore/career/it-support-or-cybersecurity/index.html",
   "explore/career/cybersecurity-paths/index.html",
@@ -452,6 +454,7 @@ const wholeSitePageMarkers = new Map([
       "120 credits",
       "/security-plus/sy0-701/study-guide/",
       "/cissp/study-guide/security-architecture-engineering/",
+      "/cissp/study-guide/communication-network-security/",
       "https://www.isc2.org/certifications/cissp/cissp-certification-exam-outline"
     ]
   ],
@@ -2529,7 +2532,9 @@ for (const file of htmlFiles) {
     for (const href of [
       "/cissp/study-guide/",
       "/cissp/study-guide/security-risk-management/",
-      "/cissp/study-guide/asset-security/"
+      "/cissp/study-guide/asset-security/",
+      "/cissp/study-guide/security-architecture-engineering/",
+      "/cissp/study-guide/communication-network-security/"
     ]) {
       if (!html.includes(`href="${href}"`)) {
         fail(`${relative}: CISSP resource hub is missing ${href}`);
@@ -2604,7 +2609,9 @@ for (const file of htmlFiles) {
       "Security Operations",
       "Software Development Security",
       'href="/cissp/study-guide/security-risk-management/"',
-      'href="/cissp/study-guide/asset-security/"'
+      'href="/cissp/study-guide/asset-security/"',
+      'href="/cissp/study-guide/security-architecture-engineering/"',
+      'href="/cissp/study-guide/communication-network-security/"'
     ];
 
     for (const marker of requiredMarkers) {
@@ -2725,6 +2732,62 @@ for (const file of htmlFiles) {
     for (const marker of requiredMarkers) {
       if (!hasPageMarker(html, marker)) {
         fail(`${relative}: CISSP Domain 2 guide is missing ${marker}`);
+      }
+    }
+  }
+
+  if (relative === "cissp/study-guide/communication-network-security/index.html") {
+    if (!headingMatches(html, "CISSP Domain 4: Communication and Network Security")) {
+      fail(`${relative}: expected CISSP Domain 4 h1 is missing`);
+    }
+
+    if (!html.includes("data-print-guide")) {
+      fail(`${relative}: CISSP Domain 4 guide is missing the shared Print | Save control`);
+    }
+
+    const requiredSectionIds = [
+      "domain-map",
+      "decision-order",
+      "models-addressing",
+      "secure-protocols",
+      "transport-performance",
+      "segmentation-flows",
+      "edge-wireless",
+      "software-defined-cloud",
+      "monitoring-management",
+      "network-components",
+      "communication-channels",
+      "ai-networking",
+      "exam-traps",
+      "review-checklist",
+      "official-references"
+    ];
+
+    for (const id of requiredSectionIds) {
+      if (!html.includes(`id="${id}"`)) {
+        fail(`${relative}: CISSP Domain 4 guide is missing section #${id}`);
+      }
+    }
+
+    const requiredMarkers = [
+      "Open Systems Interconnection",
+      "Internet Protocol Security",
+      "Secure Shell",
+      "Transport Layer Security",
+      "north-south traffic",
+      "east-west traffic",
+      "Microsegmentation",
+      "Network Access Control",
+      "Software-defined networking",
+      "Virtual Private Cloud",
+      "Network observability",
+      "Third-party connectivity",
+      'href="/cissp/study-guide/"'
+    ];
+
+    for (const marker of requiredMarkers) {
+      if (!hasPageMarker(html, marker)) {
+        fail(`${relative}: CISSP Domain 4 guide is missing ${marker}`);
       }
     }
   }

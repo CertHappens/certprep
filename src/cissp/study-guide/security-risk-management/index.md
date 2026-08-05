@@ -73,6 +73,9 @@ relatedLinks:
   - title: "CISSP Domain 3: Security Architecture and Engineering"
     url: /cissp/study-guide/security-architecture-engineering/
     description: Apply governance, risk, privacy, threat-modeling, and supplier requirements to secure system and facility design.
+  - title: "CISSP Domain 4: Communication and Network Security"
+    url: /cissp/study-guide/communication-network-security/
+    description: Connect governance, asset requirements, architecture, and cryptography to network design, segmentation, infrastructure, and secure channels.
   - title: "Security+ Domain 5: Program Management and Oversight"
     url: /security-plus/sy0-701/study-guide/security-program-management-oversight/
     description: Refresh foundational governance, risk, third-party, compliance, audit, and awareness concepts.

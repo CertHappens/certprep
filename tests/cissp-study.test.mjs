@@ -39,6 +39,10 @@ test("CISSP navigation exposes overview and available study guides without an em
           label: "Domain 3: Architecture",
           url: "/cissp/study-guide/security-architecture-engineering/",
         },
+        {
+          label: "Domain 4: Network Security",
+          url: "/cissp/study-guide/communication-network-security/",
+        },
       ],
     },
   ]);
@@ -52,12 +56,13 @@ test("CISSP hub promotes the study roadmap and all available domain guides", asy
   assert.equal(cissp.resourcesFirst, true);
   assert.equal(cissp.sourceReviewed, "2026-08-05");
   assert.deepEqual(
-    cissp.currentResources.links.slice(0, 4).map((link) => link.url),
+    cissp.currentResources.links.slice(0, 5).map((link) => link.url),
     [
       "/cissp/study-guide/",
       "/cissp/study-guide/security-risk-management/",
       "/cissp/study-guide/asset-security/",
       "/cissp/study-guide/security-architecture-engineering/",
+      "/cissp/study-guide/communication-network-security/",
     ]
   );
 
@@ -79,6 +84,11 @@ test("CISSP hub promotes the study roadmap and all available domain guides", asy
         number: "3",
         url: "/cissp/study-guide/security-architecture-engineering/",
         linkLabel: "Open Domain 3 guide",
+      },
+      {
+        number: "4",
+        url: "/cissp/study-guide/communication-network-security/",
+        linkLabel: "Open Domain 4 guide",
       },
     ]
   );
@@ -105,6 +115,12 @@ test("CISSP study pages use the shared printable article contract and current ro
         "src/cissp/study-guide/security-architecture-engineering/index.md"
       ),
       route: "/cissp/study-guide/security-architecture-engineering/",
+    },
+    {
+      source: await readSource(
+        "src/cissp/study-guide/communication-network-security/index.md"
+      ),
+      route: "/cissp/study-guide/communication-network-security/",
     },
   ];
 
@@ -346,5 +362,114 @@ test("CISSP Domain 3 covers all official objectives, architecture areas, and pri
     assert.match(domain, new RegExp(escapeRegExp(url)));
   }
 
+  assert.doesNotMatch(domain, /\u2014/);
+});
+
+
+test("CISSP Domain 4 covers all official objectives, network areas, and primary references", async () => {
+  const domain = await readSource(
+    "src/cissp/study-guide/communication-network-security/index.md"
+  );
+
+  const requiredSections = [
+    "domain-map",
+    "decision-order",
+    "models-addressing",
+    "secure-protocols",
+    "transport-performance",
+    "segmentation-flows",
+    "edge-wireless",
+    "software-defined-cloud",
+    "monitoring-management",
+    "network-components",
+    "communication-channels",
+    "ai-networking",
+    "exam-traps",
+    "review-checklist",
+    "official-references",
+  ];
+
+  for (const id of requiredSections) {
+    assert.match(domain, new RegExp(`id=["']${id}["']`));
+  }
+
+  for (let objective = 1; objective <= 3; objective += 1) {
+    assert.match(domain, new RegExp(`<td>4\\.${objective}<\\/td>`));
+  }
+
+  const requiredMarkers = [
+    "Open Systems Interconnection",
+    "Transmission Control Protocol/Internet Protocol",
+    "IPv4",
+    "IPv6",
+    "Unicast",
+    "Broadcast",
+    "Multicast",
+    "Anycast",
+    "Internet Protocol Security",
+    "Secure Shell",
+    "Transport Layer Security",
+    "multilayer protocol",
+    "converged network",
+    "InfiniBand over Ethernet",
+    "Compute Express Link",
+    "data plane",
+    "control plane",
+    "management plane",
+    "bandwidth",
+    "latency",
+    "jitter",
+    "throughput",
+    "signal-to-noise ratio",
+    "north-south traffic",
+    "east-west traffic",
+    "out-of-band management",
+    "air-gapped",
+    "virtual local area network",
+    "virtual private network",
+    "Virtual routing and forwarding",
+    "Microsegmentation",
+    "zero trust",
+    "Content delivery network",
+    "Software-defined networking",
+    "Software-Defined Wide Area Networking",
+    "Network functions virtualization",
+    "Virtual Private Cloud",
+    "Network observability",
+    "Network Access Control",
+    "Voice over Internet Protocol",
+    "Remote access",
+    "Third-party connectivity",
+    "Network Detection and Response",
+  ];
+
+  for (const marker of requiredMarkers) {
+    assert.match(domain, new RegExp(escapeRegExp(marker), "i"));
+  }
+
+  const requiredReferences = [
+    "https://www.isc2.org/certifications/cissp/cissp-certification-exam-outline",
+    "https://csrc.nist.gov/pubs/sp/800/215/final",
+    "https://csrc.nist.gov/pubs/sp/800/207/final",
+    "https://csrc.nist.gov/pubs/sp/800/52/r2/final",
+    "https://csrc.nist.gov/pubs/sp/800/77/r1/final",
+    "https://csrc.nist.gov/pubs/sp/800/46/r2/final",
+    "https://csrc.nist.gov/pubs/sp/800/153/final",
+    "https://csrc.nist.gov/pubs/sp/800/137/final",
+    "https://csrc.nist.gov/pubs/sp/800/125/b/final",
+    "https://www.rfc-editor.org/rfc/rfc8200",
+    "https://www.rfc-editor.org/rfc/rfc4301",
+    "https://www.rfc-editor.org/rfc/rfc4251",
+    "https://www.rfc-editor.org/rfc/rfc8446",
+    "https://www.rfc-editor.org/rfc/rfc7568",
+  ];
+
+  for (const url of requiredReferences) {
+    assert.match(domain, new RegExp(escapeRegExp(url)));
+  }
+
+  assert.match(domain, /SSL is obsolete and should not be treated as an acceptable modern protocol/);
+  assert.match(domain, /A VLAN creates a separate Layer 2 domain/);
+  assert.match(domain, /A VPN protects traffic through the tunnel/);
   assert.doesNotMatch(domain, /\u2014/);
 });
