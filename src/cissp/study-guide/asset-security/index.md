@@ -78,16 +78,18 @@ relatedLinks:
   - title: "CISSP Domain 6: Security Assessment and Testing"
     url: /cissp/study-guide/security-assessment-testing/
     description: Test classification, handling, retention, sanitization, and data-protection controls with evidence that supports asset-owner decisions.
+  - title: "CISSP Domain 7: Security Operations"
+    url: /cissp/study-guide/security-operations/
+    description: Apply investigations, logging, monitoring, incident response, configuration, patching, recovery, continuity, physical safeguards, and personnel safety.
+  - title: "CISSP Domain 8: Software Development Security"
+    url: /cissp/study-guide/software-development-security/
+    description: Protect source code, repositories, build artifacts, dependencies, test data, models, logs, and secrets throughout their lifecycle.
   - title: "Security+ Domain 3: Security Architecture"
     url: /security-plus/sy0-701/study-guide/security-architecture/
     description: Refresh data protection, resilience, cloud, virtualization, and architecture concepts at the foundational level.
   - title: Hashing, Encryption, and Encoding Quick Reference
     url: /security-plus/quick-review/hashing-encryption-encoding/
     description: Compare common methods used to protect confidentiality and integrity across different data states.
-
-  - title: "CISSP Domain 7: Security Operations"
-    url: /cissp/study-guide/security-operations/
-    description: Apply investigations, logging, monitoring, incident response, configuration, patching, recovery, continuity, physical safeguards, and personnel safety.
 ---
 Domain 2 accounts for 10 percent of the current CISSP exam outline. Its central question is simple to state and difficult to answer well: what does the organization have, why does it matter, who is accountable for it, and what must happen to it throughout its useful life?
 

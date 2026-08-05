@@ -11,7 +11,7 @@
     "status": {
       "label": "How to use this hub",
       "heading": "Start with the study guide, then map the scope to your experience",
-      "body": "Use the CISSP study guide to organize all eight domains. The available domain guides build from governance and risk through asset protection, secure architecture, protected communications, identity and access management, assessment and testing, and security operations."
+      "body": "Use the CISSP study guide to organize all eight domains. The domain guides build from governance and risk through asset protection, secure architecture, protected communications, identity and access management, assessment and testing, security operations, and software development security."
     },
     "summary": [
       "CISSP covers security across an entire organization. Technical knowledge still matters, but candidates also need to connect controls to business objectives, legal duties, architecture, risk, operations, and program leadership.",
@@ -141,7 +141,9 @@
         "number": "8",
         "name": "Software Development Security",
         "weight": "10%",
-        "focus": "Secure development lifecycles, software controls, acquisition, testing, supply chains, and application risk."
+        "focus": "Secure development lifecycles, software controls, acquisition, testing, supply chains, and application risk.",
+        "url": "/cissp/study-guide/software-development-security/",
+        "linkLabel": "Open Domain 8 guide"
       }
     ],
     "experience": {
@@ -195,7 +197,7 @@
     },
     "currentResources": {
       "heading": "CISSP study resources available now",
-      "intro": "Begin with the full study roadmap, then use the available domain guides for governance, risk, asset protection, secure architecture, protected communications, identity and access decisions, assessment evidence, and security operations.",
+      "intro": "Begin with the full study roadmap, then use the eight domain guides for governance, risk, asset protection, secure architecture, protected communications, identity and access decisions, assessment evidence, security operations, and secure software development.",
       "links": [
         {
           "title": "CISSP study guide",
@@ -236,6 +238,11 @@
           "title": "Domain 7: Security Operations",
           "url": "/cissp/study-guide/security-operations/",
           "description": "Study investigations, logging and monitoring, configuration and change management, incident response, detection, patching, recovery, continuity, physical security, personnel safety, and AI-assisted operations."
+        },
+        {
+          "title": "Domain 8: Software Development Security",
+          "url": "/cissp/study-guide/software-development-security/",
+          "description": "Study secure software lifecycles, development methods, repositories, CI/CD, application testing, acquired software, supply-chain controls, secure coding, APIs, and AI-assisted development."
         },
         {
           "title": "Security+ study guide",

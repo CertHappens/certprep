@@ -55,6 +55,10 @@ test("CISSP navigation exposes overview and available study guides without an em
           label: "Domain 7: Security Operations",
           url: "/cissp/study-guide/security-operations/",
         },
+        {
+          label: "Domain 8: Software Security",
+          url: "/cissp/study-guide/software-development-security/",
+        },
       ],
     },
   ]);
@@ -68,7 +72,7 @@ test("CISSP hub promotes the study roadmap and all available domain guides", asy
   assert.equal(cissp.resourcesFirst, true);
   assert.equal(cissp.sourceReviewed, "2026-08-05");
   assert.deepEqual(
-    cissp.currentResources.links.slice(0, 8).map((link) => link.url),
+    cissp.currentResources.links.slice(0, 9).map((link) => link.url),
     [
       "/cissp/study-guide/",
       "/cissp/study-guide/security-risk-management/",
@@ -78,6 +82,7 @@ test("CISSP hub promotes the study roadmap and all available domain guides", asy
       "/cissp/study-guide/identity-access-management/",
       "/cissp/study-guide/security-assessment-testing/",
       "/cissp/study-guide/security-operations/",
+      "/cissp/study-guide/software-development-security/",
     ]
   );
 
@@ -119,6 +124,11 @@ test("CISSP hub promotes the study roadmap and all available domain guides", asy
         number: "7",
         url: "/cissp/study-guide/security-operations/",
         linkLabel: "Open Domain 7 guide",
+      },
+      {
+        number: "8",
+        url: "/cissp/study-guide/software-development-security/",
+        linkLabel: "Open Domain 8 guide",
       },
     ]
   );
@@ -169,6 +179,12 @@ test("CISSP study pages use the shared printable article contract and current ro
         "src/cissp/study-guide/security-operations/index.md"
       ),
       route: "/cissp/study-guide/security-operations/",
+    },
+    {
+      source: await readSource(
+        "src/cissp/study-guide/software-development-security/index.md"
+      ),
+      route: "/cissp/study-guide/software-development-security/",
     },
   ];
 
@@ -639,6 +655,7 @@ test("CISSP domain-guide body headings use the ToC section numbers while preserv
     "src/cissp/study-guide/identity-access-management/index.md",
     "src/cissp/study-guide/security-assessment-testing/index.md",
     "src/cissp/study-guide/security-operations/index.md",
+    "src/cissp/study-guide/software-development-security/index.md",
   ];
 
   for (const file of files) {
@@ -872,3 +889,101 @@ test("CISSP Domain 6 covers all official objectives, assessment areas, and prima
   assert.doesNotMatch(domain, /coming soon|possible next|in development/i);
   assert.doesNotMatch(domain, /\u2014/);
 });
+
+test("CISSP Domain 8 covers all official objectives, software-security areas, and primary references", async () => {
+  const domain = await readSource(
+    "src/cissp/study-guide/software-development-security/index.md"
+  );
+
+  const requiredSections = [
+    "domain-map",
+    "decision-order",
+    "secure-sdlc",
+    "development-methods",
+    "maturity-teams",
+    "maintenance-change",
+    "development-ecosystem",
+    "pipelines-repositories",
+    "application-testing",
+    "effectiveness",
+    "acquired-software",
+    "software-supply-chain",
+    "secure-coding",
+    "api-security",
+    "software-defined-security",
+    "ai-development",
+    "exam-traps",
+    "review-checklist",
+    "official-references",
+  ];
+
+  for (const id of requiredSections) {
+    assert.match(domain, new RegExp(`id=["']${id}["']`));
+  }
+
+  for (let objective = 1; objective <= 5; objective += 1) {
+    assert.match(domain, new RegExp(`<td>8\\.${objective}<\\/td>`));
+  }
+
+  const requiredMarkers = [
+    "Software Development Life Cycle",
+    "Waterfall",
+    "Agile",
+    "Development and Operations",
+    "Development, Security, and Operations",
+    "Scaled Agile Framework",
+    "Capability Maturity Model",
+    "Software Assurance Maturity Model",
+    "Integrated Product Team",
+    "Technical debt",
+    "Integrated Development Environment",
+    "Continuous Integration",
+    "Continuous Delivery",
+    "Software configuration management",
+    "code repository",
+    "Static Application Security Testing",
+    "Dynamic Application Security Testing",
+    "Software Composition Analysis",
+    "Interactive Application Security Testing",
+    "Commercial off-the-shelf",
+    "open-source software",
+    "Software Bill of Materials",
+    "Vulnerability Exploitability eXchange",
+    "Software provenance",
+    "Input validation",
+    "Injection",
+    "Application Programming Interface",
+    "software-defined security",
+    "Infrastructure as code",
+    "AI-assisted coding",
+    "hallucinated packages",
+  ];
+
+  for (const marker of requiredMarkers) {
+    assert.match(domain, new RegExp(escapeRegExp(marker), "i"));
+  }
+
+  const requiredReferences = [
+    "https://www.isc2.org/certifications/cissp/cissp-certification-exam-outline",
+    "https://csrc.nist.gov/pubs/sp/800/218/final",
+    "https://csrc.nist.gov/pubs/sp/800/218/a/final",
+    "https://csrc.nist.gov/pubs/sp/800/161/r1/upd1/final",
+    "https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final",
+    "https://csrc.nist.gov/Projects/ssdf",
+    "https://owasp.org/www-project-samm/",
+    "https://owasp.org/www-project-application-security-verification-standard/",
+    "https://owasp.org/Top10/",
+    "https://owasp.org/API-Security/",
+  ];
+
+  for (const url of requiredReferences) {
+    assert.match(domain, new RegExp(escapeRegExp(url)));
+  }
+
+  assert.match(domain, /An SBOM improves visibility\. It does not prove that a component is safe/);
+  assert.match(domain, /AI output is untrusted data/);
+  assert.match(domain, /Authentication proves an identity\. Authorization decides what that identity may do/);
+  assert.doesNotMatch(domain, /coming soon|possible next|in development/i);
+  assert.doesNotMatch(domain, /\u2014/);
+});
+

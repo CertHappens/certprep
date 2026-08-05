@@ -215,6 +215,7 @@ const publicPageFiles = [
   "cissp/study-guide/identity-access-management/index.html",
   "cissp/study-guide/security-assessment-testing/index.html",
   "cissp/study-guide/security-operations/index.html",
+  "cissp/study-guide/software-development-security/index.html",
   "ccna/index.html",
   "ccna/acronyms/index.html",
   "ccna/commands/index.html",
@@ -282,6 +283,7 @@ const articlePageFiles = [
   "cissp/study-guide/identity-access-management/index.html",
   "cissp/study-guide/security-assessment-testing/index.html",
   "cissp/study-guide/security-operations/index.html",
+  "cissp/study-guide/software-development-security/index.html",
   "explore/career/paths/index.html",
   "explore/career/it-support-or-cybersecurity/index.html",
   "explore/career/cybersecurity-paths/index.html",
@@ -464,6 +466,7 @@ const wholeSitePageMarkers = new Map([
       "/cissp/study-guide/identity-access-management/",
       "/cissp/study-guide/security-assessment-testing/",
       "/cissp/study-guide/security-operations/",
+      "/cissp/study-guide/software-development-security/",
       "https://www.isc2.org/certifications/cissp/cissp-certification-exam-outline"
     ]
   ],
@@ -1387,6 +1390,7 @@ for (const file of htmlFiles) {
     "/cissp/study-guide/identity-access-management/",
     "/cissp/study-guide/security-assessment-testing/",
     "/cissp/study-guide/security-operations/",
+    "/cissp/study-guide/software-development-security/",
     "/ccna/",
     "/explore/",
     "/explore/career/paths/",
@@ -2630,7 +2634,8 @@ for (const file of htmlFiles) {
       'href="/cissp/study-guide/communication-network-security/"',
       'href="/cissp/study-guide/identity-access-management/"',
       'href="/cissp/study-guide/security-assessment-testing/"',
-      'href="/cissp/study-guide/security-operations/"'
+      'href="/cissp/study-guide/security-operations/"',
+      'href="/cissp/study-guide/software-development-security/"'
     ];
 
     for (const marker of requiredMarkers) {
@@ -2985,6 +2990,64 @@ for (const file of htmlFiles) {
     for (const marker of requiredMarkers) {
       if (!hasPageMarker(html, marker)) {
         fail(`${relative}: CISSP Domain 7 guide is missing ${marker}`);
+      }
+    }
+  }
+
+  if (relative === "cissp/study-guide/software-development-security/index.html") {
+    if (!headingMatches(html, "CISSP Domain 8: Software Development Security")) {
+      fail(`${relative}: expected CISSP Domain 8 h1 is missing`);
+    }
+
+    if (!html.includes("data-print-guide")) {
+      fail(`${relative}: CISSP Domain 8 guide is missing the shared Print | Save control`);
+    }
+
+    const requiredSectionIds = [
+      "domain-map",
+      "decision-order",
+      "secure-sdlc",
+      "development-methods",
+      "maturity-teams",
+      "maintenance-change",
+      "development-ecosystem",
+      "pipelines-repositories",
+      "application-testing",
+      "effectiveness",
+      "acquired-software",
+      "software-supply-chain",
+      "secure-coding",
+      "api-security",
+      "software-defined-security",
+      "ai-development",
+      "exam-traps",
+      "review-checklist",
+      "official-references"
+    ];
+
+    for (const id of requiredSectionIds) {
+      if (!html.includes(`id="${id}"`)) {
+        fail(`${relative}: CISSP Domain 8 guide is missing section #${id}`);
+      }
+    }
+
+    const requiredMarkers = [
+      "Software Development Life Cycle",
+      "Development, Security, and Operations",
+      "Software Assurance Maturity Model",
+      "Continuous Integration",
+      "Static Application Security Testing",
+      "Software Composition Analysis",
+      "Software Bill of Materials",
+      "Application Programming Interface",
+      "software-defined security",
+      "AI-assisted development",
+      'href="/cissp/study-guide/"'
+    ];
+
+    for (const marker of requiredMarkers) {
+      if (!hasPageMarker(html, marker)) {
+        fail(`${relative}: CISSP Domain 8 guide is missing ${marker}`);
       }
     }
   }

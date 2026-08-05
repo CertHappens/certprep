@@ -99,6 +99,9 @@ relatedLinks:
   - title: "CISSP Domain 6: Security Assessment and Testing"
     url: /cissp/study-guide/security-assessment-testing/
     description: Use assessment findings, control evidence, audits, metrics, and retesting to improve security operations.
+  - title: "CISSP Domain 8: Software Development Security"
+    url: /cissp/study-guide/software-development-security/
+    description: Connect software releases to logging, monitoring, patching, incident response, change control, recovery, and retirement.
   - title: Security+ Security Operations Guide
     url: /security-plus/sy0-701/study-guide/security-operations/
     description: Refresh operational controls, vulnerability management, monitoring, incident response, and recovery concepts before applying the CISSP perspective.

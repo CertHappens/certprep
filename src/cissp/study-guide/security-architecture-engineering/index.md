@@ -82,16 +82,18 @@ relatedLinks:
   - title: "CISSP Domain 6: Security Assessment and Testing"
     url: /cissp/study-guide/security-assessment-testing/
     description: Verify architecture assumptions, control implementation, cryptography, facilities, and lifecycle requirements through planned assessment and testing.
+  - title: "CISSP Domain 7: Security Operations"
+    url: /cissp/study-guide/security-operations/
+    description: Apply investigations, logging, monitoring, incident response, configuration, patching, recovery, continuity, physical safeguards, and personnel safety.
+  - title: "CISSP Domain 8: Software Development Security"
+    url: /cissp/study-guide/software-development-security/
+    description: Carry secure design principles, threat models, cryptography, architecture requirements, and lifecycle controls into software development.
   - title: "Security+ Domain 3: Security Architecture"
     url: /security-plus/sy0-701/study-guide/security-architecture/
     description: Refresh resilience, cloud, virtualization, data protection, and architecture concepts at the foundational level.
   - title: Hashing, Encryption, and Encoding Quick Reference
     url: /security-plus/quick-review/hashing-encryption-encoding/
     description: Compare foundational cryptographic and data-transformation methods before reviewing CISSP-level design decisions.
-
-  - title: "CISSP Domain 7: Security Operations"
-    url: /cissp/study-guide/security-operations/
-    description: Apply investigations, logging, monitoring, incident response, configuration, patching, recovery, continuity, physical safeguards, and personnel safety.
 ---
 Domain 3 accounts for 13 percent of the current CISSP exam outline. It asks how trustworthy systems are designed, built, operated, and retired. The domain ranges from abstract security models to cryptography, cloud and industrial architectures, physical facilities, environmental protections, and the information-system lifecycle.
 

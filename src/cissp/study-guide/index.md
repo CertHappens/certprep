@@ -66,6 +66,9 @@ relatedLinks:
   - title: "Domain 7: Security Operations"
     url: /cissp/study-guide/security-operations/
     description: Operate investigations, monitoring, incident response, configuration, patching, recovery, continuity, physical safeguards, and personnel safety.
+  - title: "Domain 8: Software Development Security"
+    url: /cissp/study-guide/software-development-security/
+    description: Build security into software planning, development, testing, acquisition, delivery, operation, change, and retirement.
   - title: Security+ SY0-701 Study Guide
     url: /security-plus/sy0-701/study-guide/
     description: Refresh security controls, architecture, operations, threats, and governance concepts at the foundational level.
@@ -328,6 +331,8 @@ Use the detailed [Security Operations guide](/cissp/study-guide/security-operati
 Software Development Security integrates security into development and acquisition. Topics include development methodologies, maturity models, coding practices, application testing, dependencies, repositories, continuous integration and delivery, acquired software, managed services, and cloud services.
 
 The most effective security work begins with requirements and design. Testing near release remains necessary, but it cannot replace secure architecture, trusted dependencies, controlled change, and lifecycle ownership.
+
+Use the detailed [Software Development Security guide](/cissp/study-guide/software-development-security/) to connect the secure software lifecycle, development methods, repositories, pipelines, application testing, acquired software, supply-chain controls, coding standards, APIs, software-defined security, and AI-assisted development.
 
 <h2 id="study-plan">A practical CISSP study plan</h2>
 

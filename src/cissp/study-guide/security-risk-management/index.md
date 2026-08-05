@@ -82,16 +82,18 @@ relatedLinks:
   - title: "CISSP Domain 6: Security Assessment and Testing"
     url: /cissp/study-guide/security-assessment-testing/
     description: Use assessments, control testing, metrics, reports, remediation, and audits to verify that governance requirements are working.
+  - title: "CISSP Domain 7: Security Operations"
+    url: /cissp/study-guide/security-operations/
+    description: Apply investigations, logging, monitoring, incident response, configuration, patching, recovery, continuity, physical safeguards, and personnel safety.
+  - title: "CISSP Domain 8: Software Development Security"
+    url: /cissp/study-guide/software-development-security/
+    description: Connect software governance, supplier oversight, legal duties, policy, risk response, and security requirements to the development lifecycle.
   - title: "Security+ Domain 5: Program Management and Oversight"
     url: /security-plus/sy0-701/study-guide/security-program-management-oversight/
     description: Refresh foundational governance, risk, third-party, compliance, audit, and awareness concepts.
   - title: Recovery Metrics Quick Reference
     url: /security-plus/quick-review/recovery-metrics/
     description: Compare recovery time, recovery point, repair, and failure measurements used in continuity decisions.
-
-  - title: "CISSP Domain 7: Security Operations"
-    url: /cissp/study-guide/security-operations/
-    description: Apply investigations, logging, monitoring, incident response, configuration, patching, recovery, continuity, physical safeguards, and personnel safety.
 ---
 Domain 1 accounts for 16 percent of the current CISSP exam outline, the largest average weight of the eight domains. It establishes how an organization decides what security should accomplish, who is accountable, which obligations apply, how risk is evaluated, and how people are prepared to follow the program.
 

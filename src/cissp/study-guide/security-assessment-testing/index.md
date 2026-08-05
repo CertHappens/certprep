@@ -91,6 +91,9 @@ relatedLinks:
   - title: "CISSP Domain 7: Security Operations"
     url: /cissp/study-guide/security-operations/
     description: Apply investigations, logging, monitoring, incident response, configuration, patching, recovery, continuity, physical safeguards, and personnel safety.
+  - title: "CISSP Domain 8: Software Development Security"
+    url: /cissp/study-guide/software-development-security/
+    description: Apply code review, application testing, evidence, reporting, remediation, exceptions, and retesting throughout software delivery.
   - title: Security+ Security Operations Guide
     url: /security-plus/sy0-701/study-guide/security-operations/
     description: Refresh vulnerability management, monitoring, incident response, and operational evidence before applying the CISSP perspective.

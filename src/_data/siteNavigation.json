@@ -201,6 +201,10 @@
             {
               "label": "Domain 7: Security Operations",
               "url": "/cissp/study-guide/security-operations/"
+            },
+            {
+              "label": "Domain 8: Software Security",
+              "url": "/cissp/study-guide/software-development-security/"
             }
           ]
         }

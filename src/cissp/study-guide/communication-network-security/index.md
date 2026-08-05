@@ -77,6 +77,12 @@ relatedLinks:
   - title: "CISSP Domain 6: Security Assessment and Testing"
     url: /cissp/study-guide/security-assessment-testing/
     description: Assess network architecture, secure channels, segmentation, components, monitoring, remote access, and third-party connections.
+  - title: "CISSP Domain 7: Security Operations"
+    url: /cissp/study-guide/security-operations/
+    description: Apply investigations, logging, monitoring, incident response, configuration, patching, recovery, continuity, physical safeguards, and personnel safety.
+  - title: "CISSP Domain 8: Software Development Security"
+    url: /cissp/study-guide/software-development-security/
+    description: Protect application traffic, APIs, service connections, development environments, build systems, and deployment paths.
   - title: Network+ N10-009 Study Guide
     url: /network-plus/n10-009/study-guide/
     description: Refresh networking concepts, implementation, operations, security, and troubleshooting at the foundational level.
@@ -86,9 +92,6 @@ relatedLinks:
   - title: IPv4 Subnetting Reference
     url: /network-plus/n10-009/study-guide/ipv4-subnetting/
     description: Refresh subnet boundaries, prefixes, address ranges, and host calculations used in network design.
-  - title: "CISSP Domain 7: Security Operations"
-    url: /cissp/study-guide/security-operations/
-    description: Apply investigations, logging, monitoring, incident response, configuration, patching, recovery, continuity, physical safeguards, and personnel safety.
 ---
 Domain 4 accounts for 13 percent of the current CISSP exam outline. It asks how an organization moves information between people, systems, sites, cloud services, devices, and external partners without losing confidentiality, integrity, availability, or control.
 
