@@ -8,7 +8,7 @@ printable: true
 printTitle: "Network+ N10-009 Domain 2: Network Implementation"
 author: certHappens
 datePublished: 2026-07-26
-dateModified: 2026-07-31
+dateModified: 2026-08-05
 articleSection: Network+ N10-009 Domain 2
 eyebrow: Network+ domain 2 guide
 lede: Turn network requirements into working routes, VLANs, wireless coverage, and physical infrastructure without losing sight of how traffic must move.
@@ -605,7 +605,7 @@ A wireless survey or spectrum analysis should guide channel plans. Choosing the 
 
 - The **service set identifier (SSID)** is the human-facing wireless network name.
 - The **basic service set identifier (BSSID)** identifies a specific basic service set, commonly tied to one access-point radio interface.
-- An **extended service set identifier (ESSID)** refers to the shared network identity used across multiple access points to provide broader coverage and roaming.
+- An **extended service set identifier (ESSID)** is the wireless network name shared by multiple access points. It allows users to move between those access points while remaining on the same wireless network.
 
 Multiple access points can advertise the same SSID while using different BSSIDs and channels. That is normal in an infrastructure deployment.
 

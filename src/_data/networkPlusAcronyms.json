@@ -721,7 +721,7 @@
           "id": "essid",
           "term": "ESSID",
           "expansion": "Extended Service Set Identifier",
-          "meaning": "A name associated with an extended wireless service spanning multiple access points. In ordinary use, SSID is the more common term.",
+          "meaning": "The wireless network name shared by multiple access points so users can move between them while staying on the same wireless network.",
           "domains": [
             "2"
           ],
@@ -1376,7 +1376,7 @@
           "id": "mib",
           "term": "MIB",
           "expansion": "Management Information Base",
-          "meaning": "A structured collection of objects and identifiers that an SNMP manager can read or modify on a managed device.",
+          "meaning": "The catalog that describes the information a device can report through SNMP.",
           "domains": [
             "3"
           ],
@@ -1656,7 +1656,7 @@
           "id": "oid",
           "term": "OID",
           "expansion": "Object Identifier",
-          "meaning": "A hierarchical identifier for a managed object, commonly used with SNMP and management information bases to identify a specific value or counter.",
+          "meaning": "The unique number used to request one item from an SNMP management catalog.",
           "domains": [
             "3"
           ],
@@ -2165,7 +2165,7 @@
           "id": "sase",
           "term": "SASE",
           "expansion": "Secure Access Service Edge",
-          "meaning": "A cloud-delivered architecture that combines network connectivity and security services near users and resources.",
+          "meaning": "Delivers networking and security controls through cloud services so users and branch locations receive consistent protection wherever they connect.",
           "domains": [
             "1"
           ],
@@ -2383,7 +2383,7 @@
           "id": "snmp",
           "term": "SNMP",
           "expansion": "Simple Network Management Protocol",
-          "meaning": "A protocol used to monitor and manage network devices and report operational information.",
+          "meaning": "Lets monitoring software request status and counters from network devices and receive event notifications.",
           "domains": [
             "1",
             "3"

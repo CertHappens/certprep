@@ -340,7 +340,7 @@ The appropriate response may be replacement, migration, isolation, compensating 
 
 <h2 id="remanence">Address data remanence and destruction</h2>
 
-Deleting a file or removing a directory entry does not necessarily remove the underlying data. **Data remanence** is residual information that remains after an ordinary deletion, formatting action, or other attempt to remove it.
+**Data remanence** means deleted data can still remain on a storage device and may be recoverable. Deleting a file, formatting a drive, or removing a directory entry does not always erase the underlying information.
 
 Sanitization should make access to the target data infeasible for the required level of effort. The method depends on media type, sensitivity, reuse plan, threat, available assurance, and organizational standard.
 
@@ -392,7 +392,9 @@ Encryption is important, but it does not establish authorized use, correct class
 
 **Data Loss Prevention (DLP)** identifies and monitors sensitive content and can block, warn, quarantine, encrypt, or record actions involving data at endpoints, across networks, or in repositories. DLP needs accurate classification, tuned rules, exception handling, and response processes. A flood of false positives can cause users to bypass the control or analysts to ignore alerts.
 
-A **Cloud Access Security Broker (CASB)** provides visibility and policy enforcement between cloud consumers and cloud services. Capabilities may include discovery, access policy, data protection, threat detection, and compliance support. Architecture matters because controls differ among forward proxy, reverse proxy, application programming interface integration, and provider-native approaches.
+A **Cloud Access Security Broker (CASB)** helps an organization see and control how people use cloud services. Depending on how it is connected, it can enforce access rules, protect data, detect threats, and support compliance.
+
+CASBs can work through proxies, application programming interfaces, or controls built into the cloud provider. The connection method affects what the CASB can see and block.
 
 Other methods include access control, encryption, tokenization, masking, rights management, secure enclaves, database activity monitoring, information flow controls, integrity validation, backups, and physical safeguards.
 

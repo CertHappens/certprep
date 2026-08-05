@@ -198,7 +198,7 @@ The organization should document who configures identities, protects data, patch
 
 <h3>Secure Access Service Edge</h3>
 
-**Secure Access Service Edge (SASE)** combines wide-area networking and cloud-delivered security capabilities to apply policy closer to users, devices, applications, and data regardless of location. Common elements can include software-defined wide-area networking, secure web gateway, cloud access security broker, firewall capabilities, and zero-trust network access.
+**Secure Access Service Edge (SASE)** delivers networking and security controls through cloud services so users and branch locations can receive consistent protection wherever they connect. Common elements can include software-defined wide-area networking, secure web gateway, cloud access security broker, firewall capabilities, and zero-trust network access.
 
 The architectural question is not whether every named component is present. It is whether identity, traffic, policy, enforcement, availability, logging, privacy, and provider dependencies are addressed consistently.
 
@@ -254,7 +254,7 @@ Controls should trace to requirements, threats, risks, obligations, and architec
 
 A **functional requirement** states what the system or control must do, such as enforce multifactor authentication, encrypt stored records, prevent unapproved code execution, or retain audit events for a defined period.
 
-An **assurance requirement** states how much confidence is needed that the function is correctly designed, implemented, configured, and operating. Evidence may include independent testing, code review, formal analysis, validation, certification, supplier documentation, monitoring, or repeated control assessment.
+An **assurance requirement** says how much evidence is needed before the organization can trust that a control was built correctly and still works. That evidence may come from testing, code review, formal analysis, certification, supplier records, monitoring, or repeated assessments.
 
 A feature can exist with weak assurance. An encryption option that is disabled, incorrectly configured, poorly implemented, or dependent on exposed keys does not provide the intended protection.
 
@@ -287,7 +287,9 @@ These mechanisms reduce risk but do not make vulnerable software safe. A privile
 
 <h3>Trusted Platform Module and measured boot</h3>
 
-A **Trusted Platform Module (TPM)** is a hardware or firmware-based security component that can protect cryptographic material and record measurements associated with platform state. It can support device identity, secure boot processes, disk-encryption key protection, and attestation.
+A **Trusted Platform Module (TPM)** is a protected hardware or firmware component that stores cryptographic keys and records information about how a device started. It can help prove the device's identity, protect disk-encryption keys, and support secure boot.
+
+**Attestation** is evidence another system can check to determine whether the device is in an approved state.
 
 **Secure boot** checks whether boot components are signed by an approved authority before execution. **Measured boot** records measurements so another party can evaluate what started. One blocks unapproved components; the other creates evidence about the boot path.
 
@@ -398,7 +400,7 @@ Certificate validation should consider the trust chain, intended use, identity, 
 
 Algorithm selection considers protection goal, data lifetime, performance, platform support, interoperability, regulatory requirements, implementation maturity, key size, mode of operation, and known weaknesses.
 
-**Cryptographic agility** is the ability to identify where cryptography is used and replace algorithms, parameters, certificates, protocols, keys, and dependent components without redesigning the entire system. Inventory and migration planning matter because encrypted data and signed artifacts can outlive the technology that created them.
+**Cryptographic agility** means being able to find and replace outdated encryption, signing methods, certificates, protocols, and keys without rebuilding the entire system. This requires an accurate inventory and a migration plan because encrypted data and digital signatures may remain in use for many years.
 
 <h3>Quantum considerations</h3>
 

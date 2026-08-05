@@ -8,7 +8,7 @@ printable: true
 printTitle: "CCNA 200-301 v2.0 Domain 3: IP Routing"
 author: certHappens
 datePublished: 2026-07-31
-dateModified: 2026-08-01
+dateModified: 2026-08-05
 articleSection: CCNA 200-301 v2.0 Domain 3
 eyebrow: CCNA v2.0 domain 3 guide
 lede: Follow the packet. Read the routing table, prove the next hop, verify the routing relationship, and separate route-selection problems from forwarding and return-path problems.
@@ -161,9 +161,9 @@ For a destination outside both prefixes, the `/0` default route can be used if n
 
 This distinction is worth learning precisely.
 
-**Administrative distance (AD)** compares the trustworthiness of different route sources when they offer competing routes to the same destination prefix. On Cisco IOS, a connected route normally has AD 0, a static route normally has AD 1, and OSPF normally has AD 110.
+**Administrative distance (AD)** tells a Cisco router which route source to prefer when different sources know a route to the same destination prefix. A lower administrative distance is preferred. On Cisco IOS, a connected route normally has AD 0, a static route normally has AD 1, and OSPF normally has AD 110.
 
-**Metric** is protocol-specific. OSPF uses cost. A lower OSPF cost represents a more preferred OSPF path.
+A **metric** tells a routing protocol which of its available paths it prefers. Open Shortest Path First (OSPF) calls its metric cost, and a lower OSPF cost is preferred.
 
 Do not compare the OSPF metric in one prefix against the static-route metric in another prefix and conclude that the smaller number must win. Prefix matching and route-source selection happen in their proper contexts.
 

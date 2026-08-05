@@ -403,12 +403,14 @@ Risk management gives decision-makers a structured way to compare uncertainty, p
       <tr><td data-label="Term">Impact</td><td data-label="Meaning">The consequence to operations, assets, people, other organizations, or society.</td></tr>
       <tr><td data-label="Term">Inherent risk</td><td data-label="Meaning">Risk before considering the effect of controls.</td></tr>
       <tr><td data-label="Term">Residual risk</td><td data-label="Meaning">Risk remaining after controls and other treatments are considered.</td></tr>
-      <tr><td data-label="Term">Risk appetite</td><td data-label="Meaning">The broad amount and type of risk an organization is willing to pursue or retain.</td></tr>
-      <tr><td data-label="Term">Risk tolerance</td><td data-label="Meaning">The acceptable variation or threshold around a specific objective or risk area.</td></tr>
+      <tr><td data-label="Term">Risk appetite</td><td data-label="Meaning">The amount of possible loss, harm, disruption, or uncertainty an organization is willing to accept while pursuing its goals.</td></tr>
+      <tr><td data-label="Term">Risk tolerance</td><td data-label="Meaning">The limit for how much loss, harm, delay, or disruption is acceptable in one area. For example, an organization may accept some downtime but set a maximum of two hours.</td></tr>
       <tr><td data-label="Term">Risk capacity</td><td data-label="Meaning">The maximum risk the organization can absorb without threatening its viability or obligations.</td></tr>
     </tbody>
   </table>
 </div>
+
+Risk appetite sets the broad boundary. Risk tolerance turns that boundary into measurable limits.
 
 <h3>Qualitative and quantitative analysis</h3>
 

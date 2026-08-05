@@ -459,7 +459,7 @@
           "id": "casb",
           "term": "CASB",
           "expansion": "Cloud access security broker",
-          "meaning": "A control point that applies security policy between users and cloud services.",
+          "meaning": "Helps an organization see and control how people use cloud services.",
           "domains": [
             "3",
             "4"
@@ -3047,7 +3047,7 @@
           "id": "sase",
           "term": "SASE",
           "expansion": "Secure access service edge",
-          "meaning": "A cloud-delivered architecture that combines network connectivity and security services near users and resources.",
+          "meaning": "Delivers networking and security controls through cloud services so users and branch locations receive consistent protection wherever they connect.",
           "domains": [
             "3",
             "4"
@@ -3292,7 +3292,7 @@
           "id": "snmp",
           "term": "SNMP",
           "expansion": "Simple Network Management Protocol",
-          "meaning": "A protocol used to monitor and manage network devices and report operational information.",
+          "meaning": "Lets monitoring software request status and counters from network devices and receive event notifications.",
           "domains": [
             "3",
             "4"
@@ -3675,7 +3675,7 @@
           "id": "tpm",
           "term": "TPM",
           "expansion": "Trusted Platform Module",
-          "meaning": "A hardware security component that protects keys and supports measured boot, attestation, and device-bound cryptography.",
+          "meaning": "A protected hardware component that stores cryptographic keys and records how a device started.",
           "domains": [
             "1",
             "3",
@@ -4199,7 +4199,7 @@
           "id": "xss",
           "term": "XSS",
           "expansion": "Cross-site scripting",
-          "meaning": "An injection attack that causes untrusted script to run in another user's browser.",
+          "meaning": "An attack that makes a trusted website send attacker-controlled script to another user's browser.",
           "domains": [
             "2"
           ],

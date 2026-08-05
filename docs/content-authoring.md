@@ -93,6 +93,7 @@ Every article should solve a real reader problem. It should teach, compare, demo
 Prefer:
 
 - Plain language and direct reader-focused wording
+- Definitions that begin with the ordinary meaning before adding formal or technical detail
 - Concrete examples and scenario clues
 - Clear distinctions between commonly confused concepts
 - Short paragraphs and descriptive headings
@@ -132,6 +133,18 @@ Complete this review before publishing an article:
 10. Scan public copy for em dashes before committing.
 
 A few natural contrasts are acceptable when the subject requires them. The warning is about a repeated writing pattern, not a banned word.
+
+### Plain-language definitions
+
+When introducing an important term:
+
+1. State what it means in ordinary language.
+2. Add the technical conditions, components, or limits that matter.
+3. Give a concrete example or short practical distinction when it would improve retention.
+
+Do not define a term by repeating the same unclear word inside its definition when a clearer synonym or concrete explanation is available. For example, explain risk through possible loss, harm, disruption, uncertainty, or missed objectives before relying on the word `risk` to carry the meaning.
+
+When formal wording is necessary, keep it and follow it with a direct summary. Prefer a short definition that a learner can remember, then add precision, rather than opening with dense terminology and expecting the learner to work backward to the main idea.
 
 ## Acronyms and initialisms
 
