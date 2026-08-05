@@ -177,6 +177,10 @@
             {
               "label": "Domain 1: Risk Management",
               "url": "/cissp/study-guide/security-risk-management/"
+            },
+            {
+              "label": "Domain 2: Asset Security",
+              "url": "/cissp/study-guide/asset-security/"
             }
           ]
         }

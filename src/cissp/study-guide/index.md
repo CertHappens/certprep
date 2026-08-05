@@ -8,6 +8,7 @@ printable: true
 printTitle: CISSP Study Guide
 author: certHappens
 datePublished: 2026-08-05
+dateModified: 2026-08-05
 articleSection: CISSP Study Guide
 eyebrow: CISSP study guide
 lede: Build a study plan around the eight official domains, then practice connecting technical choices to organizational risk, responsibilities, and business outcomes.
@@ -47,6 +48,9 @@ relatedLinks:
   - title: "Domain 1: Security and Risk Management"
     url: /cissp/study-guide/security-risk-management/
     description: Build the ethics, governance, legal, continuity, personnel, risk, supply-chain, and awareness foundation.
+  - title: "Domain 2: Asset Security"
+    url: /cissp/study-guide/asset-security/
+    description: Follow information and other assets through classification, handling, ownership, retention, protection, and destruction.
   - title: Security+ SY0-701 Study Guide
     url: /security-plus/sy0-701/study-guide/
     description: Refresh security controls, architecture, operations, threats, and governance concepts at the foundational level.
@@ -123,6 +127,11 @@ Do not study each domain as an isolated container. Security and Risk Management 
         <td data-label="Need">Governance and risk foundation</td>
         <td data-label="Best starting point"><a href="/cissp/study-guide/security-risk-management/">Domain 1 guide</a></td>
         <td data-label="Use it for">Ethics, legal duties, policy, continuity, personnel security, risk, supply chains, and awareness.</td>
+      </tr>
+      <tr>
+        <td data-label="Need">Classification and data lifecycle</td>
+        <td data-label="Best starting point"><a href="/cissp/study-guide/asset-security/">Domain 2 guide</a></td>
+        <td data-label="Use it for">Classification, ownership, handling, data roles, retention, sanitization, and protection controls.</td>
       </tr>
       <tr>
         <td data-label="Need">Security controls and operations refresher</td>
@@ -243,7 +252,7 @@ Start with the detailed [Security and Risk Management guide](/cissp/study-guide/
 
 Asset Security follows information and other assets through classification, ownership, handling, storage, retention, protection, and destruction. Study the roles of owner, controller, custodian, processor, user, and data subject. Connect each role to authority and responsibility rather than memorizing titles without context.
 
-A classification label matters because it drives handling requirements. Those requirements influence access control, encryption, monitoring, backup, retention, transmission, and disposal.
+A classification label matters because it drives handling requirements. Those requirements influence access control, encryption, monitoring, backup, retention, transmission, and disposal. Use the detailed [Asset Security guide](/cissp/study-guide/asset-security/) to connect the six official objectives to practical lifecycle decisions.
 
 <h3 id="domain-3">Domain 3: Security Architecture and Engineering</h3>
 

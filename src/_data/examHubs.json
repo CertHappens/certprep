@@ -11,7 +11,7 @@
     "status": {
       "label": "How to use this hub",
       "heading": "Start with the study guide, then map the scope to your experience",
-      "body": "Use the CISSP study guide to organize all eight domains and the Domain 1 guide to build the governance and risk foundation that influences decisions throughout the exam. Security+ and Network+ resources remain useful for targeted technical refreshers."
+      "body": "Use the CISSP study guide to organize all eight domains. The Domain 1 guide builds the governance and risk foundation, while Domain 2 follows information and other assets through classification, handling, ownership, retention, protection, and destruction."
     },
     "summary": [
       "CISSP covers security across an entire organization. Technical knowledge still matters, but candidates also need to connect controls to business objectives, legal duties, architecture, risk, operations, and program leadership.",
@@ -93,7 +93,9 @@
         "number": "2",
         "name": "Asset Security",
         "weight": "10%",
-        "focus": "Information and asset classification, ownership, handling, retention, privacy, and secure lifecycle decisions."
+        "focus": "Information and asset classification, ownership, handling, retention, privacy, and secure lifecycle decisions.",
+        "url": "/cissp/study-guide/asset-security/",
+        "linkLabel": "Open Domain 2 guide"
       },
       {
         "number": "3",
@@ -183,7 +185,7 @@
     },
     "currentResources": {
       "heading": "CISSP study resources available now",
-      "intro": "Begin with the full study roadmap, then use the Domain 1 guide for ethics, governance, law, business continuity, personnel security, risk, supply chains, and awareness programs.",
+      "intro": "Begin with the full study roadmap, then use the Domain 1 and Domain 2 guides for governance, risk, asset ownership, classification, handling, retention, and protection decisions.",
       "links": [
         {
           "title": "CISSP study guide",
@@ -194,6 +196,11 @@
           "title": "Domain 1: Security and Risk Management",
           "url": "/cissp/study-guide/security-risk-management/",
           "description": "Study ethics, governance, legal duties, policy, continuity, personnel security, risk, threat modeling, supply chains, and security learning programs."
+        },
+        {
+          "title": "Domain 2: Asset Security",
+          "url": "/cissp/study-guide/asset-security/",
+          "description": "Study classification, handling, ownership, inventories, data roles, lifecycle decisions, retention, sanitization, and data protection controls."
         },
         {
           "title": "Security+ study guide",

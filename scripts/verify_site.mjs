@@ -209,6 +209,7 @@ const publicPageFiles = [
   "cissp/index.html",
   "cissp/study-guide/index.html",
   "cissp/study-guide/security-risk-management/index.html",
+  "cissp/study-guide/asset-security/index.html",
   "ccna/index.html",
   "ccna/acronyms/index.html",
   "ccna/commands/index.html",
@@ -270,6 +271,7 @@ const articlePageFiles = [
   "copyright/index.html",
   "cissp/study-guide/index.html",
   "cissp/study-guide/security-risk-management/index.html",
+  "cissp/study-guide/asset-security/index.html",
   "explore/career/paths/index.html",
   "explore/career/it-support-or-cybersecurity/index.html",
   "explore/career/cybersecurity-paths/index.html",
@@ -1364,6 +1366,7 @@ for (const file of htmlFiles) {
     "/cissp/",
     "/cissp/study-guide/",
     "/cissp/study-guide/security-risk-management/",
+    "/cissp/study-guide/asset-security/",
     "/ccna/",
     "/explore/",
     "/explore/career/paths/",
@@ -2522,7 +2525,8 @@ for (const file of htmlFiles) {
 
     for (const href of [
       "/cissp/study-guide/",
-      "/cissp/study-guide/security-risk-management/"
+      "/cissp/study-guide/security-risk-management/",
+      "/cissp/study-guide/asset-security/"
     ]) {
       if (!html.includes(`href="${href}"`)) {
         fail(`${relative}: CISSP resource hub is missing ${href}`);
@@ -2596,7 +2600,8 @@ for (const file of htmlFiles) {
       "Security Assessment and Testing",
       "Security Operations",
       "Software Development Security",
-      'href="/cissp/study-guide/security-risk-management/"'
+      'href="/cissp/study-guide/security-risk-management/"',
+      'href="/cissp/study-guide/asset-security/"'
     ];
 
     for (const marker of requiredMarkers) {
@@ -2659,6 +2664,64 @@ for (const file of htmlFiles) {
     for (const marker of requiredMarkers) {
       if (!hasPageMarker(html, marker)) {
         fail(`${relative}: CISSP Domain 1 guide is missing ${marker}`);
+      }
+    }
+  }
+
+  if (relative === "cissp/study-guide/asset-security/index.html") {
+    if (!headingMatches(html, "CISSP Domain 2: Asset Security")) {
+      fail(`${relative}: expected CISSP Domain 2 h1 is missing`);
+    }
+
+    if (!html.includes("data-print-guide")) {
+      fail(`${relative}: CISSP Domain 2 guide is missing the shared Print | Save control`);
+    }
+
+    const requiredSectionIds = [
+      "domain-map",
+      "decision-order",
+      "classification",
+      "handling",
+      "provisioning",
+      "data-roles",
+      "lifecycle",
+      "retention",
+      "remanence",
+      "controls",
+      "ai-assets",
+      "exam-traps",
+      "review-checklist",
+      "official-references"
+    ];
+
+    for (const id of requiredSectionIds) {
+      if (!html.includes(`id="${id}"`)) {
+        fail(`${relative}: CISSP Domain 2 guide is missing section #${id}`);
+      }
+    }
+
+    const requiredMarkers = [
+      "Information classification",
+      "Asset classification",
+      "Data owner",
+      "Data controller",
+      "Data custodian",
+      "Data processor",
+      "Data remanence",
+      "End of Life",
+      "End of Support",
+      "Digital Rights Management",
+      "Data Loss Prevention",
+      "Cloud Access Security Broker",
+      "Clear",
+      "Purge",
+      "Destroy",
+      'href="/cissp/study-guide/"'
+    ];
+
+    for (const marker of requiredMarkers) {
+      if (!hasPageMarker(html, marker)) {
+        fail(`${relative}: CISSP Domain 2 guide is missing ${marker}`);
       }
     }
   }

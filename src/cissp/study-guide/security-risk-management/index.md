@@ -8,6 +8,7 @@ printable: true
 printTitle: "CISSP Domain 1: Security and Risk Management"
 author: certHappens
 datePublished: 2026-08-05
+dateModified: 2026-08-05
 articleSection: CISSP Domain 1
 eyebrow: CISSP Domain 1 guide
 lede: Connect ethics, governance, legal duties, business continuity, personnel decisions, risk, suppliers, and learning programs to the people accountable for each outcome.
@@ -66,6 +67,9 @@ relatedLinks:
   - title: CISSP Certification Overview
     url: /cissp/
     description: Review exam format, experience requirements, maintenance obligations, and candidate fit.
+  - title: "CISSP Domain 2: Asset Security"
+    url: /cissp/study-guide/asset-security/
+    description: Follow information and other assets through classification, handling, ownership, retention, protection, and destruction.
   - title: "Security+ Domain 5: Program Management and Oversight"
     url: /security-plus/sy0-701/study-guide/security-program-management-oversight/
     description: Refresh foundational governance, risk, third-party, compliance, audit, and awareness concepts.
@@ -221,9 +225,9 @@ Do not assume that selecting a framework completes governance. The organization 
 
 <h3>Due care and due diligence</h3>
 
-**Due care** is the reasonable care expected when protecting people, assets, and interests. It is visible in the controls and decisions the organization makes.
+**Due care** is the responsibility to take reasonable and appropriate steps to protect people, assets, and interests from foreseeable harm. It is demonstrated through the safeguards and decisions an organization actually puts into practice.
 
-**Due diligence** is the ongoing effort to investigate, verify, monitor, and maintain that care. It is visible in assessments, reviews, testing, monitoring, supplier checks, and corrective actions.
+**Due diligence** is the ongoing process of investigating, verifying, monitoring, and documenting whether those safeguards remain appropriate and effective. It is demonstrated through assessments, reviews, testing, supplier checks, and corrective actions.
 
 Buying a security tool can demonstrate neither by itself. The organization must select an appropriate control, configure it, operate it, monitor it, respond to findings, and adjust it as conditions change.
 
