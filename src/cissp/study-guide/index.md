@@ -57,6 +57,9 @@ relatedLinks:
   - title: "Domain 4: Communication and Network Security"
     url: /cissp/study-guide/communication-network-security/
     description: Connect network models, segmentation, secure protocols, infrastructure, monitoring, and protected communication channels.
+  - title: "Domain 5: Identity and Access Management"
+    url: /cissp/study-guide/identity-access-management/
+    description: Follow identity proofing, authentication, authorization, federation, provisioning, privileged access, and account removal.
   - title: Security+ SY0-701 Study Guide
     url: /security-plus/sy0-701/study-guide/
     description: Refresh security controls, architecture, operations, threats, and governance concepts at the foundational level.
@@ -143,6 +146,11 @@ Do not study each domain as an isolated container. Security and Risk Management 
         <td data-label="Need">Network architecture and protected communications</td>
         <td data-label="Best starting point"><a href="/cissp/study-guide/communication-network-security/">Domain 4 guide</a></td>
         <td data-label="Use it for">Models, secure protocols, segmentation, network components, monitoring, remote access, and third-party connectivity.</td>
+      </tr>
+      <tr>
+        <td data-label="Need">Identity, authentication, and access decisions</td>
+        <td data-label="Best starting point"><a href="/cissp/study-guide/identity-access-management/">Domain 5 guide</a></td>
+        <td data-label="Use it for">Identity proofing, authentication, federation, authorization models, provisioning, privileged access, and service accounts.</td>
       </tr>
       <tr>
         <td data-label="Need">Security controls and operations refresher</td>
@@ -281,7 +289,7 @@ Technical recognition remains important, but CISSP adds architecture and governa
 
 Identity and Access Management (IAM) covers people, devices, services, credentials, sessions, federation, access-control models, provisioning, review, and removal. Follow the identity lifecycle from registration and proofing through authorization, monitoring, changes, and deprovisioning.
 
-Separate identification, authentication, authorization, and accounting. Then connect each step to governance principles such as least privilege, need to know, separation of duties, and periodic review.
+Separate identification, authentication, authorization, and accounting. Then connect each step to governance principles such as least privilege, need to know, separation of duties, and periodic review. Use the detailed [Identity and Access Management guide](/cissp/study-guide/identity-access-management/) to connect all six official objectives.
 
 <h3 id="domain-6">Domain 6: Security Assessment and Testing</h3>
 

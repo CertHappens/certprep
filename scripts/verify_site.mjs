@@ -212,6 +212,7 @@ const publicPageFiles = [
   "cissp/study-guide/asset-security/index.html",
   "cissp/study-guide/security-architecture-engineering/index.html",
   "cissp/study-guide/communication-network-security/index.html",
+  "cissp/study-guide/identity-access-management/index.html",
   "ccna/index.html",
   "ccna/acronyms/index.html",
   "ccna/commands/index.html",
@@ -276,6 +277,7 @@ const articlePageFiles = [
   "cissp/study-guide/asset-security/index.html",
   "cissp/study-guide/security-architecture-engineering/index.html",
   "cissp/study-guide/communication-network-security/index.html",
+  "cissp/study-guide/identity-access-management/index.html",
   "explore/career/paths/index.html",
   "explore/career/it-support-or-cybersecurity/index.html",
   "explore/career/cybersecurity-paths/index.html",
@@ -455,6 +457,7 @@ const wholeSitePageMarkers = new Map([
       "/security-plus/sy0-701/study-guide/",
       "/cissp/study-guide/security-architecture-engineering/",
       "/cissp/study-guide/communication-network-security/",
+      "/cissp/study-guide/identity-access-management/",
       "https://www.isc2.org/certifications/cissp/cissp-certification-exam-outline"
     ]
   ],
@@ -1373,6 +1376,9 @@ for (const file of htmlFiles) {
     "/cissp/study-guide/",
     "/cissp/study-guide/security-risk-management/",
     "/cissp/study-guide/asset-security/",
+    "/cissp/study-guide/security-architecture-engineering/",
+    "/cissp/study-guide/communication-network-security/",
+    "/cissp/study-guide/identity-access-management/",
     "/ccna/",
     "/explore/",
     "/explore/career/paths/",
@@ -2534,7 +2540,8 @@ for (const file of htmlFiles) {
       "/cissp/study-guide/security-risk-management/",
       "/cissp/study-guide/asset-security/",
       "/cissp/study-guide/security-architecture-engineering/",
-      "/cissp/study-guide/communication-network-security/"
+      "/cissp/study-guide/communication-network-security/",
+      "/cissp/study-guide/identity-access-management/"
     ]) {
       if (!html.includes(`href="${href}"`)) {
         fail(`${relative}: CISSP resource hub is missing ${href}`);
@@ -2611,7 +2618,8 @@ for (const file of htmlFiles) {
       'href="/cissp/study-guide/security-risk-management/"',
       'href="/cissp/study-guide/asset-security/"',
       'href="/cissp/study-guide/security-architecture-engineering/"',
-      'href="/cissp/study-guide/communication-network-security/"'
+      'href="/cissp/study-guide/communication-network-security/"',
+      'href="/cissp/study-guide/identity-access-management/"'
     ];
 
     for (const marker of requiredMarkers) {
@@ -2771,6 +2779,9 @@ for (const file of htmlFiles) {
 
     const requiredMarkers = [
       "Open Systems Interconnection",
+      "APS transports network data physically.",
+      "TCP/IP layer",
+      "Network Access",
       "Internet Protocol Security",
       "Secure Shell",
       "Transport Layer Security",
@@ -2788,6 +2799,62 @@ for (const file of htmlFiles) {
     for (const marker of requiredMarkers) {
       if (!hasPageMarker(html, marker)) {
         fail(`${relative}: CISSP Domain 4 guide is missing ${marker}`);
+      }
+    }
+  }
+
+  if (relative === "cissp/study-guide/identity-access-management/index.html") {
+    if (!headingMatches(html, "CISSP Domain 5: Identity and Access Management")) {
+      fail(`${relative}: expected CISSP Domain 5 h1 is missing`);
+    }
+
+    if (!html.includes("data-print-guide")) {
+      fail(`${relative}: CISSP Domain 5 guide is missing the shared Print | Save control`);
+    }
+
+    const requiredSectionIds = [
+      "domain-map",
+      "decision-order",
+      "identity-access-basics",
+      "access-assets",
+      "identity-proofing",
+      "authentication",
+      "sessions-credentials",
+      "federation-sso",
+      "authorization-models",
+      "policy-enforcement",
+      "identity-lifecycle",
+      "privileged-service-accounts",
+      "authentication-systems",
+      "ai-identities",
+      "exam-traps",
+      "review-checklist",
+      "official-references"
+    ];
+
+    for (const id of requiredSectionIds) {
+      if (!html.includes(`id="${id}"`)) {
+        fail(`${relative}: CISSP Domain 5 guide is missing section #${id}`);
+      }
+    }
+
+    const requiredMarkers = [
+      "Identity proofing",
+      "Multi-factor authentication",
+      "OpenID Connect",
+      "Attribute-based access control",
+      "Policy Decision Point",
+      "joiner, mover, and leaver",
+      "Privileged Access Management",
+      "Service account",
+      "Kerberos",
+      "AI agent",
+      'href="/cissp/study-guide/"'
+    ];
+
+    for (const marker of requiredMarkers) {
+      if (!hasPageMarker(html, marker)) {
+        fail(`${relative}: CISSP Domain 5 guide is missing ${marker}`);
       }
     }
   }

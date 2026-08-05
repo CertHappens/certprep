@@ -76,6 +76,9 @@ relatedLinks:
   - title: "CISSP Domain 4: Communication and Network Security"
     url: /cissp/study-guide/communication-network-security/
     description: Connect governance, asset requirements, architecture, and cryptography to network design, segmentation, infrastructure, and secure channels.
+  - title: "CISSP Domain 5: Identity and Access Management"
+    url: /cissp/study-guide/identity-access-management/
+    description: Connect trusted system design, cryptography, and architecture to identity, authentication, authorization, and privileged access.
   - title: "Security+ Domain 3: Security Architecture"
     url: /security-plus/sy0-701/study-guide/security-architecture/
     description: Refresh resilience, cloud, virtualization, data protection, and architecture concepts at the foundational level.

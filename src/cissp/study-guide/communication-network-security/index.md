@@ -71,6 +71,9 @@ relatedLinks:
   - title: "CISSP Domain 3: Security Architecture and Engineering"
     url: /cissp/study-guide/security-architecture-engineering/
     description: Connect secure design principles, trust boundaries, cryptography, and system architecture to network decisions.
+  - title: "CISSP Domain 5: Identity and Access Management"
+    url: /cissp/study-guide/identity-access-management/
+    description: Connect network admission, remote access, protected administration, federation, and third-party connectivity to identity controls.
   - title: Network+ N10-009 Study Guide
     url: /network-plus/n10-009/study-guide/
     description: Refresh networking concepts, implementation, operations, security, and troubleshooting at the foundational level.
@@ -133,7 +136,13 @@ Network models provide a shared way to describe where communication functions oc
 
 The **Open Systems Interconnection (OSI) model** divides communication into seven conceptual layers. The **Transmission Control Protocol/Internet Protocol (TCP/IP) model** groups real Internet protocols into fewer layers.
 
-<div class="table-scroll" role="region" aria-label="OSI and TCP IP model comparison" tabindex="0">
+A useful top-to-bottom OSI mnemonic is:
+
+> **APS transports network data physically.**
+
+It maps to Application, Presentation, Session, Transport, Network, Data Link, and Physical. The sentence stays close to the actual layer names, which makes the order easier to reconstruct.
+
+<div class="table-scroll" role="region" aria-label="OSI model layers" tabindex="0">
   <table class="mobile-card-table">
     <thead>
       <tr><th scope="col">OSI layer</th><th scope="col">Plain purpose</th><th scope="col">Common examples</th></tr>
@@ -150,7 +159,23 @@ The **Open Systems Interconnection (OSI) model** divides communication into seve
   </table>
 </div>
 
-The TCP/IP model usually groups these functions as application, transport, Internet, and link or network-access layers. The exact number of layers matters less than understanding the control boundary.
+The TCP/IP model usually uses four layers:
+
+<div class="table-scroll" role="region" aria-label="TCP IP and OSI model mapping" tabindex="0">
+  <table class="mobile-card-table">
+    <thead>
+      <tr><th scope="col">TCP/IP layer</th><th scope="col">Rough OSI match</th><th scope="col">What it handles</th></tr>
+    </thead>
+    <tbody>
+      <tr><td data-label="TCP/IP layer">Application</td><td data-label="Rough OSI match">Application, Presentation, and Session</td><td data-label="What it handles">Application services, data formatting, encryption, and session functions.</td></tr>
+      <tr><td data-label="TCP/IP layer">Transport</td><td data-label="Rough OSI match">Transport</td><td data-label="What it handles">Communication between applications, including TCP and UDP.</td></tr>
+      <tr><td data-label="TCP/IP layer">Internet</td><td data-label="Rough OSI match">Network</td><td data-label="What it handles">IP addressing, packet delivery, and routing between networks.</td></tr>
+      <tr><td data-label="TCP/IP layer">Network Access</td><td data-label="Rough OSI match">Data Link and Physical</td><td data-label="What it handles">Frames, local delivery, media access, cables, fiber, and radio signals.</td></tr>
+    </tbody>
+  </table>
+</div>
+
+The mapping is approximate because the two models were created for different purposes. The important relationship is that TCP/IP combines the top three OSI layers into its Application layer and combines the bottom two OSI layers into its Network Access layer.
 
 For example:
 

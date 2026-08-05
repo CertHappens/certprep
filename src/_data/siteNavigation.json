@@ -189,6 +189,10 @@
             {
               "label": "Domain 4: Network Security",
               "url": "/cissp/study-guide/communication-network-security/"
+            },
+            {
+              "label": "Domain 5: Identity & Access",
+              "url": "/cissp/study-guide/identity-access-management/"
             }
           ]
         }

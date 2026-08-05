@@ -11,7 +11,7 @@
     "status": {
       "label": "How to use this hub",
       "heading": "Start with the study guide, then map the scope to your experience",
-      "body": "Use the CISSP study guide to organize all eight domains. The available domain guides build from governance and risk through asset protection, secure architecture, and communication and network security."
+      "body": "Use the CISSP study guide to organize all eight domains. The available domain guides build from governance and risk through asset protection, secure architecture, communication and network security, and identity and access management."
     },
     "summary": [
       "CISSP covers security across an entire organization. Technical knowledge still matters, but candidates also need to connect controls to business objectives, legal duties, architecture, risk, operations, and program leadership.",
@@ -117,7 +117,9 @@
         "number": "5",
         "name": "Identity and Access Management",
         "weight": "13%",
-        "focus": "Identity lifecycles, authentication, authorization, federation, access models, and access-control governance."
+        "focus": "Identity lifecycles, authentication, authorization, federation, access models, and access-control governance.",
+        "url": "/cissp/study-guide/identity-access-management/",
+        "linkLabel": "Open Domain 5 guide"
       },
       {
         "number": "6",
@@ -189,7 +191,7 @@
     },
     "currentResources": {
       "heading": "CISSP study resources available now",
-      "intro": "Begin with the full study roadmap, then use the available domain guides for governance, risk, asset protection, secure architecture, cryptography, network design, segmentation, and protected communications.",
+      "intro": "Begin with the full study roadmap, then use the available domain guides for governance, risk, asset protection, secure architecture, protected communications, and identity and access decisions.",
       "links": [
         {
           "title": "CISSP study guide",
@@ -215,6 +217,11 @@
           "title": "Domain 4: Communication and Network Security",
           "url": "/cissp/study-guide/communication-network-security/",
           "description": "Study network models, secure protocols, segmentation, wireless and cloud networking, infrastructure, monitoring, remote access, and third-party connectivity."
+        },
+        {
+          "title": "Domain 5: Identity and Access Management",
+          "url": "/cissp/study-guide/identity-access-management/",
+          "description": "Study identity proofing, authentication, federation, authorization models, provisioning, privileged access, service accounts, and authentication systems."
         },
         {
           "title": "Security+ study guide",

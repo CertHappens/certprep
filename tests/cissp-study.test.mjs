@@ -43,6 +43,10 @@ test("CISSP navigation exposes overview and available study guides without an em
           label: "Domain 4: Network Security",
           url: "/cissp/study-guide/communication-network-security/",
         },
+        {
+          label: "Domain 5: Identity & Access",
+          url: "/cissp/study-guide/identity-access-management/",
+        },
       ],
     },
   ]);
@@ -56,13 +60,14 @@ test("CISSP hub promotes the study roadmap and all available domain guides", asy
   assert.equal(cissp.resourcesFirst, true);
   assert.equal(cissp.sourceReviewed, "2026-08-05");
   assert.deepEqual(
-    cissp.currentResources.links.slice(0, 5).map((link) => link.url),
+    cissp.currentResources.links.slice(0, 6).map((link) => link.url),
     [
       "/cissp/study-guide/",
       "/cissp/study-guide/security-risk-management/",
       "/cissp/study-guide/asset-security/",
       "/cissp/study-guide/security-architecture-engineering/",
       "/cissp/study-guide/communication-network-security/",
+      "/cissp/study-guide/identity-access-management/",
     ]
   );
 
@@ -89,6 +94,11 @@ test("CISSP hub promotes the study roadmap and all available domain guides", asy
         number: "4",
         url: "/cissp/study-guide/communication-network-security/",
         linkLabel: "Open Domain 4 guide",
+      },
+      {
+        number: "5",
+        url: "/cissp/study-guide/identity-access-management/",
+        linkLabel: "Open Domain 5 guide",
       },
     ]
   );
@@ -121,6 +131,12 @@ test("CISSP study pages use the shared printable article contract and current ro
         "src/cissp/study-guide/communication-network-security/index.md"
       ),
       route: "/cissp/study-guide/communication-network-security/",
+    },
+    {
+      source: await readSource(
+        "src/cissp/study-guide/identity-access-management/index.md"
+      ),
+      route: "/cissp/study-guide/identity-access-management/",
     },
   ];
 
@@ -471,5 +487,112 @@ test("CISSP Domain 4 covers all official objectives, network areas, and primary 
   assert.match(domain, /SSL is obsolete and should not be treated as an acceptable modern protocol/);
   assert.match(domain, /A VLAN creates a separate Layer 2 domain/);
   assert.match(domain, /A VPN protects traffic through the tunnel/);
+  assert.match(domain, /APS transports network data physically\./);
+  assert.match(domain, /TCP\/IP combines the top three OSI layers into its Application layer/);
+  assert.match(domain, /combines the bottom two OSI layers into its Network Access layer/);
+  assert.doesNotMatch(domain, /All People Seem To Need Data Processing/);
+  assert.doesNotMatch(domain, /\u2014/);
+});
+
+
+test("CISSP Domain 5 covers all official objectives, identity areas, and primary references", async () => {
+  const domain = await readSource(
+    "src/cissp/study-guide/identity-access-management/index.md"
+  );
+
+  const requiredSections = [
+    "domain-map",
+    "decision-order",
+    "identity-access-basics",
+    "access-assets",
+    "identity-proofing",
+    "authentication",
+    "sessions-credentials",
+    "federation-sso",
+    "authorization-models",
+    "policy-enforcement",
+    "identity-lifecycle",
+    "privileged-service-accounts",
+    "authentication-systems",
+    "ai-identities",
+    "exam-traps",
+    "review-checklist",
+    "official-references",
+  ];
+
+  for (const id of requiredSections) {
+    assert.match(domain, new RegExp(`id=["']${id}["']`));
+  }
+
+  for (let objective = 1; objective <= 6; objective += 1) {
+    assert.match(domain, new RegExp(`<td>5\\.${objective}<\\/td>`));
+  }
+
+  const requiredMarkers = [
+    "Identification",
+    "Authentication",
+    "Authorization",
+    "Accounting",
+    "Identity proofing",
+    "Multi-factor authentication",
+    "passwordless authentication",
+    "Web Authentication",
+    "Passkeys",
+    "False acceptance rate",
+    "False rejection rate",
+    "Adaptive authentication",
+    "Single sign-on",
+    "Federation",
+    "SAML",
+    "OAuth 2.0",
+    "OpenID Connect",
+    "SCIM",
+    "Role-based access control",
+    "Rule-based access control",
+    "Mandatory access control",
+    "Discretionary access control",
+    "Attribute-based access control",
+    "Risk-based access control",
+    "Policy Decision Point",
+    "Policy Enforcement Point",
+    "joiner, mover, and leaver",
+    "Just-in-time",
+    "Privileged Access Management",
+    "Service account",
+    "Kerberos",
+    "LDAP",
+    "RADIUS",
+    "TACACS+",
+    "AI agent",
+  ];
+
+  for (const marker of requiredMarkers) {
+    assert.match(domain, new RegExp(escapeRegExp(marker), "i"));
+  }
+
+  const requiredReferences = [
+    "https://www.isc2.org/certifications/cissp/cissp-certification-exam-outline",
+    "https://csrc.nist.gov/pubs/sp/800/63/4/final",
+    "https://csrc.nist.gov/pubs/sp/800/63/a/4/final",
+    "https://csrc.nist.gov/pubs/sp/800/63/b/4/final",
+    "https://csrc.nist.gov/pubs/sp/800/63/c/4/final",
+    "https://csrc.nist.gov/pubs/sp/800/162/upd2/final",
+    "https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final",
+    "https://csrc.nist.gov/pubs/sp/800/207/final",
+    "https://www.rfc-editor.org/rfc/rfc4120",
+    "https://www.rfc-editor.org/rfc/rfc6749",
+    "https://www.rfc-editor.org/rfc/rfc9700",
+    "https://www.rfc-editor.org/rfc/rfc7644",
+    "https://openid.net/specs/openid-connect-core-1_0.html",
+    "https://www.w3.org/TR/webauthn-3/",
+  ];
+
+  for (const url of requiredReferences) {
+    assert.match(domain, new RegExp(escapeRegExp(url)));
+  }
+
+  assert.match(domain, /OAuth is an authorization framework, not a complete user-authentication protocol/);
+  assert.match(domain, /A password and two security questions are still one factor/);
+  assert.match(domain, /Just-in-time provisioning.*creates or activates an account/s);
   assert.doesNotMatch(domain, /\u2014/);
 });
