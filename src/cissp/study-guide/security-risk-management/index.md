@@ -66,7 +66,7 @@ relatedLinks:
   - title: CISSP Certification Overview
     url: /cissp/
     description: Review exam format, experience requirements, maintenance obligations, and candidate fit.
-  - title: Security+ Domain 5: Program Management and Oversight
+  - title: "Security+ Domain 5: Program Management and Oversight"
     url: /security-plus/sy0-701/study-guide/security-program-management-oversight/
     description: Refresh foundational governance, risk, third-party, compliance, audit, and awareness concepts.
   - title: Recovery Metrics Quick Reference
