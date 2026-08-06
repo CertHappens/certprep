@@ -514,7 +514,7 @@
     "currentResources": {
       "eyebrow": "Practice and study",
       "heading": "Start studying CCNA",
-      "intro": "Start with a randomized practice session or the five-domain guide, then use the command, acronym, subnetting, and protocol references to investigate weak areas.",
+      "intro": "Start with a randomized practice session or the five-domain guide, use focused quick reviews to correct weak spots, then consult the command, acronym, subnetting, and protocol references for deeper verification.",
       "links": [
         {
           "title": "CCNA 200-301 v2.0 practice test",
@@ -525,6 +525,11 @@
           "title": "CCNA 200-301 v2.0 study guide",
           "url": "/ccna/200-301-v2/study-guide/",
           "description": "Work through the published five-domain v2.0 scope with configuration, verification, troubleshooting, and lab-oriented study guidance."
+        },
+        {
+          "title": "CCNA 200-301 v2.0 quick reviews",
+          "url": "/ccna/quick-review/",
+          "description": "Compare IPv6 addressing, route selection, static routes, VLANs, trunks, Rapid PVST+, and EtherChannel through focused Cisco IOS evidence and exam scenarios."
         },
         {
           "title": "CCNA acronyms and terms",

@@ -219,6 +219,10 @@ const publicPageFiles = [
   "ccna/index.html",
   "ccna/acronyms/index.html",
   "ccna/commands/index.html",
+  "ccna/quick-review/index.html",
+  "ccna/quick-review/ipv6-addressing-neighbor-discovery/index.html",
+  "ccna/quick-review/route-selection-static-routing/index.html",
+  "ccna/quick-review/vlans-trunks-stp-etherchannel/index.html",
   "ccna/200-301-v2/practice-test/index.html",
   "ccna/200-301-v2/study-guide/index.html",
   "ccna/200-301-v2/study-guide/network-infrastructure-connectivity/index.html",
@@ -268,6 +272,9 @@ const publicPageFiles = [
 const articlePageFiles = [
   "ccna/acronyms/index.html",
   "ccna/commands/index.html",
+  "ccna/quick-review/ipv6-addressing-neighbor-discovery/index.html",
+  "ccna/quick-review/route-selection-static-routing/index.html",
+  "ccna/quick-review/vlans-trunks-stp-etherchannel/index.html",
   "ccna/200-301-v2/study-guide/index.html",
   "ccna/200-301-v2/study-guide/network-infrastructure-connectivity/index.html",
   "ccna/200-301-v2/study-guide/switching-network-access/index.html",
@@ -483,6 +490,7 @@ const wholeSitePageMarkers = new Map([
       "/ccna/200-301-v2/study-guide/ai-network-operations-management/",
       "/ccna/acronyms/",
       "/ccna/commands/",
+      "/ccna/quick-review/",
       "Network Infrastructure and Connectivity",
       "AI, Network Operations, and Management",
       "February 2, 2027",
@@ -500,6 +508,7 @@ const wholeSitePageMarkers = new Map([
       "/ccna/200-301-v2/study-guide/network-services-security/",
       "/ccna/commands/",
       "/ccna/acronyms/",
+      "/ccna/quick-review/",
       "February 3, 2027"
     ]
   ],
@@ -569,6 +578,29 @@ const wholeSitePageMarkers = new Map([
       "Syslog severity levels",
       "/ccna/acronyms/"
     ]
+  ],
+  [
+    "ccna/quick-review/index.html",
+    [
+      "CCNA 200-301 v2.0 Quick Review",
+      "/ccna/quick-review/ipv6-addressing-neighbor-discovery/",
+      "/ccna/quick-review/route-selection-static-routing/",
+      "/ccna/quick-review/vlans-trunks-stp-etherchannel/",
+      "/ccna/200-301-v2/practice-test/",
+      "/ccna/commands/"
+    ]
+  ],
+  [
+    "ccna/quick-review/ipv6-addressing-neighbor-discovery/index.html",
+    ["Neighbor Discovery", "Modified EUI-64", "show ipv6 neighbors", "/ccna/quick-review/"]
+  ],
+  [
+    "ccna/quick-review/route-selection-static-routing/index.html",
+    ["longest matching installed prefix", "floating static", "show ip route", "/ccna/quick-review/"]
+  ],
+  [
+    "ccna/quick-review/vlans-trunks-stp-etherchannel/index.html",
+    ["Rapid PVST+", "show etherchannel summary", "BPDU Guard", "/ccna/quick-review/"]
   ],
   [
     "404.html",
@@ -1374,6 +1406,7 @@ for (const file of htmlFiles) {
     "/network-plus/n10-009/study-guide/ipv4-subnetting/",
     "/tools/subnet-calculator/",
     "/ccna/200-301-v2/study-guide/",
+    "/ccna/quick-review/",
     "/ccna/200-301-v2/study-guide/network-infrastructure-connectivity/",
     "/ccna/200-301-v2/study-guide/switching-network-access/",
     "/ccna/200-301-v2/study-guide/ip-routing/",
@@ -1560,6 +1593,74 @@ for (const file of htmlFiles) {
     for (const marker of requiredAnalyticsDisclosures) {
       if (!hasPageMarker(html, marker)) {
         fail(`${relative}: analytics disclosure is missing ${marker}`);
+      }
+    }
+  }
+
+  if (relative === "ccna/index.html") {
+    if (!html.includes('href="/ccna/quick-review/"')) {
+      fail(`${relative}: CCNA hub is missing the quick-review link`);
+    }
+  }
+
+  if (relative === "ccna/quick-review/index.html") {
+    if (!headingMatches(html, "CCNA 200-301 v2.0 Quick Review")) {
+      fail(`${relative}: CCNA quick-review hub is missing its expected h1`);
+    }
+
+    const requiredQuickReviewLinks = [
+      "/ccna/quick-review/ipv6-addressing-neighbor-discovery/",
+      "/ccna/quick-review/route-selection-static-routing/",
+      "/ccna/quick-review/vlans-trunks-stp-etherchannel/",
+      "/ccna/200-301-v2/practice-test/",
+      "/ccna/200-301-v2/study-guide/",
+      "/ccna/commands/"
+    ];
+
+    for (const href of requiredQuickReviewLinks) {
+      if (!html.includes(`href="${href}"`)) {
+        fail(`${relative}: quick-review hub is missing ${href}`);
+      }
+    }
+  }
+
+  const ccnaQuickReviewPages = {
+    "ccna/quick-review/ipv6-addressing-neighbor-discovery/index.html": [
+      "Neighbor Discovery",
+      "Modified EUI-64",
+      "Router Advertisement",
+      "show ipv6 neighbors"
+    ],
+    "ccna/quick-review/route-selection-static-routing/index.html": [
+      "longest matching installed prefix",
+      "administrative distance",
+      "floating static",
+      "show ip route"
+    ],
+    "ccna/quick-review/vlans-trunks-stp-etherchannel/index.html": [
+      "Rapid PVST+",
+      "show etherchannel summary",
+      "BPDU Guard",
+      "Loop Guard"
+    ]
+  };
+
+  if (Object.hasOwn(ccnaQuickReviewPages, relative)) {
+    if (!html.includes("data-print-guide")) {
+      fail(`${relative}: CCNA quick-review guide is missing the shared Print | Save control`);
+    }
+
+    if (!html.includes('/ccna/quick-review/')) {
+      fail(`${relative}: CCNA quick-review guide is missing its hub link`);
+    }
+
+    if (!html.includes('/ccna/200-301-v2/practice-test/')) {
+      fail(`${relative}: CCNA quick-review guide is missing its practice-test link`);
+    }
+
+    for (const marker of ccnaQuickReviewPages[relative]) {
+      if (!hasPageMarker(html, marker)) {
+        fail(`${relative}: CCNA quick-review guide is missing ${marker}`);
       }
     }
   }

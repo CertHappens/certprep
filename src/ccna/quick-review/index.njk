@@ -1,0 +1,65 @@
+---
+layout: layouts/base.njk
+title: CCNA Quick Review Guides for 200-301 v2.0
+description: Review CCNA 200-301 v2.0 concepts with printable comparisons for IPv6, route selection, static routing, VLANs, trunks, Rapid PVST+, and EtherChannel.
+permalink: /ccna/quick-review/
+breadcrumbs:
+  - label: Home
+    url: /
+  - label: CCNA
+    url: /ccna/
+  - label: Quick Review
+    url: /ccna/quick-review/
+---
+
+<header class="page-header page-header--compact">
+  <div class="page-shell">
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="/">Home</a></li>
+        <li><a href="/ccna/">CCNA</a></li>
+        <li aria-current="page">Quick Review</li>
+      </ol>
+    </nav>
+
+    <p class="eyebrow">CCNA quick review</p>
+    <h1>CCNA 200-301 v2.0 Quick Review</h1>
+    <p class="lede">
+      Focused comparisons for configuration and troubleshooting questions where several commands, routes, or switch states appear plausible.
+    </p>
+  </div>
+</header>
+
+<section class="section">
+  <div class="page-shell">
+    <p>
+      Each guide starts with the decision you need to make, shows the Cisco IOS evidence that supports it, and ends with a rapid-review grid. The pages are designed for screen review and clean printing.
+    </p>
+
+    <div class="card-grid">
+      {% for guide in ccnaQuickReviews %}
+      <article class="card">
+        <p class="card__meta">{{ guide.meta }}</p>
+        <h2>{{ guide.title }}</h2>
+        <p>{{ guide.description }}</p>
+        <a class="button button--secondary" href="{{ guide.url }}">{{ guide.buttonLabel }}</a>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="page-shell">
+    <h2>Apply the evidence</h2>
+    <p>
+      Use a quick review to correct one weak spot, then test the decision in a fresh session. The domain guides provide the surrounding design and configuration context, while the IOS command reference helps you choose the next useful command.
+    </p>
+    <div class="button-row">
+      <a class="button" href="/ccna/200-301-v2/practice-test/">Start a practice test</a>
+      <a class="button button--secondary" href="/ccna/200-301-v2/study-guide/">Open the full study guide</a>
+      <a class="button button--secondary" href="/ccna/commands/">Open IOS verification commands</a>
+      <a class="button button--secondary" href="/ccna/acronyms/">Open acronyms and terms</a>
+    </div>
+  </div>
+</section>

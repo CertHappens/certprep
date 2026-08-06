@@ -242,6 +242,10 @@
               "url": "/ccna/200-301-v2/study-guide/"
             },
             {
+              "label": "Quick reviews",
+              "url": "/ccna/quick-review/"
+            },
+            {
               "label": "Domain 1: Infrastructure",
               "url": "/ccna/200-301-v2/study-guide/network-infrastructure-connectivity/"
             },
