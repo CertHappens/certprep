@@ -141,21 +141,22 @@ test("acronym references use matching plain-language meanings", async () => {
 
 test("meaningful editorial changes update article metadata and authoring guidance", async () => {
   const changedArticles = [
-    "src/security-plus/sy0-701/study-guide/general-security-concepts/index.md",
-    "src/security-plus/sy0-701/study-guide/threats-vulnerabilities-mitigations/index.md",
-    "src/security-plus/sy0-701/study-guide/security-program-management-oversight/index.md",
-    "src/network-plus/n10-009/study-guide/network-implementation/index.md",
-    "src/network-plus/quick-review/monitoring-evidence/index.md",
-    "src/ccna/200-301-v2/study-guide/ip-routing/index.md",
-    "src/ccna/200-301-v2/study-guide/ai-network-operations-management/index.md",
-    "src/cissp/study-guide/security-risk-management/index.md",
-    "src/cissp/study-guide/asset-security/index.md",
-    "src/cissp/study-guide/security-architecture-engineering/index.md",
+    ["src/security-plus/sy0-701/study-guide/general-security-concepts/index.md", "2026-08-05"],
+    ["src/security-plus/sy0-701/study-guide/threats-vulnerabilities-mitigations/index.md", "2026-08-06"],
+    ["src/security-plus/sy0-701/study-guide/security-program-management-oversight/index.md", "2026-08-05"],
+    ["src/network-plus/n10-009/study-guide/network-implementation/index.md", "2026-08-05"],
+    ["src/network-plus/quick-review/monitoring-evidence/index.md", "2026-08-05"],
+    ["src/ccna/200-301-v2/study-guide/ip-routing/index.md", "2026-08-05"],
+    ["src/ccna/200-301-v2/study-guide/ai-network-operations-management/index.md", "2026-08-05"],
+    ["src/cissp/study-guide/security-risk-management/index.md", "2026-08-05"],
+    ["src/cissp/study-guide/asset-security/index.md", "2026-08-05"],
+    ["src/cissp/study-guide/security-architecture-engineering/index.md", "2026-08-05"],
+    ["src/cissp/study-guide/security-assessment-testing/index.md", "2026-08-06"],
   ];
 
-  for (const relative of changedArticles) {
+  for (const [relative, expectedDate] of changedArticles) {
     const source = await readSource(relative);
-    assert.equal(parseFrontMatterValue(source, "dateModified"), "2026-08-05");
+    assert.equal(parseFrontMatterValue(source, "dateModified"), expectedDate);
     assert.doesNotMatch(source, /\u2014/);
   }
 

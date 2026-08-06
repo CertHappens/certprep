@@ -1,4 +1,4 @@
-import { rankSearchResults } from "./search-core.js";
+import { rankSearchResults } from "./search-core.js?v=20260806-2";
 
 const form = document.querySelector("[data-site-search-form]");
 const input = document.querySelector("[data-site-search-input]");
@@ -51,6 +51,13 @@ if (form && input && clearButton && status && resultsList && emptyState && guida
       section.className = "search-results__section";
       section.textContent = `Matched section: ${result.matchedHeading}`;
       item.append(section);
+    }
+
+    if (result.relatedMatch) {
+      const related = document.createElement("p");
+      related.className = "search-results__related";
+      related.textContent = `Related match: ${result.relatedMatch}`;
+      item.append(related);
     }
 
     if (result.excerpt) {

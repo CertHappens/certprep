@@ -10,7 +10,8 @@ import {
   buildSearchExcerpt,
   normalizeSearchText,
   rankSearchResults,
-  tokenizeSearchQuery
+  tokenizeSearchQuery,
+  wordFamilyTerms
 } from "../src/assets/js/search-core.js";
 
 const readSource = (relative) =>
@@ -135,5 +136,169 @@ test("site search route, index hook, navigation icon, and client assets are regi
   assert.match(page, /Numbered practice-test questions are not included/);
   assert.match(headers, /\/search-index\.json/);
   assert.match(client, /rankSearchResults/);
+  assert.match(client, /search-core\.js\?v=20260806-2/);
+  assert.match(page, /site-search\.js\?v=20260806-2/);
   assert.match(styles, /\.search-results__item/);
+});
+
+test("ordinary words match conservative grammatical families", () => {
+  assert.ok(wordFamilyTerms("hack").includes("hacks"));
+  assert.ok(wordFamilyTerms("hack").includes("hacked"));
+  assert.ok(wordFamilyTerms("hack").includes("hacking"));
+  assert.ok(wordFamilyTerms("hacks").includes("hack"));
+  assert.ok(wordFamilyTerms("policy").includes("policies"));
+  assert.ok(wordFamilyTerms("route").includes("routed"));
+  assert.ok(wordFamilyTerms("route").includes("routing"));
+  assert.deepEqual(wordFamilyTerms("AI"), ["ai"]);
+});
+
+test("hack searches include word-family and curated related matches without substring noise", () => {
+  const pages = [
+    {
+      title: "Direct hack explanation",
+      url: "/hack/",
+      description: "Uses the exact term.",
+      type: "Page",
+      section: "Site",
+      headings: [],
+      text: "A hack may be authorized or malicious."
+    },
+    {
+      title: "Hacking activity",
+      url: "/hacking/",
+      description: "Uses a grammatical form.",
+      type: "Page",
+      section: "Site",
+      headings: [],
+      text: "Hacking activity requires context."
+    },
+    {
+      title: "Threat actors",
+      url: "/hacker/",
+      description: "Defines the informal term.",
+      type: "Domain guide",
+      section: "Security+",
+      headings: [{ text: "Hacker terminology", id: "hacker" }],
+      text: "A hacker may be a penetration tester or malicious attacker."
+    },
+    {
+      title: "Account compromise",
+      url: "/compromise/",
+      description: "Related incident terminology.",
+      type: "Domain guide",
+      section: "Security+",
+      headings: [],
+      text: "A compromised account may permit unauthorized access."
+    },
+    {
+      title: "Hackathon planning",
+      url: "/hackathon/",
+      description: "An unrelated compound word.",
+      type: "Explore article",
+      section: "Explore",
+      headings: [],
+      text: "Plan a community hackathon."
+    }
+  ];
+
+  const results = rankSearchResults(pages, "hack");
+  assert.deepEqual(results.map((page) => page.url), [
+    "/hack/",
+    "/hacking/",
+    "/hacker/",
+    "/compromise/"
+  ]);
+  assert.equal(results[0].relatedMatch, "");
+  assert.equal(results[1].relatedMatch, "");
+  assert.equal(results[2].relatedMatch, "hacker");
+  assert.ok(results[3].relatedMatch);
+});
+
+test("exact content outranks family matches, which outrank aliases", () => {
+  const pages = [
+    {
+      title: "General security page",
+      url: "/exact/",
+      description: "General guidance.",
+      type: "Page",
+      section: "Site",
+      headings: [],
+      text: "The exact word hack appears in this explanation."
+    },
+    {
+      title: "Hacking overview",
+      url: "/family/",
+      description: "A grammatical variation.",
+      type: "Page",
+      section: "Site",
+      headings: [],
+      text: "Hacking appears here."
+    },
+    {
+      title: "Account compromise",
+      url: "/alias/",
+      description: "A related concept.",
+      type: "Page",
+      section: "Site",
+      headings: [],
+      text: "The account was compromised."
+    }
+  ];
+
+  assert.deepEqual(rankSearchResults(pages, "hack").map((page) => page.url), [
+    "/exact/",
+    "/family/",
+    "/alias/"
+  ]);
+});
+
+test("phrase aliases support learner wording such as ethical hacker", () => {
+  const pages = [
+    {
+      title: "Penetration Testing",
+      url: "/penetration-testing/",
+      description: "Authorized security testing.",
+      type: "Domain guide",
+      section: "CISSP",
+      headings: [{ text: "Penetration tester responsibilities", id: "tester" }],
+      text: "A penetration tester works under written authorization and scope."
+    }
+  ];
+
+  const [result] = rankSearchResults(pages, "ethical hacker");
+  assert.equal(result.url, "/penetration-testing/");
+  assert.equal(result.relatedMatch, "penetration tester");
+  assert.equal(result.matchedHeadingId, "tester");
+});
+
+test("curated phrase aliases bridge familiar spelling and certification terms", () => {
+  const pages = [
+    {
+      title: "Wireless Networks",
+      url: "/wireless/",
+      description: "Wireless networking concepts.",
+      type: "Domain guide",
+      section: "Network+",
+      headings: [],
+      text: "Wireless networks use access points and radio frequencies."
+    }
+  ];
+
+  const [result] = rankSearchResults(pages, "Wi-Fi");
+  assert.equal(result.url, "/wireless/");
+  assert.equal(result.relatedMatch, "wireless");
+});
+
+test("search results explain related matches and guides define hacker in context", async () => {
+  const [client, page, securityGuide, cisspGuide] = await Promise.all([
+    readSource("src/assets/js/site-search.js"),
+    readSource("src/search/index.njk"),
+    readSource("src/security-plus/sy0-701/study-guide/threats-vulnerabilities-mitigations/index.md"),
+    readSource("src/cissp/study-guide/security-assessment-testing/index.md")
+  ]);
+
+  assert.match(client, /Related match:/);
+  assert.match(page, /Common word forms are grouped, while short acronyms remain exact/);
+  assert.match(securityGuide, /\*\*Hacker\*\* is an informal term for someone who explores, tests, or attacks computer systems/);
+  assert.match(cisspGuide, /authorization and scope distinguish a penetration tester or red-team member from a malicious attacker/);
 });

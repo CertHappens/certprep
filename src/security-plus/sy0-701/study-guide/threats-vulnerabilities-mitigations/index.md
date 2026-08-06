@@ -8,7 +8,7 @@ printable: true
 printTitle: "Security+ SY0-701 Domain 2: Threats, Vulnerabilities, and Mitigations"
 author: certHappens
 datePublished: 2026-07-23
-dateModified: 2026-08-05
+dateModified: 2026-08-06
 articleSection: Security+ SY0-701 Domain 2
 eyebrow: Security+ Domain 2 guide
 lede: Follow an attack from the person or group behind it, through the path they use, to the weakness they exploit and the control that reduces the risk.
@@ -120,6 +120,8 @@ Use the chain from actor to mitigation when a question feels crowded. The same m
 <h2 id="threat-actors">Threat actors and motivations</h2>
 
 A threat actor is the person, group, or organizational behavior that creates risk. The actor's location, resources, skill, and motivation help predict likely targets and methods.
+
+**Hacker** is an informal term for someone who explores, tests, or attacks computer systems. The activity may be authorized or malicious, so certification material usually uses a more specific term such as penetration tester, attacker, threat actor, or hacktivist.
 
 <div class="table-scroll" role="region" aria-label="Threat actors characteristics and motivations" tabindex="0">
   <table>

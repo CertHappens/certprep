@@ -110,6 +110,7 @@
 
 .search-results__metadata,
 .search-results__section,
+.search-results__related,
 .search-results__excerpt {
   margin: 0.35rem 0 0;
 }
@@ -125,6 +126,12 @@
 .search-results__section {
   color: var(--text);
   font-weight: 750;
+}
+
+.search-results__related {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  font-weight: 700;
 }
 
 .search-results__excerpt {
