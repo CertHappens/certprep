@@ -14,6 +14,11 @@ test("IPv6 reference and calculator use public article routes", async () => {
   assert.match(reference, /RFC 5952/);
   assert.match(reference, /SLAAC/);
   assert.match(reference, /Neighbor Discovery/);
+  assert.equal((reference.match(/class="table-scroll"/g) || []).length, 3);
+  assert.equal((reference.match(/class="mobile-card-table"/g) || []).length, 3);
+  assert.match(reference, /aria-label="Common IPv6 prefix planning sizes"/);
+  assert.match(reference, /aria-label="Common IPv6 address types"/);
+  assert.match(reference, /aria-label="IPv6 Neighbor Discovery messages"/);
   assert.doesNotMatch(reference, /—/);
 
   assert.match(calculator, /permalink: \/tools\/ipv6-calculator\//);

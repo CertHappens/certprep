@@ -116,12 +116,19 @@ RFC 5952 recommends lowercase hexadecimal, removal of leading zeros, and compres
 
 The prefix length tells a router how many leading bits identify the destination network. A longer prefix is more specific.
 
-| Prefix | Common planning use | Number of /64 prefixes inside it |
-|---|---|---:|
-| <code>/48</code> | Large site or organization assignment | 65,536 |
-| <code>/56</code> | Smaller site or customer assignment | 256 |
-| <code>/60</code> | Small deployment with several LANs | 16 |
-| <code>/64</code> | Common LAN prefix | 1 |
+<div class="table-scroll" role="region" aria-label="Common IPv6 prefix planning sizes" tabindex="0">
+  <table class="mobile-card-table">
+    <thead>
+      <tr><th scope="col">Prefix</th><th scope="col">Common planning use</th><th scope="col">Number of /64 prefixes inside it</th></tr>
+    </thead>
+    <tbody>
+      <tr><td data-label="Prefix"><code>/48</code></td><td data-label="Common planning use">Large site or organization assignment</td><td data-label="Number of /64 prefixes inside it">65,536</td></tr>
+      <tr><td data-label="Prefix"><code>/56</code></td><td data-label="Common planning use">Smaller site or customer assignment</td><td data-label="Number of /64 prefixes inside it">256</td></tr>
+      <tr><td data-label="Prefix"><code>/60</code></td><td data-label="Common planning use">Small deployment with several LANs</td><td data-label="Number of /64 prefixes inside it">16</td></tr>
+      <tr><td data-label="Prefix"><code>/64</code></td><td data-label="Common planning use">Common LAN prefix</td><td data-label="Number of /64 prefixes inside it">1</td></tr>
+    </tbody>
+  </table>
+</div>
 
 A <code>/64</code> is the normal size for many IPv6 LANs and is expected by common Stateless Address Autoconfiguration (SLAAC) designs. IPv6 routing still supports other prefix lengths. A prefix that is not <code>/64</code> is not automatically invalid, but using a different size can affect address-assignment features and device expectations.
 
@@ -129,17 +136,24 @@ The prefix boundary may fall inside a hexadecimal group. A <code>/57</code>, for
 
 <h2 id="address-types">Recognize common IPv6 address types</h2>
 
-| Address or prefix | Plain-language purpose |
-|---|---|
-| <code>::/128</code> | Unspecified address. A system uses it before it has a usable source address. |
-| <code>::1/128</code> | Loopback. Traffic stays on the local system. |
-| <code>fe80::/10</code> | Link-local. Traffic remains on the local link and is not routed to another link. |
-| <code>fc00::/7</code> | Unique local. Intended for private local communication, not normal public internet routing. |
-| <code>2000::/3</code> | Main global-unicast range. Allocation and reachability still need separate verification. |
-| <code>2001:db8::/32</code> | Documentation. Reserved for examples and training material. |
-| <code>ff00::/8</code> | Multicast. Sends traffic to a group of interfaces. |
-| <code>::ffff:0:0/96</code> | IPv4-mapped IPv6 form used by software and APIs. |
-| <code>64:ff9b::/96</code> | Well-known NAT64 prefix for embedding IPv4 destinations in translation environments. |
+<div class="table-scroll" role="region" aria-label="Common IPv6 address types" tabindex="0">
+  <table class="mobile-card-table">
+    <thead>
+      <tr><th scope="col">Address or prefix</th><th scope="col">Plain-language purpose</th></tr>
+    </thead>
+    <tbody>
+      <tr><td data-label="Address or prefix"><code>::/128</code></td><td data-label="Plain-language purpose">Unspecified address. A system uses it before it has a usable source address.</td></tr>
+      <tr><td data-label="Address or prefix"><code>::1/128</code></td><td data-label="Plain-language purpose">Loopback. Traffic stays on the local system.</td></tr>
+      <tr><td data-label="Address or prefix"><code>fe80::/10</code></td><td data-label="Plain-language purpose">Link-local. Traffic remains on the local link and is not routed to another link.</td></tr>
+      <tr><td data-label="Address or prefix"><code>fc00::/7</code></td><td data-label="Plain-language purpose">Unique local. Intended for private local communication, not normal public internet routing.</td></tr>
+      <tr><td data-label="Address or prefix"><code>2000::/3</code></td><td data-label="Plain-language purpose">Main global-unicast range. Allocation and reachability still need separate verification.</td></tr>
+      <tr><td data-label="Address or prefix"><code>2001:db8::/32</code></td><td data-label="Plain-language purpose">Documentation. Reserved for examples and training material.</td></tr>
+      <tr><td data-label="Address or prefix"><code>ff00::/8</code></td><td data-label="Plain-language purpose">Multicast. Sends traffic to a group of interfaces.</td></tr>
+      <tr><td data-label="Address or prefix"><code>::ffff:0:0/96</code></td><td data-label="Plain-language purpose">IPv4-mapped IPv6 form used by software and APIs.</td></tr>
+      <tr><td data-label="Address or prefix"><code>64:ff9b::/96</code></td><td data-label="Plain-language purpose">Well-known NAT64 prefix for embedding IPv4 destinations in translation environments.</td></tr>
+    </tbody>
+  </table>
+</div>
 
 ### Multicast scope
 
@@ -196,13 +210,20 @@ A host normally creates a link-local address even when it also has global or uni
 
 IPv6 Neighbor Discovery uses Internet Control Message Protocol for IPv6 (ICMPv6) messages to discover routers, prefixes, neighbors, and address conflicts.
 
-| Message | Plain-language purpose |
-|---|---|
-| Router Solicitation | A host asks routers to send configuration information sooner. |
-| Router Advertisement | A router announces prefixes, default-router information, and address-assignment flags. |
-| Neighbor Solicitation | A node asks who owns an IPv6 address or checks reachability. |
-| Neighbor Advertisement | A node answers with link-layer information or announces a change. |
-| Redirect | A router tells a host about a better next hop on the same link. |
+<div class="table-scroll" role="region" aria-label="IPv6 Neighbor Discovery messages" tabindex="0">
+  <table class="mobile-card-table">
+    <thead>
+      <tr><th scope="col">Message</th><th scope="col">Plain-language purpose</th></tr>
+    </thead>
+    <tbody>
+      <tr><td data-label="Message">Router Solicitation</td><td data-label="Plain-language purpose">A host asks routers to send configuration information sooner.</td></tr>
+      <tr><td data-label="Message">Router Advertisement</td><td data-label="Plain-language purpose">A router announces prefixes, default-router information, and address-assignment flags.</td></tr>
+      <tr><td data-label="Message">Neighbor Solicitation</td><td data-label="Plain-language purpose">A node asks who owns an IPv6 address or checks reachability.</td></tr>
+      <tr><td data-label="Message">Neighbor Advertisement</td><td data-label="Plain-language purpose">A node answers with link-layer information or announces a change.</td></tr>
+      <tr><td data-label="Message">Redirect</td><td data-label="Plain-language purpose">A router tells a host about a better next hop on the same link.</td></tr>
+    </tbody>
+  </table>
+</div>
 
 The solicited-node multicast range <code>ff02::1:ff00:0/104</code> limits neighbor discovery traffic to nodes whose addresses share the final 24 bits. This replaces the broad local broadcast behavior used by IPv4 Address Resolution Protocol (ARP).
 
