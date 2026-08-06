@@ -110,14 +110,15 @@ test("short acronym queries match whole terms instead of unrelated word fragment
 });
 
 test("site search route, index hook, navigation icon, and client assets are registered", async () => {
-  const [navigationText, layout, config, page, headers, client, styles] = await Promise.all([
+  const [navigationText, layout, config, page, headers, client, styles, verifier] = await Promise.all([
     readSource("src/_data/siteNavigation.json"),
     readSource("src/_includes/layouts/base.njk"),
     readSource("eleventy.config.js"),
     readSource("src/search/index.njk"),
     readSource("src/_headers"),
     readSource("src/assets/js/site-search.js"),
-    readSource("src/assets/css/search.css")
+    readSource("src/assets/css/search.css"),
+    readSource("scripts/verify_site.mjs")
   ]);
   const navigation = JSON.parse(navigationText);
 
@@ -138,6 +139,7 @@ test("site search route, index hook, navigation icon, and client assets are regi
   assert.match(client, /rankSearchResults/);
   assert.match(client, /search-core\.js\?v=20260806-2/);
   assert.match(page, /site-search\.js\?v=20260806-2/);
+  assert.match(verifier, /src="\/assets\/js\/site-search\.js\?/);
   assert.match(styles, /\.search-results__item/);
 });
 

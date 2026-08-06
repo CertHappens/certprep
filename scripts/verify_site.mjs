@@ -3742,7 +3742,7 @@ if (await isFile(path.join(outputRoot, "search/index.html"))) {
     'data-site-search-form',
     'data-site-search-input',
     'data-site-search-results',
-    'src="/assets/js/site-search.js"',
+    'src="/assets/js/site-search.js?',
     'href="/search/"',
     'primary-nav__icon'
   ];
