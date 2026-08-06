@@ -175,6 +175,10 @@
               "url": "/cissp/study-guide/"
             },
             {
+              "label": "Quick reviews",
+              "url": "/cissp/quick-review/"
+            },
+            {
               "label": "Domain 1: Risk Management",
               "url": "/cissp/study-guide/security-risk-management/"
             },

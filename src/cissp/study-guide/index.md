@@ -45,6 +45,9 @@ relatedLinks:
   - title: CISSP Certification Overview
     url: /cissp/
     description: Review the exam format, experience path, maintenance requirements, and candidate perspective.
+  - title: CISSP Quick Review Guides
+    url: /cissp/quick-review/
+    description: Compare governance and risk, security models, assessment methods, incident decisions, and recovery choices.
   - title: "Domain 1: Security and Risk Management"
     url: /cissp/study-guide/security-risk-management/
     description: Build the ethics, governance, legal, continuity, personnel, risk, supply-chain, and awareness foundation.
@@ -81,6 +84,8 @@ The Certified Information Systems Security Professional (CISSP) exam covers secu
 The current ISC2 exam outline took effect April 15, 2024. It contains eight domains and gives the greatest average weight to Security and Risk Management. The breadth means most experienced candidates begin with both strengths and blind spots. A security operations specialist may need more software-development depth. An auditor may need more architecture and cryptography. A network engineer may need more governance, privacy, and personnel-security context.
 
 Use the official outline as the coverage checklist. Use this guide to organize the work, connect nearby concepts, and keep technical facts attached to the decisions they support.
+
+Use the [CISSP Quick Review Guides](/cissp/quick-review/) when two models, governance terms, assessment methods, or recovery choices are easy to blur together.
 
 <h2 id="exam-snapshot">CISSP exam snapshot</h2>
 

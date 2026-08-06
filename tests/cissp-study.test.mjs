@@ -27,6 +27,7 @@ test("CISSP navigation exposes overview and available study guides without an em
       label: "Study",
       links: [
         { label: "Study guide", url: "/cissp/study-guide/" },
+        { label: "Quick reviews", url: "/cissp/quick-review/" },
         {
           label: "Domain 1: Risk Management",
           url: "/cissp/study-guide/security-risk-management/",
@@ -72,9 +73,10 @@ test("CISSP hub promotes the study roadmap and all available domain guides", asy
   assert.equal(cissp.resourcesFirst, true);
   assert.equal(cissp.sourceReviewed, "2026-08-05");
   assert.deepEqual(
-    cissp.currentResources.links.slice(0, 9).map((link) => link.url),
+    cissp.currentResources.links.slice(0, 10).map((link) => link.url),
     [
       "/cissp/study-guide/",
+      "/cissp/quick-review/",
       "/cissp/study-guide/security-risk-management/",
       "/cissp/study-guide/asset-security/",
       "/cissp/study-guide/security-architecture-engineering/",

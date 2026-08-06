@@ -197,12 +197,17 @@
     },
     "currentResources": {
       "heading": "CISSP study resources available now",
-      "intro": "Begin with the full study roadmap, then use the eight domain guides for governance, risk, asset protection, secure architecture, protected communications, identity and access decisions, assessment evidence, security operations, and secure software development.",
+      "intro": "Begin with the full study roadmap, use the quick reviews for distinctions that are easy to blur, then use the eight domain guides for complete coverage.",
       "links": [
         {
           "title": "CISSP study guide",
           "url": "/cissp/study-guide/",
           "description": "Organize the eight domains, exam perspective, study priorities, and a practical preparation sequence."
+        },
+        {
+          "title": "CISSP Quick Review Guides",
+          "url": "/cissp/quick-review/",
+          "description": "Review governance and risk, security models and design principles, and assessment, incident, and recovery decisions with focused printable comparisons."
         },
         {
           "title": "Domain 1: Security and Risk Management",

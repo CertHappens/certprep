@@ -207,6 +207,10 @@ const publicPageFiles = [
   "contact/index.html",
   "copyright/index.html",
   "cissp/index.html",
+  "cissp/quick-review/index.html",
+  "cissp/quick-review/governance-risk-policy-decisions/index.html",
+  "cissp/quick-review/security-models-design-principles/index.html",
+  "cissp/quick-review/assessment-incident-recovery-decisions/index.html",
   "cissp/study-guide/index.html",
   "cissp/study-guide/security-risk-management/index.html",
   "cissp/study-guide/asset-security/index.html",
@@ -282,6 +286,9 @@ const articlePageFiles = [
   "ccna/200-301-v2/study-guide/network-services-security/index.html",
   "ccna/200-301-v2/study-guide/ai-network-operations-management/index.html",
   "copyright/index.html",
+  "cissp/quick-review/governance-risk-policy-decisions/index.html",
+  "cissp/quick-review/security-models-design-principles/index.html",
+  "cissp/quick-review/assessment-incident-recovery-decisions/index.html",
   "cissp/study-guide/index.html",
   "cissp/study-guide/security-risk-management/index.html",
   "cissp/study-guide/asset-security/index.html",
@@ -1569,7 +1576,9 @@ for (const file of htmlFiles) {
       'href="/network-plus/n10-009/practice-test/"',
       'href="/tools/subnet-calculator/"',
       'href="/cissp/"',
-      'href="/ccna/"'
+      'href="/ccna/"',
+      "ISC2 CISSP",
+      "CISSP includes a complete eight-domain study collection"
     ];
 
     for (const marker of requiredHomepageMarkers) {
@@ -1580,6 +1589,10 @@ for (const file of htmlFiles) {
 
     if (includesNormalizedText(html, "Free certification practice")) {
       fail(`${relative}: retired free-practice eyebrow is still present`);
+    }
+
+    if (includesNormalizedText(html, "Explore the CISSP path")) {
+      fail(`${relative}: CISSP remains separated from the primary certification resources`);
     }
   }
 
@@ -1600,6 +1613,12 @@ for (const file of htmlFiles) {
   if (relative === "ccna/index.html") {
     if (!html.includes('href="/ccna/quick-review/"')) {
       fail(`${relative}: CCNA hub is missing the quick-review link`);
+    }
+  }
+
+  if (relative === "cissp/index.html") {
+    if (!html.includes('href="/cissp/quick-review/"')) {
+      fail(`${relative}: CISSP hub is missing the quick-review link`);
     }
   }
 

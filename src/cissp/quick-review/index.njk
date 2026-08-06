@@ -1,0 +1,64 @@
+---
+layout: layouts/base.njk
+title: CISSP Quick Review Guides
+description: Review CISSP decisions with printable comparisons for governance and risk, security models and design principles, assessments, incidents, recovery, and continuity.
+permalink: /cissp/quick-review/
+breadcrumbs:
+  - label: Home
+    url: /
+  - label: CISSP
+    url: /cissp/
+  - label: Quick Review
+    url: /cissp/quick-review/
+---
+
+<header class="page-header page-header--compact">
+  <div class="page-shell">
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="/">Home</a></li>
+        <li><a href="/cissp/">CISSP</a></li>
+        <li aria-current="page">Quick Review</li>
+      </ol>
+    </nav>
+
+    <p class="eyebrow">CISSP quick review</p>
+    <h1>CISSP Quick Review</h1>
+    <p class="lede">
+      Focused comparisons for decisions where several answers are technically possible, but one better fits the authority, business need, lifecycle stage, or evidence in the scenario.
+    </p>
+  </div>
+</header>
+
+<section class="section">
+  <div class="page-shell">
+    <p>
+      Each guide begins with the distinction that matters, adds the technical detail needed for CISSP, and ends with scenario clues and a rapid-review grid. The pages are designed for screen review and clean printing.
+    </p>
+
+    <div class="card-grid">
+      {% for guide in cisspQuickReviews %}
+      <article class="card">
+        <p class="card__meta">{{ guide.meta }}</p>
+        <h2>{{ guide.title }}</h2>
+        <p>{{ guide.description }}</p>
+        <a class="button button--secondary" href="{{ guide.url }}">{{ guide.buttonLabel }}</a>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="page-shell">
+    <h2>Return to the full context</h2>
+    <p>
+      Use a quick review to correct one blurred distinction, then return to the domain guides for the surrounding governance, architecture, operational, and software context.
+    </p>
+    <div class="button-row">
+      <a class="button" href="/cissp/study-guide/">Open the CISSP study guide</a>
+      <a class="button button--secondary" href="/cissp/">Open the CISSP resource hub</a>
+      <a class="button button--secondary" href="/security-plus/quick-review/recovery-metrics/">Review recovery metrics</a>
+    </div>
+  </div>
+</section>
