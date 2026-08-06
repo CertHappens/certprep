@@ -1,4 +1,11 @@
+import { readFileSync } from "node:fs";
+
 import { buildExploreArticleCollection } from "./scripts/explore_content.mjs";
+import { buildHumanSitemapSections, getPublicSitemapPages } from "./scripts/site_map.mjs";
+
+const siteNavigation = JSON.parse(
+  readFileSync(new URL("./src/_data/siteNavigation.json", import.meta.url), "utf8")
+);
 
 function escapeXml(value) {
   return String(value)
@@ -70,27 +77,11 @@ export default function (eleventyConfig) {
   );
 
   eleventyConfig.addCollection("sitemapPages", (collectionApi) =>
-    collectionApi
-      .getAll()
-      .filter((item) => {
-        if (item.data?.sitemap === false || !item.url) {
-          return false;
-        }
+    getPublicSitemapPages(collectionApi.getAll())
+  );
 
-        if (
-          item.url.startsWith("/quiz-data/") ||
-          item.url.startsWith("/api/") ||
-          item.url.endsWith(".xml") ||
-          item.url.endsWith(".txt") ||
-          item.url.endsWith(".webmanifest") ||
-          item.url === "/404.html"
-        ) {
-          return false;
-        }
-
-        return item.url.endsWith("/");
-      })
-      .sort((left, right) => left.url.localeCompare(right.url))
+  eleventyConfig.addCollection("humanSitemapSections", (collectionApi) =>
+    buildHumanSitemapSections(collectionApi.getAll(), siteNavigation)
   );
 
   return {

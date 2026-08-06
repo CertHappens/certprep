@@ -8,7 +8,7 @@ printable: true
 printTitle: CCNA 200-301 v2.0 Study Guide
 author: certHappens
 datePublished: 2026-07-31
-dateModified: 2026-08-01
+dateModified: 2026-08-05
 articleSection: CCNA 200-301 v2.0
 eyebrow: CCNA v2.0 study guide
 lede: Build the network, verify what it is doing, then troubleshoot from evidence. The v2.0 blueprint rewards that cycle across routing, switching, services, security, wireless, automation, and operations.
@@ -55,6 +55,9 @@ relatedLinks:
   - title: CCNA 200-301 v2.0 Practice Test
     url: /ccna/200-301-v2/practice-test/
     description: Apply the published v2.0 objectives in randomized sessions with detailed explanations and practical network evidence.
+  - title: CCNA Quick Review Guides
+    url: /ccna/quick-review/
+    description: Compare IPv6 addressing, route selection, static routes, switching, spanning tree, and EtherChannel through focused evidence and rapid-review grids.
   - title: CCNA Acronyms and Terms
     url: /ccna/acronyms/
     description: Look up the full expansion and practical meaning of CCNA networking abbreviations used throughout the guides.

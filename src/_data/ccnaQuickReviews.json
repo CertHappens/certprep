@@ -1,0 +1,26 @@
+[
+  {
+    "title": "IPv6 Addressing and Neighbor Discovery Quick Reference",
+    "shortTitle": "IPv6 addressing",
+    "url": "/ccna/quick-review/ipv6-addressing-neighbor-discovery/",
+    "description": "Separate IPv6 address types, prefix behavior, modified EUI-64, Neighbor Discovery, router advertisements, and link-local next-hop requirements.",
+    "buttonLabel": "Review IPv6 addressing",
+    "meta": "Address scopes, prefixes, NDP, SLAAC, and EUI-64"
+  },
+  {
+    "title": "Route Selection and Static Routing Quick Reference",
+    "shortTitle": "Route selection",
+    "url": "/ccna/quick-review/route-selection-static-routing/",
+    "description": "Read Cisco routing-table evidence in the correct order, then troubleshoot default, network, host, floating, IPv4, and IPv6 static routes.",
+    "buttonLabel": "Review route selection",
+    "meta": "Longest prefix, AD, metrics, next hops, and static routes"
+  },
+  {
+    "title": "VLANs, Trunks, Rapid PVST+, and EtherChannel Quick Reference",
+    "shortTitle": "Switching decisions",
+    "url": "/ccna/quick-review/vlans-trunks-stp-etherchannel/",
+    "description": "Match access ports, trunks, SVIs, LACP EtherChannels, Rapid PVST+ roles, and spanning-tree protections to Cisco IOS evidence.",
+    "buttonLabel": "Review switching decisions",
+    "meta": "VLAN placement, loop prevention, bundled links, and verification"
+  }
+]

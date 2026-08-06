@@ -1,0 +1,32 @@
+.site-map {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+  gap: 1rem;
+  align-items: start;
+}
+
+.site-map__section {
+  padding: 1.35rem 1.4rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-medium);
+  background: linear-gradient(160deg, rgb(25 34 49 / 0.96), rgb(17 24 35 / 0.96));
+  box-shadow: var(--shadow);
+}
+
+.site-map__section h2 {
+  margin: 0 0 0.9rem;
+  font-size: clamp(1.3rem, 2vw, 1.6rem);
+}
+
+.site-map__links {
+  display: grid;
+  gap: 0.55rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.site-map__links a {
+  display: inline-block;
+  line-height: 1.4;
+}

@@ -8,7 +8,7 @@ printable: true
 printTitle: "Security+ SY0-701 Domain 2: Threats, Vulnerabilities, and Mitigations"
 author: certHappens
 datePublished: 2026-07-23
-dateModified: 2026-07-31
+dateModified: 2026-08-05
 articleSection: Security+ SY0-701 Domain 2
 eyebrow: Security+ Domain 2 guide
 lede: Follow an attack from the person or group behind it, through the path they use, to the weakness they exploit and the control that reduces the risk.
@@ -363,7 +363,7 @@ For example, an application checks that a file is safe and permitted. An attacke
 
 **SQL injection** occurs when untrusted input changes the meaning of a database query. Parameterized queries, safe APIs, input handling, least-privileged database accounts, and defensive monitoring reduce risk.
 
-**Cross-site scripting (XSS)** allows untrusted content to execute in another user's browser under the affected site's context. Context-aware output encoding, safe templating, input handling, content security policy, and secure cookie settings help limit exposure and impact.
+**Cross-site scripting (XSS)** happens when a website sends attacker-controlled script to another user's browser, and the browser runs it as though it came from the trusted site. Context-aware output encoding, safe templating, input handling, content security policy, and secure cookie settings help limit exposure and impact.
 
 The location of execution separates the two. SQL injection targets the application's database interaction. XSS targets browser-rendered content and the user's session.
 

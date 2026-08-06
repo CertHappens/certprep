@@ -5,13 +5,13 @@
     "fullName": "Certified Information Systems Security Professional",
     "provider": "ISC2",
     "eyebrow": "Certification overview",
-    "title": "CISSP Certification Overview",
-    "lede": "Understand the exam's scope, experience path, and management-level perspective before deciding how CISSP fits your security career.",
-    "sourceReviewed": "2026-07-29",
+    "title": "CISSP Study Resources and Certification Overview",
+    "lede": "Use CISSP-specific study guidance to connect the eight exam domains to risk, governance, architecture, operations, and organizational decision-making.",
+    "sourceReviewed": "2026-08-05",
     "status": {
-      "label": "How to use this overview",
-      "heading": "Start with scope, experience, and decision-making",
-      "body": "Use this page to understand the current CISSP exam structure, experience path, and the broader management and risk perspective expected from candidates. The linked Security+ and Network+ material is best used as a technical refresher, not as a substitute for CISSP-specific preparation."
+      "label": "How to use this hub",
+      "heading": "Start with the study guide, then map the scope to your experience",
+      "body": "Use the CISSP study guide to organize all eight domains. The domain guides build from governance and risk through asset protection, secure architecture, protected communications, identity and access management, assessment and testing, security operations, and software development security."
     },
     "summary": [
       "CISSP covers security across an entire organization. Technical knowledge still matters, but candidates also need to connect controls to business objectives, legal duties, architecture, risk, operations, and program leadership.",
@@ -85,49 +85,65 @@
         "number": "1",
         "name": "Security and Risk Management",
         "weight": "16%",
-        "focus": "Ethics, governance, law, policy, risk, supply chains, awareness, and business continuity foundations."
+        "focus": "Ethics, governance, law, policy, risk, supply chains, awareness, and business continuity foundations.",
+        "url": "/cissp/study-guide/security-risk-management/",
+        "linkLabel": "Open Domain 1 guide"
       },
       {
         "number": "2",
         "name": "Asset Security",
         "weight": "10%",
-        "focus": "Information and asset classification, ownership, handling, retention, privacy, and secure lifecycle decisions."
+        "focus": "Information and asset classification, ownership, handling, retention, privacy, and secure lifecycle decisions.",
+        "url": "/cissp/study-guide/asset-security/",
+        "linkLabel": "Open Domain 2 guide"
       },
       {
         "number": "3",
         "name": "Security Architecture and Engineering",
         "weight": "13%",
-        "focus": "Security models, engineering principles, cryptography, physical design, and architecture weaknesses across modern systems."
+        "focus": "Security models, engineering principles, cryptography, physical design, and architecture weaknesses across modern systems.",
+        "url": "/cissp/study-guide/security-architecture-engineering/",
+        "linkLabel": "Open Domain 3 guide"
       },
       {
         "number": "4",
         "name": "Communication and Network Security",
         "weight": "13%",
-        "focus": "Secure network architecture, communications technologies, transmission methods, and protected network operations."
+        "focus": "Secure network architecture, communications technologies, transmission methods, and protected network operations.",
+        "url": "/cissp/study-guide/communication-network-security/",
+        "linkLabel": "Open Domain 4 guide"
       },
       {
         "number": "5",
         "name": "Identity and Access Management",
         "weight": "13%",
-        "focus": "Identity lifecycles, authentication, authorization, federation, access models, and access-control governance."
+        "focus": "Identity lifecycles, authentication, authorization, federation, access models, and access-control governance.",
+        "url": "/cissp/study-guide/identity-access-management/",
+        "linkLabel": "Open Domain 5 guide"
       },
       {
         "number": "6",
         "name": "Security Assessment and Testing",
         "weight": "12%",
-        "focus": "Assessment strategies, testing, audits, control validation, reporting, and analysis of security results."
+        "focus": "Assessment strategies, testing, audits, control validation, reporting, and analysis of security results.",
+        "url": "/cissp/study-guide/security-assessment-testing/",
+        "linkLabel": "Open Domain 6 guide"
       },
       {
         "number": "7",
         "name": "Security Operations",
         "weight": "13%",
-        "focus": "Investigations, incident management, monitoring, resilience, recovery, change, patching, and operational security."
+        "focus": "Investigations, incident management, monitoring, resilience, recovery, change, patching, and operational security.",
+        "url": "/cissp/study-guide/security-operations/",
+        "linkLabel": "Open Domain 7 guide"
       },
       {
         "number": "8",
         "name": "Software Development Security",
         "weight": "10%",
-        "focus": "Secure development lifecycles, software controls, acquisition, testing, supply chains, and application risk."
+        "focus": "Secure development lifecycles, software controls, acquisition, testing, supply chains, and application risk.",
+        "url": "/cissp/study-guide/software-development-security/",
+        "linkLabel": "Open Domain 8 guide"
       }
     ],
     "experience": {
@@ -180,28 +196,68 @@
       "eyebrow": "Study approach"
     },
     "currentResources": {
-      "heading": "Useful Cert Happens resources available now",
-      "intro": "These resources are written for Security+ or Network+, so they do not replace CISSP-specific preparation. They can still help refresh technical foundations that appear inside the broader CISSP scope.",
+      "heading": "CISSP study resources available now",
+      "intro": "Begin with the full study roadmap, use the quick reviews for distinctions that are easy to blur, then use the eight domain guides for complete coverage.",
       "links": [
+        {
+          "title": "CISSP study guide",
+          "url": "/cissp/study-guide/",
+          "description": "Organize the eight domains, exam perspective, study priorities, and a practical preparation sequence."
+        },
+        {
+          "title": "CISSP Quick Review Guides",
+          "url": "/cissp/quick-review/",
+          "description": "Review governance and risk, security models and design principles, and assessment, incident, and recovery decisions with focused printable comparisons."
+        },
+        {
+          "title": "Domain 1: Security and Risk Management",
+          "url": "/cissp/study-guide/security-risk-management/",
+          "description": "Study ethics, governance, legal duties, policy, continuity, personnel security, risk, threat modeling, supply chains, and security learning programs."
+        },
+        {
+          "title": "Domain 2: Asset Security",
+          "url": "/cissp/study-guide/asset-security/",
+          "description": "Study classification, handling, ownership, inventories, data roles, lifecycle decisions, retention, sanitization, and data protection controls."
+        },
+        {
+          "title": "Domain 3: Security Architecture and Engineering",
+          "url": "/cissp/study-guide/security-architecture-engineering/",
+          "description": "Study secure design principles, security models, system capabilities, architecture weaknesses, cryptography, facilities, and lifecycle engineering."
+        },
+        {
+          "title": "Domain 4: Communication and Network Security",
+          "url": "/cissp/study-guide/communication-network-security/",
+          "description": "Study network models, secure protocols, segmentation, wireless and cloud networking, infrastructure, monitoring, remote access, and third-party connectivity."
+        },
+        {
+          "title": "Domain 5: Identity and Access Management",
+          "url": "/cissp/study-guide/identity-access-management/",
+          "description": "Study identity proofing, authentication, federation, authorization models, provisioning, privileged access, service accounts, and authentication systems."
+        },
+        {
+          "title": "Domain 6: Security Assessment and Testing",
+          "url": "/cissp/study-guide/security-assessment-testing/",
+          "description": "Study assessment strategy, control testing, vulnerability assessment, penetration testing, process evidence, metrics, reporting, remediation, exceptions, audits, and AI red teaming."
+        },
+        {
+          "title": "Domain 7: Security Operations",
+          "url": "/cissp/study-guide/security-operations/",
+          "description": "Study investigations, logging and monitoring, configuration and change management, incident response, detection, patching, recovery, continuity, physical security, personnel safety, and AI-assisted operations."
+        },
+        {
+          "title": "Domain 8: Software Development Security",
+          "url": "/cissp/study-guide/software-development-security/",
+          "description": "Study secure software lifecycles, development methods, repositories, CI/CD, application testing, acquired software, supply-chain controls, secure coding, APIs, and AI-assisted development."
+        },
         {
           "title": "Security+ study guide",
           "url": "/security-plus/sy0-701/study-guide/",
-          "description": "Refresh controls, architecture, operations, threats, governance, and risk concepts."
-        },
-        {
-          "title": "Security+ quick reviews",
-          "url": "/security-plus/quick-review/",
-          "description": "Compare controls, recovery metrics, and cryptographic concepts that are easy to blur together."
+          "description": "Refresh controls, architecture, operations, threats, governance, and risk concepts at the foundational level."
         },
         {
           "title": "Network+ study guide",
           "url": "/network-plus/n10-009/study-guide/",
-          "description": "Review network architecture, operations, security, and troubleshooting foundations."
-        },
-        {
-          "title": "Ports and protocols",
-          "url": "/ports-protocols/",
-          "description": "Refresh common services, transports, secure alternatives, and operational clues."
+          "description": "Review network architecture, operations, security, and troubleshooting foundations used across several CISSP domains."
         }
       ],
       "eyebrow": "Current resources"
@@ -210,6 +266,10 @@
       {
         "label": "CISSP certification exam outline",
         "url": "https://www.isc2.org/certifications/cissp/cissp-certification-exam-outline"
+      },
+      {
+        "label": "ISC2 computerized adaptive testing guidance",
+        "url": "https://www.isc2.org/certifications/computerized-adaptive-testing"
       },
       {
         "label": "CISSP experience requirements",
@@ -237,9 +297,10 @@
     "sources": {
       "heading": "Confirm current requirements with ISC2",
       "intro": "Exam policies, fees, and certification requirements can change. Check the official sources before making registration or maintenance decisions.",
-      "independence": "Cert Happens is an independent study resource and is not affiliated with or endorsed by ISC2."
+      "independence": "CertHappens is an independent study resource and is not affiliated with or endorsed by ISC2."
     },
-    "transition": null
+    "transition": null,
+    "resourcesFirst": true
   },
   "ccna": {
     "slug": "ccna",
@@ -458,7 +519,7 @@
     "currentResources": {
       "eyebrow": "Practice and study",
       "heading": "Start studying CCNA",
-      "intro": "Start with a randomized practice session or the five-domain guide, then use the command, acronym, subnetting, and protocol references to investigate weak areas.",
+      "intro": "Start with a randomized practice session or the five-domain guide, use focused quick reviews to correct weak spots, then consult the command, acronym, subnetting, and protocol references for deeper verification.",
       "links": [
         {
           "title": "CCNA 200-301 v2.0 practice test",
@@ -469,6 +530,11 @@
           "title": "CCNA 200-301 v2.0 study guide",
           "url": "/ccna/200-301-v2/study-guide/",
           "description": "Work through the published five-domain v2.0 scope with configuration, verification, troubleshooting, and lab-oriented study guidance."
+        },
+        {
+          "title": "CCNA 200-301 v2.0 quick reviews",
+          "url": "/ccna/quick-review/",
+          "description": "Compare IPv6 addressing, route selection, static routes, VLANs, trunks, Rapid PVST+, and EtherChannel through focused Cisco IOS evidence and exam scenarios."
         },
         {
           "title": "CCNA acronyms and terms",

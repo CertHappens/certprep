@@ -8,7 +8,7 @@ printable: true
 printTitle: Network Monitoring Evidence Quick Reference for Network+ N10-009
 author: certHappens
 datePublished: 2026-07-27
-dateModified: 2026-07-31
+dateModified: 2026-08-05
 articleSection: Network+ N10-009 Quick Review
 eyebrow: Network+ quick review
 lede: Start with the question you need answered, then choose the smallest evidence source that can answer it.
@@ -130,7 +130,7 @@ An interface counter can show drops without showing the application conversation
 
 <h2 id="snmp">SNMP: device state, counters, and notifications</h2>
 
-Simple Network Management Protocol (SNMP) lets a management system read or change managed values exposed by an SNMP agent. The Management Information Base (MIB) organizes those values, and an object identifier (OID) identifies a specific managed object.
+**Simple Network Management Protocol (SNMP)** lets monitoring software request status and counters from network devices and receive event notifications. A **Management Information Base (MIB)** is the catalog that describes the information a device can report through SNMP. An **Object Identifier (OID)** is the unique number used to request one item from that catalog.
 
 Use SNMP when the question asks for values such as:
 

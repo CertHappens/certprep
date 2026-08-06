@@ -8,7 +8,7 @@ printable: true
 printTitle: "Security+ SY0-701 Domain 1: General Security Concepts"
 author: certHappens
 datePublished: 2026-07-23
-dateModified: 2026-07-31
+dateModified: 2026-08-05
 articleSection: Security+ SY0-701 Domain 1
 eyebrow: Security+ Domain 1 guide
 lede: Learn how the core security ideas fit together, where exam questions draw the line, and which clues point to the strongest answer.
@@ -475,7 +475,7 @@ The salt does not need to remain secret. Its value comes from uniqueness. The pa
 
 Protecting the algorithm while exposing private keys would defeat the design. Common key-protection tools include:
 
-- **Trusted Platform Module (TPM):** Hardware-backed key storage and platform measurements tied to a device.
+- **Trusted Platform Module (TPM):** A protected hardware component that stores cryptographic keys and records how a device started. It can help protect disk-encryption keys and support secure boot and attestation.
 - **Hardware Security Module (HSM):** Dedicated hardware for secure key generation, storage, and cryptographic operations.
 - **Key Management System (KMS):** Central service for creating, storing, rotating, authorizing, and auditing keys.
 - **Secure enclave:** Isolated execution and storage area that protects sensitive operations from the rest of the system.

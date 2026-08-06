@@ -155,7 +155,64 @@
     {
       "label": "CISSP",
       "url": "/cissp/",
-      "matchPrefix": "/cissp/"
+      "matchPrefix": "/cissp/",
+      "menuId": "cissp-navigation",
+      "groups": [
+        {
+          "label": "Overview",
+          "links": [
+            {
+              "label": "CISSP hub",
+              "url": "/cissp/"
+            }
+          ]
+        },
+        {
+          "label": "Study",
+          "links": [
+            {
+              "label": "Study guide",
+              "url": "/cissp/study-guide/"
+            },
+            {
+              "label": "Quick reviews",
+              "url": "/cissp/quick-review/"
+            },
+            {
+              "label": "Domain 1: Risk Management",
+              "url": "/cissp/study-guide/security-risk-management/"
+            },
+            {
+              "label": "Domain 2: Asset Security",
+              "url": "/cissp/study-guide/asset-security/"
+            },
+            {
+              "label": "Domain 3: Architecture",
+              "url": "/cissp/study-guide/security-architecture-engineering/"
+            },
+            {
+              "label": "Domain 4: Network Security",
+              "url": "/cissp/study-guide/communication-network-security/"
+            },
+            {
+              "label": "Domain 5: Identity & Access",
+              "url": "/cissp/study-guide/identity-access-management/"
+            },
+            {
+              "label": "Domain 6: Assessment & Testing",
+              "url": "/cissp/study-guide/security-assessment-testing/"
+            },
+            {
+              "label": "Domain 7: Security Operations",
+              "url": "/cissp/study-guide/security-operations/"
+            },
+            {
+              "label": "Domain 8: Software Security",
+              "url": "/cissp/study-guide/software-development-security/"
+            }
+          ]
+        }
+      ]
     },
     {
       "label": "CCNA",
@@ -187,6 +244,10 @@
             {
               "label": "200-301 v2.0 study guide",
               "url": "/ccna/200-301-v2/study-guide/"
+            },
+            {
+              "label": "Quick reviews",
+              "url": "/ccna/quick-review/"
             },
             {
               "label": "Domain 1: Infrastructure",
@@ -257,6 +318,10 @@
             {
               "label": "IT or Cybersecurity",
               "url": "/explore/career/it-support-or-cybersecurity/"
+            },
+            {
+              "label": "Which Cyber Career",
+              "url": "/explore/career/cybersecurity-paths/"
             }
           ]
         }
@@ -283,6 +348,10 @@
     {
       "label": "Contact and corrections",
       "url": "/contact/"
+    },
+    {
+      "label": "Site Map",
+      "url": "/sitemap/"
     }
   ]
 }

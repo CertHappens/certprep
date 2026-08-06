@@ -8,7 +8,7 @@ printable: true
 printTitle: "CCNA 200-301 v2.0 Domain 5: AI, Network Operations, and Management"
 author: certHappens
 datePublished: 2026-08-01
-dateModified: 2026-08-01
+dateModified: 2026-08-05
 articleSection: CCNA 200-301 v2.0 Domain 5
 eyebrow: CCNA v2.0 domain 5 guide
 lede: Use automation and AI to gather, organize, and act on network evidence without giving up engineering judgment, access control, or verification.
@@ -274,7 +274,7 @@ A version-controlled file is useful because it shows intended change history. It
 
 <h2 id="snmp">Simple Network Management Protocol</h2>
 
-Simple Network Management Protocol (SNMP) provides a standardized way for management software and network devices to exchange operational information.
+**Simple Network Management Protocol (SNMP)** lets monitoring software request status and counters from network devices and receive event notifications.
 
 Core parts include:
 
@@ -290,8 +290,8 @@ Core parts include:
     <tbody>
       <tr><td data-label="Component"><strong>Network management system (NMS)</strong></td><td data-label="Function">Acts as the SNMP manager that polls devices, receives notifications, stores data, and presents operational views.</td><td data-label="Example">A monitoring platform graphs interface utilization and alerts on repeated link changes.</td></tr>
       <tr><td data-label="Component"><strong>Agent</strong></td><td data-label="Function">Runs on the managed device and exposes supported management data.</td><td data-label="Example">The IOS XE SNMP agent supplies interface counters and device information.</td></tr>
-      <tr><td data-label="Component"><strong>Management information base (MIB)</strong></td><td data-label="Function">Describes manageable objects and their organization.</td><td data-label="Example">An interface table defines objects for interface state and counters.</td></tr>
-      <tr><td data-label="Component"><strong>Object identifier (OID)</strong></td><td data-label="Function">Uniquely identifies a specific management object in a hierarchy.</td><td data-label="Example">The manager requests an OID associated with an interface counter.</td></tr>
+      <tr><td data-label="Component"><strong>Management information base (MIB)</strong></td><td data-label="Function">Acts as the catalog that describes the information a device can report through SNMP.</td><td data-label="Example">An interface table defines entries for interface state and counters.</td></tr>
+      <tr><td data-label="Component"><strong>Object identifier (OID)</strong></td><td data-label="Function">Provides the unique number used to request one item from that catalog.</td><td data-label="Example">The manager requests the OID for an interface counter.</td></tr>
       <tr><td data-label="Component"><strong>Poll</strong></td><td data-label="Function">The manager requests current data from the agent.</td><td data-label="Example">The NMS reads interface octet counters every five minutes.</td></tr>
       <tr><td data-label="Component"><strong>Trap or inform</strong></td><td data-label="Function">The agent sends an event notification toward the manager. An inform includes acknowledgment behavior that a basic trap does not.</td><td data-label="Example">A device reports a link-state change without waiting for the next poll.</td></tr>
     </tbody>

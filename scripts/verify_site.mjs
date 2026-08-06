@@ -207,9 +207,26 @@ const publicPageFiles = [
   "contact/index.html",
   "copyright/index.html",
   "cissp/index.html",
+  "cissp/quick-review/index.html",
+  "cissp/quick-review/governance-risk-policy-decisions/index.html",
+  "cissp/quick-review/security-models-design-principles/index.html",
+  "cissp/quick-review/assessment-incident-recovery-decisions/index.html",
+  "cissp/study-guide/index.html",
+  "cissp/study-guide/security-risk-management/index.html",
+  "cissp/study-guide/asset-security/index.html",
+  "cissp/study-guide/security-architecture-engineering/index.html",
+  "cissp/study-guide/communication-network-security/index.html",
+  "cissp/study-guide/identity-access-management/index.html",
+  "cissp/study-guide/security-assessment-testing/index.html",
+  "cissp/study-guide/security-operations/index.html",
+  "cissp/study-guide/software-development-security/index.html",
   "ccna/index.html",
   "ccna/acronyms/index.html",
   "ccna/commands/index.html",
+  "ccna/quick-review/index.html",
+  "ccna/quick-review/ipv6-addressing-neighbor-discovery/index.html",
+  "ccna/quick-review/route-selection-static-routing/index.html",
+  "ccna/quick-review/vlans-trunks-stp-etherchannel/index.html",
   "ccna/200-301-v2/practice-test/index.html",
   "ccna/200-301-v2/study-guide/index.html",
   "ccna/200-301-v2/study-guide/network-infrastructure-connectivity/index.html",
@@ -221,6 +238,7 @@ const publicPageFiles = [
   "explore/index.html",
   "explore/career/paths/index.html",
   "explore/career/it-support-or-cybersecurity/index.html",
+  "explore/career/cybersecurity-paths/index.html",
   "network-plus/index.html",
   "network-plus/acronyms/index.html",
   "network-plus/n10-009/practice-test/index.html",
@@ -237,6 +255,7 @@ const publicPageFiles = [
   "network-plus/quick-review/vlans-trunks-stp-lacp/index.html",
   "ports-protocols/index.html",
   "privacy/index.html",
+  "sitemap/index.html",
   "security-plus/index.html",
   "security-plus/acronyms/index.html",
   "security-plus/quick-review/index.html",
@@ -257,6 +276,9 @@ const publicPageFiles = [
 const articlePageFiles = [
   "ccna/acronyms/index.html",
   "ccna/commands/index.html",
+  "ccna/quick-review/ipv6-addressing-neighbor-discovery/index.html",
+  "ccna/quick-review/route-selection-static-routing/index.html",
+  "ccna/quick-review/vlans-trunks-stp-etherchannel/index.html",
   "ccna/200-301-v2/study-guide/index.html",
   "ccna/200-301-v2/study-guide/network-infrastructure-connectivity/index.html",
   "ccna/200-301-v2/study-guide/switching-network-access/index.html",
@@ -264,8 +286,21 @@ const articlePageFiles = [
   "ccna/200-301-v2/study-guide/network-services-security/index.html",
   "ccna/200-301-v2/study-guide/ai-network-operations-management/index.html",
   "copyright/index.html",
+  "cissp/quick-review/governance-risk-policy-decisions/index.html",
+  "cissp/quick-review/security-models-design-principles/index.html",
+  "cissp/quick-review/assessment-incident-recovery-decisions/index.html",
+  "cissp/study-guide/index.html",
+  "cissp/study-guide/security-risk-management/index.html",
+  "cissp/study-guide/asset-security/index.html",
+  "cissp/study-guide/security-architecture-engineering/index.html",
+  "cissp/study-guide/communication-network-security/index.html",
+  "cissp/study-guide/identity-access-management/index.html",
+  "cissp/study-guide/security-assessment-testing/index.html",
+  "cissp/study-guide/security-operations/index.html",
+  "cissp/study-guide/software-development-security/index.html",
   "explore/career/paths/index.html",
   "explore/career/it-support-or-cybersecurity/index.html",
+  "explore/career/cybersecurity-paths/index.html",
   "network-plus/acronyms/index.html",
   "network-plus/n10-009/study-guide/index.html",
   "network-plus/n10-009/study-guide/ipv4-subnetting/index.html",
@@ -440,6 +475,12 @@ const wholeSitePageMarkers = new Map([
       "Software Development Security",
       "120 credits",
       "/security-plus/sy0-701/study-guide/",
+      "/cissp/study-guide/security-architecture-engineering/",
+      "/cissp/study-guide/communication-network-security/",
+      "/cissp/study-guide/identity-access-management/",
+      "/cissp/study-guide/security-assessment-testing/",
+      "/cissp/study-guide/security-operations/",
+      "/cissp/study-guide/software-development-security/",
       "https://www.isc2.org/certifications/cissp/cissp-certification-exam-outline"
     ]
   ],
@@ -456,6 +497,7 @@ const wholeSitePageMarkers = new Map([
       "/ccna/200-301-v2/study-guide/ai-network-operations-management/",
       "/ccna/acronyms/",
       "/ccna/commands/",
+      "/ccna/quick-review/",
       "Network Infrastructure and Connectivity",
       "AI, Network Operations, and Management",
       "February 2, 2027",
@@ -473,6 +515,7 @@ const wholeSitePageMarkers = new Map([
       "/ccna/200-301-v2/study-guide/network-services-security/",
       "/ccna/commands/",
       "/ccna/acronyms/",
+      "/ccna/quick-review/",
       "February 3, 2027"
     ]
   ],
@@ -544,6 +587,29 @@ const wholeSitePageMarkers = new Map([
     ]
   ],
   [
+    "ccna/quick-review/index.html",
+    [
+      "CCNA 200-301 v2.0 Quick Review",
+      "/ccna/quick-review/ipv6-addressing-neighbor-discovery/",
+      "/ccna/quick-review/route-selection-static-routing/",
+      "/ccna/quick-review/vlans-trunks-stp-etherchannel/",
+      "/ccna/200-301-v2/practice-test/",
+      "/ccna/commands/"
+    ]
+  ],
+  [
+    "ccna/quick-review/ipv6-addressing-neighbor-discovery/index.html",
+    ["Neighbor Discovery", "Modified EUI-64", "show ipv6 neighbors", "/ccna/quick-review/"]
+  ],
+  [
+    "ccna/quick-review/route-selection-static-routing/index.html",
+    ["longest matching installed prefix", "floating static", "show ip route", "/ccna/quick-review/"]
+  ],
+  [
+    "ccna/quick-review/vlans-trunks-stp-etherchannel/index.html",
+    ["Rapid PVST+", "show etherchannel summary", "BPDU Guard", "/ccna/quick-review/"]
+  ],
+  [
     "404.html",
     ["/security-plus/", "/network-plus/", "Return home"]
   ],
@@ -552,6 +618,20 @@ const wholeSitePageMarkers = new Map([
     [
       "/security-plus/sy0-701/practice-test/",
       "/network-plus/n10-009/practice-test/",
+      "/privacy/"
+    ]
+  ],
+  [
+    "sitemap/index.html",
+    [
+      "Site Map",
+      "/security-plus/",
+      "/network-plus/",
+      "/ccna/",
+      "/cissp/",
+      "/explore/",
+      "/ports-protocols/",
+      "/tools/subnet-calculator/",
       "/privacy/"
     ]
   ],
@@ -644,6 +724,7 @@ const requiredFiles = [
   "assets/js/quiz/paged-question.js",
   "assets/js/quiz/stimulus.js",
   "assets/css/explore.css",
+  "assets/css/site-map.css",
   "assets/js/explore/career-assessment-core.js",
   "assets/js/explore/career-assessment.js",
   "quiz-data/catalog.json",
@@ -1187,6 +1268,10 @@ for (const file of htmlFiles) {
     fail(`${relative}: footer is missing the Copyright and usage link`);
   }
 
+  if (!hasLinkWithText(html, "/sitemap/", "Site Map")) {
+    fail(`${relative}: footer is missing the Site Map link`);
+  }
+
   if (!includesNormalizedText(html, "All rights reserved", { mainOnly: false })) {
     fail(`${relative}: visible copyright notice is missing`);
   }
@@ -1254,8 +1339,11 @@ for (const file of htmlFiles) {
     'data-primary-navigation',
     'id="security-plus-navigation"',
     'id="network-plus-navigation"',
+    'id="cissp-navigation"',
     'id="ccna-navigation"',
     'id="explore-navigation"',
+    'id="cissp-navigation-group-1"',
+    'id="cissp-navigation-group-2"',
     'id="ccna-navigation-group-1"',
     'id="ccna-navigation-group-2"',
     'id="ccna-navigation-group-3"',
@@ -1268,6 +1356,17 @@ for (const file of htmlFiles) {
   for (const marker of requiredNavigationMarkers) {
     if (!hasPageMarker(html, marker)) {
       fail(`${relative}: shared navigation is missing ${marker}`);
+    }
+  }
+
+  const expectedCisspNavigationGroups = [
+    ["cissp-navigation-group-1", "Overview"],
+    ["cissp-navigation-group-2", "Study"]
+  ];
+
+  for (const [id, label] of expectedCisspNavigationGroups) {
+    if (!elementTextByIdMatches(html, "p", id, label)) {
+      fail(`${relative}: CISSP navigation group #${id} is missing label ${label}`);
     }
   }
 
@@ -1285,8 +1384,8 @@ for (const file of htmlFiles) {
   }
 
   const navigationSubmenuCount = (html.match(/data-nav-submenu/g) || []).length;
-  if (navigationSubmenuCount !== 4) {
-    fail(`${relative}: expected 4 shared navigation submenus, found ${navigationSubmenuCount}`);
+  if (navigationSubmenuCount !== 5) {
+    fail(`${relative}: expected 5 shared navigation submenus, found ${navigationSubmenuCount}`);
   }
 
   const requiredNavigationLinks = [
@@ -1314,6 +1413,7 @@ for (const file of htmlFiles) {
     "/network-plus/n10-009/study-guide/ipv4-subnetting/",
     "/tools/subnet-calculator/",
     "/ccna/200-301-v2/study-guide/",
+    "/ccna/quick-review/",
     "/ccna/200-301-v2/study-guide/network-infrastructure-connectivity/",
     "/ccna/200-301-v2/study-guide/switching-network-access/",
     "/ccna/200-301-v2/study-guide/ip-routing/",
@@ -1322,10 +1422,20 @@ for (const file of htmlFiles) {
     "/ccna/acronyms/",
     "/ccna/commands/",
     "/cissp/",
+    "/cissp/study-guide/",
+    "/cissp/study-guide/security-risk-management/",
+    "/cissp/study-guide/asset-security/",
+    "/cissp/study-guide/security-architecture-engineering/",
+    "/cissp/study-guide/communication-network-security/",
+    "/cissp/study-guide/identity-access-management/",
+    "/cissp/study-guide/security-assessment-testing/",
+    "/cissp/study-guide/security-operations/",
+    "/cissp/study-guide/software-development-security/",
     "/ccna/",
     "/explore/",
     "/explore/career/paths/",
-    "/explore/career/it-support-or-cybersecurity/"
+    "/explore/career/it-support-or-cybersecurity/",
+    "/explore/career/cybersecurity-paths/"
   ];
 
   for (const href of requiredNavigationLinks) {
@@ -1466,7 +1576,9 @@ for (const file of htmlFiles) {
       'href="/network-plus/n10-009/practice-test/"',
       'href="/tools/subnet-calculator/"',
       'href="/cissp/"',
-      'href="/ccna/"'
+      'href="/ccna/"',
+      "ISC2 CISSP",
+      "CISSP includes a complete eight-domain study collection"
     ];
 
     for (const marker of requiredHomepageMarkers) {
@@ -1477,6 +1589,10 @@ for (const file of htmlFiles) {
 
     if (includesNormalizedText(html, "Free certification practice")) {
       fail(`${relative}: retired free-practice eyebrow is still present`);
+    }
+
+    if (includesNormalizedText(html, "Explore the CISSP path")) {
+      fail(`${relative}: CISSP remains separated from the primary certification resources`);
     }
   }
 
@@ -1490,6 +1606,80 @@ for (const file of htmlFiles) {
     for (const marker of requiredAnalyticsDisclosures) {
       if (!hasPageMarker(html, marker)) {
         fail(`${relative}: analytics disclosure is missing ${marker}`);
+      }
+    }
+  }
+
+  if (relative === "ccna/index.html") {
+    if (!html.includes('href="/ccna/quick-review/"')) {
+      fail(`${relative}: CCNA hub is missing the quick-review link`);
+    }
+  }
+
+  if (relative === "cissp/index.html") {
+    if (!html.includes('href="/cissp/quick-review/"')) {
+      fail(`${relative}: CISSP hub is missing the quick-review link`);
+    }
+  }
+
+  if (relative === "ccna/quick-review/index.html") {
+    if (!headingMatches(html, "CCNA 200-301 v2.0 Quick Review")) {
+      fail(`${relative}: CCNA quick-review hub is missing its expected h1`);
+    }
+
+    const requiredQuickReviewLinks = [
+      "/ccna/quick-review/ipv6-addressing-neighbor-discovery/",
+      "/ccna/quick-review/route-selection-static-routing/",
+      "/ccna/quick-review/vlans-trunks-stp-etherchannel/",
+      "/ccna/200-301-v2/practice-test/",
+      "/ccna/200-301-v2/study-guide/",
+      "/ccna/commands/"
+    ];
+
+    for (const href of requiredQuickReviewLinks) {
+      if (!html.includes(`href="${href}"`)) {
+        fail(`${relative}: quick-review hub is missing ${href}`);
+      }
+    }
+  }
+
+  const ccnaQuickReviewPages = {
+    "ccna/quick-review/ipv6-addressing-neighbor-discovery/index.html": [
+      "Neighbor Discovery",
+      "Modified EUI-64",
+      "Router Advertisement",
+      "show ipv6 neighbors"
+    ],
+    "ccna/quick-review/route-selection-static-routing/index.html": [
+      "longest matching installed prefix",
+      "administrative distance",
+      "floating static",
+      "show ip route"
+    ],
+    "ccna/quick-review/vlans-trunks-stp-etherchannel/index.html": [
+      "Rapid PVST+",
+      "show etherchannel summary",
+      "BPDU Guard",
+      "Loop Guard"
+    ]
+  };
+
+  if (Object.hasOwn(ccnaQuickReviewPages, relative)) {
+    if (!html.includes("data-print-guide")) {
+      fail(`${relative}: CCNA quick-review guide is missing the shared Print | Save control`);
+    }
+
+    if (!html.includes('/ccna/quick-review/')) {
+      fail(`${relative}: CCNA quick-review guide is missing its hub link`);
+    }
+
+    if (!html.includes('/ccna/200-301-v2/practice-test/')) {
+      fail(`${relative}: CCNA quick-review guide is missing its practice-test link`);
+    }
+
+    for (const marker of ccnaQuickReviewPages[relative]) {
+      if (!hasPageMarker(html, marker)) {
+        fail(`${relative}: CCNA quick-review guide is missing ${marker}`);
       }
     }
   }
@@ -2465,8 +2655,30 @@ for (const file of htmlFiles) {
   }
 
   if (relative === "cissp/index.html") {
-    if (!headingMatches(html, "CISSP Certification Overview")) {
-      fail(`${relative}: expected CISSP overview h1 is missing`);
+    if (!headingMatches(html, "CISSP Study Resources and Certification Overview")) {
+      fail(`${relative}: expected CISSP resource-hub h1 is missing`);
+    }
+
+    const resourceHeadingIndex = html.indexOf('id="exam-resources-heading"');
+    const overviewHeadingIndex = html.indexOf('id="exam-overview-heading"');
+    if (resourceHeadingIndex < 0 || overviewHeadingIndex < 0) {
+      fail(`${relative}: CISSP resource-first ordering markers are incomplete`);
+    } else if (resourceHeadingIndex > overviewHeadingIndex) {
+      fail(`${relative}: CISSP study resources must appear before exam overview content`);
+    }
+
+    for (const href of [
+      "/cissp/study-guide/",
+      "/cissp/study-guide/security-risk-management/",
+      "/cissp/study-guide/asset-security/",
+      "/cissp/study-guide/security-architecture-engineering/",
+      "/cissp/study-guide/communication-network-security/",
+      "/cissp/study-guide/identity-access-management/",
+      "/cissp/study-guide/security-assessment-testing/"
+    ]) {
+      if (!html.includes(`href="${href}"`)) {
+        fail(`${relative}: CISSP resource hub is missing ${href}`);
+      }
     }
 
     const requiredSectionIds = [
@@ -2499,6 +2711,464 @@ for (const file of htmlFiles) {
 
     if (!includesNormalizedText(html, "not affiliated with or endorsed by ISC2")) {
       fail(`${relative}: ISC2 independence statement is missing`);
+    }
+  }
+
+  if (relative === "cissp/study-guide/index.html") {
+    if (!headingMatches(html, "CISSP Study Guide")) {
+      fail(`${relative}: expected CISSP study-guide h1 is missing`);
+    }
+
+    if (!html.includes("data-print-guide")) {
+      fail(`${relative}: CISSP study guide is missing the shared Print | Save control`);
+    }
+
+    const requiredSectionIds = [
+      "exam-snapshot",
+      "how-to-use",
+      "decision-lens",
+      "domains",
+      "study-plan",
+      "review-habits",
+      "official-references"
+    ];
+
+    for (const id of requiredSectionIds) {
+      if (!html.includes(`id="${id}"`)) {
+        fail(`${relative}: CISSP study guide is missing section #${id}`);
+      }
+    }
+
+    const requiredMarkers = [
+      "Security and Risk Management",
+      "Asset Security",
+      "Security Architecture and Engineering",
+      "Communication and Network Security",
+      "Identity and Access Management",
+      "Security Assessment and Testing",
+      "Security Operations",
+      "Software Development Security",
+      'href="/cissp/study-guide/security-risk-management/"',
+      'href="/cissp/study-guide/asset-security/"',
+      'href="/cissp/study-guide/security-architecture-engineering/"',
+      'href="/cissp/study-guide/communication-network-security/"',
+      'href="/cissp/study-guide/identity-access-management/"',
+      'href="/cissp/study-guide/security-assessment-testing/"',
+      'href="/cissp/study-guide/security-operations/"',
+      'href="/cissp/study-guide/software-development-security/"'
+    ];
+
+    for (const marker of requiredMarkers) {
+      if (!hasPageMarker(html, marker)) {
+        fail(`${relative}: CISSP study guide is missing ${marker}`);
+      }
+    }
+  }
+
+  if (relative === "cissp/study-guide/security-risk-management/index.html") {
+    if (!headingMatches(html, "CISSP Domain 1: Security and Risk Management")) {
+      fail(`${relative}: expected CISSP Domain 1 h1 is missing`);
+    }
+
+    if (!html.includes("data-print-guide")) {
+      fail(`${relative}: CISSP Domain 1 guide is missing the shared Print | Save control`);
+    }
+
+    const requiredSectionIds = [
+      "domain-map",
+      "decision-order",
+      "ethics-principles",
+      "governance",
+      "legal-investigations",
+      "policy",
+      "business-continuity",
+      "personnel-security",
+      "risk-management",
+      "threat-modeling",
+      "supply-chain",
+      "awareness",
+      "exam-traps",
+      "review-checklist",
+      "official-references"
+    ];
+
+    for (const id of requiredSectionIds) {
+      if (!html.includes(`id="${id}"`)) {
+        fail(`${relative}: CISSP Domain 1 guide is missing section #${id}`);
+      }
+    }
+
+    const requiredMarkers = [
+      "Due care",
+      "Due diligence",
+      "Business Impact Analysis",
+      "Maximum tolerable downtime",
+      "Recovery Time Objective",
+      "Recovery Point Objective",
+      "Single Loss Expectancy",
+      "Annualized Loss Expectancy",
+      "Supply Chain Risk Management",
+      "Software Bill of Materials",
+      "Awareness",
+      "Training",
+      "Education",
+      'href="/cissp/study-guide/"'
+    ];
+
+    for (const marker of requiredMarkers) {
+      if (!hasPageMarker(html, marker)) {
+        fail(`${relative}: CISSP Domain 1 guide is missing ${marker}`);
+      }
+    }
+  }
+
+  if (relative === "cissp/study-guide/asset-security/index.html") {
+    if (!headingMatches(html, "CISSP Domain 2: Asset Security")) {
+      fail(`${relative}: expected CISSP Domain 2 h1 is missing`);
+    }
+
+    if (!html.includes("data-print-guide")) {
+      fail(`${relative}: CISSP Domain 2 guide is missing the shared Print | Save control`);
+    }
+
+    const requiredSectionIds = [
+      "domain-map",
+      "decision-order",
+      "classification",
+      "handling",
+      "provisioning",
+      "data-roles",
+      "lifecycle",
+      "retention",
+      "remanence",
+      "controls",
+      "ai-assets",
+      "exam-traps",
+      "review-checklist",
+      "official-references"
+    ];
+
+    for (const id of requiredSectionIds) {
+      if (!html.includes(`id="${id}"`)) {
+        fail(`${relative}: CISSP Domain 2 guide is missing section #${id}`);
+      }
+    }
+
+    const requiredMarkers = [
+      "Information classification",
+      "Asset classification",
+      "Data owner",
+      "Data controller",
+      "Data custodian",
+      "Data processor",
+      "Data remanence",
+      "End of Life",
+      "End of Support",
+      "Digital Rights Management",
+      "Data Loss Prevention",
+      "Cloud Access Security Broker",
+      "Clear",
+      "Purge",
+      "Destroy",
+      'href="/cissp/study-guide/"'
+    ];
+
+    for (const marker of requiredMarkers) {
+      if (!hasPageMarker(html, marker)) {
+        fail(`${relative}: CISSP Domain 2 guide is missing ${marker}`);
+      }
+    }
+  }
+
+  if (relative === "cissp/study-guide/communication-network-security/index.html") {
+    if (!headingMatches(html, "CISSP Domain 4: Communication and Network Security")) {
+      fail(`${relative}: expected CISSP Domain 4 h1 is missing`);
+    }
+
+    if (!html.includes("data-print-guide")) {
+      fail(`${relative}: CISSP Domain 4 guide is missing the shared Print | Save control`);
+    }
+
+    const requiredSectionIds = [
+      "domain-map",
+      "decision-order",
+      "models-addressing",
+      "secure-protocols",
+      "transport-performance",
+      "segmentation-flows",
+      "edge-wireless",
+      "software-defined-cloud",
+      "monitoring-management",
+      "network-components",
+      "communication-channels",
+      "ai-networking",
+      "exam-traps",
+      "review-checklist",
+      "official-references"
+    ];
+
+    for (const id of requiredSectionIds) {
+      if (!html.includes(`id="${id}"`)) {
+        fail(`${relative}: CISSP Domain 4 guide is missing section #${id}`);
+      }
+    }
+
+    const requiredMarkers = [
+      "Open Systems Interconnection",
+      "APS transports network data physically.",
+      "TCP/IP layer",
+      "Network Access",
+      "Internet Protocol Security",
+      "Secure Shell",
+      "Transport Layer Security",
+      "north-south traffic",
+      "east-west traffic",
+      "Microsegmentation",
+      "Network Access Control",
+      "Software-defined networking",
+      "Virtual Private Cloud",
+      "Network observability",
+      "Third-party connectivity",
+      'href="/cissp/study-guide/"'
+    ];
+
+    for (const marker of requiredMarkers) {
+      if (!hasPageMarker(html, marker)) {
+        fail(`${relative}: CISSP Domain 4 guide is missing ${marker}`);
+      }
+    }
+  }
+
+  if (relative === "cissp/study-guide/identity-access-management/index.html") {
+    if (!headingMatches(html, "CISSP Domain 5: Identity and Access Management")) {
+      fail(`${relative}: expected CISSP Domain 5 h1 is missing`);
+    }
+
+    if (!html.includes("data-print-guide")) {
+      fail(`${relative}: CISSP Domain 5 guide is missing the shared Print | Save control`);
+    }
+
+    const requiredSectionIds = [
+      "domain-map",
+      "decision-order",
+      "identity-access-basics",
+      "access-assets",
+      "identity-proofing",
+      "authentication",
+      "sessions-credentials",
+      "federation-sso",
+      "authorization-models",
+      "policy-enforcement",
+      "identity-lifecycle",
+      "privileged-service-accounts",
+      "authentication-systems",
+      "ai-identities",
+      "exam-traps",
+      "review-checklist",
+      "official-references"
+    ];
+
+    for (const id of requiredSectionIds) {
+      if (!html.includes(`id="${id}"`)) {
+        fail(`${relative}: CISSP Domain 5 guide is missing section #${id}`);
+      }
+    }
+
+    const requiredMarkers = [
+      "Identity proofing",
+      "Multi-factor authentication",
+      "OpenID Connect",
+      "Attribute-based access control",
+      "Policy Decision Point",
+      "joiner, mover, and leaver",
+      "Privileged Access Management",
+      "Service account",
+      "Kerberos",
+      "AI agent",
+      'href="/cissp/study-guide/"'
+    ];
+
+    for (const marker of requiredMarkers) {
+      if (!hasPageMarker(html, marker)) {
+        fail(`${relative}: CISSP Domain 5 guide is missing ${marker}`);
+      }
+    }
+  }
+
+  if (relative === "cissp/study-guide/security-assessment-testing/index.html") {
+    if (!headingMatches(html, "CISSP Domain 6: Security Assessment and Testing")) {
+      fail(`${relative}: expected CISSP Domain 6 h1 is missing`);
+    }
+
+    if (!html.includes("data-print-guide")) {
+      fail(`${relative}: CISSP Domain 6 guide is missing the shared Print | Save control`);
+    }
+
+    const requiredSectionIds = [
+      "domain-map",
+      "decision-order",
+      "strategy-scope",
+      "independence-evidence",
+      "vulnerability-assessment",
+      "penetration-teams",
+      "logs-synthetic-benchmarks",
+      "code-misuse-interfaces",
+      "breach-compliance",
+      "process-data",
+      "metrics-indicators",
+      "analyze-output",
+      "reporting",
+      "remediation-exceptions",
+      "audits",
+      "ai-testing",
+      "exam-traps",
+      "review-checklist",
+      "official-references"
+    ];
+
+    for (const id of requiredSectionIds) {
+      if (!html.includes(`id="${id}"`)) {
+        fail(`${relative}: CISSP Domain 6 guide is missing section #${id}`);
+      }
+    }
+
+    const requiredMarkers = [
+      "Vulnerability assessment",
+      "Penetration test",
+      "red team",
+      "blue team",
+      "purple team",
+      "synthetic transaction",
+      "Coverage analysis",
+      "breach and attack simulation",
+      "Key Performance Indicator",
+      "Key Risk Indicator",
+      "Ethical disclosure",
+      "AI red teaming",
+      'href="/cissp/study-guide/"'
+    ];
+
+    for (const marker of requiredMarkers) {
+      if (!hasPageMarker(html, marker)) {
+        fail(`${relative}: CISSP Domain 6 guide is missing ${marker}`);
+      }
+    }
+  }
+
+  if (relative === "cissp/study-guide/security-operations/index.html") {
+    if (!headingMatches(html, "CISSP Domain 7: Security Operations")) {
+      fail(`${relative}: expected CISSP Domain 7 h1 is missing`);
+    }
+
+    if (!html.includes("data-print-guide")) {
+      fail(`${relative}: CISSP Domain 7 guide is missing the shared Print | Save control`);
+    }
+
+    const requiredSectionIds = [
+      "domain-map",
+      "decision-order",
+      "investigations",
+      "logging-monitoring",
+      "intelligence-hunting",
+      "configuration-management",
+      "operations-foundations",
+      "resource-protection",
+      "incident-management",
+      "detection-prevention",
+      "patch-vulnerability",
+      "change-management",
+      "recovery-strategies",
+      "disaster-recovery",
+      "recovery-testing",
+      "business-continuity",
+      "physical-security",
+      "personnel-safety",
+      "ai-operations",
+      "exam-traps",
+      "review-checklist",
+      "official-references"
+    ];
+
+    for (const id of requiredSectionIds) {
+      if (!html.includes(`id="${id}"`)) {
+        fail(`${relative}: CISSP Domain 7 guide is missing section #${id}`);
+      }
+    }
+
+    const requiredMarkers = [
+      "Chain of custody",
+      "Security Information and Event Management",
+      "Configuration drift",
+      "Incident management",
+      "Known Exploited Vulnerabilities",
+      "Disaster recovery",
+      "Business continuity",
+      "Model drift",
+      'href="/cissp/study-guide/"'
+    ];
+
+    for (const marker of requiredMarkers) {
+      if (!hasPageMarker(html, marker)) {
+        fail(`${relative}: CISSP Domain 7 guide is missing ${marker}`);
+      }
+    }
+  }
+
+  if (relative === "cissp/study-guide/software-development-security/index.html") {
+    if (!headingMatches(html, "CISSP Domain 8: Software Development Security")) {
+      fail(`${relative}: expected CISSP Domain 8 h1 is missing`);
+    }
+
+    if (!html.includes("data-print-guide")) {
+      fail(`${relative}: CISSP Domain 8 guide is missing the shared Print | Save control`);
+    }
+
+    const requiredSectionIds = [
+      "domain-map",
+      "decision-order",
+      "secure-sdlc",
+      "development-methods",
+      "maturity-teams",
+      "maintenance-change",
+      "development-ecosystem",
+      "pipelines-repositories",
+      "application-testing",
+      "effectiveness",
+      "acquired-software",
+      "software-supply-chain",
+      "secure-coding",
+      "api-security",
+      "software-defined-security",
+      "ai-development",
+      "exam-traps",
+      "review-checklist",
+      "official-references"
+    ];
+
+    for (const id of requiredSectionIds) {
+      if (!html.includes(`id="${id}"`)) {
+        fail(`${relative}: CISSP Domain 8 guide is missing section #${id}`);
+      }
+    }
+
+    const requiredMarkers = [
+      "Software Development Life Cycle",
+      "Development, Security, and Operations",
+      "Software Assurance Maturity Model",
+      "Continuous Integration",
+      "Static Application Security Testing",
+      "Software Composition Analysis",
+      "Software Bill of Materials",
+      "Application Programming Interface",
+      "software-defined security",
+      "AI-assisted development",
+      'href="/cissp/study-guide/"'
+    ];
+
+    for (const marker of requiredMarkers) {
+      if (!hasPageMarker(html, marker)) {
+        fail(`${relative}: CISSP Domain 8 guide is missing ${marker}`);
+      }
     }
   }
 
@@ -2906,6 +3576,41 @@ if (await isFile(path.join(outputRoot, "sitemap.xml"))) {
     if (!entry || !/<lastmod>\d{4}-\d{2}-\d{2}<\/lastmod>/.test(entry)) {
       fail(`sitemap.xml: publication or modification date is missing for ${url}`);
     }
+  }
+}
+
+if (await isFile(path.join(outputRoot, "sitemap/index.html"))) {
+  const humanSitemap = await readFile(
+    path.join(outputRoot, "sitemap/index.html"),
+    "utf8"
+  );
+  const omittedFromHumanSitemap = new Set(["index.html", "sitemap/index.html"]);
+
+  for (const relative of publicPageFiles) {
+    if (omittedFromHumanSitemap.has(relative)) {
+      continue;
+    }
+
+    const href = `/${relative.replace(/index\.html$/, "")}`;
+    if (!humanSitemap.includes(`href="${href}"`)) {
+      fail(`sitemap/index.html: missing public page link ${href}`);
+    }
+  }
+
+  const excludedQuestionPrefixes = [
+    "/security-plus/sy0-701/practice-test/question/",
+    "/network-plus/n10-009/practice-test/question/",
+    "/ccna/200-301-v2/practice-test/question/"
+  ];
+
+  for (const prefix of excludedQuestionPrefixes) {
+    if (humanSitemap.includes(`href="${prefix}`)) {
+      fail(`sitemap/index.html: paged question route must remain excluded (${prefix})`);
+    }
+  }
+
+  if (humanSitemap.includes('href="/sitemap.xml"')) {
+    fail("sitemap/index.html: human Site Map should not link to the XML sitemap");
   }
 }
 

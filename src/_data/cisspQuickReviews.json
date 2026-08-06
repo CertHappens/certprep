@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Governance, Risk, and Policy Decisions Quick Reference",
+    "shortTitle": "Governance and risk",
+    "url": "/cissp/quick-review/governance-risk-policy-decisions/",
+    "description": "Separate governance roles, risk appetite and tolerance, due care and diligence, risk responses, and the policy hierarchy before choosing a control or action.",
+    "buttonLabel": "Review governance decisions",
+    "meta": "Authority, risk limits, policy hierarchy, and treatment choices"
+  },
+  {
+    "title": "Security Models and Design Principles Quick Reference",
+    "shortTitle": "Models and design",
+    "url": "/cissp/quick-review/security-models-design-principles/",
+    "description": "Compare confidentiality and integrity models, then connect least privilege, separation of duties, defense in depth, secure failure, and zero trust to architecture decisions.",
+    "buttonLabel": "Compare security models",
+    "meta": "Bell-LaPadula, Biba, Clark-Wilson, Brewer-Nash, and secure design"
+  },
+  {
+    "title": "Assessment, Incident, and Recovery Decisions Quick Reference",
+    "shortTitle": "Assessment and recovery",
+    "url": "/cissp/quick-review/assessment-incident-recovery-decisions/",
+    "description": "Choose among assessments, tests, audits, monitoring, incident actions, recovery objectives, recovery sites, and continuity exercises by following the purpose and decision order.",
+    "buttonLabel": "Review assessment and recovery",
+    "meta": "Evidence, response order, RTO, RPO, recovery sites, and exercises"
+  }
+]

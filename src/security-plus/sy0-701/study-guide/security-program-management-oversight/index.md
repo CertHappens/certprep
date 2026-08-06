@@ -8,7 +8,7 @@ printable: true
 printTitle: "Security+ SY0-701 Domain 5: Security Program Management and Oversight"
 author: certHappens
 datePublished: 2026-07-23
-dateModified: 2026-07-31
+dateModified: 2026-08-05
 articleSection: Security+ SY0-701 Domain 5
 eyebrow: Security+ Domain 5 guide
 lede: Connect policies, risk decisions, vendor oversight, compliance work, and security awareness to the people responsible for each outcome.
@@ -248,8 +248,11 @@ A **risk threshold** marks a point that triggers action or escalation. It might 
 
 <h3>Appetite and tolerance</h3>
 
-- **Risk appetite** describes the amount and type of risk an organization is willing to pursue or retain while meeting its objectives.
-- **Risk tolerance** describes the acceptable variation around a specific objective or risk.
+**Risk appetite** is the amount of possible loss, harm, disruption, or uncertainty an organization is willing to accept while pursuing its goals.
+
+**Risk tolerance** is the limit for how much loss, harm, delay, or disruption is acceptable in one area. For example, an organization may accept some downtime but set a maximum of two hours.
+
+Risk appetite sets the broad boundary. Risk tolerance turns that boundary into measurable limits.
 
 An expansionary appetite accepts more uncertainty in exchange for growth or opportunity. A conservative appetite favors protection and predictability. A neutral posture balances opportunity and exposure without leaning strongly in either direction.
 
@@ -372,7 +375,9 @@ The correct response depends on the source of the obligation. A contract breach 
 
 <h3>Due care and due diligence</h3>
 
-**Due care** is the reasonable protection and action expected under the circumstances. **Due diligence** is the continuing effort to investigate, verify, and monitor whether those protections remain appropriate and effective.
+**Due care** is the responsibility to take reasonable and appropriate steps to protect people, assets, and interests from foreseeable harm. It is demonstrated through the safeguards and decisions an organization actually puts into practice.
+
+**Due diligence** is the ongoing process of investigating, verifying, monitoring, and documenting whether those safeguards remain appropriate and effective. It is demonstrated through assessments, reviews, testing, supplier checks, and corrective actions.
 
 Installing a required control can demonstrate care. Reviewing alerts, testing effectiveness, updating the control, and responding to findings demonstrate diligence over time.
 

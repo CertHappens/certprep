@@ -672,7 +672,7 @@
           "id": "mib",
           "term": "MIB",
           "expansion": "Management Information Base",
-          "meaning": "A structured description of management objects that an SNMP agent exposes to a manager.",
+          "meaning": "The catalog that describes the information a device can report through SNMP.",
           "domains": [
             "5"
           ],
@@ -794,7 +794,7 @@
           "id": "oid",
           "term": "OID",
           "expansion": "Object Identifier",
-          "meaning": "A hierarchical identifier for a specific management object that can be read or referenced through SNMP.",
+          "meaning": "The unique number used to request one item from an SNMP management catalog.",
           "domains": [
             "5"
           ],
@@ -1028,7 +1028,7 @@
           "id": "snmp",
           "term": "SNMP",
           "expansion": "Simple Network Management Protocol",
-          "meaning": "A protocol used to monitor and manage network devices and report operational information.",
+          "meaning": "Lets monitoring software request status and counters from network devices and receive event notifications.",
           "domains": [
             "5"
           ],
