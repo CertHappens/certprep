@@ -2,6 +2,7 @@ import { readFileSync } from "node:fs";
 
 import { buildExploreArticleCollection } from "./scripts/explore_content.mjs";
 import { buildHumanSitemapSections, getPublicSitemapPages } from "./scripts/site_map.mjs";
+import { buildSearchIndex } from "./scripts/search_index.mjs";
 
 const siteNavigation = JSON.parse(
   readFileSync(new URL("./src/_data/siteNavigation.json", import.meta.url), "utf8")
@@ -83,6 +84,10 @@ export default function (eleventyConfig) {
   eleventyConfig.addCollection("humanSitemapSections", (collectionApi) =>
     buildHumanSitemapSections(collectionApi.getAll(), siteNavigation)
   );
+
+  eleventyConfig.on("eleventy.after", async ({ directories, dir }) => {
+    await buildSearchIndex(directories?.output ?? dir?.output ?? "_site");
+  });
 
   return {
     dir: {

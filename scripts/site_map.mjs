@@ -30,6 +30,7 @@ const HUMAN_SITE_MAP_SECTION_RULES = [
     matches: (url) =>
       url === "/ports-protocols/" ||
       url === "/ipv6-addressing/" ||
+      url === "/search/" ||
       url.startsWith("/tools/")
   },
   {

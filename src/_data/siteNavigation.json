@@ -342,6 +342,12 @@
           ]
         }
       ]
+    },
+    {
+      "label": "Search",
+      "url": "/search/",
+      "matchPrefix": "/search/",
+      "icon": "search"
     }
   ],
   "footer": [

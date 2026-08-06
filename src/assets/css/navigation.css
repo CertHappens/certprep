@@ -264,3 +264,44 @@
     width: 100%;
   }
 }
+
+/* Compact site search link */
+.primary-nav__link--icon {
+  width: 2.65rem;
+  padding-inline: 0.55rem;
+}
+
+.primary-nav__icon {
+  width: 1.15rem;
+  height: 1.15rem;
+  flex: 0 0 auto;
+}
+
+.primary-nav__icon-label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media screen and (max-width: 48rem) {
+  .primary-nav__link--icon {
+    width: 100%;
+    gap: 0.65rem;
+  }
+
+  .primary-nav__icon-label {
+    position: static;
+    width: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+  }
+}

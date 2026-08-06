@@ -256,6 +256,7 @@ const publicPageFiles = [
   "ipv6-addressing/index.html",
   "ports-protocols/index.html",
   "privacy/index.html",
+  "search/index.html",
   "sitemap/index.html",
   "security-plus/index.html",
   "security-plus/acronyms/index.html",
@@ -3687,6 +3688,69 @@ if (await isFile(path.join(outputRoot, "sitemap/index.html"))) {
 
   if (humanSitemap.includes('href="/sitemap.xml"')) {
     fail("sitemap/index.html: human Site Map should not link to the XML sitemap");
+  }
+}
+
+
+const searchIndexPath = path.join(outputRoot, "search-index.json");
+if (!(await isFile(searchIndexPath))) {
+  fail("search-index.json: generated search index is missing");
+} else {
+  try {
+    const searchIndex = JSON.parse(await readFile(searchIndexPath, "utf8"));
+    const pages = Array.isArray(searchIndex.pages) ? searchIndex.pages : [];
+    const excludedSearchFiles = new Set(["search/index.html", "sitemap/index.html"]);
+    const expectedSearchUrls = publicPageFiles
+      .filter((relative) => !excludedSearchFiles.has(relative))
+      .map((relative) => new URL(publicUrlFromOutput(relative)).pathname)
+      .sort();
+    const actualSearchUrls = pages.map((page) => page.url).sort();
+
+    if (searchIndex.version !== 1) {
+      fail("search-index.json: expected version 1");
+    }
+
+    if (JSON.stringify(actualSearchUrls) !== JSON.stringify(expectedSearchUrls)) {
+      fail(
+        `search-index.json: expected ${expectedSearchUrls.length} searchable public pages, found ${actualSearchUrls.length}`
+      );
+    }
+
+    for (const page of pages) {
+      for (const field of ["title", "url", "description", "type", "section", "text"]) {
+        if (typeof page[field] !== "string" || !page[field].trim()) {
+          fail(`search-index.json: ${page.url || "unknown page"} is missing ${field}`);
+        }
+      }
+
+      if (!Array.isArray(page.headings)) {
+        fail(`search-index.json: ${page.url || "unknown page"} headings must be an array`);
+      }
+
+      if (page.url.includes("/practice-test/question/")) {
+        fail(`search-index.json: paged question route must remain excluded (${page.url})`);
+      }
+    }
+  } catch (error) {
+    fail(`search-index.json: invalid JSON (${error.message})`);
+  }
+}
+
+if (await isFile(path.join(outputRoot, "search/index.html"))) {
+  const searchPage = await readFile(path.join(outputRoot, "search/index.html"), "utf8");
+  const requiredSearchMarkers = [
+    'data-site-search-form',
+    'data-site-search-input',
+    'data-site-search-results',
+    'src="/assets/js/site-search.js"',
+    'href="/search/"',
+    'primary-nav__icon'
+  ];
+
+  for (const marker of requiredSearchMarkers) {
+    if (!searchPage.includes(marker)) {
+      fail(`search/index.html: missing ${marker}`);
+    }
   }
 }
 

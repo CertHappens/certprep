@@ -232,10 +232,21 @@
           </details>
           {% else %}
           <a
-            class="primary-nav__link"
+            class="primary-nav__link{% if item.icon %} primary-nav__link--icon{% endif %}"
             href="{{ item.url }}"
             data-nav-prefix="{{ item.matchPrefix }}"
-          >{{ item.label }}</a>
+            {% if item.icon %}aria-label="{{ item.label }}" title="{{ item.label }}"{% endif %}
+          >
+            {% if item.icon == "search" %}
+            <svg class="primary-nav__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false">
+              <circle cx="11" cy="11" r="7"></circle>
+              <path d="m20 20-3.6-3.6"></path>
+            </svg>
+            <span class="primary-nav__icon-label">{{ item.label }}</span>
+            {% else %}
+            {{ item.label }}
+            {% endif %}
+          </a>
           {% endif %}
         {% endfor %}
       </nav>
