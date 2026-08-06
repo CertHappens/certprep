@@ -568,3 +568,19 @@
     font-size: 8pt;
   }
 }
+
+@media print {
+  .ipv6-hextet-table table {
+    min-width: 0;
+    font-size: 6.8pt;
+  }
+
+  .ipv6-hextet-table th,
+  .ipv6-hextet-table td {
+    padding: 0.035in 0.04in;
+  }
+
+  .ipv6-child-list {
+    columns: 2;
+  }
+}

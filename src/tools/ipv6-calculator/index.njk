@@ -1,0 +1,272 @@
+---
+layout: layouts/article.njk
+title: IPv6 Address and Prefix Calculator
+description: Expand, compress, classify, and analyze IPv6 addresses and prefixes, including /64 containment, prefix boundaries, and child-prefix planning.
+permalink: /tools/ipv6-calculator/
+ogType: article
+printable: true
+printTitle: IPv6 Address and Prefix Calculator
+author: certHappens
+datePublished: 2026-08-06
+dateModified: 2026-08-06
+articleSection: Networking Tools
+eyebrow: Networking tool
+lede: Enter an IPv6 address and prefix to see its canonical text forms, address type, prefix boundaries, containing /64, and optional child-prefix plan.
+breadcrumbs:
+  - label: Home
+    url: /
+  - label: IPv6 Address and Prefix Calculator
+    url: /tools/ipv6-calculator/
+toc:
+  - id: calculator
+    label: Calculator
+  - id: read-results
+    label: Read the results
+  - id: prefix-planning
+    label: Prefix planning
+  - id: sixty-four
+    label: The /64 boundary
+  - id: limits
+    label: What this tool does not verify
+keywords:
+  - IPv6 calculator
+  - IPv6 prefix calculator
+  - IPv6 subnet calculator
+  - IPv6 address compression
+  - IPv6 address expansion
+  - IPv6 /64 calculator
+relatedLinks:
+  - title: IPv6 Addressing and Prefix Reference
+    url: /ipv6-addressing/
+    description: Learn address structure, compression, common address types, /64 planning, SLAAC, DHCPv6, and Neighbor Discovery.
+  - title: CCNA IPv6 Addressing and Neighbor Discovery Quick Review
+    url: /ccna/quick-review/ipv6-addressing-neighbor-discovery/
+    description: Match IPv6 address types and discovery messages to Cisco IOS evidence and exam scenarios.
+  - title: "CCNA Domain 1: Network Infrastructure and Connectivity"
+    url: /ccna/200-301-v2/study-guide/network-infrastructure-connectivity/
+    description: Apply IPv6 addressing to interfaces, modified EUI-64, wireless clients, and troubleshooting.
+  - title: "Network+ Domain 1: Networking Concepts"
+    url: /network-plus/n10-009/study-guide/networking-concepts/
+    description: Connect IPv6 addressing to traffic flow, devices, cloud networks, and modern network environments.
+  - title: IPv4 Subnet Calculator
+    url: /tools/subnet-calculator/
+    description: Calculate IPv4 network and broadcast boundaries, usable host ranges, masks, wildcard masks, and address status.
+  - title: IPv4 Subnetting Reference
+    url: /network-plus/n10-009/study-guide/ipv4-subnetting/
+    description: Compare IPv6 prefix planning with IPv4 network, broadcast, host, and VLSM calculations.
+---
+<p>This tool checks the written address and prefix, but it also explains the result. IPv6 has no broadcast address, so the first and final values shown below are boundaries of the prefix rather than IPv4-style network and broadcast reservations.</p>
+
+<section class="subnet-calculator ipv6-calculator" id="calculator" data-ipv6-calculator>
+  <div class="subnet-calculator__intro">
+    <h2>Calculate an IPv6 address and prefix</h2>
+    <p>Include the prefix in the address, or enter it separately. The child prefix is optional and shows how the parent can be divided into smaller prefixes.</p>
+  </div>
+
+  <form class="subnet-calculator__form ipv6-calculator__form" data-ipv6-form novalidate>
+    <div class="subnet-calculator__field">
+      <label for="ipv6-address">IPv6 address</label>
+      <input
+        id="ipv6-address"
+        name="address"
+        type="text"
+        value="2001:db8:1234:12ab::20/48"
+        inputmode="url"
+        autocomplete="off"
+        autocapitalize="off"
+        spellcheck="false"
+        aria-describedby="ipv6-address-help"
+        data-ipv6-address
+      >
+      <p id="ipv6-address-help" class="subnet-calculator__help">Example: <code>2001:db8:1234:12ab::20/48</code></p>
+    </div>
+
+    <div class="subnet-calculator__field">
+      <label for="ipv6-prefix">Prefix length</label>
+      <input
+        id="ipv6-prefix"
+        name="prefix"
+        type="text"
+        value=""
+        inputmode="numeric"
+        autocomplete="off"
+        autocapitalize="off"
+        spellcheck="false"
+        aria-describedby="ipv6-prefix-help"
+        data-ipv6-prefix
+      >
+      <p id="ipv6-prefix-help" class="subnet-calculator__help">Optional when the address includes a prefix. Examples: <code>/48</code>, <code>64</code>, or <code>/127</code></p>
+    </div>
+
+    <div class="subnet-calculator__field">
+      <label for="ipv6-child-prefix">Desired child prefix</label>
+      <input
+        id="ipv6-child-prefix"
+        name="child-prefix"
+        type="text"
+        value="/64"
+        inputmode="numeric"
+        autocomplete="off"
+        autocapitalize="off"
+        spellcheck="false"
+        aria-describedby="ipv6-child-prefix-help"
+        data-ipv6-child-prefix
+      >
+      <p id="ipv6-child-prefix-help" class="subnet-calculator__help">Optional. Use a length equal to or longer than the parent prefix. Clear this field for address analysis only.</p>
+    </div>
+
+    <div class="subnet-calculator__actions">
+      <button class="button" type="submit">Calculate IPv6 prefix</button>
+      <button class="button button--secondary" type="reset">Restore example</button>
+    </div>
+  </form>
+
+  <p class="subnet-calculator__error" role="alert" tabindex="-1" data-ipv6-error hidden></p>
+
+  <section class="subnet-calculator__results" aria-labelledby="ipv6-results-heading" aria-live="polite" data-ipv6-results hidden>
+    <h2 id="ipv6-results-heading" tabindex="-1" data-ipv6-results-heading>IPv6 results</h2>
+
+    <dl class="subnet-results-grid ipv6-results-grid">
+      <div>
+        <dt>Normalized input</dt>
+        <dd class="subnet-value" data-ipv6-output="cidr"></dd>
+      </div>
+      <div>
+        <dt>Recommended compressed form</dt>
+        <dd class="subnet-value" data-ipv6-output="compressed"></dd>
+      </div>
+      <div class="ipv6-result--wide">
+        <dt>Fully expanded form</dt>
+        <dd class="subnet-value" data-ipv6-output="expanded"></dd>
+      </div>
+      <div>
+        <dt>Containing prefix</dt>
+        <dd class="subnet-value" data-ipv6-output="network-prefix"></dd>
+      </div>
+      <div>
+        <dt>First address in prefix</dt>
+        <dd class="subnet-value" data-ipv6-output="first"></dd>
+      </div>
+      <div>
+        <dt>Final address in prefix</dt>
+        <dd class="subnet-value" data-ipv6-output="final"></dd>
+      </div>
+      <div>
+        <dt>Containing /64</dt>
+        <dd class="subnet-value" data-ipv6-output="containing-64"></dd>
+      </div>
+      <div>
+        <dt>Prefix bits</dt>
+        <dd data-ipv6-output="prefix-bits"></dd>
+      </div>
+      <div>
+        <dt>Bits after the prefix</dt>
+        <dd data-ipv6-output="remaining-bits"></dd>
+      </div>
+      <div>
+        <dt>Matched address range</dt>
+        <dd class="subnet-value" data-ipv6-output="matched-range"></dd>
+      </div>
+      <div>
+        <dt>Embedded IPv4 address</dt>
+        <dd class="subnet-value" data-ipv6-output="embedded-ipv4"></dd>
+      </div>
+    </dl>
+
+    <div class="subnet-status" data-ipv6-status>
+      <p class="subnet-status__label"><strong>Address type:</strong> <span data-ipv6-output="status"></span></p>
+      <p data-ipv6-output="status-detail"></p>
+    </div>
+
+    <section class="ipv6-child-plan" data-ipv6-child-section>
+      <h3>Child-prefix plan</h3>
+      <dl class="subnet-results-grid">
+        <div>
+          <dt>Number of child prefixes</dt>
+          <dd data-ipv6-output="child-count"></dd>
+        </div>
+        <div>
+          <dt>Selected child number</dt>
+          <dd data-ipv6-output="child-index"></dd>
+        </div>
+        <div class="ipv6-result--wide">
+          <dt>Child containing the entered address</dt>
+          <dd class="subnet-value" data-ipv6-output="child-selected"></dd>
+        </div>
+        <div>
+          <dt>Previous child prefix</dt>
+          <dd class="subnet-value" data-ipv6-output="child-previous"></dd>
+        </div>
+        <div>
+          <dt>Next child prefix</dt>
+          <dd class="subnet-value" data-ipv6-output="child-next"></dd>
+        </div>
+      </dl>
+
+      <h4>First child prefixes</h4>
+      <ol class="ipv6-child-list" data-ipv6-child-list></ol>
+    </section>
+
+    <h3>128-bit group view</h3>
+    <div class="table-scroll ipv6-hextet-table" role="region" aria-label="Expanded IPv6 hexadecimal and binary groups" tabindex="0">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Group</th>
+            <th scope="col">Hex</th>
+            <th scope="col">Binary</th>
+            <th scope="col">Role for this prefix</th>
+          </tr>
+        </thead>
+        <tbody data-ipv6-hextet-body></tbody>
+      </table>
+    </div>
+
+    <h3>How this result was calculated</h3>
+    <ol class="subnet-explanation" data-ipv6-explanation></ol>
+  </section>
+
+  <noscript>
+    <p class="subnet-calculator__error">This calculator requires JavaScript. The IPv6 addressing reference remains available without it.</p>
+  </noscript>
+</section>
+
+<h2 id="read-results">How to read the results</h2>
+
+<p>The <strong>recommended compressed form</strong> follows RFC 5952: remove leading zeros, use lowercase hexadecimal, and replace the longest run of at least two zero groups with <code>::</code>. The fully expanded form shows all eight groups and all four digits in each group.</p>
+
+<p>The <strong>containing prefix</strong> clears every bit after the slash length. The <strong>final address</strong> sets those remaining bits to 1. These values describe the numeric boundaries of the prefix. IPv6 does not have a broadcast address, and the boundary values are not automatically treated like IPv4 network and broadcast addresses.</p>
+
+<p>The address type identifies common special-purpose ranges such as link-local, unique-local, multicast, documentation, loopback, and translation prefixes. A global-unicast result does not prove that the address is assigned, reachable, or allowed through a firewall.</p>
+
+<h2 id="prefix-planning">How child-prefix planning works</h2>
+
+<p>The child prefix must be equal to or longer than the parent. The difference tells the calculator how many bits are available to number child prefixes.</p>
+
+<pre><code>Parent /48 to child /64
+64 - 48 = 16 child-prefix bits
+2^16 = 65,536 child /64 prefixes</code></pre>
+
+<p>The entered address selects one child prefix. In the example, <code>2001:db8:1234:12ab::20/48</code> falls inside <code>2001:db8:1234:12ab::/64</code>. The value <code>12ab</code> is the child number in hexadecimal. The calculator also shows the decimal index and the neighboring prefixes.</p>
+
+<p>Clear the child-prefix field when you only need to analyze the address and its current prefix.</p>
+
+<h2 id="sixty-four">What the /64 result means</h2>
+
+<p>A <code>/64</code> is the normal size for many IPv6 LANs and is expected by common Stateless Address Autoconfiguration designs. Routing still supports other prefix lengths, so a prefix is not invalid merely because it is shorter or longer than <code>/64</code>.</p>
+
+<p>The calculator always shows the containing <code>/64</code> because it helps with address reading and common LAN planning. When the entered prefix is longer than <code>/64</code>, that result is a broader parent prefix rather than the exact calculated prefix.</p>
+
+<p>For a full explanation of address types, compression, SLAAC, DHCPv6, Neighbor Discovery, and planning examples, use the <a href="/ipv6-addressing/">IPv6 Addressing and Prefix Reference</a>.</p>
+
+<h2 id="limits">What this tool does not verify</h2>
+
+<ul>
+  <li>It does not confirm address ownership, allocation, routing, firewall policy, DNS, or internet reachability.</li>
+  <li>It recognizes common address categories but does not replace the complete IANA special-purpose registry.</li>
+  <li>It removes zone identifiers such as <code>%eth0</code> from consideration. A zone identifies the local interface or scope context, not part of the 128-bit address.</li>
+  <li>It does not decide whether every address inside a prefix should be assigned. Architecture, anycast use, platform behavior, and policy still matter.</li>
+  <li>It does not generate modified EUI-64 interface identifiers, reverse-DNS names, or route summaries.</li>
+</ul>
+
+<script type="module" src="/assets/js/ipv6-calculator.js"></script>

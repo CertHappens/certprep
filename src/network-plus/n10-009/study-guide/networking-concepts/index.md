@@ -8,7 +8,7 @@ printable: true
 printTitle: "Network+ N10-009 Domain 1: Networking Concepts"
 author: certHappens
 datePublished: 2026-07-25
-dateModified: 2026-07-31
+dateModified: 2026-08-06
 articleSection: Network+ N10-009 Domain 1
 eyebrow: Network+ domain 1 guide
 lede: Build the mental model that lets you trace traffic, choose the right device or service, and recognize where a network problem begins.
@@ -72,6 +72,12 @@ relatedLinks:
   - title: IPv4 Subnet Calculator
     url: /tools/subnet-calculator/
     description: Check subnet boundaries, usable ranges, masks, wildcard masks, binary work, and address status.
+  - title: IPv6 Addressing and Prefix Reference
+    url: /ipv6-addressing/
+    description: Review address compression, common address types, /64 planning, SLAAC, DHCPv6, and Neighbor Discovery.
+  - title: IPv6 Address and Prefix Calculator
+    url: /tools/ipv6-calculator/
+    description: Expand and compress IPv6 addresses, identify common address types, find prefix boundaries, and plan child prefixes.
   - title: Network+ N10-009 Practice Test
     url: /network-plus/n10-009/practice-test/
     description: Apply networking concepts in randomized questions with detailed explanations.

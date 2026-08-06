@@ -147,6 +147,14 @@
             {
               "label": "IPv4 subnet calculator",
               "url": "/tools/subnet-calculator/"
+            },
+            {
+              "label": "IPv6 addressing reference",
+              "url": "/ipv6-addressing/"
+            },
+            {
+              "label": "IPv6 address calculator",
+              "url": "/tools/ipv6-calculator/"
             }
           ]
         }
@@ -293,6 +301,14 @@
             {
               "label": "IPv4 subnet calculator",
               "url": "/tools/subnet-calculator/"
+            },
+            {
+              "label": "IPv6 addressing reference",
+              "url": "/ipv6-addressing/"
+            },
+            {
+              "label": "IPv6 address calculator",
+              "url": "/tools/ipv6-calculator/"
             }
           ]
         }

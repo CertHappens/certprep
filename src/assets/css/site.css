@@ -3299,3 +3299,85 @@ h3 {
     font-size: 0.8rem;
   }
 }
+
+/* IPv6 address and prefix calculator */
+.ipv6-calculator__form {
+  grid-template-columns: minmax(0, 2fr) minmax(8rem, 0.75fr) minmax(10rem, 1fr);
+}
+
+.ipv6-result--wide {
+  grid-column: 1 / -1;
+}
+
+.subnet-status[data-status="global-unicast"] {
+  border-left-color: var(--success);
+}
+
+.subnet-status[data-status="documentation"],
+.subnet-status[data-status="benchmarking"],
+.subnet-status[data-status="translation"] {
+  border-left-color: var(--warning);
+}
+
+.subnet-status[data-status="multicast"],
+.subnet-status[data-status="special-purpose"],
+.subnet-status[data-status="other-reserved"],
+.subnet-status[data-status="ipv4-mapped"] {
+  border-left-color: #d3a4ff;
+}
+
+.ipv6-child-plan {
+  margin-top: 1.5rem;
+  padding-top: 0.5rem;
+}
+
+.ipv6-child-list {
+  display: grid;
+  gap: 0.35rem;
+  margin-bottom: 0;
+}
+
+.ipv6-hextet-table table {
+  min-width: 48rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 0.82rem;
+}
+
+.ipv6-hextet-table th:nth-child(1),
+.ipv6-hextet-table td:nth-child(1) {
+  width: 8%;
+}
+
+.ipv6-hextet-table th:nth-child(2),
+.ipv6-hextet-table td:nth-child(2) {
+  width: 13%;
+}
+
+.ipv6-hextet-table th:nth-child(3),
+.ipv6-hextet-table td:nth-child(3) {
+  width: 34%;
+}
+
+@media screen and (max-width: 56rem) {
+  .ipv6-calculator__form {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .ipv6-calculator__form .subnet-calculator__field:first-child {
+    grid-column: 1 / -1;
+  }
+}
+
+@media screen and (max-width: 42rem) {
+  .ipv6-calculator__form {
+    grid-template-columns: 1fr;
+  }
+
+  .ipv6-calculator__form .subnet-calculator__field:first-child {
+    grid-column: auto;
+  }
+
+  .ipv6-result--wide {
+    grid-column: auto;
+  }
+}

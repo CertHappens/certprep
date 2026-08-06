@@ -253,6 +253,7 @@ const publicPageFiles = [
   "network-plus/quick-review/monitoring-evidence/index.html",
   "network-plus/quick-review/troubleshooting-tools/index.html",
   "network-plus/quick-review/vlans-trunks-stp-lacp/index.html",
+  "ipv6-addressing/index.html",
   "ports-protocols/index.html",
   "privacy/index.html",
   "sitemap/index.html",
@@ -270,7 +271,8 @@ const publicPageFiles = [
   "security-plus/sy0-701/study-guide/security-program-management-oversight/index.html",
   "security-plus/sy0-701/study-guide/threats-vulnerabilities-mitigations/index.html",
   "terms/index.html",
-  "tools/subnet-calculator/index.html"
+  "tools/subnet-calculator/index.html",
+  "tools/ipv6-calculator/index.html"
 ];
 
 const articlePageFiles = [
@@ -312,6 +314,7 @@ const articlePageFiles = [
   "network-plus/quick-review/monitoring-evidence/index.html",
   "network-plus/quick-review/troubleshooting-tools/index.html",
   "network-plus/quick-review/vlans-trunks-stp-lacp/index.html",
+  "ipv6-addressing/index.html",
   "ports-protocols/index.html",
   "security-plus/acronyms/index.html",
   "security-plus/quick-review/hashing-encryption-encoding/index.html",
@@ -324,7 +327,8 @@ const articlePageFiles = [
   "security-plus/sy0-701/study-guide/security-program-management-oversight/index.html",
   "security-plus/sy0-701/study-guide/threats-vulnerabilities-mitigations/index.html",
   "terms/index.html",
-  "tools/subnet-calculator/index.html"
+  "tools/subnet-calculator/index.html",
+  "tools/ipv6-calculator/index.html"
 ];
 
 const publicPageFileSet = new Set(publicPageFiles);
@@ -719,6 +723,7 @@ const requiredFiles = [
   "assets/js/acronym-filter.js",
   "assets/js/ports-protocols-filter.js",
   "assets/js/subnet-calculator.js",
+  "assets/js/ipv6-calculator.js",
   "assets/js/quiz/app.js",
   "assets/js/quiz/results-actions.js",
   "assets/js/quiz/paged-question.js",
@@ -1412,6 +1417,8 @@ for (const file of htmlFiles) {
     "/ports-protocols/",
     "/network-plus/n10-009/study-guide/ipv4-subnetting/",
     "/tools/subnet-calculator/",
+    "/ipv6-addressing/",
+    "/tools/ipv6-calculator/",
     "/ccna/200-301-v2/study-guide/",
     "/ccna/quick-review/",
     "/ccna/200-301-v2/study-guide/network-infrastructure-connectivity/",
@@ -1575,6 +1582,8 @@ for (const file of htmlFiles) {
       'href="/security-plus/sy0-701/practice-test/"',
       'href="/network-plus/n10-009/practice-test/"',
       'href="/tools/subnet-calculator/"',
+      'href="/ipv6-addressing/"',
+      'href="/tools/ipv6-calculator/"',
       'href="/cissp/"',
       'href="/ccna/"',
       "ISC2 CISSP",
@@ -1747,6 +1756,14 @@ for (const file of htmlFiles) {
 
     if (!html.includes('href="/network-plus/n10-009/study-guide/ipv4-subnetting/"')) {
       fail(`${relative}: Network+ hub is missing the IPv4 subnetting reference link`);
+    }
+
+    if (!html.includes('href="/ipv6-addressing/"')) {
+      fail(`${relative}: Network+ hub is missing the IPv6 addressing reference link`);
+    }
+
+    if (!html.includes('href="/tools/ipv6-calculator/"')) {
+      fail(`${relative}: Network+ hub is missing the IPv6 address calculator link`);
     }
 
     if (!html.includes('href="/ccna/"')) {
@@ -1963,7 +1980,9 @@ for (const file of htmlFiles) {
       "/ports-protocols/",
       "/network-plus/n10-009/practice-test/",
       "/network-plus/n10-009/study-guide/ipv4-subnetting/",
-      "/tools/subnet-calculator/"
+      "/tools/subnet-calculator/",
+      "/ipv6-addressing/",
+      "/tools/ipv6-calculator/"
     ];
 
     for (const marker of requiredContent) {
@@ -2079,6 +2098,8 @@ for (const file of htmlFiles) {
       "/network-plus/n10-009/study-guide/network-security/",
       "/network-plus/n10-009/study-guide/ipv4-subnetting/",
       "/tools/subnet-calculator/",
+      "/ipv6-addressing/",
+      "/tools/ipv6-calculator/",
       "/ports-protocols/",
       "/network-plus/quick-review/monitoring-evidence/"
     ];
@@ -2315,6 +2336,61 @@ for (const file of htmlFiles) {
     for (const marker of requiredMarkers) {
       if (!hasPageMarker(html, marker)) {
         fail(`${relative}: IPv4 subnet calculator is missing ${marker}`);
+      }
+    }
+  }
+
+  if (relative === "ipv6-addressing/index.html") {
+    if (!html.includes("data-print-guide")) {
+      fail(`${relative}: IPv6 addressing reference is missing the shared Print | Save control`);
+    }
+
+    if (!headingMatches(html, "IPv6 Addressing and Prefix Reference")) {
+      fail(`${relative}: IPv6 addressing reference is missing its expected h1`);
+    }
+
+    const requiredMarkers = [
+      "Read the eight 16-bit groups",
+      "IPv6 does not use broadcast addresses",
+      "2001:db8::/32",
+      "Stateless Address Autoconfiguration",
+      "Neighbor Discovery",
+      "/tools/ipv6-calculator/"
+    ];
+
+    for (const requiredMarker of requiredMarkers) {
+      if (!hasPageMarker(html, requiredMarker)) {
+        fail(`${relative}: IPv6 addressing reference is missing ${requiredMarker}`);
+      }
+    }
+  }
+
+  if (relative === "tools/ipv6-calculator/index.html") {
+    if (!html.includes("data-print-guide")) {
+      fail(`${relative}: IPv6 calculator is missing the shared Print | Save control`);
+    }
+
+    if (!headingMatches(html, "IPv6 Address and Prefix Calculator")) {
+      fail(`${relative}: IPv6 calculator is missing its expected h1`);
+    }
+
+    const requiredMarkers = [
+      "data-ipv6-calculator",
+      "data-ipv6-form",
+      "data-ipv6-address",
+      "data-ipv6-prefix",
+      "data-ipv6-child-prefix",
+      "data-ipv6-results",
+      'data-ipv6-output="network-prefix"',
+      "data-ipv6-hextet-body",
+      'src="/assets/js/ipv6-calculator.js"',
+      "/ipv6-addressing/",
+      "/ccna/quick-review/ipv6-addressing-neighbor-discovery/"
+    ];
+
+    for (const requiredMarker of requiredMarkers) {
+      if (!hasPageMarker(html, requiredMarker)) {
+        fail(`${relative}: IPv6 calculator is missing ${requiredMarker}`);
       }
     }
   }

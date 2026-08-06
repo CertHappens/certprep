@@ -8,7 +8,7 @@ printable: true
 printTitle: Network+ N10-009 Study Guide
 author: certHappens
 datePublished: 2026-07-25
-dateModified: 2026-07-31
+dateModified: 2026-08-06
 articleSection: Network+ N10-009
 eyebrow: Network+ study guide
 lede: A practical roadmap for understanding how networks work, applying the right configuration, and troubleshooting from evidence instead of guesswork.
@@ -65,6 +65,12 @@ relatedLinks:
   - title: IPv4 Subnet Calculator
     url: /tools/subnet-calculator/
     description: Check network and broadcast addresses, usable ranges, masks, wildcard masks, binary work, and address status.
+  - title: IPv6 Addressing and Prefix Reference
+    url: /ipv6-addressing/
+    description: Expand and compress addresses, recognize common address types, understand prefix boundaries, and plan child prefixes without IPv4 assumptions.
+  - title: IPv6 Address and Prefix Calculator
+    url: /tools/ipv6-calculator/
+    description: Check canonical address text, containing prefixes, address categories, binary boundaries, and parent-to-child prefix plans.
   - title: "Domain 1: Networking Concepts"
     url: /network-plus/n10-009/study-guide/networking-concepts/
     description: Trace traffic through the OSI model and review devices, cloud, protocols, media, addressing, IPv6, and modern network designs.
@@ -313,7 +319,7 @@ A reliable subnetting process is more valuable than a memorized chart you cannot
 4. Determine the broadcast address and usable range.
 5. Confirm whether the available host count fits the requirement.
 
-For IPv6, recognize the address types and operational choices rather than trying to force IPv4 habits onto a larger address space. Know why dual stack, tunneling, and Network Address Translation 64 (NAT64) may appear during transition. Understand that neighbor discovery and essential Internet Control Message Protocol for IPv6 (ICMPv6) functions affect normal operation.
+For IPv6, recognize the address types and operational choices rather than trying to force IPv4 habits onto a larger address space. Use the [IPv6 Addressing and Prefix Reference](/ipv6-addressing/) to review address text, scopes, prefix boundaries, and child-prefix planning, then check examples with the [IPv6 Address and Prefix Calculator](/tools/ipv6-calculator/). Know why dual stack, tunneling, and Network Address Translation 64 (NAT64) may appear during transition. Understand that neighbor discovery and essential Internet Control Message Protocol for IPv6 (ICMPv6) functions affect normal operation.
 
 <h3>Media, transceivers, and topology</h3>
 
