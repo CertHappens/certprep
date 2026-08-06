@@ -187,6 +187,7 @@ test("Explore navigation, landing page, and first article activate together as p
           { label: "Which Tech Career", url: "/explore/career/paths/" },
           { label: "IT or Cybersecurity", url: "/explore/career/it-support-or-cybersecurity/" },
           { label: "Which Cyber Career", url: "/explore/career/cybersecurity-paths/" },
+          { label: "Which Certification First", url: "/explore/certifications/first-it-certification/" },
         ],
       },
     ],

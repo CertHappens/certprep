@@ -5,7 +5,7 @@
   aria-labelledby="career-assessment-title"
 >
   <div class="career-assessment__intro">
-    <p class="eyebrow">Practical self-assessment</p>
+    <p class="eyebrow">{{ assessment.eyebrow or "Practical self-assessment" }}</p>
     <h2 id="career-assessment-title">{{ assessment.title }}</h2>
     {% if assessment.introduction %}<p>{{ assessment.introduction }}</p>{% endif %}
     <p class="career-assessment__session-note">Progress and results are saved in this browser tab.</p>
@@ -59,7 +59,7 @@
       <button class="button button--secondary career-assessment__restart" type="button" data-career-assessment-restart>Restart quiz</button>
       <div class="career-assessment__actions-end">
         <button class="button" type="button" data-career-assessment-next hidden>Next question</button>
-        <button class="button" type="submit" data-career-assessment-submit>See my top two paths</button>
+        <button class="button" type="submit" data-career-assessment-submit>{{ assessment.submitLabel or "See my top two paths" }}</button>
       </div>
     </div>
   </form>
@@ -70,17 +70,17 @@
     tabindex="-1"
     hidden
   >
-    <p class="eyebrow">Your results</p>
-    <h2 id="career-assessment-results-title">Your strongest technology career matches</h2>
-    <p class="career-assessment__result-lead">Your answers suggest that you may enjoy...</p>
+    <p class="eyebrow">{{ assessment.resultsEyebrow or "Your results" }}</p>
+    <h2 id="career-assessment-results-title">{{ assessment.resultsTitle or "Your strongest technology career matches" }}</h2>
+    <p class="career-assessment__result-lead">{{ assessment.resultLead or "Your answers suggest that you may enjoy..." }}</p>
     <div class="career-assessment__result-grid" data-career-assessment-result-cards></div>
     <p class="career-assessment__result-note">
-      These results are a starting point for exploration. Skills and interests can overlap across several paths.
+      {{ assessment.resultNote or "These results are a starting point for exploration. Skills and interests can overlap across several paths." }}
     </p>
     <p class="career-assessment__result-next">
-      Continue below to compare all six paths in more detail. Each section includes common roles, the kinds of problems you may handle, and a small project that can help you explore the work.
+      {{ assessment.resultNext or "Continue below to compare all six paths in more detail. Each section includes common roles, the kinds of problems you may handle, and a small project that can help you explore the work." }}
     </p>
-    <button class="button career-assessment__retake" type="button" data-career-assessment-reset>Retake the quiz</button>
+    <button class="button career-assessment__retake" type="button" data-career-assessment-reset>{{ assessment.retakeLabel or "Retake the quiz" }}</button>
   </section>
   <noscript>
     <p class="callout">JavaScript is required to score this self-assessment in your browser.</p>
