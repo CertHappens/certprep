@@ -51,10 +51,12 @@ test("CCNA practice is discoverable from navigation, homepage, and hub", async (
     },
   ]);
   assert.deepEqual(
-    referencesAndTools.links.slice(-2).map((link) => link.url),
+    referencesAndTools.links.slice(-4).map((link) => link.url),
     [
       "/network-plus/n10-009/study-guide/ipv4-subnetting/",
       "/tools/subnet-calculator/",
+      "/ipv6-addressing/",
+      "/tools/ipv6-calculator/",
     ],
   );
   assert.match(homepage, /quizCatalog\.byTestId\["CCNA-301-V2"\]/);

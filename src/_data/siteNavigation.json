@@ -147,6 +147,14 @@
             {
               "label": "IPv4 subnet calculator",
               "url": "/tools/subnet-calculator/"
+            },
+            {
+              "label": "IPv6 addressing reference",
+              "url": "/ipv6-addressing/"
+            },
+            {
+              "label": "IPv6 address calculator",
+              "url": "/tools/ipv6-calculator/"
             }
           ]
         }
@@ -293,6 +301,14 @@
             {
               "label": "IPv4 subnet calculator",
               "url": "/tools/subnet-calculator/"
+            },
+            {
+              "label": "IPv6 addressing reference",
+              "url": "/ipv6-addressing/"
+            },
+            {
+              "label": "IPv6 address calculator",
+              "url": "/tools/ipv6-calculator/"
             }
           ]
         }
@@ -322,10 +338,20 @@
             {
               "label": "Which Cyber Career",
               "url": "/explore/career/cybersecurity-paths/"
+            },
+            {
+              "label": "Which Certification First",
+              "url": "/explore/certifications/first-it-certification/"
             }
           ]
         }
       ]
+    },
+    {
+      "label": "Search",
+      "url": "/search/",
+      "matchPrefix": "/search/",
+      "icon": "search"
     }
   ],
   "footer": [

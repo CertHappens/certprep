@@ -8,7 +8,7 @@ printable: true
 printTitle: CCNA 200-301 v2.0 Study Guide
 author: certHappens
 datePublished: 2026-07-31
-dateModified: 2026-08-05
+dateModified: 2026-08-06
 articleSection: CCNA 200-301 v2.0
 eyebrow: CCNA v2.0 study guide
 lede: Build the network, verify what it is doing, then troubleshoot from evidence. The v2.0 blueprint rewards that cycle across routing, switching, services, security, wireless, automation, and operations.
@@ -85,6 +85,12 @@ relatedLinks:
   - title: IPv4 Subnet Calculator
     url: /tools/subnet-calculator/
     description: Check subnet boundaries and address roles after working the calculation manually.
+  - title: IPv6 Addressing and Prefix Reference
+    url: /ipv6-addressing/
+    description: Expand and compress IPv6 addresses, identify common address types, understand prefix boundaries, and plan child prefixes.
+  - title: IPv6 Address and Prefix Calculator
+    url: /tools/ipv6-calculator/
+    description: Check canonical address text, containing prefixes, address categories, binary boundaries, and parent-to-child prefix plans.
   - title: Common Ports and Protocols Reference
     url: /ports-protocols/
     description: Review common services, transports, secure alternatives, and protocols that do not use TCP or UDP ports.
@@ -177,7 +183,7 @@ A strong Domain 1 workflow answers questions in this order:
 
 Read the full [Domain 1: Network Infrastructure and Connectivity guide](/ccna/200-301-v2/study-guide/network-infrastructure-connectivity/) for link counters, cabling clues, IPv4 and IPv6 examples, modified Extended Unique Identifier 64-bit (EUI-64), wireless troubleshooting, endpoint commands, DHCP configuration, and an integrated fault-isolation example.
 
-For subnet calculations, use the [IPv4 Subnetting Reference](/network-plus/n10-009/study-guide/ipv4-subnetting/) and [IPv4 Subnet Calculator](/tools/subnet-calculator/) as supporting tools. Work the calculation manually first, then use the calculator to check it.
+For IPv4 subnet calculations, use the [IPv4 Subnetting Reference](/network-plus/n10-009/study-guide/ipv4-subnetting/) and [IPv4 Subnet Calculator](/tools/subnet-calculator/). For IPv6 address text, prefix boundaries, and child-prefix planning, use the [IPv6 Addressing and Prefix Reference](/ipv6-addressing/) and [IPv6 Address and Prefix Calculator](/tools/ipv6-calculator/). Work the problem manually first, then use the calculator to check it.
 
 <h2 id="domain-2">Domain 2: Switching and Network Access</h2>
 

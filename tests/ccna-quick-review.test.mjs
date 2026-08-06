@@ -61,14 +61,17 @@ test("CCNA quick-review hub renders from shared data and links study resources",
 const sourceSpecs = [
   {
     path: "src/ccna/quick-review/ipv6-addressing-neighbor-discovery/index.md",
+    modified: "2026-08-06",
     markers: ["Neighbor Discovery", "Modified EUI-64", "show ipv6 neighbors", "Router Advertisement"],
   },
   {
     path: "src/ccna/quick-review/route-selection-static-routing/index.md",
+    modified: "2026-08-05",
     markers: ["longest matching installed prefix", "administrative distance", "floating static", "show ip route"],
   },
   {
     path: "src/ccna/quick-review/vlans-trunks-stp-etherchannel/index.md",
+    modified: "2026-08-05",
     markers: ["Rapid PVST+", "show etherchannel summary", "BPDU Guard", "Loop Guard"],
   },
 ];
@@ -79,7 +82,7 @@ for (const spec of sourceSpecs) {
     assert.match(source, /layout: layouts\/article\.njk/);
     assert.match(source, /printable: true/);
     assert.match(source, /datePublished: 2026-08-05/);
-    assert.match(source, /dateModified: 2026-08-05/);
+    assert.match(source, new RegExp(`dateModified: ${spec.modified}`));
     assert.match(source, /url: \/ccna\/quick-review\//);
     assert.match(source, /url: \/ccna\/200-301-v2\/practice-test\//);
     assert.doesNotMatch(source, /—/);

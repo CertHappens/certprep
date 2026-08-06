@@ -8,7 +8,7 @@ printable: true
 printTitle: "CISSP Domain 6: Security Assessment and Testing"
 author: certHappens
 datePublished: 2026-08-05
-dateModified: 2026-08-05
+dateModified: 2026-08-06
 articleSection: CISSP Domain 6
 eyebrow: CISSP Domain 6 guide
 lede: Plan assessments around a clear purpose, collect evidence that can support a decision, test controls safely, report what the results mean, and follow findings through remediation or approved exception.
@@ -241,6 +241,8 @@ Prioritization should consider asset importance, exposure, exploitability, avail
 <h2 id="penetration-teams">6. Use penetration testing and team exercises to show attack paths and defensive performance</h2>
 
 A **penetration test** is an authorized attempt to exploit selected weaknesses within agreed boundaries. It can show whether separate findings combine into a practical attack path and what impact successful exploitation could have.
+
+**Hacker** is an informal term for someone who explores, tests, or attacks computer systems. In assessment work, authorization and scope distinguish a penetration tester or red-team member from a malicious attacker.
 
 The rules of engagement should define:
 

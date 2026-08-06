@@ -8,7 +8,7 @@ printable: true
 printTitle: IPv6 Addressing and Neighbor Discovery Quick Reference for CCNA 200-301 v2.0
 author: certHappens
 datePublished: 2026-08-05
-dateModified: 2026-08-05
+dateModified: 2026-08-06
 articleSection: CCNA 200-301 v2.0 Quick Review
 eyebrow: CCNA quick review
 lede: Identify what the IPv6 address can do, confirm the prefix and interface state, then use Neighbor Discovery evidence before changing configuration.
@@ -66,6 +66,12 @@ relatedLinks:
   - title: CCNA Acronyms and Terms
     url: /ccna/acronyms/
     description: Look up IPv6 and Cisco networking terms with plain-language explanations.
+  - title: IPv6 Addressing and Prefix Reference
+    url: /ipv6-addressing/
+    description: Review address structure, compression, common ranges, /64 planning, and assignment methods.
+  - title: IPv6 Address and Prefix Calculator
+    url: /tools/ipv6-calculator/
+    description: Expand, compress, classify, and calculate IPv6 prefixes and child-prefix boundaries.
   - title: Take a randomized CCNA practice test
     url: /ccna/200-301-v2/practice-test/
     description: Apply these distinctions in a fresh 10, 20, 30, or 50-question session.

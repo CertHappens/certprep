@@ -8,7 +8,7 @@ printable: true
 printTitle: "CISSP Domain 4: Communication and Network Security"
 author: certHappens
 datePublished: 2026-08-05
-dateModified: 2026-08-05
+dateModified: 2026-08-06
 articleSection: CISSP Domain 4
 eyebrow: CISSP Domain 4 guide
 lede: Connect network design, segmentation, secure protocols, infrastructure, monitoring, and communication channels to the business traffic and services they must protect.
@@ -92,6 +92,12 @@ relatedLinks:
   - title: IPv4 Subnetting Reference
     url: /network-plus/n10-009/study-guide/ipv4-subnetting/
     description: Refresh subnet boundaries, prefixes, address ranges, and host calculations used in network design.
+  - title: IPv6 Addressing and Prefix Reference
+    url: /ipv6-addressing/
+    description: Review IPv6 address structure, common scopes, prefix planning, assignment, and Neighbor Discovery.
+  - title: IPv6 Address and Prefix Calculator
+    url: /tools/ipv6-calculator/
+    description: Check IPv6 text forms, address categories, prefix boundaries, and child-prefix plans.
 ---
 Domain 4 accounts for 13 percent of the current CISSP exam outline. It asks how an organization moves information between people, systems, sites, cloud services, devices, and external partners without losing confidentiality, integrity, availability, or control.
 

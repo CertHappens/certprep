@@ -1,0 +1,82 @@
+---
+layout: layouts/base.njk
+title: Search
+description: Search CertHappens study guides, quick reviews, references, tools, practice-test pages, and Explore articles.
+permalink: /search/
+dateCreated: "2026-08-06"
+datePublished: "2026-08-06"
+dateModified: "2026-08-06"
+stylesheets:
+  - /assets/css/search.css?v=20260806-2
+breadcrumbs:
+  - label: Home
+    url: /
+  - label: Search
+    url: /search/
+---
+<header class="page-header page-header--compact">
+  <div class="page-shell">
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="/">Home</a></li>
+        <li aria-current="page">Search</li>
+      </ol>
+    </nav>
+    <p class="eyebrow">Find a topic</p>
+    <h1>Search CertHappens</h1>
+    <p class="lede">
+      Search study guides, quick reviews, references, tools, practice-test pages, and Explore articles.
+    </p>
+  </div>
+</header>
+
+<section class="section section--search">
+  <div class="page-shell search-page">
+    <form class="site-search" role="search" data-site-search-form>
+      <label for="site-search-input">Term or phrase</label>
+      <div class="site-search__row">
+        <input
+          id="site-search-input"
+          type="search"
+          name="q"
+          inputmode="search"
+          autocomplete="off"
+          enterkeyhint="search"
+          placeholder="Try IPv6, risk tolerance, OSPF cost, or SAML"
+          aria-describedby="site-search-help site-search-status"
+          data-site-search-input
+        >
+        <button class="button" type="submit">Search</button>
+        <button class="button button--secondary" type="button" data-site-search-clear hidden>Clear</button>
+      </div>
+      <p id="site-search-help" class="site-search__help">
+        Results are drawn from public CertHappens pages. Common word forms are grouped, while short acronyms remain exact. Numbered practice-test questions are not included.
+      </p>
+    </form>
+
+    <div class="search-guidance" data-site-search-guidance>
+      <h2>Search by the words you remember</h2>
+      <p>
+        You do not need to know which certification contains the topic. Search for a protocol, control, command,
+        acronym, career path, or a phrase from the explanation.
+      </p>
+    </div>
+
+    <section class="search-results" aria-labelledby="search-results-heading">
+      <h2 id="search-results-heading" class="visually-hidden">Search results</h2>
+      <p class="search-results__status" id="site-search-status" aria-live="polite" data-site-search-status>
+        Enter a term or phrase to search CertHappens.
+      </p>
+      <p class="search-results__empty" data-site-search-empty hidden>
+        No matching pages were found. Try fewer words, a related acronym, or a broader term.
+      </p>
+      <ol class="search-results__list" data-site-search-results></ol>
+    </section>
+
+    <noscript>
+      <p class="callout">Site search requires JavaScript. The <a href="/sitemap/">Site Map</a> lists every public page.</p>
+    </noscript>
+  </div>
+</section>
+
+<script type="module" src="/assets/js/site-search.js?v=20260806-2"></script>

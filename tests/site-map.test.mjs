@@ -150,3 +150,30 @@ test("footer and Site Map source use the human-facing route", async () => {
   assert.match(sitemapTemplate, /collections\.humanSitemapSections/);
   assert.doesNotMatch(sitemapTemplate, /href=["']\/sitemap\.xml/);
 });
+
+test("shared IPv6 reference is grouped with references and tools", () => {
+  const sections = buildHumanSitemapSections(
+    [
+      page("/ipv6-addressing/", "IPv6 Addressing and Prefix Reference"),
+      page("/tools/ipv6-calculator/", "IPv6 Address and Prefix Calculator")
+    ],
+    navigation
+  );
+
+  assert.deepEqual(sections, [
+    {
+      id: "references-tools",
+      label: "References and tools",
+      pages: [
+        {
+          label: "IPv6 Address and Prefix Calculator",
+          url: "/tools/ipv6-calculator/"
+        },
+        {
+          label: "IPv6 Addressing and Prefix Reference",
+          url: "/ipv6-addressing/"
+        }
+      ]
+    }
+  ]);
+});

@@ -80,12 +80,17 @@ function restoreAnswers(form, assessment, savedAnswers) {
   }
 }
 
-function createResultCard(match, rank) {
+function createResultCard(match, rank, assessment) {
   const article = document.createElement("article");
   article.className = "career-assessment__result-card";
   const rankLabel = document.createElement("p");
   rankLabel.className = "career-assessment__result-rank";
-  rankLabel.textContent = rank === 1 ? "Strongest match" : "Second match";
+  const configuredRankLabels = Array.isArray(assessment.resultRankLabels)
+    ? assessment.resultRankLabels
+    : [];
+  rankLabel.textContent =
+    configuredRankLabels[rank - 1] ||
+    (rank === 1 ? "Strongest match" : rank === 2 ? "Second match" : `Match ${rank}`);
 
   const heading = document.createElement("h3");
   heading.textContent = match.label;
@@ -236,10 +241,12 @@ function initializeCareerAssessment(root) {
 
   const renderResults = (outcome, { focus = false, announce = false } = {}) => {
     resultCards.replaceChildren(
-      ...outcome.topMatches.map((match, index) => createResultCard(match, index + 1))
+      ...outcome.topMatches.map((match, index) => createResultCard(match, index + 1, assessment))
     );
     if (announce) {
-      status.textContent = "Assessment complete. Your two strongest matches are shown below.";
+      status.textContent =
+        assessment.completionAnnouncement ||
+        "Assessment complete. Your two strongest matches are shown below.";
     }
     form.hidden = true;
     results.hidden = false;

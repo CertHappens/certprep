@@ -27,7 +27,11 @@ const HUMAN_SITE_MAP_SECTION_RULES = [
   {
     id: "references-tools",
     label: "References and tools",
-    matches: (url) => url === "/ports-protocols/" || url.startsWith("/tools/")
+    matches: (url) =>
+      url === "/ports-protocols/" ||
+      url === "/ipv6-addressing/" ||
+      url === "/search/" ||
+      url.startsWith("/tools/")
   },
   {
     id: "site-information",

@@ -519,7 +519,7 @@
     "currentResources": {
       "eyebrow": "Practice and study",
       "heading": "Start studying CCNA",
-      "intro": "Start with a randomized practice session or the five-domain guide, use focused quick reviews to correct weak spots, then consult the command, acronym, subnetting, and protocol references for deeper verification.",
+      "intro": "Start with a randomized practice session or the five-domain guide, use focused quick reviews to correct weak spots, then consult the command, acronym, IPv4, IPv6, and protocol references for deeper verification.",
       "links": [
         {
           "title": "CCNA 200-301 v2.0 practice test",
@@ -580,6 +580,16 @@
           "title": "IPv4 subnet calculator",
           "url": "/tools/subnet-calculator/",
           "description": "Check network and broadcast boundaries, usable ranges, masks, and address status after working the calculation manually."
+        },
+        {
+          "title": "IPv6 addressing and prefix reference",
+          "url": "/ipv6-addressing/",
+          "description": "Review address compression, common address types, /64 planning, SLAAC, DHCPv6, Neighbor Discovery, and child-prefix calculations."
+        },
+        {
+          "title": "IPv6 address and prefix calculator",
+          "url": "/tools/ipv6-calculator/",
+          "description": "Expand and compress IPv6 addresses, identify common address types, find prefix boundaries, and plan child prefixes."
         },
         {
           "title": "Ports and protocols",

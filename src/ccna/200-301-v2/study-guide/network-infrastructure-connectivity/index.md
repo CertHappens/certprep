@@ -8,7 +8,7 @@ printable: true
 printTitle: "CCNA 200-301 v2.0 Domain 1: Network Infrastructure and Connectivity"
 author: certHappens
 datePublished: 2026-07-31
-dateModified: 2026-08-01
+dateModified: 2026-08-06
 articleSection: CCNA 200-301 v2.0 Domain 1
 eyebrow: CCNA v2.0 domain 1 guide
 lede: Start at the link, prove the address, follow the path, and separate wireless or Dynamic Host Configuration Protocol (DHCP) symptoms from the layer that actually failed.
@@ -75,6 +75,12 @@ relatedLinks:
   - title: IPv4 Subnet Calculator
     url: /tools/subnet-calculator/
     description: Verify network, broadcast, usable range, masks, and address roles after solving manually.
+  - title: IPv6 Addressing and Prefix Reference
+    url: /ipv6-addressing/
+    description: Review compression, address types, prefix planning, SLAAC, DHCPv6, and Neighbor Discovery.
+  - title: IPv6 Address and Prefix Calculator
+    url: /tools/ipv6-calculator/
+    description: Check expanded and compressed forms, common address categories, prefix boundaries, and child prefixes.
   - title: Network Troubleshooting Tools
     url: /network-plus/quick-review/troubleshooting-tools/
     description: Match endpoint, path, packet, cable, and wireless tools to the evidence they provide.
