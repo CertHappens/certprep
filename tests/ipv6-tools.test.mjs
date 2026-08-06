@@ -70,3 +70,18 @@ test("relevant IPv6 study pages link to the shared reference and calculator", as
     assert.match(source, /url: \/tools\/ipv6-calculator\//);
   }
 });
+
+
+test("IPv4 and IPv6 calculators link directly to each other", async () => {
+  const ipv4 = await readSource("src/tools/subnet-calculator/index.njk");
+  const ipv6 = await readSource("src/tools/ipv6-calculator/index.njk");
+
+  assert.match(
+    ipv4,
+    /<a class="button button--secondary" href="\/tools\/ipv6-calculator\/">IPv6 calc<\/a>/,
+  );
+  assert.match(
+    ipv6,
+    /<a class="button button--secondary" href="\/tools\/subnet-calculator\/">IPv4 calc<\/a>/,
+  );
+});
