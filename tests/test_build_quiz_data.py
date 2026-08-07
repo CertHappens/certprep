@@ -38,6 +38,8 @@ class QuizDataBuilderTests(unittest.TestCase):
             "slug": "security-plus/sec-701",
             "questions_csv": "data/security-plus/sec-701/questions.csv",
             "objective_map_csv": "data/security-plus/sec-701/objective-map.csv",
+            "stimuli_json": "data/security-plus/sec-701/stimuli.json",
+            "responses_json": "data/security-plus/sec-701/responses.json",
             "output_directory": "src/quiz-data/security-plus/sec-701",
             "public_base_path": "/quiz-data/security-plus/sec-701",
             "practice_test_path": "/security-plus/sy0-701/practice-test",
@@ -163,18 +165,17 @@ class QuizDataBuilderTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temporary_directory:
             temporary = Path(temporary_directory)
             stimuli_path = temporary / "stimuli.json"
+            stimulus_registry = json.loads(
+                (PROJECT_ROOT / "data" / "security-plus" / "sec-701" / "stimuli.json").read_text(encoding="utf-8")
+            )
+            stimulus_registry["stimuli"][question_id] = {
+                "type": "preformatted",
+                "variant": "log",
+                "title": "Event log",
+                "content": "event one\nevent two",
+            }
             stimuli_path.write_text(
-                json.dumps({
-                    "schemaVersion": 1,
-                    "stimuli": {
-                        question_id: {
-                            "type": "preformatted",
-                            "variant": "log",
-                            "title": "Event log",
-                            "content": "event one\nevent two",
-                        }
-                    },
-                }),
+                json.dumps(stimulus_registry),
                 encoding="utf-8",
             )
             config = deepcopy(self.quiz_config)

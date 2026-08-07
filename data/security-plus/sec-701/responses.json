@@ -1,4 +1,961 @@
 {
   "schemaVersion": 1,
-  "responses": {}
+  "responses": {
+    "SEC701-0000251": {
+      "type": "matching",
+      "variant": "matching",
+      "items": [
+        {
+          "id": "allowlist",
+          "text": "Application allowlisting blocks an unapproved executable before it starts.",
+          "correctOptionId": "preventive",
+          "explanation": "The control stops unauthorized software execution before the event occurs."
+        },
+        {
+          "id": "signin_alert",
+          "text": "A monitoring rule alerts on an unexpected privileged sign-in.",
+          "correctOptionId": "detective",
+          "explanation": "The alert identifies activity that has occurred or is occurring."
+        },
+        {
+          "id": "restore_config",
+          "text": "A system restores a protected known-good configuration after an unauthorized change.",
+          "correctOptionId": "corrective",
+          "explanation": "The restoration repairs the affected state after the change."
+        },
+        {
+          "id": "warning_sign",
+          "text": "A sign states that access is monitored and unauthorized entry may be prosecuted.",
+          "correctOptionId": "deterrent",
+          "explanation": "The warning is intended to discourage an attempted violation."
+        }
+      ],
+      "options": [
+        {
+          "id": "preventive",
+          "label": "Preventive"
+        },
+        {
+          "id": "detective",
+          "label": "Detective"
+        },
+        {
+          "id": "corrective",
+          "label": "Corrective"
+        },
+        {
+          "id": "deterrent",
+          "label": "Deterrent"
+        }
+      ]
+    },
+    "SEC701-0000252": {
+      "type": "matching",
+      "variant": "classification",
+      "items": [
+        {
+          "id": "passkey",
+          "text": "Verify a user with a registered passkey before sign-in.",
+          "correctOptionId": "authentication",
+          "explanation": "The passkey is used to verify the identity claiming the account."
+        },
+        {
+          "id": "finance_role",
+          "text": "Permit the Finance Approver role to release payments up to its assigned limit.",
+          "correctOptionId": "authorization",
+          "explanation": "The role and limit determine what an authenticated user is permitted to do."
+        },
+        {
+          "id": "admin_audit",
+          "text": "Record which administrator changed a firewall rule and when the change occurred.",
+          "correctOptionId": "accounting",
+          "explanation": "The audit record creates a history of accountable actions."
+        },
+        {
+          "id": "smart_card",
+          "text": "Validate a user certificate from a smart card during login.",
+          "correctOptionId": "authentication",
+          "explanation": "Certificate validation contributes to verifying the user identity."
+        },
+        {
+          "id": "hr_block",
+          "text": "Block a Sales role from opening employee medical-benefit records.",
+          "correctOptionId": "authorization",
+          "explanation": "The access decision restricts what the authenticated role may read."
+        },
+        {
+          "id": "api_audit",
+          "text": "Write timestamped records of privileged API changes to the audit system.",
+          "correctOptionId": "accounting",
+          "explanation": "The records support accountability and later review of privileged actions."
+        }
+      ],
+      "options": [
+        {
+          "id": "authentication",
+          "label": "Authentication"
+        },
+        {
+          "id": "authorization",
+          "label": "Authorization"
+        },
+        {
+          "id": "accounting",
+          "label": "Accounting"
+        }
+      ]
+    },
+    "SEC701-0000253": {
+      "type": "ordering",
+      "items": [
+        {
+          "id": "assess",
+          "text": "Assess the security and operational impact of the proposed rule change.",
+          "explanation": "Impact analysis identifies affected services, risks, dependencies, and rollback needs before authorization."
+        },
+        {
+          "id": "approve",
+          "text": "Obtain authorization from the designated change approver.",
+          "explanation": "The assessed change must be authorized before the approved work proceeds."
+        },
+        {
+          "id": "test",
+          "text": "Test the approved rule change in the designated nonproduction environment.",
+          "explanation": "Testing checks the intended behavior before the production system is changed."
+        },
+        {
+          "id": "implement",
+          "text": "Implement the approved and tested rule change in production.",
+          "explanation": "Production implementation follows approval and testing."
+        },
+        {
+          "id": "validate",
+          "text": "Validate the result and update the change and configuration records.",
+          "explanation": "Post-change validation confirms the outcome and records the resulting production state."
+        }
+      ],
+      "correctOrder": [
+        "assess",
+        "approve",
+        "test",
+        "implement",
+        "validate"
+      ]
+    },
+    "SEC701-0000254": {
+      "type": "matching",
+      "variant": "matching",
+      "items": [
+        {
+          "id": "many_accounts",
+          "text": "One external source tries the same password once against many employee accounts.",
+          "correctOptionId": "password_spraying",
+          "explanation": "Password spraying spreads a small number of password guesses across many accounts to avoid per-account lockouts."
+        },
+        {
+          "id": "encoded_dns",
+          "text": "A host sends frequent DNS queries containing long, high-entropy subdomain labels.",
+          "correctOptionId": "dns_tunneling",
+          "explanation": "Encoded or high-entropy labels can carry command-and-control or exfiltration data through DNS."
+        },
+        {
+          "id": "lookalike_domain",
+          "text": "A payroll sign-in link uses a domain that differs from the company domain by one character.",
+          "correctOptionId": "typosquatting",
+          "explanation": "Typosquatting uses lookalike or misspelled domains to deceive users."
+        },
+        {
+          "id": "hidden_process",
+          "text": "A memory image shows a privileged process that normal operating-system tools do not display.",
+          "correctOptionId": "rootkit",
+          "explanation": "Rootkits can conceal processes, drivers, files, or other artifacts from normal system tools."
+        }
+      ],
+      "options": [
+        {
+          "id": "password_spraying",
+          "label": "Password spraying"
+        },
+        {
+          "id": "dns_tunneling",
+          "label": "DNS tunneling"
+        },
+        {
+          "id": "typosquatting",
+          "label": "Typosquatting"
+        },
+        {
+          "id": "rootkit",
+          "label": "Rootkit"
+        }
+      ]
+    },
+    "SEC701-0000255": {
+      "type": "matching",
+      "variant": "classification",
+      "items": [
+        {
+          "id": "object_auth",
+          "text": "An API verifies sign-in but does not verify that the user may access the requested customer record.",
+          "correctOptionId": "application",
+          "explanation": "The missing per-object authorization check is an application-logic weakness."
+        },
+        {
+          "id": "public_bucket",
+          "text": "A cloud storage bucket containing internal reports is configured for public read access.",
+          "correctOptionId": "misconfiguration",
+          "explanation": "The unsafe access setting exposes data because of configuration rather than application logic."
+        },
+        {
+          "id": "vendor_build",
+          "text": "A trusted vendor build pipeline is compromised and distributes a modified signed update to customers.",
+          "correctOptionId": "supply_chain",
+          "explanation": "The weakness enters through a trusted supplier development and distribution process."
+        },
+        {
+          "id": "sql_concat",
+          "text": "A web application concatenates untrusted input directly into a database query.",
+          "correctOptionId": "application",
+          "explanation": "Unsafe query construction is an application weakness that can enable injection."
+        },
+        {
+          "id": "default_admin",
+          "text": "A newly deployed appliance still uses the vendor default administrator password.",
+          "correctOptionId": "misconfiguration",
+          "explanation": "Leaving a default credential in place is an insecure configuration state."
+        },
+        {
+          "id": "package_publisher",
+          "text": "A dependency package is pulled automatically after the package publisher account is compromised.",
+          "correctOptionId": "supply_chain",
+          "explanation": "A compromised upstream package source introduces risk through the software supply chain."
+        }
+      ],
+      "options": [
+        {
+          "id": "application",
+          "label": "Application vulnerability"
+        },
+        {
+          "id": "misconfiguration",
+          "label": "Security misconfiguration"
+        },
+        {
+          "id": "supply_chain",
+          "label": "Supply-chain weakness"
+        }
+      ]
+    },
+    "SEC701-0000256": {
+      "type": "ordering",
+      "items": [
+        {
+          "id": "register",
+          "text": "Register or prepare the lookalike sign-in site.",
+          "explanation": "The deceptive destination must exist before victims can be sent to it."
+        },
+        {
+          "id": "deliver",
+          "text": "Send the user a message containing the deceptive sign-in link.",
+          "explanation": "The lure directs the user to the attacker-controlled site."
+        },
+        {
+          "id": "capture",
+          "text": "Capture the credentials the user submits to the lookalike page.",
+          "explanation": "The attacker obtains the password only after the victim enters it."
+        },
+        {
+          "id": "reuse",
+          "text": "Submit the stolen credentials to the legitimate service.",
+          "explanation": "The captured credentials are then used against the real authentication service."
+        },
+        {
+          "id": "access",
+          "text": "Establish an authenticated session to the victim account.",
+          "explanation": "Account access follows successful use of the stolen credentials."
+        }
+      ],
+      "correctOrder": [
+        "register",
+        "deliver",
+        "capture",
+        "reuse",
+        "access"
+      ]
+    },
+    "SEC701-0000257": {
+      "type": "line_select",
+      "selectionCount": 4,
+      "correctLineNumbers": [
+        1,
+        3,
+        5,
+        6
+      ]
+    },
+    "SEC701-0000258": {
+      "type": "line_select",
+      "selectionCount": 2,
+      "correctLineNumbers": [
+        4,
+        5
+      ]
+    },
+    "SEC701-0000259": {
+      "type": "matching",
+      "variant": "matching",
+      "items": [
+        {
+          "id": "guest_os",
+          "text": "The customer must manage the guest operating system, host firewall, and installed agents.",
+          "correctOptionId": "iaas",
+          "explanation": "IaaS leaves guest operating systems and deployed software under customer control."
+        },
+        {
+          "id": "app_code",
+          "text": "Developers deploy application code while the provider manages the operating system and application runtime.",
+          "correctOptionId": "paas",
+          "explanation": "PaaS provides the managed platform while customers deploy and secure their application code and data."
+        },
+        {
+          "id": "finished_app",
+          "text": "Users consume a finished business application through a browser without managing its platform.",
+          "correctOptionId": "saas",
+          "explanation": "SaaS delivers the completed application as the provider-managed service."
+        },
+        {
+          "id": "event_function",
+          "text": "A short event-driven function runs on demand without the customer maintaining servers.",
+          "correctOptionId": "serverless",
+          "explanation": "Serverless execution abstracts server operation while the customer supplies the function code and configuration."
+        }
+      ],
+      "options": [
+        {
+          "id": "iaas",
+          "label": "Infrastructure as a service"
+        },
+        {
+          "id": "paas",
+          "label": "Platform as a service"
+        },
+        {
+          "id": "saas",
+          "label": "Software as a service"
+        },
+        {
+          "id": "serverless",
+          "label": "Serverless computing"
+        }
+      ]
+    },
+    "SEC701-0000260": {
+      "type": "matching",
+      "variant": "classification",
+      "items": [
+        {
+          "id": "ssd_file",
+          "text": "An encrypted payroll file stored on an endpoint SSD.",
+          "correctOptionId": "at_rest",
+          "explanation": "The file is stored on persistent media and is therefore at rest."
+        },
+        {
+          "id": "tls_api",
+          "text": "An API request protected by TLS while crossing the Internet.",
+          "correctOptionId": "in_transit",
+          "explanation": "The request is moving between systems over a network."
+        },
+        {
+          "id": "ram_record",
+          "text": "A customer record decrypted in application memory while a calculation is performed.",
+          "correctOptionId": "in_use",
+          "explanation": "The record is actively being processed in memory."
+        },
+        {
+          "id": "backup_tape",
+          "text": "An encrypted database backup stored on offline media.",
+          "correctOptionId": "at_rest",
+          "explanation": "The backup is stored rather than being transmitted or processed."
+        },
+        {
+          "id": "ipsec_tunnel",
+          "text": "Replication traffic protected by IPsec between two sites.",
+          "correctOptionId": "in_transit",
+          "explanation": "The replication data is moving through a protected network tunnel."
+        },
+        {
+          "id": "analytics_ram",
+          "text": "Decrypted transaction values loaded into memory for an analytics job.",
+          "correctOptionId": "in_use",
+          "explanation": "The values are actively processed by the analytics workload."
+        }
+      ],
+      "options": [
+        {
+          "id": "at_rest",
+          "label": "Data at rest"
+        },
+        {
+          "id": "in_transit",
+          "label": "Data in transit"
+        },
+        {
+          "id": "in_use",
+          "label": "Data in use"
+        }
+      ]
+    },
+    "SEC701-0000261": {
+      "type": "ordering",
+      "items": [
+        {
+          "id": "declare",
+          "text": "Declare the primary site unavailable and activate the recovery plan.",
+          "explanation": "The recovery process begins after the incident meets the criteria for declaring the primary site unavailable."
+        },
+        {
+          "id": "activate_site",
+          "text": "Activate the required compute, network, and access services at the warm site.",
+          "explanation": "The alternate environment must be ready before application data and services are restored."
+        },
+        {
+          "id": "restore_data",
+          "text": "Restore or synchronize the approved recovery data to the alternate environment.",
+          "explanation": "The applications need the required recovery data before functional validation."
+        },
+        {
+          "id": "validate_service",
+          "text": "Validate the critical application and security controls at the warm site.",
+          "explanation": "Testing verifies that the recovered service and protections operate correctly before users are redirected."
+        },
+        {
+          "id": "redirect_users",
+          "text": "Redirect user and application traffic to the validated warm-site service.",
+          "explanation": "Traffic moves only after the alternate service has been validated."
+        }
+      ],
+      "correctOrder": [
+        "declare",
+        "activate_site",
+        "restore_data",
+        "validate_service",
+        "redirect_users"
+      ]
+    },
+    "SEC701-0000262": {
+      "type": "line_select",
+      "selectionCount": 2,
+      "correctLineNumbers": [
+        2,
+        4
+      ]
+    },
+    "SEC701-0000263": {
+      "type": "matching",
+      "variant": "matching",
+      "items": [
+        {
+          "id": "process_tree",
+          "text": "A process tree shows a document reader spawning a script interpreter on one laptop.",
+          "correctOptionId": "edr",
+          "explanation": "Endpoint detection and response tools collect process and host activity from endpoints."
+        },
+        {
+          "id": "network_signature",
+          "text": "A network alert identifies an exploit signature in traffic crossing a monitored segment.",
+          "correctOptionId": "ids_ips",
+          "explanation": "IDS and IPS technologies inspect network traffic for suspicious or known attack patterns."
+        },
+        {
+          "id": "cross_source",
+          "text": "An alert combines identity, endpoint, and firewall events into one correlated incident.",
+          "correctOptionId": "siem",
+          "explanation": "A SIEM aggregates and correlates events from multiple security sources."
+        },
+        {
+          "id": "blocked_upload",
+          "text": "An outbound upload is blocked because the file contains regulated identifiers.",
+          "correctOptionId": "dlp",
+          "explanation": "DLP identifies sensitive information and can enforce rules that restrict its movement."
+        }
+      ],
+      "options": [
+        {
+          "id": "edr",
+          "label": "EDR"
+        },
+        {
+          "id": "ids_ips",
+          "label": "IDS or IPS"
+        },
+        {
+          "id": "siem",
+          "label": "SIEM"
+        },
+        {
+          "id": "dlp",
+          "label": "DLP"
+        }
+      ]
+    },
+    "SEC701-0000264": {
+      "type": "matching",
+      "variant": "matching",
+      "items": [
+        {
+          "id": "federated_sso",
+          "text": "Send a signed identity assertion from an identity provider to a service provider for browser SSO.",
+          "correctOptionId": "saml",
+          "explanation": "SAML is designed to exchange authentication and attribute assertions between identity and service providers."
+        },
+        {
+          "id": "delegated_api",
+          "text": "Let a user authorize an application to access a limited API scope without giving the application the user password.",
+          "correctOptionId": "oauth",
+          "explanation": "OAuth supports delegated authorization through scoped access tokens."
+        },
+        {
+          "id": "directory_query",
+          "text": "Query a centralized directory for user and group attributes.",
+          "correctOptionId": "ldap",
+          "explanation": "LDAP is commonly used to access and manage directory information."
+        },
+        {
+          "id": "origin_bound",
+          "text": "Require an authenticator designed to resist credential replay through a fake sign-in site.",
+          "correctOptionId": "phishing_resistant",
+          "explanation": "Phishing-resistant authenticators bind authentication to the legitimate verifier or origin."
+        }
+      ],
+      "options": [
+        {
+          "id": "saml",
+          "label": "SAML"
+        },
+        {
+          "id": "oauth",
+          "label": "OAuth"
+        },
+        {
+          "id": "ldap",
+          "label": "LDAP"
+        },
+        {
+          "id": "phishing_resistant",
+          "label": "Phishing-resistant authenticator"
+        }
+      ]
+    },
+    "SEC701-0000265": {
+      "type": "matching",
+      "variant": "classification",
+      "items": [
+        {
+          "id": "credentialed_scan",
+          "text": "A credentialed scanner discovers that a server is missing a security update.",
+          "correctOptionId": "identify",
+          "explanation": "The scan identifies a potential vulnerability."
+        },
+        {
+          "id": "active_exploit",
+          "text": "Threat intelligence shows active exploitation of a public-facing vulnerability on a critical system.",
+          "correctOptionId": "prioritize",
+          "explanation": "Exploit activity, exposure, and asset importance influence treatment priority."
+        },
+        {
+          "id": "deploy_patch",
+          "text": "Administrators deploy the vendor security update to the affected servers.",
+          "correctOptionId": "remediate",
+          "explanation": "Applying the update changes the vulnerable state and is a remediation action."
+        },
+        {
+          "id": "rescan",
+          "text": "The team rescans the servers after deployment to confirm the finding is gone.",
+          "correctOptionId": "validate",
+          "explanation": "The rescan checks whether remediation successfully removed the vulnerability."
+        },
+        {
+          "id": "manual_test",
+          "text": "A penetration tester discovers an authorization flaw that the automated scanner missed.",
+          "correctOptionId": "identify",
+          "explanation": "The manual test identifies an additional weakness."
+        },
+        {
+          "id": "criticality_rank",
+          "text": "The team raises a finding because the affected asset processes regulated customer data.",
+          "correctOptionId": "prioritize",
+          "explanation": "Asset sensitivity changes the relative urgency of treatment."
+        },
+        {
+          "id": "temporary_block",
+          "text": "A firewall rule blocks the exposed vulnerable service until the permanent fix is ready.",
+          "correctOptionId": "remediate",
+          "explanation": "The compensating change reduces exposure and is a remediation or mitigation action."
+        },
+        {
+          "id": "confirm_control",
+          "text": "Testing confirms that the temporary block prevents access from untrusted networks.",
+          "correctOptionId": "validate",
+          "explanation": "The test verifies that the applied control has the intended effect."
+        }
+      ],
+      "options": [
+        {
+          "id": "identify",
+          "label": "Identification"
+        },
+        {
+          "id": "prioritize",
+          "label": "Prioritization"
+        },
+        {
+          "id": "remediate",
+          "label": "Remediation"
+        },
+        {
+          "id": "validate",
+          "label": "Validation"
+        }
+      ]
+    },
+    "SEC701-0000266": {
+      "type": "matching",
+      "variant": "classification",
+      "items": [
+        {
+          "id": "mfa_success",
+          "text": "Successful sign-in with the username, MFA result, source address, and timestamp.",
+          "correctOptionId": "identity",
+          "explanation": "Authentication systems directly record identity and sign-in events."
+        },
+        {
+          "id": "dns_query",
+          "text": "A DNS query from an internal host to a newly observed external domain.",
+          "correctOptionId": "network",
+          "explanation": "DNS and network monitoring provide evidence about host communications."
+        },
+        {
+          "id": "process_spawn",
+          "text": "A document reader spawns a script interpreter with a suspicious command line.",
+          "correctOptionId": "endpoint",
+          "explanation": "Endpoint telemetry records process creation and command-line activity."
+        },
+        {
+          "id": "bucket_policy",
+          "text": "An administrator changes a cloud storage bucket policy to allow public access.",
+          "correctOptionId": "cloud",
+          "explanation": "Cloud control-plane audit logs record administrative resource changes."
+        },
+        {
+          "id": "signin_fail",
+          "text": "Repeated failed sign-ins for one account from several source addresses.",
+          "correctOptionId": "identity",
+          "explanation": "The identity system is the direct source for authentication outcomes."
+        },
+        {
+          "id": "proxy_upload",
+          "text": "A proxy records a large HTTPS upload to an unsanctioned file-sharing domain.",
+          "correctOptionId": "network",
+          "explanation": "Web proxy data records destination, user or device context, and transfer details."
+        },
+        {
+          "id": "quarantine_hash",
+          "text": "An endpoint sensor quarantines a file and records its hash and parent process.",
+          "correctOptionId": "endpoint",
+          "explanation": "Endpoint security telemetry records file and process activity on the host."
+        },
+        {
+          "id": "role_change",
+          "text": "A cloud administrator grants a new privileged role to a service identity.",
+          "correctOptionId": "cloud",
+          "explanation": "The cloud audit trail records identity and policy changes made through the control plane."
+        }
+      ],
+      "options": [
+        {
+          "id": "identity",
+          "label": "Identity or authentication log"
+        },
+        {
+          "id": "network",
+          "label": "Network or proxy log"
+        },
+        {
+          "id": "endpoint",
+          "label": "Endpoint telemetry"
+        },
+        {
+          "id": "cloud",
+          "label": "Cloud control-plane audit log"
+        }
+      ]
+    },
+    "SEC701-0000267": {
+      "type": "ordering",
+      "items": [
+        {
+          "id": "prepare",
+          "text": "Preparation",
+          "explanation": "Preparation establishes the people, tools, communications, and procedures needed before an incident."
+        },
+        {
+          "id": "detect_analyze",
+          "text": "Detection and analysis",
+          "explanation": "Detection and analysis determine whether an event is an incident and establish scope and impact."
+        },
+        {
+          "id": "contain",
+          "text": "Containment",
+          "explanation": "Containment limits additional damage and spread before the threat is removed."
+        },
+        {
+          "id": "eradicate",
+          "text": "Eradication",
+          "explanation": "Eradication removes malicious code, persistence, and exploited weaknesses after containment."
+        },
+        {
+          "id": "recover",
+          "text": "Recovery",
+          "explanation": "Recovery restores and validates normal operations after the threat has been removed."
+        },
+        {
+          "id": "lessons",
+          "text": "Lessons learned and improvement",
+          "explanation": "Post-incident review identifies improvements to controls, procedures, and training."
+        }
+      ],
+      "correctOrder": [
+        "prepare",
+        "detect_analyze",
+        "contain",
+        "eradicate",
+        "recover",
+        "lessons"
+      ]
+    },
+    "SEC701-0000268": {
+      "type": "ordering",
+      "items": [
+        {
+          "id": "request",
+          "text": "Submit the privileged-access request with the maintenance purpose and time window.",
+          "explanation": "The workflow begins with a documented business need and requested duration."
+        },
+        {
+          "id": "approve",
+          "text": "Obtain approval from the designated privileged-access owner.",
+          "explanation": "Authorization is required before elevated rights are granted."
+        },
+        {
+          "id": "grant",
+          "text": "Have PAM grant the approved administrator role for the limited window.",
+          "explanation": "PAM activates only the privilege authorized for the approved period."
+        },
+        {
+          "id": "use_record",
+          "text": "Perform the maintenance while the privileged session is logged or recorded.",
+          "explanation": "The approved access is used with accountability during the maintenance activity."
+        },
+        {
+          "id": "revoke",
+          "text": "Automatically remove the elevated role when the approved window expires.",
+          "explanation": "Automatic removal prevents the temporary privilege from becoming standing access."
+        }
+      ],
+      "correctOrder": [
+        "request",
+        "approve",
+        "grant",
+        "use_record",
+        "revoke"
+      ]
+    },
+    "SEC701-0000269": {
+      "type": "line_select",
+      "selectionCount": 2,
+      "correctLineNumbers": [
+        1,
+        2
+      ]
+    },
+    "SEC701-0000270": {
+      "type": "matching",
+      "variant": "matching",
+      "items": [
+        {
+          "id": "management_direction",
+          "text": "States management direction that sensitive company data must be protected.",
+          "correctOptionId": "policy",
+          "explanation": "A policy establishes high-level management intent and expectations."
+        },
+        {
+          "id": "mandatory_crypto",
+          "text": "Requires approved encryption algorithms and minimum key sizes for protected data.",
+          "correctOptionId": "standard",
+          "explanation": "A standard defines specific mandatory requirements used to implement policy."
+        },
+        {
+          "id": "account_steps",
+          "text": "Lists the steps the service desk follows to create and verify a new employee account.",
+          "correctOptionId": "procedure",
+          "explanation": "A procedure provides repeatable step-by-step instructions for performing an activity."
+        },
+        {
+          "id": "travel_advice",
+          "text": "Recommends safer practices employees should consider when using networks while traveling.",
+          "correctOptionId": "guideline",
+          "explanation": "A guideline provides recommended practices and allows situational judgment."
+        }
+      ],
+      "options": [
+        {
+          "id": "policy",
+          "label": "Policy"
+        },
+        {
+          "id": "standard",
+          "label": "Standard"
+        },
+        {
+          "id": "procedure",
+          "label": "Procedure"
+        },
+        {
+          "id": "guideline",
+          "label": "Guideline"
+        }
+      ]
+    },
+    "SEC701-0000271": {
+      "type": "matching",
+      "variant": "classification",
+      "items": [
+        {
+          "id": "retire_service",
+          "text": "Discontinue an optional Internet-facing service that creates more risk than business value.",
+          "correctOptionId": "avoid",
+          "explanation": "Ending the activity removes the source of that risk."
+        },
+        {
+          "id": "cyber_insurance",
+          "text": "Purchase cyber insurance to cover part of the financial impact of a qualifying incident.",
+          "correctOptionId": "transfer",
+          "explanation": "Insurance transfers a defined portion of financial impact to the insurer under the policy terms."
+        },
+        {
+          "id": "deploy_mfa",
+          "text": "Require phishing-resistant authentication for administrators to reduce account-compromise likelihood.",
+          "correctOptionId": "mitigate",
+          "explanation": "The control reduces the likelihood or impact of the identified threat."
+        },
+        {
+          "id": "accept_low",
+          "text": "Document and approve a low residual risk that falls within the established tolerance.",
+          "correctOptionId": "accept",
+          "explanation": "The organization knowingly retains the remaining risk after review."
+        },
+        {
+          "id": "stop_data_collection",
+          "text": "Remove an unnecessary data-collection feature so the organization no longer stores that sensitive field.",
+          "correctOptionId": "avoid",
+          "explanation": "Removing the activity eliminates the associated storage and exposure risk."
+        },
+        {
+          "id": "vendor_indemnity",
+          "text": "Use a contract that assigns specified financial responsibility to a service provider for defined failures.",
+          "correctOptionId": "transfer",
+          "explanation": "The contract shifts specified consequences to another party, although the organization still retains some risk."
+        },
+        {
+          "id": "segment_legacy",
+          "text": "Segment and closely monitor a legacy system while its replacement is being completed.",
+          "correctOptionId": "mitigate",
+          "explanation": "The temporary controls reduce exposure without eliminating the underlying system risk."
+        },
+        {
+          "id": "approved_exception",
+          "text": "A risk owner formally accepts a small remaining exposure until the planned replacement date.",
+          "correctOptionId": "accept",
+          "explanation": "The owner acknowledges and retains the residual risk for the approved period."
+        }
+      ],
+      "options": [
+        {
+          "id": "avoid",
+          "label": "Avoid"
+        },
+        {
+          "id": "transfer",
+          "label": "Transfer"
+        },
+        {
+          "id": "mitigate",
+          "label": "Mitigate"
+        },
+        {
+          "id": "accept",
+          "label": "Accept"
+        }
+      ]
+    },
+    "SEC701-0000272": {
+      "type": "ordering",
+      "items": [
+        {
+          "id": "requirements",
+          "text": "Define the security, privacy, resilience, and data-handling requirements for the service.",
+          "explanation": "Requirements must be known before the organization can evaluate candidate providers."
+        },
+        {
+          "id": "due_diligence",
+          "text": "Assess the provider and important subcontractors against the defined requirements.",
+          "explanation": "Due diligence evaluates whether the provider can meet the required controls and obligations."
+        },
+        {
+          "id": "contract",
+          "text": "Execute the agreement with required security clauses, service targets, notification terms, and assurance rights.",
+          "explanation": "Contractual obligations should be established before access and regulated processing begin."
+        },
+        {
+          "id": "onboard",
+          "text": "Provision only the approved access and data flows needed for the contracted service.",
+          "explanation": "Onboarding implements the least-privilege connection after the relationship is approved and contracted."
+        },
+        {
+          "id": "monitor",
+          "text": "Monitor performance, control evidence, incidents, material changes, and supplier risk during the relationship.",
+          "explanation": "Ongoing monitoring addresses changes that occur after the initial assessment."
+        },
+        {
+          "id": "offboard",
+          "text": "Revoke access and complete required data return, retention, or verified destruction when the relationship ends.",
+          "explanation": "Termination activities remove access and resolve data obligations at the end of the lifecycle."
+        }
+      ],
+      "correctOrder": [
+        "requirements",
+        "due_diligence",
+        "contract",
+        "onboard",
+        "monitor",
+        "offboard"
+      ]
+    },
+    "SEC701-0000273": {
+      "type": "line_select",
+      "selectionCount": 2,
+      "correctLineNumbers": [
+        2,
+        5
+      ]
+    },
+    "SEC701-0000274": {
+      "type": "line_select",
+      "selectionCount": 2,
+      "correctLineNumbers": [
+        2,
+        6
+      ]
+    }
+  }
 }

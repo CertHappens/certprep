@@ -1,0 +1,25 @@
+question_id,domain_id,objective_id,difficulty,question_type,interaction_variant,item_count,option_count,selection_count,stimulus_type,stimulus_variant,topic
+SEC701-0000251,1.0,1.1,easy,matching,matching,4,4,,,,Security control functions
+SEC701-0000252,1.0,1.2,medium,matching,classification,6,3,,,,Authentication authorization and accounting
+SEC701-0000253,1.0,1.3,medium,ordering,ordering,5,0,,,,Planned change workflow
+SEC701-0000254,2.0,2.4,medium,matching,matching,4,4,,,,Malicious activity indicators
+SEC701-0000255,2.0,2.3,hard,matching,classification,6,3,,,,Vulnerability categories
+SEC701-0000256,2.0,2.2,easy,ordering,ordering,5,0,,,,Credential phishing progression
+SEC701-0000257,2.0,2.4,medium,line_select,line_select,0,0,4,preformatted,log,Password spraying evidence
+SEC701-0000258,2.0,2.4,hard,line_select,line_select,0,0,2,preformatted,log,Directory traversal evidence
+SEC701-0000259,3.0,3.1,easy,matching,matching,4,4,,,,Cloud delivery models
+SEC701-0000260,3.0,3.3,medium,matching,classification,6,3,,,,Data states
+SEC701-0000261,3.0,3.4,medium,ordering,ordering,5,0,,,,Warm-site recovery sequence
+SEC701-0000262,3.0,3.2,hard,line_select,line_select,0,0,2,preformatted,configuration,Management interface hardening
+SEC701-0000263,4.0,4.4,medium,matching,matching,4,4,,,,Security monitoring tools
+SEC701-0000264,4.0,4.6,hard,matching,matching,4,4,,,,Identity federation and access technologies
+SEC701-0000265,4.0,4.3,medium,matching,classification,8,4,,,,Vulnerability management activities
+SEC701-0000266,4.0,4.9,hard,matching,classification,8,4,,,,Investigation data sources
+SEC701-0000267,4.0,4.8,easy,ordering,ordering,6,0,,,,Incident response phases
+SEC701-0000268,4.0,4.6,medium,ordering,ordering,5,0,,,,Time-limited privileged access
+SEC701-0000269,4.0,4.9,medium,line_select,line_select,0,0,2,preformatted,log,Impossible travel investigation
+SEC701-0000270,5.0,5.1,easy,matching,matching,4,4,,,,Governance document types
+SEC701-0000271,5.0,5.2,medium,matching,classification,8,4,,,,Risk treatment strategies
+SEC701-0000272,5.0,5.3,hard,ordering,ordering,6,0,,,,Third-party risk lifecycle
+SEC701-0000273,5.0,5.3,medium,line_select,line_select,0,0,2,preformatted,plain_text,Vendor due diligence evidence
+SEC701-0000274,5.0,5.6,easy,line_select,line_select,0,0,2,preformatted,plain_text,Phishing message indicators

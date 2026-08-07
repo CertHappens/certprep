@@ -781,6 +781,42 @@
           "reported": "14%"
         }
       ]
+    },
+    "SEC701-0000257": {
+      "type": "preformatted",
+      "variant": "log",
+      "title": "Authentication events",
+      "content": "09:14:01 FAIL user=adavis src=198.51.100.77 reason=bad_password\n09:14:02 FAIL user=adavis src=203.0.113.18 reason=bad_password\n09:14:03 FAIL user=bchen src=198.51.100.77 reason=bad_password\n09:14:04 SUCCESS user=svc_backup src=10.20.4.12 method=certificate\n09:14:05 FAIL user=cmorris src=198.51.100.77 reason=bad_password\n09:14:07 FAIL user=dpatel src=198.51.100.77 reason=bad_password\n09:14:09 FAIL user=dpatel src=192.0.2.55 reason=bad_password"
+    },
+    "SEC701-0000258": {
+      "type": "preformatted",
+      "variant": "log",
+      "title": "Web access log",
+      "content": "10:22:11 GET /index.html status=200 src=203.0.113.21\n10:22:14 GET /images/logo.png status=200 src=203.0.113.21\n10:22:19 GET /download?file=report.pdf status=200 src=198.51.100.44\n10:22:25 GET /download?file=../../../../etc/passwd status=403 src=198.51.100.88\n10:22:27 GET /download?file=..%2f..%2f..%2fetc%2fshadow status=403 src=198.51.100.88\n10:22:31 GET /api/status status=200 src=192.0.2.19\n10:22:42 POST /login status=401 src=203.0.113.50"
+    },
+    "SEC701-0000262": {
+      "type": "preformatted",
+      "variant": "configuration",
+      "title": "Appliance management settings",
+      "content": "management_protocol = ssh\nmanagement_source = 0.0.0.0/0\nadmin_mfa = required\nweb_admin_protocol = http\nweb_admin_source = 10.20.0.0/16\nsnmp_version = 3\nlogging = remote\nsession_timeout_minutes = 10"
+    },
+    "SEC701-0000269": {
+      "type": "preformatted",
+      "variant": "log",
+      "title": "Authentication activity",
+      "content": "13:02:11 SUCCESS user=jlee city=Orlando country=US src=198.51.100.21 mfa=passkey\n13:07:18 SUCCESS user=jlee city=Frankfurt country=DE src=203.0.113.70 mfa=push\n13:09:02 SUCCESS user=mking city=Orlando country=US src=198.51.100.33 mfa=passkey\n13:40:10 FAIL user=jlee city=Frankfurt country=DE src=203.0.113.70 reason=bad_password\n15:10:55 SUCCESS user=jlee city=Orlando country=US src=198.51.100.21 mfa=passkey"
+    },
+    "SEC701-0000273": {
+      "type": "preformatted",
+      "variant": "plain_text",
+      "title": "Vendor questionnaire responses",
+      "content": "1. Encryption: customer data is encrypted at rest and in transit.\n2. Incident notification: customers are notified as resources permit; no contractual deadline is defined.\n3. Independent assessment: an external control assessment is completed annually.\n4. Subprocessors: a maintained list is provided to customers and material changes are communicated.\n5. Backups: production data and backup copies are stored in the same cloud region.\n6. Administrator access: MFA is required and privileged activity is logged."
+    },
+    "SEC701-0000274": {
+      "type": "preformatted",
+      "variant": "plain_text",
+      "title": "Payroll email",
+      "content": "From: Payroll Team <payroll@company.example>\nReply-To: payroll-help@company-pay.example\nSubject: Updated direct-deposit portal\nHello,\nTo avoid a processing delay, review your banking details today:\nhttps://company-payroll.example.secure-login.example/verify\nContact the service desk through the normal company directory if you have questions."
     }
   }
 }
