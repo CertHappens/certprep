@@ -308,8 +308,8 @@
       "title": "Recovery options",
       "columns": [
         {
-          "key": "option",
-          "label": "Option"
+          "key": "plan",
+          "label": "Plan"
         },
         {
           "key": "design",
@@ -326,28 +326,28 @@
       ],
       "rows": [
         {
-          "option": "A",
           "design": "Cold site plus nightly backup",
           "estimated_rto": "48 hours",
-          "estimated_rpo": "24 hours"
+          "estimated_rpo": "24 hours",
+          "plan": "Plan 1"
         },
         {
-          "option": "B",
           "design": "Warm site plus hourly replication",
           "estimated_rto": "4 hours",
-          "estimated_rpo": "60 minutes"
+          "estimated_rpo": "60 minutes",
+          "plan": "Plan 2"
         },
         {
-          "option": "C",
           "design": "Active-passive with asynchronous replication",
           "estimated_rto": "45 minutes",
-          "estimated_rpo": "30 minutes"
+          "estimated_rpo": "30 minutes",
+          "plan": "Plan 3"
         },
         {
-          "option": "D",
           "design": "Active-active with synchronous replication",
           "estimated_rto": "5 minutes",
-          "estimated_rpo": "0 minutes"
+          "estimated_rpo": "0 minutes",
+          "plan": "Plan 4"
         }
       ]
     },
@@ -792,7 +792,7 @@
       "type": "preformatted",
       "variant": "log",
       "title": "Web access log",
-      "content": "10:22:11 GET /index.html status=200 src=203.0.113.21\n10:22:14 GET /images/logo.png status=200 src=203.0.113.21\n10:22:19 GET /download?file=report.pdf status=200 src=198.51.100.44\n10:22:25 GET /download?file=../../../../etc/passwd status=403 src=198.51.100.88\n10:22:27 GET /download?file=..%2f..%2f..%2fetc%2fshadow status=403 src=198.51.100.88\n10:22:31 GET /api/status status=200 src=192.0.2.19\n10:22:42 POST /login status=401 src=203.0.113.50"
+      "content": "GET /index.html\nGET /images/logo.png\nGET /download?file=report.pdf\nGET /download?file=../../../../etc/passwd\nGET /download?file=..%2f..%2fetc%2fshadow\nGET /api/status\nPOST /login"
     },
     "SEC701-0000262": {
       "type": "preformatted",
@@ -804,19 +804,19 @@
       "type": "preformatted",
       "variant": "log",
       "title": "Authentication activity",
-      "content": "13:02:11 SUCCESS user=jlee city=Orlando country=US src=198.51.100.21 mfa=passkey\n13:07:18 SUCCESS user=jlee city=Frankfurt country=DE src=203.0.113.70 mfa=push\n13:09:02 SUCCESS user=mking city=Orlando country=US src=198.51.100.33 mfa=passkey\n13:40:10 FAIL user=jlee city=Frankfurt country=DE src=203.0.113.70 reason=bad_password\n15:10:55 SUCCESS user=jlee city=Orlando country=US src=198.51.100.21 mfa=passkey"
+      "content": "13:02 SUCCESS user=jlee city=Orlando\n13:07 SUCCESS user=jlee city=Frankfurt\n13:09 SUCCESS user=mking city=Orlando\n13:40 FAIL user=jlee city=Frankfurt\n15:10 SUCCESS user=jlee city=Orlando"
     },
     "SEC701-0000273": {
       "type": "preformatted",
       "variant": "plain_text",
       "title": "Vendor questionnaire responses",
-      "content": "1. Encryption: customer data is encrypted at rest and in transit.\n2. Incident notification: customers are notified as resources permit; no contractual deadline is defined.\n3. Independent assessment: an external control assessment is completed annually.\n4. Subprocessors: a maintained list is provided to customers and material changes are communicated.\n5. Backups: production data and backup copies are stored in the same cloud region.\n6. Administrator access: MFA is required and privileged activity is logged."
+      "content": "Encryption: protected at rest and in transit.\nIncident notice: no required reporting deadline.\nAudit: independent assessment completed annually.\nSubprocessors: list maintained; material changes reported.\nBackups: primary and backup data share one region.\nAdmin access: MFA required; privileged activity logged."
     },
     "SEC701-0000274": {
       "type": "preformatted",
       "variant": "plain_text",
       "title": "Payroll email",
-      "content": "From: Payroll Team <payroll@company.example>\nReply-To: payroll-help@company-pay.example\nSubject: Updated direct-deposit portal\nHello,\nTo avoid a processing delay, review your banking details today:\nhttps://company-payroll.example.secure-login.example/verify\nContact the service desk through the normal company directory if you have questions."
+      "content": "From: Payroll <payroll@company.example>\nReply-To: payroll-help@company-pay.example\nSubject: Updated direct deposit\nReview your banking details today.\nCompany portal: payroll.company.example\nLink host: company-payroll.example.secure-login.example\nFor help, use the company service desk directory."
     }
   }
 }

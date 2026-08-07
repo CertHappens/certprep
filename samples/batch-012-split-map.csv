@@ -1,0 +1,13 @@
+original_question_id,split_companion_ids,reason
+SEC701-0000252,SEC701-0000275,6-item classification split 3+3
+SEC701-0000253,SEC701-0000276,5-step ordering split into two 3-step questions with one shared boundary step
+SEC701-0000255,SEC701-0000277,6-item classification split 3+3
+SEC701-0000256,SEC701-0000278,5-step ordering split into two 3-step questions with one shared boundary step
+SEC701-0000260,SEC701-0000279,6-item classification split 3+3
+SEC701-0000261,SEC701-0000280,5-step ordering split into two 3-step questions with one shared boundary step
+SEC701-0000265,SEC701-0000281|SEC701-0000282,8-item classification split 3+3+2
+SEC701-0000266,SEC701-0000283|SEC701-0000284,8-item classification split 3+3+2
+SEC701-0000267,SEC701-0000285,6-step ordering split 3+3
+SEC701-0000268,SEC701-0000286,5-step ordering split into two 3-step questions with one shared boundary step
+SEC701-0000271,SEC701-0000287|SEC701-0000288,8-item classification split 3+3+2
+SEC701-0000272,SEC701-0000289,6-step ordering split 3+3

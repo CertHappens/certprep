@@ -70,24 +70,6 @@
           "text": "Record which administrator changed a firewall rule and when the change occurred.",
           "correctOptionId": "accounting",
           "explanation": "The audit record creates a history of accountable actions."
-        },
-        {
-          "id": "smart_card",
-          "text": "Validate a user certificate from a smart card during login.",
-          "correctOptionId": "authentication",
-          "explanation": "Certificate validation contributes to verifying the user identity."
-        },
-        {
-          "id": "hr_block",
-          "text": "Block a Sales role from opening employee medical-benefit records.",
-          "correctOptionId": "authorization",
-          "explanation": "The access decision restricts what the authenticated role may read."
-        },
-        {
-          "id": "api_audit",
-          "text": "Write timestamped records of privileged API changes to the audit system.",
-          "correctOptionId": "accounting",
-          "explanation": "The records support accountability and later review of privileged actions."
         }
       ],
       "options": [
@@ -110,36 +92,24 @@
       "items": [
         {
           "id": "assess",
-          "text": "Assess the security and operational impact of the proposed rule change.",
-          "explanation": "Impact analysis identifies affected services, risks, dependencies, and rollback needs before authorization."
+          "text": "Assess the change impact.",
+          "explanation": "Impact analysis identifies affected services, risks, and rollback needs."
         },
         {
           "id": "approve",
-          "text": "Obtain authorization from the designated change approver.",
-          "explanation": "The assessed change must be authorized before the approved work proceeds."
+          "text": "Obtain change approval.",
+          "explanation": "The assessed change must be authorized before work proceeds."
         },
         {
           "id": "test",
-          "text": "Test the approved rule change in the designated nonproduction environment.",
-          "explanation": "Testing checks the intended behavior before the production system is changed."
-        },
-        {
-          "id": "implement",
-          "text": "Implement the approved and tested rule change in production.",
-          "explanation": "Production implementation follows approval and testing."
-        },
-        {
-          "id": "validate",
-          "text": "Validate the result and update the change and configuration records.",
-          "explanation": "Post-change validation confirms the outcome and records the resulting production state."
+          "text": "Test the approved change in nonproduction.",
+          "explanation": "Testing checks behavior before production implementation."
         }
       ],
       "correctOrder": [
         "assess",
         "approve",
-        "test",
-        "implement",
-        "validate"
+        "test"
       ]
     },
     "SEC701-0000254": {
@@ -211,24 +181,6 @@
           "text": "A trusted vendor build pipeline is compromised and distributes a modified signed update to customers.",
           "correctOptionId": "supply_chain",
           "explanation": "The weakness enters through a trusted supplier development and distribution process."
-        },
-        {
-          "id": "sql_concat",
-          "text": "A web application concatenates untrusted input directly into a database query.",
-          "correctOptionId": "application",
-          "explanation": "Unsafe query construction is an application weakness that can enable injection."
-        },
-        {
-          "id": "default_admin",
-          "text": "A newly deployed appliance still uses the vendor default administrator password.",
-          "correctOptionId": "misconfiguration",
-          "explanation": "Leaving a default credential in place is an insecure configuration state."
-        },
-        {
-          "id": "package_publisher",
-          "text": "A dependency package is pulled automatically after the package publisher account is compromised.",
-          "correctOptionId": "supply_chain",
-          "explanation": "A compromised upstream package source introduces risk through the software supply chain."
         }
       ],
       "options": [
@@ -251,36 +203,24 @@
       "items": [
         {
           "id": "register",
-          "text": "Register or prepare the lookalike sign-in site.",
-          "explanation": "The deceptive destination must exist before victims can be sent to it."
+          "text": "Prepare the lookalike sign-in site.",
+          "explanation": "The deceptive destination must exist before the lure is sent."
         },
         {
           "id": "deliver",
-          "text": "Send the user a message containing the deceptive sign-in link.",
+          "text": "Send the deceptive sign-in link.",
           "explanation": "The lure directs the user to the attacker-controlled site."
         },
         {
           "id": "capture",
-          "text": "Capture the credentials the user submits to the lookalike page.",
-          "explanation": "The attacker obtains the password only after the victim enters it."
-        },
-        {
-          "id": "reuse",
-          "text": "Submit the stolen credentials to the legitimate service.",
-          "explanation": "The captured credentials are then used against the real authentication service."
-        },
-        {
-          "id": "access",
-          "text": "Establish an authenticated session to the victim account.",
-          "explanation": "Account access follows successful use of the stolen credentials."
+          "text": "Capture the credentials the user submits.",
+          "explanation": "The attacker obtains the password after the victim enters it."
         }
       ],
       "correctOrder": [
         "register",
         "deliver",
-        "capture",
-        "reuse",
-        "access"
+        "capture"
       ]
     },
     "SEC701-0000257": {
@@ -370,24 +310,6 @@
           "text": "A customer record decrypted in application memory while a calculation is performed.",
           "correctOptionId": "in_use",
           "explanation": "The record is actively being processed in memory."
-        },
-        {
-          "id": "backup_tape",
-          "text": "An encrypted database backup stored on offline media.",
-          "correctOptionId": "at_rest",
-          "explanation": "The backup is stored rather than being transmitted or processed."
-        },
-        {
-          "id": "ipsec_tunnel",
-          "text": "Replication traffic protected by IPsec between two sites.",
-          "correctOptionId": "in_transit",
-          "explanation": "The replication data is moving through a protected network tunnel."
-        },
-        {
-          "id": "analytics_ram",
-          "text": "Decrypted transaction values loaded into memory for an analytics job.",
-          "correctOptionId": "in_use",
-          "explanation": "The values are actively processed by the analytics workload."
         }
       ],
       "options": [
@@ -410,36 +332,24 @@
       "items": [
         {
           "id": "declare",
-          "text": "Declare the primary site unavailable and activate the recovery plan.",
-          "explanation": "The recovery process begins after the incident meets the criteria for declaring the primary site unavailable."
+          "text": "Declare the primary site unavailable.",
+          "explanation": "The recovery plan starts when outage criteria are met."
         },
         {
           "id": "activate_site",
-          "text": "Activate the required compute, network, and access services at the warm site.",
-          "explanation": "The alternate environment must be ready before application data and services are restored."
+          "text": "Activate warm-site compute, network, and access services.",
+          "explanation": "The alternate environment must be available before restoration."
         },
         {
           "id": "restore_data",
-          "text": "Restore or synchronize the approved recovery data to the alternate environment.",
-          "explanation": "The applications need the required recovery data before functional validation."
-        },
-        {
-          "id": "validate_service",
-          "text": "Validate the critical application and security controls at the warm site.",
-          "explanation": "Testing verifies that the recovered service and protections operate correctly before users are redirected."
-        },
-        {
-          "id": "redirect_users",
-          "text": "Redirect user and application traffic to the validated warm-site service.",
-          "explanation": "Traffic moves only after the alternate service has been validated."
+          "text": "Restore or synchronize the approved recovery data.",
+          "explanation": "The service needs recovery data before validation."
         }
       ],
       "correctOrder": [
         "declare",
         "activate_site",
-        "restore_data",
-        "validate_service",
-        "redirect_users"
+        "restore_data"
       ]
     },
     "SEC701-0000262": {
@@ -552,51 +462,21 @@
       "items": [
         {
           "id": "credentialed_scan",
-          "text": "A credentialed scanner discovers that a server is missing a security update.",
+          "text": "A credentialed scan finds a missing security update.",
           "correctOptionId": "identify",
           "explanation": "The scan identifies a potential vulnerability."
         },
         {
           "id": "active_exploit",
-          "text": "Threat intelligence shows active exploitation of a public-facing vulnerability on a critical system.",
+          "text": "Threat intel shows active exploitation of a public critical system.",
           "correctOptionId": "prioritize",
           "explanation": "Exploit activity, exposure, and asset importance influence treatment priority."
         },
         {
           "id": "deploy_patch",
-          "text": "Administrators deploy the vendor security update to the affected servers.",
+          "text": "Administrators deploy the vendor security update.",
           "correctOptionId": "remediate",
           "explanation": "Applying the update changes the vulnerable state and is a remediation action."
-        },
-        {
-          "id": "rescan",
-          "text": "The team rescans the servers after deployment to confirm the finding is gone.",
-          "correctOptionId": "validate",
-          "explanation": "The rescan checks whether remediation successfully removed the vulnerability."
-        },
-        {
-          "id": "manual_test",
-          "text": "A penetration tester discovers an authorization flaw that the automated scanner missed.",
-          "correctOptionId": "identify",
-          "explanation": "The manual test identifies an additional weakness."
-        },
-        {
-          "id": "criticality_rank",
-          "text": "The team raises a finding because the affected asset processes regulated customer data.",
-          "correctOptionId": "prioritize",
-          "explanation": "Asset sensitivity changes the relative urgency of treatment."
-        },
-        {
-          "id": "temporary_block",
-          "text": "A firewall rule blocks the exposed vulnerable service until the permanent fix is ready.",
-          "correctOptionId": "remediate",
-          "explanation": "The compensating change reduces exposure and is a remediation or mitigation action."
-        },
-        {
-          "id": "confirm_control",
-          "text": "Testing confirms that the temporary block prevents access from untrusted networks.",
-          "correctOptionId": "validate",
-          "explanation": "The test verifies that the applied control has the intended effect."
         }
       ],
       "options": [
@@ -624,51 +504,21 @@
       "items": [
         {
           "id": "mfa_success",
-          "text": "Successful sign-in with the username, MFA result, source address, and timestamp.",
+          "text": "A successful sign-in records the user, MFA result, source, and time.",
           "correctOptionId": "identity",
           "explanation": "Authentication systems directly record identity and sign-in events."
         },
         {
           "id": "dns_query",
-          "text": "A DNS query from an internal host to a newly observed external domain.",
+          "text": "A host queries a newly observed external domain.",
           "correctOptionId": "network",
           "explanation": "DNS and network monitoring provide evidence about host communications."
         },
         {
           "id": "process_spawn",
-          "text": "A document reader spawns a script interpreter with a suspicious command line.",
+          "text": "A document reader launches a script interpreter with a suspicious command.",
           "correctOptionId": "endpoint",
           "explanation": "Endpoint telemetry records process creation and command-line activity."
-        },
-        {
-          "id": "bucket_policy",
-          "text": "An administrator changes a cloud storage bucket policy to allow public access.",
-          "correctOptionId": "cloud",
-          "explanation": "Cloud control-plane audit logs record administrative resource changes."
-        },
-        {
-          "id": "signin_fail",
-          "text": "Repeated failed sign-ins for one account from several source addresses.",
-          "correctOptionId": "identity",
-          "explanation": "The identity system is the direct source for authentication outcomes."
-        },
-        {
-          "id": "proxy_upload",
-          "text": "A proxy records a large HTTPS upload to an unsanctioned file-sharing domain.",
-          "correctOptionId": "network",
-          "explanation": "Web proxy data records destination, user or device context, and transfer details."
-        },
-        {
-          "id": "quarantine_hash",
-          "text": "An endpoint sensor quarantines a file and records its hash and parent process.",
-          "correctOptionId": "endpoint",
-          "explanation": "Endpoint security telemetry records file and process activity on the host."
-        },
-        {
-          "id": "role_change",
-          "text": "A cloud administrator grants a new privileged role to a service identity.",
-          "correctOptionId": "cloud",
-          "explanation": "The cloud audit trail records identity and policy changes made through the control plane."
         }
       ],
       "options": [
@@ -696,41 +546,23 @@
         {
           "id": "prepare",
           "text": "Preparation",
-          "explanation": "Preparation establishes the people, tools, communications, and procedures needed before an incident."
+          "explanation": "Prepare people, tools, communications, and procedures before incidents."
         },
         {
           "id": "detect_analyze",
           "text": "Detection and analysis",
-          "explanation": "Detection and analysis determine whether an event is an incident and establish scope and impact."
+          "explanation": "Confirm the incident and determine scope and impact."
         },
         {
           "id": "contain",
           "text": "Containment",
-          "explanation": "Containment limits additional damage and spread before the threat is removed."
-        },
-        {
-          "id": "eradicate",
-          "text": "Eradication",
-          "explanation": "Eradication removes malicious code, persistence, and exploited weaknesses after containment."
-        },
-        {
-          "id": "recover",
-          "text": "Recovery",
-          "explanation": "Recovery restores and validates normal operations after the threat has been removed."
-        },
-        {
-          "id": "lessons",
-          "text": "Lessons learned and improvement",
-          "explanation": "Post-incident review identifies improvements to controls, procedures, and training."
+          "explanation": "Limit additional damage and spread."
         }
       ],
       "correctOrder": [
         "prepare",
         "detect_analyze",
-        "contain",
-        "eradicate",
-        "recover",
-        "lessons"
+        "contain"
       ]
     },
     "SEC701-0000268": {
@@ -738,36 +570,24 @@
       "items": [
         {
           "id": "request",
-          "text": "Submit the privileged-access request with the maintenance purpose and time window.",
-          "explanation": "The workflow begins with a documented business need and requested duration."
+          "text": "Submit the privileged-access request.",
+          "explanation": "The workflow begins with a documented need and time window."
         },
         {
           "id": "approve",
-          "text": "Obtain approval from the designated privileged-access owner.",
-          "explanation": "Authorization is required before elevated rights are granted."
+          "text": "Obtain approval from the access owner.",
+          "explanation": "Authorization is required before elevation."
         },
         {
           "id": "grant",
-          "text": "Have PAM grant the approved administrator role for the limited window.",
-          "explanation": "PAM activates only the privilege authorized for the approved period."
-        },
-        {
-          "id": "use_record",
-          "text": "Perform the maintenance while the privileged session is logged or recorded.",
-          "explanation": "The approved access is used with accountability during the maintenance activity."
-        },
-        {
-          "id": "revoke",
-          "text": "Automatically remove the elevated role when the approved window expires.",
-          "explanation": "Automatic removal prevents the temporary privilege from becoming standing access."
+          "text": "Grant the temporary administrator role.",
+          "explanation": "PAM activates the approved privilege for the limited window."
         }
       ],
       "correctOrder": [
         "request",
         "approve",
-        "grant",
-        "use_record",
-        "revoke"
+        "grant"
       ]
     },
     "SEC701-0000269": {
@@ -832,51 +652,21 @@
       "items": [
         {
           "id": "retire_service",
-          "text": "Discontinue an optional Internet-facing service that creates more risk than business value.",
+          "text": "Discontinue an optional Internet-facing service with little business value.",
           "correctOptionId": "avoid",
           "explanation": "Ending the activity removes the source of that risk."
         },
         {
           "id": "cyber_insurance",
-          "text": "Purchase cyber insurance to cover part of the financial impact of a qualifying incident.",
+          "text": "Buy cyber insurance for part of a qualifying incident loss.",
           "correctOptionId": "transfer",
           "explanation": "Insurance transfers a defined portion of financial impact to the insurer under the policy terms."
         },
         {
           "id": "deploy_mfa",
-          "text": "Require phishing-resistant authentication for administrators to reduce account-compromise likelihood.",
+          "text": "Require phishing-resistant authentication for administrators.",
           "correctOptionId": "mitigate",
           "explanation": "The control reduces the likelihood or impact of the identified threat."
-        },
-        {
-          "id": "accept_low",
-          "text": "Document and approve a low residual risk that falls within the established tolerance.",
-          "correctOptionId": "accept",
-          "explanation": "The organization knowingly retains the remaining risk after review."
-        },
-        {
-          "id": "stop_data_collection",
-          "text": "Remove an unnecessary data-collection feature so the organization no longer stores that sensitive field.",
-          "correctOptionId": "avoid",
-          "explanation": "Removing the activity eliminates the associated storage and exposure risk."
-        },
-        {
-          "id": "vendor_indemnity",
-          "text": "Use a contract that assigns specified financial responsibility to a service provider for defined failures.",
-          "correctOptionId": "transfer",
-          "explanation": "The contract shifts specified consequences to another party, although the organization still retains some risk."
-        },
-        {
-          "id": "segment_legacy",
-          "text": "Segment and closely monitor a legacy system while its replacement is being completed.",
-          "correctOptionId": "mitigate",
-          "explanation": "The temporary controls reduce exposure without eliminating the underlying system risk."
-        },
-        {
-          "id": "approved_exception",
-          "text": "A risk owner formally accepts a small remaining exposure until the planned replacement date.",
-          "correctOptionId": "accept",
-          "explanation": "The owner acknowledges and retains the residual risk for the approved period."
         }
       ],
       "options": [
@@ -903,42 +693,24 @@
       "items": [
         {
           "id": "requirements",
-          "text": "Define the security, privacy, resilience, and data-handling requirements for the service.",
-          "explanation": "Requirements must be known before the organization can evaluate candidate providers."
+          "text": "Define the service security and data requirements.",
+          "explanation": "Requirements must be known before providers can be evaluated."
         },
         {
           "id": "due_diligence",
-          "text": "Assess the provider and important subcontractors against the defined requirements.",
-          "explanation": "Due diligence evaluates whether the provider can meet the required controls and obligations."
+          "text": "Assess the provider against the requirements.",
+          "explanation": "Due diligence checks whether the provider can meet required controls and obligations."
         },
         {
           "id": "contract",
-          "text": "Execute the agreement with required security clauses, service targets, notification terms, and assurance rights.",
-          "explanation": "Contractual obligations should be established before access and regulated processing begin."
-        },
-        {
-          "id": "onboard",
-          "text": "Provision only the approved access and data flows needed for the contracted service.",
-          "explanation": "Onboarding implements the least-privilege connection after the relationship is approved and contracted."
-        },
-        {
-          "id": "monitor",
-          "text": "Monitor performance, control evidence, incidents, material changes, and supplier risk during the relationship.",
-          "explanation": "Ongoing monitoring addresses changes that occur after the initial assessment."
-        },
-        {
-          "id": "offboard",
-          "text": "Revoke access and complete required data return, retention, or verified destruction when the relationship ends.",
-          "explanation": "Termination activities remove access and resolve data obligations at the end of the lifecycle."
+          "text": "Execute the agreement with required security terms.",
+          "explanation": "Security obligations should be established before access and processing begin."
         }
       ],
       "correctOrder": [
         "requirements",
         "due_diligence",
-        "contract",
-        "onboard",
-        "monitor",
-        "offboard"
+        "contract"
       ]
     },
     "SEC701-0000273": {
@@ -955,6 +727,504 @@
       "correctLineNumbers": [
         2,
         6
+      ]
+    },
+    "SEC701-0000275": {
+      "type": "matching",
+      "variant": "classification",
+      "items": [
+        {
+          "id": "smart_card",
+          "text": "Validate a user certificate from a smart card during login.",
+          "correctOptionId": "authentication",
+          "explanation": "Certificate validation contributes to verifying the user identity."
+        },
+        {
+          "id": "hr_block",
+          "text": "Block a Sales role from opening employee medical-benefit records.",
+          "correctOptionId": "authorization",
+          "explanation": "The access decision restricts what the authenticated role may read."
+        },
+        {
+          "id": "api_audit",
+          "text": "Write timestamped records of privileged API changes to the audit system.",
+          "correctOptionId": "accounting",
+          "explanation": "The records support accountability and later review of privileged actions."
+        }
+      ],
+      "options": [
+        {
+          "id": "authentication",
+          "label": "Authentication"
+        },
+        {
+          "id": "authorization",
+          "label": "Authorization"
+        },
+        {
+          "id": "accounting",
+          "label": "Accounting"
+        }
+      ]
+    },
+    "SEC701-0000277": {
+      "type": "matching",
+      "variant": "classification",
+      "items": [
+        {
+          "id": "sql_concat",
+          "text": "A web application concatenates untrusted input directly into a database query.",
+          "correctOptionId": "application",
+          "explanation": "Unsafe query construction is an application weakness that can enable injection."
+        },
+        {
+          "id": "default_admin",
+          "text": "A newly deployed appliance still uses the vendor default administrator password.",
+          "correctOptionId": "misconfiguration",
+          "explanation": "Leaving a default credential in place is an insecure configuration state."
+        },
+        {
+          "id": "package_publisher",
+          "text": "A dependency package is pulled automatically after the package publisher account is compromised.",
+          "correctOptionId": "supply_chain",
+          "explanation": "A compromised upstream package source introduces risk through the software supply chain."
+        }
+      ],
+      "options": [
+        {
+          "id": "application",
+          "label": "Application vulnerability"
+        },
+        {
+          "id": "misconfiguration",
+          "label": "Security misconfiguration"
+        },
+        {
+          "id": "supply_chain",
+          "label": "Supply-chain weakness"
+        }
+      ]
+    },
+    "SEC701-0000279": {
+      "type": "matching",
+      "variant": "classification",
+      "items": [
+        {
+          "id": "backup_tape",
+          "text": "An encrypted database backup stored on offline media.",
+          "correctOptionId": "at_rest",
+          "explanation": "The backup is stored rather than being transmitted or processed."
+        },
+        {
+          "id": "ipsec_tunnel",
+          "text": "Replication traffic protected by IPsec between two sites.",
+          "correctOptionId": "in_transit",
+          "explanation": "The replication data is moving through a protected network tunnel."
+        },
+        {
+          "id": "analytics_ram",
+          "text": "Decrypted transaction values loaded into memory for an analytics job.",
+          "correctOptionId": "in_use",
+          "explanation": "The values are actively processed by the analytics workload."
+        }
+      ],
+      "options": [
+        {
+          "id": "at_rest",
+          "label": "Data at rest"
+        },
+        {
+          "id": "in_transit",
+          "label": "Data in transit"
+        },
+        {
+          "id": "in_use",
+          "label": "Data in use"
+        }
+      ]
+    },
+    "SEC701-0000281": {
+      "type": "matching",
+      "variant": "classification",
+      "items": [
+        {
+          "id": "rescan",
+          "text": "The team rescans after deployment to confirm the finding is gone.",
+          "correctOptionId": "validate",
+          "explanation": "The rescan checks whether remediation successfully removed the vulnerability."
+        },
+        {
+          "id": "manual_test",
+          "text": "A penetration test finds an authorization flaw the scanner missed.",
+          "correctOptionId": "identify",
+          "explanation": "The manual test identifies an additional weakness."
+        },
+        {
+          "id": "criticality_rank",
+          "text": "A finding is raised in priority because the asset stores regulated data.",
+          "correctOptionId": "prioritize",
+          "explanation": "Asset sensitivity changes the relative urgency of treatment."
+        }
+      ],
+      "options": [
+        {
+          "id": "identify",
+          "label": "Identification"
+        },
+        {
+          "id": "prioritize",
+          "label": "Prioritization"
+        },
+        {
+          "id": "remediate",
+          "label": "Remediation"
+        },
+        {
+          "id": "validate",
+          "label": "Validation"
+        }
+      ]
+    },
+    "SEC701-0000282": {
+      "type": "matching",
+      "variant": "classification",
+      "items": [
+        {
+          "id": "temporary_block",
+          "text": "A firewall blocks the vulnerable service until a permanent fix is ready.",
+          "correctOptionId": "remediate",
+          "explanation": "The compensating change reduces exposure and is a remediation or mitigation action."
+        },
+        {
+          "id": "confirm_control",
+          "text": "Testing confirms the temporary block prevents untrusted access.",
+          "correctOptionId": "validate",
+          "explanation": "The test verifies that the applied control has the intended effect."
+        }
+      ],
+      "options": [
+        {
+          "id": "identify",
+          "label": "Identification"
+        },
+        {
+          "id": "prioritize",
+          "label": "Prioritization"
+        },
+        {
+          "id": "remediate",
+          "label": "Remediation"
+        },
+        {
+          "id": "validate",
+          "label": "Validation"
+        }
+      ]
+    },
+    "SEC701-0000283": {
+      "type": "matching",
+      "variant": "classification",
+      "items": [
+        {
+          "id": "bucket_policy",
+          "text": "An administrator changes a cloud bucket policy to public access.",
+          "correctOptionId": "cloud",
+          "explanation": "Cloud control-plane audit logs record administrative resource changes."
+        },
+        {
+          "id": "signin_fail",
+          "text": "One account has repeated failed sign-ins from several source addresses.",
+          "correctOptionId": "identity",
+          "explanation": "The identity system is the direct source for authentication outcomes."
+        },
+        {
+          "id": "proxy_upload",
+          "text": "A proxy records a large HTTPS upload to an unsanctioned file-sharing site.",
+          "correctOptionId": "network",
+          "explanation": "Web proxy data records destination, user or device context, and transfer details."
+        }
+      ],
+      "options": [
+        {
+          "id": "identity",
+          "label": "Identity or authentication log"
+        },
+        {
+          "id": "network",
+          "label": "Network or proxy log"
+        },
+        {
+          "id": "endpoint",
+          "label": "Endpoint telemetry"
+        },
+        {
+          "id": "cloud",
+          "label": "Cloud control-plane audit log"
+        }
+      ]
+    },
+    "SEC701-0000284": {
+      "type": "matching",
+      "variant": "classification",
+      "items": [
+        {
+          "id": "quarantine_hash",
+          "text": "An endpoint sensor quarantines a file and records its hash and parent process.",
+          "correctOptionId": "endpoint",
+          "explanation": "Endpoint security telemetry records file and process activity on the host."
+        },
+        {
+          "id": "role_change",
+          "text": "A cloud administrator grants a privileged role to a service identity.",
+          "correctOptionId": "cloud",
+          "explanation": "The cloud audit trail records identity and policy changes made through the control plane."
+        }
+      ],
+      "options": [
+        {
+          "id": "identity",
+          "label": "Identity or authentication log"
+        },
+        {
+          "id": "network",
+          "label": "Network or proxy log"
+        },
+        {
+          "id": "endpoint",
+          "label": "Endpoint telemetry"
+        },
+        {
+          "id": "cloud",
+          "label": "Cloud control-plane audit log"
+        }
+      ]
+    },
+    "SEC701-0000287": {
+      "type": "matching",
+      "variant": "classification",
+      "items": [
+        {
+          "id": "accept_low",
+          "text": "Approve a low residual risk that is within tolerance.",
+          "correctOptionId": "accept",
+          "explanation": "The organization knowingly retains the remaining risk after review."
+        },
+        {
+          "id": "stop_data_collection",
+          "text": "Remove an unnecessary feature that collects a sensitive field.",
+          "correctOptionId": "avoid",
+          "explanation": "Removing the activity eliminates the associated storage and exposure risk."
+        },
+        {
+          "id": "vendor_indemnity",
+          "text": "Use a contract that assigns specified financial responsibility to a provider.",
+          "correctOptionId": "transfer",
+          "explanation": "The contract shifts specified consequences to another party, although the organization still retains some risk."
+        }
+      ],
+      "options": [
+        {
+          "id": "avoid",
+          "label": "Avoid"
+        },
+        {
+          "id": "transfer",
+          "label": "Transfer"
+        },
+        {
+          "id": "mitigate",
+          "label": "Mitigate"
+        },
+        {
+          "id": "accept",
+          "label": "Accept"
+        }
+      ]
+    },
+    "SEC701-0000288": {
+      "type": "matching",
+      "variant": "classification",
+      "items": [
+        {
+          "id": "segment_legacy",
+          "text": "Segment and monitor a legacy system while replacement is underway.",
+          "correctOptionId": "mitigate",
+          "explanation": "The temporary controls reduce exposure without eliminating the underlying system risk."
+        },
+        {
+          "id": "approved_exception",
+          "text": "A risk owner accepts a small exposure until the planned replacement date.",
+          "correctOptionId": "accept",
+          "explanation": "The owner acknowledges and retains the residual risk for the approved period."
+        }
+      ],
+      "options": [
+        {
+          "id": "avoid",
+          "label": "Avoid"
+        },
+        {
+          "id": "transfer",
+          "label": "Transfer"
+        },
+        {
+          "id": "mitigate",
+          "label": "Mitigate"
+        },
+        {
+          "id": "accept",
+          "label": "Accept"
+        }
+      ]
+    },
+    "SEC701-0000276": {
+      "type": "ordering",
+      "items": [
+        {
+          "id": "test",
+          "text": "Test the approved change in nonproduction.",
+          "explanation": "Testing checks behavior before production implementation."
+        },
+        {
+          "id": "implement",
+          "text": "Implement the tested change in production.",
+          "explanation": "Production implementation follows approval and testing."
+        },
+        {
+          "id": "validate",
+          "text": "Validate the result and update records.",
+          "explanation": "Validation confirms the outcome and records the new production state."
+        }
+      ],
+      "correctOrder": [
+        "test",
+        "implement",
+        "validate"
+      ]
+    },
+    "SEC701-0000278": {
+      "type": "ordering",
+      "items": [
+        {
+          "id": "capture",
+          "text": "Capture the credentials the user submits.",
+          "explanation": "The attacker obtains the password after the victim enters it."
+        },
+        {
+          "id": "reuse",
+          "text": "Submit the stolen credentials to the real service.",
+          "explanation": "The captured credentials are reused against the legitimate service."
+        },
+        {
+          "id": "access",
+          "text": "Establish a session to the victim account.",
+          "explanation": "Successful credential use produces account access."
+        }
+      ],
+      "correctOrder": [
+        "capture",
+        "reuse",
+        "access"
+      ]
+    },
+    "SEC701-0000280": {
+      "type": "ordering",
+      "items": [
+        {
+          "id": "restore_data",
+          "text": "Restore or synchronize the approved recovery data.",
+          "explanation": "The service needs recovery data before validation."
+        },
+        {
+          "id": "validate_service",
+          "text": "Validate the recovered application and security controls.",
+          "explanation": "Testing confirms the recovered service works correctly."
+        },
+        {
+          "id": "redirect_users",
+          "text": "Redirect users to the validated warm site.",
+          "explanation": "Traffic moves after the recovered service has been validated."
+        }
+      ],
+      "correctOrder": [
+        "restore_data",
+        "validate_service",
+        "redirect_users"
+      ]
+    },
+    "SEC701-0000285": {
+      "type": "ordering",
+      "items": [
+        {
+          "id": "eradicate",
+          "text": "Eradication",
+          "explanation": "Remove malicious code, persistence, and exploited weaknesses."
+        },
+        {
+          "id": "recover",
+          "text": "Recovery",
+          "explanation": "Restore and validate normal operations."
+        },
+        {
+          "id": "lessons",
+          "text": "Lessons learned",
+          "explanation": "Review the response and assign improvements."
+        }
+      ],
+      "correctOrder": [
+        "eradicate",
+        "recover",
+        "lessons"
+      ]
+    },
+    "SEC701-0000286": {
+      "type": "ordering",
+      "items": [
+        {
+          "id": "grant",
+          "text": "Grant the temporary administrator role.",
+          "explanation": "PAM activates the approved privilege for the limited window."
+        },
+        {
+          "id": "use_record",
+          "text": "Perform the maintenance while the session is recorded.",
+          "explanation": "The temporary access is used with accountability."
+        },
+        {
+          "id": "revoke",
+          "text": "Remove the elevated role when the window ends.",
+          "explanation": "Automatic removal prevents temporary access from becoming standing privilege."
+        }
+      ],
+      "correctOrder": [
+        "grant",
+        "use_record",
+        "revoke"
+      ]
+    },
+    "SEC701-0000289": {
+      "type": "ordering",
+      "items": [
+        {
+          "id": "onboard",
+          "text": "Provision only the approved access and data flows.",
+          "explanation": "Onboarding implements the approved least-privilege connection."
+        },
+        {
+          "id": "monitor",
+          "text": "Monitor performance, incidents, and control evidence.",
+          "explanation": "Ongoing monitoring addresses changes during the relationship."
+        },
+        {
+          "id": "offboard",
+          "text": "Revoke access and complete required data handling at termination.",
+          "explanation": "Offboarding removes access and resolves return, retention, or destruction requirements."
+        }
+      ],
+      "correctOrder": [
+        "onboard",
+        "monitor",
+        "offboard"
       ]
     }
   }

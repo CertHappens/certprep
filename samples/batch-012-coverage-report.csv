@@ -1,33 +1,25 @@
 dimension,value,count,percentage,target_exam_weight_percent,notes
-domain,1.0 General Security Concepts,3,12.5,12,Allocation keeps the cumulative 274-question bank within about 0.1 percentage point of each official domain weight.
-domain,"2.0 Threats, Vulnerabilities, and Mitigations",5,20.8,22,Allocation keeps the cumulative 274-question bank within about 0.1 percentage point of each official domain weight.
-domain,3.0 Security Architecture,4,16.7,18,Allocation keeps the cumulative 274-question bank within about 0.1 percentage point of each official domain weight.
-domain,4.0 Security Operations,7,29.2,28,Allocation keeps the cumulative 274-question bank within about 0.1 percentage point of each official domain weight.
-domain,5.0 Security Program Management and Oversight,5,20.8,20,Allocation keeps the cumulative 274-question bank within about 0.1 percentage point of each official domain weight.
-objective,1.1 Compare and contrast various types of security controls.,1,4.2,,
-objective,1.2 Summarize fundamental security concepts.,1,4.2,,
-objective,1.3 Explain the importance of change management processes and the impact to security.,1,4.2,,
-objective,2.2 Explain common threat vectors and attack surfaces.,1,4.2,,
-objective,2.3 Explain various types of vulnerabilities.,1,4.2,,
-objective,"2.4 Given a scenario, analyze indicators of malicious activity.",3,12.5,,
-objective,3.1 Compare and contrast security implications of different architecture models.,1,4.2,,
-objective,"3.2 Given a scenario, apply security principles to secure enterprise infrastructure.",1,4.2,,
-objective,3.3 Compare and contrast concepts and strategies to protect data.,1,4.2,,
-objective,3.4 Explain the importance of resilience and recovery in security architecture.,1,4.2,,
-objective,4.3 Explain various activities associated with vulnerability management.,1,4.2,,
-objective,4.4 Explain security alerting and monitoring concepts and tools.,1,4.2,,
-objective,"4.6 Given a scenario, implement and maintain identity and access management.",2,8.3,,
-objective,4.8 Explain appropriate incident response activities.,1,4.2,,
-objective,"4.9 Given a scenario, use data sources to support an investigation.",2,8.3,,
-objective,5.1 Summarize elements of effective security governance.,1,4.2,,
-objective,5.2 Explain elements of the risk management process.,1,4.2,,
-objective,5.3 Explain the processes associated with third-party risk assessment and management.,2,8.3,,
-objective,"5.6 Given a scenario, implement security awareness practices.",1,4.2,,
-difficulty,easy,6,25.0,,
-difficulty,hard,6,25.0,,
-difficulty,medium,12,50.0,,
-interaction_type,matching,6,25.0,,Batch 012 contains only newly supported structured-response interactions.
-interaction_type,classification,6,25.0,,Batch 012 contains only newly supported structured-response interactions.
-interaction_type,ordering,6,25.0,,Batch 012 contains only newly supported structured-response interactions.
-interaction_type,line_select,6,25.0,,Batch 012 contains only newly supported structured-response interactions.
-stimulus_requirement,line_select with preformatted stimulus,6,25.0,,Selectable evidence-line questions require a preformatted stimulus.
+domain,1.0 General Security Concepts,5,12.8,12,Revised Batch 012 family includes split companion questions created for learner readability; use cumulative coverage for bank weighting.
+domain,"2.0 Threats, Vulnerabilities, and Mitigations",7,17.9,22,Revised Batch 012 family includes split companion questions created for learner readability; use cumulative coverage for bank weighting.
+domain,3.0 Security Architecture,6,15.4,18,Revised Batch 012 family includes split companion questions created for learner readability; use cumulative coverage for bank weighting.
+domain,4.0 Security Operations,13,33.3,28,Revised Batch 012 family includes split companion questions created for learner readability; use cumulative coverage for bank weighting.
+domain,5.0 Security Program Management and Oversight,8,20.5,20,Revised Batch 012 family includes split companion questions created for learner readability; use cumulative coverage for bank weighting.
+objective,1.1 Compare and contrast various types of security controls.,1,2.6,,
+objective,1.2 Summarize fundamental security concepts.,2,5.1,,
+objective,1.3 Explain the importance of change management processes and the impact to security.,2,5.1,,
+objective,2.2 Explain common threat vectors and attack surfaces.,2,5.1,,
+objective,2.3 Explain various types of vulnerabilities.,2,5.1,,
+objective,"2.4 Given a scenario, analyze indicators of malicious activity.",3,7.7,,
+objective,3.1 Compare and contrast security implications of different architecture models.,1,2.6,,
+objective,"3.2 Given a scenario, apply security principles to secure enterprise infrastructure.",1,2.6,,
+objective,3.3 Compare and contrast concepts and strategies to protect data.,2,5.1,,
+objective,3.4 Explain the importance of resilience and recovery in security architecture.,2,5.1,,
+objective,4.3 Explain various activities associated with vulnerability management.,3,7.7,,
+objective,4.4 Explain security alerting and monitoring concepts and tools.,1,2.6,,
+objective,"4.6 Given a scenario, implement and maintain identity and access management.",3,7.7,,
+objective,4.8 Explain appropriate incident response activities.,2,5.1,,
+objective,"4.9 Given a scenario, use data sources to support an investigation.",4,10.3,,
+objective,5.1 Summarize elements of effective security governance.,1,2.6,,
+objective,5.2 Explain elements of the risk management process.,3,7.7,,
+objective,5.3 Explain the processes associated with third-party risk assessment and management.,3,7.7,,
+objective,"5.6 Given a scenario, implement security awareness practices.",1,2.6,,
