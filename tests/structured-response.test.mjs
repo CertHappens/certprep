@@ -259,3 +259,17 @@ test("practice-test runtimes render structured responses in classic and paged mo
   assert.match(rendererSource, /Choose a match/);
   assert.match(rendererSource, /Choose a category/);
 });
+
+test("site verifier accepts generalized correct-response wording", () => {
+  const verifierSource = readFileSync("scripts/verify_site.mjs", "utf8");
+  const practiceTemplates = [
+    "src/security-plus/sy0-701/practice-test/index.njk",
+    "src/network-plus/n10-009/practice-test/index.njk",
+    "src/ccna/200-301-v2/practice-test/index.njk",
+  ].map((path) => readFileSync(path, "utf8"));
+
+  assert.match(verifierSource, /"correct responses"/);
+  for (const source of practiceTemplates) {
+    assert.match(source, /correct responses/i);
+  }
+});

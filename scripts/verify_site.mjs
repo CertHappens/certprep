@@ -96,7 +96,7 @@ function verifyQuizResultActions(html, relative, resourcePath, resourceLabel) {
   const requiredText = [
     "What would you like to do next?",
     "incorrect and unanswered questions",
-    "correct answers",
+    "correct responses",
     "explanations"
   ];
 
@@ -239,7 +239,6 @@ const publicPageFiles = [
   "explore/career/paths/index.html",
   "explore/career/it-support-or-cybersecurity/index.html",
   "explore/career/cybersecurity-paths/index.html",
-  "explore/certifications/first-it-certification/index.html",
   "network-plus/index.html",
   "network-plus/acronyms/index.html",
   "network-plus/n10-009/practice-test/index.html",
@@ -305,7 +304,6 @@ const articlePageFiles = [
   "explore/career/paths/index.html",
   "explore/career/it-support-or-cybersecurity/index.html",
   "explore/career/cybersecurity-paths/index.html",
-  "explore/certifications/first-it-certification/index.html",
   "network-plus/acronyms/index.html",
   "network-plus/n10-009/study-guide/index.html",
   "network-plus/n10-009/study-guide/ipv4-subnetting/index.html",
@@ -1445,8 +1443,7 @@ for (const file of htmlFiles) {
     "/explore/",
     "/explore/career/paths/",
     "/explore/career/it-support-or-cybersecurity/",
-    "/explore/career/cybersecurity-paths/",
-    "/explore/certifications/first-it-certification/"
+    "/explore/career/cybersecurity-paths/"
   ];
 
   for (const href of requiredNavigationLinks) {
