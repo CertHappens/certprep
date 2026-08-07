@@ -103,6 +103,28 @@ function safeId(value) {
     .replace(/^-+|-+$/g, "") || "question-stimulus";
 }
 
+export function getQuestionStimulusTablePresentation(stimulus) {
+  if (!stimulus || stimulus.type !== "table" || !isValidQuestionStimulus(stimulus)) {
+    return null;
+  }
+
+  const columnCount = stimulus.columns.length;
+  const rowCount = stimulus.rows.length;
+  const maxCellLength = Math.max(
+    ...stimulus.rows.flatMap((row) => stimulus.columns.map((column) => row[column.key].length)),
+    0,
+  );
+
+  // Structured data should reflow into row cards on a phone whenever the
+  // resulting cards remain practical. Very dense datasets retain horizontal
+  // scrolling so the renderer does not turn a large matrix into dozens of
+  // oversized cards. Logs, configurations, and command output are separate
+  // preformatted stimulus types and never enter this table heuristic.
+  const denseMatrix = columnCount >= 7
+    || (columnCount >= 5 && (rowCount >= 8 || maxCellLength > 240));
+  return denseMatrix ? "scroll" : "cards";
+}
+
 export function renderQuestionStimulus(container, stimulus, {
   headingLevel = 3,
   idPrefix = "question-stimulus",
@@ -151,12 +173,14 @@ export function renderQuestionStimulus(container, stimulus, {
     const head = documentRef.createElement("thead");
     const headRow = documentRef.createElement("tr");
     const body = documentRef.createElement("tbody");
+    const mobilePresentation = getQuestionStimulusTablePresentation(stimulus);
 
     scroller.className = "quiz-stimulus__table-scroll";
     scroller.tabIndex = 0;
     scroller.setAttribute("role", "region");
     scroller.setAttribute("aria-label", `${stimulus.title} table`);
-    table.className = "quiz-stimulus__table";
+    table.className = `quiz-stimulus__table quiz-stimulus__table--mobile-${mobilePresentation}`;
+    scroller.dataset.mobilePresentation = mobilePresentation;
 
     if (stimulus.caption) {
       const caption = documentRef.createElement("caption");
@@ -177,6 +201,7 @@ export function renderQuestionStimulus(container, stimulus, {
       stimulus.columns.forEach((column) => {
         const cell = documentRef.createElement("td");
         cell.textContent = row[column.key];
+        cell.dataset.label = column.label;
         tableRow.append(cell);
       });
       body.append(tableRow);

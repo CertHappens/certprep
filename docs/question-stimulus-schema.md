@@ -79,6 +79,12 @@ Rules:
 
 ## Runtime behavior
 
+Question authors choose the stimulus type for the meaning of the evidence, not for screen size. The renderer handles responsive presentation automatically:
+
+- Structured `table` stimuli use their column labels as mobile field labels. Ordinary tables reflow into one card per row on narrow screens. Very dense matrices retain horizontal scrolling when cards would become impractical.
+- `preformatted` command output, configuration, and logs always preserve whitespace and line alignment with horizontal scrolling as needed. They are never converted into cards.
+- The renderer makes this choice from the normalized stimulus structure. Authors do not add mobile-specific classes, duplicate content, or viewport hints.
+
 The built question snapshot stores the normalized `stimulus` object. This preserves the same evidence across browser-session navigation, paged routes, completed-test review, and question reports tied to the question version and data version.
 
 Stimuli remain read-only evidence. Matching/classification, ordering, and selectable-line response state use the separate contract in `docs/question-response-schema.md` rather than overloading the stimulus object.

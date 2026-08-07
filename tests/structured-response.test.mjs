@@ -12,6 +12,7 @@ import {
   isValidStructuredQuestion,
   isValidStructuredResponseState,
   moveOrderingResponseItem,
+  moveOrderingResponseItemToEdge,
   setMatchingResponseValue,
   toggleLineResponseSelection,
 } from "../src/assets/js/quiz/structured-response.js";
@@ -173,6 +174,24 @@ test("ordering is unanswered until the learner changes or explicitly confirms th
   assert.equal(gradeStructuredResponseState({ question, responseState: correct }).status, "correct");
 });
 
+test("ordering items can jump directly to the top or bottom", () => {
+  const question = orderingQuestion();
+  const initial = {
+    type: "ordering",
+    order: ["first", "second", "third"],
+    touched: false,
+  };
+
+  const toTop = moveOrderingResponseItemToEdge(initial, "third", "start");
+  assert.deepEqual(toTop.order, ["third", "first", "second"]);
+  assert.equal(toTop.touched, true);
+
+  const toBottom = moveOrderingResponseItemToEdge(toTop, "third", "end");
+  assert.deepEqual(toBottom.order, ["first", "second", "third"]);
+  assert.equal(isValidStructuredResponseState(question, toBottom), true);
+  assert.throws(() => moveOrderingResponseItemToEdge(initial, "third", "middle"), RangeError);
+});
+
 test("line selection tracks partial responses and grades the selected line set", () => {
   const question = lineSelectQuestion();
   let responseState = createInitialStructuredResponseState(question, deterministicRandom);
@@ -254,6 +273,11 @@ test("practice-test runtimes render structured responses in classic and paged mo
   assert.match(appSource, /renderStructuredQuestionResponse/);
   assert.match(pagedSource, /renderStructuredQuestionResponse/);
   assert.match(rendererSource, /Move up/);
+  assert.match(rendererSource, /Move down/);
+  assert.match(rendererSource, /To top/);
+  assert.match(rendererSource, /To bottom/);
+  assert.match(rendererSource, /icon: "⇈"/);
+  assert.match(rendererSource, /icon: "⇊"/);
   assert.match(rendererSource, /Use this order/);
   assert.match(rendererSource, /Select exactly/);
   assert.match(rendererSource, /Choose a match/);

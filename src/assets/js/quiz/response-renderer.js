@@ -3,6 +3,7 @@ import {
   getSelectableStimulusLines,
   isValidStructuredResponseState,
   moveOrderingResponseItem,
+  moveOrderingResponseItemToEdge,
   setMatchingResponseValue,
   toggleLineResponseSelection,
 } from "./structured-response.js";
@@ -84,11 +85,39 @@ function renderMatching(container, state, onChange, idPrefix) {
   container.append(wrapper);
 }
 
+function createOrderingMoveButton(documentRef, {
+  icon,
+  label,
+  ariaLabel,
+  focusKey,
+  disabled,
+  onClick,
+}) {
+  const button = documentRef.createElement("button");
+  const iconElement = documentRef.createElement("span");
+  const labelElement = documentRef.createElement("span");
+
+  button.type = "button";
+  button.className = "button button--secondary button--small quiz-order-item__move";
+  button.disabled = disabled;
+  button.dataset.responseFocusKey = focusKey;
+  button.setAttribute("aria-label", ariaLabel);
+
+  iconElement.className = "quiz-order-item__move-icon";
+  iconElement.textContent = icon;
+  iconElement.setAttribute("aria-hidden", "true");
+  labelElement.textContent = label;
+  button.append(iconElement, labelElement);
+  button.addEventListener("click", onClick);
+  return button;
+}
+
 function renderOrdering(container, state, onChange, idPrefix) {
   const documentRef = container.ownerDocument || document;
   const wrapper = documentRef.createElement("div");
   const list = documentRef.createElement("ol");
   const itemById = new Map(state.question.response.items.map((item) => [item.id, item]));
+  const itemCount = state.responseState.order.length;
 
   wrapper.className = "quiz-structured-response quiz-ordering-response";
   list.className = "quiz-order-list";
@@ -101,8 +130,8 @@ function renderOrdering(container, state, onChange, idPrefix) {
     const position = documentRef.createElement("span");
     const text = documentRef.createElement("span");
     const controls = documentRef.createElement("span");
-    const up = documentRef.createElement("button");
-    const down = documentRef.createElement("button");
+    const atTop = index === 0;
+    const atBottom = index === itemCount - 1;
 
     row.className = "quiz-order-item";
     position.className = "quiz-order-item__number";
@@ -112,37 +141,69 @@ function renderOrdering(container, state, onChange, idPrefix) {
     text.textContent = item.text;
     controls.className = "quiz-order-item__controls";
 
-    up.type = "button";
-    up.className = "button button--secondary button--small quiz-order-item__move";
-    up.textContent = "Move up";
-    up.disabled = index === 0;
-    up.dataset.responseFocusKey = `order:${itemId}:up`;
-    up.setAttribute("aria-label", `Move ${item.text} up`);
-
-    down.type = "button";
-    down.className = "button button--secondary button--small quiz-order-item__move";
-    down.textContent = "Move down";
-    down.disabled = index === state.responseState.order.length - 1;
-    down.dataset.responseFocusKey = `order:${itemId}:down`;
-    down.setAttribute("aria-label", `Move ${item.text} down`);
-
-    up.addEventListener("click", () => {
-      const nextState = moveOrderingResponseItem(state.responseState, itemId, -1);
-      onChange(nextState, {
-        focusKey: `order:${itemId}:up`,
-        announcement: `Moved item ${index + 1} up.`,
-      });
+    const toTop = createOrderingMoveButton(documentRef, {
+      icon: "⇈",
+      label: "To top",
+      ariaLabel: `Move ${item.text} to the top`,
+      focusKey: `order:${itemId}:top`,
+      disabled: atTop,
+      onClick: () => {
+        const nextState = moveOrderingResponseItemToEdge(state.responseState, itemId, "start");
+        onChange(nextState, {
+          focusKey: `order:${itemId}:down`,
+          announcement: `Moved item ${index + 1} to the top.`,
+        });
+      },
     });
 
-    down.addEventListener("click", () => {
-      const nextState = moveOrderingResponseItem(state.responseState, itemId, 1);
-      onChange(nextState, {
-        focusKey: `order:${itemId}:down`,
-        announcement: `Moved item ${index + 1} down.`,
-      });
+    const up = createOrderingMoveButton(documentRef, {
+      icon: "↑",
+      label: "Move up",
+      ariaLabel: `Move ${item.text} up`,
+      focusKey: `order:${itemId}:up`,
+      disabled: atTop,
+      onClick: () => {
+        const nextState = moveOrderingResponseItem(state.responseState, itemId, -1);
+        const nextIndex = index - 1;
+        onChange(nextState, {
+          focusKey: `order:${itemId}:${nextIndex === 0 ? "down" : "up"}`,
+          announcement: `Moved item ${index + 1} up to position ${nextIndex + 1}.`,
+        });
+      },
     });
 
-    controls.append(up, down);
+    const down = createOrderingMoveButton(documentRef, {
+      icon: "↓",
+      label: "Move down",
+      ariaLabel: `Move ${item.text} down`,
+      focusKey: `order:${itemId}:down`,
+      disabled: atBottom,
+      onClick: () => {
+        const nextState = moveOrderingResponseItem(state.responseState, itemId, 1);
+        const nextIndex = index + 1;
+        onChange(nextState, {
+          focusKey: `order:${itemId}:${nextIndex === itemCount - 1 ? "up" : "down"}`,
+          announcement: `Moved item ${index + 1} down to position ${nextIndex + 1}.`,
+        });
+      },
+    });
+
+    const toBottom = createOrderingMoveButton(documentRef, {
+      icon: "⇊",
+      label: "To bottom",
+      ariaLabel: `Move ${item.text} to the bottom`,
+      focusKey: `order:${itemId}:bottom`,
+      disabled: atBottom,
+      onClick: () => {
+        const nextState = moveOrderingResponseItemToEdge(state.responseState, itemId, "end");
+        onChange(nextState, {
+          focusKey: `order:${itemId}:up`,
+          announcement: `Moved item ${index + 1} to the bottom.`,
+        });
+      },
+    });
+
+    controls.append(toTop, up, down, toBottom);
     row.append(position, text, controls);
     list.append(row);
   });
@@ -163,7 +224,7 @@ function renderOrdering(container, state, onChange, idPrefix) {
   });
 
   help.className = "quiz-structured-response__help";
-  help.textContent = "Use Move up and Move down to arrange the items. If the current order is already correct, choose Use this order.";
+  help.textContent = "Use the move buttons to arrange the items. To top and To bottom make larger moves in one step. If the current order is already correct, choose Use this order.";
   wrapper.append(list, confirm, help);
   container.append(wrapper);
 }

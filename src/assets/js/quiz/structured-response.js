@@ -280,6 +280,29 @@ export function moveOrderingResponseItem(responseState, itemId, direction) {
   return { type: "ordering", order, touched: true };
 }
 
+export function moveOrderingResponseItemToEdge(responseState, itemId, edge) {
+  if (!["start", "end"].includes(edge)) {
+    throw new RangeError('Ordering edge must be "start" or "end".');
+  }
+  const order = [...(responseState?.order || [])];
+  const currentIndex = order.indexOf(itemId);
+  if (currentIndex < 0) {
+    throw new RangeError("The ordering item is not part of this response.");
+  }
+  if (order.length < 2) {
+    return { type: "ordering", order, touched: true };
+  }
+
+  const targetIndex = edge === "start" ? 0 : order.length - 1;
+  if (currentIndex === targetIndex) {
+    return { type: "ordering", order, touched: true };
+  }
+
+  const [item] = order.splice(currentIndex, 1);
+  order.splice(targetIndex, 0, item);
+  return { type: "ordering", order, touched: true };
+}
+
 export function toggleLineResponseSelection(responseState, lineNumber, checked, selectionCount) {
   const selected = new Set(responseState?.selectedLineNumbers || []);
   if (checked) {

@@ -2,7 +2,10 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 
-import { isValidQuestionStimulus } from "../src/assets/js/quiz/stimulus.js";
+import {
+  getQuestionStimulusTablePresentation,
+  isValidQuestionStimulus,
+} from "../src/assets/js/quiz/stimulus.js";
 import { createQuizSession, isValidQuizSession } from "../src/assets/js/quiz/session.js";
 
 const preformatted = {
@@ -53,6 +56,40 @@ test("accepts supported preformatted and table stimuli", () => {
   assert.equal(isValidQuestionStimulus(undefined), true);
 });
 
+test("table presentation automatically favors mobile cards for ordinary structured data", () => {
+  assert.equal(getQuestionStimulusTablePresentation(table), "cards");
+
+  const phishingResults = {
+    type: "table",
+    title: "Phishing simulation results",
+    columns: [
+      { key: "department", label: "Department" },
+      { key: "clicked", label: "Clicked simulation" },
+      { key: "reported", label: "Reported simulation" },
+    ],
+    rows: [
+      { department: "Finance", clicked: "22%", reported: "8%" },
+      { department: "Sales", clicked: "18%", reported: "5%" },
+    ],
+  };
+  assert.equal(getQuestionStimulusTablePresentation(phishingResults), "cards");
+});
+
+test("very dense table stimuli keep the scroll presentation", () => {
+  const columns = Array.from({ length: 7 }, (_, index) => ({
+    key: `field_${index + 1}`,
+    label: `Field ${index + 1}`,
+  }));
+  const dense = {
+    type: "table",
+    title: "Dense evidence matrix",
+    columns,
+    rows: [Object.fromEntries(columns.map((column) => [column.key, "value"]))],
+  };
+  assert.equal(getQuestionStimulusTablePresentation(dense), "scroll");
+  assert.equal(getQuestionStimulusTablePresentation(preformatted), null);
+});
+
 test("rejects malformed stimulus structures", () => {
   assert.equal(isValidQuestionStimulus({ ...preformatted, variant: "html" }), false);
   assert.equal(isValidQuestionStimulus({ ...table, rows: [{ device: "SW1" }] }), false);
@@ -84,6 +121,8 @@ test("renderer and templates keep stimulus content text-only and available in bo
 
   assert.match(renderer, /code\.textContent = stimulus\.content/);
   assert.match(renderer, /cell\.textContent = row\[column\.key\]/);
+  assert.match(renderer, /cell\.dataset\.label = column\.label/);
+  assert.match(renderer, /quiz-stimulus__table--mobile-\$\{mobilePresentation\}/);
   assert.doesNotMatch(renderer, /innerHTML\s*=/);
   assert.match(classic, /data-quiz-stimulus/);
   assert.match(paged, /data-paged-stimulus/);
