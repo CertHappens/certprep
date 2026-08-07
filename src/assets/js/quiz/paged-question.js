@@ -1,7 +1,6 @@
 import { createAnswerDomState } from "./paged-answer-dom.js";
 import {
   answerInputType,
-  savedAnswerStatus,
   updatePagedAnswerSelection,
 } from "./paged-answers.js";
 import {
@@ -16,12 +15,18 @@ import { createPagedNavigationModel } from "./paged-navigation.js";
 import { createPagedReportContext } from "./paged-report.js";
 import { createQuestionReporter } from "./reporting.js";
 import { renderQuestionStimulus } from "./stimulus.js";
+import { renderStructuredQuestionResponse } from "./response-renderer.js";
+import {
+  getQuestionResponseStatusText,
+  isChoiceQuestionType,
+} from "./structured-response.js";
 import { restorePagedQuizSession } from "./paged-session.js";
 import {
   completeQuizSession,
   getCurrentQuestionState,
   moveToQuestion,
   setSelectedAnswerIds,
+  setStructuredResponseState,
   toggleQuestionFlag,
 } from "./session.js";
 import { saveStoredSession } from "./storage.js";
@@ -132,7 +137,7 @@ function renderRestoredSession(appRoot, viewRoot, result) {
   setText(
     viewRoot,
     "[data-paged-answer-status]",
-    savedAnswerStatus(result.state.selectedAnswerIds),
+    getQuestionResponseStatusText(result.state),
   );
 
   const questionHeading = viewRoot.querySelector("[data-paged-question-text]");
@@ -152,7 +157,7 @@ function renderRestoredSession(appRoot, viewRoot, result) {
   if (!stimulus) {
     throw new Error("Missing paged question stimulus container.");
   }
-  renderQuestionStimulus(stimulus, question.stimulus, {
+  renderQuestionStimulus(stimulus, question.type === "line_select" ? null : question.stimulus, {
     headingLevel: 3,
     idPrefix: `${question.id}-paged-stimulus`,
   });
@@ -162,7 +167,11 @@ function renderRestoredSession(appRoot, viewRoot, result) {
     throw new Error("Missing paged question answers.");
   }
 
-  renderAnswers(answers, viewRoot, result);
+  if (isChoiceQuestionType(question.type)) {
+    renderAnswers(answers, viewRoot, result);
+  } else {
+    renderStructuredPagedResponse(answers, viewRoot, result);
+  }
   renderPagedFlag(viewRoot, result);
   renderPagedNavigation(viewRoot, result);
 }
@@ -227,7 +236,7 @@ function renderAnswers(container, viewRoot, result) {
       setText(
         viewRoot,
         "[data-paged-answer-status]",
-        savedAnswerStatus(state.selectedAnswerIds),
+        getQuestionResponseStatusText(state),
       );
       renderPagedNavigation(viewRoot, result);
       announce(viewRoot, `Answer saved for question ${result.position}.`);
@@ -235,6 +244,34 @@ function renderAnswers(container, viewRoot, result) {
 
     label.append(input, letter, text);
     container.append(label);
+  });
+}
+
+function renderStructuredPagedResponse(container, viewRoot, result, focusKey = null) {
+  const state = result.state;
+  renderStructuredQuestionResponse(container, state, {
+    idPrefix: `${state.question.id}-paged-response`,
+    focusKey,
+    onChange(nextResponseState, change = {}) {
+      if (change.persist !== false) {
+        setStructuredResponseState(result.session, state.question.id, nextResponseState);
+        saveStoredSession(
+          window.sessionStorage,
+          result.storageKey,
+          result.session,
+        );
+      }
+      renderStructuredPagedResponse(container, viewRoot, result, change.focusKey || null);
+      setText(
+        viewRoot,
+        "[data-paged-answer-status]",
+        getQuestionResponseStatusText(state),
+      );
+      renderPagedNavigation(viewRoot, result);
+      if (change.announcement) {
+        announce(viewRoot, change.announcement);
+      }
+    },
   });
 }
 
@@ -328,10 +365,13 @@ function renderPagedNavigation(root, result) {
     result.position,
   );
 
+  const summaryParts = [`${model.answered} answered`];
+  if (model.incomplete > 0) summaryParts.push(`${model.incomplete} incomplete`);
+  summaryParts.push(`${model.unanswered} unanswered`, `${model.flagged} flagged`);
   setText(
     root,
     "[data-paged-summary]",
-    `${model.answered} answered, ${model.unanswered} unanswered, ${model.flagged} flagged`,
+    summaryParts.join(", "),
   );
 
   const progress = root.querySelector("[data-paged-progress]");
@@ -381,6 +421,7 @@ function renderPagedNavigation(root, result) {
     link.dataset.pagedTargetPosition = String(item.position);
     link.className = "quiz-navigator__button";
     link.classList.toggle("is-answered", item.answered);
+    link.classList.toggle("is-incomplete", item.incomplete);
     link.classList.toggle("is-flagged", item.flagged);
     link.classList.toggle("is-current", item.current);
     link.textContent = String(item.position);

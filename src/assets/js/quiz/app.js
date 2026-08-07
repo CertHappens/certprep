@@ -8,6 +8,13 @@ import {
 } from "./paged-entry.js";
 import { createQuestionReporter } from "./reporting.js";
 import { renderQuestionStimulus } from "./stimulus.js";
+import { renderStructuredQuestionResponse } from "./response-renderer.js";
+import {
+  formatStructuredResponseSummary,
+  getQuestionResponseProgress,
+  getSelectableStimulusLines,
+  isChoiceQuestionType,
+} from "./structured-response.js";
 import { confirmCompletedTestReplacement } from "./results-actions.js";
 import {
   completeQuizSession,
@@ -16,12 +23,14 @@ import {
   getCurrentQuestionId,
   getCurrentQuestionState,
   getFlaggedCount,
+  getIncompleteCount,
   getQuestionState,
   getUnansweredCount,
   isValidQuizSession,
   moveToQuestion,
   reopenQuizSession,
   setSelectedAnswerIds,
+  setStructuredResponseState,
   toggleQuestionFlag,
 } from "./session.js";
 import {
@@ -128,7 +137,7 @@ async function initializeQuiz(root) {
     elements.primaryReviewEmpty.hidden = needsReview.length > 0;
 
     elements.correctReviewDetails.hidden = correctResults.length === 0;
-    elements.correctReviewSummary.textContent = `Review ${correctResults.length} correct answer${correctResults.length === 1 ? "" : "s"}`;
+    elements.correctReviewSummary.textContent = `Review ${correctResults.length} correct question${correctResults.length === 1 ? "" : "s"}`;
     renderReviewList(elements.correctReviewList, correctResults, openReportFromReview);
 
     showView("results");
@@ -138,19 +147,26 @@ async function initializeQuiz(root) {
     }
   };
 
-  const renderQuestion = ({ focusHeading = false, focusAnswerId = null } = {}) => {
+  const renderQuestion = ({ focusHeading = false, focusAnswerId = null, focusResponseKey = null } = {}) => {
     const state = getCurrentQuestionState(session);
     const question = state.question;
     const total = session.questionOrder.length;
     const position = session.currentIndex + 1;
     const answered = getAnsweredCount(session);
+    const incomplete = getIncompleteCount(session);
+    const unanswered = getUnansweredCount(session);
     const flagged = getFlaggedCount(session);
 
     elements.position.textContent = `Question ${position} of ${total}`;
     elements.progress.value = position;
     elements.progress.max = total;
     elements.progress.textContent = `${position} of ${total}`;
-    elements.progressText.textContent = `${answered} answered, ${total - answered} unanswered, ${flagged} flagged`;
+    const progressParts = [`${answered} answered`];
+    if (incomplete > 0) {
+      progressParts.push(`${incomplete} incomplete`);
+    }
+    progressParts.push(`${unanswered} unanswered`, `${flagged} flagged`);
+    elements.progressText.textContent = progressParts.join(", ");
     elements.domain.textContent = `${question.domain.id} ${question.domain.name}`;
     elements.topic.textContent = question.topic;
     elements.questionHeading.textContent = question.text;
@@ -163,12 +179,29 @@ async function initializeQuiz(root) {
       elements.instruction.hidden = true;
     }
 
-    renderQuestionStimulus(elements.stimulus, question.stimulus, {
+    renderQuestionStimulus(elements.stimulus, question.type === "line_select" ? null : question.stimulus, {
       headingLevel: 3,
       idPrefix: `${question.id}-active-stimulus`,
     });
 
-    renderAnswers(elements.answers, state, session, persist, announce, renderQuestion);
+    if (isChoiceQuestionType(question.type)) {
+      renderAnswers(elements.answers, state, session, persist, announce, renderQuestion);
+    } else {
+      renderStructuredQuestionResponse(elements.answers, state, {
+        idPrefix: `${question.id}-active-response`,
+        focusKey: focusResponseKey,
+        onChange(nextResponseState, change = {}) {
+          if (change.persist !== false) {
+            setStructuredResponseState(session, question.id, nextResponseState);
+            persist();
+          }
+          renderQuestion({ focusResponseKey: change.focusKey || null });
+          if (change.announcement) {
+            announce(change.announcement);
+          }
+        },
+      });
+    }
     renderNavigator(elements.navigator, session, (targetIndex) => {
       moveToQuestion(session, targetIndex);
       persist();
@@ -258,8 +291,16 @@ async function initializeQuiz(root) {
 
   elements.finish.addEventListener("click", () => {
     const unanswered = getUnansweredCount(session);
-    const message = unanswered > 0
-      ? `Finish this test with ${unanswered} unanswered question${unanswered === 1 ? "" : "s"}?`
+    const incomplete = getIncompleteCount(session);
+    const unfinishedParts = [];
+    if (incomplete > 0) {
+      unfinishedParts.push(`${incomplete} incomplete question${incomplete === 1 ? "" : "s"}`);
+    }
+    if (unanswered > 0) {
+      unfinishedParts.push(`${unanswered} unanswered question${unanswered === 1 ? "" : "s"}`);
+    }
+    const message = unfinishedParts.length > 0
+      ? `Finish this test with ${unfinishedParts.join(" and ")}?`
       : "Finish this test?";
 
     if (!window.confirm(message)) {
@@ -408,11 +449,8 @@ function renderNavigator(container, session, onNavigate) {
     const button = document.createElement("button");
     const statuses = [];
 
-    if (state.selectedAnswerIds.length > 0) {
-      statuses.push("answered");
-    } else {
-      statuses.push("unanswered");
-    }
+    const responseProgress = getQuestionResponseProgress(state);
+    statuses.push(responseProgress);
 
     if (state.flaggedForReview) {
       statuses.push("flagged");
@@ -424,7 +462,8 @@ function renderNavigator(container, session, onNavigate) {
 
     button.type = "button";
     button.className = "quiz-navigator__button";
-    button.classList.toggle("is-answered", state.selectedAnswerIds.length > 0);
+    button.classList.toggle("is-answered", responseProgress === "answered");
+    button.classList.toggle("is-incomplete", responseProgress === "incomplete");
     button.classList.toggle("is-flagged", state.flaggedForReview);
     button.classList.toggle("is-current", index === session.currentIndex);
     button.textContent = String(index + 1);
@@ -470,7 +509,10 @@ function renderReviewList(container, questionResults, onReport) {
 function createReviewCard(result, onReport) {
   const { state, status, position } = result;
   const { question } = state;
-  const answerById = new Map(question.answers.map((answer) => [answer.id, answer]));
+  const choiceQuestion = isChoiceQuestionType(question.type);
+  const answerById = new Map(
+    choiceQuestion ? question.answers.map((answer) => [answer.id, answer]) : [],
+  );
   const article = document.createElement("article");
   const header = document.createElement("header");
   const badge = document.createElement("span");
@@ -504,29 +546,46 @@ function createReviewCard(result, onReport) {
   appendDefinition(metadata, "Topic", question.topic);
 
   answerSummary.className = "quiz-review-summary";
-  appendAnswerSummary(
-    answerSummary,
-    "Your answer",
-    formatAnswerSelections(state.selectedAnswerIds, state, answerById) || "No answer selected",
-  );
-  appendAnswerSummary(
-    answerSummary,
-    "Correct answer",
-    formatAnswerSelections(question.correctAnswerIds, state, answerById),
-  );
-
   answerList.className = "quiz-review-answers";
-  state.displayedAnswerIds.forEach((answerId, index) => {
-    const answer = answerById.get(answerId);
-    const isSelected = state.selectedAnswerIds.includes(answerId);
-    const isCorrect = question.correctAnswerIds.includes(answerId);
-    answerList.append(createReviewAnswer(answer, index, isSelected, isCorrect));
-  });
+
+  if (choiceQuestion) {
+    appendAnswerSummary(
+      answerSummary,
+      "Your answer",
+      formatAnswerSelections(state.selectedAnswerIds, state, answerById) || "No answer selected",
+    );
+    appendAnswerSummary(
+      answerSummary,
+      "Correct answer",
+      formatAnswerSelections(question.correctAnswerIds, state, answerById),
+    );
+
+    state.displayedAnswerIds.forEach((answerId, index) => {
+      const answer = answerById.get(answerId);
+      const isSelected = state.selectedAnswerIds.includes(answerId);
+      const isCorrect = question.correctAnswerIds.includes(answerId);
+      answerList.append(createReviewAnswer(answer, index, isSelected, isCorrect));
+    });
+  } else {
+    appendAnswerSummary(
+      answerSummary,
+      "Your response",
+      formatStructuredResponseSummary(state),
+    );
+    appendAnswerSummary(
+      answerSummary,
+      "Correct response",
+      formatStructuredResponseSummary(state, { correct: true }),
+    );
+    renderStructuredReview(answerList, state);
+  }
 
   const explanationHeading = document.createElement("h4");
   const explanationText = document.createElement("p");
   correctExplanation.className = "quiz-correct-explanation";
-  explanationHeading.textContent = "Why the correct answer is right";
+  explanationHeading.textContent = choiceQuestion
+    ? "Why the correct answer is right"
+    : "Why the correct response is right";
   explanationText.textContent = question.correctExplanation;
   correctExplanation.append(explanationHeading, explanationText);
 
@@ -546,7 +605,7 @@ function createReviewCard(result, onReport) {
     article.append(instruction);
   }
 
-  if (question.stimulus) {
+  if (question.stimulus && question.type !== "line_select") {
     const stimulus = document.createElement("div");
     renderQuestionStimulus(stimulus, question.stimulus, {
       headingLevel: 4,
@@ -557,6 +616,96 @@ function createReviewCard(result, onReport) {
 
   article.append(metadata, answerSummary, answerList, correctExplanation, actions);
   return article;
+}
+
+function renderStructuredReview(container, state) {
+  const { question } = state;
+
+  if (question.type === "matching") {
+    const optionById = new Map(question.response.options.map((option) => [option.id, option.label]));
+    question.response.items.forEach((item, index) => {
+      const selectedOptionId = state.responseState.matches[item.id];
+      const selectedLabel = optionById.get(selectedOptionId) || "Not selected";
+      const correctLabel = optionById.get(item.correctOptionId) || item.correctOptionId;
+      const section = document.createElement("section");
+      const heading = document.createElement("div");
+      const number = document.createElement("span");
+      const text = document.createElement("strong");
+      const detail = document.createElement("p");
+      const explanation = document.createElement("p");
+
+      section.className = "quiz-review-answer";
+      section.classList.toggle("is-correct", selectedOptionId === item.correctOptionId);
+      section.classList.toggle("is-selected-wrong", Boolean(selectedOptionId) && selectedOptionId !== item.correctOptionId);
+      heading.className = "quiz-review-answer__heading";
+      number.className = "quiz-review-answer__letter";
+      number.textContent = String(index + 1);
+      number.setAttribute("aria-hidden", "true");
+      text.textContent = item.text;
+      detail.className = "quiz-structured-review__detail";
+      const label = question.response.variant === "classification" ? "category" : "match";
+      detail.textContent = `Your ${label}: ${selectedLabel}. Correct ${label}: ${correctLabel}.`;
+      explanation.className = "quiz-review-answer__explanation";
+      explanation.textContent = item.explanation;
+      heading.append(number, text);
+      section.append(heading, detail, explanation);
+      container.append(section);
+    });
+    return;
+  }
+
+  if (question.type === "ordering") {
+    const itemById = new Map(question.response.items.map((item) => [item.id, item]));
+    question.response.correctOrder.forEach((itemId, index) => {
+      const item = itemById.get(itemId);
+      const section = document.createElement("section");
+      const heading = document.createElement("div");
+      const number = document.createElement("span");
+      const text = document.createElement("strong");
+      const explanation = document.createElement("p");
+      section.className = "quiz-review-answer is-correct";
+      heading.className = "quiz-review-answer__heading";
+      number.className = "quiz-review-answer__letter";
+      number.textContent = String(index + 1);
+      number.setAttribute("aria-hidden", "true");
+      text.textContent = item?.text || itemId;
+      explanation.className = "quiz-review-answer__explanation";
+      explanation.textContent = item?.explanation || "";
+      heading.append(number, text);
+      section.append(heading, explanation);
+      container.append(section);
+    });
+    return;
+  }
+
+  const selected = new Set(state.responseState.selectedLineNumbers);
+  const correct = new Set(question.response.correctLineNumbers);
+  for (const line of getSelectableStimulusLines(question)) {
+    if (!line.text.trim()) continue;
+    const section = document.createElement("section");
+    const heading = document.createElement("div");
+    const number = document.createElement("span");
+    const code = document.createElement("code");
+    const badges = document.createElement("span");
+    const isSelected = selected.has(line.number);
+    const isCorrect = correct.has(line.number);
+
+    section.className = "quiz-review-answer quiz-structured-review-line";
+    section.classList.toggle("is-correct", isCorrect);
+    section.classList.toggle("is-selected-wrong", isSelected && !isCorrect);
+    heading.className = "quiz-review-answer__heading";
+    number.className = "quiz-review-answer__letter";
+    number.textContent = String(line.number);
+    number.setAttribute("aria-hidden", "true");
+    code.className = "quiz-structured-review-line__code";
+    code.textContent = line.text;
+    badges.className = "quiz-review-answer__badges";
+    if (isSelected) badges.append(createInlineBadge("Your selection", "selected"));
+    if (isCorrect) badges.append(createInlineBadge("Correct line", "correct"));
+    heading.append(number, code, badges);
+    section.append(heading);
+    container.append(section);
+  }
 }
 
 function createReviewAnswer(answer, index, isSelected, isCorrect) {

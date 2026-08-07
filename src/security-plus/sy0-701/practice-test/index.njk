@@ -81,7 +81,7 @@ breadcrumbs:
 
         <div class="quiz-setup__notes">
           <p><strong>{{ quiz.availableQuestionCount }}</strong> approved questions are currently available for {{ quiz.test.examVersion }}.</p>
-          <p>After finishing, you will receive a score, domain counts, and a detailed explanation for every answer choice.</p>
+          <p>After finishing, you will receive a score, domain counts, and detailed explanations for each question.</p>
         </div>
       </section>
 
@@ -130,7 +130,7 @@ breadcrumbs:
 
             <form class="quiz-answer-form">
               <fieldset>
-                <legend class="visually-hidden">Select your answer</legend>
+                <legend class="visually-hidden">Provide your response</legend>
                 <div class="quiz-answers" data-quiz-answers></div>
               </fieldset>
             </form>
@@ -186,7 +186,7 @@ breadcrumbs:
         <section class="quiz-results__section" aria-labelledby="quiz-next-steps-heading">
           <div class="callout">
             <h2 id="quiz-next-steps-heading">What would you like to do next?</h2>
-            <p>Your incorrect and unanswered questions, correct answers, and explanations are listed directly below. You can also reopen the full test question by question or start a fresh randomized test.</p>
+            <p>Your incorrect and unanswered questions, correct responses, and explanations are listed directly below. You can also reopen the full test question by question or start a fresh randomized test.</p>
             <div class="button-row">
               <a class="button button--secondary" href="#missed-question-review">Jump to missed questions</a>
               <button class="button button--secondary" type="button" data-quiz-return>Review the full test question by question</button>
@@ -199,7 +199,7 @@ breadcrumbs:
         <section class="quiz-results__section" id="missed-question-review" aria-labelledby="review-results-heading">
           <div class="quiz-results__section-heading">
             <h2 id="review-results-heading">Incorrect and unanswered review</h2>
-            <p>Your incorrect and unanswered questions are listed below with the correct answer and explanation. Answer letters match the order you saw during this test.</p>
+            <p>Your incorrect and unanswered questions are listed below with the correct response and explanation. For multiple-choice questions, answer letters match the order you saw during this test.</p>
           </div>
 
           <div class="quiz-review-list" data-review-primary></div>
@@ -209,7 +209,7 @@ breadcrumbs:
           </div>
 
           <details class="quiz-correct-review" data-review-correct-details>
-            <summary data-review-correct-summary>Review correct answers</summary>
+            <summary data-review-correct-summary>Review correct responses</summary>
             <div class="quiz-review-list" data-review-correct></div>
           </details>
         </section>
@@ -236,7 +236,7 @@ breadcrumbs:
           <fieldset class="question-report-categories">
             <legend>What seems wrong?</legend>
             <label><input type="radio" name="report-category" value="possible_typo"> <span>Possible typo</span></label>
-            <label><input type="radio" name="report-category" value="correct_answer_may_be_wrong"> <span>Correct answer may be wrong</span></label>
+            <label><input type="radio" name="report-category" value="correct_answer_may_be_wrong"> <span>Correct answer or response may be wrong</span></label>
             <label><input type="radio" name="report-category" value="explanation_unclear"> <span>Explanation is unclear</span></label>
             <label><input type="radio" name="report-category" value="question_outdated"> <span>Question may be outdated</span></label>
             <label><input type="radio" name="report-category" value="duplicate_question"> <span>Duplicate question</span></label>

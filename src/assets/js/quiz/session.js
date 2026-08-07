@@ -1,4 +1,12 @@
 import { isValidQuestionStimulus } from "./stimulus.js";
+import {
+  createInitialStructuredResponseState,
+  getQuestionResponseProgress,
+  isChoiceQuestionType,
+  isStructuredQuestionType,
+  isValidStructuredQuestion,
+  isValidStructuredResponseState,
+} from "./structured-response.js";
 import { sampleWithoutReplacement, shuffleCopy } from "./shuffle.js";
 
 export const QUIZ_SESSION_VERSION = 1;
@@ -51,12 +59,27 @@ export function createQuizSession({
 
   for (const sourceQuestion of selectedQuestions) {
     const question = cloneQuestion(sourceQuestion);
-    const answerIds = question.answers.map((answer) => answer.id);
+
+    if (isChoiceQuestionType(question.type)) {
+      const answerIds = question.answers.map((answer) => answer.id);
+      questionStates[question.id] = {
+        question,
+        displayedAnswerIds: shuffleCopy(answerIds, random),
+        selectedAnswerIds: [],
+        flaggedForReview: false,
+      };
+      continue;
+    }
+
+    if (!isValidStructuredQuestion(question)) {
+      throw new Error(`Question ${question.id} does not define a valid structured response.`);
+    }
 
     questionStates[question.id] = {
       question,
-      displayedAnswerIds: shuffleCopy(answerIds, random),
+      displayedAnswerIds: [],
       selectedAnswerIds: [],
+      responseState: createInitialStructuredResponseState(question, random),
       flaggedForReview: false,
     };
   }
@@ -113,46 +136,71 @@ export function isValidQuizSession(session, expectedTestId = null) {
 
   for (const questionId of session.questionOrder) {
     const state = session.questions[questionId];
-    const answerIds = state?.question?.answers?.map((answer) => answer.id);
-    const correctAnswerIds = state?.question?.correctAnswerIds;
+    const question = state?.question;
 
-    if (!state || !Array.isArray(answerIds) || answerIds.length === 0) {
+    if (!state || !question?.id || question.id !== questionId) {
       return false;
     }
 
-    if (!Array.isArray(correctAnswerIds) || correctAnswerIds.length === 0) {
+    if (!isValidQuestionStimulus(question.stimulus)) {
       return false;
     }
 
-    if (!isValidQuestionStimulus(state.question.stimulus)) {
+    if (typeof state.flaggedForReview !== "boolean") {
       return false;
     }
 
-    if (!correctAnswerIds.every((answerId) => answerIds.includes(answerId))) {
+    if (!Array.isArray(state.displayedAnswerIds) || !Array.isArray(state.selectedAnswerIds)) {
       return false;
     }
 
-    if (!Array.isArray(state.displayedAnswerIds) || state.displayedAnswerIds.length !== answerIds.length) {
+    if (isChoiceQuestionType(question.type)) {
+      const answerIds = question.answers?.map((answer) => answer.id);
+      const correctAnswerIds = question.correctAnswerIds;
+
+      if (!Array.isArray(answerIds) || answerIds.length === 0) {
+        return false;
+      }
+
+      if (!Array.isArray(correctAnswerIds) || correctAnswerIds.length === 0) {
+        return false;
+      }
+
+      if (!correctAnswerIds.every((answerId) => answerIds.includes(answerId))) {
+        return false;
+      }
+
+      if (state.displayedAnswerIds.length !== answerIds.length) {
+        return false;
+      }
+
+      if (new Set(state.displayedAnswerIds).size !== answerIds.length) {
+        return false;
+      }
+
+      if (!state.displayedAnswerIds.every((answerId) => answerIds.includes(answerId))) {
+        return false;
+      }
+
+      if (new Set(state.selectedAnswerIds).size !== state.selectedAnswerIds.length) {
+        return false;
+      }
+
+      if (!state.selectedAnswerIds.every((answerId) => answerIds.includes(answerId))) {
+        return false;
+      }
+      continue;
+    }
+
+    if (!isStructuredQuestionType(question.type) || !isValidStructuredQuestion(question)) {
       return false;
     }
 
-    if (new Set(state.displayedAnswerIds).size !== answerIds.length) {
+    if (state.displayedAnswerIds.length !== 0 || state.selectedAnswerIds.length !== 0) {
       return false;
     }
 
-    if (!state.displayedAnswerIds.every((answerId) => answerIds.includes(answerId))) {
-      return false;
-    }
-
-    if (!Array.isArray(state.selectedAnswerIds)) {
-      return false;
-    }
-
-    if (new Set(state.selectedAnswerIds).size !== state.selectedAnswerIds.length) {
-      return false;
-    }
-
-    if (!state.selectedAnswerIds.every((answerId) => answerIds.includes(answerId))) {
+    if (!isValidStructuredResponseState(question, state.responseState)) {
       return false;
     }
   }
@@ -180,6 +228,9 @@ export function getCurrentQuestionState(session) {
 
 export function setSelectedAnswerIds(session, questionId, selectedAnswerIds, now = isoNow) {
   const state = getQuestionState(session, questionId);
+  if (!isChoiceQuestionType(state.question.type)) {
+    throw new Error(`Question ${questionId} does not use answer-choice selections.`);
+  }
   const allowedAnswerIds = new Set(state.question.answers.map((answer) => answer.id));
   const normalizedIds = [...new Set(selectedAnswerIds)];
 
@@ -192,6 +243,19 @@ export function setSelectedAnswerIds(session, questionId, selectedAnswerIds, now
   }
 
   state.selectedAnswerIds = normalizedIds;
+  touch(session, now);
+  return session;
+}
+
+export function setStructuredResponseState(session, questionId, responseState, now = isoNow) {
+  const state = getQuestionState(session, questionId);
+  if (!isStructuredQuestionType(state.question.type)) {
+    throw new Error(`Question ${questionId} does not use a structured response.`);
+  }
+  if (!isValidStructuredResponseState(state.question, responseState)) {
+    throw new Error(`Question ${questionId} received an invalid structured response state.`);
+  }
+  state.responseState = JSON.parse(JSON.stringify(responseState));
   touch(session, now);
   return session;
 }
@@ -215,7 +279,13 @@ export function moveToQuestion(session, index, now = isoNow) {
 
 export function getAnsweredCount(session) {
   return session.questionOrder.reduce((count, questionId) => {
-    return count + (session.questions[questionId].selectedAnswerIds.length > 0 ? 1 : 0);
+    return count + (getQuestionResponseProgress(session.questions[questionId]) === "answered" ? 1 : 0);
+  }, 0);
+}
+
+export function getIncompleteCount(session) {
+  return session.questionOrder.reduce((count, questionId) => {
+    return count + (getQuestionResponseProgress(session.questions[questionId]) === "incomplete" ? 1 : 0);
   }, 0);
 }
 
@@ -226,7 +296,9 @@ export function getFlaggedCount(session) {
 }
 
 export function getUnansweredCount(session) {
-  return session.questionOrder.length - getAnsweredCount(session);
+  return session.questionOrder.reduce((count, questionId) => {
+    return count + (getQuestionResponseProgress(session.questions[questionId]) === "unanswered" ? 1 : 0);
+  }, 0);
 }
 
 export function completeQuizSession(session, now = isoNow) {

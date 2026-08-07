@@ -2,7 +2,7 @@
 
 ## Purpose
 
-A question may optionally present read-only evidence before its answer choices. The stimulus contract is certification-neutral and supports Security+, Network+, CCNA, and future exam engines without embedding vendor-specific behavior in the renderer.
+A question may optionally present read-only evidence before the learner provides a response. The stimulus contract is certification-neutral and supports Security+, Network+, CCNA, and future exam engines without embedding vendor-specific behavior in the renderer.
 
 Stimuli are stored in a separate JSON sidecar so existing question-bank CSV files do not need multiline command output or nested table data.
 
@@ -81,4 +81,4 @@ Rules:
 
 The built question snapshot stores the normalized `stimulus` object. This preserves the same evidence across browser-session navigation, paged routes, completed-test review, and question reports tied to the question version and data version.
 
-This first layer is read-only. Ordering, matching, classification, selectable lines, and multi-part response state will use separate response contracts rather than overloading the stimulus object.
+Stimuli remain read-only evidence. Matching/classification, ordering, and selectable-line response state use the separate contract in `docs/question-response-schema.md` rather than overloading the stimulus object.

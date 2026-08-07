@@ -12,7 +12,7 @@ Question content must be original. Do not copy, closely paraphrase, reconstruct,
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | `SEC-701` | CompTIA Security+ | `SY0-701` | `6.0` | `data/security-plus/sec-701/` | `SEC701-0000001` | `SEC701-BATCH-001` | Registered in the quiz catalog |
 | `NET-009` | CompTIA Network+ | `N10-009` | `6.0` | `data/network-plus/n10-009/` | `NET009-0000001` | `NET009-BATCH-001` | Registered in the quiz catalog |
-| `CCNA-301-V2` | Cisco CCNA | `200-301 v2.0` | `2.0` | `data/ccna/200-301-v2/` | `CCNA301V2-0000001` | `CCNA301V2-BATCH-001` | Authoring-ready; not yet registered |
+| `CCNA-301-V2` | Cisco CCNA | `200-301 v2.0` | `2.0` | `data/ccna/200-301-v2/` | `CCNA301V2-0000001` | `CCNA301V2-BATCH-001` | Registered in the quiz catalog |
 
 A later major exam version receives a new namespace so question history, reports, routes, and analytics remain unambiguous. Permanent question IDs do not encode domains or objectives because mappings can be corrected without changing the ID. Sequence numbers are never reused.
 
@@ -27,7 +27,8 @@ data/<certification>/<exam-version>/
   questions.csv
   retired-questions.csv
   source-register.csv
-  stimuli.json              # present when the bank uses or pre-registers stimuli
+  stimuli.json              # optional read-only evidence
+  responses.json            # structured matching, ordering, or line-selection responses
 ```
 
 Shared authority and tools:
@@ -35,8 +36,10 @@ Shared authority and tools:
 ```text
 docs/blank-question-template.csv
 docs/blank-stimuli-template.json
+docs/blank-responses-template.json
 docs/question-schema.md
 docs/question-stimulus-schema.md
+docs/question-response-schema.md
 scripts/validate_question_bank.py
 scripts/build_quiz_data.py
 ```
@@ -107,11 +110,13 @@ replacement_question_id
 ## Allowed values
 
 - `difficulty`: `easy`, `medium`, `hard`
-- `question_type`: `single_choice`, `multi_select`, `best_available`
+- `question_type`: `single_choice`, `multi_select`, `best_available`, `matching`, `ordering`, `line_select`
 - `question_style`: `direct`, `scenario`, `comparison`, `calculation`
 - `review_status`: `draft`, `review`, `approved`
 
 `single_choice` and `best_available` require exactly one correct stored key. `multi_select` requires two or more sorted, unique pipe-delimited keys and an instruction stating exactly how many answers to select. `best_available` requires an instruction identifying the stated decision criterion.
+
+`matching`, `ordering`, and `line_select` require a `question_instruction` plus a matching entry in `responses.json`. Their A-D answer fields, `correct_answers`, and A-D explanation fields remain blank because the structured sidecar is authoritative for the response. See `docs/question-response-schema.md`.
 
 ## Objective and source authority
 
@@ -147,7 +152,11 @@ CCNA identifiers are enforced as:
 - Question regex: `^CCNA301V2-\d{7}$`
 - Batch regex: `^CCNA301V2-BATCH-\d{3}$`
 
-The CCNA directory is intentionally valid with header-only lifecycle CSVs and an empty stimulus registry before Batch 001. Do not add CCNA to `config/quiz-catalog.json`, publish a practice-test route, or claim that a public bank exists until approved rows are present and the full staging workflow passes.
+CCNA is registered in `config/quiz-catalog.json` and uses the same active, draft, retired, stimulus, and structured-response lifecycle as the Security+ and Network+ banks.
+
+## Structured responses
+
+Matching/classification, ordering, and selectable evidence-line interactions live in the per-exam `responses.json` sidecar. They use the same question IDs, versioning, review state, objective mapping, source rules, session persistence, grading, reporting, and results review as multiple-choice questions. They do not emulate a command-line or vendor PBQ interface. See `docs/question-response-schema.md`.
 
 ## Optional read-only stimuli
 

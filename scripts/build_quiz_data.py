@@ -11,6 +11,7 @@ from __future__ import annotations
 import csv
 import hashlib
 import json
+import re
 import sys
 from collections import Counter
 from datetime import datetime, timezone
@@ -22,6 +23,10 @@ DEFAULT_CONFIG_PATH = PROJECT_ROOT / "config" / "quiz-catalog.json"
 GENERATED_ROOT = PROJECT_ROOT / "src" / "quiz-data"
 RUNTIME_SCHEMA_VERSION = 1
 ANSWER_KEYS = ("A", "B", "C", "D")
+CHOICE_QUESTION_TYPES = {"single_choice", "multi_select", "best_available"}
+STRUCTURED_QUESTION_TYPES = {"matching", "ordering", "line_select"}
+QUESTION_TYPES = CHOICE_QUESTION_TYPES | STRUCTURED_QUESTION_TYPES
+RESPONSE_ID_RE = re.compile(r"^[a-z][a-z0-9_-]{0,39}$")
 PREFORMATTED_STIMULUS_VARIANTS = {"command_output", "configuration", "log", "plain_text"}
 
 
@@ -120,7 +125,6 @@ def normalize_question_stimulus(question_id: str, value: Any) -> dict[str, Any]:
             raise BuildError(f"{label} requires 1 to 10 columns.")
         normalized_columns = []
         keys = []
-        import re
         for index, column in enumerate(columns, start=1):
             if not isinstance(column, dict) or set(column) != {"key", "label"}:
                 raise BuildError(f"{label} column {index} must contain only key and label.")
@@ -154,7 +158,12 @@ def normalize_question_stimulus(question_id: str, value: Any) -> dict[str, Any]:
     raise BuildError(f"{label} has unsupported type {stimulus_type!r}.")
 
 
-def load_question_stimuli(path: Path, known_question_ids: set[str]) -> dict[str, dict[str, Any]]:
+def load_question_stimuli(
+    path: Path,
+    known_question_ids: set[str],
+    *,
+    allow_unknown: bool = False,
+) -> dict[str, dict[str, Any]]:
     registry = read_json(path)
     if registry.get("schemaVersion") != 1:
         raise BuildError(f"Unsupported stimulus schemaVersion in {path}: {registry.get('schemaVersion')!r}.")
@@ -162,9 +171,203 @@ def load_question_stimuli(path: Path, known_question_ids: set[str]) -> dict[str,
     if not isinstance(values, dict):
         raise BuildError(f"Stimulus registry {path} must contain a stimuli object.")
     unknown = sorted(set(values) - known_question_ids)
-    if unknown:
+    if unknown and not allow_unknown:
         raise BuildError(f"Stimulus registry {path} contains unknown question IDs: {', '.join(unknown)}")
-    return {question_id: normalize_question_stimulus(question_id, value) for question_id, value in values.items()}
+    normalized = {
+        question_id: normalize_question_stimulus(question_id, value)
+        for question_id, value in values.items()
+    }
+    if allow_unknown:
+        return {
+            question_id: value
+            for question_id, value in normalized.items()
+            if question_id in known_question_ids
+        }
+    return normalized
+
+
+def _response_id(value: Any, *, label: str) -> str:
+    if not isinstance(value, str) or not RESPONSE_ID_RE.fullmatch(value):
+        raise BuildError(
+            f"{label} must start with a lowercase letter and contain only lowercase letters, numbers, underscores, or hyphens."
+        )
+    return value
+
+
+def normalize_question_response(
+    question_id: str,
+    value: Any,
+    *,
+    stimulus: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    label = f"Question {question_id} response"
+    if not isinstance(value, dict) or isinstance(value, list):
+        raise BuildError(f"{label} must be a JSON object.")
+
+    response_type = value.get("type")
+
+    if response_type == "matching":
+        allowed = {"type", "variant", "items", "options"}
+        extra = sorted(set(value) - allowed)
+        if extra:
+            raise BuildError(f"{label} contains unsupported fields: {', '.join(extra)}")
+        variant = value.get("variant")
+        if variant not in {"matching", "classification"}:
+            raise BuildError(f"{label} matching variant must be 'matching' or 'classification'.")
+        items = value.get("items")
+        options = value.get("options")
+        if not isinstance(items, list) or not 2 <= len(items) <= 10:
+            raise BuildError(f"{label} requires 2 to 10 matching items.")
+        if not isinstance(options, list) or not 2 <= len(options) <= 10:
+            raise BuildError(f"{label} requires 2 to 10 matching options.")
+
+        normalized_options = []
+        option_ids = []
+        for index, option in enumerate(options, start=1):
+            if not isinstance(option, dict) or set(option) != {"id", "label"}:
+                raise BuildError(f"{label} option {index} must contain only id and label.")
+            option_id = _response_id(option.get("id"), label=f"{label} option {index} id")
+            option_label = _required_text(option.get("label"), label=f"{label} option {index} label", max_length=180)
+            option_ids.append(option_id)
+            normalized_options.append({"id": option_id, "label": option_label})
+        if len(set(option_ids)) != len(option_ids):
+            raise BuildError(f"{label} option IDs must be unique.")
+
+        normalized_items = []
+        item_ids = []
+        correct_option_ids = []
+        for index, item in enumerate(items, start=1):
+            if not isinstance(item, dict) or set(item) != {"id", "text", "correctOptionId", "explanation"}:
+                raise BuildError(
+                    f"{label} item {index} must contain only id, text, correctOptionId, and explanation."
+                )
+            item_id = _response_id(item.get("id"), label=f"{label} item {index} id")
+            text = _required_text(item.get("text"), label=f"{label} item {index} text", max_length=500)
+            correct_option_id = _response_id(
+                item.get("correctOptionId"), label=f"{label} item {index} correctOptionId"
+            )
+            explanation = _required_text(
+                item.get("explanation"), label=f"{label} item {index} explanation", max_length=1200
+            )
+            if correct_option_id not in option_ids:
+                raise BuildError(f"{label} item {index} references an unknown matching option.")
+            item_ids.append(item_id)
+            correct_option_ids.append(correct_option_id)
+            normalized_items.append({
+                "id": item_id,
+                "text": text,
+                "correctOptionId": correct_option_id,
+                "explanation": explanation,
+            })
+        if len(set(item_ids)) != len(item_ids):
+            raise BuildError(f"{label} item IDs must be unique.")
+        if variant == "matching":
+            if len(items) != len(options):
+                raise BuildError(f"{label} one-to-one matching requires the same number of items and options.")
+            if len(set(correct_option_ids)) != len(correct_option_ids):
+                raise BuildError(f"{label} one-to-one matching may use each option only once.")
+
+        return {
+            "type": "matching",
+            "variant": variant,
+            "items": normalized_items,
+            "options": normalized_options,
+        }
+
+    if response_type == "ordering":
+        allowed = {"type", "items", "correctOrder"}
+        extra = sorted(set(value) - allowed)
+        if extra:
+            raise BuildError(f"{label} contains unsupported fields: {', '.join(extra)}")
+        items = value.get("items")
+        correct_order = value.get("correctOrder")
+        if not isinstance(items, list) or not 3 <= len(items) <= 10:
+            raise BuildError(f"{label} requires 3 to 10 ordering items.")
+        normalized_items = []
+        item_ids = []
+        for index, item in enumerate(items, start=1):
+            if not isinstance(item, dict) or set(item) != {"id", "text", "explanation"}:
+                raise BuildError(f"{label} item {index} must contain only id, text, and explanation.")
+            item_id = _response_id(item.get("id"), label=f"{label} item {index} id")
+            text = _required_text(item.get("text"), label=f"{label} item {index} text", max_length=500)
+            explanation = _required_text(
+                item.get("explanation"), label=f"{label} item {index} explanation", max_length=1200
+            )
+            item_ids.append(item_id)
+            normalized_items.append({"id": item_id, "text": text, "explanation": explanation})
+        if len(set(item_ids)) != len(item_ids):
+            raise BuildError(f"{label} item IDs must be unique.")
+        if not isinstance(correct_order, list) or correct_order != list(dict.fromkeys(correct_order)):
+            raise BuildError(f"{label} correctOrder must be a unique list of item IDs.")
+        if set(correct_order) != set(item_ids) or len(correct_order) != len(item_ids):
+            raise BuildError(f"{label} correctOrder must contain every ordering item exactly once.")
+        return {"type": "ordering", "items": normalized_items, "correctOrder": correct_order}
+
+    if response_type == "line_select":
+        allowed = {"type", "selectionCount", "correctLineNumbers"}
+        extra = sorted(set(value) - allowed)
+        if extra:
+            raise BuildError(f"{label} contains unsupported fields: {', '.join(extra)}")
+        selection_count = value.get("selectionCount")
+        correct_line_numbers = value.get("correctLineNumbers")
+        if not isinstance(selection_count, int) or not 1 <= selection_count <= 8:
+            raise BuildError(f"{label} selectionCount must be an integer from 1 through 8.")
+        if (
+            not isinstance(correct_line_numbers, list)
+            or len(correct_line_numbers) != selection_count
+            or any(not isinstance(number, int) or number < 1 for number in correct_line_numbers)
+            or correct_line_numbers != sorted(set(correct_line_numbers))
+        ):
+            raise BuildError(
+                f"{label} correctLineNumbers must contain exactly selectionCount sorted, unique positive integers."
+            )
+        if not stimulus or stimulus.get("type") != "preformatted":
+            raise BuildError(f"{label} requires a preformatted question stimulus.")
+        lines = stimulus.get("content", "").split("\n")
+        if len(lines) > 100:
+            raise BuildError(f"{label} supports at most 100 stimulus lines.")
+        for number in correct_line_numbers:
+            if number > len(lines):
+                raise BuildError(f"{label} references line {number}, but the stimulus has only {len(lines)} lines.")
+            if not lines[number - 1].strip():
+                raise BuildError(f"{label} may not identify blank stimulus line {number} as correct.")
+        return {
+            "type": "line_select",
+            "selectionCount": selection_count,
+            "correctLineNumbers": correct_line_numbers,
+        }
+
+    raise BuildError(f"{label} has unsupported type {response_type!r}.")
+
+
+def load_question_responses(
+    path: Path,
+    known_question_ids: set[str],
+    *,
+    stimuli: dict[str, dict[str, Any]] | None = None,
+    allow_unknown: bool = False,
+) -> dict[str, dict[str, Any]]:
+    registry = read_json(path)
+    if registry.get("schemaVersion") != 1:
+        raise BuildError(f"Unsupported response schemaVersion in {path}: {registry.get('schemaVersion')!r}.")
+    values = registry.get("responses")
+    if not isinstance(values, dict):
+        raise BuildError(f"Response registry {path} must contain a responses object.")
+    unknown = sorted(set(values) - known_question_ids)
+    if unknown and not allow_unknown:
+        raise BuildError(f"Response registry {path} contains unknown question IDs: {', '.join(unknown)}")
+    stimulus_map = stimuli or {}
+    values_to_normalize = (
+        {question_id: value for question_id, value in values.items() if question_id in known_question_ids}
+        if allow_unknown
+        else values
+    )
+    return {
+        question_id: normalize_question_response(
+            question_id, value, stimulus=stimulus_map.get(question_id)
+        )
+        for question_id, value in values_to_normalize.items()
+    }
 
 def stable_answer_id(question_id: str, stored_key: str) -> str:
     """Create a stable answer identity independent of displayed position."""
@@ -241,7 +444,11 @@ def calculate_question_count_settings(
     return enabled_options, default_count
 
 
-def build_public_question(row: dict[str, str], stimulus: dict[str, Any] | None = None) -> dict[str, Any]:
+def build_public_question(
+    row: dict[str, str],
+    stimulus: dict[str, Any] | None = None,
+    response: dict[str, Any] | None = None,
+) -> dict[str, Any]:
     question_id = row.get("question_id", "").strip()
     if not question_id:
         raise BuildError("Encountered an active question without a question_id.")
@@ -266,53 +473,15 @@ def build_public_question(row: dict[str, str], stimulus: dict[str, Any] | None =
             raise BuildError(f"Question {question_id}: missing {label}.")
 
     question_type = row.get("question_type", "").strip()
-    if question_type not in {"single_choice", "multi_select", "best_available"}:
+    if question_type not in QUESTION_TYPES:
         raise BuildError(
             f"Question {question_id}: unsupported question_type {question_type!r}."
         )
 
     instruction = row.get("question_instruction", "").strip() or None
-    correct_keys = [key.upper() for key in split_pipe_values(row.get("correct_answers", ""))]
-    if not correct_keys:
-        raise BuildError(f"Question {question_id}: no correct answer key was supplied.")
-    if len(correct_keys) != len(set(correct_keys)):
-        raise BuildError(f"Question {question_id}: correct answer keys must be unique.")
-    if question_type in {"single_choice", "best_available"} and len(correct_keys) != 1:
-        raise BuildError(
-            f"Question {question_id}: {question_type} requires exactly one correct answer."
-        )
-    if question_type == "multi_select" and len(correct_keys) < 2:
-        raise BuildError(
-            f"Question {question_id}: multi_select requires at least two correct answers."
-        )
-    if question_type in {"multi_select", "best_available"} and instruction is None:
+    if question_type in {"multi_select", "best_available", *STRUCTURED_QUESTION_TYPES} and instruction is None:
         raise BuildError(
             f"Question {question_id}: {question_type} requires a question instruction."
-        )
-
-    answers: list[dict[str, str]] = []
-    for key in ANSWER_KEYS:
-        suffix = key.lower()
-        answer_text = row.get(f"answer_{suffix}", "").strip()
-        explanation = row.get(f"answer_{suffix}_explanation", "").strip()
-        if not answer_text or not explanation:
-            raise BuildError(
-                f"Question {question_id}: answer {key} requires text and an explanation."
-            )
-
-        answers.append(
-            {
-                "id": stable_answer_id(question_id, key),
-                "text": answer_text,
-                "explanation": explanation,
-            }
-        )
-
-    correct_answer_ids = [stable_answer_id(question_id, key) for key in correct_keys]
-    known_answer_ids = {answer["id"] for answer in answers}
-    if not set(correct_answer_ids).issubset(known_answer_ids):
-        raise BuildError(
-            f"Question {question_id}: a correct answer does not match a stored answer."
         )
 
     question = {
@@ -335,15 +504,85 @@ def build_public_question(row: dict[str, str], stimulus: dict[str, Any] | None =
             "id": row.get("objective_id", "").strip(),
             "text": row.get("objective_text", "").strip(),
         },
-        "answers": answers,
-        "correctAnswerIds": correct_answer_ids,
         "correctExplanation": row.get("correct_explanation", "").strip(),
         "studyTopics": split_pipe_values(row.get("study_topics", "")),
     }
+
+    if question_type in CHOICE_QUESTION_TYPES:
+        if response is not None:
+            raise BuildError(
+                f"Question {question_id}: choice questions may not define a structured response."
+            )
+        correct_keys = [key.upper() for key in split_pipe_values(row.get("correct_answers", ""))]
+        if not correct_keys:
+            raise BuildError(f"Question {question_id}: no correct answer key was supplied.")
+        if len(correct_keys) != len(set(correct_keys)):
+            raise BuildError(f"Question {question_id}: correct answer keys must be unique.")
+        if question_type in {"single_choice", "best_available"} and len(correct_keys) != 1:
+            raise BuildError(
+                f"Question {question_id}: {question_type} requires exactly one correct answer."
+            )
+        if question_type == "multi_select" and len(correct_keys) < 2:
+            raise BuildError(
+                f"Question {question_id}: multi_select requires at least two correct answers."
+            )
+
+        answers: list[dict[str, str]] = []
+        for key in ANSWER_KEYS:
+            suffix = key.lower()
+            answer_text = row.get(f"answer_{suffix}", "").strip()
+            explanation = row.get(f"answer_{suffix}_explanation", "").strip()
+            if not answer_text or not explanation:
+                raise BuildError(
+                    f"Question {question_id}: answer {key} requires text and an explanation."
+                )
+
+            answers.append(
+                {
+                    "id": stable_answer_id(question_id, key),
+                    "text": answer_text,
+                    "explanation": explanation,
+                }
+            )
+
+        correct_answer_ids = [stable_answer_id(question_id, key) for key in correct_keys]
+        known_answer_ids = {answer["id"] for answer in answers}
+        if not set(correct_answer_ids).issubset(known_answer_ids):
+            raise BuildError(
+                f"Question {question_id}: a correct answer does not match a stored answer."
+            )
+
+        question["answers"] = answers
+        question["correctAnswerIds"] = correct_answer_ids
+    else:
+        structured_choice_fields = [
+            row.get("answer_a", "").strip(),
+            row.get("answer_b", "").strip(),
+            row.get("answer_c", "").strip(),
+            row.get("answer_d", "").strip(),
+            row.get("correct_answers", "").strip(),
+            row.get("answer_a_explanation", "").strip(),
+            row.get("answer_b_explanation", "").strip(),
+            row.get("answer_c_explanation", "").strip(),
+            row.get("answer_d_explanation", "").strip(),
+        ]
+        if any(structured_choice_fields):
+            raise BuildError(
+                f"Question {question_id}: structured questions must leave answer A-D, correct_answers, and answer-choice explanations blank."
+            )
+        if response is None:
+            raise BuildError(
+                f"Question {question_id}: {question_type} requires a structured response sidecar entry."
+            )
+        if response.get("type") != question_type:
+            raise BuildError(
+                f"Question {question_id}: response type {response.get('type')!r} does not match question_type {question_type!r}."
+            )
+        question["response"] = response
+
     if stimulus is not None:
         question["stimulus"] = stimulus
     return question
-
 
 def consistent_test_metadata(rows: list[dict[str, str]], slug: str) -> dict[str, str]:
     field_map = {
@@ -471,9 +710,28 @@ def build_quiz(
     stimuli: dict[str, dict[str, Any]] = {}
     stimuli_path_value = str(quiz_config.get("stimuli_json", "")).strip()
     if stimuli_path_value:
-        stimuli = load_question_stimuli(project_root / stimuli_path_value, set(question_ids))
+        stimuli = load_question_stimuli(
+            project_root / stimuli_path_value,
+            set(question_ids),
+            allow_unknown=True,
+        )
+
+    responses: dict[str, dict[str, Any]] = {}
+    responses_path_value = str(quiz_config.get("responses_json", "")).strip()
+    if responses_path_value:
+        responses = load_question_responses(
+            project_root / responses_path_value,
+            set(question_ids),
+            stimuli=stimuli,
+            allow_unknown=True,
+        )
+
     questions = [
-        build_public_question(row, stimuli.get(row.get("question_id", "").strip()))
+        build_public_question(
+            row,
+            stimuli.get(row.get("question_id", "").strip()),
+            responses.get(row.get("question_id", "").strip()),
+        )
         for row in source_rows
     ]
     objective_rows = read_csv(objective_map_path)

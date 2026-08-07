@@ -11,7 +11,13 @@ from collections import Counter
 from datetime import date
 from pathlib import Path
 
-from build_quiz_data import BuildError, load_question_stimuli
+from build_quiz_data import (
+    BuildError,
+    CHOICE_QUESTION_TYPES,
+    STRUCTURED_QUESTION_TYPES,
+    load_question_responses,
+    load_question_stimuli,
+)
 
 BANK_CONFIGS = [
     {
@@ -23,6 +29,8 @@ BANK_CONFIGS = [
         "objectives_version": "6.0",
         "id_pattern": r"^SEC701-(\d{7})$",
         "batch_pattern": r"^SEC701-(?:BATCH-\d{3}|SAMPLE-001)$",
+        "stimuli_file": "stimuli.json",
+        "responses_file": "responses.json",
         "expected_objectives": {
             "1.1", "1.2", "1.3", "1.4",
             "2.1", "2.2", "2.3", "2.4", "2.5",
@@ -41,6 +49,7 @@ BANK_CONFIGS = [
         "id_pattern": r"^CCNA301V2-(\d{7})$",
         "batch_pattern": r"^CCNA301V2-BATCH-\d{3}$",
         "stimuli_file": "stimuli.json",
+        "responses_file": "responses.json",
         "expected_objectives": {
             "1.1", "1.2", "1.3", "1.4", "1.5", "1.5.a", "1.5.b", "1.5.c", "1.5.d", "1.6", "1.7",
             "2.1", "2.1.a", "2.1.b", "2.1.c", "2.1.d",
@@ -62,6 +71,8 @@ BANK_CONFIGS = [
         "objectives_version": "6.0",
         "id_pattern": r"^NET009-(\d{7})$",
         "batch_pattern": r"^NET009-BATCH-\d{3}$",
+        "stimuli_file": "stimuli.json",
+        "responses_file": "responses.json",
         "expected_objectives": {
             "1.1", "1.2", "1.3", "1.4", "1.5", "1.6", "1.7", "1.8",
             "2.1", "2.2", "2.3", "2.4",
@@ -81,13 +92,14 @@ EXPECTED_OBJECTIVES: set[str] = set()
 ID_RE = re.compile(r"$^")
 BATCH_RE = re.compile(r"$^")
 STIMULI_FILE = ""
+RESPONSES_FILE = ""
 DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 CONCEPT_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 
 
 def configure_bank(config: dict[str, object]) -> None:
     global TEST_ID, CERTIFICATION, EXAM_VERSION, OBJECTIVES_VERSION
-    global BANK_PATH, EXPECTED_OBJECTIVES, ID_RE, BATCH_RE, STIMULI_FILE
+    global BANK_PATH, EXPECTED_OBJECTIVES, ID_RE, BATCH_RE, STIMULI_FILE, RESPONSES_FILE
 
     TEST_ID = str(config["test_id"])
     CERTIFICATION = str(config["certification"])
@@ -98,6 +110,7 @@ def configure_bank(config: dict[str, object]) -> None:
     ID_RE = re.compile(str(config["id_pattern"]))
     BATCH_RE = re.compile(str(config["batch_pattern"]))
     STIMULI_FILE = str(config.get("stimuli_file", ""))
+    RESPONSES_FILE = str(config.get("responses_file", ""))
 
 
 ABSOLUTE_RE = re.compile(r"\b(always|never|guarantees?|completely|impossible)\b", re.I)
@@ -131,7 +144,7 @@ SOURCE_HEADERS = [
 
 ENUMS = {
     "difficulty": {"easy","medium","hard"},
-    "question_type": {"single_choice","multi_select","best_available"},
+    "question_type": CHOICE_QUESTION_TYPES | STRUCTURED_QUESTION_TYPES,
     "question_style": {"direct","scenario","comparison","calculation"},
     "review_status": {"draft","review","approved"},
 }
@@ -173,15 +186,81 @@ def read_csv(path: Path, expected_headers: list[str], errors: list[str]) -> list
 
 def validate_stimulus_sidecar(
     path: Path,
-    approved_question_ids: set[str],
+    known_question_ids: set[str],
     errors: list[str],
 ) -> int:
+    """Backward-compatible helper used by focused validator tests."""
     try:
-        stimuli = load_question_stimuli(path, approved_question_ids)
+        stimuli = load_question_stimuli(path, known_question_ids)
     except BuildError as exc:
         errors.append(f"{path.name}: {exc}")
         return 0
     return len(stimuli)
+
+
+def validate_sidecars(
+    bank: Path,
+    question_sets: dict[str, list[dict[str, str]]],
+    errors: list[str],
+) -> tuple[int, int, dict[str, dict[str, object]], dict[str, dict[str, object]]]:
+    active_rows = [
+        row
+        for filename in ("questions.csv", "draft-questions.csv")
+        for row in question_sets[filename]
+        if row.get("question_id", "").strip()
+    ]
+    known_ids = {row["question_id"].strip() for row in active_rows}
+    question_types = {row["question_id"].strip(): row.get("question_type", "").strip() for row in active_rows}
+
+    stimuli: dict[str, dict[str, object]] = {}
+    responses: dict[str, dict[str, object]] = {}
+
+    if STIMULI_FILE:
+        try:
+            stimuli = load_question_stimuli(bank / STIMULI_FILE, known_ids)
+        except BuildError as exc:
+            errors.append(f"{STIMULI_FILE}: {exc}")
+
+    if RESPONSES_FILE:
+        try:
+            responses = load_question_responses(
+                bank / RESPONSES_FILE,
+                known_ids,
+                stimuli=stimuli,
+            )
+        except BuildError as exc:
+            errors.append(f"{RESPONSES_FILE}: {exc}")
+
+    structured_ids = {
+        question_id
+        for question_id, question_type in question_types.items()
+        if question_type in STRUCTURED_QUESTION_TYPES
+    }
+    response_ids = set(responses)
+    missing = sorted(structured_ids - response_ids)
+    if missing:
+        errors.append(
+            f"{RESPONSES_FILE or 'responses.json'}: missing structured responses for question IDs: {', '.join(missing)}"
+        )
+
+    unexpected = sorted(
+        question_id
+        for question_id in response_ids
+        if question_types.get(question_id) not in STRUCTURED_QUESTION_TYPES
+    )
+    if unexpected:
+        errors.append(
+            f"{RESPONSES_FILE or 'responses.json'}: choice questions may not define structured responses: {', '.join(unexpected)}"
+        )
+
+    for question_id in sorted(structured_ids & response_ids):
+        response_type = responses[question_id].get("type")
+        if response_type != question_types[question_id]:
+            errors.append(
+                f"{RESPONSES_FILE or 'responses.json'}: {question_id} response type {response_type!r} does not match question_type {question_types[question_id]!r}"
+            )
+
+    return len(stimuli), len(responses), stimuli, responses
 
 
 def validate() -> tuple[list[str], list[str], list[str]]:
@@ -202,18 +281,9 @@ def validate() -> tuple[list[str], list[str], list[str]]:
         for name in FILE_STATUS
     }
 
-    stimulus_count = 0
-    if STIMULI_FILE:
-        approved_question_ids = {
-            row.get("question_id", "").strip()
-            for row in question_sets["questions.csv"]
-            if row.get("question_id", "").strip()
-        }
-        stimulus_count = validate_stimulus_sidecar(
-            bank / STIMULI_FILE,
-            approved_question_ids,
-            errors,
-        )
+    stimulus_count, response_count, stimuli, responses = validate_sidecars(
+        bank, question_sets, errors
+    )
 
     objective_by_id: dict[str, dict[str, str]] = {}
     for index, row in enumerate(objectives, start=2):
@@ -312,16 +382,23 @@ def validate() -> tuple[list[str], list[str], list[str]]:
             if not CONCEPT_RE.fullmatch(row.get("concept_key", "")):
                 errors.append(f"{label}: concept_key must be lowercase kebab-case")
 
+            qtype = row.get("question_type")
             required = [
                 "question_id","test_id","certification","exam_version","objectives_version",
                 "question_version","batch_id","domain_id","domain_name","objective_id",
                 "objective_text","topic","concept_key","difficulty","question_type",
-                "question_text","answer_a","answer_b","answer_c","answer_d",
-                "correct_answers","correct_explanation","answer_a_explanation",
-                "answer_b_explanation","answer_c_explanation","answer_d_explanation",
-                "study_topics","source_ids","reference_notes","date_added",
-                "date_modified","review_status",
+                "question_text","correct_explanation","study_topics","source_ids",
+                "reference_notes","date_added","date_modified","review_status",
             ]
+            if qtype in CHOICE_QUESTION_TYPES:
+                required.extend([
+                    "answer_a","answer_b","answer_c","answer_d","correct_answers",
+                    "answer_a_explanation","answer_b_explanation",
+                    "answer_c_explanation","answer_d_explanation",
+                ])
+            elif qtype in STRUCTURED_QUESTION_TYPES:
+                required.append("question_instruction")
+
             for field in required:
                 if not row.get(field, "").strip():
                     errors.append(f"{label}: required field {field} is blank")
@@ -350,32 +427,50 @@ def validate() -> tuple[list[str], list[str], list[str]]:
                 errors.append(f"{label}: approved rows must have blank quality_flags")
 
             choices = {letter: row.get(f"answer_{letter.lower()}", "").strip() for letter in "ABCD"}
-            choice_norms = [normalized(value) for value in choices.values()]
-            if any(not value for value in choices.values()):
-                errors.append(f"{label}: all four answer choices must be populated")
-            if len(set(choice_norms)) != 4:
-                errors.append(f"{label}: answer choices must be distinct after normalization")
-            clause_sigs = [reversed_clause_signature(value) for value in choices.values()]
-            if len(set(clause_sigs)) != 4:
-                errors.append(f"{label}: reversed-clause duplicate choices detected")
-
             correct = [part.strip() for part in row.get("correct_answers", "").split("|") if part.strip()]
-            if any(letter not in {"A","B","C","D"} for letter in correct):
-                errors.append(f"{label}: correct_answers contains an invalid stored key")
-            if correct != sorted(set(correct)):
-                errors.append(f"{label}: correct_answers must be sorted and unique")
-            qtype = row.get("question_type")
-            if qtype in {"single_choice","best_available"} and len(correct) != 1:
-                errors.append(f"{label}: {qtype} requires exactly one correct answer")
-            if qtype == "multi_select":
-                if len(correct) < 2:
-                    errors.append(f"{label}: multi_select requires at least two correct answers")
-                if not row.get("question_instruction"):
-                    errors.append(f"{label}: multi_select requires question_instruction")
-            if qtype == "best_available" and not row.get("question_instruction"):
-                errors.append(f"{label}: best_available requires question_instruction")
 
-            position_fields = [row.get("question_text", ""), *choices.values()]
+            if qtype in CHOICE_QUESTION_TYPES:
+                choice_norms = [normalized(value) for value in choices.values()]
+                if any(not value for value in choices.values()):
+                    errors.append(f"{label}: all four answer choices must be populated")
+                if len(set(choice_norms)) != 4:
+                    errors.append(f"{label}: answer choices must be distinct after normalization")
+                clause_sigs = [reversed_clause_signature(value) for value in choices.values()]
+                if len(set(clause_sigs)) != 4:
+                    errors.append(f"{label}: reversed-clause duplicate choices detected")
+
+                if any(letter not in {"A","B","C","D"} for letter in correct):
+                    errors.append(f"{label}: correct_answers contains an invalid stored key")
+                if correct != sorted(set(correct)):
+                    errors.append(f"{label}: correct_answers must be sorted and unique")
+                if qtype in {"single_choice","best_available"} and len(correct) != 1:
+                    errors.append(f"{label}: {qtype} requires exactly one correct answer")
+                if qtype == "multi_select":
+                    if len(correct) < 2:
+                        errors.append(f"{label}: multi_select requires at least two correct answers")
+                    if not row.get("question_instruction"):
+                        errors.append(f"{label}: multi_select requires question_instruction")
+                if qtype == "best_available" and not row.get("question_instruction"):
+                    errors.append(f"{label}: best_available requires question_instruction")
+            elif qtype in STRUCTURED_QUESTION_TYPES:
+                structured_choice_fields = [
+                    *choices.values(),
+                    row.get("correct_answers", "").strip(),
+                    row.get("answer_a_explanation", "").strip(),
+                    row.get("answer_b_explanation", "").strip(),
+                    row.get("answer_c_explanation", "").strip(),
+                    row.get("answer_d_explanation", "").strip(),
+                ]
+                if any(structured_choice_fields):
+                    errors.append(
+                        f"{label}: structured questions must leave answer A-D, correct_answers, and answer-choice explanations blank"
+                    )
+                if not row.get("question_instruction"):
+                    errors.append(f"{label}: {qtype} requires question_instruction")
+
+            position_fields = [row.get("question_text", ""), row.get("question_instruction", "")]
+            if qtype in CHOICE_QUESTION_TYPES:
+                position_fields.extend(choices.values())
             if any(POSITION_RE.search(value) for value in position_fields):
                 errors.append(f"{label}: position-dependent answer wording detected")
 
@@ -464,6 +559,8 @@ def validate() -> tuple[list[str], list[str], list[str]]:
     info.append(f"Question rows: {len(stored_rows)}")
     if STIMULI_FILE:
         info.append(f"Stimuli: {stimulus_count}")
+    if RESPONSES_FILE:
+        info.append(f"Structured responses: {response_count}")
     info.append(f"Approved answer-key counts: {dict(sorted(answer_counts.items()))}")
     info.append(f"Approved domain counts: {dict(sorted(domain_counts.items()))}")
     info.append(f"Approved difficulty counts: {dict(sorted(difficulty_counts.items()))}")

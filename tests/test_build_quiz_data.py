@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import csv
 import json
 import sys
 import tempfile
@@ -19,6 +20,7 @@ from build_quiz_data import (  # noqa: E402
     build_quiz,
     calculate_question_count_settings,
     canonical_hash,
+    normalize_question_response,
     normalize_question_stimulus,
     read_csv,
     stable_answer_id,
@@ -189,6 +191,176 @@ class QuizDataBuilderTests(unittest.TestCase):
             self.assertEqual(built["stimulus"]["variant"], "log")
             unstimulated = next(question for question in payload["questions"] if question["id"] != question_id)
             self.assertNotIn("stimulus", unstimulated)
+
+
+    def test_normalizes_matching_classification_and_ordering_responses(self) -> None:
+        matching = normalize_question_response(
+            "SEC701-9000001",
+            {
+                "type": "matching",
+                "variant": "classification",
+                "items": [
+                    {"id": "first", "text": "First item", "correctOptionId": "category_a", "explanation": "First explanation."},
+                    {"id": "second", "text": "Second item", "correctOptionId": "category_a", "explanation": "Second explanation."},
+                ],
+                "options": [
+                    {"id": "category_a", "label": "Category A"},
+                    {"id": "category_b", "label": "Category B"},
+                ],
+            },
+        )
+        self.assertEqual(matching["variant"], "classification")
+        self.assertEqual(matching["items"][1]["correctOptionId"], "category_a")
+
+        ordering = normalize_question_response(
+            "SEC701-9000002",
+            {
+                "type": "ordering",
+                "items": [
+                    {"id": "one", "text": "Step one", "explanation": "First."},
+                    {"id": "two", "text": "Step two", "explanation": "Second."},
+                    {"id": "three", "text": "Step three", "explanation": "Third."},
+                ],
+                "correctOrder": ["one", "two", "three"],
+            },
+        )
+        self.assertEqual(ordering["correctOrder"], ["one", "two", "three"])
+
+    def test_line_select_response_requires_nonblank_preformatted_stimulus_lines(self) -> None:
+        stimulus = normalize_question_stimulus(
+            "SEC701-9000003",
+            {
+                "type": "preformatted",
+                "variant": "configuration",
+                "title": "Configuration",
+                "content": "line one\nline two\n\nline four",
+            },
+        )
+        response = normalize_question_response(
+            "SEC701-9000003",
+            {"type": "line_select", "selectionCount": 2, "correctLineNumbers": [2, 4]},
+            stimulus=stimulus,
+        )
+        self.assertEqual(response["correctLineNumbers"], [2, 4])
+
+        with self.assertRaises(BuildError):
+            normalize_question_response(
+                "SEC701-9000003",
+                {"type": "line_select", "selectionCount": 1, "correctLineNumbers": [3]},
+                stimulus=stimulus,
+            )
+
+    def test_public_structured_question_uses_response_sidecar_instead_of_answer_choices(self) -> None:
+        row = deepcopy(self.rows[0])
+        row["question_type"] = "matching"
+        row["question_instruction"] = "Match each item to its category."
+        for field in (
+            "answer_a", "answer_b", "answer_c", "answer_d", "correct_answers",
+            "answer_a_explanation", "answer_b_explanation",
+            "answer_c_explanation", "answer_d_explanation",
+        ):
+            row[field] = ""
+        response = normalize_question_response(
+            row["question_id"],
+            {
+                "type": "matching",
+                "variant": "matching",
+                "items": [
+                    {"id": "first", "text": "First item", "correctOptionId": "one", "explanation": "First maps to one."},
+                    {"id": "second", "text": "Second item", "correctOptionId": "two", "explanation": "Second maps to two."},
+                ],
+                "options": [
+                    {"id": "one", "label": "One"},
+                    {"id": "two", "label": "Two"},
+                ],
+            },
+        )
+        question = build_public_question(row, response=response)
+        self.assertEqual(question["type"], "matching")
+        self.assertEqual(question["response"]["variant"], "matching")
+        self.assertNotIn("answers", question)
+        self.assertNotIn("correctAnswerIds", question)
+
+    def test_structured_question_rejects_leftover_choice_fields(self) -> None:
+        row = deepcopy(self.rows[0])
+        row["question_type"] = "ordering"
+        row["question_instruction"] = "Place the steps in order."
+        response = normalize_question_response(
+            row["question_id"],
+            {
+                "type": "ordering",
+                "items": [
+                    {"id": "one", "text": "One", "explanation": "First."},
+                    {"id": "two", "text": "Two", "explanation": "Second."},
+                    {"id": "three", "text": "Three", "explanation": "Third."},
+                ],
+                "correctOrder": ["one", "two", "three"],
+            },
+        )
+        with self.assertRaises(BuildError):
+            build_public_question(row, response=response)
+
+
+    def test_build_quiz_loads_a_structured_response_sidecar(self) -> None:
+        row = deepcopy(self.rows[0])
+        row["question_type"] = "matching"
+        row["question_instruction"] = "Match each item to its category."
+        for field in (
+            "answer_a", "answer_b", "answer_c", "answer_d", "correct_answers",
+            "answer_a_explanation", "answer_b_explanation",
+            "answer_c_explanation", "answer_d_explanation",
+        ):
+            row[field] = ""
+
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            temporary = Path(temporary_directory)
+            questions_path = temporary / "questions.csv"
+            with questions_path.open("w", encoding="utf-8", newline="") as handle:
+                writer = csv.DictWriter(handle, fieldnames=list(row))
+                writer.writeheader()
+                writer.writerow(row)
+
+            responses_path = temporary / "responses.json"
+            responses_path.write_text(
+                json.dumps({
+                    "schemaVersion": 1,
+                    "responses": {
+                        row["question_id"]: {
+                            "type": "matching",
+                            "variant": "matching",
+                            "items": [
+                                {"id": "first", "text": "First item", "correctOptionId": "one", "explanation": "First maps to one."},
+                                {"id": "second", "text": "Second item", "correctOptionId": "two", "explanation": "Second maps to two."},
+                            ],
+                            "options": [
+                                {"id": "one", "label": "One"},
+                                {"id": "two", "label": "Two"},
+                            ],
+                        }
+                    },
+                }),
+                encoding="utf-8",
+            )
+
+            config = deepcopy(self.quiz_config)
+            config["questions_csv"] = str(questions_path)
+            config["responses_json"] = str(responses_path)
+            config["question_count_options"] = [1]
+            config["preferred_default_question_count"] = 1
+            output_directory = temporary / "output"
+
+            manifest, _ = build_quiz(
+                config,
+                project_root=PROJECT_ROOT,
+                output_directory_override=output_directory,
+                generated_at="2026-08-07T12:00:00Z",
+            )
+            payload = json.loads((output_directory / "questions.json").read_text(encoding="utf-8"))
+            built = payload["questions"][0]
+            self.assertEqual(manifest["questionTypes"], ["matching"])
+            self.assertEqual(built["response"]["type"], "matching")
+            self.assertNotIn("answers", built)
+            self.assertNotIn("correctAnswerIds", built)
 
     def test_current_bank_builds_all_public_questions(self) -> None:
         expected_question_count = len(self.rows)

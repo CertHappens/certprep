@@ -1,3 +1,4 @@
+import { getQuestionResponseProgress, isStructuredQuestionType } from "./structured-response.js";
 import { buildQuestionPath } from "./routes.js";
 
 function requireSession(session) {
@@ -28,6 +29,8 @@ export function createPagedNavigationModel(session, currentPosition) {
   }
 
   let answered = 0;
+  let incomplete = 0;
+  let unanswered = 0;
   let flagged = 0;
 
   const items = session.questionOrder.map((questionId, index) => {
@@ -35,25 +38,29 @@ export function createPagedNavigationModel(session, currentPosition) {
 
     if (
       !state ||
-      !Array.isArray(state.selectedAnswerIds) ||
       typeof state.flaggedForReview !== "boolean"
     ) {
       throw new TypeError(
         `Question state ${questionId} is missing navigation data.`,
       );
     }
+    if (!isStructuredQuestionType(state.question?.type) && !Array.isArray(state.selectedAnswerIds)) {
+      throw new TypeError(`Question state ${questionId} is missing response data.`);
+    }
 
     const position = index + 1;
-    const isAnswered = state.selectedAnswerIds.length > 0;
+    const responseProgress = getQuestionResponseProgress(state);
+    const isAnswered = responseProgress === "answered";
+    const isIncomplete = responseProgress === "incomplete";
     const isFlagged = state.flaggedForReview;
     const isCurrent = position === currentPosition;
 
     if (isAnswered) answered += 1;
+    else if (isIncomplete) incomplete += 1;
+    else unanswered += 1;
     if (isFlagged) flagged += 1;
 
-    const statuses = [
-      isAnswered ? "answered" : "unanswered",
-    ];
+    const statuses = [responseProgress];
 
     if (isFlagged) statuses.push("flagged");
     if (isCurrent) statuses.push("current question");
@@ -66,6 +73,7 @@ export function createPagedNavigationModel(session, currentPosition) {
         session.test?.practiceTestPath,
       ),
       answered: isAnswered,
+      incomplete: isIncomplete,
       flagged: isFlagged,
       current: isCurrent,
       ariaLabel: `Question ${position}, ${statuses.join(", ")}`,
@@ -76,7 +84,8 @@ export function createPagedNavigationModel(session, currentPosition) {
     currentPosition,
     total,
     answered,
-    unanswered: total - answered,
+    incomplete,
+    unanswered,
     flagged,
     previousPath:
       currentPosition > 1

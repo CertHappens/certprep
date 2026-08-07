@@ -2,7 +2,7 @@
 
 ## Purpose
 
-The quiz session model preserves a visitor's randomized test within the current browser tab. It keeps question order, displayed answer order, selected answers, flags, and current position stable during navigation and page refreshes.
+The quiz session model preserves a visitor's randomized test within the current browser tab. It keeps question order, response state, flags, and current position stable during navigation and page refreshes.
 
 The session is stored in `sessionStorage`. It is not a user account, long-term test history, or cross-device record.
 
@@ -14,7 +14,7 @@ certprep.quiz.SEC-701.session.v1
 
 Each test ID receives a separate key.
 
-## Session shape
+## Common session shape
 
 ```json
 {
@@ -26,54 +26,98 @@ Each test ID receives a separate key.
     "examVersion": "SY0-701"
   },
   "dataVersion": "sha256:...",
-  "startedAt": "2026-07-19T12:00:00.000Z",
-  "updatedAt": "2026-07-19T12:04:00.000Z",
+  "startedAt": "2026-08-07T12:00:00.000Z",
+  "updatedAt": "2026-08-07T12:04:00.000Z",
   "completedAt": null,
   "currentIndex": 0,
-  "questionOrder": [
-    "SEC701-0000008",
-    "SEC701-0000002"
+  "questionOrder": ["SEC701-0000008"],
+  "questions": {}
+}
+```
+
+Each selected public question is cloned into its question state. A later deployment therefore does not silently change an unfinished test already open in the tab.
+
+## Choice-question state
+
+```json
+{
+  "question": { "id": "SEC701-0000008", "type": "single_choice" },
+  "displayedAnswerIds": [
+    "SEC701-0000008:D",
+    "SEC701-0000008:A",
+    "SEC701-0000008:C",
+    "SEC701-0000008:B"
   ],
-  "questions": {
-    "SEC701-0000008": {
-      "question": {
-        "id": "SEC701-0000008",
-        "answers": []
-      },
-      "displayedAnswerIds": [
-        "SEC701-0000008:D",
-        "SEC701-0000008:A",
-        "SEC701-0000008:C",
-        "SEC701-0000008:B"
-      ],
-      "selectedAnswerIds": [],
-      "flaggedForReview": false
-    }
+  "selectedAnswerIds": [],
+  "flaggedForReview": false
+}
+```
+
+Displayed letters are derived from `displayedAnswerIds` and are never stored as grading identities. Selected choices use the stable question-specific answer IDs.
+
+## Matching and classification state
+
+```json
+{
+  "question": { "id": "SEC701-0000201", "type": "matching" },
+  "displayedAnswerIds": [],
+  "selectedAnswerIds": [],
+  "responseState": {
+    "type": "matching",
+    "matches": {
+      "item_a": "category_one"
+    },
+    "optionOrder": ["category_two", "category_one"],
+    "touched": true
+  },
+  "flaggedForReview": false
+}
+```
+
+The option order is randomized once per session and then preserved. One-to-one matching does not allow the same option to satisfy multiple items. Classification may reuse categories.
+
+## Ordering state
+
+```json
+{
+  "responseState": {
+    "type": "ordering",
+    "order": ["step_three", "step_one", "step_two"],
+    "touched": false
   }
 }
 ```
 
-## Stable identities
+The initial order is randomized. It remains `unanswered` until the learner deliberately moves an item or chooses **Use this order**. This prevents a coincidentally correct initial shuffle from being counted without learner confirmation.
 
-Displayed letters are derived from the saved `displayedAnswerIds` order. They are never stored as grading identities.
+## Selectable-line state
 
-For example, the first displayed answer can be labeled `A` while its stable answer ID remains:
-
-```text
-SEC701-0000008:D
+```json
+{
+  "responseState": {
+    "type": "line_select",
+    "selectedLineNumbers": [3, 7],
+    "touched": true
+  }
+}
 ```
 
-Selected answers are stored as stable answer IDs. This allows Phase 4 grading to compare `selectedAnswerIds` with `correctAnswerIds` without depending on displayed position.
+Only nonblank lines from the saved preformatted stimulus can be selected. The stored line numbers refer to the exact stimulus snapshot in the same question state.
 
-## Question snapshot
+## Response progress
 
-Each session stores the selected public question objects as a snapshot. A deployment that updates the public question bank will not silently alter an unfinished test already open in a visitor's tab.
+Navigation recognizes three response states:
 
-## Completion
+- `answered`: a complete choice or structured response has been provided.
+- `incomplete`: matching or line-selection work has begun but is not complete.
+- `unanswered`: no response has been provided. An untouched ordering shuffle is also unanswered.
 
-Phase 3 records `completedAt` and displays answered, unanswered, and flagged counts. Phase 4 will add grading, domain results, elapsed time, and answer review while retaining this session contract.
+The navigator shows incomplete work separately so a learner can find it before finishing.
 
+## Completion and return to test
 
-## Optional stimulus snapshots
+Finishing records `completedAt`. If incomplete or unanswered questions remain, the final-question confirmation reports both counts. Returning from results clears completion status, keeps the saved response state, and allows changes before the test is finished again.
 
-When a public question includes a read-only stimulus, the complete normalized stimulus object is cloned into the session's question snapshot. Paged and classic navigation must render that stored snapshot rather than refetching or reconstructing evidence. This preserves command output, logs, configuration fragments, and table rows across reloads and completed-test review.
+## Reporting
+
+Structured responses are converted to compact stable response tokens for question reports. This preserves the learner's response in the existing displayed/selected-answer report fields without a D1 schema migration.

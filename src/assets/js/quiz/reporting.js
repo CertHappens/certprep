@@ -1,6 +1,8 @@
+import { buildStructuredReportAnswerIds, isStructuredQuestionType } from "./structured-response.js";
+
 export const REPORT_CATEGORY_OPTIONS = Object.freeze([
   ["possible_typo", "Possible typo"],
-  ["correct_answer_may_be_wrong", "Correct answer may be wrong"],
+  ["correct_answer_may_be_wrong", "Correct answer or response may be wrong"],
   ["explanation_unclear", "Explanation is unclear"],
   ["question_outdated", "Question may be outdated"],
   ["duplicate_question", "Duplicate question"],
@@ -25,6 +27,13 @@ export function buildQuestionReportPayload({
     throw new Error("The reported question is not part of this session.");
   }
 
+  const reportAnswers = isStructuredQuestionType(state.question.type)
+    ? buildStructuredReportAnswerIds(state)
+    : {
+        displayedAnswerIds: [...state.displayedAnswerIds],
+        selectedAnswerIds: [...state.selectedAnswerIds],
+      };
+
   return {
     questionId,
     testId: session.test.testId,
@@ -34,8 +43,7 @@ export function buildQuestionReportPayload({
     category,
     note: String(note).trim(),
     questionPosition,
-    displayedAnswerIds: [...state.displayedAnswerIds],
-    selectedAnswerIds: [...state.selectedAnswerIds],
+    ...reportAnswers,
     turnstileToken,
     website,
   };

@@ -1,3 +1,8 @@
+import {
+  gradeStructuredResponseState,
+  isChoiceQuestionType,
+} from "./structured-response.js";
+
 function uniqueSortedIds(ids) {
   return [...new Set(ids)].sort();
 }
@@ -24,6 +29,19 @@ export function gradeQuestionState(state) {
     throw new Error("A question state with a stable question ID is required for grading.");
   }
 
+  if (!isChoiceQuestionType(state.question.type)) {
+    const structured = gradeStructuredResponseState(state);
+    return {
+      questionId: state.question.id,
+      status: structured.status,
+      isAnswered: structured.isAnswered,
+      isCorrect: structured.status === "correct",
+      responseProgress: structured.progress,
+      selectedAnswerIds: [],
+      correctAnswerIds: [],
+    };
+  }
+
   const selectedAnswerIds = uniqueSortedIds(state.selectedAnswerIds ?? []);
   const correctAnswerIds = uniqueSortedIds(state.question.correctAnswerIds ?? []);
 
@@ -42,10 +60,12 @@ export function gradeQuestionState(state) {
     status,
     isAnswered: selectedAnswerIds.length > 0,
     isCorrect: status === "correct",
+    responseProgress: selectedAnswerIds.length > 0 ? "answered" : "unanswered",
     selectedAnswerIds,
     correctAnswerIds,
   };
 }
+
 
 export function getElapsedMilliseconds(session) {
   const startedAt = validDateMilliseconds(session?.startedAt);

@@ -30,6 +30,7 @@ class CcnaPreBatchFoundationTests(unittest.TestCase):
         self.assertEqual(self.config["exam_version"], "200-301 v2.0")
         self.assertEqual(self.config["objectives_version"], "2.0")
         self.assertEqual(self.config["stimuli_file"], "stimuli.json")
+        self.assertEqual(self.config["responses_file"], "responses.json")
         self.assertRegex("CCNA301V2-0000001", self.config["id_pattern"])
         self.assertRegex("CCNA301V2-BATCH-001", self.config["batch_pattern"])
 
@@ -105,6 +106,50 @@ class CcnaPreBatchFoundationTests(unittest.TestCase):
             self.assertEqual(len(errors), 1)
             self.assertIn("unknown question IDs", errors[0])
 
+
+    def test_structured_response_sidecar_is_validated_for_an_active_question(self) -> None:
+        validator.configure_bank(self.config)
+        question_id = "CCNA301V2-9999999"
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            bank = Path(temporary_directory)
+            (bank / "stimuli.json").write_text(
+                json.dumps({"schemaVersion": 1, "stimuli": {}}),
+                encoding="utf-8",
+            )
+            (bank / "responses.json").write_text(
+                json.dumps({
+                    "schemaVersion": 1,
+                    "responses": {
+                        question_id: {
+                            "type": "matching",
+                            "variant": "classification",
+                            "items": [
+                                {"id": "one", "text": "First", "correctOptionId": "category_a", "explanation": "First category."},
+                                {"id": "two", "text": "Second", "correctOptionId": "category_a", "explanation": "Second category."},
+                            ],
+                            "options": [
+                                {"id": "category_a", "label": "Category A"},
+                                {"id": "category_b", "label": "Category B"},
+                            ],
+                        }
+                    },
+                }),
+                encoding="utf-8",
+            )
+            errors: list[str] = []
+            stimulus_count, response_count, _stimuli, responses = validator.validate_sidecars(
+                bank,
+                {
+                    "questions.csv": [{"question_id": question_id, "question_type": "matching"}],
+                    "draft-questions.csv": [],
+                },
+                errors,
+            )
+            self.assertEqual(errors, [])
+            self.assertEqual(stimulus_count, 0)
+            self.assertEqual(response_count, 1)
+            self.assertEqual(responses[question_id]["variant"], "classification")
+
     def test_ccna_is_registered_in_the_public_quiz_catalog(self) -> None:
         catalog = json.loads(
             (PROJECT_ROOT / "config" / "quiz-catalog.json").read_text(encoding="utf-8")
@@ -117,6 +162,7 @@ class CcnaPreBatchFoundationTests(unittest.TestCase):
         self.assertEqual(ccna["questions_csv"], "data/ccna/200-301-v2/questions.csv")
         self.assertEqual(ccna["objective_map_csv"], "data/ccna/200-301-v2/objective-map.csv")
         self.assertEqual(ccna["stimuli_json"], "data/ccna/200-301-v2/stimuli.json")
+        self.assertEqual(ccna["responses_json"], "data/ccna/200-301-v2/responses.json")
         self.assertEqual(ccna["public_base_path"], "/quiz-data/ccna/200-301-v2")
         self.assertEqual(ccna["practice_test_path"], "/ccna/200-301-v2/practice-test")
         self.assertEqual(ccna["question_count_options"], [10, 20, 30, 50])
